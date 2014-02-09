@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGItem>
+    <ID>1</ID>
+    <Name>Nuts &amp; Bolts Cereal</Name>
+    <Description>Michelin 3 Star meal in a box</Description>
+    <SystemDescription />
+    <IsUsable>true</IsUsable>
+    <ItemCategory>Food</ItemCategory>
+    <IconPath>Icon/nuts_bolts_cereal</IconPath>
+    <Value>10</Value>
+    <Rarity>Worthless</Rarity>
+    <IsCopy>false</IsCopy>
+    <SourceItem>0</SourceItem>
+  </RPGItem>
+</ArrayOfRPGItem>

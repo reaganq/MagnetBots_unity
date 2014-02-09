@@ -1,0 +1,128 @@
+fileFormatVersion: 2
+guid: 178e1b4a0e7b74989b09742d4f693636
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: armLRoot
+    100002: armRRoot
+    100004: bodyRoot
+    100006: headRoot
+    100008: Hips
+    100010: knight:Mesh_Group1104
+    100012: knight:Mesh_Group1344
+    100014: knight:Mesh_Group4448
+    100016: knight:pCube16
+    100018: knight:pCube17
+    100020: knight:pCube19
+    100022: //RootNode
+    100024: LeftShoulder
+    100026: Neck
+    100028: RightShoulder
+    100030: Spine
+    100032: Spine1
+    100034: Spine2
+    100036: transform1
+    100038: transform2
+    400000: armLRoot
+    400002: armRRoot
+    400004: bodyRoot
+    400006: headRoot
+    400008: Hips
+    400010: knight:Mesh_Group1104
+    400012: knight:Mesh_Group1344
+    400014: knight:Mesh_Group4448
+    400016: knight:pCube16
+    400018: knight:pCube17
+    400020: knight:pCube19
+    400022: //RootNode
+    400024: LeftShoulder
+    400026: Neck
+    400028: RightShoulder
+    400030: Spine
+    400032: Spine1
+    400034: Spine2
+    400036: transform1
+    400038: transform2
+    2300000: armLRoot
+    2300002: armRRoot
+    2300004: bodyRoot
+    2300006: headRoot
+    2300008: knight:Mesh_Group1104
+    2300010: knight:Mesh_Group1344
+    2300012: knight:Mesh_Group4448
+    2300014: knight:pCube16
+    2300016: knight:pCube17
+    2300018: knight:pCube19
+    3300000: armLRoot
+    3300002: armRRoot
+    3300004: bodyRoot
+    3300006: headRoot
+    3300008: knight:Mesh_Group1104
+    3300010: knight:Mesh_Group1344
+    3300012: knight:Mesh_Group4448
+    3300014: knight:pCube16
+    3300016: knight:pCube17
+    3300018: knight:pCube19
+    4300000: headRoot
+    4300002: armLRoot
+    4300004: armRRoot
+    4300006: knight:pCube17
+    4300008: knight:pCube16
+    4300010: knight:Mesh_Group1104
+    4300012: knight:Mesh_Group4448
+    4300014: knight:pCube19
+    4300016: knight:Mesh_Group1344
+    4300018: bodyRoot
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .200000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

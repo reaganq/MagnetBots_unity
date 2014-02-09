@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfShop xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Shop>
+    <ID>1</ID>
+    <Name>General Store</Name>
+    <Description />
+    <SystemDescription />
+    <Items>
+      <ShopItem>
+        <StackAmount>2</StackAmount>
+        <Preffix>WEAPON</Preffix>
+        <ID>1</ID>
+      </ShopItem>
+      <ShopItem>
+        <StackAmount>5</StackAmount>
+        <Preffix>WEAPON</Preffix>
+        <ID>2</ID>
+      </ShopItem>
+      <ShopItem>
+        <StackAmount>1</StackAmount>
+        <Preffix>WEAPON</Preffix>
+        <ID>3</ID>
+      </ShopItem>
+      <ShopItem>
+        <StackAmount>2</StackAmount>
+        <Preffix>WEAPON</Preffix>
+        <ID>4</ID>
+      </ShopItem>
+      <ShopItem>
+        <StackAmount>3</StackAmount>
+        <Preffix>WEAPON</Preffix>
+        <ID>5</ID>
+      </ShopItem>
+    </Items>
+    <RestockTime>100</RestockTime>
+    <LastRestockTime>0</LastRestockTime>
+  </Shop>
+</ArrayOfShop>

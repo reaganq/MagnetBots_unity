@@ -1,0 +1,104 @@
+fileFormatVersion: 2
+guid: 1f145d7c0384c47f3abfd27bacb66879
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: bones:polySurface49
+    100002: bones:polySurface50
+    100004: bones:polySurface51
+    100006: bones:R_Arm_Hover_b
+    100008: bones:R_Elbow
+    100010: bones:R_Forearm
+    100012: bones:R_Hand
+    100014: bones:R_IndexFinger
+    100016: bones:R_IndexFinger_end
+    100018: bones:R_SecondFinger
+    100020: bones:R_SecondFinger_End
+    100022: bones:R_Shoulder
+    100024: bones:R_ShoulderGuard
+    100026: bones:R_Thumb
+    100028: bones:R_Thumb_End
+    100030: //RootNode
+    100032: chef_armR
+    400000: bones:polySurface49
+    400002: bones:polySurface50
+    400004: bones:polySurface51
+    400006: bones:R_Arm_Hover_b
+    400008: bones:R_Elbow
+    400010: bones:R_Forearm
+    400012: bones:R_Hand
+    400014: bones:R_IndexFinger
+    400016: bones:R_IndexFinger_end
+    400018: bones:R_SecondFinger
+    400020: bones:R_SecondFinger_End
+    400022: bones:R_Shoulder
+    400024: bones:R_ShoulderGuard
+    400026: bones:R_Thumb
+    400028: bones:R_Thumb_End
+    400030: //RootNode
+    400032: chef_armR
+    2300000: bones:polySurface49
+    2300002: bones:polySurface50
+    2300004: bones:polySurface51
+    3300000: bones:polySurface49
+    3300002: bones:polySurface50
+    3300004: bones:polySurface51
+    4300000: chef_armR
+    4300002: bones:polySurface51
+    4300004: bones:polySurface50
+    4300006: bones:polySurface49
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: chef_armR
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  userData: 

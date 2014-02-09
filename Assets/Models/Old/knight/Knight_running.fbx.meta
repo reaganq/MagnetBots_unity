@@ -1,0 +1,2031 @@
+fileFormatVersion: 2
+guid: 246956bc3427d405784f46c66785507c
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: knight:Mesh_Group1104
+    100002: knight:Mesh_Group1344
+    100004: knight:Mesh_Group1408
+    100006: knight:Mesh_Group4448
+    100008: knight:Mesh_Group5744
+    100010: knight:Mesh_Group5745
+    100012: knight:Mesh_Group5746
+    100014: knight:Mesh_pCone1
+    100016: knight:Mesh_pCylinder15
+    100018: knight:Mesh_pCylinder16
+    100020: knight:Mesh_pCylinder17
+    100022: knight:Mesh_pCylinder18
+    100024: knight:Mesh_pCylinder19
+    100026: knight:Mesh_pSphere8
+    100028: knight:Mesh_pSphere9
+    100030: knight:Mesh_ZBrush_defualt_group
+    100032: knight:pCube16
+    100034: knight:pCube17
+    100036: knight:pCube18
+    100038: knight:pCube19
+    100040: knight:pCube27
+    100042: knight:pCube28
+    100044: knight:pCube29
+    100046: knight:pCube30
+    100048: knight:pCube31
+    100050: knight:pCube32
+    100052: knight:pCube33
+    100054: knight:pCube34
+    100056: knight:pCube35
+    100058: knight:pCube36
+    100060: knight:pCube37
+    100062: knight:pCube38
+    100064: knight:pCube39
+    100066: knight:pCube40
+    100068: knight:pCylinder21
+    100070: knight:pCylinder22
+    100072: knight:pCylinder23
+    100074: knight:pCylinder24
+    100076: knight:pCylinder25
+    100078: knight:pCylinder26
+    100080: knight:polySurface2
+    100082: knight:pSphere10
+    100084: knight:pSphere11
+    100086: knight:ZBrush_defualt_group1
+    100088: //RootNode
+    100090: rig:AnimData_Head
+    100092: rig:AnimData_HeadTop_End
+    100094: rig:AnimData_Hips
+    100096: rig:AnimData_Joint_GRP
+    100098: rig:AnimData_LeftArm
+    100100: rig:AnimData_LeftFoot
+    100102: rig:AnimData_LeftForeArm
+    100104: rig:AnimData_LeftHand
+    100106: rig:AnimData_LeftHandIndex1
+    100108: rig:AnimData_LeftHandIndex2
+    100110: rig:AnimData_LeftHandIndex3
+    100112: rig:AnimData_LeftHandIndex4
+    100114: rig:AnimData_LeftHandThumb1
+    100116: rig:AnimData_LeftHandThumb2
+    100118: rig:AnimData_LeftHandThumb3
+    100120: rig:AnimData_LeftHandThumb4
+    100122: rig:AnimData_LeftLeg
+    100124: rig:AnimData_LeftShoulder
+    100126: rig:AnimData_LeftToe_End
+    100128: rig:AnimData_LeftToeBase
+    100130: rig:AnimData_LeftUpLeg
+    100132: rig:AnimData_Neck
+    100134: rig:AnimData_RightArm
+    100136: rig:AnimData_RightFoot
+    100138: rig:AnimData_RightForeArm
+    100140: rig:AnimData_RightHand
+    100142: rig:AnimData_RightHandIndex1
+    100144: rig:AnimData_RightHandIndex2
+    100146: rig:AnimData_RightHandIndex3
+    100148: rig:AnimData_RightHandIndex4
+    100150: rig:AnimData_RightHandThumb1
+    100152: rig:AnimData_RightHandThumb2
+    100154: rig:AnimData_RightHandThumb3
+    100156: rig:AnimData_RightHandThumb4
+    100158: rig:AnimData_RightLeg
+    100160: rig:AnimData_RightShoulder
+    100162: rig:AnimData_RightToe_End
+    100164: rig:AnimData_RightToeBase
+    100166: rig:AnimData_RightUpLeg
+    100168: rig:AnimData_Spine
+    100170: rig:AnimData_Spine1
+    100172: rig:AnimData_Spine2
+    100174: rig:Bind_Head
+    100176: rig:Bind_HeadTop_End
+    100178: rig:Bind_Hips
+    100180: rig:Bind_Joint_GRP
+    100182: rig:Bind_LeftArm
+    100184: rig:Bind_LeftFoot
+    100186: rig:Bind_LeftForeArm
+    100188: rig:Bind_LeftHand
+    100190: rig:Bind_LeftHandIndex1
+    100192: rig:Bind_LeftHandIndex2
+    100194: rig:Bind_LeftHandThumb1
+    100196: rig:Bind_LeftHandThumb2
+    100198: rig:Bind_LeftLeg
+    100200: rig:Bind_LeftShoulder
+    100202: rig:Bind_LeftToe_End
+    100204: rig:Bind_LeftToeBase
+    100206: rig:Bind_LeftUpLeg
+    100208: rig:Bind_Neck
+    100210: rig:Bind_RightArm
+    100212: rig:Bind_RightFoot
+    100214: rig:Bind_RightForeArm
+    100216: rig:Bind_RightHand
+    100218: rig:Bind_RightHandIndex1
+    100220: rig:Bind_RightHandIndex2
+    100222: rig:Bind_RightHandThumb1
+    100224: rig:Bind_RightHandThumb2
+    100226: rig:Bind_RightLeg
+    100228: rig:Bind_RightShoulder
+    100230: rig:Bind_RightToe_End
+    100232: rig:Bind_RightToeBase
+    100234: rig:Bind_RightUpLeg
+    100236: rig:Bind_Spine
+    100238: rig:Bind_Spine1
+    100240: rig:Bind_Spine2
+    100242: rig:CTRL_GRP
+    100244: rig:FK_LeftArm
+    100246: rig:FK_LeftFoot
+    100248: rig:FK_LeftForeArm
+    100250: rig:FK_LeftHand
+    100252: rig:FK_LeftLeg
+    100254: rig:FK_LeftToe_End
+    100256: rig:FK_LeftToeBase
+    100258: rig:FK_LeftUpLeg
+    100260: rig:FK_RightArm
+    100262: rig:FK_RightFoot
+    100264: rig:FK_RightForeArm
+    100266: rig:FK_RightHand
+    100268: rig:FK_RightLeg
+    100270: rig:FK_RightToe_End
+    100272: rig:FK_RightToeBase
+    100274: rig:FK_RightUpLeg
+    100276: rig:global_CTRL
+    100278: rig:Head_CTRL
+    100280: rig:Head_CTRL_AnimData_CONST_GRP
+    100282: rig:Head_CTRL_In_Rig_CONST_GRP
+    100284: rig:Head_CTRL_Inherit_Rotation_GRP
+    100286: rig:Head_CTRL_POS_GRP
+    100288: rig:IK_Dummy_Hips
+    100290: rig:IK_Dummy_Joint_GRP
+    100292: rig:IK_Dummy_LeftShoulder
+    100294: rig:IK_Dummy_RightShoulder
+    100296: rig:IK_Dummy_Spine
+    100298: rig:IK_Dummy_Spine1
+    100300: rig:IK_Dummy_Spine2
+    100302: rig:IK_LeftArm
+    100304: rig:IK_LeftFoot
+    100306: rig:IK_LeftForeArm
+    100308: rig:IK_LeftHand
+    100310: rig:IK_LeftLeg
+    100312: rig:IK_LeftToe_End
+    100314: rig:IK_LeftToeBase
+    100316: rig:IK_LeftUpLeg
+    100318: rig:IK_RightArm
+    100320: rig:IK_RightFoot
+    100322: rig:IK_RightForeArm
+    100324: rig:IK_RightHand
+    100326: rig:IK_RightLeg
+    100328: rig:IK_RightToe_End
+    100330: rig:IK_RightToeBase
+    100332: rig:IK_RightUpLeg
+    100334: rig:Joint_GRP
+    100336: rig:Left_Ankle_IK_AnimData_GRP
+    100338: rig:Left_Ankle_IK_CTRL
+    100340: rig:Left_Toe_End_IK_CTRL
+    100342: rig:Left_Toe_IK_AnimData_GRP
+    100344: rig:Left_ToeBase_IK_AnimData_GRP
+    100346: rig:Left_ToeBase_IK_CTRL
+    100348: rig:Left_ToeBase_IkHandle
+    100350: rig:LeftArm_FK_CTRL
+    100352: rig:LeftArm_FK_CTRL_AnimData_CONST_GRP
+    100354: rig:LeftArm_FK_CTRL_In_Rig_CONST_GRP
+    100356: rig:LeftArm_FK_CTRL_POS_GRP
+    100358: rig:LeftFoot_FK_CTRL
+    100360: rig:LeftFoot_FK_CTRL_AnimData_CONST_GRP
+    100362: rig:LeftFoot_FK_CTRL_In_Rig_CONST_GRP
+    100364: rig:LeftFoot_FK_CTRL_POS_GRP
+    100366: rig:LeftFoot_IK_BakingLOC
+    100368: rig:LeftFoot_IK_CTRL
+    100370: rig:LeftFoot_IK_CTRL_AnimData_CONST_GRP
+    100372: rig:LeftFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    100374: rig:LeftFoot_IK_CTRL_grandparent_Global_POS_GRP
+    100376: rig:LeftFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    100378: rig:LeftFoot_IK_CTRL_grandparent_POS_GRP
+    100380: rig:LeftFoot_IK_CTRL_In_Rig_CONST_GRP
+    100382: rig:LeftFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    100384: rig:LeftFoot_IK_CTRL_parent_Global_POS_GRP
+    100386: rig:LeftFoot_IK_CTRL_parent_POS_GRP
+    100388: rig:LeftFoot_IK_CTRL_POS_GRP
+    100390: rig:LeftFoot_IK_CTRL_Reorient_GRP
+    100392: rig:LeftFoot_IK_Handle
+    100394: rig:LeftFoot_Options
+    100396: rig:LeftForeArm_FK_CTRL
+    100398: rig:LeftForeArm_FK_CTRL_AnimData_CONST_GRP
+    100400: rig:LeftForeArm_FK_CTRL_In_Rig_CONST_GRP
+    100402: rig:LeftForeArm_FK_CTRL_POS_GRP
+    100404: rig:LeftForeArm_IK_BakingLOC
+    100406: rig:LeftForeArm_IK_CTRL
+    100408: rig:LeftForeArm_IK_CTRL_AnimData_CONST_GRP
+    100410: rig:LeftForeArm_IK_CTRL_GuideCurve
+    100412: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    100414: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    100416: rig:LeftForeArm_IK_CTRL_In_Rig_CONST_GRP
+    100418: rig:LeftForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    100420: rig:LeftForeArm_IK_CTRL_parent_Global_POS_GRP
+    100422: rig:LeftForeArm_IK_CTRL_parent_POS_GRP
+    100424: rig:LeftForeArm_IK_CTRL_POS_GRP
+    100426: rig:LeftHand_CTRLs_GRP
+    100428: rig:LeftHand_FK_CTRL
+    100430: rig:LeftHand_FK_CTRL_AnimData_CONST_GRP
+    100432: rig:LeftHand_FK_CTRL_In_Rig_CONST_GRP
+    100434: rig:LeftHand_FK_CTRL_POS_GRP
+    100436: rig:LeftHand_IK_CTRL
+    100438: rig:LeftHand_IK_CTRL_AnimData_CONST_GRP
+    100440: rig:LeftHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    100442: rig:LeftHand_IK_CTRL_grandparent_Global_POS_GRP
+    100444: rig:LeftHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    100446: rig:LeftHand_IK_CTRL_grandparent_POS_GRP
+    100448: rig:LeftHand_IK_CTRL_In_Rig_CONST_GRP
+    100450: rig:LeftHand_IK_CTRL_parent_AnimData_CONST_GRP
+    100452: rig:LeftHand_IK_CTRL_parent_Global_POS_GRP
+    100454: rig:LeftHand_IK_CTRL_parent_POS_GRP
+    100456: rig:LeftHand_IK_CTRL_POS_GRP
+    100458: rig:LeftHand_IK_Handle
+    100460: rig:LeftHand_Options
+    100462: rig:LeftHandIndex1_CTRL
+    100464: rig:LeftHandIndex1_CTRL_AnimData_CONST_GRP
+    100466: rig:LeftHandIndex1_CTRL_In_Rig_CONST_GRP
+    100468: rig:LeftHandIndex1_CTRL_POS_GRP
+    100470: rig:LeftHandIndex2_CTRL
+    100472: rig:LeftHandIndex2_CTRL_AnimData_CONST_GRP
+    100474: rig:LeftHandIndex2_CTRL_In_Rig_CONST_GRP
+    100476: rig:LeftHandIndex2_CTRL_POS_GRP
+    100478: rig:LeftHandIndex3_CTRL
+    100480: rig:LeftHandIndex3_CTRL_AnimData_CONST_GRP
+    100482: rig:LeftHandIndex3_CTRL_In_Rig_CONST_GRP
+    100484: rig:LeftHandIndex3_CTRL_POS_GRP
+    100486: rig:LeftHandThumb1_CTRL
+    100488: rig:LeftHandThumb1_CTRL_AnimData_CONST_GRP
+    100490: rig:LeftHandThumb1_CTRL_In_Rig_CONST_GRP
+    100492: rig:LeftHandThumb1_CTRL_POS_GRP
+    100494: rig:LeftHandThumb2_CTRL
+    100496: rig:LeftHandThumb2_CTRL_AnimData_CONST_GRP
+    100498: rig:LeftHandThumb2_CTRL_In_Rig_CONST_GRP
+    100500: rig:LeftHandThumb2_CTRL_POS_GRP
+    100502: rig:LeftHandThumb3_CTRL
+    100504: rig:LeftHandThumb3_CTRL_AnimData_CONST_GRP
+    100506: rig:LeftHandThumb3_CTRL_In_Rig_CONST_GRP
+    100508: rig:LeftHandThumb3_CTRL_POS_GRP
+    100510: rig:LeftLeg_FK_CTRL
+    100512: rig:LeftLeg_FK_CTRL_AnimData_CONST_GRP
+    100514: rig:LeftLeg_FK_CTRL_In_Rig_CONST_GRP
+    100516: rig:LeftLeg_FK_CTRL_POS_GRP
+    100518: rig:LeftLeg_IK_BakingLOC
+    100520: rig:LeftLeg_IK_CTRL
+    100522: rig:LeftLeg_IK_CTRL_AnimData_CONST_GRP
+    100524: rig:LeftLeg_IK_CTRL_Follow_Foot_GRP
+    100526: rig:LeftLeg_IK_CTRL_Follow_Knee_GRP
+    100528: rig:LeftLeg_IK_CTRL_GuideCurve
+    100530: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    100532: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    100534: rig:LeftLeg_IK_CTRL_In_Rig_CONST_GRP
+    100536: rig:LeftLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    100538: rig:LeftLeg_IK_CTRL_parent_Global_POS_GRP
+    100540: rig:LeftLeg_IK_CTRL_parent_POS_GRP
+    100542: rig:LeftLeg_IK_CTRL_POS_GRP
+    100544: rig:LeftShoulder_CTRL
+    100546: rig:LeftShoulder_CTRL_AnimData_CONST_GRP
+    100548: rig:LeftShoulder_CTRL_In_Rig_CONST_GRP
+    100550: rig:LeftShoulder_CTRL_POS_GRP
+    100552: rig:LeftToeBase_FK_CTRL
+    100554: rig:LeftToeBase_FK_CTRL_AnimData_CONST_GRP
+    100556: rig:LeftToeBase_FK_CTRL_In_Rig_CONST_GRP
+    100558: rig:LeftToeBase_FK_CTRL_POS_GRP
+    100560: rig:LeftUpLeg_FK_CTRL
+    100562: rig:LeftUpLeg_FK_CTRL_AnimData_CONST_GRP
+    100564: rig:LeftUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    100566: rig:LeftUpLeg_FK_CTRL_POS_GRP
+    100568: rig:Mesh_GRP
+    100570: rig:Misc_GRP
+    100572: rig:MIXAMO_CHARACTER_Head_infoNode
+    100574: rig:MIXAMO_CHARACTER_HeadTop_End_infoNode
+    100576: rig:MIXAMO_CHARACTER_Hips_infoNode
+    100578: rig:MIXAMO_CHARACTER_infoNode
+    100580: rig:MIXAMO_CHARACTER_LeftArm_infoNode
+    100582: rig:MIXAMO_CHARACTER_LeftFoot_infoNode
+    100584: rig:MIXAMO_CHARACTER_LeftForeArm_infoNode
+    100586: rig:MIXAMO_CHARACTER_LeftHand_infoNode
+    100588: rig:MIXAMO_CHARACTER_LeftHandIndex1_infoNode
+    100590: rig:MIXAMO_CHARACTER_LeftHandIndex2_infoNode
+    100592: rig:MIXAMO_CHARACTER_LeftHandIndex3_infoNode
+    100594: rig:MIXAMO_CHARACTER_LeftHandIndex4_infoNode
+    100596: rig:MIXAMO_CHARACTER_LeftHandMiddle1_infoNode
+    100598: rig:MIXAMO_CHARACTER_LeftHandMiddle2_infoNode
+    100600: rig:MIXAMO_CHARACTER_LeftHandMiddle3_infoNode
+    100602: rig:MIXAMO_CHARACTER_LeftHandMiddle4_infoNode
+    100604: rig:MIXAMO_CHARACTER_LeftHandPinky1_infoNode
+    100606: rig:MIXAMO_CHARACTER_LeftHandPinky2_infoNode
+    100608: rig:MIXAMO_CHARACTER_LeftHandPinky3_infoNode
+    100610: rig:MIXAMO_CHARACTER_LeftHandPinky4_infoNode
+    100612: rig:MIXAMO_CHARACTER_LeftHandRing1_infoNode
+    100614: rig:MIXAMO_CHARACTER_LeftHandRing2_infoNode
+    100616: rig:MIXAMO_CHARACTER_LeftHandRing3_infoNode
+    100618: rig:MIXAMO_CHARACTER_LeftHandRing4_infoNode
+    100620: rig:MIXAMO_CHARACTER_LeftHandThumb1_infoNode
+    100622: rig:MIXAMO_CHARACTER_LeftHandThumb2_infoNode
+    100624: rig:MIXAMO_CHARACTER_LeftHandThumb3_infoNode
+    100626: rig:MIXAMO_CHARACTER_LeftHandThumb4_infoNode
+    100628: rig:MIXAMO_CHARACTER_LeftLeg_infoNode
+    100630: rig:MIXAMO_CHARACTER_LeftShoulder_infoNode
+    100632: rig:MIXAMO_CHARACTER_LeftToe_End_infoNode
+    100634: rig:MIXAMO_CHARACTER_LeftToeBase_infoNode
+    100636: rig:MIXAMO_CHARACTER_LeftUpLeg_infoNode
+    100638: rig:MIXAMO_CHARACTER_Neck1_infoNode
+    100640: rig:MIXAMO_CHARACTER_Neck_infoNode
+    100642: rig:MIXAMO_CHARACTER_RightArm_infoNode
+    100644: rig:MIXAMO_CHARACTER_RightFoot_infoNode
+    100646: rig:MIXAMO_CHARACTER_RightForeArm_infoNode
+    100648: rig:MIXAMO_CHARACTER_RightHand_infoNode
+    100650: rig:MIXAMO_CHARACTER_RightHandIndex1_infoNode
+    100652: rig:MIXAMO_CHARACTER_RightHandIndex2_infoNode
+    100654: rig:MIXAMO_CHARACTER_RightHandIndex3_infoNode
+    100656: rig:MIXAMO_CHARACTER_RightHandIndex4_infoNode
+    100658: rig:MIXAMO_CHARACTER_RightHandMiddle1_infoNode
+    100660: rig:MIXAMO_CHARACTER_RightHandMiddle2_infoNode
+    100662: rig:MIXAMO_CHARACTER_RightHandMiddle3_infoNode
+    100664: rig:MIXAMO_CHARACTER_RightHandMiddle4_infoNode
+    100666: rig:MIXAMO_CHARACTER_RightHandPinky1_infoNode
+    100668: rig:MIXAMO_CHARACTER_RightHandPinky2_infoNode
+    100670: rig:MIXAMO_CHARACTER_RightHandPinky3_infoNode
+    100672: rig:MIXAMO_CHARACTER_RightHandPinky4_infoNode
+    100674: rig:MIXAMO_CHARACTER_RightHandRing1_infoNode
+    100676: rig:MIXAMO_CHARACTER_RightHandRing2_infoNode
+    100678: rig:MIXAMO_CHARACTER_RightHandRing3_infoNode
+    100680: rig:MIXAMO_CHARACTER_RightHandRing4_infoNode
+    100682: rig:MIXAMO_CHARACTER_RightHandThumb1_infoNode
+    100684: rig:MIXAMO_CHARACTER_RightHandThumb2_infoNode
+    100686: rig:MIXAMO_CHARACTER_RightHandThumb3_infoNode
+    100688: rig:MIXAMO_CHARACTER_RightHandThumb4_infoNode
+    100690: rig:MIXAMO_CHARACTER_RightLeg_infoNode
+    100692: rig:MIXAMO_CHARACTER_RightShoulder_infoNode
+    100694: rig:MIXAMO_CHARACTER_RightToe_End_infoNode
+    100696: rig:MIXAMO_CHARACTER_RightToeBase_infoNode
+    100698: rig:MIXAMO_CHARACTER_RightUpLeg_infoNode
+    100700: rig:MIXAMO_CHARACTER_Root_infoNode
+    100702: rig:MIXAMO_CHARACTER_Spine1_infoNode
+    100704: rig:MIXAMO_CHARACTER_Spine2_infoNode
+    100706: rig:MIXAMO_CHARACTER_Spine3_infoNode
+    100708: rig:MIXAMO_CHARACTER_Spine_infoNode
+    100710: rig:Neck_CTRL
+    100712: rig:Neck_CTRL_AnimData_CONST_GRP
+    100714: rig:Neck_CTRL_In_Rig_CONST_GRP
+    100716: rig:Neck_CTRL_POS_GRP
+    100718: rig:Right_Ankle_IK_AnimData_GRP
+    100720: rig:Right_Ankle_IK_CTRL
+    100722: rig:Right_Toe_End_IK_CTRL
+    100724: rig:Right_Toe_IK_AnimData_GRP
+    100726: rig:Right_ToeBase_IK_AnimData_GRP
+    100728: rig:Right_ToeBase_IK_CTRL
+    100730: rig:Right_ToeBase_IkHandle
+    100732: rig:RightArm_FK_CTRL
+    100734: rig:RightArm_FK_CTRL_AnimData_CONST_GRP
+    100736: rig:RightArm_FK_CTRL_In_Rig_CONST_GRP
+    100738: rig:RightArm_FK_CTRL_POS_GRP
+    100740: rig:RightFoot_FK_CTRL
+    100742: rig:RightFoot_FK_CTRL_AnimData_CONST_GRP
+    100744: rig:RightFoot_FK_CTRL_In_Rig_CONST_GRP
+    100746: rig:RightFoot_FK_CTRL_POS_GRP
+    100748: rig:RightFoot_IK_BakingLOC
+    100750: rig:RightFoot_IK_CTRL
+    100752: rig:RightFoot_IK_CTRL_AnimData_CONST_GRP
+    100754: rig:RightFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    100756: rig:RightFoot_IK_CTRL_grandparent_Global_POS_GRP
+    100758: rig:RightFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    100760: rig:RightFoot_IK_CTRL_grandparent_POS_GRP
+    100762: rig:RightFoot_IK_CTRL_In_Rig_CONST_GRP
+    100764: rig:RightFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    100766: rig:RightFoot_IK_CTRL_parent_Global_POS_GRP
+    100768: rig:RightFoot_IK_CTRL_parent_POS_GRP
+    100770: rig:RightFoot_IK_CTRL_POS_GRP
+    100772: rig:RightFoot_IK_CTRL_Reorient_GRP
+    100774: rig:RightFoot_IK_Handle
+    100776: rig:RightFoot_Options
+    100778: rig:RightForeArm_FK_CTRL
+    100780: rig:RightForeArm_FK_CTRL_AnimData_CONST_GRP
+    100782: rig:RightForeArm_FK_CTRL_In_Rig_CONST_GRP
+    100784: rig:RightForeArm_FK_CTRL_POS_GRP
+    100786: rig:RightForeArm_IK_BakingLOC
+    100788: rig:RightForeArm_IK_CTRL
+    100790: rig:RightForeArm_IK_CTRL_AnimData_CONST_GRP
+    100792: rig:RightForeArm_IK_CTRL_GuideCurve
+    100794: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    100796: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    100798: rig:RightForeArm_IK_CTRL_In_Rig_CONST_GRP
+    100800: rig:RightForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    100802: rig:RightForeArm_IK_CTRL_parent_Global_POS_GRP
+    100804: rig:RightForeArm_IK_CTRL_parent_POS_GRP
+    100806: rig:RightForeArm_IK_CTRL_POS_GRP
+    100808: rig:RightHand_CTRLs_GRP
+    100810: rig:RightHand_FK_CTRL
+    100812: rig:RightHand_FK_CTRL_AnimData_CONST_GRP
+    100814: rig:RightHand_FK_CTRL_In_Rig_CONST_GRP
+    100816: rig:RightHand_FK_CTRL_POS_GRP
+    100818: rig:RightHand_IK_CTRL
+    100820: rig:RightHand_IK_CTRL_AnimData_CONST_GRP
+    100822: rig:RightHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    100824: rig:RightHand_IK_CTRL_grandparent_Global_POS_GRP
+    100826: rig:RightHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    100828: rig:RightHand_IK_CTRL_grandparent_POS_GRP
+    100830: rig:RightHand_IK_CTRL_In_Rig_CONST_GRP
+    100832: rig:RightHand_IK_CTRL_parent_AnimData_CONST_GRP
+    100834: rig:RightHand_IK_CTRL_parent_Global_POS_GRP
+    100836: rig:RightHand_IK_CTRL_parent_POS_GRP
+    100838: rig:RightHand_IK_CTRL_POS_GRP
+    100840: rig:RightHand_IK_Handle
+    100842: rig:RightHand_Options
+    100844: rig:RightHandIndex1_CTRL
+    100846: rig:RightHandIndex1_CTRL_AnimData_CONST_GRP
+    100848: rig:RightHandIndex1_CTRL_In_Rig_CONST_GRP
+    100850: rig:RightHandIndex1_CTRL_POS_GRP
+    100852: rig:RightHandIndex2_CTRL
+    100854: rig:RightHandIndex2_CTRL_AnimData_CONST_GRP
+    100856: rig:RightHandIndex2_CTRL_In_Rig_CONST_GRP
+    100858: rig:RightHandIndex2_CTRL_POS_GRP
+    100860: rig:RightHandIndex3_CTRL
+    100862: rig:RightHandIndex3_CTRL_AnimData_CONST_GRP
+    100864: rig:RightHandIndex3_CTRL_In_Rig_CONST_GRP
+    100866: rig:RightHandIndex3_CTRL_POS_GRP
+    100868: rig:RightHandThumb1_CTRL
+    100870: rig:RightHandThumb1_CTRL_AnimData_CONST_GRP
+    100872: rig:RightHandThumb1_CTRL_In_Rig_CONST_GRP
+    100874: rig:RightHandThumb1_CTRL_POS_GRP
+    100876: rig:RightHandThumb2_CTRL
+    100878: rig:RightHandThumb2_CTRL_AnimData_CONST_GRP
+    100880: rig:RightHandThumb2_CTRL_In_Rig_CONST_GRP
+    100882: rig:RightHandThumb2_CTRL_POS_GRP
+    100884: rig:RightHandThumb3_CTRL
+    100886: rig:RightHandThumb3_CTRL_AnimData_CONST_GRP
+    100888: rig:RightHandThumb3_CTRL_In_Rig_CONST_GRP
+    100890: rig:RightHandThumb3_CTRL_POS_GRP
+    100892: rig:RightLeg_FK_CTRL
+    100894: rig:RightLeg_FK_CTRL_AnimData_CONST_GRP
+    100896: rig:RightLeg_FK_CTRL_In_Rig_CONST_GRP
+    100898: rig:RightLeg_FK_CTRL_POS_GRP
+    100900: rig:RightLeg_IK_BakingLOC
+    100902: rig:RightLeg_IK_CTRL
+    100904: rig:RightLeg_IK_CTRL_AnimData_CONST_GRP
+    100906: rig:RightLeg_IK_CTRL_Follow_Foot_GRP
+    100908: rig:RightLeg_IK_CTRL_Follow_Knee_GRP
+    100910: rig:RightLeg_IK_CTRL_GuideCurve
+    100912: rig:RightLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    100914: rig:RightLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    100916: rig:RightLeg_IK_CTRL_In_Rig_CONST_GRP
+    100918: rig:RightLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    100920: rig:RightLeg_IK_CTRL_parent_Global_POS_GRP
+    100922: rig:RightLeg_IK_CTRL_parent_POS_GRP
+    100924: rig:RightLeg_IK_CTRL_POS_GRP
+    100926: rig:RightShoulder_CTRL
+    100928: rig:RightShoulder_CTRL_AnimData_CONST_GRP
+    100930: rig:RightShoulder_CTRL_In_Rig_CONST_GRP
+    100932: rig:RightShoulder_CTRL_POS_GRP
+    100934: rig:RightToeBase_FK_CTRL
+    100936: rig:RightToeBase_FK_CTRL_AnimData_CONST_GRP
+    100938: rig:RightToeBase_FK_CTRL_In_Rig_CONST_GRP
+    100940: rig:RightToeBase_FK_CTRL_POS_GRP
+    100942: rig:RightUpLeg_FK_CTRL
+    100944: rig:RightUpLeg_FK_CTRL_AnimData_CONST_GRP
+    100946: rig:RightUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    100948: rig:RightUpLeg_FK_CTRL_POS_GRP
+    100950: rig:Root_CTRL
+    100952: rig:Root_CTRL_AnimData_CONST_GRP
+    100954: rig:Root_CTRL_In_Rig_CONST_GRP
+    100956: rig:Root_CTRL_POS_GRP
+    100958: rig:Spine1_CTRL
+    100960: rig:Spine1_CTRL_AnimData_CONST_GRP
+    100962: rig:Spine1_CTRL_In_Rig_CONST_GRP
+    100964: rig:Spine1_CTRL_POS_GRP
+    100966: rig:Spine2_CTRL
+    100968: rig:Spine2_CTRL_AnimData_CONST_GRP
+    100970: rig:Spine2_CTRL_In_Rig_CONST_GRP
+    100972: rig:Spine2_CTRL_POS_GRP
+    100974: rig:Spine_CTRL
+    100976: rig:Spine_CTRL_AnimData_CONST_GRP
+    100978: rig:Spine_CTRL_In_Rig_CONST_GRP
+    100980: rig:Spine_CTRL_POS_GRP
+    100982: Head
+    100984: HeadTop_End
+    100986: Hips
+    100988: LeftArm
+    100990: LeftFoot
+    100992: LeftForeArm
+    100994: LeftHand
+    100996: LeftHandIndex1
+    100998: LeftHandIndex2
+    101000: LeftHandIndex3
+    101002: LeftHandIndex4
+    101004: LeftHandThumb1
+    101006: LeftHandThumb2
+    101008: LeftHandThumb3
+    101010: LeftHandThumb4
+    101012: LeftLeg
+    101014: LeftShoulder
+    101016: LeftToe_End
+    101018: LeftToeBase
+    101020: LeftUpLeg
+    101022: Neck
+    101024: RightArm
+    101026: RightFoot
+    101028: RightForeArm
+    101030: RightHand
+    101032: RightHandIndex1
+    101034: RightHandIndex2
+    101036: RightHandIndex3
+    101038: RightHandIndex4
+    101040: RightHandThumb1
+    101042: RightHandThumb2
+    101044: RightHandThumb3
+    101046: RightHandThumb4
+    101048: RightLeg
+    101050: RightShoulder
+    101052: RightToe_End
+    101054: RightToeBase
+    101056: RightUpLeg
+    101058: Spine
+    101060: Spine1
+    101062: Spine2
+    400000: knight:Mesh_Group1104
+    400002: knight:Mesh_Group1344
+    400004: knight:Mesh_Group1408
+    400006: knight:Mesh_Group4448
+    400008: knight:Mesh_Group5744
+    400010: knight:Mesh_Group5745
+    400012: knight:Mesh_Group5746
+    400014: knight:Mesh_pCone1
+    400016: knight:Mesh_pCylinder15
+    400018: knight:Mesh_pCylinder16
+    400020: knight:Mesh_pCylinder17
+    400022: knight:Mesh_pCylinder18
+    400024: knight:Mesh_pCylinder19
+    400026: knight:Mesh_pSphere8
+    400028: knight:Mesh_pSphere9
+    400030: knight:Mesh_ZBrush_defualt_group
+    400032: knight:pCube16
+    400034: knight:pCube17
+    400036: knight:pCube18
+    400038: knight:pCube19
+    400040: knight:pCube27
+    400042: knight:pCube28
+    400044: knight:pCube29
+    400046: knight:pCube30
+    400048: knight:pCube31
+    400050: knight:pCube32
+    400052: knight:pCube33
+    400054: knight:pCube34
+    400056: knight:pCube35
+    400058: knight:pCube36
+    400060: knight:pCube37
+    400062: knight:pCube38
+    400064: knight:pCube39
+    400066: knight:pCube40
+    400068: knight:pCylinder21
+    400070: knight:pCylinder22
+    400072: knight:pCylinder23
+    400074: knight:pCylinder24
+    400076: knight:pCylinder25
+    400078: knight:pCylinder26
+    400080: knight:polySurface2
+    400082: knight:pSphere10
+    400084: knight:pSphere11
+    400086: knight:ZBrush_defualt_group1
+    400088: //RootNode
+    400090: rig:AnimData_Head
+    400092: rig:AnimData_HeadTop_End
+    400094: rig:AnimData_Hips
+    400096: rig:AnimData_Joint_GRP
+    400098: rig:AnimData_LeftArm
+    400100: rig:AnimData_LeftFoot
+    400102: rig:AnimData_LeftForeArm
+    400104: rig:AnimData_LeftHand
+    400106: rig:AnimData_LeftHandIndex1
+    400108: rig:AnimData_LeftHandIndex2
+    400110: rig:AnimData_LeftHandIndex3
+    400112: rig:AnimData_LeftHandIndex4
+    400114: rig:AnimData_LeftHandThumb1
+    400116: rig:AnimData_LeftHandThumb2
+    400118: rig:AnimData_LeftHandThumb3
+    400120: rig:AnimData_LeftHandThumb4
+    400122: rig:AnimData_LeftLeg
+    400124: rig:AnimData_LeftShoulder
+    400126: rig:AnimData_LeftToe_End
+    400128: rig:AnimData_LeftToeBase
+    400130: rig:AnimData_LeftUpLeg
+    400132: rig:AnimData_Neck
+    400134: rig:AnimData_RightArm
+    400136: rig:AnimData_RightFoot
+    400138: rig:AnimData_RightForeArm
+    400140: rig:AnimData_RightHand
+    400142: rig:AnimData_RightHandIndex1
+    400144: rig:AnimData_RightHandIndex2
+    400146: rig:AnimData_RightHandIndex3
+    400148: rig:AnimData_RightHandIndex4
+    400150: rig:AnimData_RightHandThumb1
+    400152: rig:AnimData_RightHandThumb2
+    400154: rig:AnimData_RightHandThumb3
+    400156: rig:AnimData_RightHandThumb4
+    400158: rig:AnimData_RightLeg
+    400160: rig:AnimData_RightShoulder
+    400162: rig:AnimData_RightToe_End
+    400164: rig:AnimData_RightToeBase
+    400166: rig:AnimData_RightUpLeg
+    400168: rig:AnimData_Spine
+    400170: rig:AnimData_Spine1
+    400172: rig:AnimData_Spine2
+    400174: rig:Bind_Head
+    400176: rig:Bind_HeadTop_End
+    400178: rig:Bind_Hips
+    400180: rig:Bind_Joint_GRP
+    400182: rig:Bind_LeftArm
+    400184: rig:Bind_LeftFoot
+    400186: rig:Bind_LeftForeArm
+    400188: rig:Bind_LeftHand
+    400190: rig:Bind_LeftHandIndex1
+    400192: rig:Bind_LeftHandIndex2
+    400194: rig:Bind_LeftHandThumb1
+    400196: rig:Bind_LeftHandThumb2
+    400198: rig:Bind_LeftLeg
+    400200: rig:Bind_LeftShoulder
+    400202: rig:Bind_LeftToe_End
+    400204: rig:Bind_LeftToeBase
+    400206: rig:Bind_LeftUpLeg
+    400208: rig:Bind_Neck
+    400210: rig:Bind_RightArm
+    400212: rig:Bind_RightFoot
+    400214: rig:Bind_RightForeArm
+    400216: rig:Bind_RightHand
+    400218: rig:Bind_RightHandIndex1
+    400220: rig:Bind_RightHandIndex2
+    400222: rig:Bind_RightHandThumb1
+    400224: rig:Bind_RightHandThumb2
+    400226: rig:Bind_RightLeg
+    400228: rig:Bind_RightShoulder
+    400230: rig:Bind_RightToe_End
+    400232: rig:Bind_RightToeBase
+    400234: rig:Bind_RightUpLeg
+    400236: rig:Bind_Spine
+    400238: rig:Bind_Spine1
+    400240: rig:Bind_Spine2
+    400242: rig:CTRL_GRP
+    400244: rig:FK_LeftArm
+    400246: rig:FK_LeftFoot
+    400248: rig:FK_LeftForeArm
+    400250: rig:FK_LeftHand
+    400252: rig:FK_LeftLeg
+    400254: rig:FK_LeftToe_End
+    400256: rig:FK_LeftToeBase
+    400258: rig:FK_LeftUpLeg
+    400260: rig:FK_RightArm
+    400262: rig:FK_RightFoot
+    400264: rig:FK_RightForeArm
+    400266: rig:FK_RightHand
+    400268: rig:FK_RightLeg
+    400270: rig:FK_RightToe_End
+    400272: rig:FK_RightToeBase
+    400274: rig:FK_RightUpLeg
+    400276: rig:global_CTRL
+    400278: rig:Head_CTRL
+    400280: rig:Head_CTRL_AnimData_CONST_GRP
+    400282: rig:Head_CTRL_In_Rig_CONST_GRP
+    400284: rig:Head_CTRL_Inherit_Rotation_GRP
+    400286: rig:Head_CTRL_POS_GRP
+    400288: rig:IK_Dummy_Hips
+    400290: rig:IK_Dummy_Joint_GRP
+    400292: rig:IK_Dummy_LeftShoulder
+    400294: rig:IK_Dummy_RightShoulder
+    400296: rig:IK_Dummy_Spine
+    400298: rig:IK_Dummy_Spine1
+    400300: rig:IK_Dummy_Spine2
+    400302: rig:IK_LeftArm
+    400304: rig:IK_LeftFoot
+    400306: rig:IK_LeftForeArm
+    400308: rig:IK_LeftHand
+    400310: rig:IK_LeftLeg
+    400312: rig:IK_LeftToe_End
+    400314: rig:IK_LeftToeBase
+    400316: rig:IK_LeftUpLeg
+    400318: rig:IK_RightArm
+    400320: rig:IK_RightFoot
+    400322: rig:IK_RightForeArm
+    400324: rig:IK_RightHand
+    400326: rig:IK_RightLeg
+    400328: rig:IK_RightToe_End
+    400330: rig:IK_RightToeBase
+    400332: rig:IK_RightUpLeg
+    400334: rig:Joint_GRP
+    400336: rig:Left_Ankle_IK_AnimData_GRP
+    400338: rig:Left_Ankle_IK_CTRL
+    400340: rig:Left_Toe_End_IK_CTRL
+    400342: rig:Left_Toe_IK_AnimData_GRP
+    400344: rig:Left_ToeBase_IK_AnimData_GRP
+    400346: rig:Left_ToeBase_IK_CTRL
+    400348: rig:Left_ToeBase_IkHandle
+    400350: rig:LeftArm_FK_CTRL
+    400352: rig:LeftArm_FK_CTRL_AnimData_CONST_GRP
+    400354: rig:LeftArm_FK_CTRL_In_Rig_CONST_GRP
+    400356: rig:LeftArm_FK_CTRL_POS_GRP
+    400358: rig:LeftFoot_FK_CTRL
+    400360: rig:LeftFoot_FK_CTRL_AnimData_CONST_GRP
+    400362: rig:LeftFoot_FK_CTRL_In_Rig_CONST_GRP
+    400364: rig:LeftFoot_FK_CTRL_POS_GRP
+    400366: rig:LeftFoot_IK_BakingLOC
+    400368: rig:LeftFoot_IK_CTRL
+    400370: rig:LeftFoot_IK_CTRL_AnimData_CONST_GRP
+    400372: rig:LeftFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    400374: rig:LeftFoot_IK_CTRL_grandparent_Global_POS_GRP
+    400376: rig:LeftFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    400378: rig:LeftFoot_IK_CTRL_grandparent_POS_GRP
+    400380: rig:LeftFoot_IK_CTRL_In_Rig_CONST_GRP
+    400382: rig:LeftFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    400384: rig:LeftFoot_IK_CTRL_parent_Global_POS_GRP
+    400386: rig:LeftFoot_IK_CTRL_parent_POS_GRP
+    400388: rig:LeftFoot_IK_CTRL_POS_GRP
+    400390: rig:LeftFoot_IK_CTRL_Reorient_GRP
+    400392: rig:LeftFoot_IK_Handle
+    400394: rig:LeftFoot_Options
+    400396: rig:LeftForeArm_FK_CTRL
+    400398: rig:LeftForeArm_FK_CTRL_AnimData_CONST_GRP
+    400400: rig:LeftForeArm_FK_CTRL_In_Rig_CONST_GRP
+    400402: rig:LeftForeArm_FK_CTRL_POS_GRP
+    400404: rig:LeftForeArm_IK_BakingLOC
+    400406: rig:LeftForeArm_IK_CTRL
+    400408: rig:LeftForeArm_IK_CTRL_AnimData_CONST_GRP
+    400410: rig:LeftForeArm_IK_CTRL_GuideCurve
+    400412: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    400414: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    400416: rig:LeftForeArm_IK_CTRL_In_Rig_CONST_GRP
+    400418: rig:LeftForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    400420: rig:LeftForeArm_IK_CTRL_parent_Global_POS_GRP
+    400422: rig:LeftForeArm_IK_CTRL_parent_POS_GRP
+    400424: rig:LeftForeArm_IK_CTRL_POS_GRP
+    400426: rig:LeftHand_CTRLs_GRP
+    400428: rig:LeftHand_FK_CTRL
+    400430: rig:LeftHand_FK_CTRL_AnimData_CONST_GRP
+    400432: rig:LeftHand_FK_CTRL_In_Rig_CONST_GRP
+    400434: rig:LeftHand_FK_CTRL_POS_GRP
+    400436: rig:LeftHand_IK_CTRL
+    400438: rig:LeftHand_IK_CTRL_AnimData_CONST_GRP
+    400440: rig:LeftHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    400442: rig:LeftHand_IK_CTRL_grandparent_Global_POS_GRP
+    400444: rig:LeftHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    400446: rig:LeftHand_IK_CTRL_grandparent_POS_GRP
+    400448: rig:LeftHand_IK_CTRL_In_Rig_CONST_GRP
+    400450: rig:LeftHand_IK_CTRL_parent_AnimData_CONST_GRP
+    400452: rig:LeftHand_IK_CTRL_parent_Global_POS_GRP
+    400454: rig:LeftHand_IK_CTRL_parent_POS_GRP
+    400456: rig:LeftHand_IK_CTRL_POS_GRP
+    400458: rig:LeftHand_IK_Handle
+    400460: rig:LeftHand_Options
+    400462: rig:LeftHandIndex1_CTRL
+    400464: rig:LeftHandIndex1_CTRL_AnimData_CONST_GRP
+    400466: rig:LeftHandIndex1_CTRL_In_Rig_CONST_GRP
+    400468: rig:LeftHandIndex1_CTRL_POS_GRP
+    400470: rig:LeftHandIndex2_CTRL
+    400472: rig:LeftHandIndex2_CTRL_AnimData_CONST_GRP
+    400474: rig:LeftHandIndex2_CTRL_In_Rig_CONST_GRP
+    400476: rig:LeftHandIndex2_CTRL_POS_GRP
+    400478: rig:LeftHandIndex3_CTRL
+    400480: rig:LeftHandIndex3_CTRL_AnimData_CONST_GRP
+    400482: rig:LeftHandIndex3_CTRL_In_Rig_CONST_GRP
+    400484: rig:LeftHandIndex3_CTRL_POS_GRP
+    400486: rig:LeftHandThumb1_CTRL
+    400488: rig:LeftHandThumb1_CTRL_AnimData_CONST_GRP
+    400490: rig:LeftHandThumb1_CTRL_In_Rig_CONST_GRP
+    400492: rig:LeftHandThumb1_CTRL_POS_GRP
+    400494: rig:LeftHandThumb2_CTRL
+    400496: rig:LeftHandThumb2_CTRL_AnimData_CONST_GRP
+    400498: rig:LeftHandThumb2_CTRL_In_Rig_CONST_GRP
+    400500: rig:LeftHandThumb2_CTRL_POS_GRP
+    400502: rig:LeftHandThumb3_CTRL
+    400504: rig:LeftHandThumb3_CTRL_AnimData_CONST_GRP
+    400506: rig:LeftHandThumb3_CTRL_In_Rig_CONST_GRP
+    400508: rig:LeftHandThumb3_CTRL_POS_GRP
+    400510: rig:LeftLeg_FK_CTRL
+    400512: rig:LeftLeg_FK_CTRL_AnimData_CONST_GRP
+    400514: rig:LeftLeg_FK_CTRL_In_Rig_CONST_GRP
+    400516: rig:LeftLeg_FK_CTRL_POS_GRP
+    400518: rig:LeftLeg_IK_BakingLOC
+    400520: rig:LeftLeg_IK_CTRL
+    400522: rig:LeftLeg_IK_CTRL_AnimData_CONST_GRP
+    400524: rig:LeftLeg_IK_CTRL_Follow_Foot_GRP
+    400526: rig:LeftLeg_IK_CTRL_Follow_Knee_GRP
+    400528: rig:LeftLeg_IK_CTRL_GuideCurve
+    400530: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    400532: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    400534: rig:LeftLeg_IK_CTRL_In_Rig_CONST_GRP
+    400536: rig:LeftLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    400538: rig:LeftLeg_IK_CTRL_parent_Global_POS_GRP
+    400540: rig:LeftLeg_IK_CTRL_parent_POS_GRP
+    400542: rig:LeftLeg_IK_CTRL_POS_GRP
+    400544: rig:LeftShoulder_CTRL
+    400546: rig:LeftShoulder_CTRL_AnimData_CONST_GRP
+    400548: rig:LeftShoulder_CTRL_In_Rig_CONST_GRP
+    400550: rig:LeftShoulder_CTRL_POS_GRP
+    400552: rig:LeftToeBase_FK_CTRL
+    400554: rig:LeftToeBase_FK_CTRL_AnimData_CONST_GRP
+    400556: rig:LeftToeBase_FK_CTRL_In_Rig_CONST_GRP
+    400558: rig:LeftToeBase_FK_CTRL_POS_GRP
+    400560: rig:LeftUpLeg_FK_CTRL
+    400562: rig:LeftUpLeg_FK_CTRL_AnimData_CONST_GRP
+    400564: rig:LeftUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    400566: rig:LeftUpLeg_FK_CTRL_POS_GRP
+    400568: rig:Mesh_GRP
+    400570: rig:Misc_GRP
+    400572: rig:MIXAMO_CHARACTER_Head_infoNode
+    400574: rig:MIXAMO_CHARACTER_HeadTop_End_infoNode
+    400576: rig:MIXAMO_CHARACTER_Hips_infoNode
+    400578: rig:MIXAMO_CHARACTER_infoNode
+    400580: rig:MIXAMO_CHARACTER_LeftArm_infoNode
+    400582: rig:MIXAMO_CHARACTER_LeftFoot_infoNode
+    400584: rig:MIXAMO_CHARACTER_LeftForeArm_infoNode
+    400586: rig:MIXAMO_CHARACTER_LeftHand_infoNode
+    400588: rig:MIXAMO_CHARACTER_LeftHandIndex1_infoNode
+    400590: rig:MIXAMO_CHARACTER_LeftHandIndex2_infoNode
+    400592: rig:MIXAMO_CHARACTER_LeftHandIndex3_infoNode
+    400594: rig:MIXAMO_CHARACTER_LeftHandIndex4_infoNode
+    400596: rig:MIXAMO_CHARACTER_LeftHandMiddle1_infoNode
+    400598: rig:MIXAMO_CHARACTER_LeftHandMiddle2_infoNode
+    400600: rig:MIXAMO_CHARACTER_LeftHandMiddle3_infoNode
+    400602: rig:MIXAMO_CHARACTER_LeftHandMiddle4_infoNode
+    400604: rig:MIXAMO_CHARACTER_LeftHandPinky1_infoNode
+    400606: rig:MIXAMO_CHARACTER_LeftHandPinky2_infoNode
+    400608: rig:MIXAMO_CHARACTER_LeftHandPinky3_infoNode
+    400610: rig:MIXAMO_CHARACTER_LeftHandPinky4_infoNode
+    400612: rig:MIXAMO_CHARACTER_LeftHandRing1_infoNode
+    400614: rig:MIXAMO_CHARACTER_LeftHandRing2_infoNode
+    400616: rig:MIXAMO_CHARACTER_LeftHandRing3_infoNode
+    400618: rig:MIXAMO_CHARACTER_LeftHandRing4_infoNode
+    400620: rig:MIXAMO_CHARACTER_LeftHandThumb1_infoNode
+    400622: rig:MIXAMO_CHARACTER_LeftHandThumb2_infoNode
+    400624: rig:MIXAMO_CHARACTER_LeftHandThumb3_infoNode
+    400626: rig:MIXAMO_CHARACTER_LeftHandThumb4_infoNode
+    400628: rig:MIXAMO_CHARACTER_LeftLeg_infoNode
+    400630: rig:MIXAMO_CHARACTER_LeftShoulder_infoNode
+    400632: rig:MIXAMO_CHARACTER_LeftToe_End_infoNode
+    400634: rig:MIXAMO_CHARACTER_LeftToeBase_infoNode
+    400636: rig:MIXAMO_CHARACTER_LeftUpLeg_infoNode
+    400638: rig:MIXAMO_CHARACTER_Neck1_infoNode
+    400640: rig:MIXAMO_CHARACTER_Neck_infoNode
+    400642: rig:MIXAMO_CHARACTER_RightArm_infoNode
+    400644: rig:MIXAMO_CHARACTER_RightFoot_infoNode
+    400646: rig:MIXAMO_CHARACTER_RightForeArm_infoNode
+    400648: rig:MIXAMO_CHARACTER_RightHand_infoNode
+    400650: rig:MIXAMO_CHARACTER_RightHandIndex1_infoNode
+    400652: rig:MIXAMO_CHARACTER_RightHandIndex2_infoNode
+    400654: rig:MIXAMO_CHARACTER_RightHandIndex3_infoNode
+    400656: rig:MIXAMO_CHARACTER_RightHandIndex4_infoNode
+    400658: rig:MIXAMO_CHARACTER_RightHandMiddle1_infoNode
+    400660: rig:MIXAMO_CHARACTER_RightHandMiddle2_infoNode
+    400662: rig:MIXAMO_CHARACTER_RightHandMiddle3_infoNode
+    400664: rig:MIXAMO_CHARACTER_RightHandMiddle4_infoNode
+    400666: rig:MIXAMO_CHARACTER_RightHandPinky1_infoNode
+    400668: rig:MIXAMO_CHARACTER_RightHandPinky2_infoNode
+    400670: rig:MIXAMO_CHARACTER_RightHandPinky3_infoNode
+    400672: rig:MIXAMO_CHARACTER_RightHandPinky4_infoNode
+    400674: rig:MIXAMO_CHARACTER_RightHandRing1_infoNode
+    400676: rig:MIXAMO_CHARACTER_RightHandRing2_infoNode
+    400678: rig:MIXAMO_CHARACTER_RightHandRing3_infoNode
+    400680: rig:MIXAMO_CHARACTER_RightHandRing4_infoNode
+    400682: rig:MIXAMO_CHARACTER_RightHandThumb1_infoNode
+    400684: rig:MIXAMO_CHARACTER_RightHandThumb2_infoNode
+    400686: rig:MIXAMO_CHARACTER_RightHandThumb3_infoNode
+    400688: rig:MIXAMO_CHARACTER_RightHandThumb4_infoNode
+    400690: rig:MIXAMO_CHARACTER_RightLeg_infoNode
+    400692: rig:MIXAMO_CHARACTER_RightShoulder_infoNode
+    400694: rig:MIXAMO_CHARACTER_RightToe_End_infoNode
+    400696: rig:MIXAMO_CHARACTER_RightToeBase_infoNode
+    400698: rig:MIXAMO_CHARACTER_RightUpLeg_infoNode
+    400700: rig:MIXAMO_CHARACTER_Root_infoNode
+    400702: rig:MIXAMO_CHARACTER_Spine1_infoNode
+    400704: rig:MIXAMO_CHARACTER_Spine2_infoNode
+    400706: rig:MIXAMO_CHARACTER_Spine3_infoNode
+    400708: rig:MIXAMO_CHARACTER_Spine_infoNode
+    400710: rig:Neck_CTRL
+    400712: rig:Neck_CTRL_AnimData_CONST_GRP
+    400714: rig:Neck_CTRL_In_Rig_CONST_GRP
+    400716: rig:Neck_CTRL_POS_GRP
+    400718: rig:Right_Ankle_IK_AnimData_GRP
+    400720: rig:Right_Ankle_IK_CTRL
+    400722: rig:Right_Toe_End_IK_CTRL
+    400724: rig:Right_Toe_IK_AnimData_GRP
+    400726: rig:Right_ToeBase_IK_AnimData_GRP
+    400728: rig:Right_ToeBase_IK_CTRL
+    400730: rig:Right_ToeBase_IkHandle
+    400732: rig:RightArm_FK_CTRL
+    400734: rig:RightArm_FK_CTRL_AnimData_CONST_GRP
+    400736: rig:RightArm_FK_CTRL_In_Rig_CONST_GRP
+    400738: rig:RightArm_FK_CTRL_POS_GRP
+    400740: rig:RightFoot_FK_CTRL
+    400742: rig:RightFoot_FK_CTRL_AnimData_CONST_GRP
+    400744: rig:RightFoot_FK_CTRL_In_Rig_CONST_GRP
+    400746: rig:RightFoot_FK_CTRL_POS_GRP
+    400748: rig:RightFoot_IK_BakingLOC
+    400750: rig:RightFoot_IK_CTRL
+    400752: rig:RightFoot_IK_CTRL_AnimData_CONST_GRP
+    400754: rig:RightFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    400756: rig:RightFoot_IK_CTRL_grandparent_Global_POS_GRP
+    400758: rig:RightFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    400760: rig:RightFoot_IK_CTRL_grandparent_POS_GRP
+    400762: rig:RightFoot_IK_CTRL_In_Rig_CONST_GRP
+    400764: rig:RightFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    400766: rig:RightFoot_IK_CTRL_parent_Global_POS_GRP
+    400768: rig:RightFoot_IK_CTRL_parent_POS_GRP
+    400770: rig:RightFoot_IK_CTRL_POS_GRP
+    400772: rig:RightFoot_IK_CTRL_Reorient_GRP
+    400774: rig:RightFoot_IK_Handle
+    400776: rig:RightFoot_Options
+    400778: rig:RightForeArm_FK_CTRL
+    400780: rig:RightForeArm_FK_CTRL_AnimData_CONST_GRP
+    400782: rig:RightForeArm_FK_CTRL_In_Rig_CONST_GRP
+    400784: rig:RightForeArm_FK_CTRL_POS_GRP
+    400786: rig:RightForeArm_IK_BakingLOC
+    400788: rig:RightForeArm_IK_CTRL
+    400790: rig:RightForeArm_IK_CTRL_AnimData_CONST_GRP
+    400792: rig:RightForeArm_IK_CTRL_GuideCurve
+    400794: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    400796: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    400798: rig:RightForeArm_IK_CTRL_In_Rig_CONST_GRP
+    400800: rig:RightForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    400802: rig:RightForeArm_IK_CTRL_parent_Global_POS_GRP
+    400804: rig:RightForeArm_IK_CTRL_parent_POS_GRP
+    400806: rig:RightForeArm_IK_CTRL_POS_GRP
+    400808: rig:RightHand_CTRLs_GRP
+    400810: rig:RightHand_FK_CTRL
+    400812: rig:RightHand_FK_CTRL_AnimData_CONST_GRP
+    400814: rig:RightHand_FK_CTRL_In_Rig_CONST_GRP
+    400816: rig:RightHand_FK_CTRL_POS_GRP
+    400818: rig:RightHand_IK_CTRL
+    400820: rig:RightHand_IK_CTRL_AnimData_CONST_GRP
+    400822: rig:RightHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    400824: rig:RightHand_IK_CTRL_grandparent_Global_POS_GRP
+    400826: rig:RightHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    400828: rig:RightHand_IK_CTRL_grandparent_POS_GRP
+    400830: rig:RightHand_IK_CTRL_In_Rig_CONST_GRP
+    400832: rig:RightHand_IK_CTRL_parent_AnimData_CONST_GRP
+    400834: rig:RightHand_IK_CTRL_parent_Global_POS_GRP
+    400836: rig:RightHand_IK_CTRL_parent_POS_GRP
+    400838: rig:RightHand_IK_CTRL_POS_GRP
+    400840: rig:RightHand_IK_Handle
+    400842: rig:RightHand_Options
+    400844: rig:RightHandIndex1_CTRL
+    400846: rig:RightHandIndex1_CTRL_AnimData_CONST_GRP
+    400848: rig:RightHandIndex1_CTRL_In_Rig_CONST_GRP
+    400850: rig:RightHandIndex1_CTRL_POS_GRP
+    400852: rig:RightHandIndex2_CTRL
+    400854: rig:RightHandIndex2_CTRL_AnimData_CONST_GRP
+    400856: rig:RightHandIndex2_CTRL_In_Rig_CONST_GRP
+    400858: rig:RightHandIndex2_CTRL_POS_GRP
+    400860: rig:RightHandIndex3_CTRL
+    400862: rig:RightHandIndex3_CTRL_AnimData_CONST_GRP
+    400864: rig:RightHandIndex3_CTRL_In_Rig_CONST_GRP
+    400866: rig:RightHandIndex3_CTRL_POS_GRP
+    400868: rig:RightHandThumb1_CTRL
+    400870: rig:RightHandThumb1_CTRL_AnimData_CONST_GRP
+    400872: rig:RightHandThumb1_CTRL_In_Rig_CONST_GRP
+    400874: rig:RightHandThumb1_CTRL_POS_GRP
+    400876: rig:RightHandThumb2_CTRL
+    400878: rig:RightHandThumb2_CTRL_AnimData_CONST_GRP
+    400880: rig:RightHandThumb2_CTRL_In_Rig_CONST_GRP
+    400882: rig:RightHandThumb2_CTRL_POS_GRP
+    400884: rig:RightHandThumb3_CTRL
+    400886: rig:RightHandThumb3_CTRL_AnimData_CONST_GRP
+    400888: rig:RightHandThumb3_CTRL_In_Rig_CONST_GRP
+    400890: rig:RightHandThumb3_CTRL_POS_GRP
+    400892: rig:RightLeg_FK_CTRL
+    400894: rig:RightLeg_FK_CTRL_AnimData_CONST_GRP
+    400896: rig:RightLeg_FK_CTRL_In_Rig_CONST_GRP
+    400898: rig:RightLeg_FK_CTRL_POS_GRP
+    400900: rig:RightLeg_IK_BakingLOC
+    400902: rig:RightLeg_IK_CTRL
+    400904: rig:RightLeg_IK_CTRL_AnimData_CONST_GRP
+    400906: rig:RightLeg_IK_CTRL_Follow_Foot_GRP
+    400908: rig:RightLeg_IK_CTRL_Follow_Knee_GRP
+    400910: rig:RightLeg_IK_CTRL_GuideCurve
+    400912: rig:RightLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    400914: rig:RightLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    400916: rig:RightLeg_IK_CTRL_In_Rig_CONST_GRP
+    400918: rig:RightLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    400920: rig:RightLeg_IK_CTRL_parent_Global_POS_GRP
+    400922: rig:RightLeg_IK_CTRL_parent_POS_GRP
+    400924: rig:RightLeg_IK_CTRL_POS_GRP
+    400926: rig:RightShoulder_CTRL
+    400928: rig:RightShoulder_CTRL_AnimData_CONST_GRP
+    400930: rig:RightShoulder_CTRL_In_Rig_CONST_GRP
+    400932: rig:RightShoulder_CTRL_POS_GRP
+    400934: rig:RightToeBase_FK_CTRL
+    400936: rig:RightToeBase_FK_CTRL_AnimData_CONST_GRP
+    400938: rig:RightToeBase_FK_CTRL_In_Rig_CONST_GRP
+    400940: rig:RightToeBase_FK_CTRL_POS_GRP
+    400942: rig:RightUpLeg_FK_CTRL
+    400944: rig:RightUpLeg_FK_CTRL_AnimData_CONST_GRP
+    400946: rig:RightUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    400948: rig:RightUpLeg_FK_CTRL_POS_GRP
+    400950: rig:Root_CTRL
+    400952: rig:Root_CTRL_AnimData_CONST_GRP
+    400954: rig:Root_CTRL_In_Rig_CONST_GRP
+    400956: rig:Root_CTRL_POS_GRP
+    400958: rig:Spine1_CTRL
+    400960: rig:Spine1_CTRL_AnimData_CONST_GRP
+    400962: rig:Spine1_CTRL_In_Rig_CONST_GRP
+    400964: rig:Spine1_CTRL_POS_GRP
+    400966: rig:Spine2_CTRL
+    400968: rig:Spine2_CTRL_AnimData_CONST_GRP
+    400970: rig:Spine2_CTRL_In_Rig_CONST_GRP
+    400972: rig:Spine2_CTRL_POS_GRP
+    400974: rig:Spine_CTRL
+    400976: rig:Spine_CTRL_AnimData_CONST_GRP
+    400978: rig:Spine_CTRL_In_Rig_CONST_GRP
+    400980: rig:Spine_CTRL_POS_GRP
+    400982: Head
+    400984: HeadTop_End
+    400986: Hips
+    400988: LeftArm
+    400990: LeftFoot
+    400992: LeftForeArm
+    400994: LeftHand
+    400996: LeftHandIndex1
+    400998: LeftHandIndex2
+    401000: LeftHandIndex3
+    401002: LeftHandIndex4
+    401004: LeftHandThumb1
+    401006: LeftHandThumb2
+    401008: LeftHandThumb3
+    401010: LeftHandThumb4
+    401012: LeftLeg
+    401014: LeftShoulder
+    401016: LeftToe_End
+    401018: LeftToeBase
+    401020: LeftUpLeg
+    401022: Neck
+    401024: RightArm
+    401026: RightFoot
+    401028: RightForeArm
+    401030: RightHand
+    401032: RightHandIndex1
+    401034: RightHandIndex2
+    401036: RightHandIndex3
+    401038: RightHandIndex4
+    401040: RightHandThumb1
+    401042: RightHandThumb2
+    401044: RightHandThumb3
+    401046: RightHandThumb4
+    401048: RightLeg
+    401050: RightShoulder
+    401052: RightToe_End
+    401054: RightToeBase
+    401056: RightUpLeg
+    401058: Spine
+    401060: Spine1
+    401062: Spine2
+    2300000: knight:Mesh_Group1104
+    2300002: knight:Mesh_Group1344
+    2300004: knight:Mesh_Group1408
+    2300006: knight:Mesh_Group4448
+    2300008: knight:Mesh_Group5744
+    2300010: knight:Mesh_Group5745
+    2300012: knight:Mesh_Group5746
+    2300014: knight:Mesh_pCone1
+    2300016: knight:Mesh_pCylinder15
+    2300018: knight:Mesh_pCylinder16
+    2300020: knight:Mesh_pCylinder17
+    2300022: knight:Mesh_pCylinder18
+    2300024: knight:Mesh_pCylinder19
+    2300026: knight:Mesh_pSphere8
+    2300028: knight:Mesh_pSphere9
+    2300030: knight:Mesh_ZBrush_defualt_group
+    2300032: knight:pCube16
+    2300034: knight:pCube17
+    2300036: knight:pCube18
+    2300038: knight:pCube19
+    2300040: knight:pCube27
+    2300042: knight:pCube28
+    2300044: knight:pCube29
+    2300046: knight:pCube30
+    2300048: knight:pCube31
+    2300050: knight:pCube32
+    2300052: knight:pCube33
+    2300054: knight:pCube34
+    2300056: knight:pCube35
+    2300058: knight:pCube36
+    2300060: knight:pCube37
+    2300062: knight:pCube38
+    2300064: knight:pCube39
+    2300066: knight:pCube40
+    2300068: knight:pCylinder21
+    2300070: knight:pCylinder22
+    2300072: knight:pCylinder23
+    2300074: knight:pCylinder24
+    2300076: knight:pCylinder25
+    2300078: knight:pCylinder26
+    2300080: knight:polySurface2
+    2300082: knight:pSphere10
+    2300084: knight:pSphere11
+    2300086: knight:ZBrush_defualt_group1
+    3300000: knight:Mesh_Group1104
+    3300002: knight:Mesh_Group1344
+    3300004: knight:Mesh_Group1408
+    3300006: knight:Mesh_Group4448
+    3300008: knight:Mesh_Group5744
+    3300010: knight:Mesh_Group5745
+    3300012: knight:Mesh_Group5746
+    3300014: knight:Mesh_pCone1
+    3300016: knight:Mesh_pCylinder15
+    3300018: knight:Mesh_pCylinder16
+    3300020: knight:Mesh_pCylinder17
+    3300022: knight:Mesh_pCylinder18
+    3300024: knight:Mesh_pCylinder19
+    3300026: knight:Mesh_pSphere8
+    3300028: knight:Mesh_pSphere9
+    3300030: knight:Mesh_ZBrush_defualt_group
+    3300032: knight:pCube16
+    3300034: knight:pCube17
+    3300036: knight:pCube18
+    3300038: knight:pCube19
+    3300040: knight:pCube27
+    3300042: knight:pCube28
+    3300044: knight:pCube29
+    3300046: knight:pCube30
+    3300048: knight:pCube31
+    3300050: knight:pCube32
+    3300052: knight:pCube33
+    3300054: knight:pCube34
+    3300056: knight:pCube35
+    3300058: knight:pCube36
+    3300060: knight:pCube37
+    3300062: knight:pCube38
+    3300064: knight:pCube39
+    3300066: knight:pCube40
+    3300068: knight:pCylinder21
+    3300070: knight:pCylinder22
+    3300072: knight:pCylinder23
+    3300074: knight:pCylinder24
+    3300076: knight:pCylinder25
+    3300078: knight:pCylinder26
+    3300080: knight:polySurface2
+    3300082: knight:pSphere10
+    3300084: knight:pSphere11
+    3300086: knight:ZBrush_defualt_group1
+    4300000: knight:pCube18
+    4300002: knight:polySurface2
+    4300004: knight:Mesh_Group5744
+    4300006: knight:pCylinder26
+    4300008: knight:pCylinder25
+    4300010: knight:pSphere11
+    4300012: knight:pCylinder24
+    4300014: knight:pCube38
+    4300016: knight:pCube39
+    4300018: knight:pSphere10
+    4300020: knight:ZBrush_defualt_group1
+    4300022: knight:Mesh_Group5745
+    4300024: knight:pCylinder23
+    4300026: knight:Mesh_pCylinder18
+    4300028: knight:Mesh_pCylinder17
+    4300030: knight:Mesh_pCone1
+    4300032: knight:Mesh_pSphere9
+    4300034: knight:Mesh_pCylinder16
+    4300036: knight:Mesh_pCylinder19
+    4300038: knight:Mesh_pSphere8
+    4300040: knight:Mesh_pCylinder15
+    4300042: knight:Mesh_ZBrush_defualt_group
+    4300044: knight:Mesh_Group5746
+    4300046: knight:Mesh_Group1408
+    4300048: knight:pCube16
+    4300050: knight:Mesh_Group1104
+    4300052: knight:Mesh_Group4448
+    4300054: knight:pCube17
+    4300056: knight:pCube31
+    4300058: knight:pCube30
+    4300060: knight:pCylinder21
+    4300062: knight:pCube28
+    4300064: knight:pCube29
+    4300066: knight:pCube27
+    4300068: knight:pCube37
+    4300070: knight:pCube36
+    4300072: knight:pCube35
+    4300074: knight:pCylinder22
+    4300076: knight:pCube33
+    4300078: knight:pCube34
+    4300080: knight:pCube32
+    4300082: knight:pCube40
+    4300084: knight:pCube19
+    4300086: knight:Mesh_Group1344
+    7400000: knight_armR_runningidle
+    7400002: Take 001 //// rig:LeftHand_CTRLs_GRP
+    7400004: Take 001 //// rig:LeftHandIndex1_CTRL_AnimData_CONST_GRP
+    7400006: Take 001 //// rig:LeftHandIndex2_CTRL_AnimData_CONST_GRP
+    7400008: Take 001 //// rig:LeftHandIndex3_CTRL_AnimData_CONST_GRP
+    7400010: Take 001 //// rig:LeftHandThumb1_CTRL_AnimData_CONST_GRP
+    7400012: Take 001 //// rig:LeftHandThumb1_CTRL_In_Rig_CONST_GRP
+    7400014: Take 001 //// rig:LeftHandThumb2_CTRL_AnimData_CONST_GRP
+    7400016: Take 001 //// rig:LeftHandThumb2_CTRL_In_Rig_CONST_GRP
+    7400018: Take 001 //// rig:LeftHandThumb3_CTRL_AnimData_CONST_GRP
+    7400020: Take 001 //// rig:RightHand_CTRLs_GRP
+    7400022: Take 001 //// rig:RightHandIndex1_CTRL_AnimData_CONST_GRP
+    7400024: Take 001 //// rig:RightHandIndex2_CTRL_AnimData_CONST_GRP
+    7400026: Take 001 //// rig:RightHandIndex3_CTRL_AnimData_CONST_GRP
+    7400028: Take 001 //// rig:RightHandThumb1_CTRL_AnimData_CONST_GRP
+    7400030: Take 001 //// rig:RightHandThumb1_CTRL_In_Rig_CONST_GRP
+    7400032: Take 001 //// rig:RightHandThumb2_CTRL_AnimData_CONST_GRP
+    7400034: Take 001 //// rig:RightHandThumb2_CTRL_In_Rig_CONST_GRP
+    7400036: Take 001 //// rig:RightHandThumb3_CTRL_AnimData_CONST_GRP
+    7400038: Take 001 //// rig:LeftFoot_Options
+    7400040: Take 001 //// rig:RightFoot_Options
+    7400042: Take 001 //// rig:LeftHand_Options
+    7400044: Take 001 //// rig:RightHand_Options
+    7400046: Take 001 //// rig:Root_CTRL_POS_GRP
+    7400048: Take 001 //// rig:Root_CTRL_AnimData_CONST_GRP
+    7400050: Take 001 //// rig:Root_CTRL
+    7400052: Take 001 //// rig:Spine_CTRL_AnimData_CONST_GRP
+    7400054: Take 001 //// rig:Spine1_CTRL_AnimData_CONST_GRP
+    7400056: Take 001 //// rig:Spine1_CTRL
+    7400058: Take 001 //// rig:Spine2_CTRL_AnimData_CONST_GRP
+    7400060: Take 001 //// rig:Spine2_CTRL
+    7400062: Take 001 //// rig:Neck_CTRL_AnimData_CONST_GRP
+    7400064: Take 001 //// rig:Head_CTRL_AnimData_CONST_GRP
+    7400066: Take 001 //// rig:Head_CTRL_In_Rig_CONST_GRP
+    7400068: Take 001 //// rig:LeftShoulder_CTRL_AnimData_CONST_GRP
+    7400070: Take 001 //// rig:LeftArm_FK_CTRL_AnimData_CONST_GRP
+    7400072: Take 001 //// rig:LeftArm_FK_CTRL
+    7400074: Take 001 //// rig:LeftForeArm_FK_CTRL_AnimData_CONST_GRP
+    7400076: Take 001 //// rig:LeftForeArm_FK_CTRL
+    7400078: Take 001 //// rig:LeftHand_FK_CTRL_AnimData_CONST_GRP
+    7400080: Take 001 //// rig:RightShoulder_CTRL_AnimData_CONST_GRP
+    7400082: Take 001 //// rig:RightArm_FK_CTRL_AnimData_CONST_GRP
+    7400084: Take 001 //// rig:RightArm_FK_CTRL
+    7400086: Take 001 //// rig:RightForeArm_FK_CTRL_AnimData_CONST_GRP
+    7400088: Take 001 //// rig:RightForeArm_FK_CTRL
+    7400090: Take 001 //// rig:RightHand_FK_CTRL_AnimData_CONST_GRP
+    7400092: Take 001 //// rig:RightHand_FK_CTRL
+    7400094: Take 001 //// rig:LeftUpLeg_FK_CTRL_AnimData_CONST_GRP
+    7400096: Take 001 //// rig:LeftLeg_FK_CTRL_AnimData_CONST_GRP
+    7400098: Take 001 //// rig:LeftFoot_FK_CTRL_AnimData_CONST_GRP
+    7400100: Take 001 //// rig:LeftToeBase_FK_CTRL_AnimData_CONST_GRP
+    7400102: Take 001 //// rig:RightUpLeg_FK_CTRL_AnimData_CONST_GRP
+    7400104: Take 001 //// rig:RightLeg_FK_CTRL_AnimData_CONST_GRP
+    7400106: Take 001 //// rig:RightFoot_FK_CTRL_AnimData_CONST_GRP
+    7400108: Take 001 //// rig:RightToeBase_FK_CTRL_AnimData_CONST_GRP
+    7400110: Take 001 //// rig:LeftForeArm_IK_CTRL_parent_POS_GRP
+    7400112: Take 001 //// rig:LeftForeArm_IK_CTRL_parent_Global_POS_GRP
+    7400114: Take 001 //// rig:LeftForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    7400116: Take 001 //// rig:LeftForeArm_IK_CTRL_AnimData_CONST_GRP
+    7400118: Take 001 //// rig:LeftForeArm_IK_CTRL_In_Rig_CONST_GRP
+    7400120: Take 001 //// rig:LeftHand_IK_CTRL_grandparent_POS_GRP
+    7400122: Take 001 //// rig:LeftHand_IK_CTRL_grandparent_Global_POS_GRP
+    7400124: Take 001 //// rig:LeftHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    7400126: Take 001 //// rig:LeftHand_IK_CTRL_parent_AnimData_CONST_GRP
+    7400128: Take 001 //// rig:LeftHand_IK_CTRL_AnimData_CONST_GRP
+    7400130: Take 001 //// rig:RightForeArm_IK_CTRL_parent_POS_GRP
+    7400132: Take 001 //// rig:RightForeArm_IK_CTRL_parent_Global_POS_GRP
+    7400134: Take 001 //// rig:RightForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    7400136: Take 001 //// rig:RightForeArm_IK_CTRL_AnimData_CONST_GRP
+    7400138: Take 001 //// rig:RightForeArm_IK_CTRL_In_Rig_CONST_GRP
+    7400140: Take 001 //// rig:RightHand_IK_CTRL_grandparent_POS_GRP
+    7400142: Take 001 //// rig:RightHand_IK_CTRL_grandparent_Global_POS_GRP
+    7400144: Take 001 //// rig:RightHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    7400146: Take 001 //// rig:RightHand_IK_CTRL_parent_AnimData_CONST_GRP
+    7400148: Take 001 //// rig:RightHand_IK_CTRL_AnimData_CONST_GRP
+    7400150: Take 001 //// rig:LeftLeg_IK_CTRL_parent_POS_GRP
+    7400152: Take 001 //// rig:LeftLeg_IK_CTRL_parent_Global_POS_GRP
+    7400154: Take 001 //// rig:LeftLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    7400156: Take 001 //// rig:LeftLeg_IK_CTRL_AnimData_CONST_GRP
+    7400158: Take 001 //// rig:LeftLeg_IK_CTRL_In_Rig_CONST_GRP
+    7400160: Take 001 //// rig:LeftLeg_IK_CTRL
+    7400162: Take 001 //// rig:LeftLeg_IK_CTRL_Follow_Foot_GRP
+    7400164: Take 001 //// rig:LeftLeg_IK_CTRL_Follow_Knee_GRP
+    7400166: Take 001 //// rig:LeftFoot_IK_CTRL_grandparent_POS_GRP
+    7400168: Take 001 //// rig:LeftFoot_IK_CTRL_grandparent_Global_POS_GRP
+    7400170: Take 001 //// rig:LeftFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    7400172: Take 001 //// rig:LeftFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    7400174: Take 001 //// rig:LeftFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    7400176: Take 001 //// rig:LeftFoot_IK_CTRL_AnimData_CONST_GRP
+    7400178: Take 001 //// rig:LeftFoot_IK_CTRL
+    7400180: Take 001 //// rig:Left_Toe_End_IK_CTRL
+    7400182: Take 001 //// rig:Left_ToeBase_IK_AnimData_GRP
+    7400184: Take 001 //// rig:Left_ToeBase_IK_CTRL
+    7400186: Take 001 //// rig:Left_Ankle_IK_CTRL
+    7400188: Take 001 //// rig:RightLeg_IK_CTRL_parent_POS_GRP
+    7400190: Take 001 //// rig:RightLeg_IK_CTRL_parent_Global_POS_GRP
+    7400192: Take 001 //// rig:RightLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    7400194: Take 001 //// rig:RightLeg_IK_CTRL_AnimData_CONST_GRP
+    7400196: Take 001 //// rig:RightLeg_IK_CTRL_In_Rig_CONST_GRP
+    7400198: Take 001 //// rig:RightLeg_IK_CTRL
+    7400200: Take 001 //// rig:RightLeg_IK_CTRL_Follow_Foot_GRP
+    7400202: Take 001 //// rig:RightLeg_IK_CTRL_Follow_Knee_GRP
+    7400204: Take 001 //// rig:RightFoot_IK_CTRL_grandparent_POS_GRP
+    7400206: Take 001 //// rig:RightFoot_IK_CTRL_grandparent_Global_POS_GRP
+    7400208: Take 001 //// rig:RightFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    7400210: Take 001 //// rig:RightFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    7400212: Take 001 //// rig:RightFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    7400214: Take 001 //// rig:RightFoot_IK_CTRL_AnimData_CONST_GRP
+    7400216: Take 001 //// rig:RightFoot_IK_CTRL
+    7400218: Take 001 //// rig:Right_Toe_End_IK_CTRL
+    7400220: Take 001 //// rig:Right_ToeBase_IK_AnimData_GRP
+    7400222: Take 001 //// rig:Right_ToeBase_IK_CTRL
+    7400224: Take 001 //// rig:Right_Ankle_IK_CTRL
+    7400226: Take 001 //// rig:IK_Dummy_Hips
+    7400228: Take 001 //// rig:IK_Dummy_Spine
+    7400230: Take 001 //// rig:IK_Dummy_Spine1
+    7400232: Take 001 //// rig:IK_Dummy_Spine2
+    7400234: Take 001 //// rig:IK_Dummy_LeftShoulder
+    7400236: Take 001 //// rig:IK_Dummy_RightShoulder
+    7400238: Take 001 //// rig:Joint_GRP
+    7400240: Take 001 //// rig:Bind_Hips
+    7400242: Take 001 //// rig:Bind_Spine
+    7400244: Take 001 //// rig:Bind_Spine1
+    7400246: Take 001 //// rig:Bind_Spine2
+    7400248: Take 001 //// rig:Bind_Neck
+    7400250: Take 001 //// rig:Bind_Head
+    7400252: Take 001 //// rig:Bind_LeftShoulder
+    7400254: Take 001 //// rig:Bind_LeftArm
+    7400256: Take 001 //// rig:Bind_LeftForeArm
+    7400258: Take 001 //// rig:Bind_LeftHand
+    7400260: Take 001 //// rig:Bind_LeftHandThumb1
+    7400262: Take 001 //// rig:Bind_LeftHandThumb2
+    7400264: Take 001 //// rig:Bind_LeftHandIndex1
+    7400266: Take 001 //// rig:Bind_LeftHandIndex2
+    7400268: Take 001 //// rig:FK_LeftArm
+    7400270: Take 001 //// rig:FK_LeftForeArm
+    7400272: Take 001 //// rig:FK_LeftHand
+    7400274: Take 001 //// rig:IK_LeftArm
+    7400276: Take 001 //// rig:IK_LeftForeArm
+    7400278: Take 001 //// rig:IK_LeftHand
+    7400280: Take 001 //// rig:Bind_RightShoulder
+    7400282: Take 001 //// rig:Bind_RightArm
+    7400284: Take 001 //// rig:Bind_RightForeArm
+    7400286: Take 001 //// rig:Bind_RightHand
+    7400288: Take 001 //// rig:Bind_RightHandThumb1
+    7400290: Take 001 //// rig:Bind_RightHandThumb2
+    7400292: Take 001 //// rig:Bind_RightHandIndex1
+    7400294: Take 001 //// rig:Bind_RightHandIndex2
+    7400296: Take 001 //// rig:FK_RightArm
+    7400298: Take 001 //// rig:FK_RightForeArm
+    7400300: Take 001 //// rig:FK_RightHand
+    7400302: Take 001 //// rig:IK_RightArm
+    7400304: Take 001 //// rig:IK_RightForeArm
+    7400306: Take 001 //// rig:IK_RightHand
+    7400308: Take 001 //// rig:Bind_LeftUpLeg
+    7400310: Take 001 //// rig:Bind_LeftLeg
+    7400312: Take 001 //// rig:Bind_LeftFoot
+    7400314: Take 001 //// rig:Bind_LeftToeBase
+    7400316: Take 001 //// rig:Bind_LeftToe_End
+    7400318: Take 001 //// rig:Bind_RightUpLeg
+    7400320: Take 001 //// rig:Bind_RightLeg
+    7400322: Take 001 //// rig:Bind_RightFoot
+    7400324: Take 001 //// rig:Bind_RightToeBase
+    7400326: Take 001 //// rig:Bind_RightToe_End
+    7400328: Take 001 //// rig:FK_LeftUpLeg
+    7400330: Take 001 //// rig:FK_LeftLeg
+    7400332: Take 001 //// rig:FK_LeftFoot
+    7400334: Take 001 //// rig:FK_LeftToeBase
+    7400336: Take 001 //// rig:FK_RightUpLeg
+    7400338: Take 001 //// rig:FK_RightLeg
+    7400340: Take 001 //// rig:FK_RightFoot
+    7400342: Take 001 //// rig:FK_RightToeBase
+    7400344: Take 001 //// rig:IK_LeftUpLeg
+    7400346: Take 001 //// rig:IK_LeftLeg
+    7400348: Take 001 //// rig:IK_LeftFoot
+    7400350: Take 001 //// rig:IK_LeftToeBase
+    7400352: Take 001 //// rig:IK_LeftToe_End
+    7400354: Take 001 //// rig:IK_RightUpLeg
+    7400356: Take 001 //// rig:IK_RightLeg
+    7400358: Take 001 //// rig:IK_RightFoot
+    7400360: Take 001 //// rig:IK_RightToeBase
+    7400362: Take 001 //// rig:IK_RightToe_End
+    7400364: Take 001 //// Hips
+    7400366: Take 001 //// Spine
+    7400368: Take 001 //// Spine1
+    7400370: Take 001 //// Spine2
+    7400372: Take 001 //// Neck
+    7400374: Take 001 //// Head
+    7400376: Take 001 //// HeadTop_End
+    7400378: Take 001 //// LeftShoulder
+    7400380: Take 001 //// LeftArm
+    7400382: Take 001 //// LeftForeArm
+    7400384: Take 001 //// LeftHand
+    7400386: Take 001 //// LeftHandThumb1
+    7400388: Take 001 //// LeftHandThumb2
+    7400390: Take 001 //// LeftHandThumb3
+    7400392: Take 001 //// LeftHandThumb4
+    7400394: Take 001 //// LeftHandIndex1
+    7400396: Take 001 //// LeftHandIndex2
+    7400398: Take 001 //// LeftHandIndex3
+    7400400: Take 001 //// LeftHandIndex4
+    7400402: Take 001 //// RightShoulder
+    7400404: Take 001 //// RightArm
+    7400406: Take 001 //// RightForeArm
+    7400408: Take 001 //// RightHand
+    7400410: Take 001 //// RightHandThumb1
+    7400412: Take 001 //// RightHandThumb2
+    7400414: Take 001 //// RightHandThumb3
+    7400416: Take 001 //// RightHandThumb4
+    7400418: Take 001 //// RightHandIndex1
+    7400420: Take 001 //// RightHandIndex2
+    7400422: Take 001 //// RightHandIndex3
+    7400424: Take 001 //// RightHandIndex4
+    7400426: Take 001 //// LeftUpLeg
+    7400428: Take 001 //// LeftLeg
+    7400430: Take 001 //// LeftFoot
+    7400432: Take 001 //// LeftToeBase
+    7400434: Take 001 //// LeftToe_End
+    7400436: Take 001 //// RightUpLeg
+    7400438: Take 001 //// RightLeg
+    7400440: Take 001 //// RightFoot
+    7400442: Take 001 //// RightToeBase
+    7400444: Take 001 //// RightToe_End
+    7400446: knight_armR_runningidle //// Hips
+    9500000: //RootNode
+    11100000: //RootNode
+    11100002: knight:Mesh_Group1104
+    11100004: knight:Mesh_Group1344
+    11100006: knight:Mesh_Group1408
+    11100008: knight:Mesh_Group4448
+    11100010: knight:Mesh_Group5744
+    11100012: knight:Mesh_Group5745
+    11100014: knight:Mesh_Group5746
+    11100016: knight:Mesh_pCone1
+    11100018: knight:Mesh_pCylinder15
+    11100020: knight:Mesh_pCylinder16
+    11100022: knight:Mesh_pCylinder17
+    11100024: knight:Mesh_pCylinder18
+    11100026: knight:Mesh_pCylinder19
+    11100028: knight:Mesh_pSphere8
+    11100030: knight:Mesh_pSphere9
+    11100032: knight:Mesh_ZBrush_defualt_group
+    11100034: knight:pCube16
+    11100036: knight:pCube17
+    11100038: knight:pCube18
+    11100040: knight:pCube19
+    11100042: knight:pCube27
+    11100044: knight:pCube28
+    11100046: knight:pCube29
+    11100048: knight:pCube30
+    11100050: knight:pCube31
+    11100052: knight:pCube32
+    11100054: knight:pCube33
+    11100056: knight:pCube34
+    11100058: knight:pCube35
+    11100060: knight:pCube36
+    11100062: knight:pCube37
+    11100064: knight:pCube38
+    11100066: knight:pCube39
+    11100068: knight:pCube40
+    11100070: knight:pCylinder21
+    11100072: knight:pCylinder22
+    11100074: knight:pCylinder23
+    11100076: knight:pCylinder24
+    11100078: knight:pCylinder25
+    11100080: knight:pCylinder26
+    11100082: knight:polySurface2
+    11100084: knight:pSphere10
+    11100086: knight:pSphere11
+    11100088: knight:ZBrush_defualt_group1
+    11100090: rig:AnimData_Head
+    11100092: rig:AnimData_HeadTop_End
+    11100094: rig:AnimData_Hips
+    11100096: rig:AnimData_Joint_GRP
+    11100098: rig:AnimData_LeftArm
+    11100100: rig:AnimData_LeftFoot
+    11100102: rig:AnimData_LeftForeArm
+    11100104: rig:AnimData_LeftHand
+    11100106: rig:AnimData_LeftHandIndex1
+    11100108: rig:AnimData_LeftHandIndex2
+    11100110: rig:AnimData_LeftHandIndex3
+    11100112: rig:AnimData_LeftHandIndex4
+    11100114: rig:AnimData_LeftHandThumb1
+    11100116: rig:AnimData_LeftHandThumb2
+    11100118: rig:AnimData_LeftHandThumb3
+    11100120: rig:AnimData_LeftHandThumb4
+    11100122: rig:AnimData_LeftLeg
+    11100124: rig:AnimData_LeftShoulder
+    11100126: rig:AnimData_LeftToe_End
+    11100128: rig:AnimData_LeftToeBase
+    11100130: rig:AnimData_LeftUpLeg
+    11100132: rig:AnimData_Neck
+    11100134: rig:AnimData_RightArm
+    11100136: rig:AnimData_RightFoot
+    11100138: rig:AnimData_RightForeArm
+    11100140: rig:AnimData_RightHand
+    11100142: rig:AnimData_RightHandIndex1
+    11100144: rig:AnimData_RightHandIndex2
+    11100146: rig:AnimData_RightHandIndex3
+    11100148: rig:AnimData_RightHandIndex4
+    11100150: rig:AnimData_RightHandThumb1
+    11100152: rig:AnimData_RightHandThumb2
+    11100154: rig:AnimData_RightHandThumb3
+    11100156: rig:AnimData_RightHandThumb4
+    11100158: rig:AnimData_RightLeg
+    11100160: rig:AnimData_RightShoulder
+    11100162: rig:AnimData_RightToe_End
+    11100164: rig:AnimData_RightToeBase
+    11100166: rig:AnimData_RightUpLeg
+    11100168: rig:AnimData_Spine
+    11100170: rig:AnimData_Spine1
+    11100172: rig:AnimData_Spine2
+    11100174: rig:Bind_Head
+    11100176: rig:Bind_HeadTop_End
+    11100178: rig:Bind_Hips
+    11100180: rig:Bind_Joint_GRP
+    11100182: rig:Bind_LeftArm
+    11100184: rig:Bind_LeftFoot
+    11100186: rig:Bind_LeftForeArm
+    11100188: rig:Bind_LeftHand
+    11100190: rig:Bind_LeftHandIndex1
+    11100192: rig:Bind_LeftHandIndex2
+    11100194: rig:Bind_LeftHandThumb1
+    11100196: rig:Bind_LeftHandThumb2
+    11100198: rig:Bind_LeftLeg
+    11100200: rig:Bind_LeftShoulder
+    11100202: rig:Bind_LeftToe_End
+    11100204: rig:Bind_LeftToeBase
+    11100206: rig:Bind_LeftUpLeg
+    11100208: rig:Bind_Neck
+    11100210: rig:Bind_RightArm
+    11100212: rig:Bind_RightFoot
+    11100214: rig:Bind_RightForeArm
+    11100216: rig:Bind_RightHand
+    11100218: rig:Bind_RightHandIndex1
+    11100220: rig:Bind_RightHandIndex2
+    11100222: rig:Bind_RightHandThumb1
+    11100224: rig:Bind_RightHandThumb2
+    11100226: rig:Bind_RightLeg
+    11100228: rig:Bind_RightShoulder
+    11100230: rig:Bind_RightToe_End
+    11100232: rig:Bind_RightToeBase
+    11100234: rig:Bind_RightUpLeg
+    11100236: rig:Bind_Spine
+    11100238: rig:Bind_Spine1
+    11100240: rig:Bind_Spine2
+    11100242: rig:CTRL_GRP
+    11100244: rig:FK_LeftArm
+    11100246: rig:FK_LeftFoot
+    11100248: rig:FK_LeftForeArm
+    11100250: rig:FK_LeftHand
+    11100252: rig:FK_LeftLeg
+    11100254: rig:FK_LeftToe_End
+    11100256: rig:FK_LeftToeBase
+    11100258: rig:FK_LeftUpLeg
+    11100260: rig:FK_RightArm
+    11100262: rig:FK_RightFoot
+    11100264: rig:FK_RightForeArm
+    11100266: rig:FK_RightHand
+    11100268: rig:FK_RightLeg
+    11100270: rig:FK_RightToe_End
+    11100272: rig:FK_RightToeBase
+    11100274: rig:FK_RightUpLeg
+    11100276: rig:global_CTRL
+    11100278: rig:Head_CTRL
+    11100280: rig:Head_CTRL_AnimData_CONST_GRP
+    11100282: rig:Head_CTRL_In_Rig_CONST_GRP
+    11100284: rig:Head_CTRL_Inherit_Rotation_GRP
+    11100286: rig:Head_CTRL_POS_GRP
+    11100288: rig:IK_Dummy_Hips
+    11100290: rig:IK_Dummy_Joint_GRP
+    11100292: rig:IK_Dummy_LeftShoulder
+    11100294: rig:IK_Dummy_RightShoulder
+    11100296: rig:IK_Dummy_Spine
+    11100298: rig:IK_Dummy_Spine1
+    11100300: rig:IK_Dummy_Spine2
+    11100302: rig:IK_LeftArm
+    11100304: rig:IK_LeftFoot
+    11100306: rig:IK_LeftForeArm
+    11100308: rig:IK_LeftHand
+    11100310: rig:IK_LeftLeg
+    11100312: rig:IK_LeftToe_End
+    11100314: rig:IK_LeftToeBase
+    11100316: rig:IK_LeftUpLeg
+    11100318: rig:IK_RightArm
+    11100320: rig:IK_RightFoot
+    11100322: rig:IK_RightForeArm
+    11100324: rig:IK_RightHand
+    11100326: rig:IK_RightLeg
+    11100328: rig:IK_RightToe_End
+    11100330: rig:IK_RightToeBase
+    11100332: rig:IK_RightUpLeg
+    11100334: rig:Joint_GRP
+    11100336: rig:Left_Ankle_IK_AnimData_GRP
+    11100338: rig:Left_Ankle_IK_CTRL
+    11100340: rig:Left_Toe_End_IK_CTRL
+    11100342: rig:Left_Toe_IK_AnimData_GRP
+    11100344: rig:Left_ToeBase_IK_AnimData_GRP
+    11100346: rig:Left_ToeBase_IK_CTRL
+    11100348: rig:Left_ToeBase_IkHandle
+    11100350: rig:LeftArm_FK_CTRL
+    11100352: rig:LeftArm_FK_CTRL_AnimData_CONST_GRP
+    11100354: rig:LeftArm_FK_CTRL_In_Rig_CONST_GRP
+    11100356: rig:LeftArm_FK_CTRL_POS_GRP
+    11100358: rig:LeftFoot_FK_CTRL
+    11100360: rig:LeftFoot_FK_CTRL_AnimData_CONST_GRP
+    11100362: rig:LeftFoot_FK_CTRL_In_Rig_CONST_GRP
+    11100364: rig:LeftFoot_FK_CTRL_POS_GRP
+    11100366: rig:LeftFoot_IK_BakingLOC
+    11100368: rig:LeftFoot_IK_CTRL
+    11100370: rig:LeftFoot_IK_CTRL_AnimData_CONST_GRP
+    11100372: rig:LeftFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    11100374: rig:LeftFoot_IK_CTRL_grandparent_Global_POS_GRP
+    11100376: rig:LeftFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    11100378: rig:LeftFoot_IK_CTRL_grandparent_POS_GRP
+    11100380: rig:LeftFoot_IK_CTRL_In_Rig_CONST_GRP
+    11100382: rig:LeftFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    11100384: rig:LeftFoot_IK_CTRL_parent_Global_POS_GRP
+    11100386: rig:LeftFoot_IK_CTRL_parent_POS_GRP
+    11100388: rig:LeftFoot_IK_CTRL_POS_GRP
+    11100390: rig:LeftFoot_IK_CTRL_Reorient_GRP
+    11100392: rig:LeftFoot_IK_Handle
+    11100394: rig:LeftFoot_Options
+    11100396: rig:LeftForeArm_FK_CTRL
+    11100398: rig:LeftForeArm_FK_CTRL_AnimData_CONST_GRP
+    11100400: rig:LeftForeArm_FK_CTRL_In_Rig_CONST_GRP
+    11100402: rig:LeftForeArm_FK_CTRL_POS_GRP
+    11100404: rig:LeftForeArm_IK_BakingLOC
+    11100406: rig:LeftForeArm_IK_CTRL
+    11100408: rig:LeftForeArm_IK_CTRL_AnimData_CONST_GRP
+    11100410: rig:LeftForeArm_IK_CTRL_GuideCurve
+    11100412: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    11100414: rig:LeftForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    11100416: rig:LeftForeArm_IK_CTRL_In_Rig_CONST_GRP
+    11100418: rig:LeftForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    11100420: rig:LeftForeArm_IK_CTRL_parent_Global_POS_GRP
+    11100422: rig:LeftForeArm_IK_CTRL_parent_POS_GRP
+    11100424: rig:LeftForeArm_IK_CTRL_POS_GRP
+    11100426: rig:LeftHand_CTRLs_GRP
+    11100428: rig:LeftHand_FK_CTRL
+    11100430: rig:LeftHand_FK_CTRL_AnimData_CONST_GRP
+    11100432: rig:LeftHand_FK_CTRL_In_Rig_CONST_GRP
+    11100434: rig:LeftHand_FK_CTRL_POS_GRP
+    11100436: rig:LeftHand_IK_CTRL
+    11100438: rig:LeftHand_IK_CTRL_AnimData_CONST_GRP
+    11100440: rig:LeftHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    11100442: rig:LeftHand_IK_CTRL_grandparent_Global_POS_GRP
+    11100444: rig:LeftHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    11100446: rig:LeftHand_IK_CTRL_grandparent_POS_GRP
+    11100448: rig:LeftHand_IK_CTRL_In_Rig_CONST_GRP
+    11100450: rig:LeftHand_IK_CTRL_parent_AnimData_CONST_GRP
+    11100452: rig:LeftHand_IK_CTRL_parent_Global_POS_GRP
+    11100454: rig:LeftHand_IK_CTRL_parent_POS_GRP
+    11100456: rig:LeftHand_IK_CTRL_POS_GRP
+    11100458: rig:LeftHand_IK_Handle
+    11100460: rig:LeftHand_Options
+    11100462: rig:LeftHandIndex1_CTRL
+    11100464: rig:LeftHandIndex1_CTRL_AnimData_CONST_GRP
+    11100466: rig:LeftHandIndex1_CTRL_In_Rig_CONST_GRP
+    11100468: rig:LeftHandIndex1_CTRL_POS_GRP
+    11100470: rig:LeftHandIndex2_CTRL
+    11100472: rig:LeftHandIndex2_CTRL_AnimData_CONST_GRP
+    11100474: rig:LeftHandIndex2_CTRL_In_Rig_CONST_GRP
+    11100476: rig:LeftHandIndex2_CTRL_POS_GRP
+    11100478: rig:LeftHandIndex3_CTRL
+    11100480: rig:LeftHandIndex3_CTRL_AnimData_CONST_GRP
+    11100482: rig:LeftHandIndex3_CTRL_In_Rig_CONST_GRP
+    11100484: rig:LeftHandIndex3_CTRL_POS_GRP
+    11100486: rig:LeftHandThumb1_CTRL
+    11100488: rig:LeftHandThumb1_CTRL_AnimData_CONST_GRP
+    11100490: rig:LeftHandThumb1_CTRL_In_Rig_CONST_GRP
+    11100492: rig:LeftHandThumb1_CTRL_POS_GRP
+    11100494: rig:LeftHandThumb2_CTRL
+    11100496: rig:LeftHandThumb2_CTRL_AnimData_CONST_GRP
+    11100498: rig:LeftHandThumb2_CTRL_In_Rig_CONST_GRP
+    11100500: rig:LeftHandThumb2_CTRL_POS_GRP
+    11100502: rig:LeftHandThumb3_CTRL
+    11100504: rig:LeftHandThumb3_CTRL_AnimData_CONST_GRP
+    11100506: rig:LeftHandThumb3_CTRL_In_Rig_CONST_GRP
+    11100508: rig:LeftHandThumb3_CTRL_POS_GRP
+    11100510: rig:LeftLeg_FK_CTRL
+    11100512: rig:LeftLeg_FK_CTRL_AnimData_CONST_GRP
+    11100514: rig:LeftLeg_FK_CTRL_In_Rig_CONST_GRP
+    11100516: rig:LeftLeg_FK_CTRL_POS_GRP
+    11100518: rig:LeftLeg_IK_BakingLOC
+    11100520: rig:LeftLeg_IK_CTRL
+    11100522: rig:LeftLeg_IK_CTRL_AnimData_CONST_GRP
+    11100524: rig:LeftLeg_IK_CTRL_Follow_Foot_GRP
+    11100526: rig:LeftLeg_IK_CTRL_Follow_Knee_GRP
+    11100528: rig:LeftLeg_IK_CTRL_GuideCurve
+    11100530: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    11100532: rig:LeftLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    11100534: rig:LeftLeg_IK_CTRL_In_Rig_CONST_GRP
+    11100536: rig:LeftLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    11100538: rig:LeftLeg_IK_CTRL_parent_Global_POS_GRP
+    11100540: rig:LeftLeg_IK_CTRL_parent_POS_GRP
+    11100542: rig:LeftLeg_IK_CTRL_POS_GRP
+    11100544: rig:LeftShoulder_CTRL
+    11100546: rig:LeftShoulder_CTRL_AnimData_CONST_GRP
+    11100548: rig:LeftShoulder_CTRL_In_Rig_CONST_GRP
+    11100550: rig:LeftShoulder_CTRL_POS_GRP
+    11100552: rig:LeftToeBase_FK_CTRL
+    11100554: rig:LeftToeBase_FK_CTRL_AnimData_CONST_GRP
+    11100556: rig:LeftToeBase_FK_CTRL_In_Rig_CONST_GRP
+    11100558: rig:LeftToeBase_FK_CTRL_POS_GRP
+    11100560: rig:LeftUpLeg_FK_CTRL
+    11100562: rig:LeftUpLeg_FK_CTRL_AnimData_CONST_GRP
+    11100564: rig:LeftUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    11100566: rig:LeftUpLeg_FK_CTRL_POS_GRP
+    11100568: rig:Mesh_GRP
+    11100570: rig:Misc_GRP
+    11100572: rig:MIXAMO_CHARACTER_Head_infoNode
+    11100574: rig:MIXAMO_CHARACTER_HeadTop_End_infoNode
+    11100576: rig:MIXAMO_CHARACTER_Hips_infoNode
+    11100578: rig:MIXAMO_CHARACTER_infoNode
+    11100580: rig:MIXAMO_CHARACTER_LeftArm_infoNode
+    11100582: rig:MIXAMO_CHARACTER_LeftFoot_infoNode
+    11100584: rig:MIXAMO_CHARACTER_LeftForeArm_infoNode
+    11100586: rig:MIXAMO_CHARACTER_LeftHand_infoNode
+    11100588: rig:MIXAMO_CHARACTER_LeftHandIndex1_infoNode
+    11100590: rig:MIXAMO_CHARACTER_LeftHandIndex2_infoNode
+    11100592: rig:MIXAMO_CHARACTER_LeftHandIndex3_infoNode
+    11100594: rig:MIXAMO_CHARACTER_LeftHandIndex4_infoNode
+    11100596: rig:MIXAMO_CHARACTER_LeftHandMiddle1_infoNode
+    11100598: rig:MIXAMO_CHARACTER_LeftHandMiddle2_infoNode
+    11100600: rig:MIXAMO_CHARACTER_LeftHandMiddle3_infoNode
+    11100602: rig:MIXAMO_CHARACTER_LeftHandMiddle4_infoNode
+    11100604: rig:MIXAMO_CHARACTER_LeftHandPinky1_infoNode
+    11100606: rig:MIXAMO_CHARACTER_LeftHandPinky2_infoNode
+    11100608: rig:MIXAMO_CHARACTER_LeftHandPinky3_infoNode
+    11100610: rig:MIXAMO_CHARACTER_LeftHandPinky4_infoNode
+    11100612: rig:MIXAMO_CHARACTER_LeftHandRing1_infoNode
+    11100614: rig:MIXAMO_CHARACTER_LeftHandRing2_infoNode
+    11100616: rig:MIXAMO_CHARACTER_LeftHandRing3_infoNode
+    11100618: rig:MIXAMO_CHARACTER_LeftHandRing4_infoNode
+    11100620: rig:MIXAMO_CHARACTER_LeftHandThumb1_infoNode
+    11100622: rig:MIXAMO_CHARACTER_LeftHandThumb2_infoNode
+    11100624: rig:MIXAMO_CHARACTER_LeftHandThumb3_infoNode
+    11100626: rig:MIXAMO_CHARACTER_LeftHandThumb4_infoNode
+    11100628: rig:MIXAMO_CHARACTER_LeftLeg_infoNode
+    11100630: rig:MIXAMO_CHARACTER_LeftShoulder_infoNode
+    11100632: rig:MIXAMO_CHARACTER_LeftToe_End_infoNode
+    11100634: rig:MIXAMO_CHARACTER_LeftToeBase_infoNode
+    11100636: rig:MIXAMO_CHARACTER_LeftUpLeg_infoNode
+    11100638: rig:MIXAMO_CHARACTER_Neck1_infoNode
+    11100640: rig:MIXAMO_CHARACTER_Neck_infoNode
+    11100642: rig:MIXAMO_CHARACTER_RightArm_infoNode
+    11100644: rig:MIXAMO_CHARACTER_RightFoot_infoNode
+    11100646: rig:MIXAMO_CHARACTER_RightForeArm_infoNode
+    11100648: rig:MIXAMO_CHARACTER_RightHand_infoNode
+    11100650: rig:MIXAMO_CHARACTER_RightHandIndex1_infoNode
+    11100652: rig:MIXAMO_CHARACTER_RightHandIndex2_infoNode
+    11100654: rig:MIXAMO_CHARACTER_RightHandIndex3_infoNode
+    11100656: rig:MIXAMO_CHARACTER_RightHandIndex4_infoNode
+    11100658: rig:MIXAMO_CHARACTER_RightHandMiddle1_infoNode
+    11100660: rig:MIXAMO_CHARACTER_RightHandMiddle2_infoNode
+    11100662: rig:MIXAMO_CHARACTER_RightHandMiddle3_infoNode
+    11100664: rig:MIXAMO_CHARACTER_RightHandMiddle4_infoNode
+    11100666: rig:MIXAMO_CHARACTER_RightHandPinky1_infoNode
+    11100668: rig:MIXAMO_CHARACTER_RightHandPinky2_infoNode
+    11100670: rig:MIXAMO_CHARACTER_RightHandPinky3_infoNode
+    11100672: rig:MIXAMO_CHARACTER_RightHandPinky4_infoNode
+    11100674: rig:MIXAMO_CHARACTER_RightHandRing1_infoNode
+    11100676: rig:MIXAMO_CHARACTER_RightHandRing2_infoNode
+    11100678: rig:MIXAMO_CHARACTER_RightHandRing3_infoNode
+    11100680: rig:MIXAMO_CHARACTER_RightHandRing4_infoNode
+    11100682: rig:MIXAMO_CHARACTER_RightHandThumb1_infoNode
+    11100684: rig:MIXAMO_CHARACTER_RightHandThumb2_infoNode
+    11100686: rig:MIXAMO_CHARACTER_RightHandThumb3_infoNode
+    11100688: rig:MIXAMO_CHARACTER_RightHandThumb4_infoNode
+    11100690: rig:MIXAMO_CHARACTER_RightLeg_infoNode
+    11100692: rig:MIXAMO_CHARACTER_RightShoulder_infoNode
+    11100694: rig:MIXAMO_CHARACTER_RightToe_End_infoNode
+    11100696: rig:MIXAMO_CHARACTER_RightToeBase_infoNode
+    11100698: rig:MIXAMO_CHARACTER_RightUpLeg_infoNode
+    11100700: rig:MIXAMO_CHARACTER_Root_infoNode
+    11100702: rig:MIXAMO_CHARACTER_Spine1_infoNode
+    11100704: rig:MIXAMO_CHARACTER_Spine2_infoNode
+    11100706: rig:MIXAMO_CHARACTER_Spine3_infoNode
+    11100708: rig:MIXAMO_CHARACTER_Spine_infoNode
+    11100710: rig:Neck_CTRL
+    11100712: rig:Neck_CTRL_AnimData_CONST_GRP
+    11100714: rig:Neck_CTRL_In_Rig_CONST_GRP
+    11100716: rig:Neck_CTRL_POS_GRP
+    11100718: rig:Right_Ankle_IK_AnimData_GRP
+    11100720: rig:Right_Ankle_IK_CTRL
+    11100722: rig:Right_Toe_End_IK_CTRL
+    11100724: rig:Right_Toe_IK_AnimData_GRP
+    11100726: rig:Right_ToeBase_IK_AnimData_GRP
+    11100728: rig:Right_ToeBase_IK_CTRL
+    11100730: rig:Right_ToeBase_IkHandle
+    11100732: rig:RightArm_FK_CTRL
+    11100734: rig:RightArm_FK_CTRL_AnimData_CONST_GRP
+    11100736: rig:RightArm_FK_CTRL_In_Rig_CONST_GRP
+    11100738: rig:RightArm_FK_CTRL_POS_GRP
+    11100740: rig:RightFoot_FK_CTRL
+    11100742: rig:RightFoot_FK_CTRL_AnimData_CONST_GRP
+    11100744: rig:RightFoot_FK_CTRL_In_Rig_CONST_GRP
+    11100746: rig:RightFoot_FK_CTRL_POS_GRP
+    11100748: rig:RightFoot_IK_BakingLOC
+    11100750: rig:RightFoot_IK_CTRL
+    11100752: rig:RightFoot_IK_CTRL_AnimData_CONST_GRP
+    11100754: rig:RightFoot_IK_CTRL_grandparent_AnimData_CONST_GRP
+    11100756: rig:RightFoot_IK_CTRL_grandparent_Global_POS_GRP
+    11100758: rig:RightFoot_IK_CTRL_grandparent_inRig_CONST_GRP
+    11100760: rig:RightFoot_IK_CTRL_grandparent_POS_GRP
+    11100762: rig:RightFoot_IK_CTRL_In_Rig_CONST_GRP
+    11100764: rig:RightFoot_IK_CTRL_parent_AnimData_CONST_GRP
+    11100766: rig:RightFoot_IK_CTRL_parent_Global_POS_GRP
+    11100768: rig:RightFoot_IK_CTRL_parent_POS_GRP
+    11100770: rig:RightFoot_IK_CTRL_POS_GRP
+    11100772: rig:RightFoot_IK_CTRL_Reorient_GRP
+    11100774: rig:RightFoot_IK_Handle
+    11100776: rig:RightFoot_Options
+    11100778: rig:RightForeArm_FK_CTRL
+    11100780: rig:RightForeArm_FK_CTRL_AnimData_CONST_GRP
+    11100782: rig:RightForeArm_FK_CTRL_In_Rig_CONST_GRP
+    11100784: rig:RightForeArm_FK_CTRL_POS_GRP
+    11100786: rig:RightForeArm_IK_BakingLOC
+    11100788: rig:RightForeArm_IK_CTRL
+    11100790: rig:RightForeArm_IK_CTRL_AnimData_CONST_GRP
+    11100792: rig:RightForeArm_IK_CTRL_GuideCurve
+    11100794: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster1Handle
+    11100796: rig:RightForeArm_IK_CTRL_GuideCurve_Cluster2Handle
+    11100798: rig:RightForeArm_IK_CTRL_In_Rig_CONST_GRP
+    11100800: rig:RightForeArm_IK_CTRL_parent_AnimData_CONST_GRP
+    11100802: rig:RightForeArm_IK_CTRL_parent_Global_POS_GRP
+    11100804: rig:RightForeArm_IK_CTRL_parent_POS_GRP
+    11100806: rig:RightForeArm_IK_CTRL_POS_GRP
+    11100808: rig:RightHand_CTRLs_GRP
+    11100810: rig:RightHand_FK_CTRL
+    11100812: rig:RightHand_FK_CTRL_AnimData_CONST_GRP
+    11100814: rig:RightHand_FK_CTRL_In_Rig_CONST_GRP
+    11100816: rig:RightHand_FK_CTRL_POS_GRP
+    11100818: rig:RightHand_IK_CTRL
+    11100820: rig:RightHand_IK_CTRL_AnimData_CONST_GRP
+    11100822: rig:RightHand_IK_CTRL_grandparent_AnimData_CONST_GRP
+    11100824: rig:RightHand_IK_CTRL_grandparent_Global_POS_GRP
+    11100826: rig:RightHand_IK_CTRL_grandparent_inRig_CONST_GRP
+    11100828: rig:RightHand_IK_CTRL_grandparent_POS_GRP
+    11100830: rig:RightHand_IK_CTRL_In_Rig_CONST_GRP
+    11100832: rig:RightHand_IK_CTRL_parent_AnimData_CONST_GRP
+    11100834: rig:RightHand_IK_CTRL_parent_Global_POS_GRP
+    11100836: rig:RightHand_IK_CTRL_parent_POS_GRP
+    11100838: rig:RightHand_IK_CTRL_POS_GRP
+    11100840: rig:RightHand_IK_Handle
+    11100842: rig:RightHand_Options
+    11100844: rig:RightHandIndex1_CTRL
+    11100846: rig:RightHandIndex1_CTRL_AnimData_CONST_GRP
+    11100848: rig:RightHandIndex1_CTRL_In_Rig_CONST_GRP
+    11100850: rig:RightHandIndex1_CTRL_POS_GRP
+    11100852: rig:RightHandIndex2_CTRL
+    11100854: rig:RightHandIndex2_CTRL_AnimData_CONST_GRP
+    11100856: rig:RightHandIndex2_CTRL_In_Rig_CONST_GRP
+    11100858: rig:RightHandIndex2_CTRL_POS_GRP
+    11100860: rig:RightHandIndex3_CTRL
+    11100862: rig:RightHandIndex3_CTRL_AnimData_CONST_GRP
+    11100864: rig:RightHandIndex3_CTRL_In_Rig_CONST_GRP
+    11100866: rig:RightHandIndex3_CTRL_POS_GRP
+    11100868: rig:RightHandThumb1_CTRL
+    11100870: rig:RightHandThumb1_CTRL_AnimData_CONST_GRP
+    11100872: rig:RightHandThumb1_CTRL_In_Rig_CONST_GRP
+    11100874: rig:RightHandThumb1_CTRL_POS_GRP
+    11100876: rig:RightHandThumb2_CTRL
+    11100878: rig:RightHandThumb2_CTRL_AnimData_CONST_GRP
+    11100880: rig:RightHandThumb2_CTRL_In_Rig_CONST_GRP
+    11100882: rig:RightHandThumb2_CTRL_POS_GRP
+    11100884: rig:RightHandThumb3_CTRL
+    11100886: rig:RightHandThumb3_CTRL_AnimData_CONST_GRP
+    11100888: rig:RightHandThumb3_CTRL_In_Rig_CONST_GRP
+    11100890: rig:RightHandThumb3_CTRL_POS_GRP
+    11100892: rig:RightLeg_FK_CTRL
+    11100894: rig:RightLeg_FK_CTRL_AnimData_CONST_GRP
+    11100896: rig:RightLeg_FK_CTRL_In_Rig_CONST_GRP
+    11100898: rig:RightLeg_FK_CTRL_POS_GRP
+    11100900: rig:RightLeg_IK_BakingLOC
+    11100902: rig:RightLeg_IK_CTRL
+    11100904: rig:RightLeg_IK_CTRL_AnimData_CONST_GRP
+    11100906: rig:RightLeg_IK_CTRL_Follow_Foot_GRP
+    11100908: rig:RightLeg_IK_CTRL_Follow_Knee_GRP
+    11100910: rig:RightLeg_IK_CTRL_GuideCurve
+    11100912: rig:RightLeg_IK_CTRL_GuideCurve_Cluster1Handle
+    11100914: rig:RightLeg_IK_CTRL_GuideCurve_Cluster2Handle
+    11100916: rig:RightLeg_IK_CTRL_In_Rig_CONST_GRP
+    11100918: rig:RightLeg_IK_CTRL_parent_AnimData_CONST_GRP
+    11100920: rig:RightLeg_IK_CTRL_parent_Global_POS_GRP
+    11100922: rig:RightLeg_IK_CTRL_parent_POS_GRP
+    11100924: rig:RightLeg_IK_CTRL_POS_GRP
+    11100926: rig:RightShoulder_CTRL
+    11100928: rig:RightShoulder_CTRL_AnimData_CONST_GRP
+    11100930: rig:RightShoulder_CTRL_In_Rig_CONST_GRP
+    11100932: rig:RightShoulder_CTRL_POS_GRP
+    11100934: rig:RightToeBase_FK_CTRL
+    11100936: rig:RightToeBase_FK_CTRL_AnimData_CONST_GRP
+    11100938: rig:RightToeBase_FK_CTRL_In_Rig_CONST_GRP
+    11100940: rig:RightToeBase_FK_CTRL_POS_GRP
+    11100942: rig:RightUpLeg_FK_CTRL
+    11100944: rig:RightUpLeg_FK_CTRL_AnimData_CONST_GRP
+    11100946: rig:RightUpLeg_FK_CTRL_In_Rig_CONST_GRP
+    11100948: rig:RightUpLeg_FK_CTRL_POS_GRP
+    11100950: rig:Root_CTRL
+    11100952: rig:Root_CTRL_AnimData_CONST_GRP
+    11100954: rig:Root_CTRL_In_Rig_CONST_GRP
+    11100956: rig:Root_CTRL_POS_GRP
+    11100958: rig:Spine1_CTRL
+    11100960: rig:Spine1_CTRL_AnimData_CONST_GRP
+    11100962: rig:Spine1_CTRL_In_Rig_CONST_GRP
+    11100964: rig:Spine1_CTRL_POS_GRP
+    11100966: rig:Spine2_CTRL
+    11100968: rig:Spine2_CTRL_AnimData_CONST_GRP
+    11100970: rig:Spine2_CTRL_In_Rig_CONST_GRP
+    11100972: rig:Spine2_CTRL_POS_GRP
+    11100974: rig:Spine_CTRL
+    11100976: rig:Spine_CTRL_AnimData_CONST_GRP
+    11100978: rig:Spine_CTRL_In_Rig_CONST_GRP
+    11100980: rig:Spine_CTRL_POS_GRP
+    11100982: Head
+    11100984: HeadTop_End
+    11100986: Hips
+    11100988: LeftArm
+    11100990: LeftFoot
+    11100992: LeftForeArm
+    11100994: LeftHand
+    11100996: LeftHandIndex1
+    11100998: LeftHandIndex2
+    11101000: LeftHandIndex3
+    11101002: LeftHandIndex4
+    11101004: LeftHandThumb1
+    11101006: LeftHandThumb2
+    11101008: LeftHandThumb3
+    11101010: LeftHandThumb4
+    11101012: LeftLeg
+    11101014: LeftShoulder
+    11101016: LeftToe_End
+    11101018: LeftToeBase
+    11101020: LeftUpLeg
+    11101022: Neck
+    11101024: RightArm
+    11101026: RightFoot
+    11101028: RightForeArm
+    11101030: RightHand
+    11101032: RightHandIndex1
+    11101034: RightHandIndex2
+    11101036: RightHandIndex3
+    11101038: RightHandIndex4
+    11101040: RightHandThumb1
+    11101042: RightHandThumb2
+    11101044: RightHandThumb3
+    11101046: RightHandThumb4
+    11101048: RightLeg
+    11101050: RightShoulder
+    11101052: RightToe_End
+    11101054: RightToeBase
+    11101056: RightUpLeg
+    11101058: Spine
+    11101060: Spine1
+    11101062: Spine2
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 1
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations:
+    - name: knight_armR_runningidle
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 27
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      transformMask: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .200000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 1
+  userData: 

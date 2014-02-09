@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 9444bcdf7beac4c73845390b561eef5c
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: knight:Mesh_Group5745
+    100002: knight:pCube38
+    100004: knight:pCube39
+    100006: knight:pCylinder23
+    100008: knight:pCylinder24
+    100010: knight:pCylinder25
+    100012: knight:pCylinder26
+    100014: knight:pSphere10
+    100016: knight:pSphere11
+    100018: knight:ZBrush_defualt_group1
+    100020: //RootNode
+    100022: LeftArm
+    100024: LeftForeArm
+    100026: LeftHand
+    100028: LeftHandIndex1
+    100030: LeftHandIndex2
+    100032: LeftHandThumb1
+    100034: LeftHandThumb2
+    400000: knight:Mesh_Group5745
+    400002: knight:pCube38
+    400004: knight:pCube39
+    400006: knight:pCylinder23
+    400008: knight:pCylinder24
+    400010: knight:pCylinder25
+    400012: knight:pCylinder26
+    400014: knight:pSphere10
+    400016: knight:pSphere11
+    400018: knight:ZBrush_defualt_group1
+    400020: //RootNode
+    400022: LeftArm
+    400024: LeftForeArm
+    400026: LeftHand
+    400028: LeftHandIndex1
+    400030: LeftHandIndex2
+    400032: LeftHandThumb1
+    400034: LeftHandThumb2
+    2300000: knight:Mesh_Group5745
+    2300002: knight:pCube38
+    2300004: knight:pCube39
+    2300006: knight:pCylinder23
+    2300008: knight:pCylinder24
+    2300010: knight:pCylinder25
+    2300012: knight:pCylinder26
+    2300014: knight:pSphere10
+    2300016: knight:pSphere11
+    2300018: knight:ZBrush_defualt_group1
+    3300000: knight:Mesh_Group5745
+    3300002: knight:pCube38
+    3300004: knight:pCube39
+    3300006: knight:pCylinder23
+    3300008: knight:pCylinder24
+    3300010: knight:pCylinder25
+    3300012: knight:pCylinder26
+    3300014: knight:pSphere10
+    3300016: knight:pSphere11
+    3300018: knight:ZBrush_defualt_group1
+    4300000: knight:pCylinder26
+    4300002: knight:pCylinder25
+    4300004: knight:pSphere11
+    4300006: knight:pCylinder24
+    4300008: knight:pCube38
+    4300010: knight:pCube39
+    4300012: knight:pSphere10
+    4300014: knight:ZBrush_defualt_group1
+    4300016: knight:Mesh_Group5745
+    4300018: knight:pCylinder23
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .200000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

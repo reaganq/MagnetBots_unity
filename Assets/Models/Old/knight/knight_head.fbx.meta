@@ -1,0 +1,79 @@
+fileFormatVersion: 2
+guid: 1b09c87a8ad4c40ee838908b1d020432
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: Head
+    100002: HeadTop_End
+    100004: knight:Mesh_Group5744
+    100006: knight:pCube18
+    100008: knight:polySurface2
+    100010: //RootNode
+    400000: Head
+    400002: HeadTop_End
+    400004: knight:Mesh_Group5744
+    400006: knight:pCube18
+    400008: knight:polySurface2
+    400010: //RootNode
+    2300000: knight:Mesh_Group5744
+    2300002: knight:pCube18
+    2300004: knight:polySurface2
+    3300000: knight:Mesh_Group5744
+    3300002: knight:pCube18
+    3300004: knight:polySurface2
+    4300000: knight:pCube18
+    4300002: knight:polySurface2
+    4300004: knight:Mesh_Group5744
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .200000003
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    handles: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  additionalBone: 1
+  animationType: 2
+  userData: 

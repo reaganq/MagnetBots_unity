@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGNPC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGNPC>
+    <ShopID>0</ShopID>
+    <ID>1</ID>
+    <Name>Lab</Name>
+    <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <ShopID>0</ShopID>
+    <ID>2</ID>
+    <Name>Bank</Name>
+    <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <ShopID>0</ShopID>
+    <LevelName>MagnetCentralGym</LevelName>
+    <ID>3</ID>
+    <Name>Gym</Name>
+    <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <ShopID>0</ShopID>
+    <ID>4</ID>
+    <Name>Burger Joint</Name>
+    <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <ShopID>1</ShopID>
+    <ID>5</ID>
+    <Name>General Store</Name>
+    <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+</ArrayOfRPGNPC>

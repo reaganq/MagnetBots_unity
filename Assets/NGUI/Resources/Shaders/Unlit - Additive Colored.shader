@@ -1,0 +1,35 @@
+Shader "Unlit/Additive Colored"
+{
+	Properties
+	{
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "white" {}
+	}
+	
+	SubShader
+	{
+		Tags
+		{
+			"Queue" = "Transparent"
+			"IgnoreProjector" = "True"
+			"RenderType" = "Transparent"
+		}
+		
+		LOD 100
+		Cull Off
+		Lighting Off
+		ZWrite Off
+		Fog { Mode Off }
+		AlphaTest Greater .01
+		Blend One One
+		
+		Pass
+		{
+			ColorMaterial AmbientAndDiffuse
+			
+			SetTexture [_MainTex]
+			{
+				Combine Texture * Primary
+			}
+		}
+	}
+}

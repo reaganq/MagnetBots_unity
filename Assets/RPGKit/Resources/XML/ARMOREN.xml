@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGArmor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGArmor>
+    <ID>3</ID>
+    <Name>Knight Left Arm</Name>
+    <Description>awesome shield bro!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_armL</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <FBXName>Armor/ArmL/Knight_ArmL</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this to block damage!</AbilityString>
+    <AbilityIconPath>abilityicon_knight_armL</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>1</ID>
+    <Name>Helmet of the Holy Knight</Name>
+    <Description>Such plummage, much wow</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_head</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <FBXName>Armor/Head/Knight_Head</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString />
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>2</ID>
+    <Name>Knight Pauldron</Name>
+    <Description>Come at me bro!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_body</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <FBXName>Armor/Body/Knight_Body</FBXName>
+    <ArmorClassValue>20</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString />
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>4</ID>
+    <Name>Excalibur</Name>
+    <Description>Stick'em with the pointy end!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_armR</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Legendary</Rarity>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <FBXName>Armor/ArmR/Knight_ArmR</FBXName>
+    <ArmorClassValue>5</ArmorClassValue>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this to destroy your foes</AbilityString>
+    <AbilityIconPath>abilityicon_knight_armR</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>5</ID>
+    <Name>Robust knight legs</Name>
+    <Description>strong but slow</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_legs</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <FBXName>Armor/Legs/Knight_Legs</FBXName>
+    <ArmorClassValue>15</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>6</ID>
+    <Name>Average Head</Name>
+    <Description>Pretty average</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>basic_head</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <FBXName>Armor/Head/Basic_Head</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>7</ID>
+    <Name>Plain Body</Name>
+    <Description>Super plain</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>basic_body</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Worthless</Rarity>
+    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <FBXName>Armor/Body/Basic_Body</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>8</ID>
+    <Name>Basic Left Arm</Name>
+    <Description>Your parents don't want you</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>basic_armL</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <FBXName>Armor/ArmL/Basic_ArmL</FBXName>
+    <ArmorClassValue>5</ArmorClassValue>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this to shoot ata your enemies!</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>9</ID>
+    <Name>Basic Right Arm</Name>
+    <Description>No one wants to be your friend</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>basic_armR</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <FBXName>Armor/ArmR/Basic_ArmR</FBXName>
+    <ArmorClassValue>15</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Wield the power of the Thunder God</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>10</ID>
+    <Name>Skinny Legs</Name>
+    <Description>even hipsters think you're too underground</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>basic_legs</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <FBXName>Armor/Legs/Basic_Legs</FBXName>
+    <ArmorClassValue>5</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>11</ID>
+    <Name>Left Boxing Glove</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>boxer_armL</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <FBXName>Armor/ArmL/Boxer_ArmL</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>12</ID>
+    <Name>Boxer's Helmet</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>boxer_head</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>50</BuyValue>
+    <SellValue>10</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <FBXName>Armor/Head/Boxer_Head</FBXName>
+    <ArmorClassValue>15</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>13</ID>
+    <Name>Tyson's Right hand</Name>
+    <Description>MIKE TYSON!!!!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>boxer_armR</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>50</SellValue>
+    <Rarity>Epic</Rarity>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <FBXName>Armor/ArmR/Boxer_ArmR</FBXName>
+    <ArmorClassValue>50</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>14</ID>
+    <Name>Gumball Gun</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_armR</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>50</SellValue>
+    <Rarity>Common</Rarity>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <FBXName>Armor/ArmR/gumball_armR</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>15</ID>
+    <Name>Egg Beater</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath />
+    <AtlasName />
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Worthless</Rarity>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <FBXName>Armor/</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+</ArrayOfRPGArmor>
