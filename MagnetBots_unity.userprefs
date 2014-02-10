@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_lightmap.shader">
+    <Files>
+      <File FileName="Assets/NGUI/Scripts/Interaction/UIDragObject.cs" Line="81" Column="2" />
+      <File FileName="Assets/Scripts/Enemies/Skills/RangedAISkill.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Range/StandardGun.cs" Line="1" Column="1" />
+      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_Transparent.shader" Line="13" Column="54" />
+      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight.shader" Line="1" Column="1" />
+      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_lightmap.shader" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-guid: 9dba53179920747fa8b13388234b20c5
-labels:
-- toonygooch
-- toon
-- shader
+guid: de4844929c8164f0d90bd57905b789d5
 ShaderImporter:
   defaultTextures: []
   userData: 
