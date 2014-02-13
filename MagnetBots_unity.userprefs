@@ -1,41 +1,27 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/ArmoryGUIController.cs">
     <Files>
-      <File FileName="Assets/Scripts/Character/InputController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Range/StandardGun.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Base/ArmorSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/HitBox.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Demos/DemoFriendsAndCustomAuth/GUIFriendFinding.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonNetwork.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="89" Column="2" />
-      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/IntroGUIController.cs" Line="58" Column="6" />
+      <File FileName="Assets/Scripts/GUI/IntroGUIController.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="42" Column="2" />
+      <File FileName="Assets/Scripts/Character/InputController.cs" Line="164" Column="18" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="37" Column="16" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="48" Column="26" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="109" Column="5" />
+      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonNetwork.cs" Line="1883" Column="20" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="89" Column="7" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="25" Column="5" />
+      <File FileName="Assets/Scripts/Managers/GUIManager.cs" Line="206" Column="13" />
+      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="297" Column="19" />
+      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="74" Column="5" />
+      <File FileName="Assets/Scripts/Armor/Melee/LongDurationMelee.cs" Line="124" Column="44" />
+      <File FileName="Assets/Scripts/Armor/Base/ArmorSkill.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="82" Column="43" />
+      <File FileName="Assets/Scripts/Armor/Range/StandardGun.cs" Line="257" Column="90" />
+      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonHandler.cs" Line="170" Column="1" />
+      <File FileName="Assets/Scripts/GUI/ShopGUIController.cs" Line="45" Column="91" />
+      <File FileName="Assets/Scripts/GUI/ArmoryGUIController.cs" Line="89" Column="9" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Armor" expanded="True">
-                <Node name="Range" expanded="True" />
-              </Node>
-              <Node name="Character" expanded="True" />
-              <Node name="GUI" expanded="True" />
-              <Node name="Managers" expanded="True">
-                <Node name="GameManager.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="ClassPad">
-        <State expanded="True" selected="True" />
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

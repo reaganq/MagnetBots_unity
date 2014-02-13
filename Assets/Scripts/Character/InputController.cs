@@ -33,7 +33,7 @@ public class InputController : MonoBehaviour {
         character = gameObject.GetComponent<CharacterController>();
         motor = gameObject.GetComponent<CharacterMotor>();
         //uiCamera = Camera.main.gameObject.GetComponent<UICamera>();
-        UICamera.fallThrough = this.gameObject;
+        //UICamera.fallThrough = this.gameObject;
         //outputAngleVector = new Vector2(0,0);
 
     }
@@ -149,6 +149,7 @@ public class InputController : MonoBehaviour {
 
     void OnPress(bool isDown)
     {
+
         if(!GameManager.Instance.GameHasStarted && !isDown)
         {
             GameManager.Instance.GameHasStarted = true;
@@ -161,8 +162,6 @@ public class InputController : MonoBehaviour {
             {
                 if(isDown)
                 {
-                    //if(UICamera.currentTouchID == -1)
-                    //Debug.Log("OnpressDown "+ UICamera.currentTouchID);
                     if(!actionManager.isLocked())
                     {
                         if(UICamera.currentTouchID == -1)

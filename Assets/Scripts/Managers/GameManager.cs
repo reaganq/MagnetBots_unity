@@ -95,30 +95,34 @@ public class GameManager : MonoBehaviour {
         else
         {
 
+			StartCoroutine("LoadStandard");
 
-            if(level == 1)
-            {
-                Debug.Log("loaded scene 1");
-                PlayerManager.Instance.RefreshAvatar();
-                GUIManager.Instance.TurnOffAllOtherUI();
-                GUIManager.Instance.DisplayMainGUI();
-            }
-
-            else
-            {
-                Debug.Log("loaded scene " + Application.loadedLevel);
-                PlayerManager.Instance.RefreshAvatar();
-                GUIManager.Instance.TurnOffAllOtherUI();
-                GUIManager.Instance.DisplayMainGUI();
-            }
-            if(inputType == InputType.TouchInput)
-            {
-                joystick.enable = true;
-            }
+	        
         }
-
-
     }
+
+	public IEnumerator LoadStandard()
+	{
+		while(!NetworkManager.Instance.isConnectedToServer)
+			yield return null;
+		Debug.Log("loaded scene " + Application.loadedLevel);
+		//yield return new WaitForSeconds(1);
+		PlayerManager.Instance.RefreshAvatar();
+		GUIManager.Instance.TurnOffAllOtherUI();
+		GUIManager.Instance.DisplayMainGUI();
+		
+		
+		if(inputType == InputType.TouchInput)
+		{
+			joystick.enable = true;
+		}
+		yield return null;
+	}
+
+	public void reloadAvatar()
+	{
+		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 1f);
+	}
 
     public void LoadLevel(string name)
     {
@@ -129,8 +133,6 @@ public class GameManager : MonoBehaviour {
         PlayerManager.Instance.DisableAvatarInput();
         Application.LoadLevel(name);
     }
-
-
 }
 
 public enum InputType

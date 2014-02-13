@@ -9,6 +9,7 @@ public class Avatar : MonoBehaviour {
     public Animation animationTarget;
     public CharacterActionManager actionManager;
     public CharacterStatus myStatus;
+	public PhotonView myPhotonView;
     
     public Transform PelvisBone;
     public Transform BodyRoot;
@@ -39,30 +40,52 @@ public class Avatar : MonoBehaviour {
         myStatus = GetComponent<CharacterStatus>();
 	}
 
+	public void LoadAllBodyParts(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	{
+		myPhotonView.RPC("LoadAll", PhotonTargets.AllBuffered, headPath, bodyPath, armLPath, armRPath, legsPath);
+	}
+
+	[RPC]
+	public void LoadAll(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	{
+		Debug.Log("1");
+		SpawnHead(headPath);
+		SpawnBody(bodyPath);
+		SpawnArmL(armLPath);
+		SpawnArmR(armRPath);
+		SpawnLegs(legsPath);
+	}
+
     public void EquipBodyPart(string objectpath, EquipmentSlots slot)
     {
         switch(slot)
         {
             case EquipmentSlots.Head:
-            SpawnHead(objectpath);
+			myPhotonView.RPC("SpawnHead", PhotonTargets.AllBuffered, objectpath);
+            //SpawnHead(objectpath);
                 break;
             case EquipmentSlots.Body:
-            SpawnBody(objectpath);
+			myPhotonView.RPC("SpawnBody", PhotonTargets.AllBuffered, objectpath);
+            //SpawnBody(objectpath);
                 break;
             case EquipmentSlots.ArmL:
-            SpawnArmL(objectpath);
+			myPhotonView.RPC("SpawnArmL", PhotonTargets.AllBuffered, objectpath);
+            //SpawnArmL(objectpath);
                 break;
             case EquipmentSlots.ArmR:
-            SpawnArmR(objectpath);
+			myPhotonView.RPC("SpawnArmR", PhotonTargets.AllBuffered, objectpath);
+            //SpawnArmR(objectpath);
                 break;
             case EquipmentSlots.Legs:
-            SpawnLegs(objectpath);
+			myPhotonView.RPC("SpawnLegs", PhotonTargets.AllBuffered, objectpath);
+            //SpawnLegs(objectpath);
                 break;
             case EquipmentSlots.Face:
             SpawnFace(objectpath);
                 break;
         }
     }
+
 
     public void SpawnFace(string objectpath)
     {
@@ -91,6 +114,7 @@ public class Avatar : MonoBehaviour {
 
     }
 
+	[RPC]
     public void SpawnHead(string objectpath)
     {
         if(HeadObjects.Count > 0)
@@ -110,6 +134,7 @@ public class Avatar : MonoBehaviour {
     }
    
 #region SpawnBody
+	[RPC]
     public void SpawnBody(string objectpath)
     {        
         if(BodyObjects.Count > 0)
@@ -193,7 +218,7 @@ public class Avatar : MonoBehaviour {
         return null;    
     }
 #endregion
-    
+	[RPC]
     public void SpawnArmL(string objectpath)
     {
         if(ArmLObjects.Count > 0)
@@ -256,6 +281,7 @@ public class Avatar : MonoBehaviour {
         obj.parent = ArmLRoot.parent;
     }
     
+	[RPC]
     public void SpawnArmR(string objectpath)
     {
         if(ArmRObjects.Count > 0)
@@ -320,7 +346,7 @@ public class Avatar : MonoBehaviour {
         obj.localRotation = Quaternion.identity;
         obj.parent = ArmRRoot.parent;
     }
-    
+	[RPC]
     public void SpawnLegs(string objectpath)
     {
         if(LegObjects.Count > 0)

@@ -289,6 +289,7 @@
      <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
      <Compile Include="Assets\Scripts\Character\InputController.cs" />
+     <Compile Include="Assets\Scripts\Character\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Enemies\JimFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\SimpleFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AISkill.cs" />

@@ -70,11 +70,11 @@ public class ShopGUIController : BasicGUIController {
             {
                 BuyButton.SetActive(true);
                 SellButton.SetActive(false);
-                ItemNameLabel.enabled = true;
+                /*ItemNameLabel.enabled = true;
                 ItemNameLabel.text = PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].rpgItem.Name;
                 ItemDescriptionLabel.enabled = true;
                 ItemDescriptionLabel.text = PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].rpgItem.Description;
-                
+                */
             }
         }
         else
@@ -83,10 +83,12 @@ public class ShopGUIController : BasicGUIController {
             {
                 SellButton.SetActive(true);
                 BuyButton.SetActive(false);
+				/*
                 ItemNameLabel.enabled = true;
                 ItemNameLabel.text = PlayerManager.Instance.Hero.Inventory.Items[CurrentSelectedItemIndex].rpgItem.Name;
                 ItemDescriptionLabel.enabled = true;
                 ItemDescriptionLabel.text = PlayerManager.Instance.Hero.Inventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
+                */
             }
         }
         /*if(SelectedInventory.Items[CurrentSelectedItemIndex].IsItemUsable )

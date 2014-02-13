@@ -203,8 +203,8 @@ public class GUIManager : MonoBehaviour {
         {
             HideMainGUI();
             TurnOffAllOtherUI();
-            //ShopGUI.SetActive(true);
-            mainCamera.enabled = false;
+            ShopGUI.SetActive(true);
+            //mainCamera.enabled = false;
             IsShopDisplayed = true;
             ShopGUI.SendMessage("Enable");
         }

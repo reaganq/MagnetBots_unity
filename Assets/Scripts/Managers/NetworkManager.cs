@@ -40,22 +40,29 @@ public class NetworkManager : MonoBehaviour {
 			DontDestroyOnLoad(this);
 		}
 
-		PhotonNetwork.offlineMode = offlineMode;
+		if(offlineMode)
+		{
+			//Connect();
+			PhotonNetwork.Disconnect();
+			PhotonNetwork.offlineMode = offlineMode;
+			PhotonNetwork.CreateRoom("null");
+			Debug.Log("offlinemode");
+		}
 	}
 
 	public void Connect () 
 	{
 
 		PhotonNetwork.ConnectUsingSettings("Magnet Bots v0.0.1");
+
 	}
 
 	void OnGUI()
 	{
+		//if(!offlineMode)
+		//{
 		GUILayout.Label( PhotonNetwork.connectionStateDetailed.ToString() );
-	}
-
-	void Update()
-	{
+		//}
 	}
 
 	void OnJoinedLobby()
@@ -72,10 +79,16 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnJoinedRoom()
 	{
+
 		Debug.Log("OnJoinedRoom");
 		//PhotonNetwork.load
 		isConnectedToServer = true;
-
+		GameManager.Instance.GameHasStarted = true;
+		GameManager.Instance.GameIsPaused = false;
+		GUIManager.Instance.StartGame();
+		if(!offlineMode)
+			PhotonNetwork.LoadLevel(1);
+		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 0);
 	}
 	
 }

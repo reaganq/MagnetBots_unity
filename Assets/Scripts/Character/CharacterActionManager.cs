@@ -9,6 +9,7 @@ public class CharacterActionManager : MonoBehaviour {
     public Animation animationTarget;
 	public CharacterStatus myStatus;
     public CharacterMotor motor;
+	public PhotonView myPhotonView;
 
     private Job leftJob;
     private Job rightJob;
@@ -36,7 +37,8 @@ public class CharacterActionManager : MonoBehaviour {
     // Use this for initialization
     void Start () 
     {
-        animationTarget.Play("Default_Idle");
+        //animationTarget.Play("Default_Idle");
+		myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
     }
     
     public void AddArmorcontroller(ArmorSkill controller, PassiveArmorAnimationController animController, int index)
@@ -226,7 +228,8 @@ public class CharacterActionManager : MonoBehaviour {
         if(movementState != MovementState.idle)
         {
             animationTarget["Default_Idle"].time = 0;
-            animationTarget.CrossFade("Default_Idle");
+            //animationTarget.CrossFade("Default_Idle");
+			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
             for (int i = 0; i < armorControllers.Length ; i++)
             {
                 if(armorAnimControllers[i] != null )
@@ -251,7 +254,8 @@ public class CharacterActionManager : MonoBehaviour {
         if(movementState != MovementState.moving)
         {
             animationTarget["Default_Run"].time = 0;
-            animationTarget.CrossFade("Default_Run");
+            //animationTarget.CrossFade("Default_Run");
+			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
             for (int i = 0; i < armorControllers.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
@@ -275,6 +279,32 @@ public class CharacterActionManager : MonoBehaviour {
     }
 
     #endregion
+
+	[RPC]
+	public void PlayAnimation(string name)
+	{
+		Debug.Log("play animation");
+		animationTarget.Play(name);
+	}
+
+	[RPC]
+	public void CrossFadeAnimation(string name)
+	{
+		animationTarget.CrossFade(name);
+	}
+
+	[RPC]
+	public void CrossFadeAnimation(string name, float timer)
+	{
+		animationTarget.CrossFade(name, timer);
+	}
+
+	[RPC]
+	public void BlendAnimation(string name, float target, float timer)
+	{
+		animationTarget.Blend(name, target, timer);
+	}
+
 
 }
 

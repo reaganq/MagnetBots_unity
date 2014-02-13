@@ -89,11 +89,13 @@ public class StandardGun : ArmorSkill {
             armorState = ArmorState.casting;
             //characterAnimation.CrossFade(castAnimation.clip.name, 0.05f);
 
-            characterAnimation.Play(castAnimation.clip.name);
+            //characterAnimation.Play(castAnimation.clip.name);
+			characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, castAnimation.clip.name);
             yield return new WaitForSeconds(castAnimation.clip.length);
 
             Debug.Log("cast to fire");
-            characterAnimation.Play(durationAnimation.clip.name);
+            //characterAnimation.Play(durationAnimation.clip.name);
+			characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
 
             if(fireSpeedTimer >0)
                 yield return new WaitForSeconds(fireSpeedTimer);
@@ -170,7 +172,8 @@ public class StandardGun : ArmorSkill {
             yield return new WaitForSeconds(1f);
             Debug.Log("withdraw");
             armorState = ArmorState.followThrough;
-            characterAnimation.CrossFade(followThroughAnimation.clip.name);
+            //characterAnimation.CrossFade(followThroughAnimation.clip.name);
+			characterManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
             yield return new WaitForSeconds(followThroughAnimation.clip.length);
             _skillActive = false;
             Reset();
@@ -224,7 +227,8 @@ public class StandardGun : ArmorSkill {
         Debug.Log("ammo: " + currentAmmoCount);
         //play recoil animation
         armorState = ArmorState.recoiling;
-        characterAnimation.Play(recoilAnimation.clip.name);
+        //characterAnimation.Play(recoilAnimation.clip.name);
+		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
         if(currentAmmoCount <= 0)
         {
             cooldownTimer = cooldown + recoilAnimation.clip.length;
@@ -246,9 +250,11 @@ public class StandardGun : ArmorSkill {
 
 
         armorState = ArmorState.reloading;
-        characterAnimation.Play(reloadAnimation.clip.name);
+        //characterAnimation.Play(reloadAnimation.clip.name);
+		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
         yield return new WaitForSeconds(reloadAnimation.clip.length);
-        characterAnimation.Play(durationAnimation.clip.name);
+        //characterAnimation.Play(durationAnimation.clip.name);
+		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
         Debug.Log("back to fire mode");
         currentAmmoCount = maxAmmoCount;
 

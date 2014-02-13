@@ -80,18 +80,18 @@ public class ArmoryGUIController : BasicGUIController {
             {
                 //ItemSkillSprite.enabled = true;
                 //ItemSkillSprite.spriteName = armor.AbilityIconPath;
-                ItemSkillDescriptionLabel.enabled = true;
-                ItemSkillDescriptionLabel.text = armor.AbilityString;
+                //ItemSkillDescriptionLabel.enabled = true;
+                //ItemSkillDescriptionLabel.text = armor.AbilityString;
             }
         }
         else
             EquipButton.SetActive(false);
         
         
-        ItemNameLabel.enabled = true;
-        ItemNameLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Name;
-        ItemDescriptionLabel.enabled = true;
-        ItemDescriptionLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
+        //ItemNameLabel.enabled = true;
+        //ItemNameLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Name;
+        //ItemDescriptionLabel.enabled = true;
+        //ItemDescriptionLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
     }
     
     public void OnUseButtonPressed()

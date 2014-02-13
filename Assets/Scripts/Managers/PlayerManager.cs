@@ -89,11 +89,10 @@ public class PlayerManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        Debug.Log("started new game");
         Hero.StartNewGame();
         LoadAvatar();
-
     }
+
 
     public void LoadAvatar()
     {
@@ -103,12 +102,17 @@ public class PlayerManager : MonoBehaviour
         //spawnPoints = new List<SpawnPoint>();
         //sounds = new GeneralPlayerSounds();
      //LoadScene();
+		Debug.Log(PhotonNetwork.isMessageQueueRunning);
         SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
-        //avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position, Quaternion.identity, 0) as GameObject;
-		avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
+        avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position, Quaternion.identity, 0) as GameObject;
+		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
         avatarObject.AddComponent<DontDestroy>();
         avatarStatus = avatarObject.GetComponent<CharacterStatus>();
         avatarInput = avatarObject.GetComponent<InputController>();
+		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
+		cm.enabled = true;
+		avatarInput.enabled = true;
+		UICamera.fallThrough = avatarObject;
         avatar = avatarObject.GetComponent<Avatar>();
         RefreshAvatar();
     }
@@ -118,7 +122,7 @@ public class PlayerManager : MonoBehaviour
         if(avatarObject == null)
         {
             StartNewGame();
-            return;
+			return;
         }
 
         //mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -134,11 +138,16 @@ public class PlayerManager : MonoBehaviour
 
     void LoadCharacterParts()
     {
-        avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedBody.rpgItem).FBXName, Hero.Equip.EquippedBody.Slot);
-        avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedLegs.rpgItem).FBXName, Hero.Equip.EquippedLegs.Slot);
-        avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, Hero.Equip.EquippedHead.Slot);
-        avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName, Hero.Equip.EquippedArmL.Slot);
-        avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName, Hero.Equip.EquippedArmR.Slot);
+        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedBody.rpgItem).FBXName, Hero.Equip.EquippedBody.Slot);
+        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedLegs.rpgItem).FBXName, Hero.Equip.EquippedLegs.Slot);
+        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, Hero.Equip.EquippedHead.Slot);
+        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName, Hero.Equip.EquippedArmL.Slot);
+        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName, Hero.Equip.EquippedArmR.Slot);
+		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, 
+		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgItem).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgItem).FBXName);
     }
 
     public void EnableAvatarInput()

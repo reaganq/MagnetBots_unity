@@ -18,7 +18,8 @@ public class NPC: MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine("ShowNPC");
+			if(other.gameObject == PlayerManager.Instance.avatarObject)
+            	StartCoroutine("ShowNPC");
         }
     }
     
@@ -26,6 +27,7 @@ public class NPC: MonoBehaviour
     {
         if(Active && other.gameObject.CompareTag("Player"))
         {
+			if(other.gameObject == PlayerManager.Instance.avatarObject)
             StartCoroutine("HideNPC");
             
         }

@@ -8,7 +8,7 @@ public class IntroGUIController : MonoBehaviour {
 
     public void OnStartPressed()
     {
-        StartCoroutine("offlineload");
+        StartCoroutine("load");
     }
 
     public string levelName;
@@ -39,15 +39,16 @@ public class IntroGUIController : MonoBehaviour {
 		startButton.SetActive(false);
 		loadingLabel.SetActive(true);
 		NetworkManager.Instance.Connect();
-		while(!NetworkManager.Instance.isConnectedToServer)
+		yield return null;
+		/*while(!NetworkManager.Instance.isConnectedToServer)
 		{
 			yield return null;
 		}
-		yield return null;
+		yield return new WaitForSeconds(1);
 		GameManager.Instance.GameHasStarted = true;
 		GameManager.Instance.GameIsPaused = false;
 		GUIManager.Instance.StartGame();
-		PhotonNetwork.LoadLevel(1);
+		PhotonNetwork.LoadLevel(1);*/
 	}
     
     public void ActivateScene() {

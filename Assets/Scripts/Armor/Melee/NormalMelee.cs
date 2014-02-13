@@ -78,7 +78,8 @@ public class NormalMelee : ArmorSkill {
         int i = Random.Range(0, attackAnimations.Length);
         //Debug.Log("i = "+i);
         characterAnimation[attackAnimations[i].clip.name].time = 0;
-        characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
+        //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
+		characterManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.05f);
 
         float totalTime = attackAnimations[i].clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
@@ -108,7 +109,8 @@ public class NormalMelee : ArmorSkill {
         }
 
         yield return new WaitForSeconds(followThroughTime*0.3f);
-        characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
+        //characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
+		characterManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
 
         yield return new WaitForSeconds(followThroughTime * 0.7f);
 
