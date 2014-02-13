@@ -2083,24 +2083,11 @@
             <param name="source">The byte-array to deserialize from</param>
             <param name="offset">The offset in the byte-array</param>
         </member>
-        <member name="T:ExitGames.Client.Photon.SocketTcp">
-            <summary>
-            Internal class to encapsulate the network i/o functionality for the realtime libary.
-            </summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.SocketTcp.Send(System.Byte[],System.Int32)">
-            <summary>
-            used by TPeer*
-            </summary>
-        </member>
-        <member name="T:ExitGames.Client.Photon.SocketUdp">
-            <summary> Internal class to encapsulate the network i/o functionality for the realtime libary.</summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.SocketUdp.Send(System.Byte[],System.Int32)">
+        <member name="M:ExitGames.Client.Photon.SocketUdpNativeDynamic.Send(System.Byte[],System.Int32)">
             <summary>used by PhotonPeer*</summary>
         </member>
-        <member name="M:ExitGames.Client.Photon.SocketUdp.ReceiveLoop">
-            <summary>Endless loop, run in Receive Thread.</summary>
+        <member name="M:ExitGames.Client.Photon.SocketUdpNativeStatic.Send(System.Byte[],System.Int32)">
+            <summary>used by PhotonPeer*</summary>
         </member>
         <member name="T:ExitGames.Client.Photon.SupportClass">
             <summary>
@@ -2193,42 +2180,6 @@
             <summary>
             Class to wrap static access to the random.Next() call in a thread safe manner.
             </summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.TPeer.TCP_HEADER_BYTES">
-            <summary>TCP "Package" header: 7 bytes</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.TPeer.MSG_HEADER_BYTES">
-            <summary>TCP "Message" header: 2 bytes</summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.TPeer.ALL_HEADER_BYTES">
-            <summary>TCP header combined: 9 bytes</summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.DispatchIncomingCommands">
-            <summary>
-            Checks the incoming queue and Dispatches received data if possible. Returns if a Dispatch happened or
-            not, which shows if more Dispatches might be needed.
-            </summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.SendOutgoingCommands">
-            <summary>
-            gathers commands from all (out)queues until udp-packet is full and sends it!
-            </summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.SendAcksOnly">
-            <summary>Sends a ping in intervals to keep connection alive (server will timeout connection if nothing is sent).</summary>
-            <returns>Always false in this case (local queues are ignored. true would be: "call again to send remaining data").</returns>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.SerializeOperationToMessage(System.Byte,System.Collections.Generic.Dictionary{System.Byte,System.Object},ExitGames.Client.Photon.PeerBase.EgMessageType,System.Boolean)">
-            <summary> Returns the UDP Payload starting with Magic Number for binary protocol </summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.EnqueueMessageAsPayload(System.Boolean,System.Byte[],System.Byte)">
-            <summary>enqueues serialized operations to be sent as tcp stream / package</summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.SendPing">
-            <summary>Sends a ping and modifies this.lastPingResult to avoid another ping for a while.</summary>
-        </member>
-        <member name="M:ExitGames.Client.Photon.TPeer.ReceiveIncomingCommands(System.Byte[],System.Int32)">
-            <summary>reads incoming tcp-packages to create and queue incoming commands*</summary>
         </member>
         <member name="T:ExitGames.Client.Photon.TrafficStatsGameLevel">
             <summary>
@@ -2342,42 +2293,6 @@
         </member>
         <member name="P:ExitGames.Client.Photon.TrafficStats.TimestampOfLastReliableCommand">
             <summary>Timestamp of last incoming reliable command (every second we expect a PING).</summary>
-        </member>
-        <member name="T:ExitGames.Client.Photon.HttpBase3">
-             <summary>
-             Class to handle Http based connections to a Photon server.
-             Requests are done asynchronous and not queued at all.
-            
-             All responses are put into the game's thread-context and 
-             all results and state changes are done within calls of
-             Service() or DispatchIncomingCommands().
-             </summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.HttpBase3._rnd">
-            TODO: ask how to setup this parameters
-        </member>
-        <member name="M:ExitGames.Client.Photon.HttpBase3.Request(System.Byte[],System.String)">
-            <summary>
-            The initial request uses "?init" as UrlParameters and the binary data is the app-id (binary in up to 32 bytes).
-            Init returns a GUID for use in following requests as UrlParameters "?pid=GUID".
-            </summary>
-            <param name="data"></param>
-            <param name="urlParamter">The url paramters to append to the server adress uri.</param>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:ExitGames.Client.Photon.HttpBase3.Request(System.Byte[],System.String,ExitGames.Client.Photon.HttpBase3.MessageType)" -->
-        <member name="M:ExitGames.Client.Photon.HttpBase3.EnqueueErrorDisconnect(ExitGames.Client.Photon.StatusCode)">
-            <summary>
-            Called internally when some error (or timeout) causes a disconnect. this takes care state is set and callbacks are done (once)
-            </summary>
-        </member>
-        <member name="P:ExitGames.Client.Photon.HttpBase3.PeerID">
-            <summary>
-            The *pid* for this peer, which is assigned by the server on connect (init).
-            Initially this is Guid.Empty.
-            </summary>
-        </member>
-        <member name="F:ExitGames.Client.Photon.HttpBase3.AsyncRequestState.restarting">
-            how many times we have rererequested this request already
         </member>
     </members>
 </doc>

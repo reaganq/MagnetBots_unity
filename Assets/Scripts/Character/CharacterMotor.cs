@@ -24,7 +24,7 @@ public class CharacterMotor : MonoBehaviour {
     //public Vector3[] speed = new Vector3[2];
     
     //public float Speed;
-    public float rotSpeed = 11.5f;
+    //public float rotSpeed = 11.5f;
     public Quaternion rotTarget;
     public float rotAngle;
     
@@ -144,7 +144,7 @@ public class CharacterMotor : MonoBehaviour {
             {
                 Quaternion newRotation = Quaternion.LookRotation(direction);
                 //Debug.Log(newRotation);
-                _myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * rotSpeed);
+                _myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
             }
                 direction *= 0.2f * (Vector3.Dot(_myTransform.forward,direction) + 1);
 
@@ -208,7 +208,7 @@ public class CharacterMotor : MonoBehaviour {
         var desiredLocalDirection = _myTransform.InverseTransformDirection(dir);
         //var maxSpeed = MaxSpeedInDirection(desiredLocalDirection);
         //return _myTransform.TransformDirection(desiredLocalDirection * maxSpeed);
-        return _myTransform.TransformDirection(desiredLocalDirection * myStatus.runSpeed);
+        return _myTransform.TransformDirection(desiredLocalDirection * myStatus.movementSpeed);
     }
     
     float MaxSpeedInDirection (Vector3 desiredMovementDirection)
@@ -217,9 +217,9 @@ public class CharacterMotor : MonoBehaviour {
             return 0;
         else 
         {
-            var zAxisEllipseMultiplier  = (desiredMovementDirection.z > 0 ? myStatus.runSpeed : myStatus.runSpeed) / myStatus.runSpeed;
+            var zAxisEllipseMultiplier  = (desiredMovementDirection.z > 0 ? myStatus.movementSpeed : myStatus.movementSpeed) / myStatus.movementSpeed;
             var temp    = new Vector3(desiredMovementDirection.x, 0, desiredMovementDirection.z / zAxisEllipseMultiplier).normalized;
-            var length  = new Vector3(temp.x,0,temp.z * zAxisEllipseMultiplier).magnitude * myStatus.runSpeed;
+            var length  = new Vector3(temp.x,0,temp.z * zAxisEllipseMultiplier).magnitude * myStatus.movementSpeed;
             Debug.Log("length: "+length);
             return length;
         }
@@ -264,7 +264,7 @@ public class CharacterMotor : MonoBehaviour {
         {
             float t = 0.0f;
             //Debug.Log(speed);
-            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.runSpeed ), 0, myStatus.runSpeed );
+            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.movementSpeed ), 0, myStatus.movementSpeed );
             animationManager.UpdateRunningSpeed(t);
             animationManager.AnimateToRunning();
         }

@@ -144,6 +144,20 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
 
     public NetworkingPeer(IPhotonPeerListener listener, string playername, ConnectionProtocol connectionProtocol) : base(listener, connectionProtocol)
     {
+        #if UNITY_EDITOR || (!UNITY_IPHONE && !UNITY_ANDROID && !UNITY_PS3)
+        Debug.Log("Using C# Socket");
+        this.SocketImplementation = typeof(SocketUdp);
+        #elif !UNITY_EDITOR && UNITY_PS3
+        Debug.Log("Using class SocketUdpNativeDllImport");
+        this.SocketImplementation = typeof(SocketUdpNativeDllImport);
+        #elif !UNITY_EDITOR && UNITY_ANDROID
+        Debug.Log("Using class SocketUdpNativeDynamic");
+        this.SocketImplementation = typeof(SocketUdpNativeDynamic);
+        #elif !UNITY_EDITOR && UNITY_IPHONE
+        Debug.Log("Using class SocketUdpNativeStatic");
+        this.SocketImplementation = typeof(SocketUdpNativeStatic);
+        #endif
+
         this.Listener = this;
 
         // don't set the field directly! the listener is passed on to other classes, which get updated by the property set method

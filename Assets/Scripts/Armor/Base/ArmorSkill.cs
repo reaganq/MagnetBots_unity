@@ -40,8 +40,8 @@ public class ArmorSkill : MonoBehaviour {
     public Collider characterCollider;
     public ArmorState armorState;
 
-    public List<GameObject> HitEnemies;
-    public List<GameObject> HitAllies;
+    public List<CharacterStatus> HitEnemies;
+	public List<CharacterStatus> HitAllies;
 
     public virtual void Initialise(Animation target, Transform character, Collider masterCollider, CharacterStatus status, CharacterActionManager manager)
     {
@@ -72,11 +72,11 @@ public class ArmorSkill : MonoBehaviour {
         return false;
     }
 
-    public virtual void HitEnemy(CharacterStatus target)
+    public virtual void HitEnemy(HitBox target)
     {
     }
 
-    public virtual void HitAlly(CharacterStatus target)
+	public virtual void HitAlly(HitBox target)
     {
     }
 

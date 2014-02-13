@@ -8,18 +8,17 @@ public class IntroGUIController : MonoBehaviour {
 
     public void OnStartPressed()
     {
-        StartCoroutine("load");
-
-
+        StartCoroutine("offlineload");
     }
 
     public string levelName;
     AsyncOperation async;
     
-    IEnumerator load() {
+    IEnumerator offlineload() {
         startButton.SetActive(false);
+		NGUITools.SetActive(startButton, false);
         loadingLabel.SetActive(true);
-
+		
         async = Application.LoadLevelAsync(1);
         async.allowSceneActivation = false;
         Debug.LogWarning("ASYNC LOAD STARTED - " +
@@ -34,6 +33,22 @@ public class IntroGUIController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         ActivateScene();
     }
+
+	IEnumerator load()
+	{
+		startButton.SetActive(false);
+		loadingLabel.SetActive(true);
+		NetworkManager.Instance.Connect();
+		while(!NetworkManager.Instance.isConnectedToServer)
+		{
+			yield return null;
+		}
+		yield return null;
+		GameManager.Instance.GameHasStarted = true;
+		GameManager.Instance.GameIsPaused = false;
+		GUIManager.Instance.StartGame();
+		PhotonNetwork.LoadLevel(1);
+	}
     
     public void ActivateScene() {
         async.allowSceneActivation = true;

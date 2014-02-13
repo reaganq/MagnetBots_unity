@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
                 instance = GameObject.FindObjectOfType(typeof(PlayerManager)) as PlayerManager;
                 if (instance == null)
                 {
-                    PlayerManager prefab = Resources.Load("Managers/PlayerManager", typeof(PlayerManager)) as PlayerManager;
+                    PlayerManager prefab = Resources.Load("Managers/_PlayerManager", typeof(PlayerManager)) as PlayerManager;
                     instance = Instantiate(prefab) as PlayerManager;
                 }
             }
@@ -104,7 +104,8 @@ public class PlayerManager : MonoBehaviour
         //sounds = new GeneralPlayerSounds();
      //LoadScene();
         SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
-        avatarObject = GameObject.Instantiate(avatarPrefab, SpawnPoint.position, Quaternion.identity) as GameObject;
+        //avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position, Quaternion.identity, 0) as GameObject;
+		avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
         avatarObject.AddComponent<DontDestroy>();
         avatarStatus = avatarObject.GetComponent<CharacterStatus>();
         avatarInput = avatarObject.GetComponent<InputController>();
@@ -117,7 +118,6 @@ public class PlayerManager : MonoBehaviour
         if(avatarObject == null)
         {
             StartNewGame();
-            Debug.Log("weird startnewgame");
             return;
         }
 
@@ -128,7 +128,6 @@ public class PlayerManager : MonoBehaviour
         PlayerCamera.Instance.targetTransform = avatarObject.transform;
         SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
         avatarObject.transform.position = SpawnPoint.position;
-        Debug.Log("spawned character");
         LoadCharacterParts();
         EnableAvatarInput();
     }
@@ -145,13 +144,11 @@ public class PlayerManager : MonoBehaviour
     public void EnableAvatarInput()
     {
         avatarInput.enabled = true;
-        Debug.Log("enable input");
     }
 
     public void DisableAvatarInput()
     {
         avatarInput.enabled = false;
-        Debug.Log("disable input");
     }
  
 }
