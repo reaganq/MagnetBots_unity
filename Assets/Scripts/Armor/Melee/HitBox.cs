@@ -3,5 +3,11 @@ using System.Collections;
 
 public class HitBox : MonoBehaviour {
 
-    public CharacterStatus owner;
+    public CharacterStatus ownerCS;
+
+	public void DealDamage(int val)
+	{
+
+		ownerCS.DealDamage(val);
+	}
 }

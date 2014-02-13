@@ -3,7 +3,8 @@ using System.Collections;
 
 public class RangedAISkill : AISkill {
 
-    public ArmorAnimation castAnimation;
+	
+	public ArmorAnimation castAnimation;
     public ArmorAnimation durationAnimation;
     public ArmorAnimation recoilAnimation;
     public ArmorAnimation reloadAnimation;
@@ -32,7 +33,8 @@ public class RangedAISkill : AISkill {
 	// Use this for initialization
 	public override void Start () {
 		currentAmmoCount = maxAmmoCount;
-
+		base.Start();
+		Reset();
 	}
 	
 	// Update is called once per frame
@@ -57,27 +59,49 @@ public class RangedAISkill : AISkill {
 			if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
 				FireOneShot();
 		}
+		if(requiresTargetLock)
+		{
+			//if
+		}
+
 	}
 
 	public override IEnumerator UseSkill ()
 	{
+		Debug.Log("huh?");
+		targetShotsPerSession = Random.Range((int)minShotsPerSession, (int)maxShotsPerSession);
+		//if(requiresTargetLock)
+			//fsm.aimAtTarget = true;
+		fsm.fireObject = bulletLocation;
 		fsm.CrossFadeAnimation(castAnimation.clip);
 		yield return new WaitForSeconds(castAnimation.clip.length);
-		
+		while(fsm.targetAngleDifference > angleTolerance)
+		{
+			yield return new WaitForEndOfFrame();
+		}
 		Debug.Log("cast to fire");
 		fsm.PlayAnimation(durationAnimation.clip);
 		isSkillActive = true;
+		while(isSkillActive)
+		{
+			yield return null;
+		}
 	}
 
 	public override IEnumerator CancelSkill ()
 	{
+		while(isReloading)
+			yield return null;
 		isSkillActive = false;
+		if(requiresTargetLock)
+			fsm.aimAtTarget = false;
 		fsm.CrossFadeAnimation(followThroughAnimation.clip);
 		yield return new WaitForSeconds(followThroughAnimation.clip.length);
 		Reset();
+
 	}
 
-	public void Reset()
+	public override void Reset()
 	{
 		currentShotsFired = 0f;
 	}
@@ -88,13 +112,24 @@ public class RangedAISkill : AISkill {
 		Debug.Log("fire one shot");
 		totalShotsFired ++;
 		currentAmmoCount --;
+		currentShotsFired ++;
 		fireSpeedTimer = fireSpeed;
 		GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
 		//Physics.IgnoreCollision(bullet.collider, characterCollider);
 		if(bullet.rigidbody != null)
-			bullet.rigidbody.AddForce(this.transform.forward * bulletSpeed);
+		{
+			Vector3 dir = bulletLocation.forward;
+			dir.y = (fsm.targetObject.position - bulletLocation.position).normalized.y * 0.5f;
+			bullet.rigidbody.AddForce(dir * bulletSpeed);
+		}
 		BulletProjectile src = bullet.GetComponent<BulletProjectile>();
-		//if(src != null)
+		if(src != null)
+		{
+			src.masterAISkill = this;
+			src.status = fsm._characterStatus;
+			src.IgnoreCollisions();
+		}
+		//
 			//src.masterScript = this;
 		
 		
@@ -131,5 +166,11 @@ public class RangedAISkill : AISkill {
 		Debug.Log("back to fire mode");
 		currentAmmoCount = maxAmmoCount;
 		
+	}
+
+	public override void HitEnemy(HitBox hb)
+	{
+		Debug.Log("deal damage");
+		hb.DealDamage(10);
 	}
 }

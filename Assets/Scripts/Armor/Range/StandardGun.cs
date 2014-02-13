@@ -214,7 +214,11 @@ public class StandardGun : ArmorSkill {
             bullet.rigidbody.AddForce(characterTransform.forward * bulletSpeed);
         BulletProjectile src = bullet.GetComponent<BulletProjectile>();
         if(src != null)
-            src.masterScript = this;
+		{
+            src.masterArmor = this;
+			src.status = myStatus;
+			src.IgnoreCollisions();
+		}
 
 
         Debug.Log("ammo: " + currentAmmoCount);
@@ -250,7 +254,7 @@ public class StandardGun : ArmorSkill {
 
     }
 
-    public override void HitEnemy(CharacterStatus target)
+	public override void HitEnemy(HitBox target)
     {
         //package up all attack data, damage + status effects etc
         //target.receiveHit(data);

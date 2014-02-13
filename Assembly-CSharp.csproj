@@ -311,6 +311,7 @@
      <Compile Include="Assets\Scripts\Managers\GUIManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\JobManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TownManager.cs" />
      <Compile Include="Assets\Scripts\Misc\DontDestroy.cs" />

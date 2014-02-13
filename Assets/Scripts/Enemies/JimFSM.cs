@@ -10,6 +10,7 @@ public class JimFSM : SimpleFSM {
     public float maxMovementTimer;
     public float curMovementTimer;
 
+
     public AIState state
     {
         get
@@ -27,7 +28,7 @@ public class JimFSM : SimpleFSM {
 	// Use this for initialization
 	public override void Start () {
         base.Start();
-        state = AIState.SelectSkill;
+        state = AIState.Resting;
 
 	}
 
@@ -35,6 +36,9 @@ public class JimFSM : SimpleFSM {
     {
         switch(stateEntered)
         {
+		case AIState.Resting:
+			StartCoroutine(Rest());
+			break;
         case AIState.Searching:
             indicator.material.color = Color.green;
             searchTargetJob = new Job(SearchForTarget(), true);
@@ -67,7 +71,6 @@ public class JimFSM : SimpleFSM {
                 if(!waskilled)
                 {
                     state = AIState.Resting;
-                    Debug.Log("ended attack");
                 }
             };
             break;
@@ -80,6 +83,11 @@ public class JimFSM : SimpleFSM {
         {
         case AIState.UsingSkill:
             if(usingSkillJob != null) usingSkillJob.kill();
+			selectedSkill.Reset();
+			targetObject = null;
+			targetCharacterController = null;
+			fireObject = null;
+			aimAtTarget = false;
             break;
         case AIState.MovingTowardsTarget:
             if(moveToTargetJob != null) moveToTargetJob.kill();
@@ -97,8 +105,8 @@ public class JimFSM : SimpleFSM {
         {
         case AIState.MovingTowardsTarget:
             curMovementTimer -= Time.deltaTime;
-            Debug.Log("update movement");
-            Debug.Log("is in range = " + TargetIsInSkillRange().ToString());
+            //Debug.Log("update movement");
+            //Debug.Log("is in range = " + TargetIsInSkillRange().ToString());
 
             if(curMovementTimer <= 0 && !TargetIsInSkillRange())
             {
@@ -112,18 +120,78 @@ public class JimFSM : SimpleFSM {
             }
             else
             {
-
                 //rotation
-                Debug.Log("move?");
-                _transform.forward += (targetObject.position - _transform.position) * rotationSpeed * Time.deltaTime;
+                //_transform.forward += () * rotationSpeed * Time.deltaTime;
+
+				Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _transform.position);
+				_transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * _characterStatus.rotationSpeed);
                 //move
+
                 Vector3 moveDirection = targetObject.position - _transform.position;
                 moveDirection.y = 0;
-                _controller.Move(moveDirection.normalized * movementSpeed * Time.deltaTime);
+                _controller.Move(moveDirection.normalized * _characterStatus.movementSpeed * Time.deltaTime);
                // _transform.position = Vector3.MoveTowards (_transform.position, targetObject.position, movementSpeed * Time.deltaTime);
             }
             break;
+		case AIState.UsingSkill:
+
+			if(selectedSkill.requiresTargetLock || (selectedSkill.requiresLineOfSight && targetAngleDifference > selectedSkill.angleTolerance))
+			{
+				AimAtTarget();
+			}
+			break;
         }
+
+		//update aim angle to target
+		if(targetObject != null)
+		{
+			Vector3 targetDir = Vector3.zero;
+			Vector3 forward = Vector3.zero;
+			if(fireObject != null)
+			{
+				forward = fireObject.forward;
+                targetDir = targetObject.position - fireObject.position;
+			}
+			else
+			{
+				forward = _transform.forward;
+				targetDir = targetObject.position - _transform.position;
+            }
+            forward.y = targetDir.y = 0;
+
+			targetAngleDifference = Vector3.Angle(targetDir, forward);
+		}
+	}
+
+	public void AimAtTarget()
+	{
+		if(targetObject != null)
+		{
+			if(fireObject != null)
+			{
+				Vector3 targetPos = targetObject.position;
+				if(targetCharacterController != null)
+					targetPos = targetPos += targetCharacterController.velocity;
+				
+				Vector3 fireObjectPos = fireObject.position;
+				targetPos.y = fireObjectPos.y = 0;
+				Quaternion newRotation = Quaternion.LookRotation(targetPos - fireObjectPos);
+				transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * _characterStatus.rotationSpeed);
+				//_transform.forward += (targetPos - fireObjectPos) * _characterStatus.rotationSpeed * Time.deltaTime;
+			}
+			else
+			{
+				Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _transform.position);
+				_transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * _characterStatus.rotationSpeed);
+				//_transform.forward += (targetObject.position - _transform.position) * _characterStatus.rotationSpeed * Time.deltaTime;
+	        }
+		}
+    }
+    
+    public IEnumerator Rest()
+	{
+		yield return new WaitForSeconds(Random.Range (1,4));
+		state = AIState.SelectSkill;
 	}
 
     public IEnumerator SearchForTarget()
@@ -147,15 +215,18 @@ public class JimFSM : SimpleFSM {
                 }
             }
         }
-        Debug.Log(availableTargets.Count);
         if(availableTargets.Count >0)
         {
             targetObject = availableTargets[Random.Range(0, availableTargets.Count)].transform;
+			targetCharacterController = targetObject.gameObject.GetComponent<CharacterController>();
         }
         else
+		{
             targetObject = null;
+			targetCharacterController = null;
+		}
 
-        yield return new WaitForSeconds(3);
+        
         if(targetObject != null)
         {
             if(TargetIsInSkillRange())
@@ -166,13 +237,15 @@ public class JimFSM : SimpleFSM {
                 state = AIState.MovingTowardsTarget;
             }
         }
+
+		yield return null;
     }
 
     public bool TargetIsInSkillRange()
     {
         if(targetObject != null)
         {
-            Debug.Log(Vector3.Distance(_transform.position, targetObject.position));
+            //Debug.Log(Vector3.Distance(_transform.position, targetObject.position));
             if(Vector3.Distance(_transform.position, targetObject.position) < selectedSkill.skillRange)
                 return true;
             else
