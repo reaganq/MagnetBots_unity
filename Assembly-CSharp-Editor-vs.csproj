@@ -144,6 +144,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\Diffuse\T4M 3 Textures.shader" />
      <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\BumpSpec\T4M 2 TexturesBumpSpec.shader" />
+     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\4TexturesUnlit.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_OneLight_Transparent.shader" />
@@ -155,7 +156,6 @@
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Outline_BumpSpec_Rim_OneLight.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\6TexturesUnlitNoLM.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (AlphaClip) .shader" />
-     <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\RPGKit\Resources\XML\SHOPEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 3 Textures.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\BumpSpec\T4M 4 TexturesBumpSpec.shader" />
@@ -187,7 +187,6 @@
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 5 Textures.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Toon\T4M 2 Textures Toon.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Outline.shader" />
-     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\3TexturesUnlit.shader" />
      <None Include="Assets\RPGKit\Resources\XML\ARMOREN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Specular\T4M 3 Textures Spec.shader" />
@@ -239,6 +238,7 @@
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_Rim_OneLight.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Bump\T4M 2 TexturesBump.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Outline_Spec_Rim_OneLight.shader" />
+     <None Include="Assets\Plugins\release_history.txt" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_BumpSpec_OneLight.shader" />
      <None Include="Assets\HUD Text\Examples\Atlases\Large.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth.shader" />
