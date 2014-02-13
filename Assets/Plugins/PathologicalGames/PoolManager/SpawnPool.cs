@@ -396,10 +396,13 @@ namespace PathologicalGames
         /// the documentation for the PrefabPool class and 
         /// SpawnPool.SpawnPrefabPool()
         ///		
-        /// Broadcasts "OnSpawned" to the instance. Use this instead of Awake()
+        /// Broadcasts "OnSpawned" to the instance. Use this to manage states.
         ///		
-        /// This function has the same initial signature as Unity's Instantiate() 
-        /// that takes position and rotation. The return Type is different though.
+        /// An overload of this function has the same initial signature as Unity's 
+        /// Instantiate() that takes position and rotation. The return Type is different 
+        /// though. Unity uses and returns a GameObject reference. PoolManager 
+        /// uses and returns a Transform reference (or other supported type, such 
+        /// as AudioSource and ParticleSystem)
         /// </description>
         /// <param name="prefab">
         /// The prefab used to spawn an instance. Only used for reference if an 
@@ -408,6 +411,7 @@ namespace PathologicalGames
         /// </param>
         /// <param name="pos">The position to set the instance to</param>
         /// <param name="rot">The rotation to set the instance to</param>
+        /// <param name="parent">An optional parent for the instance</param>
         /// <returns>
         /// The instance's Transform. 
         /// 
@@ -416,7 +420,7 @@ namespace PathologicalGames
         /// reached. You DO NOT need to test for null return values unless you 
         /// used the limit option.
         /// </returns>
-        public Transform Spawn(Transform prefab, Vector3 pos, Quaternion rot)
+        public Transform Spawn(Transform prefab, Vector3 pos, Quaternion rot, Transform parent)
         {
             Transform inst;
 
@@ -435,10 +439,16 @@ namespace PathologicalGames
                     // This only happens if the limit option was used for this
                     //   Prefab Pool.
                     if (inst == null) return null;
-
-                    // If a new instance was created, it won't be grouped
-                    if (!this.dontReparent && inst.parent != this.group) 
+					
+					if (parent != null)  // User explicitly provided a parent
+					{
+						inst.parent = parent;
+					}
+                    else if (!this.dontReparent && inst.parent != this.group)  // Auto organize?
+					{
+						// If a new instance was created, it won't be grouped
                         inst.parent = this.group;
+					}
 
                     // Add to internal list - holds only active instances in the pool
                     // 	 This isn't needed for Pool functionality. It is just done 
@@ -466,7 +476,16 @@ namespace PathologicalGames
 
             // Spawn the new instance (Note: prefab already set in PrefabPool)
             inst = newPrefabPool.SpawnInstance(pos, rot);
-            inst.parent = this.group;  // Add to this parent group
+			
+			if (parent != null)  // User explicitly provided a parent
+			{
+				inst.parent = parent;
+			}
+            else  // Auto organize
+			{
+            	inst.parent = this.group;  
+			}
+
 
             // New instances are active and must be added to the internal list 
             this._spawned.Add(inst);
@@ -486,19 +505,13 @@ namespace PathologicalGames
 
         /// <summary>
         /// See primary Spawn method for documentation.
-        /// 
-        /// Convienince overload to parent the new instance under the given 
-        /// Transform parent
         /// </summary>
-        public Transform Spawn(Transform prefab, Vector3 pos, Quaternion rot, 
-                               Transform parent)
+        public Transform Spawn(Transform prefab, Vector3 pos, Quaternion rot)
         {
-            Transform inst = this.Spawn(prefab, pos, rot);
+            Transform inst = this.Spawn(prefab, pos, rot, null);
 
             // Can happen if limit was used
             if (inst == null) return null;
-				
-            if (parent != null) inst.parent = parent;
 
             return inst;
         }
@@ -606,15 +619,16 @@ namespace PathologicalGames
             return this.Spawn
             (
                 prefab, 
-                Vector3.zero, Quaternion.identity,
+                Vector3.zero, 
+				Quaternion.identity,
                 parent
             );
         }
 		
 		
         public AudioSource Spawn(AudioSource prefab,
-                            Vector3 pos, Quaternion rot,
-                            Transform parent)
+                            	 Vector3 pos, Quaternion rot,
+                            	 Transform parent)
         {
             // Instance using the standard method before doing particle stuff
             Transform inst = Spawn(prefab.transform, pos, rot, parent);

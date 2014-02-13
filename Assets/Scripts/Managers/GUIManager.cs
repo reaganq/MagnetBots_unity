@@ -16,7 +16,7 @@ public class GUIManager : MonoBehaviour {
                 instance = GameObject.FindObjectOfType(typeof(GUIManager)) as GUIManager;
                 if (instance == null)
                 {
-                    GUIManager prefab = Resources.Load("Managers/GUIManager", typeof(GUIManager)) as GUIManager;
+                    GUIManager prefab = Resources.Load("Managers/_GUIManager", typeof(GUIManager)) as GUIManager;
                     instance = Instantiate(prefab) as GUIManager;
                 }
             }

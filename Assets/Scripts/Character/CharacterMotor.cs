@@ -131,7 +131,6 @@ public class CharacterMotor : MonoBehaviour {
     public void Move(Vector3 direction)
     {
         moveDirection = direction;
-		Debug.Log("wtf");
     }
     
     Vector3 direction;

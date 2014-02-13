@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
                 instance = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
                 if (instance == null)
                 {
-                    GameManager prefab = Resources.Load("Managers/GameManager", typeof(GameManager)) as GameManager;
+                    GameManager prefab = Resources.Load("Managers/_GameManager", typeof(GameManager)) as GameManager;
                     instance = Instantiate(prefab) as GameManager;
                 }
             }
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
 
         #if UNITY_IPHONE 
         inputType = InputType.TouchInput;
-        characterJoyStick = Instantiate(Resources.Load("Managers/CharacterJoystick")) as GameObject;
+        characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
         joystick.showDebugRadius = false;
 

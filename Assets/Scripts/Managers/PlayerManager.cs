@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
                 instance = GameObject.FindObjectOfType(typeof(PlayerManager)) as PlayerManager;
                 if (instance == null)
                 {
-                    PlayerManager prefab = Resources.Load("Managers/PlayerManager", typeof(PlayerManager)) as PlayerManager;
+                    PlayerManager prefab = Resources.Load("Managers/_PlayerManager", typeof(PlayerManager)) as PlayerManager;
                     instance = Instantiate(prefab) as PlayerManager;
                 }
             }

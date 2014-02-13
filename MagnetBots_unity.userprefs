@@ -1,15 +1,41 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Melee/TriggerCollider.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/GameManager.cs">
     <Files>
-      <File FileName="Assets/NGUI/Scripts/Interaction/UIDragObject.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Skills/RangedAISkill.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/InputController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Armor/Range/StandardGun.cs" Line="1" Column="1" />
-      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_Transparent.shader" Line="1" Column="1" />
-      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight.shader" Line="1" Column="1" />
-      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_lightmap.shader" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/TriggerCollider.cs" Line="17" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Base/ArmorSkill.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/HitBox.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="1" Column="1" />
+      <File FileName="Assets/Photon Unity Networking/Demos/DemoFriendsAndCustomAuth/GUIFriendFinding.cs" Line="1" Column="1" />
+      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonNetwork.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="89" Column="2" />
+      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/IntroGUIController.cs" Line="58" Column="6" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Armor" expanded="True">
+                <Node name="Range" expanded="True" />
+              </Node>
+              <Node name="Character" expanded="True" />
+              <Node name="GUI" expanded="True" />
+              <Node name="Managers" expanded="True">
+                <Node name="GameManager.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />

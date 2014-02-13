@@ -112,10 +112,7 @@ public class InputController : MonoBehaviour {
                 //Debug.Log(forward);
                  
                 if(Input.GetKey(KeyCode.W))
-			{
                 direction += forward;
-				Debug.Log("w");
-			}
                 if(Input.GetKey(KeyCode.S))
                 direction -= forward;
                 if(Input.GetKey(KeyCode.A))

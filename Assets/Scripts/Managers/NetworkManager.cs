@@ -16,7 +16,7 @@ public class NetworkManager : MonoBehaviour {
 				instance = GameObject.FindObjectOfType(typeof(NetworkManager)) as NetworkManager;
 				if (instance == null)
 				{
-					NetworkManager prefab = Resources.Load("Managers/NetworkManager", typeof(NetworkManager)) as NetworkManager;
+					NetworkManager prefab = Resources.Load("Managers/_NetworkManager", typeof(NetworkManager)) as NetworkManager;
 					instance = Instantiate(prefab) as NetworkManager;
 				}
 			}
