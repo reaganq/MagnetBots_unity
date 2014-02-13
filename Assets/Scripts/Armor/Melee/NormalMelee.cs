@@ -32,8 +32,7 @@ public class NormalMelee : ArmorSkill {
             TriggerCollider tc = weaponCollider.GetComponent<TriggerCollider>();
             if(tc != null)
             {
-                tc.status = myStatus;
-				tc.masterArmor = this;
+                tc.ownerCollider = characterCollider;
             }
             weaponCollider.SetActive(false);
         }
@@ -116,7 +115,7 @@ public class NormalMelee : ArmorSkill {
 
     }
 
-    public override void HitEnemy(HitBox target)
+    public override void HitEnemy(CharacterStatus target)
     {
         //package up all attack data, damage + status effects etc
         //target.receiveHit(data);
@@ -124,7 +123,7 @@ public class NormalMelee : ArmorSkill {
         Debug.Log("hitenemy");
     }
 
-    public override void HitAlly(HitBox target)
+    public override void HitAlly(CharacterStatus target)
     {
         //package up all attack data, damage + status effects etc
         //target.receiveHit(data)

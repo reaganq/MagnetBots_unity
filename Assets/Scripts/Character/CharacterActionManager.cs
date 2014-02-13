@@ -7,7 +7,6 @@ public class CharacterActionManager : MonoBehaviour {
     public ArmorSkill[] armorControllers = new ArmorSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
     public Animation animationTarget;
-	public CharacterStatus myStatus;
     public CharacterMotor motor;
 
     private Job leftJob;
@@ -105,7 +104,7 @@ public class CharacterActionManager : MonoBehaviour {
     {
         if(armorControllers[2] == null || actionState == ActionState.rightAction)
         {
-            //Debug.LogWarning("returning left");
+            Debug.LogWarning("returning left");
             return;
         }
         if(trigger == InputTrigger.OnPressDown && armorControllers[2].CanPressDown())
@@ -116,7 +115,7 @@ public class CharacterActionManager : MonoBehaviour {
                 leftEndJob = null;
             }
 
-            //Debug.LogWarning("left action state");
+            Debug.LogWarning("left action state");
             if(leftJob != null) leftJob.kill();
             leftJob = Job.make( armorControllers[2].PressDown() );
             actionState = ActionState.leftAction;
@@ -128,7 +127,7 @@ public class CharacterActionManager : MonoBehaviour {
             leftEndJob.jobComplete += (waskilled) => 
             {
                 actionState = ActionState.idle;
-                //Debug.Log("job ended, was killed = " + waskilled);
+                Debug.Log("job ended, was killed = " + waskilled);
             };
         }
     }
@@ -138,7 +137,7 @@ public class CharacterActionManager : MonoBehaviour {
         //Debug.Log("here");
         if(armorControllers[3] == null || actionState == ActionState.leftAction)
         {
-            //Debug.LogWarning("returning");
+            Debug.LogWarning("returning");
 
             return;
         }
@@ -147,11 +146,11 @@ public class CharacterActionManager : MonoBehaviour {
             if(rightEndJob != null)
             {
                 rightEndJob.kill();
-                //Debug.LogWarning("right job killed");
+                Debug.LogWarning("right job killed");
                 rightEndJob = null;
             }
 
-            //Debug.Log("right action state");
+            Debug.Log("right action state");
             if(rightJob != null) rightJob.kill();
             rightJob = Job.make( armorControllers[3].PressDown() );
             actionState = ActionState.rightAction;
@@ -159,13 +158,13 @@ public class CharacterActionManager : MonoBehaviour {
 
         if(trigger == InputTrigger.OnPressUp && armorControllers[3].CanPressUp())
         {
-                //Debug.LogError("right action end state");
+                Debug.LogError("right action end state");
             rightEndJob = Job.make(armorControllers[3].PressUp());
             rightEndJob.jobComplete += (waskilled) => 
             {
                 if(!waskilled)
                     actionState = ActionState.idle;
-                //Debug.LogWarning("job ended, was killed = " + waskilled);
+                Debug.LogWarning("job ended, was killed = " + waskilled);
             };
         }
     }

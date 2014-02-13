@@ -16,7 +16,7 @@ public class PlayerCamera: MonoBehaviour {
                 instance = GameObject.FindObjectOfType(typeof(PlayerCamera)) as PlayerCamera;
                 if (instance == null)
                 {
-                    PlayerCamera prefab = Resources.Load("Managers/_GameCamera", typeof(PlayerCamera)) as PlayerCamera;
+                    PlayerCamera prefab = Resources.Load("Managers/GameCamera", typeof(PlayerCamera)) as PlayerCamera;
                     instance = Instantiate(prefab) as PlayerCamera;
                 }
             }

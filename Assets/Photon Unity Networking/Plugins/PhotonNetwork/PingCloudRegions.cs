@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Net;
+using System.Net.Sockets;
 using UnityEngine;
 
 /// <summary>
@@ -165,7 +166,7 @@ public class PingCloudRegions : MonoBehaviour
             for (int index = 0; index < address.Length; index++)
             {
                 IPAddress ipAddress = address[index];
-                if (ipAddress != null)//) && ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                if (ipAddress != null && ipAddress.AddressFamily == AddressFamily.InterNetwork)
                 {
                     return ipAddress.ToString();
                 }

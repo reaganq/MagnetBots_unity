@@ -11,7 +11,6 @@ public class SimpleFSM : MonoBehaviour {
     public Collider _collider;
     public CharacterController _controller;
     public CharacterStatus _characterStatus;
-	public float targetAngleDifference;
     public AISkill[] skills;
     public AISkill selectedSkill;
     public int selectedSkillIndex;
@@ -22,8 +21,6 @@ public class SimpleFSM : MonoBehaviour {
     public Job usingSkillJob;
 
     public Transform targetObject;
-	public CharacterController targetCharacterController;
-	public Transform fireObject;
 
     public float movementSpeed;
     public float rotationSpeed;
@@ -35,8 +32,6 @@ public class SimpleFSM : MonoBehaviour {
     public AnimationClip runningAnim;
     public AnimationClip deathAnim;
     public AnimationClip gotHitAnim;
-
-
 
     public enum AIState
     {

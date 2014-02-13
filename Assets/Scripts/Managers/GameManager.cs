@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
                 instance = GameObject.FindObjectOfType(typeof(GameManager)) as GameManager;
                 if (instance == null)
                 {
-                    GameManager prefab = Resources.Load("Managers/_GameManager", typeof(GameManager)) as GameManager;
+                    GameManager prefab = Resources.Load("Managers/GameManager", typeof(GameManager)) as GameManager;
                     instance = Instantiate(prefab) as GameManager;
                 }
             }
@@ -49,19 +49,19 @@ public class GameManager : MonoBehaviour {
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
 
-        #if UNITY_IPHONE 
+        #if UNITY_IPHONE || UNITY_EDITOR 
         inputType = InputType.TouchInput;
-        characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
+        characterJoyStick = Instantiate(Resources.Load("Managers/CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
         joystick.showDebugRadius = false;
 
         joystick.enable = false;
 
         #endif
-		#if UNITY_WEBPLAYER || UNITY_EDITOR || UNITY_STANDALONE
-        	inputType = InputType.WASDInput;
+        #if UNITY_WEBPLAYER 
+            inputType = InputType.WASDInput;
             Debug.LogWarning("wasd");
-            //joystick.gameObject.SetActive(false);
+            joystick.gameObject.SetActive(false);
         #endif
 
         #if UNITY_ANDROID && !UNITY_EDITOR
@@ -92,10 +92,9 @@ public class GameManager : MonoBehaviour {
             //join room
 
         }
+
         else
         {
-
-
             if(level == 1)
             {
                 Debug.Log("loaded scene 1");
@@ -114,6 +113,7 @@ public class GameManager : MonoBehaviour {
             if(inputType == InputType.TouchInput)
             {
                 joystick.enable = true;
+                Debug.Log("boo");
             }
         }
 
@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour {
     {
         if(inputType == InputType.TouchInput)
         {
+            Debug.Log("here");
             joystick.enable = false;
         }
         PlayerManager.Instance.DisableAvatarInput();

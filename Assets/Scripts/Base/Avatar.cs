@@ -227,6 +227,8 @@ public class Avatar : MonoBehaviour {
         if(armLcontroller != null)
         {
             armLcontroller.Initialise(animationTarget, _myTransform, (Collider)characterMotor.controller, myStatus, actionManager );
+
+            Debug.Log("transfer animation");
         }
 
         PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
