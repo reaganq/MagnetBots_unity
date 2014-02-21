@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 441c1dbaa8091cc4ea0df0cf297a41fd
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     100002: pCube1
@@ -39,6 +39,19 @@ ModelImporter:
     100066: transform7
     100068: transform8
     100070: transform9
+    100072: polySurface60
+    100074: gyro
+    100076: joint1
+    100078: joint10
+    100080: joint11
+    100082: joint2
+    100084: joint3
+    100086: joint4
+    100088: joint5
+    100090: joint6
+    100092: joint7
+    100094: joint8
+    100096: joint9
     400000: //RootNode
     400002: pCube1
     400004: pCube2
@@ -75,13 +88,32 @@ ModelImporter:
     400066: transform7
     400068: transform8
     400070: transform9
+    400072: polySurface60
+    400074: gyro
+    400076: joint1
+    400078: joint10
+    400080: joint11
+    400082: joint2
+    400084: joint3
+    400086: joint4
+    400088: joint5
+    400090: joint6
+    400092: joint7
+    400094: joint8
+    400096: joint9
     2300000: polySurface41
     2300002: //RootNode
+    2300004: polySurface60
+    2300006: gyro
     3300000: polySurface41
     3300002: //RootNode
+    3300004: polySurface60
+    3300006: gyro
     4300000: polySurface41
     4300002: Anvil_Collider
     4300004: polySurface9
+    4300006: polySurface60
+    4300008: gyro
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -134,4 +166,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

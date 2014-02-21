@@ -1,0 +1,164 @@
+{"frames": {
+
+"Button_Buy.png":
+{
+	"frame": {"x":483,"y":678,"w":335,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
+	"sourceSize": {"w":335,"h":101}
+},
+"Button_Destroy.png":
+{
+	"frame": {"x":483,"y":575,"w":335,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
+	"sourceSize": {"w":335,"h":101}
+},
+"Button_Equip.png":
+{
+	"frame": {"x":931,"y":254,"w":332,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
+	"sourceSize": {"w":332,"h":96}
+},
+"Button_Sell.png":
+{
+	"frame": {"x":594,"y":254,"w":335,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
+	"sourceSize": {"w":335,"h":101}
+},
+"Button_Use.png":
+{
+	"frame": {"x":661,"y":472,"w":332,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
+	"sourceSize": {"w":332,"h":96}
+},
+"Button_template.png":
+{
+	"frame": {"x":234,"y":839,"w":335,"h":101},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
+	"sourceSize": {"w":335,"h":101}
+},
+"ClickToStart.png":
+{
+	"frame": {"x":2,"y":315,"w":299,"h":43},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":299,"h":43},
+	"sourceSize": {"w":299,"h":43}
+},
+"InventoryTab.png":
+{
+	"frame": {"x":2,"y":612,"w":261,"h":225},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":261,"h":225},
+	"sourceSize": {"w":261,"h":225}
+},
+"ItemSelectBorder.png":
+{
+	"frame": {"x":265,"y":591,"w":216,"h":216},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":216,"h":216},
+	"sourceSize": {"w":216,"h":216}
+},
+"ItemTileBG.png":
+{
+	"frame": {"x":241,"y":373,"w":216,"h":216},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":216,"h":216},
+	"sourceSize": {"w":216,"h":216}
+},
+"MagnetBotsLogo.png":
+{
+	"frame": {"x":2,"y":2,"w":590,"h":311},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":590,"h":311},
+	"sourceSize": {"w":590,"h":311}
+},
+"MagnetIcon.png":
+{
+	"frame": {"x":459,"y":373,"w":200,"h":200},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":200},
+	"sourceSize": {"w":200,"h":200}
+},
+"TextboxBG.png":
+{
+	"frame": {"x":2,"y":373,"w":237,"h":237},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":237,"h":237},
+	"sourceSize": {"w":237,"h":237}
+},
+"arrow.png":
+{
+	"frame": {"x":157,"y":839,"w":75,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":117},
+	"sourceSize": {"w":75,"h":117}
+},
+"attackbutton.png":
+{
+	"frame": {"x":2,"y":839,"w":153,"h":153},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":153,"h":153},
+	"sourceSize": {"w":153,"h":153}
+},
+"backButton.png":
+{
+	"frame": {"x":1851,"y":2,"w":188,"h":188},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":188},
+	"sourceSize": {"w":188,"h":188}
+},
+"divider.png":
+{
+	"frame": {"x":594,"y":2,"w":1255,"h":250},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1255,"h":250},
+	"sourceSize": {"w":1255,"h":250}
+},
+"openinventorybutton.png":
+{
+	"frame": {"x":1851,"y":192,"w":179,"h":179},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":179,"h":179},
+	"sourceSize": {"w":179,"h":179}
+},
+"tutorial.png":
+{
+	"frame": {"x":661,"y":373,"w":397,"h":97},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":397,"h":97},
+	"sourceSize": {"w":397,"h":97}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "InventoryUHD.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:f67edefefc339cb9c7dfb9a346b7e7d9$"
+}
+}

@@ -27,6 +27,8 @@ public class NetworkManager : MonoBehaviour {
 	public bool isConnectedToServer = false;
 	public bool offlineMode;
 
+
+
 	void Awake()
 	{
 		if(Instance != null && Instance != this)
@@ -40,6 +42,8 @@ public class NetworkManager : MonoBehaviour {
 			DontDestroyOnLoad(this);
 		}
 
+		PhotonNetwork.playerName = "Tester";
+
 		if(offlineMode)
 		{
 			//Connect();
@@ -48,6 +52,8 @@ public class NetworkManager : MonoBehaviour {
 			PhotonNetwork.CreateRoom("null");
 			Debug.Log("offlinemode");
 		}
+
+	
 	}
 
 	public void Connect () 
@@ -59,10 +65,10 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnGUI()
 	{
-		//if(!offlineMode)
-		//{
+		if(!offlineMode)
+		{
 		GUILayout.Label( PhotonNetwork.connectionStateDetailed.ToString() );
-		//}
+		}
 	}
 
 	void OnJoinedLobby()
@@ -80,14 +86,22 @@ public class NetworkManager : MonoBehaviour {
 	void OnJoinedRoom()
 	{
 
-		Debug.Log("OnJoinedRoom");
+
 		//PhotonNetwork.load
 		isConnectedToServer = true;
-		GameManager.Instance.GameHasStarted = true;
+		Debug.Log("OnJoinedRoom");
 		GameManager.Instance.GameIsPaused = false;
 		GUIManager.Instance.StartGame();
 		if(!offlineMode)
+		{
+			Debug.Log("load level 1");
 			PhotonNetwork.LoadLevel(1);
+
+		}
+		else
+		{
+			GameManager.Instance.OnLevelWasLoaded(Application.loadedLevel);
+		}
 		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 0);
 	}
 	

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 3013a34f30440400f8719fa99633644e
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     100002: group1
@@ -101,6 +101,7 @@ ModelImporter:
     100190: polySurface106
     100192: polySurface107
     100194: lab_base
+    100196: polySurface114
     400000: //RootNode
     400002: group1
     400004: labmesh
@@ -199,6 +200,7 @@ ModelImporter:
     400190: polySurface106
     400192: polySurface107
     400194: lab_base
+    400196: polySurface114
     2300000: //RootNode
     2300002: polySurface21
     2300004: polySurface22
@@ -257,11 +259,13 @@ ModelImporter:
     4300034: polySurface97
     4300036: polySurface107
     4300038: lab_base
+    4300040: polySurface114
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
     13700000: polySurface95
     13700002: polySurface97
+    13700004: polySurface114
   materials:
     importMaterials: 0
     materialName: 0
@@ -375,4 +379,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
+  additionalBone: 0
   userData: 

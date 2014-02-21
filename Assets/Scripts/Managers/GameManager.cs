@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour {
     public bool GameHasStarted = false;
     public bool teststate = false;
 
+
     void Awake()
     {
         if(Instance != null && Instance != this)
@@ -72,9 +73,9 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        GameHasStarted = true;
         GameIsPaused = false;
-        OnLevelWasLoaded(Application.loadedLevel);
+		if(Application.loadedLevel == 0)
+        	OnLevelWasLoaded(Application.loadedLevel);
     }
 
     public void OnLevelWasLoaded(int level)
@@ -90,21 +91,21 @@ public class GameManager : MonoBehaviour {
             //check for last town
             //load town level async
             //join room
-
         }
         else
         {
-
+			Debug.Log("onlevelwasloaded");
 			StartCoroutine("LoadStandard");
-
-	        
         }
     }
 
 	public IEnumerator LoadStandard()
 	{
 		while(!NetworkManager.Instance.isConnectedToServer)
+		{
+			Debug.Log("not connected");
 			yield return null;
+		}
 		Debug.Log("loaded scene " + Application.loadedLevel);
 		//yield return new WaitForSeconds(1);
 		PlayerManager.Instance.RefreshAvatar();
@@ -119,18 +120,13 @@ public class GameManager : MonoBehaviour {
 		yield return null;
 	}
 
-	public void reloadAvatar()
-	{
-		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 1f);
-	}
-
-    public void LoadLevel(string name)
+    public void LoadWorld(string name)
     {
         if(inputType == InputType.TouchInput)
         {
             joystick.enable = false;
         }
-        PlayerManager.Instance.DisableAvatarInput();
+        //PlayerManager.Instance.DisableAvatarInput();
         Application.LoadLevel(name);
     }
 }

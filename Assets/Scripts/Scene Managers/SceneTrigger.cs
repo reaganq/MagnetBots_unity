@@ -10,7 +10,7 @@ public class SceneTrigger : MonoBehaviour {
         if(other.gameObject == PlayerManager.Instance.avatarObject)
         {
             Debug.Log("hit scene trigger");
-            GameManager.Instance.LoadLevel(targetSceneName);
+            //GameManager.Instance.LoadWorld(targetSceneName);
         }
     }
 }

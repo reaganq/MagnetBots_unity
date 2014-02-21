@@ -47,6 +47,8 @@ public class PlayerManager : MonoBehaviour
     public string ActiveNPCName;
     public NPC ActiveNPC;
     public Shop ActiveShop;
+	public WorldManager ActiveWorld;
+	public Zone ActiveZone;
 
     public Transform SpawnPoint;
 
@@ -55,8 +57,8 @@ public class PlayerManager : MonoBehaviour
     public Avatar avatar;
     public InputController avatarInput;
     public CharacterStatus avatarStatus;
-    public GameObject mainCamera;
-    public PlayerCamera playerCamera;
+	public NetworkCharacterMovement avatarNetworkMovement;
+
  
  //public static GeneralData Data;
  
@@ -89,48 +91,53 @@ public class PlayerManager : MonoBehaviour
 
     public void StartNewGame()
     {
+		GameManager.Instance.GameHasStarted = true;
         Hero.StartNewGame();
-        LoadAvatar();
+		LoadAvatar();
     }
-
-
+	
     public void LoadAvatar()
     {
-     //cursorImage = (Texture2D)Resources.Load("Icon/Cross");
-     //Data = new GeneralData();
-        
-        //spawnPoints = new List<SpawnPoint>();
-        //sounds = new GeneralPlayerSounds();
-     //LoadScene();
-		Debug.Log(PhotonNetwork.isMessageQueueRunning);
-        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
-        avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position, Quaternion.identity, 0) as GameObject;
+		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
+		ActiveZone = ActiveWorld.DefaultZone;
+		SpawnPoint = ActiveZone.spawnPoint;
+
+		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
 		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
-        avatarObject.AddComponent<DontDestroy>();
-        avatarStatus = avatarObject.GetComponent<CharacterStatus>();
-        avatarInput = avatarObject.GetComponent<InputController>();
+		//avatarObject.AddComponent<DontDestroy>();
+		avatarStatus = avatarObject.GetComponent<CharacterStatus>();
+		avatarInput = avatarObject.GetComponent<InputController>();
 		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
 		cm.enabled = true;
 		avatarInput.enabled = true;
+		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();
 		UICamera.fallThrough = avatarObject;
-        avatar = avatarObject.GetComponent<Avatar>();
-        RefreshAvatar();
+		avatar = avatarObject.GetComponent<Avatar>();
+		PlayerCamera.Instance.targetTransform = avatarObject.transform;
+		LoadCharacterParts();
     }
 
     public void RefreshAvatar()
     {
+		Debug.Log("refreshavatar");
         if(avatarObject == null)
         {
             StartNewGame();
 			return;
         }
 
-        //mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        //playerCamera = mainCamera.GetComponent<PlayerCamera>();
-        //if(playerCamera != null)
-            //playerCamera.targetTransform = avatarObject.transform;
+		if(avatarObject == null)
+		{
+			LoadAvatar();
+			return;
+		}
+
+		Debug.Log(PhotonNetwork.isMessageQueueRunning);
+
         PlayerCamera.Instance.targetTransform = avatarObject.transform;
-        SpawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
+		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
+		ActiveZone = ActiveWorld.DefaultZone;
+		SpawnPoint = ActiveZone.spawnPoint;
         avatarObject.transform.position = SpawnPoint.position;
         LoadCharacterParts();
         EnableAvatarInput();

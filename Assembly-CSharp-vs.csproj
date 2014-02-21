@@ -288,7 +288,6 @@
      <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
      <Compile Include="Assets\Scripts\Character\InputController.cs" />
-     <Compile Include="Assets\Scripts\Character\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Enemies\JimFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\SimpleFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AISkill.cs" />
@@ -316,11 +315,15 @@
      <Compile Include="Assets\Scripts\Managers\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TownManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\WorldManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\Zone.cs" />
      <Compile Include="Assets\Scripts\Misc\DontDestroy.cs" />
      <Compile Include="Assets\Scripts\NPC\NPC.cs" />
      <Compile Include="Assets\Scripts\NPC\RPGNPC.cs" />
      <Compile Include="Assets\Scripts\NPC\Shop.cs" />
      <Compile Include="Assets\Scripts\NPC\ShopItem.cs" />
+     <Compile Include="Assets\Scripts\Networking\NetworkCharacterMovement.cs" />
+     <Compile Include="Assets\Scripts\Networking\NetworkDebugging.cs" />
      <Compile Include="Assets\Scripts\Player\Equipment.cs" />
      <Compile Include="Assets\Scripts\Player\Inventory.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInformation.cs" />
@@ -355,6 +358,7 @@
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_BumpSpec_OneLight.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_OneLight_lightmap_Transparent.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Diffuse\T4M 4 Textures.shader" />
+     <None Include="Assets\UI\InventoryUHD.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel1\T4M 2 Textures ManualAdd BeastLM_1DC.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Diffuse\T4M 3 Textures.shader" />
      <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
