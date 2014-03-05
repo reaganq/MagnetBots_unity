@@ -32,8 +32,9 @@ public class RangedAISkill : AISkill {
 
 	// Use this for initialization
 	public override void Start () {
-		currentAmmoCount = maxAmmoCount;
 		base.Start();
+		currentAmmoCount = maxAmmoCount;
+		_animator[recoilAnimation.clip.name].layer = 2;
 		Reset();
 	}
 	
@@ -68,19 +69,22 @@ public class RangedAISkill : AISkill {
 
 	public override IEnumerator UseSkill ()
 	{
-		Debug.Log("huh?");
+
+		//Debug.Log("huh?");
 		targetShotsPerSession = Random.Range((int)minShotsPerSession, (int)maxShotsPerSession);
 		//if(requiresTargetLock)
 			//fsm.aimAtTarget = true;
 		fsm.fireObject = bulletLocation;
-		fsm.CrossFadeAnimation(castAnimation.clip);
+		//fsm.PlayAnimation(castAnimation.clip);
+		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, castAnimation.clip.name);
 		yield return new WaitForSeconds(castAnimation.clip.length);
 		while(fsm.targetAngleDifference > angleTolerance)
 		{
 			yield return new WaitForEndOfFrame();
 		}
-		Debug.Log("cast to fire");
-		fsm.PlayAnimation(durationAnimation.clip);
+		//Debug.Log("cast to fire");
+		//fsm.PlayAnimation(durationAnimation.clip);
+		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
 		isSkillActive = true;
 		while(isSkillActive)
 		{
@@ -95,7 +99,8 @@ public class RangedAISkill : AISkill {
 		isSkillActive = false;
 		if(requiresTargetLock)
 			fsm.aimAtTarget = false;
-		fsm.CrossFadeAnimation(followThroughAnimation.clip);
+		//fsm.CrossFadeAnimation(followThroughAnimation.clip);
+		fsm.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
 		yield return new WaitForSeconds(followThroughAnimation.clip.length);
 		Reset();
 
@@ -109,7 +114,7 @@ public class RangedAISkill : AISkill {
 	public void FireOneShot()
 	{
 		//fire bullet
-		Debug.Log("fire one shot");
+		//Debug.Log("fire one shot");
 		totalShotsFired ++;
 		currentAmmoCount --;
 		currentShotsFired ++;
@@ -126,16 +131,23 @@ public class RangedAISkill : AISkill {
 		if(src != null)
 		{
 			src.masterAISkill = this;
-			src.status = fsm._characterStatus;
+			src.status = fsm.myStatus;
 			src.IgnoreCollisions();
 		}
 		//
 			//src.masterScript = this;
 		
 		
-		Debug.Log("ammo: " + currentAmmoCount);
+		//Debug.Log("ammo: " + currentAmmoCount);
 		//play recoil animation
-		fsm.PlayAnimation(recoilAnimation.clip);
+		//fsm.PlayAnimation(recoilAnimation.clip);
+		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
+
+		Invoke("CheckAmmo", recoilAnimation.clip.length);
+	}
+
+	public void CheckAmmo()
+	{
 		if(currentAmmoCount <= 0)
 		{
 			cooldownTimer = cooldown + recoilAnimation.clip.length;
@@ -146,7 +158,6 @@ public class RangedAISkill : AISkill {
 			if(currentShotsFired >= targetShotsPerSession)
 				StartCoroutine(CancelSkill());
 		}
-		
 	}
 	
 	/*public void ActivateSkill(bool state)
@@ -156,21 +167,16 @@ public class RangedAISkill : AISkill {
 	
 	public IEnumerator Reload(float sec)
 	{
-		Debug.Log("reloading");
+		//Debug.Log("reloading");
 		isReloading = true;
 		yield return new WaitForSeconds(sec);
 		//characterAnimation.Play(reloadAnimation.clip.name);
-		fsm.PlayAnimation(reloadAnimation.clip);
+		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
 		yield return new WaitForSeconds(reloadAnimation.clip.length);
-		fsm.PlayAnimation(durationAnimation.clip);
-		Debug.Log("back to fire mode");
+		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
+		//Debug.Log("back to fire mode");
 		currentAmmoCount = maxAmmoCount;
 		
 	}
-
-	public override void HitEnemy(HitBox hb)
-	{
-		Debug.Log("deal damage");
-		hb.DealDamage(10);
-	}
+	
 }

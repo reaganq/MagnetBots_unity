@@ -85,8 +85,6 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnJoinedRoom()
 	{
-
-
 		//PhotonNetwork.load
 		isConnectedToServer = true;
 		Debug.Log("OnJoinedRoom");
@@ -104,5 +102,12 @@ public class NetworkManager : MonoBehaviour {
 		}
 		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 0);
 	}
+
+	public void OnConnectionFail(DisconnectCause cause)
+	{
+		Debug.LogError(cause);
+	}
+
+
 	
 }

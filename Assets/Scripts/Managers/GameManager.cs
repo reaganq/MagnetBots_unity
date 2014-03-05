@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
 
-        #if UNITY_IPHONE 
+		#if UNITY_IPHONE || UNITY_EDITOR 
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
@@ -59,9 +59,9 @@ public class GameManager : MonoBehaviour {
         joystick.enable = false;
 
         #endif
-		#if UNITY_WEBPLAYER || UNITY_EDITOR || UNITY_STANDALONE
+		#if UNITY_WEBPLAYER || UNITY_STANDALONE
         	inputType = InputType.WASDInput;
-            Debug.LogWarning("wasd");
+            //Debug.LogWarning("wasd");
             //joystick.gameObject.SetActive(false);
         #endif
 
@@ -85,7 +85,6 @@ public class GameManager : MonoBehaviour {
             GUIManager.Instance.DisplayIntroGUI();
             GameHasStarted = false;
             GameIsPaused = true;
-            Debug.Log("0");
 
             //login
             //check for last town
@@ -94,7 +93,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-			Debug.Log("onlevelwasloaded");
+			//Debug.Log("onlevelwasloaded");
 			StartCoroutine("LoadStandard");
         }
     }
@@ -103,10 +102,10 @@ public class GameManager : MonoBehaviour {
 	{
 		while(!NetworkManager.Instance.isConnectedToServer)
 		{
-			Debug.Log("not connected");
+			//Debug.Log("not connected");
 			yield return null;
 		}
-		Debug.Log("loaded scene " + Application.loadedLevel);
+		PlayerManager.Instance.ChangeWorld();
 		//yield return new WaitForSeconds(1);
 		PlayerManager.Instance.RefreshAvatar();
 		GUIManager.Instance.TurnOffAllOtherUI();

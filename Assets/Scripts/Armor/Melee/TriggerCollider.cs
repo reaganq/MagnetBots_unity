@@ -40,7 +40,7 @@ public class TriggerCollider : MonoBehaviour {
 					{
 						//determine if friend or foe
 						masterAISkill.HitEnemies.Add(cs);
-						masterAISkill.HitEnemy(hb);
+						masterAISkill.HitTarget(hb, false);
 						Debug.Log("I JUST HIT SOMETHING");
 					}
 				}
@@ -50,7 +50,7 @@ public class TriggerCollider : MonoBehaviour {
                     {
                         //determine if friend or foe
                         masterArmor.HitEnemies.Add(cs);
-                        masterArmor.HitEnemy(hb);
+                        masterArmor.HitTarget(hb, false);
                         Debug.Log("I JUST HIT SOMETHING");
                     }
                 }

@@ -19,7 +19,5 @@ public class SkillAnimation: ArmorAnimation
     public ArmorAnimation followThroughAnimation;
     public float castTime;
     public float followThroughTime;
-    public ArmorAttributeMultiplier[] armorAttributeMultipliers;
-    public SkillEffectMultiplier[] skillEffectMultipliers;
 }
 

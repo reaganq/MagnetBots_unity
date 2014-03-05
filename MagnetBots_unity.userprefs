@@ -1,42 +1,61 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Downloads/GeneratePole.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PlayerManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Demos/DemoFriendsAndCustomAuth/GUIFriendFinding.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Demos/DemoFriendsAndCustomAuth/GUIFriendsInRoom.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Networking/NetworkDebugging.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="110" Column="67" />
-      <File FileName="Assets/Scripts/Networking/NetworkCharacterMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Scene Managers/SceneTrigger.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/LongDurationMelee.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/IntroGUIController.cs" Line="1" Column="1" />
-      <File FileName="../../../Downloads/GeneratePole.cs" Line="28" Column="1" />
+      <File FileName="Assets/Scripts/Enemies/Skills/RangedAISkill.cs" Line="111" Column="26" />
+      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="118" Column="6" />
+      <File FileName="Assets/Scripts/Armor/Base/ArmorSkill.cs" Line="100" Column="10" />
+      <File FileName="Assets/Scripts/Armor/Range/StandardGun.cs" Line="263" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/HitBox.cs" Line="11" Column="5" />
+      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="119" Column="6" />
+      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="62" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/TriggerCollider.cs" Line="53" Column="46" />
+      <File FileName="Assets/Scripts/Armor/Range/BulletProjectile.cs" Line="58" Column="5" />
+      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="11" Column="31" />
+      <File FileName="Assets/Scripts/Enemies/JimFSM.cs" Line="145" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="184" Column="3" />
+      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="187" Column="3" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="71" Column="5" />
+      <File FileName="Assets/Scripts/Arenas/ArenaExit.cs" Line="10" Column="37" />
+      <File FileName="Assets/Scripts/Enemies/NetworkAIMovement.cs" Line="26" Column="40" />
+      <File FileName="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs" Line="4" Column="13" />
+      <File FileName="Assets/Scripts/GUI/NPCGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="90" Column="48" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Photon Unity Networking" expanded="True">
-              <Node name="Demos" expanded="True">
-                <Node name="DemoFriendsAndCustomAuth" expanded="True" />
+              <Node name="Plugins" expanded="True">
+                <Node name="PhotonNetwork" expanded="True" />
               </Node>
             </Node>
             <Node name="Scripts" expanded="True">
+              <Node name="Arenas" expanded="True" />
               <Node name="Armor" expanded="True">
+                <Node name="Base" expanded="True" />
                 <Node name="Melee" expanded="True" />
+                <Node name="Range" expanded="True" />
               </Node>
-              <Node name="Base" expanded="True" />
+              <Node name="Character" expanded="True" />
+              <Node name="Enemies" expanded="True">
+                <Node name="Skills" expanded="True" />
+              </Node>
               <Node name="GUI" expanded="True" />
               <Node name="Managers" expanded="True">
                 <Node name="PlayerManager.cs" selected="True" />
               </Node>
               <Node name="Networking" expanded="True" />
+              <Node name="NPC" expanded="True" />
+              <Node name="Player" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Plugins" expanded="True">
+              <Node name="FingerGestures" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

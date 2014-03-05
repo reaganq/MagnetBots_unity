@@ -147,7 +147,7 @@ public class PlayerInformation  {
     
     public void StartNewGame()
     {
-        for (int i = 1; i < 15 ; i++) {
+        for (int i = 1; i < 20 ; i++) {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i, 1);
             //Debug.Log(i);
         }

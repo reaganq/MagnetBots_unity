@@ -2,7 +2,7 @@
 
 "Button_Buy.png":
 {
-	"frame": {"x":483,"y":678,"w":335,"h":101},
+	"frame": {"x":483,"y":694,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -10,7 +10,7 @@
 },
 "Button_Destroy.png":
 {
-	"frame": {"x":483,"y":575,"w":335,"h":101},
+	"frame": {"x":483,"y":591,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -18,7 +18,7 @@
 },
 "Button_Equip.png":
 {
-	"frame": {"x":931,"y":254,"w":332,"h":96},
+	"frame": {"x":511,"y":895,"w":332,"h":96},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
@@ -34,7 +34,7 @@
 },
 "Button_Use.png":
 {
-	"frame": {"x":661,"y":472,"w":332,"h":96},
+	"frame": {"x":511,"y":797,"w":332,"h":96},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
@@ -42,7 +42,7 @@
 },
 "Button_template.png":
 {
-	"frame": {"x":234,"y":839,"w":335,"h":101},
+	"frame": {"x":536,"y":373,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -90,11 +90,19 @@
 },
 "MagnetIcon.png":
 {
-	"frame": {"x":459,"y":373,"w":200,"h":200},
+	"frame": {"x":309,"y":809,"w":200,"h":200},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":200},
 	"sourceSize": {"w":200,"h":200}
+},
+"NPCTrigger.png":
+{
+	"frame": {"x":157,"y":839,"w":150,"h":150},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
+	"sourceSize": {"w":150,"h":150}
 },
 "TextboxBG.png":
 {
@@ -106,7 +114,7 @@
 },
 "arrow.png":
 {
-	"frame": {"x":157,"y":839,"w":75,"h":117},
+	"frame": {"x":459,"y":373,"w":75,"h":117},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":117},
@@ -146,7 +154,7 @@
 },
 "tutorial.png":
 {
-	"frame": {"x":661,"y":373,"w":397,"h":97},
+	"frame": {"x":459,"y":492,"w":397,"h":97},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":397,"h":97},
@@ -159,6 +167,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:f67edefefc339cb9c7dfb9a346b7e7d9$"
+	"smartupdate": "$TexturePacker:SmartUpdate:cf947b6a67d96c04e429d98a979765f7$"
 }
 }

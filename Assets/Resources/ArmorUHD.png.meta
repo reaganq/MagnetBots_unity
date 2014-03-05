@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 476c0302439e94f71b5fc6723951556e
+guid: 9f4c6fb01c4b04f938fd928d642bf000
 TextureImporter:
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0

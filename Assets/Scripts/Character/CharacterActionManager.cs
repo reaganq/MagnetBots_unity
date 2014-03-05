@@ -228,8 +228,8 @@ public class CharacterActionManager : MonoBehaviour {
         if(movementState != MovementState.idle)
         {
             animationTarget["Default_Idle"].time = 0;
-            //animationTarget.CrossFade("Default_Idle");
-			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
+            animationTarget.CrossFade("Default_Idle");
+			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
             for (int i = 0; i < armorControllers.Length ; i++)
             {
                 if(armorAnimControllers[i] != null )
@@ -254,8 +254,8 @@ public class CharacterActionManager : MonoBehaviour {
         if(movementState != MovementState.moving)
         {
             animationTarget["Default_Run"].time = 0;
-            //animationTarget.CrossFade("Default_Run");
-			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
+            animationTarget.CrossFade("Default_Run");
+			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
             for (int i = 0; i < armorControllers.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
@@ -283,7 +283,6 @@ public class CharacterActionManager : MonoBehaviour {
 	[RPC]
 	public void PlayAnimation(string name)
 	{
-		Debug.Log("play animation");
 		animationTarget.Play(name);
 	}
 

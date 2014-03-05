@@ -165,6 +165,7 @@
             <filename>openinventorybutton.png</filename>
             <filename>TextboxBG.png</filename>
             <filename>tutorial.png</filename>
+            <filename>NPCTrigger.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

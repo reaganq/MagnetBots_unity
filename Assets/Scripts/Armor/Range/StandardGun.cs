@@ -260,12 +260,6 @@ public class StandardGun : ArmorSkill {
 
     }
 
-	public override void HitEnemy(HitBox target)
-    {
-        //package up all attack data, damage + status effects etc
-        //target.receiveHit(data);
-        target.DealDamage(20);
-        Debug.Log("hitenemy");
-    }
+
 
 }

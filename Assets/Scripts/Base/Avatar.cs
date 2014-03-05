@@ -48,7 +48,6 @@ public class Avatar : MonoBehaviour {
 	[RPC]
 	public void LoadAll(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
 	{
-		Debug.Log("1");
 		SpawnHead(headPath);
 		SpawnBody(bodyPath);
 		SpawnArmL(armLPath);

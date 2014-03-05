@@ -118,20 +118,6 @@ public class NormalMelee : ArmorSkill {
 
     }
 
-    public override void HitEnemy(HitBox target)
-    {
-        //package up all attack data, damage + status effects etc
-        //target.receiveHit(data);
-        target.DealDamage(50);
-        Debug.Log("hitenemy");
-    }
-
-    public override void HitAlly(HitBox target)
-    {
-        //package up all attack data, damage + status effects etc
-        //target.receiveHit(data)
-    }
-
     public void Reset()
     {
         armorState = ArmorState.ready;

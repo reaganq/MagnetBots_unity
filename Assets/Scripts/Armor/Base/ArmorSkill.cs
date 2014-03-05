@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class ArmorSkill : MonoBehaviour {
 
    
     public bool isLimitedUse;
-    public bool isPlayerOwned;
-    private string OwnerId;
 
     public bool hasPressDownEvent;
     public bool hasPressUpEvent;
@@ -25,8 +25,9 @@ public class ArmorSkill : MonoBehaviour {
     public bool isReloading;
     public float cooldownTimer;
     public float fireSpeedTimer;
+	public float damage;
 
-    private ArmorAttribute[] armorAttributes;
+    public ArmorAttribute[] armorAttributes;
     private SkillEffect[] skillEffects;
 
     public List<SkillEffect> onUseSkillEffects;
@@ -72,13 +73,41 @@ public class ArmorSkill : MonoBehaviour {
         return false;
     }
 
-    public virtual void HitEnemy(HitBox target)
-    {
-    }
+	public virtual void HitTarget(HitBox target, bool isAlly)
+	{
+		HitInfo newHit = new HitInfo();
 
-	public virtual void HitAlly(HitBox target)
-    {
-    }
+		if(!isAlly)
+		{
+			newHit.sourceName = myStatus.characterName;
+			newHit.damage = damage;
+			newHit.hitPosX = 1;
+			newHit.hitPosY = 1;
+			newHit.hitPosZ = 1;
+			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			{
+				if (onHitSkillEffects[i].effectTarget == TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == TargetType.allEnemies || onHitSkillEffects[i].effectTarget == TargetType.all) {
+					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				}
+			}
+
+			//TODO apply self buffs from characterstatus
+			//TODO apply hitbox local buffs
+			BinaryFormatter b = new BinaryFormatter();
+			MemoryStream m = new MemoryStream();
+			b.Serialize(m, newHit);
+
+			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
+
+			//target.ReceiveHit(newHit);
+			//Debug.Log(finalhit.sourceName);
+			Debug.Log("hitenemy");
+		}
+		else
+		{
+			Debug.Log("hitally");
+		}
+	}
 
     public void ApplyOnHitSkillEffects()
     {
@@ -102,7 +131,7 @@ public class ArmorSkill : MonoBehaviour {
                 break;
             }
         }
-        Debug.Log("onuseskilleffects");
+        //Debug.Log("onuseskilleffects");
     }
 
     public void RemoveOnUseSkillEffects()
@@ -133,7 +162,8 @@ public class ArmorSkill : MonoBehaviour {
         for (int i = 0; i < armorAttributes.Length ; i++) {
             if(armorAttributes[i].attributeName == ArmorAttributeName.cooldown)
                 cooldown = armorAttributes[i].attributeValue;
-
+			if(armorAttributes[i].attributeName == ArmorAttributeName.damage)
+				damage = armorAttributes[i].attributeValue;
         }
     }
 

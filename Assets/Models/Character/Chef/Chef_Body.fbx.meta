@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: ae131efd7fa674491b1c8bab04ea4921
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: bones:Chest
     100002: bones:Head_Hover_a
@@ -27,9 +27,10 @@ ModelImporter:
     400020: chef_body
     4300000: chef_body
     9500000: //RootNode
+    11100000: //RootNode
     13700000: chef_body
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -46,7 +47,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -78,5 +79,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
+  additionalBone: 0
   userData: 

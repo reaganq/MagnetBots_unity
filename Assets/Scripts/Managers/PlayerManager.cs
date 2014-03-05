@@ -49,17 +49,18 @@ public class PlayerManager : MonoBehaviour
     public Shop ActiveShop;
 	public WorldManager ActiveWorld;
 	public Zone ActiveZone;
+	public ArenaManager ActiveArena;
 
     public Transform SpawnPoint;
-
     public GameObject avatarPrefab;
+
     public GameObject avatarObject;
     public Avatar avatar;
     public InputController avatarInput;
     public CharacterStatus avatarStatus;
 	public NetworkCharacterMovement avatarNetworkMovement;
+	public PhotonView avatarPhotonView;
 
- 
  //public static GeneralData Data;
  
  //public Texture cursorImage;
@@ -98,10 +99,6 @@ public class PlayerManager : MonoBehaviour
 	
     public void LoadAvatar()
     {
-		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
-		ActiveZone = ActiveWorld.DefaultZone;
-		SpawnPoint = ActiveZone.spawnPoint;
-
 		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
 		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
 		//avatarObject.AddComponent<DontDestroy>();
@@ -113,13 +110,13 @@ public class PlayerManager : MonoBehaviour
 		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();
 		UICamera.fallThrough = avatarObject;
 		avatar = avatarObject.GetComponent<Avatar>();
+		avatarPhotonView = avatarObject.GetComponent<PhotonView>();
 		PlayerCamera.Instance.targetTransform = avatarObject.transform;
 		LoadCharacterParts();
     }
 
     public void RefreshAvatar()
     {
-		Debug.Log("refreshavatar");
         if(avatarObject == null)
         {
             StartNewGame();
@@ -135,13 +132,85 @@ public class PlayerManager : MonoBehaviour
 		Debug.Log(PhotonNetwork.isMessageQueueRunning);
 
         PlayerCamera.Instance.targetTransform = avatarObject.transform;
-		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
-		ActiveZone = ActiveWorld.DefaultZone;
-		SpawnPoint = ActiveZone.spawnPoint;
+
         avatarObject.transform.position = SpawnPoint.position;
         LoadCharacterParts();
         EnableAvatarInput();
     }
+
+	public void ChangeWorld()
+	{
+		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
+		ActiveZone = ActiveWorld.DefaultZone;
+		SpawnPoint = ActiveZone.spawnPoint;
+	}
+
+	public void ChangeZone(Zone newZone)
+	{
+		if(newZone != null)
+		{
+			Zone oldzone = ActiveZone;
+			newZone.gameObject.SetActive(true);
+			ActiveZone = newZone;
+			SpawnPoint = ActiveZone.spawnPoint;
+			avatarObject.transform.position = SpawnPoint.position;
+			oldzone.gameObject.SetActive(false);
+
+			if(ActiveArena)
+			{
+				ActiveArena.EndSession(avatarPhotonView.viewID);
+				ActiveArena = null;
+			}
+		}
+	}
+
+	public void LeaveArena(Zone newZone)
+	{
+		if(newZone != null)
+		{
+			Zone oldzone = ActiveZone;
+			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			ActiveZone = newZone;
+			SpawnPoint = ActiveZone.spawnPoint;
+			avatarObject.transform.position = SpawnPoint.position;
+			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			
+			if(ActiveArena)
+			{
+				ActiveArena.EndSession(avatarPhotonView.viewID);
+				ActiveArena = null;
+			}
+		}
+	}
+
+	public void GoToArena(Zone newZone)
+	{
+		if(newZone != null)
+		{
+			Zone oldzone = ActiveZone;
+			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			ActiveZone = newZone;
+			SpawnPoint = ActiveZone.spawnPoint;
+			avatarObject.transform.position = SpawnPoint.position;
+			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
+			if(ActiveArena == null)
+			{
+
+				Debug.LogError("no bloody arena");
+			}
+			int newid = PhotonNetwork.AllocateViewID();
+
+			ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, "Jim", avatarPhotonView.viewID, newid);
+			ResetNPC();
+		}
+	}
+
+	public void ResetNPC()
+	{
+		if(ActiveNPC != null)
+			ActiveNPC.Reset();
+	}
 
     void LoadCharacterParts()
     {

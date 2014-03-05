@@ -50,7 +50,16 @@ public class NPCGUIController : MonoBehaviour {
 
     public void OnEnterArenaButton()
     {
-        Application.LoadLevel(PlayerManager.Instance.ActiveNPC.character.LevelName);
+		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, "Gym");
+
+        //Application.LoadLevel(PlayerManager.Instance.ActiveNPC.character.LevelName);
+		//PlayerManager.Instance.GoToArena(PlayerManager.Instance.ActiveWorld.GetAvailableArena("Gym"));
+		GUIManager.Instance.HideNPC();
+		/*if(PlayerManager.Instance.ActiveArena != null)
+		{
+			Debug.Log("we have an arena");
+			PlayerManager.Instance.ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, "Jim");
+		}*/
     }
 
     public void SetupArenaButton()

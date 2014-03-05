@@ -20,10 +20,18 @@ public class InputController : MonoBehaviour {
     //public UICamera uiCamera;
     public Vector3 inputDir;
     
-    public Vector2 outputAngleVector;
-    public float outputAngle = 0.0f;
-    public float speed = 6.4f;
-    public float outputForce = 0.0f;
+    //public Vector2 outputAngleVector;
+    //public float outputAngle = 0.0f;
+    //public float speed = 6.4f;
+    //public float outputForce = 0.0f;
+
+	public LayerMask layerMask = -1;
+	public int terrainMask = 1<<16;
+	public int poiMask = 1<<15;
+	private Vector2 lastPressDownPos;
+	public Vector3 targetWayPoint;
+	public bool hasWayPoint;
+	
     
     //wasd controls
     
@@ -83,111 +91,178 @@ public class InputController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-            if(inputType == InputType.WASDInput)
-            {
-                /*bool dirPressed = true;
-                
-                float inputX=Input.GetAxis("Horizontal");
-                float inputY=Input.GetAxis("Vertical");
-                
-                if(inputX!=0f||inputY!=0f){
-                    dirPressed=true;
-                    
-                    inputDir=new Vector3(inputX,0f,inputY).normalized;
-                    motor.SetRotAngle(_myTransform.position+inputDir);
-                    Debug.Log(inputDir);
-                }
-                
-                if(inputX == 0f && inputY == 0)
-                {
-                    inputDir = Vector3.zero;
-                    Debug.Log("inputs are zero");
-                }*/
-                
-                //inputDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                //inputDir = _myTransform.TransformDirection(inputDir);
-                
-                var direction = Vector3.zero;
-                var forward = Quaternion.AngleAxis(-90,Vector3.up) * cameraTransform.right;
-                //Debug.Log(forward);
-                 
-                if(Input.GetKey(KeyCode.W))
-                direction += forward;
-                if(Input.GetKey(KeyCode.S))
-                direction -= forward;
-                if(Input.GetKey(KeyCode.A))
-                direction -= cameraTransform.right;
-                if(Input.GetKey(KeyCode.D))
-                direction += cameraTransform.right;
-                       
-                direction.Normalize();
-                motor.Move(direction);
-            }
+	    if(inputType == InputType.WASDInput && !GUIManager.Instance.IsUIBusy())
+	    {
+	        /*bool dirPressed = true;
+	        
+	        float inputX=Input.GetAxis("Horizontal");
+	        float inputY=Input.GetAxis("Vertical");
+	        
+	        if(inputX!=0f||inputY!=0f){
+	            dirPressed=true;
+	            
+	            inputDir=new Vector3(inputX,0f,inputY).normalized;
+	            motor.SetRotAngle(_myTransform.position+inputDir);
+	            Debug.Log(inputDir);
+	        }
+	        
+	        if(inputX == 0f && inputY == 0)
+	        {
+	            inputDir = Vector3.zero;
+	            Debug.Log("inputs are zero");
+	        }*/
+	        
+	        //inputDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	        //inputDir = _myTransform.TransformDirection(inputDir);
+	        
+	        var direction = Vector3.zero;
+	        var forward = Quaternion.AngleAxis(-90,Vector3.up) * cameraTransform.right;
+	        //Debug.Log(forward);
+	         
+	        if(Input.GetKey(KeyCode.W))
+	        direction += forward;
+	        if(Input.GetKey(KeyCode.S))
+	        direction -= forward;
+	        if(Input.GetKey(KeyCode.A))
+	        direction -= cameraTransform.right;
+	        if(Input.GetKey(KeyCode.D))
+	        direction += cameraTransform.right;
+	               
+	        direction.Normalize();
+	        motor.Move(direction);
+	    }
 
-            if(inputType == InputType.TouchInput)
-            {
-                //Debug.Log(joystick.JoystickAxis.x);
+	    if(inputType == InputType.TouchInput)
+	    {
+	        //Debug.Log(joystick.JoystickAxis.x);
 
-                var direction = Vector3.zero;
-                var forward = Quaternion.AngleAxis(-90,Vector3.up) * cameraTransform.right;
-                //Debug.Log(forward);
-                
-                if(joystick.JoystickAxis.y > 0.1f)
-                    direction += forward * Mathf.Abs(joystick.JoystickAxis.y);
-                if(joystick.JoystickAxis.y < -0.1f)
-                    direction -= forward * Mathf.Abs(joystick.JoystickAxis.y);
-                if(joystick.JoystickAxis.x > 0.1f)
-                    direction += cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
-                if(joystick.JoystickAxis.x < -0.1f)
-                    direction -= cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
-                
-                direction.Normalize();
-                motor.Move(direction);
-            }
+	        var direction = Vector3.zero;
+	        var forward = Quaternion.AngleAxis(-90,Vector3.up) * cameraTransform.right;
+	        //Debug.Log(forward);
+	        
+	        if(joystick.JoystickAxis.y > 0.1f)
+	            direction += forward * Mathf.Abs(joystick.JoystickAxis.y);
+	        if(joystick.JoystickAxis.y < -0.1f)
+	            direction -= forward * Mathf.Abs(joystick.JoystickAxis.y);
+	        if(joystick.JoystickAxis.x > 0.1f)
+	            direction += cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
+	        if(joystick.JoystickAxis.x < -0.1f)
+	            direction -= cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
+	        
+	        
+				
+			if(direction.magnitude > 0)
+				hasWayPoint = false;
+
+			if(hasWayPoint && Vector3.Distance(targetWayPoint, _myTransform.position) >0.5f)
+			{
+				direction = targetWayPoint - _myTransform.position;
+				direction.y = 0;
+			}
+					
+			direction.Normalize();
+			motor.Move(direction);
+	    }
+
+		if(hasWayPoint && Vector3.Distance(targetWayPoint, _myTransform.position) < 0.5f)
+			hasWayPoint = false;
         //}
     }
 
     void OnPress(bool isDown)
     {
+		if(inputType == InputType.TouchInput)
+		{
+			if(!GUIManager.Instance.IsUIBusy())
+			{
+				if(isDown)
+				{
+					lastPressDownPos = UICamera.lastTouchPosition;
+				}
+				else
+				{
+					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 1.5f)
+					{
+						Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
+						RaycastHit hit;
 
-        if(!GameManager.Instance.GameHasStarted && !isDown)
-        {
-            GameManager.Instance.GameHasStarted = true;
-            GameManager.Instance.GameIsPaused = false;
-            GUIManager.Instance.StartGame();
-        }
-        if(GameManager.Instance.GameHasStarted)
-            {
-            if(!GUIManager.Instance.IsUIBusy() && inputType == InputType.WASDInput)
-            {
-                if(isDown)
-                {
-                    if(!actionManager.isLocked())
-                    {
-                        if(UICamera.currentTouchID == -1)
-                            actionManager.LeftAction(InputTrigger.OnPressDown);
-                        if(UICamera.currentTouchID == -2)
-                            actionManager.RightAction(InputTrigger.OnPressDown);
-                    }
-                }
-                else{
-                    if(!actionManager.isLocked())
-                    {
-                        if(UICamera.currentTouchID == -1)
-                            actionManager.LeftAction(InputTrigger.OnPressUp);
-                        if(UICamera.currentTouchID == -2)
-                            actionManager.RightAction(InputTrigger.OnPressUp);
-                    }
+						if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+						{
+							int layermsk = (1<<hit.collider.gameObject.layer);
 
-                    //Debug.Log("OnpressUp "+ UICamera.currentTouchID);
-                }
+							if(layermsk == terrainMask)
+							{
+								Debug.Log(hit.point);
+								targetWayPoint = hit.point;
+								hasWayPoint = true;
+							}
+							else if(layermsk == poiMask)
+							{
+								hit.collider.gameObject.SendMessage("ActivatePOI");
+								Debug.Log("activating POI");
+							}
+						}
+					}
+				}
+			}
+		}
+
+		if(inputType == InputType.WASDInput)
+		{
+            if(!GUIManager.Instance.IsUIBusy())
+            {
+				Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
+				RaycastHit hit;
+				
+				if(Physics.Raycast(ray, out hit, Mathf.Infinity, poiMask))
+				{
+					if(!isDown)
+					{
+						Debug.Log("hit poi");
+						hit.collider.gameObject.SendMessage("ActivatePOI");
+					}
+					/*int layermsk = (1<<hit.collider.gameObject.layer);
+                        
+                        if(layermsk == terrainMask)
+                        {
+                            Debug.Log(hit.point);
+                            targetWayPoint = hit.point;
+                            hasWayPoint = true;
+                        }
+                        if(layermsk == poiMask)
+                        {
+
+                            Debug.Log("activating POI");
+                        }*/
+				}
+				else
+				{
+					if(!actionManager.isLocked())
+					{
+		                if(isDown)
+		                {	                   
+	                        if(UICamera.currentTouchID == -1)
+	                            actionManager.LeftAction(InputTrigger.OnPressDown);
+	                        if(UICamera.currentTouchID == -2)
+	                            actionManager.RightAction(InputTrigger.OnPressDown);
+		                }
+		                else
+						{
+	                        if(UICamera.currentTouchID == -1)
+	                            actionManager.LeftAction(InputTrigger.OnPressUp);
+	                        if(UICamera.currentTouchID == -2)
+	                            actionManager.RightAction(InputTrigger.OnPressUp);
+		                }
+					}
+				}
             }
-        }
+		}
 
     }
 
-    void OnClick()
+    /*void OnClick()
     {
+		Debug.Log("click");
         if(GameManager.Instance.GameHasStarted)
         {
             if(!GUIManager.Instance.IsUIBusy() && inputType == InputType.WASDInput)
@@ -202,7 +277,7 @@ public class InputController : MonoBehaviour {
                 //Debug.Log("Onclick "+ UICamera.currentTouchID);
             }
         }
-    }
+    }*/
    
     
     void FaceMovementDirection()

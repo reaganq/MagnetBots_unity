@@ -19,24 +19,6 @@ public class SkillEffect{
 
 }
 
-public class SkillEffectMultiplier
-{
-    public int skillIndex;
-    public float skillMultiplier;
-}
-
-public struct EquippedSkillEffect
-{
-    public SkillEffect skillEffect;
-    public float skillMultiplier;
-
-    public EquippedSkillEffect(SkillEffect sE, float multiplier)
-    {
-        skillEffect = sE;
-        skillMultiplier = multiplier;
-    }
-}
-
 //what does the skill affect
 public enum SkillEffectCategory
 {

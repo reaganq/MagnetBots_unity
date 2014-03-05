@@ -25,7 +25,6 @@ public class CharacterMotor : MonoBehaviour {
     
     //public float Speed;
     //public float rotSpeed = 11.5f;
-    public Quaternion rotTarget;
     public float rotAngle;
     
     public float rollSpeed;
@@ -38,8 +37,7 @@ public class CharacterMotor : MonoBehaviour {
     public Vector3 characterVelocity;
     public Vector3 horizontalVelocity;
     public float currentSpeed;
-
-    
+	
     //public Vector3 velocity = Vector3.zero;
     
 	// Use this for initialization
@@ -54,8 +52,7 @@ public class CharacterMotor : MonoBehaviour {
         characterVelocity = Vector3.zero;
         animationManager = GetComponent<CharacterActionManager>();
         //rigidbodyTransform = rigidbody.transform;
-        SetRotAngle(_myTransform.position+(Vector3.forward * -10f));
-        SetRotTarget();
+        //SetRotAngle(_myTransform.position+(Vector3.forward * -10f));
         //UpdateAnimation(); 
 	}
 	
@@ -63,70 +60,13 @@ public class CharacterMotor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        /*characterVelocity = controller.velocity;
-	    horizontalVelocity = characterVelocity;
-        horizontalVelocity.y = 0;
-        currentSpeed = horizontalVelocity.magnitude;*/
-        //UpdateMovement();
         if(!GameManager.Instance.GameIsPaused)
         {
-            //if(input.inputType == InputType.WASDInput)
-            //{
-                UpdateFunction();
-            //}
+            UpdateFunction();
             AnimationUpdate();
         }
         
 	}
-    
-    void FixedUpdate()
-    {
-        //UpdateMovementFixed();
-        //AnimationUpdate();
-    }
-        
-    void UpdateMovement()
-    {
-        /*if(input.inputDir.magnitude > 0)
-        {
-            /*speed[1] = _myTransform.TransformDirection((dir*runSpeed));
-            speed[1] += Physics.gravity;
-            speed[1] *= Time.deltaTime;
-            Debug.Log("speed 1: " + speed[1]);
-            
-            speed[1] = dir*runSpeed;
-            
-            Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            moveDirection = transform.TransformDirection(moveDirection);
-            moveDirection.Normalize();
-            
-            moveDirection *= runSpeed;
-            moveDirection *= Time.deltaTime;
-            Debug.LogWarning("move direction: " + moveDirection);
-        //controller.Move(moveDirection);
-            //Debug.Log("speed 0: " + speed[0]);
-            //Vector3 moveDirection = input.inputDir.Normalize();
-            //moveDirection *= runSpeed * 0.5f * (Vector3.Dot(gameObject.transform.forward, moveDirection) + 1);
-        }
-        
-        else
-        {
-            speed[1] = Vector3.zero;
-            Debug.Log(speed[0]);
-            Debug.LogWarning("speed1" + speed[1]);
-            Debug.Log("speed 1 is 0");
-        }
-        
-        if(canRotate)
-            {
-                SetRotTarget();
-                
-                _myTransform.rotation = Quaternion.Slerp (_myTransform.rotation, rotTarget, (Time.deltaTime*rotSpeed));
-            }
-        
-        speed[0] = Vector3.MoveTowards(speed[0], speed[1],(Time.deltaTime * acceleration));*/
-        
-    }
     
     public void Move(Vector3 direction)
     {
@@ -235,7 +175,7 @@ public class CharacterMotor : MonoBehaviour {
         
     }
 
-    public void SetRotAngle(Vector3 destination)
+    /*public void SetRotAngle(Vector3 destination)
     {
         dir=(destination-new Vector3(_myTransform.position.x,0f,_myTransform.position.z));
         float distTotal=dir.magnitude;
@@ -245,12 +185,7 @@ public class CharacterMotor : MonoBehaviour {
         rotAngle=(-rotAngle+90f);
         
         //Debug.Log("rotAngle: "+rotAngle);
-    }
-    
-    public void SetRotTarget()
-    {
-        rotTarget = Quaternion.Euler(new Vector3(0f, rotAngle, 0f));
-    }
+    }*/
 
     #endregion
 

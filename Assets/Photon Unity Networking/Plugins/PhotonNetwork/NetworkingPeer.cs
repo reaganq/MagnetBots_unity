@@ -2404,7 +2404,7 @@ internal class NetworkingPeer : LoadbalancingPeer, IPhotonPeerListener
             {
                 if (view.viewID == viewID)
                 {
-                    Debug.LogWarning("Had to lookup view that wasn't in dict: " + view);
+                    //Debug.LogWarning("Had to lookup view that wasn't in dict: " + view);
                     return view;
                 }
             }

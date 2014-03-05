@@ -23,7 +23,7 @@ public class LongDurationMelee : ArmorSkill {
     {
         base.Initialise(target,character, masterCollider, status, manager);
         TransferAnimations();
-        Debug.Log("override");
+        //Debug.Log("override");
 
     }
     
@@ -53,7 +53,7 @@ public class LongDurationMelee : ArmorSkill {
     {
 
 
-        Debug.Log("start skill");
+        //Debug.Log("start skill");
 
         armorState = ArmorState.casting;
 
@@ -64,9 +64,6 @@ public class LongDurationMelee : ArmorSkill {
 
         //characterAnimation.Play(skillAnimation.castAnimation.clip.name);
 		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.castAnimation.clip.name);
-
-
-
         yield return new WaitForSeconds(skillAnimation.castAnimation.clip.length);
   
         armorState = ArmorState.onUse;
@@ -74,7 +71,7 @@ public class LongDurationMelee : ArmorSkill {
 		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.clip.name);
         //yield return new WaitForSeconds(attackduration);
 
-        Debug.Log("end of start action");
+       //Debug.Log("end of start action");
         ApplyOnUseSkillEffects();
 
         

@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -90,6 +90,25 @@
      <Compile Include="Assets\EasyTouch\Plugins\_C#-Event-Template\C_EasyButtonTemplate.cs" />
      <Compile Include="Assets\EasyTouch\Plugins\_C#-Event-Template\C_EasyJoystickTemplate.cs" />
      <Compile Include="Assets\EasyTouch\Plugins\_C#-Event-Template\C_EasyTouchTemplate.cs" />
+     <Compile Include="Assets\FingerGestures Samples\1) Finger Events\Scripts\FingerEventsSamplePart1.cs" />
+     <Compile Include="Assets\FingerGestures Samples\1) Finger Events\Scripts\FingerEventsSamplePart2.cs" />
+     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\BasicGesturesSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PinchTwistSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PointCloudGestureRenderer.cs" />
+     <Compile Include="Assets\FingerGestures Samples\2) Gestures\Scripts\PointCloudGestureSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\DragTrail.cs" />
+     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\EmitParticlesOnSwipe.cs" />
+     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxDragSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxFingerEventsSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\3) Toolbox\Scripts\ToolboxOneFingerGestureSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\BasicSample.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\EmitParticles.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\MaxFPS.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\MenuNode.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\SampleBase.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\SampleUI.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\StartMenu.cs" />
+     <Compile Include="Assets\FingerGestures Samples\Assets\Scripts\SwipeParticlesEmitter.cs" />
      <Compile Include="Assets\HUD Text\Examples\Scripts\ChatManager.cs" />
      <Compile Include="Assets\HUD Text\Examples\Scripts\ChatParticipant.cs" />
      <Compile Include="Assets\HUD Text\Examples\Scripts\ColliderDisplayText.cs" />
@@ -261,6 +280,8 @@
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\ReallySimpleAudioSpawner.cs" />
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\ReallySimpleParticleSpawner.cs" />
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\SimpleSpawner.cs" />
+     <Compile Include="Assets\Scripts\Arenas\ArenaExit.cs" />
+     <Compile Include="Assets\Scripts\Arenas\RPGArena.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\ArmorAnimation.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\ArmorAttribute.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\ArmorController.cs" />
@@ -288,7 +309,9 @@
      <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
      <Compile Include="Assets\Scripts\Character\InputController.cs" />
+     <Compile Include="Assets\Scripts\Character\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Enemies\JimFSM.cs" />
+     <Compile Include="Assets\Scripts\Enemies\NetworkAIMovement.cs" />
      <Compile Include="Assets\Scripts\Enemies\SimpleFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\AISkill.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\JumpingMeleeAISkill.cs" />
@@ -317,12 +340,14 @@
      <Compile Include="Assets\Scripts\Managers\TownManager.cs" />
      <Compile Include="Assets\Scripts\Managers\WorldManager.cs" />
      <Compile Include="Assets\Scripts\Managers\Zone.cs" />
+     <Compile Include="Assets\Scripts\Minigames\BurgerMemory.cs" />
      <Compile Include="Assets\Scripts\Misc\DontDestroy.cs" />
+     <Compile Include="Assets\Scripts\Misc\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\NPC\NPC.cs" />
+     <Compile Include="Assets\Scripts\NPC\NPCPOITrigger.cs" />
      <Compile Include="Assets\Scripts\NPC\RPGNPC.cs" />
      <Compile Include="Assets\Scripts\NPC\Shop.cs" />
      <Compile Include="Assets\Scripts\NPC\ShopItem.cs" />
-     <Compile Include="Assets\Scripts\Networking\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Networking\NetworkDebugging.cs" />
      <Compile Include="Assets\Scripts\Player\Equipment.cs" />
      <Compile Include="Assets\Scripts\Player\Inventory.cs" />
@@ -330,8 +355,6 @@
      <Compile Include="Assets\Scripts\SaveLoad\Encryption.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\Entities\SaveContent.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
-     <Compile Include="Assets\Scripts\Scene Managers\BattleDomeManager.cs" />
-     <Compile Include="Assets\Scripts\Scene Managers\SceneTrigger.cs" />
      <Compile Include="Assets\Scripts\Storage\IStorage.cs" />
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
      <Compile Include="Assets\Scripts\Storage\XMLStorage.cs" />
@@ -368,6 +391,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_OneLight_Transparent.shader" />
      <None Include="Assets\EasyTouch\Readme_first.txt" />
+     <None Include="Assets\Plugins\FingerGestures\Readme.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Bump\T4M 2 TexturesBumped Mobile.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\!ToonyColorsPro Readme.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Bump\T4M 3 TexturesBumped.shader" />
@@ -467,6 +491,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\2TexturesUnlit.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Diffuse\T4M World Projection Shader.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\BumpSpec\T4M 3 TexturesBumpSpec.shader" />
+     <None Include="Assets\Resources\ArmorUHD.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (DeskewedHardClip).shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\DirectionLM\T4M 2 TexturesBumped DLM mobile.shader" />
      <None Include="Assets\Photon Unity Networking\changelog.txt" />

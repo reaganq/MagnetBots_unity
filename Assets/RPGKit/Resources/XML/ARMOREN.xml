@@ -301,15 +301,99 @@
     <SystemDescription />
     <IsUsable>false</IsUsable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath />
-    <AtlasName />
+    <IconPath>chef_armR</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>false</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Worthless</Rarity>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <FBXName>Armor/ArmR/Chef_ArmR</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>16</ID>
+    <Name>Chef's Hat</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>chef_head</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>50</SellValue>
+    <Rarity>Epic</Rarity>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
-    <FBXName>Armor/</FBXName>
+    <FBXName>Armor/Head/Chef_Head</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>17</ID>
+    <Name>Spatula</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>chef_armL</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>200</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Magic</Rarity>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <FBXName>Armor/ArmL/Chef_ArmL</FBXName>
+    <ArmorClassValue>10</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>18</ID>
+    <Name>Chef's Uniform</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>chef_body</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>200</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <FBXName>Armor/Body/Chef_Body</FBXName>
+    <ArmorClassValue>50</ArmorClassValue>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>19</ID>
+    <Name>Apron</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>chef_legs</IconPath>
+    <AtlasName>ArmorAtlas</AtlasName>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>false</Stackable>
+    <BuyValue>200</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Rare</Rarity>
+    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <FBXName>Armor/Legs/Chef_Legs</FBXName>
     <ArmorClassValue>10</ArmorClassValue>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>

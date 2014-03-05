@@ -4,10 +4,10 @@ using System.Collections;
 public class HitBox : MonoBehaviour {
 
     public CharacterStatus ownerCS;
+	//hitbox local buffs;
 
-	public void DealDamage(int val)
+	public virtual void ReceiveHit(HitInfo hit)
 	{
-
-		ownerCS.DealDamage(val);
+		//ownerCS.ReceiveHit(hit);
 	}
 }

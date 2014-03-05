@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 21520e82aafe549de9e268ed5a8af6d5
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: bones:L_Arm_Hover_b
     100002: bones:L_Elbow
@@ -33,9 +33,10 @@ ModelImporter:
     400026: chef_armL
     4300000: chef_armL
     9500000: //RootNode
+    11100000: //RootNode
     13700000: chef_armL
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -52,7 +53,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -84,5 +85,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
+  additionalBone: 0
   userData: 

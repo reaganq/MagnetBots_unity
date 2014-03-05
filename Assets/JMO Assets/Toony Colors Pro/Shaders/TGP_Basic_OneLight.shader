@@ -12,6 +12,8 @@ Shader "Toony Colors Pro/Normal/OneDirLight/Basic"
 		_Color ("Highlight Color", Color) = (0.8,0.8,0.8,1)
 		_SColor ("Shadow Color", Color) = (0.0,0.0,0.0,1)
 		
+		_TintColor ("Tint Color", Color) = (1,1,1,1)
+		
 	}
 	
 	SubShader
@@ -28,6 +30,7 @@ Shader "Toony Colors Pro/Normal/OneDirLight/Basic"
 		#pragma surface surf ToonyColors nolightmap nodirlightmap noforwardadd 
 		
 		sampler2D _MainTex;
+		fixed4 _TintColor;
 		
 		struct Input
 		{
@@ -38,7 +41,7 @@ Shader "Toony Colors Pro/Normal/OneDirLight/Basic"
 		{
 			half4 c = tex2D(_MainTex, IN.uv_MainTex);
 			
-			o.Albedo = c.rgb;
+			o.Albedo = c.rgb * _TintColor.rgb;
 			
 		}
 		ENDCG

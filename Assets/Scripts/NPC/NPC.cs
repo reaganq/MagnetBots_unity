@@ -8,9 +8,19 @@ public class NPC: MonoBehaviour
     public int ID;
     public bool Active = false;
     public Shop thisShop = null;
+	public GameObject trigger;
+	public Collider triggerCollider;
+
+	public Vector3 endScale = Vector3.one;
+	public Vector3 startScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     void Start()
     {
+		if(trigger)
+		{
+			triggerCollider = trigger.GetComponent<Collider>();
+			triggerCollider.enabled = false;
+		}
 		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
     }
     
@@ -19,22 +29,30 @@ public class NPC: MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
 			if(other.gameObject == PlayerManager.Instance.avatarObject)
-            	StartCoroutine("ShowNPC");
+			{
+				TweenScale.Begin(trigger, 0.2f, endScale);
+				triggerCollider.enabled = true;
+            	//StartCoroutine("ShowNPC");
+			}
         }
     }
     
     public void OnTriggerExit ( Collider other )
     {
-        if(Active && other.gameObject.CompareTag("Player"))
+        if(other.gameObject.CompareTag("Player"))
         {
 			if(other.gameObject == PlayerManager.Instance.avatarObject)
-            StartCoroutine("HideNPC");
-            
+			{
+				Debug.Log("exit");
+				Reset();
+			}
+            //StartCoroutine("HideNPC");
         }
     }
     
     public IEnumerator ShowNPC()
     {
+		Debug.Log("wtf");
         yield return new WaitForEndOfFrame();
         Active = true;
         PlayerManager.Instance.ActiveNPC = this;
@@ -65,5 +83,11 @@ public class NPC: MonoBehaviour
         
         Active = false;
     }
+
+	public void Reset()
+	{
+		TweenScale.Begin(trigger, 0.2f, startScale);
+		triggerCollider.enabled = false;
+	}
 
 }
