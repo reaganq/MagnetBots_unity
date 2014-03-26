@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using PathologicalGames;
 
 public class AISkill : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class AISkill : MonoBehaviour {
     public SkillType skillType;
     public float weighting = 0f;
     public SimpleFSM fsm;
+	public int skillIndex;
     public Animation _animator;
 
     public bool requiresTarget;
@@ -33,11 +35,30 @@ public class AISkill : MonoBehaviour {
         fsm = GetComponent<SimpleFSM>();
         _animator = GetComponent<Animation>();
     }
-
-
+	
     public virtual void SetupAnimations()
     {
     }
+
+	public void AddParticlesToPool()
+	{
+		
+	}
+	
+	public void AddPrefabToPool(Transform prefab)
+	{
+		//if(characterManager.MakeSpawnPool())
+		//{
+		if(fsm.effectsPool.GetPrefabPool(prefab) == null)
+		{
+			PrefabPool prefabPool = new PrefabPool(prefab);;
+			prefabPool.preloadAmount = 3;
+			prefabPool.preloadFrames = 5;
+			Debug.Log("here");
+			fsm.effectsPool.CreatePrefabPool(prefabPool);
+		}
+		//}
+	}
 
     public virtual IEnumerator UseSkill()
     {

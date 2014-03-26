@@ -52,8 +52,8 @@ public class NetworkManager : MonoBehaviour {
 			PhotonNetwork.CreateRoom("null");
 			Debug.Log("offlinemode");
 		}
-
-	
+		else
+			Connect();
 	}
 
 	public void Connect () 
@@ -73,8 +73,9 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnJoinedLobby()
 	{
-		Debug.Log("joined room");
-		PhotonNetwork.JoinRandomRoom();
+		Debug.Log("joined lobby");
+		if(offlineMode)
+			PhotonNetwork.JoinRandomRoom();
 	}
 
 	void OnPhotonRandomJoinFailed() 

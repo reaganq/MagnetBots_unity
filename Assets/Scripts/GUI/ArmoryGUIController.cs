@@ -1,33 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ArmoryGUIController : BasicGUIController {
-
-    public UsableItem SelectedItem = null;
-    public Inventory SelectedInventory = null;
+	
+    public InventoryUICategory SelectedInventoryCategory = InventoryUICategory.None;
+	public List<InventoryItem> SelectedItemList;
     public int CurrentSelectedInventory = -1;
     public int CurrentSelectedItemIndex = -1;
     public ItemTileButton[] ItemTiles = new ItemTileButton[10];
-    public GameObject[] CategoryButtons;
+    public ItemTileButton[] CategoryButtons;
     //public UISprite[] ItemSprites = new UISprite[10];
     public GameObject InfoPanel = null;
     
-    public GameObject UseButton = null;
-    
-    
     public GameObject EquipButton = null;
     public GameObject DestroyButton = null;
+
+	public GameObject Root = null;
+
+	public GameObject PreviousPageButton;
+	public GameObject NextPageButton;
+
+	public int pageIndex = 0;
     
     public UILabel ItemNameLabel = null;
     public UILabel ItemDescriptionLabel = null;
-    public UILabel ItemSkillDescriptionLabel = null;
+    //public UILabel ItemSkillDescriptionLabel = null;
     //public UISprite ItemSkillSprite = null;
     
-    public void Enable()
+    public override void Enable()
     {
+		Root.SetActive(true);
         OnInventoryPressed(0);
         //Debug.Log("enable");   
     }
+
+	public override void Disable()
+	{
+		Root.SetActive(false);
+	}
     
 	public void OnBackButtonpressed()
     {
@@ -36,7 +47,7 @@ public class ArmoryGUIController : BasicGUIController {
     
     public void OnItemTilePressed(int index)
     {
-        if(index == CurrentSelectedItemIndex || index >= SelectedInventory.Items.Count)
+        if(index == CurrentSelectedItemIndex || index >= SelectedItemList.Count)
         {
             //Debug.Log("return");
             return;
@@ -55,17 +66,17 @@ public class ArmoryGUIController : BasicGUIController {
     public void UpdateInfoPanel()
     {
         
-        if(SelectedInventory.Items[CurrentSelectedItemIndex].IsItemUsable)
+        /*if(SelectedItemList[CurrentSelectedItemIndex].IsItemUsable)
         {
             UseButton.SetActive(true);
             DestroyButton.SetActive(true);
         }
         else
-            UseButton.SetActive(false);
+            UseButton.SetActive(false);*/
         
-        if(SelectedInventory.Items[CurrentSelectedItemIndex].IsItemEquippable)
+		if(SelectedItemList[CurrentSelectedItemIndex+ pageIndex*ItemTiles.Length].IsItemEquippable)
         {
-            if(!SelectedInventory.Items[CurrentSelectedItemIndex].IsItemEquipped)
+			if(!SelectedItemList[CurrentSelectedItemIndex+ pageIndex*ItemTiles.Length].IsItemEquipped)
             {
                 EquipButton.SetActive(true);
                 DestroyButton.SetActive(true);
@@ -75,7 +86,7 @@ public class ArmoryGUIController : BasicGUIController {
                 EquipButton.SetActive(false);
                 DestroyButton.SetActive(false);
             }
-            RPGArmor armor = (RPGArmor)SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem;
+			RPGArmor armor = (RPGArmor)SelectedItemList[CurrentSelectedItemIndex + pageIndex*ItemTiles.Length].rpgItem;
             if(armor.HasAbility)
             {
                 //ItemSkillSprite.enabled = true;
@@ -88,20 +99,15 @@ public class ArmoryGUIController : BasicGUIController {
             EquipButton.SetActive(false);
         
         
-        //ItemNameLabel.enabled = true;
-        //ItemNameLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Name;
-        //ItemDescriptionLabel.enabled = true;
-        //ItemDescriptionLabel.text = SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
+        ItemNameLabel.enabled = true;
+		ItemNameLabel.text = SelectedItemList[CurrentSelectedItemIndex + pageIndex*ItemTiles.Length].rpgItem.Name;
+        ItemDescriptionLabel.enabled = true;
+		ItemDescriptionLabel.text = SelectedItemList[CurrentSelectedItemIndex + pageIndex*ItemTiles.Length].rpgItem.Description;
     }
-    
-    public void OnUseButtonPressed()
-    {
-        
-    }
-    
+
     public void OnEquipButtonPressed()
     {
-        SelectedInventory.EquipItem(SelectedInventory.Items[CurrentSelectedItemIndex]);
+		PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(SelectedItemList[CurrentSelectedItemIndex + pageIndex*ItemTiles.Length]);
         EquipButton.SetActive(false);
         RefreshSelection();
         UpdateInfoPanel();
@@ -109,71 +115,91 @@ public class ArmoryGUIController : BasicGUIController {
     
     public void OnDestroyButtonPressed()
     {
-        SelectedInventory.RemoveItem(SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem);
+		PlayerManager.Instance.Hero.ArmoryInventory.RemoveItem(SelectedItemList[CurrentSelectedItemIndex + pageIndex*ItemTiles.Length]);
+		RefreshItemList();
         HideInfoPanel();
         RefreshInventoryIcons();
         ResetSelection();
+		HideInfoPanel();
+		Debug.Log(PlayerManager.Instance.Hero.ArmoryInventory.Items.Count);
+		Debug.Log(PlayerManager.Instance.Hero.ArmoryInventory.HeadItems.Count);
     }
     
     public void OnInventoryPressed(int index)
     {
-        
         if(CurrentSelectedInventory != index)
         {
             if(CurrentSelectedInventory >= 0)
-                CategoryButtons[CurrentSelectedInventory].SetActive(true);
-            if(index == 0)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.HeadInventory;
-            }
-            if(index == 1)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.BodyInventory;
-            }
-            if(index == 2)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.ArmLInventory;
-            }
-            if(index == 3)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.ArmRInventory;
-            }
-            if(index == 4)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.LegsInventory;
-            }
-            if(index == 5)
-            {
-                SelectedInventory = PlayerManager.Instance.Hero.Inventory;
-            }
+				CategoryButtons[CurrentSelectedInventory].DeselectCategory();
+			CurrentSelectedInventory = index;
+			pageIndex = 0;
+			RefreshItemList();
             ResetSelection();
             RefreshInventoryIcons();
             HideInfoPanel();
-            CurrentSelectedInventory = index;
-            CategoryButtons[CurrentSelectedInventory].SetActive(false);
+            
+            CategoryButtons[CurrentSelectedInventory].SelectCategory();
         }
         
+    }
+
+	public void RefreshItemList()
+	{
+		if(CurrentSelectedInventory == 0)
+		{
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmorItems;
+		}
+		if(CurrentSelectedInventory == 1)
+		{
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.HeadItems;
+		}
+		if(CurrentSelectedInventory == 2)
+		{
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.BodyItems;
+		}
+		if(CurrentSelectedInventory == 3)
+		{
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmLItems;
+		}
+		if(CurrentSelectedInventory == 4)
+        {
+            SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmRItems;
+        }
+		if(CurrentSelectedInventory == 5)
+		{
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.LegsItems;
+		}
     }
     
     public void RefreshInventoryIcons()
     {
         for (int i = 0; i <  ItemTiles.Length; i++) {
-            if(i >= SelectedInventory.Items.Count)
-                ItemTiles[i].Hide();
+            if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
+			{
+				ItemTiles[i].Show();
+				ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.AtlasName, SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IconPath, SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount);
+				Debug.Log(i + SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.Name);
+			}
             else
             {
-                ItemTiles[i].Show();
-                ItemTiles[i].Load(SelectedInventory.Items[i].rpgItem.AtlasName, SelectedInventory.Items[i].rpgItem.IconPath, SelectedInventory.Items[i].CurrentAmount);
+				ItemTiles[i].Hide();
             }
         }
+
+		if(pageIndex == 0)
+			PreviousPageButton.SetActive(false);
+		if(((pageIndex+1)*ItemTiles.Length) >= SelectedItemList.Count)
+		{
+			NextPageButton.SetActive(false);
+		}
     }
     
     public void RefreshSelection()
     {
         for (int i = 0; i <  ItemTiles.Length; i++) {
-            if(i < SelectedInventory.Items.Count)
+			if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
             {
-                if(SelectedInventory.Items[i].IsItemEquipped)
+				if(SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemEquipped)
                     ItemTiles[i].Equip();
                 else
                     ItemTiles[i].Unequip();
@@ -190,9 +216,9 @@ public class ArmoryGUIController : BasicGUIController {
         CurrentSelectedItemIndex = -1;
         //foreach(
         for (int i = 0; i <  ItemTiles.Length; i++) {
-            if(i < SelectedInventory.Items.Count)
+			if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
             {
-                if(SelectedInventory.Items[i].IsItemEquipped)
+				if(SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemEquipped)
                     ItemTiles[i].Equip();
                 else
                     ItemTiles[i].Unequip();
@@ -201,16 +227,47 @@ public class ArmoryGUIController : BasicGUIController {
                 ItemTiles[i].Unequip();
         }
     }
+
+	public void NextPage()
+	{
+		ResetSelection();
+		RefreshInventoryIcons();
+		HideInfoPanel();
+	}
+
+	public void PreviousPage()
+	{
+		ResetSelection();
+		RefreshInventoryIcons();
+		HideInfoPanel();
+	}
     
     public void HideInfoPanel()
     {
-        UseButton.SetActive(false);
         EquipButton.SetActive(false);
         DestroyButton.SetActive(false);
         ItemNameLabel.enabled = false;
         ItemDescriptionLabel.enabled = false;
         //ItemSkillSprite.enabled = false;
-        ItemSkillDescriptionLabel.enabled = false;
+        //ItemSkillDescriptionLabel.enabled = false;
     }
     
+}
+
+public enum InventoryUICategory
+{
+	None,
+	All,
+	Normal,
+	Upgradeable,
+	Useable,
+	AllArmors,
+	Head,
+	Body,
+	ArmL,
+	ArmR,
+	Legs,
+	Food,
+	Books,
+	Quest
 }

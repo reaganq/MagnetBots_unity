@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGCurrency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGCurrency>
+    <ID>1</ID>
+    <Name>Magnets</Name>
+    <Description>Basic Currency</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Currency</ItemCategory>
+    <IconPath>MagnetIcon</IconPath>
+    <AtlasName>InventoryAtlas</AtlasName>
+    <BuyCurrency>None</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>None</Rarity>
+    <isPremium>false</isPremium>
+  </RPGCurrency>
+  <RPGCurrency>
+    <ID>2</ID>
+    <Name>Crystals</Name>
+    <Description>Premium currency</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <ItemCategory>Currency</ItemCategory>
+    <IconPath>CrystalIcon</IconPath>
+    <AtlasName>InventoryAtlas</AtlasName>
+    <BuyCurrency>None</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>None</Rarity>
+    <isPremium>true</isPremium>
+  </RPGCurrency>
+</ArrayOfRPGCurrency>

@@ -11,11 +11,11 @@ public class Equipment
  //public int MaximumRange;
  //private bool NeedAmmo;
     public EquipedItem EquippedHead;
-    public EquipedItem EquippedBody;
-    public EquipedItem EquippedArmL;
-    public EquipedItem EquippedArmR;
-    public EquipedItem EquippedLegs;
-    public EquipedItem EquippedFace;
+	public EquipedItem EquippedBody;
+	public EquipedItem EquippedArmL;
+	public EquipedItem EquippedArmR;
+	public EquipedItem EquippedLegs;
+	public EquipedItem EquippedFace;
     
     //public List<EquipedItem> Items;
  
@@ -25,12 +25,12 @@ public class Equipment
  public Equipment()
  {
         //Items = new List<EquipedItem>();
-        EquippedHead = new EquipedItem();
-        EquippedBody = new EquipedItem();
-        EquippedArmL = new EquipedItem();
-        EquippedArmR = new EquipedItem();
-        EquippedLegs = new EquipedItem();
-        EquippedFace = new EquipedItem();
+		EquippedHead = new EquipedItem();
+		EquippedBody = new EquipedItem();
+		EquippedArmL = new EquipedItem();
+		EquippedArmR = new EquipedItem();
+		EquippedLegs = new EquipedItem();
+		EquippedFace = new EquipedItem();
      //Weapon = new RPGWeapon();
  }
 
@@ -178,9 +178,9 @@ public class Equipment
      NeedAmmo = weapon.NeedAmmo;
  }*/
  
- public bool EquipItem(InventoryItem item)
+ public bool EquipItem(RPGArmor armor, int level)
  {
-     EquipedItem equiped = new EquipedItem() ;
+     /*EquipedItem equiped = new EquipedItem() ;
      //equiped.CurrentAmount = item.CurrentAmount;
      //equiped.CurrentDurability = item.CurrentDurability;
      equiped.UniqueItemId = item.UniqueItemId;
@@ -189,12 +189,7 @@ public class Equipment
      //get equipment slots
      RPGArmor e = (RPGArmor)equiped.rpgItem;
      equiped.Slot = e.EquipmentSlotIndex;
-     
-     if (!e.CanYouEquip())
-     {
-         //TODO display error message
-         return false;
-     }
+     */
      //if equipment slot is used
      /*if (IsEquipmentSlotUsed(equiped.Slot))
      {
@@ -212,78 +207,67 @@ public class Equipment
          PlayerEquip.itemsToUnequip = dropingItems;
      }*/
     //if(IsEquipmentSlotUsed(equiped.Slot))
-            
+
+		EquipedItem e = new EquipedItem();
+		e.UniqueItemId = armor.UniqueId;
+		e.rpgArmor = armor;
+		e.Level = level;
         
-    switch (equiped.Slot)
-    {
-        case EquipmentSlots.Head:
-            if(IsEquipmentSlotUsed(EquipmentSlots.Head))
-                PlayerManager.Instance.Hero.HeadInventory.UnequipItem(EquippedHead);
-            EquippedHead = equiped;
-            if(PlayerManager.Instance.avatar != null)
-                PlayerManager.Instance.avatar.EquipBodyPart(e.FBXName, EquipmentSlots.Head);
-            break;
-        case EquipmentSlots.Body:
-            if(IsEquipmentSlotUsed(EquipmentSlots.Body))
-                PlayerManager.Instance.Hero.BodyInventory.UnequipItem(EquippedBody);
-            EquippedBody = equiped;
-            if(PlayerManager.Instance.avatar != null)
-                PlayerManager.Instance.avatar.EquipBodyPart(e.FBXName, EquipmentSlots.Body);
-            break;
-        case EquipmentSlots.ArmL:
-            if(IsEquipmentSlotUsed(EquipmentSlots.ArmL))
-                PlayerManager.Instance.Hero.ArmLInventory.UnequipItem(EquippedArmL);
-            EquippedArmL = equiped;
-            if(PlayerManager.Instance.avatar != null)
-                PlayerManager.Instance.avatar.EquipBodyPart(e.FBXName, EquipmentSlots.ArmL);
-            break;
-        case EquipmentSlots.ArmR:
-            if(IsEquipmentSlotUsed(EquipmentSlots.ArmR))
-                PlayerManager.Instance.Hero.ArmRInventory.UnequipItem(EquippedArmR);
-            EquippedArmR = equiped;
-            if(PlayerManager.Instance.avatar != null)
-                PlayerManager.Instance.avatar.EquipBodyPart(e.FBXName, EquipmentSlots.ArmR);
-            break;
-        case EquipmentSlots.Legs:
-            if(IsEquipmentSlotUsed(EquipmentSlots.Legs))
-                PlayerManager.Instance.Hero.LegsInventory.UnequipItem(EquippedLegs);
-            EquippedLegs = equiped;
-            if(PlayerManager.Instance.avatar != null)
-                PlayerManager.Instance.avatar.EquipBodyPart(e.FBXName, EquipmentSlots.Legs);
-            break;
-    }
+	    switch (e.rpgArmor.EquipmentSlotIndex)
+	    {
+	        case EquipmentSlots.Head:
+	            if(IsEquipmentSlotUsed(EquipmentSlots.Head))
+	                PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedHead.UniqueItemId, EquippedHead.Level);
+	            EquippedHead = e;
+	            if(PlayerManager.Instance.avatar != null)
+	                PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Head);
+	            break;
+	        case EquipmentSlots.Body:
+	            if(IsEquipmentSlotUsed(EquipmentSlots.Body))
+				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedBody.UniqueItemId, EquippedBody.Level);
+	            EquippedBody = e;
+	            if(PlayerManager.Instance.avatar != null)
+					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Body);
+	            break;
+	        case EquipmentSlots.ArmL:
+	            if(IsEquipmentSlotUsed(EquipmentSlots.ArmL))
+				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedArmL.UniqueItemId, EquippedArmL.Level);
+	            EquippedArmL = e;
+	            if(PlayerManager.Instance.avatar != null)
+					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.ArmL);
+	            break;
+	        case EquipmentSlots.ArmR:
+	            if(IsEquipmentSlotUsed(EquipmentSlots.ArmR))
+				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedArmR.UniqueItemId, EquippedArmR.Level);
+	            EquippedArmR = e;
+	            if(PlayerManager.Instance.avatar != null)
+					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.ArmR);
+	            break;
+	        case EquipmentSlots.Legs:
+	            if(IsEquipmentSlotUsed(EquipmentSlots.Legs))
+				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedLegs.UniqueItemId, EquippedLegs.Level);
+	            EquippedLegs = e;
+	            if(PlayerManager.Instance.avatar != null)
+					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Legs);
+	            break;
+	    }
         
      //Items.Add(equiped);
      return true;
  }
- 
- public void EquipAll()
- {
-     /*foreach(EquipedItem ei in Items)
-     {
-         EquipedItem newItem = new EquipedItem();
-         newItem.rpgItem = ei.rpgItem;
-         //PlayerEquip.itemToEquip.Add(newItem);
-     }*/
- }
- 
+
  // Loading all items after loading game
     public void LoadItems()
     {
         int id = Convert.ToInt32(EquippedHead.UniqueItemId.Replace("ARMOR", string.Empty));
-        EquippedHead.rpgItem = Storage.LoadById<RPGArmor>(id, new RPGArmor());
+        EquippedHead.rpgArmor = Storage.LoadById<RPGArmor>(id, new RPGArmor());
         id = Convert.ToInt32(EquippedBody.UniqueItemId.Replace("ARMOR", string.Empty));
-        EquippedBody.rpgItem = Storage.LoadById<RPGArmor>(id, new RPGArmor());
+		EquippedBody.rpgArmor = Storage.LoadById<RPGArmor>(id, new RPGArmor());
         id = Convert.ToInt32(EquippedArmL.UniqueItemId.Replace("ARMOR", string.Empty));
-        EquippedArmL.rpgItem = Storage.LoadById<RPGArmor>(id, new RPGArmor());
+		EquippedArmL.rpgArmor = Storage.LoadById<RPGArmor>(id, new RPGArmor());
         id = Convert.ToInt32(EquippedArmR.UniqueItemId.Replace("ARMOR", string.Empty));
-        EquippedArmR.rpgItem = Storage.LoadById<RPGArmor>(id, new RPGArmor());
+		EquippedArmR.rpgArmor = Storage.LoadById<RPGArmor>(id, new RPGArmor());
         id = Convert.ToInt32(EquippedLegs.UniqueItemId.Replace("ARMOR", string.Empty));
-        EquippedLegs.rpgItem = Storage.LoadById<RPGArmor>(id, new RPGArmor());
-
-             //item.rpgItem.Icon = (Texture2D)Resources.Load(item.rpgItem.IconPath, typeof(Texture2D)); 
-
+		EquippedLegs.rpgArmor = Storage.LoadById<RPGArmor>(id, new RPGArmor());
     }
- 
- //check if it is possible attack, it will check if weapon needs ammo 
 }

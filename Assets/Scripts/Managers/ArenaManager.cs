@@ -2,34 +2,62 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ArenaManager : Photon.MonoBehaviour {
+public class ArenaManager : Zone {
 
     public Transform[] arenaSpawnPos;
     public Transform enemySpawnPos;
-    public string arenaName;
-    public List<string> enemyPrefabStrings;
-	public List<string> enemies;
-    public SimpleFSM enemy;
+	public RPGEnemy rpgEnemy;
+	public int ownerViewID;
+	public int ownerID;
+    public List<SimpleFSM> enemyFSMs;
 	public PhotonView myPhotonView;
 	public int ID;
 	public List<CharacterStatus> players;
 	public List<int> playerIDs;
+	public List<PhotonPlayer> admittedPlayers;
 	//public List<ArenaPlayer> players;
 
 	public void Start()
 	{
 		myPhotonView = GetComponent<PhotonView>();
+		type = ZoneType.arena;
+	}
+
+	public void SpawnEnemyWave(int index)
+	{
+		if(rpgEnemy != null)
+		{
+			for (int i = 0; i < rpgEnemy.PrefabPaths.Count; i++) 
+			{
+				Debug.Log("spawning enemy wave" + index);
+				GameObject enemyUnit = Instantiate(Resources.Load(rpgEnemy.PrefabPaths[index]), enemySpawnPos.position, enemySpawnPos.rotation) as GameObject;
+				PhotonView nView = enemyUnit.GetComponent<PhotonView>();
+				nView.viewID = ownerViewID;
+				SimpleFSM fsm = enemyUnit.GetComponent<SimpleFSM>();
+				enemyFSMs.Add(fsm);
+				fsm.arena = this;
+
+			}
+		}
+	}
+
+	public void UpdateNewOwner()
+	{
+		for (int i = 0; i < enemyFSMs.Count; i++) 
+		{
+			enemyFSMs[i].myPhotonView.viewID = ownerViewID;
+		}
 	}
 
 	//Master
-	[RPC]
-	public void Initialise(string name, int id, int viewid)
+	/*[RPC]
+	public void Initialise(int enemyID, int id, int viewid)
     {
 		myPhotonView.RPC("AddPlayer", PhotonTargets.All, id);
 
 		if(PhotonNetwork.isMasterClient)
 		{
-			if(enemy != null)
+			if(enemyFSM != null)
 				return;
 
 			int index = enemies.IndexOf(name);
@@ -41,135 +69,23 @@ public class ArenaManager : Photon.MonoBehaviour {
 				newEnemy.GetComponent<PhotonView>().RPC("SetupArena", PhotonTargets.AllBuffered, ID, viewid);
 			}
 		}
-    }
+    }*/
 
 	//target player
-	[RPC]
+	/*[RPC]
 	public void ChangeEnemyOwner()
 	{
-		if(PlayerManager.Instance.ActiveArena == this && enemy!=null)
+		if(PlayerManager.Instance.ActiveArena == this && enemyFSMs.Count > 0)
 		{
-			enemy.myPhotonView.RPC("ChangeOwner", PhotonTargets.AllBuffered, PhotonNetwork.AllocateViewID());
+			enemyFSMs[0].myPhotonView.RPC("ChangeOwner", PhotonTargets.AllBuffered, PhotonNetwork.AllocateViewID());
 			Debug.Log("change owner");
 		}
-	}
+	}*/
 
 	//all
-	[RPC]
-	public void AddPlayer(int id)
-	{
-		Debug.Log("adding player with id: "+id);
-		PhotonView view = PhotonView.Find(id);
-		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
-		//ArenaPlayer ap = new ArenaPlayer();
-		//ap.playerCS = playerObject;
-		//ap.playerID = view.ownerId;
-		//players.Add(ap);
-		players.Add(playerObject);
-		playerIDs.Add(view.ownerId);
-	}
 
-	//all buffered
-	[RPC]
-	public void RemovePlayer(int id)
-	{
-		PhotonView view = PhotonView.Find(id);
-		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
-		//ArenaPlayer ap = new ArenaPlayer();
-		//ap.playerCS = playerObject;
-		//ap.playerID = view.ownerId;
-		//players.Remove(ap);
-		players.Remove(playerObject);
-		playerIDs.Remove(view.ownerId);
-		if(PhotonNetwork.isMasterClient)
-		{
-			if(players.Count == 0)
-			{
-				Debug.Log("clear");
-				//PhotonView enemyView = enemy.GetComponent<PhotonView>();
-				/*if(enemyView.owner != null)
-				{
-					myPhotonView.RPC("ClearEnemies", enemyView.owner);
-				}
-				else*/
-					//myPhotonView.RPC("ClearEnemies", PhotonTargets.MasterClient);
-				ClearEnemies();
-				PlayerManager.Instance.ActiveWorld.DecommissionArena(GetComponent<Zone>());
-				//ClearEnemies();
-			}
-			else
-			{
-				if(enemy.GetComponent<SimpleFSM>().ownerID == view.ownerId)
-				{
-					Debug.Log("here alloc");
-					//PhotonNetwork.UnAllocateViewID(enemyView.viewID);
-					myPhotonView.RPC("ChangeEnemyOwner", PhotonPlayer.Find(playerIDs[0]));
-				}
-			}
-		}
-	}
 
-	//all buffered
-	[RPC]
-	public void RemovePlayerAt(int id)
-	{
-		for (int i = 0; i <playerIDs.Count; i++) 
-		{
-			if(playerIDs[i] == id)
-			{
-				playerIDs.RemoveAt(i);
-				players.RemoveAt(i);
-				Debug.Log("disconnected player" + id);
-			}
-		}
-		if(PhotonNetwork.isMasterClient)
-		{
-			PhotonView enemyView = enemy.GetComponent<PhotonView>();
 
-			if(players.Count == 0)
-			{
-				Debug.Log("clear");
-
-				//if(enemyView.owner != null)
-					//myPhotonView.RPC("ClearEnemies", enemyView.owner);
-				//else
-					//myPhotonView.RPC("ClearEnemies", PhotonTargets.MasterClient);
-				ClearEnemies();
-				PlayerManager.Instance.ActiveWorld.DecommissionArena(GetComponent<Zone>());
-			}
-			else
-			{
-				if(enemyView.owner == null && enemy.GetComponent<SimpleFSM>().ownerID == id)
-				{
-					Debug.Log("here alloc");
-					//PhotonNetwork.UnAllocateViewID(enemyView.viewID);
-					myPhotonView.RPC("ChangeEnemyOwner", PhotonPlayer.Find(playerIDs[0]));
-				}
-			}
-		}
-	}
-
-	public void EndSession(int id)
-	{
-		myPhotonView.RPC("RemovePlayer", PhotonTargets.AllBuffered, id);
-	}
-
-	public void OnPhotonPlayerDisconnected(PhotonPlayer player)
-	{
-		Debug.Log("ONPHOtonplayerdisconnected");
-		if(PhotonNetwork.isMasterClient)
-		{
-			for (int i = 0; i < playerIDs.Count; i++) 
-			{
-				if(playerIDs[i] == player.ID)
-				{
-					Debug.Log("disconnecting player" + player);
-					//players.RemoveAt(i);
-					myPhotonView.RPC("RemovePlayerAt", PhotonTargets.AllBuffered, player.ID);
-				}
-			}
-		}
-	}
 
 	/*public void RefreshPlayerList(int id)
 	{
@@ -181,23 +97,73 @@ public class ArenaManager : Photon.MonoBehaviour {
 	}*/
 
 
-	//[RPC]
-	public void ClearEnemies()
-	{
-		int id = enemy.InitViewID;
-		PhotonNetwork.RemoveRPCs(enemy.myPhotonView);
-		enemy.myPhotonView.RPC("RevertOwner", PhotonTargets.All);
 
-		PhotonNetwork.Destroy(enemy.gameObject);
+	public void CleanUp()
+	{
+		Debug.Log("clean up");
+		/*int id = enemyFSM.InitViewID;
+		PhotonNetwork.RemoveRPCs(enemyFSM.myPhotonView);
+		enemyFSM.myPhotonView.RPC("RevertOwner", PhotonTargets.All);
+
+		PhotonNetwork.Destroy(enemyFSM.gameObject);
 		PhotonNetwork.UnAllocateViewID(id);
 
-		Debug.Log("end session arena");
+		Debug.Log("end session arena");*/
+		for (int i = 0; i < enemyFSMs.Count; i++) 
+		{
+			Destroy(enemyFSMs[i].gameObject);
+		}
+		rpgEnemy = null;
+		ownerID = 0;
+		ownerViewID = 0;
+		players.Clear();
+		playerIDs.Clear();
+		admittedPlayers.Clear();
+		enemyFSMs.Clear();
 	}
 
+	public void CheckDeathStatus()
+	{
+		for (int i = 0; i < enemyFSMs.Count; i++) 
+		{
+			if(enemyFSMs[i].myStatus.isAlive())
+				return;
+		}
+		GiveRewards();
+	}
+
+	public void GiveRewards()
+	{
+		List<InventoryItem> lootItems = new List<InventoryItem>();
+		for (int i = 0; i < rpgEnemy.Loots.Count; i++) 
+		{
+			float chance = Random.Range(0.0f, 1.0f);
+			if(chance <= rpgEnemy.Loots[i].dropRate)
+			{
+				InventoryItem newItem = new InventoryItem();
+				if(rpgEnemy.Loots[i].itemType == ItemType.Currency)
+				{
+					RPGCurrency currency = Storage.LoadById<RPGCurrency>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGCurrency());
+					newItem.rpgItem = currency;
+				}
+				else if(rpgEnemy.Loots[i].itemType == ItemType.Armor)
+				{
+					RPGArmor armor = Storage.LoadById<RPGArmor>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGArmor());
+					newItem.rpgItem = armor;
+				}
+				else if(rpgEnemy.Loots[i].itemType == ItemType.Normal)
+				{
+					RPGItem item = Storage.LoadById<RPGItem>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGItem());
+					newItem.rpgItem = item;
+				}
+				newItem.CurrentAmount = Random.Range(rpgEnemy.Loots[i].minQuantity, rpgEnemy.Loots[i].maxQuantity);
+				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
+				newItem.Level = Random.Range(1, rpgEnemy.Loots[i].itemLevel);
+				lootItems.Add(newItem);
+			}
+		}
+
+		//guimanager display rewards;
+	}
 }
 
-/*public class ArenaPlayer
-{
-	public CharacterStatus playerCS;
-	public int playerID;
-}*/

@@ -34,6 +34,8 @@ public class ItemTileButton: MonoBehaviour
     
     public Color EquippedColor = Color.cyan;
     public Color SelectedColor = Color.white;
+	public UISprite mainSprite;
+
 
 	//bool mStarted = false;
 	//bool mHighlighted = false;
@@ -116,6 +118,16 @@ public class ItemTileButton: MonoBehaviour
         IsEquipped = false;
         Deselect();
     }
+
+	public void SelectCategory()
+	{
+		mainSprite.color = SelectedColor;
+	}
+
+	public void DeselectCategory()
+	{
+		mainSprite.color = Color.grey;
+	}
     
     
 }

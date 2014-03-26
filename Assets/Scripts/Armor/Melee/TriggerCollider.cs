@@ -10,7 +10,7 @@ public class TriggerCollider : MonoBehaviour {
 
 	public void Start()
 	{
-		IgnoreCollisions();
+		//IgnoreCollisions();
 	}
 
 	public void IgnoreCollisions()
@@ -39,8 +39,16 @@ public class TriggerCollider : MonoBehaviour {
 					if(!masterAISkill.HitEnemies.Contains(cs) && !masterAISkill.HitAllies.Contains(cs))
 					{
 						//determine if friend or foe
-						masterAISkill.HitEnemies.Add(cs);
-						masterAISkill.HitTarget(hb, false);
+						if(cs.isAI)
+						{
+							masterAISkill.HitAllies.Add(cs);
+							masterAISkill.HitTarget(hb, true);
+						}
+						else
+						{
+							masterAISkill.HitEnemies.Add(cs);
+							masterAISkill.HitTarget(hb, false);
+						}
 						Debug.Log("I JUST HIT SOMETHING");
 					}
 				}
@@ -49,8 +57,16 @@ public class TriggerCollider : MonoBehaviour {
 					if(!masterArmor.HitEnemies.Contains(cs) && !masterArmor.HitAllies.Contains(cs))
                     {
                         //determine if friend or foe
-                        masterArmor.HitEnemies.Add(cs);
-                        masterArmor.HitTarget(hb, false);
+						if(cs.isAI)
+						{
+                        	masterArmor.HitEnemies.Add(cs);
+                        	masterArmor.HitTarget(hb, false);
+						}
+						else
+						{
+							masterArmor.HitAllies.Add(cs);
+							masterArmor.HitTarget(hb, true);
+						}
                         Debug.Log("I JUST HIT SOMETHING");
                     }
                 }

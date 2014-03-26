@@ -1,0 +1,20 @@
+{"frames": {
+
+"MagnetCentral_Gym_Jim.png":
+{
+	"frame": {"x":2,"y":2,"w":250,"h":250},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
+	"sourceSize": {"w":250,"h":250}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "EnemiesUHD.png",
+	"format": "RGBA8888",
+	"size": {"w":256,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7c9469552a4fbceb04f0323ee06bad83$"
+}
+}

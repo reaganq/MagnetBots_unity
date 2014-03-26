@@ -87,13 +87,21 @@ public class ItemUtils {
 		
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("Upgradeable");
+		item.IsUpgradeable = EditorGUILayout.Toggle(item.IsUpgradeable ,GUILayout.Width(100));
 		EditorGUILayout.PrefixLabel("Usable");
-		
-		item.IsUsable = EditorGUILayout.Toggle(item.IsUsable ,GUILayout.Width(300));
+		item.IsUsable = EditorGUILayout.Toggle(item.IsUsable ,GUILayout.Width(100));
+		EditorGUILayout.PrefixLabel("Equippable");
+		item.IsEquippable = EditorGUILayout.Toggle(item.IsEquippable ,GUILayout.Width(100));
 		EditorGUILayout.EndHorizontal();
 		if (item.IsUsable)
 		{
 			AddUsableItem(item, Data);
+		}
+		if(item.IsEquippable)
+		{
+			EditorUtils.Label("Equiped slot");
+			item.EquipmentSlotIndex = (EquipmentSlots)EditorGUILayout.EnumPopup(item.EquipmentSlotIndex ,GUILayout.Width(300));
 		}
 	}
 	
@@ -103,13 +111,6 @@ public class ItemUtils {
 		//usableItem.Recharge = EditorUtils.FloatField(usableItem.Recharge ,"Cooldown");
 		
 		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Cooldown type");
-		
-		//usableItem.UsageSkill = (UsageSkillType)EditorGUILayout.EnumPopup(usableItem.UsageSkill ,GUILayout.Width(300));
-		EditorGUILayout.EndHorizontal();
-		
-		EditorUtils.Separator();
 		EditorUtils.Label("Usable effects");
 		
 		//EffectUtils.EffectsEditor(usableItem.Effects, Data);
@@ -142,7 +143,7 @@ public class ItemUtils {
 		
 		equiped.FBXName = EditorUtils.TextField(equiped.FBXName, "FBX location");
 		
-		EditorUtils.Label("Equiped slot");
+
 		
 		//EffectUtils.EffectsEditor(equiped.WornEffects, Data, EffectTypeUsage.Equiped);
 		
@@ -152,10 +153,7 @@ public class ItemUtils {
 		
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
-		
-        equiped.EquipmentSlotIndex = (EquipmentSlots)EditorGUILayout.EnumPopup(equiped.EquipmentSlotIndex ,GUILayout.Width(300));
-        
-        
+		        
 		/*if (GUILayout.Button("Add slot", GUILayout.Width(150)))
 		{
 			equiped.EquipmentSlots.Add(new RPGEquipmentSlot());
@@ -354,7 +352,7 @@ public class ItemUtils {
 		{
 			EditorGUILayout.Separator();
 			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("Armor", generator.GetArmor);
+			//EditorGUILayout.LabelField("Armor", generator.GetArmor);
 			EditorGUILayout.EndHorizontal();
 		}
 	}

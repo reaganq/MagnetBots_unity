@@ -1,6 +1,6 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2012 Tasharen Entertainment
+// Copyright Â© 2011-2014 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
@@ -11,7 +11,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 [AddComponentMenu("NGUI/Interaction/Draggable Camera")]
-public class UIDraggableCamera : IgnoreTimeScale
+public class UIDraggableCamera : MonoBehaviour
 {
 	/// <summary>
 	/// Root object that will be used for drag-limiting bounds.
@@ -38,6 +38,12 @@ public class UIDraggableCamera : IgnoreTimeScale
 	public UIDragObject.DragEffect dragEffect = UIDragObject.DragEffect.MomentumAndSpring;
 
 	/// <summary>
+	/// Whether the drag operation will be started smoothly, or if if it will be precise (but will have a noticeable "jump").
+	/// </summary>
+
+	public bool smoothDragStart = true;
+
+	/// <summary>
 	/// How much momentum gets applied when the press is released after dragging.
 	/// </summary>
 
@@ -50,6 +56,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 	Bounds mBounds;
 	float mScroll = 0f;
 	UIRoot mRoot;
+	bool mDragStarted = false;
 
 	/// <summary>
 	/// Current momentum, exposed just in case it's needed.
@@ -109,7 +116,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 		{
 			Vector3 offset = CalculateConstrainOffset();
 
-			if (offset.magnitude > 0f)
+			if (offset.sqrMagnitude > 0f)
 			{
 				if (immediate)
 				{
@@ -133,6 +140,8 @@ public class UIDraggableCamera : IgnoreTimeScale
 
 	public void Press (bool isPressed)
 	{
+		if (isPressed) mDragStarted = false;
+
 		if (rootForBounds != null)
 		{
 			mPressed = isPressed;
@@ -163,6 +172,13 @@ public class UIDraggableCamera : IgnoreTimeScale
 
 	public void Drag (Vector2 delta)
 	{
+		// Prevents the initial jump when the drag threshold gets passed
+		if (smoothDragStart && !mDragStarted)
+		{
+			mDragStarted = true;
+			return;
+		}
+
 		UICamera.currentTouch.clickNotification = UICamera.ClickNotification.BasedOnDelta;
 		if (mRoot != null) delta *= mRoot.pixelSizeAdjustment;
 
@@ -199,7 +215,7 @@ public class UIDraggableCamera : IgnoreTimeScale
 
 	void Update ()
 	{
-		float delta = UpdateRealTimeDelta();
+		float delta = RealTime.deltaTime;
 
 		if (mPressed)
 		{

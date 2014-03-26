@@ -166,6 +166,12 @@
             <filename>TextboxBG.png</filename>
             <filename>tutorial.png</filename>
             <filename>NPCTrigger.png</filename>
+            <filename>Button_Blank.png</filename>
+            <filename>NotificationIcon.png</filename>
+            <filename>CrystalIcon.png</filename>
+            <filename>MenuButton.png</filename>
+            <filename>currencybg.png</filename>
+            <filename>Tile.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -43,13 +44,13 @@ public class PlayerManager : MonoBehaviour
  //public static float sellPriceModifier;
  
     public UsableItem currentItem;
-    public int activeNPC;
-    public string ActiveNPCName;
     public NPC ActiveNPC;
     public Shop ActiveShop;
+	public RPGArena SelectedArena;
 	public WorldManager ActiveWorld;
 	public Zone ActiveZone;
 	public ArenaManager ActiveArena;
+	public PlayerActivityState activityState;
 
     public Transform SpawnPoint;
     public GameObject avatarPrefab;
@@ -60,6 +61,9 @@ public class PlayerManager : MonoBehaviour
     public CharacterStatus avatarStatus;
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
+
+	public List<int> partyMembers = new List<int>();
+	public bool isPartyLeader = false;
 
  //public static GeneralData Data;
  
@@ -106,17 +110,19 @@ public class PlayerManager : MonoBehaviour
 		avatarInput = avatarObject.GetComponent<InputController>();
 		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
 		cm.enabled = true;
-		avatarInput.enabled = true;
+		//avatarInput.enabled = true;
 		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();
 		UICamera.fallThrough = avatarObject;
 		avatar = avatarObject.GetComponent<Avatar>();
 		avatarPhotonView = avatarObject.GetComponent<PhotonView>();
-		PlayerCamera.Instance.targetTransform = avatarObject.transform;
-		LoadCharacterParts();
+		RefreshAvatar();
+		//PlayerCamera.Instance.targetTransform = avatarObject.transform;
+		//LoadCharacterParts();
     }
 
     public void RefreshAvatar()
     {
+		//TODO OK THERE IS A PROBLEM HERE
         if(avatarObject == null)
         {
             StartNewGame();
@@ -136,6 +142,10 @@ public class PlayerManager : MonoBehaviour
         avatarObject.transform.position = SpawnPoint.position;
         LoadCharacterParts();
         EnableAvatarInput();
+
+		//TODO hacky party list refresh
+		partyMembers.Clear();
+		isPartyLeader = false;
     }
 
 	public void ChangeWorld()
@@ -145,7 +155,7 @@ public class PlayerManager : MonoBehaviour
 		SpawnPoint = ActiveZone.spawnPoint;
 	}
 
-	public void ChangeZone(Zone newZone)
+	/*public void ChangeZone(Zone newZone)
 	{
 		if(newZone != null)
 		{
@@ -158,9 +168,36 @@ public class PlayerManager : MonoBehaviour
 
 			if(ActiveArena)
 			{
-				ActiveArena.EndSession(avatarPhotonView.viewID);
+				activewo.EndSession(avatarPhotonView.viewID);
 				ActiveArena = null;
 			}
+		}
+	}*/
+
+	public void GoToArena(Zone newZone, int enemyID)
+	{
+		if(newZone != null)
+		{
+			Zone oldzone = ActiveZone;
+			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			ActiveZone = newZone;
+			SpawnPoint = ActiveZone.spawnPoint;
+			avatarObject.transform.position = SpawnPoint.position;
+			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
+			if(ActiveArena == null)
+			{
+				
+				Debug.LogError("no bloody arena");
+			}
+			//int newid = PhotonNetwork.AllocateViewID();
+			ActiveWorld.myPhotonView.RPC("AddPlayer", PhotonTargets.AllBuffered, ActiveArena.ID, avatarPhotonView.viewID);
+			//TODO make the selected enemy dynamic
+			//ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, enemyID, avatarPhotonView.viewID, newid);
+			GUIManager.Instance.TurnOffAllOtherUI();
+			GUIManager.Instance.DisplayMainGUI();
+			ResetNPC();
+			activityState = PlayerActivityState.arena;
 		}
 	}
 
@@ -177,32 +214,11 @@ public class PlayerManager : MonoBehaviour
 			
 			if(ActiveArena)
 			{
-				ActiveArena.EndSession(avatarPhotonView.viewID);
+				ActiveWorld.EndSession(ActiveArena);
+				//ActiveArena.EndSession(avatarPhotonView.viewID);
 				ActiveArena = null;
 			}
-		}
-	}
-
-	public void GoToArena(Zone newZone)
-	{
-		if(newZone != null)
-		{
-			Zone oldzone = ActiveZone;
-			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-			ActiveZone = newZone;
-			SpawnPoint = ActiveZone.spawnPoint;
-			avatarObject.transform.position = SpawnPoint.position;
-			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
-			if(ActiveArena == null)
-			{
-
-				Debug.LogError("no bloody arena");
-			}
-			int newid = PhotonNetwork.AllocateViewID();
-
-			ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, "Jim", avatarPhotonView.viewID, newid);
-			ResetNPC();
+			activityState = PlayerActivityState.idle;
 		}
 	}
 
@@ -219,12 +235,14 @@ public class PlayerManager : MonoBehaviour
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, Hero.Equip.EquippedHead.Slot);
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName, Hero.Equip.EquippedArmL.Slot);
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName, Hero.Equip.EquippedArmR.Slot);
-		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, 
-		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgItem).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgItem).FBXName);
+		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgArmor).FBXName, 
+		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgArmor).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgArmor).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgArmor).FBXName,
+		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgArmor).FBXName);
     }
+
+
 
     public void EnableAvatarInput()
     {
@@ -235,7 +253,17 @@ public class PlayerManager : MonoBehaviour
     {
         avatarInput.enabled = false;
     }
- 
+
+	//party leader send to party members when they join
+
+}
+
+public enum PlayerActivityState
+{
+	idle,
+	minigame,
+	shop,
+	arena
 }
 
 public enum ContainerType

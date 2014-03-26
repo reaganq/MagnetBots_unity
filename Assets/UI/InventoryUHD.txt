@@ -1,8 +1,16 @@
 {"frames": {
 
+"Button_Blank.png":
+{
+	"frame": {"x":686,"y":471,"w":332,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
+	"sourceSize": {"w":332,"h":96}
+},
 "Button_Buy.png":
 {
-	"frame": {"x":483,"y":694,"w":335,"h":101},
+	"frame": {"x":693,"y":912,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -10,7 +18,7 @@
 },
 "Button_Destroy.png":
 {
-	"frame": {"x":483,"y":591,"w":335,"h":101},
+	"frame": {"x":631,"y":809,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -18,7 +26,7 @@
 },
 "Button_Equip.png":
 {
-	"frame": {"x":511,"y":895,"w":332,"h":96},
+	"frame": {"x":1008,"y":254,"w":332,"h":96},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
@@ -26,7 +34,7 @@
 },
 "Button_Sell.png":
 {
-	"frame": {"x":594,"y":254,"w":335,"h":101},
+	"frame": {"x":294,"y":821,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -34,7 +42,7 @@
 },
 "Button_Use.png":
 {
-	"frame": {"x":511,"y":797,"w":332,"h":96},
+	"frame": {"x":686,"y":373,"w":332,"h":96},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":332,"h":96},
@@ -42,7 +50,7 @@
 },
 "Button_template.png":
 {
-	"frame": {"x":536,"y":373,"w":335,"h":101},
+	"frame": {"x":671,"y":254,"w":335,"h":101},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":335,"h":101},
@@ -56,6 +64,14 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":299,"h":43},
 	"sourceSize": {"w":299,"h":43}
 },
+"CrystalIcon.png":
+{
+	"frame": {"x":706,"y":646,"w":51,"h":57},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":51,"h":57},
+	"sourceSize": {"w":51,"h":57}
+},
 "InventoryTab.png":
 {
 	"frame": {"x":2,"y":612,"w":261,"h":225},
@@ -66,7 +82,7 @@
 },
 "ItemSelectBorder.png":
 {
-	"frame": {"x":265,"y":591,"w":216,"h":216},
+	"frame": {"x":488,"y":591,"w":216,"h":216},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":216,"h":216},
@@ -74,7 +90,7 @@
 },
 "ItemTileBG.png":
 {
-	"frame": {"x":241,"y":373,"w":216,"h":216},
+	"frame": {"x":468,"y":373,"w":216,"h":216},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":216,"h":216},
@@ -90,19 +106,35 @@
 },
 "MagnetIcon.png":
 {
-	"frame": {"x":309,"y":809,"w":200,"h":200},
+	"frame": {"x":706,"y":705,"w":44,"h":57},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":200},
-	"sourceSize": {"w":200,"h":200}
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":57},
+	"sourceSize": {"w":44,"h":57}
+},
+"MenuButton.png":
+{
+	"frame": {"x":157,"y":839,"w":135,"h":141},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":135,"h":141},
+	"sourceSize": {"w":135,"h":141}
 },
 "NPCTrigger.png":
 {
-	"frame": {"x":157,"y":839,"w":150,"h":150},
+	"frame": {"x":706,"y":569,"w":75,"h":75},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":150,"h":150},
-	"sourceSize": {"w":150,"h":150}
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"NotificationIcon.png":
+{
+	"frame": {"x":241,"y":373,"w":225,"h":225},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":225},
+	"sourceSize": {"w":225,"h":225}
 },
 "TextboxBG.png":
 {
@@ -112,9 +144,17 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":237,"h":237},
 	"sourceSize": {"w":237,"h":237}
 },
+"Tile.png":
+{
+	"frame": {"x":265,"y":600,"w":221,"h":219},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":221,"h":219},
+	"sourceSize": {"w":221,"h":219}
+},
 "arrow.png":
 {
-	"frame": {"x":459,"y":373,"w":75,"h":117},
+	"frame": {"x":594,"y":254,"w":75,"h":117},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":117},
@@ -136,6 +176,14 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":188},
 	"sourceSize": {"w":188,"h":188}
 },
+"currencybg.png":
+{
+	"frame": {"x":303,"y":315,"w":161,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":161,"h":36},
+	"sourceSize": {"w":161,"h":36}
+},
 "divider.png":
 {
 	"frame": {"x":594,"y":2,"w":1255,"h":250},
@@ -154,7 +202,7 @@
 },
 "tutorial.png":
 {
-	"frame": {"x":459,"y":492,"w":397,"h":97},
+	"frame": {"x":294,"y":924,"w":397,"h":97},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":397,"h":97},
@@ -167,6 +215,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:cf947b6a67d96c04e429d98a979765f7$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4adaaba2671b546edde72e02568e3efe$"
 }
 }

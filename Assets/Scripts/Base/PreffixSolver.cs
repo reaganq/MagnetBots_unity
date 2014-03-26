@@ -3,28 +3,45 @@ using System.Collections;
 
 public class PreffixSolver  {
 
- public static bool GiveItem(PreffixType preffix, int ID, int amount)
- {
-     string uniqueId = preffix.ToString() + ID.ToString();
-     switch(preffix)
-     {
-         case PreffixType.ARMOR:
-             RPGArmor armor = Storage.LoadbyUniqueId<RPGArmor>(uniqueId, new RPGArmor());
+ 	public static void GiveItem(PreffixType preffix, int ID, int level, int amount)
+ 	{
+     	switch(preffix)
+     	{
+         	case PreffixType.ARMOR:
+				RPGArmor armor = Storage.LoadById<RPGArmor>(ID, new RPGArmor());
              //armor.CurrentDurability = armor.Durability;
-            if(armor.EquipmentSlotIndex == EquipmentSlots.Head)
-                return PlayerManager.Instance.Hero.HeadInventory.AddItem(armor, amount);
-            if(armor.EquipmentSlotIndex == EquipmentSlots.Body)
-                return PlayerManager.Instance.Hero.BodyInventory.AddItem(armor, amount);
-            if(armor.EquipmentSlotIndex == EquipmentSlots.ArmL)
-                return PlayerManager.Instance.Hero.ArmLInventory.AddItem(armor, amount);
-            if(armor.EquipmentSlotIndex == EquipmentSlots.ArmR)
-                return PlayerManager.Instance.Hero.ArmRInventory.AddItem(armor, amount);
-            if(armor.EquipmentSlotIndex == EquipmentSlots.Legs)
-                return PlayerManager.Instance.Hero.LegsInventory.AddItem(armor, amount);
-            break;
-         case PreffixType.ITEM:
-             RPGArmor item = Storage.LoadbyUniqueId<RPGArmor>(uniqueId, new RPGArmor());
-            return PlayerManager.Instance.Hero.Inventory.AddItem(item, amount);
+				PlayerManager.Instance.Hero.MainInventory.AddItem(armor, level, amount);
+
+            	/*if(armor.EquipmentSlotIndex == EquipmentSlots.Head)
+				{
+                	PlayerManager.Instance.Hero.HeadInventory.AddItem(armor, level, amount);
+					return;
+				}
+            	if(armor.EquipmentSlotIndex == EquipmentSlots.Body)
+				{
+					PlayerManager.Instance.Hero.BodyInventory.AddItem(armor, level, amount);
+					return;
+				}
+            	if(armor.EquipmentSlotIndex == EquipmentSlots.ArmL)
+				{
+					PlayerManager.Instance.Hero.ArmLInventory.AddItem(armor, level, amount);
+					return;
+				}
+            	if(armor.EquipmentSlotIndex == EquipmentSlots.ArmR)
+				{
+					PlayerManager.Instance.Hero.ArmRInventory.AddItem(armor, level, amount);
+					return;
+				}
+            	if(armor.EquipmentSlotIndex == EquipmentSlots.Legs)
+				{
+					PlayerManager.Instance.Hero.LegsInventory.AddItem(armor, level, amount);
+					return;
+				}*/
+            	break;
+         	case PreffixType.ITEM:
+            	RPGItem item = Storage.LoadById<RPGItem>(ID, new RPGItem());
+            	PlayerManager.Instance.Hero.MainInventory.AddItem(item, level, amount);
+				return;
             //break;
          /*case PreffixType.SKILL:
              if (amount == -1)
@@ -90,9 +107,8 @@ public class PreffixSolver  {
              player.Hero.AddReputation(ID, amount);
              break;
              */
-     }
-     return true;
- }
+     	}
+ 	}
 }
 
 public enum PreffixType

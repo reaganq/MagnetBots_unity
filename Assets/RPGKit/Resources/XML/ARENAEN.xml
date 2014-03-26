@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGArena xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGArena>
+    <ID>1</ID>
+    <Name>Gym</Name>
+    <Description />
+    <SystemDescription />
+    <EnemyIDs>
+      <int>1</int>
+    </EnemyIDs>
+  </RPGArena>
+</ArrayOfRPGArena>

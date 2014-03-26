@@ -5,6 +5,9 @@ public class IntroGUIController : MonoBehaviour {
 
     public GameObject loadingLabel;
     public GameObject startButton;
+	public GameObject signInButton;
+	public GameObject registerButton;
+
 
     public void OnStartPressed()
     {

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPC: MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class NPC: MonoBehaviour
     public int ID;
     public bool Active = false;
     public Shop thisShop = null;
+	public RPGArena arena = null;
+	public RPGActivity activity = null;
+	public RPGMinigame miniGame = null;
 	public GameObject trigger;
 	public Collider triggerCollider;
 
@@ -22,6 +26,26 @@ public class NPC: MonoBehaviour
 			triggerCollider.enabled = false;
 		}
 		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
+
+		if(character.ArenaID > 0)
+		{
+			arena = Storage.LoadById<RPGArena>(character.ArenaID, new RPGArena());
+
+				for (int j = 0; j < arena.EnemyIDs.Count; j++) 
+				{
+					arena.Enemies.Add(Storage.LoadById<RPGEnemy>(arena.EnemyIDs[j], new RPGEnemy()));
+				}
+		}
+		if(character.MinigameID > 0)
+		{
+			miniGame = Storage.LoadById<RPGMinigame>(character.MinigameID, new RPGMinigame());
+
+		}
+
+		if(character.ActivityID > 0)
+		{
+			activity = Storage.LoadById<RPGActivity>(character.ActivityID, new RPGActivity());
+		}
     }
     
     public void OnTriggerEnter ( Collider other )
@@ -64,8 +88,9 @@ public class NPC: MonoBehaviour
                 thisShop = Storage.LoadById<Shop>(character.ShopID, new Shop());
             }
             thisShop.PopulateItems();
-            PlayerManager.Instance.ActiveShop = thisShop;
+            //PlayerManager.Instance.ActiveShop = thisShop;
         }
+
         GUIManager.Instance.DisplayNPC();
     }
     
@@ -73,11 +98,11 @@ public class NPC: MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         PlayerManager.Instance.ActiveNPC = null;
-        if(PlayerManager.Instance.ActiveShop != null && character.ShopID == PlayerManager.Instance.ActiveShop.ID)
+        /*if(PlayerManager.Instance.ActiveShop != null && character.ShopID == PlayerManager.Instance.ActiveShop.ID)
         {
             PlayerManager.Instance.ActiveShop = null;
             
-        }
+        }*/
         
         GUIManager.Instance.HideNPC();
         

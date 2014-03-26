@@ -39,7 +39,7 @@ public class Shop : BasicItem
         preffix = "SHOP";
 	}
 	
-	public BuyTransaction BuyItem(RPGItem item, int Amount)
+	public BuyTransaction BuyItem(RPGItem item, int level, int Amount)
 	{
 		if (item.ID == 0)
 			return BuyTransaction.SomeError;
@@ -54,7 +54,7 @@ public class Shop : BasicItem
 			return BuyTransaction.NotEnoughGold;
 		
 		//check space in inventory
-        if (!PlayerManager.Instance.Hero.Inventory.DoYouHaveSpaceForThisItem(item, Amount))
+        if (!PlayerManager.Instance.Hero.DoYouHaveSpaceForThisItem(item, level, Amount))
 		{
 			return BuyTransaction.NotEnoughSpaceInInventory;
 		}
@@ -63,10 +63,10 @@ public class Shop : BasicItem
 			//add item to inventory
             if(item.ItemCategory == ItemType.Armor)
             {
-                PreffixSolver.GiveItem(PreffixType.ARMOR, item.ID, Amount);
+                PreffixSolver.GiveItem(PreffixType.ARMOR, item.ID, level, Amount);
             }
             else
-                PlayerManager.Instance.Hero.Inventory.AddItem(item, Amount);
+				PreffixSolver.GiveItem(PreffixType.ARMOR, item.ID, level, Amount);
             
 			//remove currency amount from inventory
             PlayerManager.Instance.Hero.RemoveCurrency(price, item.BuyCurrency);
@@ -93,24 +93,9 @@ public class Shop : BasicItem
 	
 	public BuyTransaction BuyItem(RPGItem rpgItem)
 	{
-		return BuyItem(rpgItem, 1);
+		return BuyItem(rpgItem, 1, 1);
 	}
-	
-	public bool SellItem(RPGItem item, int Amount)
-	{
-		if (item.ID == 0)
-			return false;
-		//calculate price
-		int price = (int)(item.SellValue * Amount);
-		//remove item
-        PlayerManager.Instance.Hero.Inventory.RemoveItem(item, Amount);
-		//add gold
-        PlayerManager.Instance.Hero.AddCurrency(price, BuyCurrencyType.Magnets);
-		//add item to temp shop collection
-		AddItem(item, Amount);
-		return true;
-	}
-	
+
 	private void AddItem(RPGItem item, int Amount)
 	{
 		foreach(ItemInWorld i in ShopItems)
@@ -128,13 +113,28 @@ public class Shop : BasicItem
 		itemInWorld.CurrentAmount = Amount;
 		ShopItems.Add(itemInWorld);
 	}
-	
-	public bool SellItem(RPGItem item)
+
+	public bool SellItem(RPGItem item, int level)
 	{
-		return SellItem(item, 1);
+		return SellItem(item, level, 1);
 	}
-	
-	/*private static DateTime StartOfWeek(DateTime dt, DayOfWeek startOfWeek)
+
+	public bool SellItem(RPGItem item, int level, int Amount)
+	{
+		if (item.ID == 0)
+			return false;
+		//calculate price
+		int price = (int)(item.SellValue * Amount);
+		//remove item
+		PlayerManager.Instance.Hero.RemoveItem(item, Amount);
+		//add gold
+		PlayerManager.Instance.Hero.AddCurrency(price, BuyCurrencyType.Magnets);
+		//add item to temp shop collection
+        //AddItem(item, Amount);
+        return true;
+    }
+    
+    /*private static DateTime StartOfWeek(DateTime dt, DayOfWeek startOfWeek)
     {
         int diff = dt.DayOfWeek - startOfWeek;
         if (diff < 0)

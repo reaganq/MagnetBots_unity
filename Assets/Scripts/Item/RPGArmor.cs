@@ -11,19 +11,21 @@ using System;
 //[XmlInclude(typeof(Effect))]
 public class RPGArmor : Equiped 
 {
-    public int ArmorClassValue;
     public bool HasAbility;
     public string AbilityString;
     public string AbilityIconPath;
+
  //public List<Effect> EffectsOnHit;
  
- public RPGArmor()
- {
-     preffix = "ARMOR";
-     Name = string.Empty;
-     FBXName = "Armor/";
-        AbilityIconPath = "AbilityIcon/";
-        AbilityString = "Use this";
-     //EffectsOnHit = new List<Effect>();
- }
+	public RPGArmor()
+	{
+		preffix = "ARMOR";
+		Name = string.Empty;
+		FBXName = "Armor/";
+		AbilityIconPath = "AbilityIcon/";
+		AbilityString = "Use this";
+		IsEquippable = true;
+		IsUsable = false;
+	//EffectsOnHit = new List<Effect>();
+	}
 }

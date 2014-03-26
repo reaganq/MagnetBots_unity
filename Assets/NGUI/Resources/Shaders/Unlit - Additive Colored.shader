@@ -2,7 +2,7 @@ Shader "Unlit/Additive Colored"
 {
 	Properties
 	{
-		_MainTex ("Base (RGB), Alpha (A)", 2D) = "white" {}
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
 	}
 	
 	SubShader
@@ -19,6 +19,7 @@ Shader "Unlit/Additive Colored"
 		Lighting Off
 		ZWrite Off
 		Fog { Mode Off }
+		ColorMask RGB
 		AlphaTest Greater .01
 		Blend One One
 		

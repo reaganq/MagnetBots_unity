@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ArmorEditor : BaseEditorWindow 
 {
-	ArmorGenerator generator = new ArmorGenerator();
+	//ArmorGenerator generator = new ArmorGenerator();
 	
 	public ArmorEditor(GUISkin guiSkin, MainWindowEditor data)
 	{
@@ -71,8 +71,7 @@ public class ArmorEditor : BaseEditorWindow
 		}*/
 		
 		EditorUtils.Separator();
-		
-		s.ArmorClassValue = EditorUtils.IntField(s.ArmorClassValue, "Armor value");
+
         
         EditorGUILayout.PrefixLabel("has ability?");
         

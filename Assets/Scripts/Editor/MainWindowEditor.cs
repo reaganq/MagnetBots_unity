@@ -21,10 +21,13 @@ public class MainWindowEditor : EditorWindow
 	//public SkillEditor skillEditor;
 	//public AttributeEditor attributeEditor;
 	public ArmorEditor armorEditor;
+	public ArenaEditor arenaEditor;
+	public EnemyEditor enemyEditor;
 	//public EquipmentSlotEditor equipmentSlotEditor;
 	//public TeleportEditor teleportEditor;
 	//public ConversationEditor conversationEditor;
 	public ShopEditor shopEditor;
+	public CurrencyEditor currencyEditor;
 	//public SpellEditor spellEditor;
 	//public EnemyEditor enemyEditor;
 	//public ContainerEditor containerEditor;
@@ -34,6 +37,8 @@ public class MainWindowEditor : EditorWindow
 	//public SpellShopEditor spellShop;
 	//public WeaponEditor weaponEditor;
 	public NPCEditor npcEditor;
+	public MiniGameEditor minigameEditor;
+	public ActivityEditor activityEditor;
 	//public RaceEditor raceEditor;
 	//public ClassEditor classEditor;
 	//public GuildEditor guildEditor;
@@ -71,6 +76,12 @@ public class MainWindowEditor : EditorWindow
 		//attributeEditor = new AttributeEditor(Skin, this);
 		
 		armorEditor = new ArmorEditor(Skin, this);
+
+		arenaEditor = new ArenaEditor(Skin, this);
+
+		enemyEditor = new EnemyEditor(Skin, this);
+
+		currencyEditor = new CurrencyEditor(Skin, this);
 		
 		//equipmentSlotEditor = new EquipmentSlotEditor(Skin, this);
 		
@@ -87,6 +98,10 @@ public class MainWindowEditor : EditorWindow
 		//containerEditor = new ContainerEditor(Skin, this);
 		
 		itemEditor = new  ItemEditor(Skin, this);
+
+		minigameEditor = new MiniGameEditor(Skin, this);
+
+		activityEditor = new ActivityEditor(Skin, this);
 		
 		//spellShop = new SpellShopEditor(Skin, this);
 		
@@ -223,6 +238,31 @@ public class MainWindowEditor : EditorWindow
 		if (GUILayout.Button(shopEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.Shop;
+		}
+
+		if (GUILayout.Button(arenaEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Arena;
+		}
+
+		if (GUILayout.Button(enemyEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Enemy;
+		}
+
+		if (GUILayout.Button(currencyEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Currency;
+		}
+
+		if (GUILayout.Button(minigameEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.MiniGame;
+		}
+
+		if (GUILayout.Button(activityEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Activity;
 		}
 		
 		/*if (GUILayout.Button(skillEditor.EditorName, GUILayout.Width(100)))
@@ -364,6 +404,25 @@ public class MainWindowEditor : EditorWindow
 				itemEditor.DisplayWindow(position);
 				break;
 
+			case MainWindowTypeEnum.Arena:
+				arenaEditor.DisplayWindow(position);
+				break;
+
+			case MainWindowTypeEnum.Enemy:
+				enemyEditor.DisplayWindow(position);
+				break;
+
+			case MainWindowTypeEnum.Currency:
+				currencyEditor.DisplayWindow(position);
+				break;
+			case MainWindowTypeEnum.MiniGame:
+				minigameEditor.DisplayWindow(position);
+				break;
+			case MainWindowTypeEnum.Activity:
+				activityEditor.DisplayWindow(position);
+				break;
+
+
             /*case MainWindowTypeEnum.QuestCategory:
                 questCategoryEditor.DisplayWindow(position);
                 break;*/
@@ -375,16 +434,19 @@ public class MainWindowEditor : EditorWindow
 public enum MainWindowTypeEnum
 {
 	None,
+	Activity,
 	Armor,
 	Attribute,
 	Class,
 	Container,
 	Conversation,
+	Currency,
 	Enemy,
 	EquipmentSlot,
 	Guild,
 	Item,
 	ItemCategory,
+	MiniGame,
 	NPC,
 	Race,
 	Reputation,
@@ -392,6 +454,7 @@ public enum MainWindowTypeEnum
     QuestCategory,
 	Scene,
 	Shop,
+	Arena,
 	Skill,
 	SpawnPoint,
 	Spell,

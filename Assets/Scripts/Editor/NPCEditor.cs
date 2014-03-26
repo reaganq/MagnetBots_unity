@@ -52,7 +52,11 @@ public class NPCEditor : BaseEditorWindow
 		RPGNPC s = (RPGNPC)currentItem;
 		
 		s.ShopID = EditorUtils.IntPopup(s.ShopID, Data.shopEditor.items, "Shop");
-		
+		s.ArenaID = EditorUtils.IntPopup(s.ArenaID, Data.arenaEditor.items, "Arena");
+		//s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data..items, "Shop");
+		s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data.minigameEditor.items, "Activities");
+		s.MinigameID = EditorUtils.IntPopup(s.MinigameID, Data.minigameEditor.items, "Minigames");
+
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
 		if (GUILayout.Button("No shop", GUILayout.Width(150)))
@@ -60,9 +64,6 @@ public class NPCEditor : BaseEditorWindow
 			s.ShopID = 0;
 		}
 		EditorGUILayout.EndHorizontal();
-
-        s.LevelName = EditorUtils.TextField(s.LevelName, "level name");
-
 
 		/*ConditionsUtils.Conditions(s.ShopConditions, Data);
 		

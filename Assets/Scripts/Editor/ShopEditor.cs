@@ -50,7 +50,7 @@ public class ShopEditor : BaseEditorWindow
 	protected override void EditPart()
 	{
 		Shop s = (Shop)currentItem;
-		
+
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
 		//EditorGUILayout.PrefixLabel("Respawn");

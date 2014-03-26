@@ -46,7 +46,7 @@ public class ArmorGenerator : ItemGenerator
 			//item.IsCopy = true;
 			//item.SourceItem = sourceItem.ID;
 			//item.Categories = sourceItem.Categories;
-			item.ArmorClassValue = sourceItem.ArmorClassValue;
+			//item.ArmorClassValue = sourceItem.ArmorClassValue;
 			item.EquipmentSlotIndex = sourceItem.EquipmentSlotIndex;
 			//item.WornEffects = sourceItem.WornEffects;
 			//item.Conditions = sourceItem.Conditions;
@@ -54,7 +54,7 @@ public class ArmorGenerator : ItemGenerator
 		}
 	}
 	
-	public string GetArmor
+	/*public string GetArmor
 	{
 		get
 		{
@@ -66,7 +66,7 @@ public class ArmorGenerator : ItemGenerator
 			}
 			return result;
 		}
-	}
+	}*/
 	
 	protected override void PrepareCollection(IItem i)
 	{
@@ -75,7 +75,7 @@ public class ArmorGenerator : ItemGenerator
 		sourceItem = (RPGArmor)i;
 	}
 	
-	protected override void GenerateAnother(IItem i)
+	/*protected override void GenerateAnother(IItem i)
 	{
 		RPGArmor armor = (RPGArmor)i;
 		//generating weapon damage
@@ -97,5 +97,5 @@ public class ArmorGenerator : ItemGenerator
 				w.ArmorClassValue = amor;
 			}
 		}
-	}
+	}*/
 }

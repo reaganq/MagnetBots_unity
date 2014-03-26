@@ -1,6 +1,6 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2012 Tasharen Entertainment
+// Copyright Â© 2011-2014 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
@@ -11,25 +11,25 @@ using System.Collections.Generic;
 /// Inspector class used to edit UISprites.
 /// </summary>
 
+[CanEditMultipleObjects]
+#if UNITY_3_5
 [CustomEditor(typeof(UISprite))]
+#else
+[CustomEditor(typeof(UISprite), true)]
+#endif
 public class UISpriteInspector : UIWidgetInspector
 {
-	protected UISprite mSprite;
-
 	/// <summary>
 	/// Atlas selection callback.
 	/// </summary>
 
-	void OnSelectAtlas (MonoBehaviour obj)
+	void OnSelectAtlas (Object obj)
 	{
-		if (mSprite != null)
-		{
-			NGUIEditorTools.RegisterUndo("Atlas Selection", mSprite);
-			bool resize = (mSprite.atlas == null);
-			mSprite.atlas = obj as UIAtlas;
-			if (resize) mSprite.MakePixelPerfect();
-			EditorUtility.SetDirty(mSprite.gameObject);
-		}
+		serializedObject.Update();
+		SerializedProperty sp = serializedObject.FindProperty("mAtlas");
+		sp.objectReferenceValue = obj;
+		serializedObject.ApplyModifiedProperties();
+		NGUISettings.atlas = obj as UIAtlas;
 	}
 
 	/// <summary>
@@ -38,33 +38,110 @@ public class UISpriteInspector : UIWidgetInspector
 
 	void SelectSprite (string spriteName)
 	{
-		if (mSprite != null && mSprite.spriteName != spriteName)
-		{
-			NGUIEditorTools.RegisterUndo("Sprite Change", mSprite);
-			mSprite.spriteName = spriteName;
-			mSprite.MakePixelPerfect();
-			EditorUtility.SetDirty(mSprite.gameObject);
-		}
+		serializedObject.Update();
+		SerializedProperty sp = serializedObject.FindProperty("mSpriteName");
+		sp.stringValue = spriteName;
+		serializedObject.ApplyModifiedProperties();
+		NGUISettings.selectedSprite = spriteName;
 	}
 
 	/// <summary>
 	/// Draw the atlas and sprite selection fields.
 	/// </summary>
 
-	override protected bool OnDrawProperties ()
+	protected override bool ShouldDrawProperties ()
 	{
-		mSprite = mWidget as UISprite;
-		ComponentSelector.Draw<UIAtlas>(mSprite.atlas, OnSelectAtlas);
-		if (mSprite.atlas == null) return false;
-		NGUIEditorTools.AdvancedSpriteField(mSprite.atlas, mSprite.spriteName, SelectSprite, false);
+		GUILayout.BeginHorizontal();
+		if (NGUIEditorTools.DrawPrefixButton("Atlas"))
+			ComponentSelector.Show<UIAtlas>(OnSelectAtlas);
+		SerializedProperty atlas = NGUIEditorTools.DrawProperty("", serializedObject, "mAtlas", GUILayout.MinWidth(20f));
+		
+		if (GUILayout.Button("Edit", GUILayout.Width(40f)))
+		{
+			if (atlas != null)
+			{
+				UIAtlas atl = atlas.objectReferenceValue as UIAtlas;
+				NGUISettings.atlas = atl;
+				NGUIEditorTools.Select(atl.gameObject);
+			}
+		}
+		GUILayout.EndHorizontal();
+
+		SerializedProperty sp = serializedObject.FindProperty("mSpriteName");
+		NGUIEditorTools.DrawAdvancedSpriteField(atlas.objectReferenceValue as UIAtlas, sp.stringValue, SelectSprite, false);
 		return true;
+	}
+
+	/// <summary>
+	/// Sprites's custom properties based on the type.
+	/// </summary>
+
+	protected override void DrawCustomProperties ()
+	{
+		GUILayout.Space(6f);
+
+		SerializedProperty sp = NGUIEditorTools.DrawProperty("Sprite Type", serializedObject, "mType", GUILayout.MinWidth(20f));
+
+		EditorGUI.BeginDisabledGroup(sp.hasMultipleDifferentValues);
+		{
+			UISprite.Type type = (UISprite.Type)sp.intValue;
+
+			if (type == UISprite.Type.Simple)
+			{
+				NGUIEditorTools.DrawProperty("Flip", serializedObject, "mFlip");
+			}
+			else if (type == UISprite.Type.Sliced)
+			{
+				NGUIEditorTools.DrawProperty("Flip", serializedObject, "mFlip");
+				sp = serializedObject.FindProperty("centerType");
+				bool val = (sp.intValue != (int)UISprite.AdvancedType.Invisible);
+
+				if (val != EditorGUILayout.Toggle("Fill Center", val))
+				{
+					sp.intValue = val ? (int)UISprite.AdvancedType.Invisible : (int)UISprite.AdvancedType.Sliced;
+				}
+			}
+			else if (type == UISprite.Type.Filled)
+			{
+				NGUIEditorTools.DrawProperty("Flip", serializedObject, "mFlip");
+				NGUIEditorTools.DrawProperty("Fill Dir", serializedObject, "mFillDirection", GUILayout.MinWidth(20f));
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(4f);
+				NGUIEditorTools.DrawProperty("Fill Amount", serializedObject, "mFillAmount", GUILayout.MinWidth(20f));
+				GUILayout.Space(4f);
+				GUILayout.EndHorizontal();
+				NGUIEditorTools.DrawProperty("Invert Fill", serializedObject, "mInvert", GUILayout.MinWidth(20f));
+			}
+			else if (type == UISprite.Type.Advanced)
+			{
+				NGUIEditorTools.DrawProperty("  - Left", serializedObject, "leftType");
+				NGUIEditorTools.DrawProperty("  - Right", serializedObject, "rightType");
+				NGUIEditorTools.DrawProperty("  - Top", serializedObject, "topType");
+				NGUIEditorTools.DrawProperty("  - Bottom", serializedObject, "bottomType");
+				NGUIEditorTools.DrawProperty("  - Center", serializedObject, "centerType");
+				NGUIEditorTools.DrawProperty("Flip", serializedObject, "mFlip");
+			}
+		}
+		EditorGUI.EndDisabledGroup();
+
+		//GUI.changed = false;
+		//Vector4 draw = EditorGUILayout.Vector4Field("Draw Region", mWidget.drawRegion);
+
+		//if (GUI.changed)
+		//{
+		//    NGUIEditorTools.RegisterUndo("Draw Region", mWidget);
+		//    mWidget.drawRegion = draw;
+		//}
+
+		GUILayout.Space(4f);
+		base.DrawCustomProperties();
 	}
 
 	/// <summary>
 	/// All widgets have a preview.
 	/// </summary>
 
-	public override bool HasPreviewGUI () { return true; }
+	public override bool HasPreviewGUI () { return !serializedObject.isEditingMultipleObjects; }
 
 	/// <summary>
 	/// Draw the sprite preview.
@@ -72,24 +149,13 @@ public class UISpriteInspector : UIWidgetInspector
 
 	public override void OnPreviewGUI (Rect rect, GUIStyle background)
 	{
-		if (mSprite == null) return;
+		UISprite sprite = target as UISprite;
+		if (sprite == null || !sprite.isValid) return;
 
-		Texture2D tex = mSprite.mainTexture as Texture2D;
+		Texture2D tex = sprite.mainTexture as Texture2D;
 		if (tex == null) return;
 
-		Rect outer = new Rect(mSprite.sprite.outer);
-		Rect inner = new Rect(mSprite.sprite.inner);
-		Rect uv = outer;
-
-		if (mSprite.atlas.coordinates == UIAtlas.Coordinates.Pixels)
-		{
-			uv = NGUIMath.ConvertToTexCoords(outer, tex.width, tex.height);
-		}
-		else
-		{
-			outer = NGUIMath.ConvertToPixels(outer, tex.width, tex.height, true);
-			inner = NGUIMath.ConvertToPixels(inner, tex.width, tex.height, true);
-		}
-		NGUIEditorTools.DrawSprite(tex, rect, outer, inner, uv, mSprite.color);
+		UISpriteData sd = sprite.atlas.GetSprite(sprite.spriteName);
+		NGUIEditorTools.DrawSprite(tex, rect, sd, sprite.color);
 	}
 }

@@ -222,10 +222,10 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmLObjects.Count > 0)
         {
-            if(actionManager.armorControllers[2] != null)
+            if(actionManager.armorSkillsArray[2] != null)
             {
-                actionManager.armorControllers[2].UnEquip();
-                actionManager.armorControllers[2] = null;
+                actionManager.armorSkillsArray[2].UnEquip();
+                actionManager.armorSkillsArray[2] = null;
             }
             if(actionManager.armorAnimControllers[2] != null)
             {
@@ -250,7 +250,7 @@ public class Avatar : MonoBehaviour {
         ArmorSkill armLcontroller = temp.GetComponent<ArmorSkill>();
         if(armLcontroller != null)
         {
-            armLcontroller.Initialise(animationTarget, _myTransform, (Collider)characterMotor.controller, myStatus, actionManager );
+            armLcontroller.Initialise(_myTransform, actionManager, 2);
         }
 
         PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
@@ -285,10 +285,10 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmRObjects.Count > 0)
         {
-            if(actionManager.armorControllers[3] != null)
+            if(actionManager.armorSkillsArray[3] != null)
             {
-                actionManager.armorControllers[3].UnEquip();
-                actionManager.armorControllers[3] = null;
+                actionManager.armorSkillsArray[3].UnEquip();
+                actionManager.armorSkillsArray[3] = null;
             }
             if(actionManager.armorAnimControllers[3] != null)
             {
@@ -314,7 +314,7 @@ public class Avatar : MonoBehaviour {
         ArmorSkill armRcontroller = temp.GetComponent<ArmorSkill>();
         if(armRcontroller != null)
         {
-            armRcontroller.Initialise(animationTarget, _myTransform, characterMotor.controller, myStatus, actionManager);
+            armRcontroller.Initialise(_myTransform, actionManager, 3);
 
             //Debug.Log("transfer animation");
         }

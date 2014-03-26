@@ -1,17 +1,24 @@
 //----------------------------------------------
 //            NGUI: Next-Gen UI kit
-// Copyright © 2011-2012 Tasharen Entertainment
+// Copyright © 2011-2014 Tasharen Entertainment
 //----------------------------------------------
 
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Base class for all tweening operations.
 /// </summary>
 
-public abstract class UITweener : IgnoreTimeScale
+public abstract class UITweener : MonoBehaviour
 {
+	/// <summary>
+	/// Current tween that triggered the callback function.
+	/// </summary>
+
+	static public UITweener current;
+
 	public enum Method
 	{
 		Linear,
@@ -29,77 +36,77 @@ public abstract class UITweener : IgnoreTimeScale
 		PingPong,
 	}
 
-	public delegate void OnFinished (UITweener tween);
-
-	/// <summary>
-	/// Delegate for subscriptions. Faster than using the 'eventReceiver' and allows for multiple receivers.
-	/// </summary>
-
-	public OnFinished onFinished;
-
 	/// <summary>
 	/// Tweening method used.
 	/// </summary>
 
+	[HideInInspector]
 	public Method method = Method.Linear;
 
 	/// <summary>
 	/// Does it play once? Does it loop?
 	/// </summary>
 
+	[HideInInspector]
 	public Style style = Style.Once;
 
 	/// <summary>
 	/// Optional curve to apply to the tween's time factor value.
 	/// </summary>
 
+	[HideInInspector]
 	public AnimationCurve animationCurve = new AnimationCurve(new Keyframe(0f, 0f, 0f, 1f), new Keyframe(1f, 1f, 1f, 0f));
 
 	/// <summary>
 	/// Whether the tween will ignore the timescale, making it work while the game is paused.
 	/// </summary>
-
+	
+	[HideInInspector]
 	public bool ignoreTimeScale = true;
 
 	/// <summary>
 	/// How long will the tweener wait before starting the tween?
 	/// </summary>
 
+	[HideInInspector]
 	public float delay = 0f;
 
 	/// <summary>
 	/// How long is the duration of the tween?
 	/// </summary>
 
+	[HideInInspector]
 	public float duration = 1f;
 
 	/// <summary>
 	/// Whether the tweener will use steeper curves for ease in / out style interpolation.
 	/// </summary>
 
+	[HideInInspector]
 	public bool steeperCurves = false;
 
 	/// <summary>
 	/// Used by buttons and tween sequences. Group of '0' means not in a sequence.
 	/// </summary>
 
+	[HideInInspector]
 	public int tweenGroup = 0;
 
 	/// <summary>
-	/// Target used with 'callWhenFinished', or this game object if none was specified.
+	/// Event delegates called when the animation finishes.
 	/// </summary>
 
-	public GameObject eventReceiver;
+	[HideInInspector]
+	public List<EventDelegate> onFinished = new List<EventDelegate>();
 
-	/// <summary>
-	/// Name of the function to call when the tween finishes.
-	/// </summary>
+	// Deprecated functionality, kept for backwards compatibility
+	[HideInInspector] public GameObject eventReceiver;
+	[HideInInspector] public string callWhenFinished;
 
-	public string callWhenFinished;
-
+	bool mStarted = false;
 	float mStartTime = 0f;
 	float mDuration = 0f;
-	float mAmountPerDelta = 1f;
+	float mAmountPerDelta = 1000f;
 	float mFactor = 0f;
 
 	/// <summary>
@@ -123,7 +130,7 @@ public abstract class UITweener : IgnoreTimeScale
 	/// Tween factor, 0-1 range.
 	/// </summary>
 
-	public float tweenFactor { get { return mFactor; } }
+	public float tweenFactor { get { return mFactor; } set { mFactor = Mathf.Clamp01(value); } }
 
 	/// <summary>
 	/// Direction that the tween is currently playing in.
@@ -132,16 +139,23 @@ public abstract class UITweener : IgnoreTimeScale
 	public AnimationOrTween.Direction direction { get { return mAmountPerDelta < 0f ? AnimationOrTween.Direction.Reverse : AnimationOrTween.Direction.Forward; } }
 
 	/// <summary>
-	/// Record the starting time.
+	/// This function is called by Unity when you add a component. Automatically set the starting values for convenience.
 	/// </summary>
 
-	protected override void OnEnable () { base.OnEnable(); mStartTime = Time.realtimeSinceStartup + delay; }
+	void Reset ()
+	{
+		if (!mStarted)
+		{
+			SetStartToCurrentValue();
+			SetEndToCurrentValue();
+		}
+	}
 
 	/// <summary>
-	/// Update on start, so there is no frame in-between.
+	/// Update as soon as it's started so that there is no delay.
 	/// </summary>
 
-	void Start () { mStartTime = Time.realtimeSinceStartup + delay; Update(); }
+	protected virtual void Start () { Update(); }
 
 	/// <summary>
 	/// Update the tweening factor and call the virtual update function.
@@ -149,8 +163,16 @@ public abstract class UITweener : IgnoreTimeScale
 
 	void Update ()
 	{
-		float delta = ignoreTimeScale ? UpdateRealTimeDelta() : Time.deltaTime;
-		if (Time.realtimeSinceStartup < mStartTime) return;
+		float delta = ignoreTimeScale ? RealTime.deltaTime : Time.deltaTime;
+		float time = ignoreTimeScale ? RealTime.time : Time.time;
+
+		if (!mStarted)
+		{
+			mStarted = true;
+			mStartTime = time + delay;
+		}
+
+		if (time < mStartTime) return;
 
 		// Advance the sampling factor
 		mFactor += amountPerDelta * delta;
@@ -180,28 +202,84 @@ public abstract class UITweener : IgnoreTimeScale
 		}
 
 		// If the factor goes out of range and this is a one-time tweening operation, disable the script
-		if ((style == Style.Once) && (mFactor > 1f || mFactor < 0f))
+		if ((style == Style.Once) && (duration == 0f || mFactor > 1f || mFactor < 0f))
 		{
 			mFactor = Mathf.Clamp01(mFactor);
 			Sample(mFactor, true);
 
-			// Notify the listener delegate
-			if (onFinished != null) onFinished(this);
-
-			// Notify the event listener target
-			if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
-			{
-				eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
-			}
-
 			// Disable this script unless the function calls above changed something
-			if (mFactor == 1f && mAmountPerDelta > 0f || mFactor == 0f && mAmountPerDelta < 0f)
-			{
+			if (duration == 0f || (mFactor == 1f && mAmountPerDelta > 0f || mFactor == 0f && mAmountPerDelta < 0f))
 				enabled = false;
+
+			current = this;
+
+			if (onFinished != null)
+			{
+				mTemp = onFinished;
+				onFinished = new List<EventDelegate>();
+
+				// Notify the listener delegates
+				EventDelegate.Execute(mTemp);
+
+				// Re-add the previous persistent delegates
+				for (int i = 0; i < mTemp.Count; ++i)
+				{
+					EventDelegate ed = mTemp[i];
+					if (ed != null) EventDelegate.Add(onFinished, ed, ed.oneShot);
+				}
+				mTemp = null;
 			}
+
+			// Deprecated legacy functionality support
+			if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
+				eventReceiver.SendMessage(callWhenFinished, this, SendMessageOptions.DontRequireReceiver);
+
+			current = null;
 		}
 		else Sample(mFactor, false);
 	}
+
+	List<EventDelegate> mTemp = null;
+
+	/// <summary>
+	/// Convenience function -- set a new OnFinished event delegate (here for to be consistent with RemoveOnFinished).
+	/// </summary>
+
+	public void SetOnFinished (EventDelegate.Callback del) { EventDelegate.Set(onFinished, del); }
+
+	/// <summary>
+	/// Convenience function -- set a new OnFinished event delegate (here for to be consistent with RemoveOnFinished).
+	/// </summary>
+
+	public void SetOnFinished (EventDelegate del) { EventDelegate.Set(onFinished, del); }
+
+	/// <summary>
+	/// Convenience function -- add a new OnFinished event delegate (here for to be consistent with RemoveOnFinished).
+	/// </summary>
+
+	public void AddOnFinished (EventDelegate.Callback del) { EventDelegate.Add(onFinished, del); }
+
+	/// <summary>
+	/// Convenience function -- add a new OnFinished event delegate (here for to be consistent with RemoveOnFinished).
+	/// </summary>
+
+	public void AddOnFinished (EventDelegate del) { EventDelegate.Add(onFinished, del); }
+
+	/// <summary>
+	/// Remove an OnFinished delegate. Will work even while iterating through the list when the tweener has finished its operation.
+	/// </summary>
+
+	public void RemoveOnFinished (EventDelegate del)
+	{
+		if (onFinished != null) onFinished.Remove(del);
+		if (mTemp != null) mTemp.Remove(del);
+	}
+
+	/// <summary>
+	/// Mark as not started when finished to enable delay on next play.
+	/// </summary>
+
+	void OnDisable () { mStarted = false; }
 
 	/// <summary>
 	/// Sample the tween at the specified factor.
@@ -280,6 +358,25 @@ public abstract class UITweener : IgnoreTimeScale
 	}
 
 	/// <summary>
+	/// Play the tween.
+	/// </summary>
+
+	[System.Obsolete("Use PlayForward() instead")]
+	public void Play () { Play(true); }
+
+	/// <summary>
+	/// Play the tween forward.
+	/// </summary>
+
+	public void PlayForward () { Play(true); }
+
+	/// <summary>
+	/// Play the tween in reverse.
+	/// </summary>
+	
+	public void PlayReverse () { Play(false); }
+
+	/// <summary>
 	/// Manually activate the tweening process, reversing it if necessary.
 	/// </summary>
 
@@ -287,15 +384,22 @@ public abstract class UITweener : IgnoreTimeScale
 	{
 		mAmountPerDelta = Mathf.Abs(amountPerDelta);
 		if (!forward) mAmountPerDelta = -mAmountPerDelta;
-		if (!enabled) Reset();
 		enabled = true;
+		Update();
 	}
 
 	/// <summary>
 	/// Manually reset the tweener's state to the beginning.
+	/// If the tween is playing forward, this means the tween's start.
+	/// If the tween is playing in reverse, this means the tween's end.
 	/// </summary>
 
-	public void Reset() { mFactor = (mAmountPerDelta < 0f) ? 1f : 0f; Sample(mFactor, false); }
+	public void ResetToBeginning ()
+	{
+		mStarted = false;
+		mFactor = (mAmountPerDelta < 0f) ? 1f : 0f;
+		Sample(mFactor, false);
+	}
 
 	/// <summary>
 	/// Manually start the tweening process, reversing its direction.
@@ -330,8 +434,22 @@ public abstract class UITweener : IgnoreTimeScale
 #if UNITY_FLASH
 		if ((object)comp == null) comp = (T)go.AddComponent<T>();
 #else
+		// Find the tween with an unset group ID (group ID of 0).
+		if (comp != null && comp.tweenGroup != 0)
+		{
+			comp = null;
+			T[] comps = go.GetComponents<T>();
+			for (int i = 0, imax = comps.Length; i < imax; ++i)
+			{
+				comp = comps[i];
+				if (comp != null && comp.tweenGroup == 0) break;
+				comp = null;
+			}
+		}
+
 		if (comp == null) comp = go.AddComponent<T>();
 #endif
+		comp.mStarted = false;
 		comp.duration = duration;
 		comp.mFactor = 0f;
 		comp.mAmountPerDelta = Mathf.Abs(comp.mAmountPerDelta);
@@ -339,8 +457,25 @@ public abstract class UITweener : IgnoreTimeScale
 		comp.animationCurve = new AnimationCurve(new Keyframe(0f, 0f, 0f, 1f), new Keyframe(1f, 1f, 1f, 0f));
 		comp.eventReceiver = null;
 		comp.callWhenFinished = null;
-		comp.onFinished = null;
 		comp.enabled = true;
+
+		if (duration <= 0f)
+		{
+			comp.Sample(1f, true);
+			comp.enabled = false;
+		}
 		return comp;
 	}
+
+	/// <summary>
+	/// Set the 'from' value to the current one.
+	/// </summary>
+
+	public virtual void SetStartToCurrentValue () { }
+
+	/// <summary>
+	/// Set the 'to' value to the current one.
+	/// </summary>
+
+	public virtual void SetEndToCurrentValue () { }
 }

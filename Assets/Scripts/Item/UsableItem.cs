@@ -13,13 +13,17 @@ public class UsableItem : BasicItem
 {
  //public List<Effect> Effects;
  //public List<Condition> UseConditions;
- public bool IsUsable;
+ 	public bool IsUsable;
+	public bool IsEquippable;
+	public bool IsUpgradeable;
     public ItemType ItemCategory;
 // public UsageSkillType UsageSkill;
  //public float Recharge; 
- public string IconPath;
+ 	public string IconPath;
     public string AtlasName;
- 
+	public EquipmentSlots EquipmentSlotIndex; 
+
+
  //public Texture2D Icon;
  
  
@@ -65,6 +69,8 @@ public enum ItemType
     Food = 1,
     Chest = 2,
     Quest = 3,
+	Normal = 4,
+	Currency = 5,
 }
 
 public enum UsageSkillType
@@ -72,5 +78,16 @@ public enum UsageSkillType
  Combat = 0,
  Spell = 1,
  Item = 2
+}
+
+public enum EquipmentSlots
+{
+	Head = 0,
+	Body = 1,
+	ArmL = 2,
+	ArmR = 3,
+	Legs = 4,
+	Face = 5,
+	None = 6
 }
 

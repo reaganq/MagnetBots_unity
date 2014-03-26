@@ -19,6 +19,7 @@ public class JimFSM : SimpleFSM {
 
 	public override void Start()
 	{
+		base.Start();
 		if(myPhotonView.isMine)
 		{
 			Debug.LogWarning("THIS IS MINE");
@@ -31,7 +32,7 @@ public class JimFSM : SimpleFSM {
         switch(stateEntered)
         {
 		case AIState.Resting:
-			StartCoroutine(Rest());
+			restJob = Job.make(Rest(), true);
 			break;
         case AIState.Searching:
             indicator.material.color = Color.green;
@@ -71,15 +72,24 @@ public class JimFSM : SimpleFSM {
 				else
 				{
 					Debug.LogWarning("killing job");
+	
 					cancelSkillJob = Job.make(selectedSkill.CancelSkill(), true);
 					cancelSkillJob.jobComplete += (killed) =>
 					{
-						state = AIState.SelectSkill;
-						Debug.LogWarning("selecting skill");
+						if(state != AIState.Dead)
+						{
+							state = AIState.SelectSkill;
+							Debug.LogWarning("selecting skill");
+						}
 					};
 				}
             };
             break;
+		case AIState.Dead:
+			//if(cancelSkillJob != null) cancelSkillJob.kill();
+			myPhotonView.RPC("PlayAnimation", PhotonTargets.All, deathAnim.name);
+			Debug.LogWarning("die");
+			break;
         }
     }
 
@@ -87,13 +97,23 @@ public class JimFSM : SimpleFSM {
     {
         switch(stateExited)
         {
+		case AIState.Resting:
+			if(restJob != null)
+				restJob.kill();
+			break;
         case AIState.UsingSkill:
-            if(usingSkillJob != null) usingSkillJob.kill();
+            if(usingSkillJob != null) 
+			{
+				usingSkillJob.kill();
+				Debug.Log("killing job");
+			}
+
 			selectedSkill.Reset();
 			targetObject = null;
 			targetCharacterController = null;
 			fireObject = null;
 			aimAtTarget = false;
+			Debug.Log("exit using skill");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, idleAnim);
             break;
         case AIState.MovingTowardsTarget:
@@ -144,6 +164,7 @@ public class JimFSM : SimpleFSM {
                 moveDirection.y = 0;
 				Vector3 movementOffset = moveDirection.normalized * myStatus.movementSpeed * Time.deltaTime;
 				//movementOffset += Physics.gravity;
+				movementOffset += Physics.gravity;
                 _controller.Move(movementOffset);
                // _transform.position = Vector3.MoveTowards (_transform.position, targetObject.position, movementSpeed * Time.deltaTime);
             }

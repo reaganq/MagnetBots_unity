@@ -2,6 +2,9 @@
 <ArrayOfRPGNPC xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGNPC>
     <ShopID>0</ShopID>
+    <ArenaID>0</ArenaID>
+    <MinigameID>0</MinigameID>
+    <ActivityID>0</ActivityID>
     <ID>1</ID>
     <Name>Lab</Name>
     <Description>Magnet Central</Description>
@@ -9,6 +12,9 @@
   </RPGNPC>
   <RPGNPC>
     <ShopID>0</ShopID>
+    <ArenaID>0</ArenaID>
+    <MinigameID>0</MinigameID>
+    <ActivityID>0</ActivityID>
     <ID>2</ID>
     <Name>Bank</Name>
     <Description>Magnet Central</Description>
@@ -16,7 +22,9 @@
   </RPGNPC>
   <RPGNPC>
     <ShopID>0</ShopID>
-    <LevelName>MagnetCentralGym</LevelName>
+    <ArenaID>0</ArenaID>
+    <MinigameID>0</MinigameID>
+    <ActivityID>0</ActivityID>
     <ID>3</ID>
     <Name>Gym</Name>
     <Description>Magnet Central</Description>
@@ -24,6 +32,9 @@
   </RPGNPC>
   <RPGNPC>
     <ShopID>0</ShopID>
+    <ArenaID>0</ArenaID>
+    <MinigameID>1</MinigameID>
+    <ActivityID>0</ActivityID>
     <ID>4</ID>
     <Name>Burger Joint</Name>
     <Description>Magnet Central</Description>
@@ -31,9 +42,22 @@
   </RPGNPC>
   <RPGNPC>
     <ShopID>1</ShopID>
+    <ArenaID>0</ArenaID>
+    <MinigameID>0</MinigameID>
+    <ActivityID>0</ActivityID>
     <ID>5</ID>
     <Name>General Store</Name>
     <Description>Magnet Central</Description>
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <ShopID>0</ShopID>
+    <ArenaID>0</ArenaID>
+    <MinigameID>0</MinigameID>
+    <ActivityID>0</ActivityID>
+    <ID>6</ID>
+    <Name>Anvil</Name>
+    <Description />
     <SystemDescription />
   </RPGNPC>
 </ArrayOfRPGNPC>

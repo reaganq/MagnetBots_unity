@@ -12,30 +12,24 @@ using System.IO;
 [Serializable]
 public class RPGItem : UsableItem
 {
- public RPGItem()
- {
-     //Categories = new List<RPGItemCategory>();
+ 	public RPGItem()
+ 	{
+    	 //Categories = new List<RPGItemCategory>();
      //Destroyable = true;
      //Droppable = false;
-     Name = string.Empty;
-     preffix = "ITEM";
+     	Name = string.Empty;
+     	preffix = "ITEM";
+		Stackable = true;
+		IsUpgradeable = false;
+		EquipmentSlotIndex = EquipmentSlots.None;
      //IconPath = "Icon/";
- }
- 
-    public BuyCurrencyType BuyCurrency;
-    public bool Stackable;
- //public bool Destroyable;
- //public int LevelItem;
- public int BuyValue;
-    public int SellValue;
- public RarityType Rarity;
- //public string PrefabName;
- //public float CurrentDurability;
- //public List<RPGItemCategory> Categories;
- 
- //item generator variables (not used in game, used only in editors)
- //public bool IsCopy;
- //public int SourceItem;
+ 	}
+
+	public BuyCurrencyType BuyCurrency;
+	public bool Stackable;
+	public int BuyValue;
+	public int SellValue;
+	public RarityType Rarity;
 }
 
 public enum RarityType
@@ -52,5 +46,6 @@ public enum RarityType
 public enum BuyCurrencyType
 {
     Magnets = 0,
-    Crystals = 1
+    Crystals = 1,
+	None = 2,
 }

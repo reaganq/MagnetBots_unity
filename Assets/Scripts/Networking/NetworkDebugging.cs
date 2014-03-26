@@ -31,6 +31,33 @@ public class NetworkDebugging : MonoBehaviour {
 		{
 			GUILayout.Label(player.ToString());
 		}
+		GUILayout.Label(PlayerManager.Instance.partyMembers.Count + " players in party.");
+		/*foreach (int playerID in PlayerManager.Instance.partyMembers)
+		{
+			GUILayout.Label(PhotonPlayer.Find(playerID).name);
+		}*/
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
+		{
+			GUILayout.Label(PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).ToString());
+		}
+
+		if(PlayerManager.Instance.isPartyLeader)
+			GUILayout.Label("im the leader");
+
+		if(PlayerManager.Instance.partyMembers.Count >0)
+		{
+			if(GUILayout.Button("quit party"))
+			{
+				/*if(!PlayerManager.Instance.isPartyLeader)
+				{
+					PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[0]));
+				}
+				else*/
+					PlayerManager.Instance.ActiveWorld.DisbandParty();
+			}
+
+		}
+
 		if (GUILayout.Button("Leave"))
 		{
 			PhotonNetwork.LeaveRoom();

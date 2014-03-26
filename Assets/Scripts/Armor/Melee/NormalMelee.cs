@@ -23,9 +23,9 @@ public class NormalMelee : ArmorSkill {
     #endregion
 
     #region setup and unequip
-    public override void Initialise(Animation target, Transform character, Collider masterCollider, CharacterStatus status, CharacterActionManager manager)
+    public override void Initialise(Transform character,CharacterActionManager manager, int index)
     {
-        base.Initialise(target,character, masterCollider, status, manager);
+        base.Initialise(character,manager, index);
         TransferAnimations();
         if(weaponCollider != null)
         {
@@ -59,7 +59,7 @@ public class NormalMelee : ArmorSkill {
 
 	}
 
-    public override bool CanPressUp()
+    public override bool CanPressDown()
     {
         if(attackAnimations.Length == 0 || armorState != ArmorState.ready)
         {
@@ -71,15 +71,21 @@ public class NormalMelee : ArmorSkill {
     }
 
 
-    public override IEnumerator PressUp()
+    public override IEnumerator PressDown()
     {
+		if(disableMovement)
+		{
+			myManager.DisableMovement();
+		}
+
+		ActivateSkill(true);
         armorState = ArmorState.casting;
 
         int i = Random.Range(0, attackAnimations.Length);
         //Debug.Log("i = "+i);
-        characterAnimation[attackAnimations[i].clip.name].time = 0;
+        myAnimation[attackAnimations[i].clip.name].time = 0;
         //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
-		characterManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.05f);
+		myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.05f);
 
         float totalTime = attackAnimations[i].clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
@@ -97,20 +103,23 @@ public class NormalMelee : ArmorSkill {
         {
             weaponCollider.SetActive(true);
         }
-        _skillActive = true;
+        
 
         yield return new WaitForSeconds(attackduration);
         armorState = ArmorState.followThrough;
-        _skillActive = false;
+        
 
         if(weaponCollider != null)
         {
             weaponCollider.SetActive(false);
         }
 
+		if(disableMovement)
+			myManager.EnableMovement();
+
         yield return new WaitForSeconds(followThroughTime*0.3f);
         //characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
-		characterManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
+		myManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
 
         yield return new WaitForSeconds(followThroughTime * 0.7f);
 
@@ -118,9 +127,11 @@ public class NormalMelee : ArmorSkill {
 
     }
 
-    public void Reset()
+    public override void Reset()
     {
         armorState = ArmorState.ready;
         HitEnemies.Clear();
+		HitAllies.Clear();
+		ActivateSkill(false);
     }
 }

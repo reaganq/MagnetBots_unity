@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PathologicalGames;
 
 public class BulletProjectile : MonoBehaviour {
 
@@ -8,11 +9,12 @@ public class BulletProjectile : MonoBehaviour {
 	public AISkill masterAISkill;
     public float timer;
 	public CharacterStatus status;
-
+	public string pool;
+	public ParticleSystem hitDecal;
 
 	// Use this for initialization
-	void Start () {
-        Invoke("suicide", timer);
+	public void OnSpawned() {
+		StartCoroutine(DeSpawn());
 		//IgnoreCollisions();
 	}
 	
@@ -30,6 +32,7 @@ public class BulletProjectile : MonoBehaviour {
 		//Debug.Log("trigger enter" + other.collider.gameObject.name);
 
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();
+		ContactPoint contact = other.contacts[0];
 		if(hb != null)
 		{
 			CharacterStatus cs = hb.ownerCS;
@@ -57,17 +60,25 @@ public class BulletProjectile : MonoBehaviour {
 				}
 			}
 		}
-		suicide();
+		PoolManager.Pools[pool].Spawn(hitDecal, contact.point, Quaternion.identity);
+		PoolManager.Pools[pool].Despawn(this.transform);
     }
 
-    void suicide()
+    private IEnumerator DeSpawn()
     {
         //Debug.LogWarning("destroyed projectile");
-        Destroy(this.gameObject);
+		yield return new WaitForSeconds(timer);
+		PoolManager.Pools[pool].Despawn(this.transform);
+		//pool.Despawn(this.transform);
     }
 
-	public void OnDisable()
+	public void OnDespawned()
 	{
+		masterArmor = null;
+		masterAISkill = null;
+		status = null;
+		pool = null;
+		this.rigidbody.velocity = Vector3.zero;
 	}
 
 }

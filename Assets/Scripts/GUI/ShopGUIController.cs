@@ -3,18 +3,20 @@ using System.Collections;
 
 public class ShopGUIController : BasicGUIController {
 
-    public UsableItem SelectedItem = null;
-    //public Inventory SelectedInventory = null;
+	//public Shop ActiveShop;
+	public Inventory SelectedInventory = null;
+	public int SelectedInventoryIndex = -1;
+    public int _CurrentSelectedItemIndex = -1;
+	public int PageIndex = 0;
+	public ItemTileButton[] ItemTiles = new ItemTileButton[10];
+	public int CurrentSelectedItemIndex {
+		get {
+			return (_CurrentSelectedItemIndex + PageIndex* ItemTiles.Length);
+		}
+	}
+
     
-    //public int CurrentSelectedInventory = -1;
-    public int CurrentSelectedItemIndex = -1;
-    public ItemTileButton[] ItemTiles = new ItemTileButton[10];
-    //public GameObject[] CategoryButtons;
-    //public UISprite[] ItemSprites = new UISprite[10];
     public GameObject InfoPanel = null;
-    
-    //public GameObject UseButton = null;
-    
     
     public GameObject BuyButton = null;
     public GameObject SellButton = null;
@@ -29,30 +31,26 @@ public class ShopGUIController : BasicGUIController {
     public void Enable()
     {
         //OnInventoryPressed(0);
+		//ActiveShop = PlayerManager.Instance.ActiveShop;
         ResetSelection();
         RefreshInventoryIcons();
         DefaultInfoPanel();
         Debug.Log("enable");   
     }
     
-	public void OnBackButtonpressed()
-    {
-        GUIManager.Instance.HideInventory();
-    }
-    
     public void OnItemTilePressed(int index)
     {
-        if(index == CurrentSelectedItemIndex || index >= PlayerManager.Instance.ActiveShop.ShopItems.Count)
+        if(index == _CurrentSelectedItemIndex || index >= PlayerManager.Instance.ActiveShop.ShopItems.Count)
         {
             Debug.Log("return");
             return;
         }
         else
         {
-            if(CurrentSelectedItemIndex>-1)
-                ItemTiles[CurrentSelectedItemIndex].Deselect();
+            if(_CurrentSelectedItemIndex>-1)
+                ItemTiles[_CurrentSelectedItemIndex].Deselect();
             ItemTiles[index].Select();
-            CurrentSelectedItemIndex = index;
+            _CurrentSelectedItemIndex = index;
             UpdateInfoPanel();
             if(CurrentShopMode == ShopMode.buy)
                 BuyButton.SetActive(true);
@@ -77,9 +75,9 @@ public class ShopGUIController : BasicGUIController {
                 */
             }
         }
-        else
+        else if(CurrentShopMode == ShopMode.sellArmor)
         {
-            if(PlayerManager.Instance.Hero.Inventory.Items[CurrentSelectedItemIndex] != null)
+			if(PlayerManager.Instance.Hero.ArmoryInventory.Items[CurrentSelectedItemIndex] != null)
             {
                 SellButton.SetActive(true);
                 BuyButton.SetActive(false);
@@ -89,6 +87,14 @@ public class ShopGUIController : BasicGUIController {
                 ItemDescriptionLabel.enabled = true;
                 ItemDescriptionLabel.text = PlayerManager.Instance.Hero.Inventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
                 */
+            }
+        }
+		else if(CurrentShopMode == ShopMode.sellNormal)
+		{
+			if(PlayerManager.Instance.Hero.MainInventory.Items[CurrentSelectedItemIndex] != null)
+			{
+				SellButton.SetActive(true);
+				BuyButton.SetActive(false);
             }
         }
         /*if(SelectedInventory.Items[CurrentSelectedItemIndex].IsItemUsable )
@@ -132,7 +138,7 @@ public class ShopGUIController : BasicGUIController {
     
     public void OnBuyButtonPressed()
     {
-        BuyTransaction buyTransaction = PlayerManager.Instance.ActiveShop.BuyItem(PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].rpgItem);
+		BuyTransaction buyTransaction = PlayerManager.Instance.ActiveShop.BuyItem(PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].rpgItem, PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].Level, 1);
         if(buyTransaction == BuyTransaction.NotEnoughGold)
         {
             //display not enough gold message
@@ -156,68 +162,30 @@ public class ShopGUIController : BasicGUIController {
     
     public void OnSellButtonPressed()
     {
-        PlayerManager.Instance.ActiveShop.SellItem(PlayerManager.Instance.Hero.Inventory.Items[CurrentSelectedItemIndex].rpgItem);
+		//PlayerManager.Instance.ActiveShop.SellItem(PlayerManager.Instance.Hero.MainInventory.Items[CurrentSelectedItemIndex].rpgItem, PlayerManager.Instance.Hero.MainInventory.Items[CurrentSelectedItemIndex] );
         /*SelectedInventory.RemoveItem(SelectedInventory.Items[CurrentSelectedItemIndex].rpgItem);
         HideInfoPanel();
         RefreshInventoryIcons();
         ResetSelection();*/
     }
     
-    public void OnInventoryPressed(int index)
-    {
-        
-        /*if(CurrentSelectedInventory != index)
-        {
-            if(CurrentSelectedInventory >= 0)
-                CategoryButtons[CurrentSelectedInventory].SetActive(true);
-            if(index == 0)
-            {
-                SelectedInventory = Player.Instance.Hero.HeadInventory;
-            }
-            if(index == 1)
-            {
-                SelectedInventory = Player.Instance.Hero.BodyInventory;
-            }
-            if(index == 2)
-            {
-                SelectedInventory = Player.Instance.Hero.ArmLInventory;
-            }
-            if(index == 3)
-            {
-                SelectedInventory = Player.Instance.Hero.ArmRInventory;
-            }
-            if(index == 4)
-            {
-                SelectedInventory = Player.Instance.Hero.LegsInventory;
-            }
-            if(index == 5)
-            {
-                SelectedInventory = Player.Instance.Hero.Inventory;
-            }
-            ResetSelection();
-            RefreshInventoryIcons();
-            HideInfoPanel();
-            CurrentSelectedInventory = index;
-            CategoryButtons[CurrentSelectedInventory].SetActive(false);
-        }
-        */
-    }
-    
     public void RefreshInventoryIcons()
     {
         Debug.Log("refresh inventory");
-        Debug.Log(PlayerManager.Instance.ActiveShop.ShopItems.Count);
+        //Debug.Log(ActiveShop.ShopItems.Count);
         for (int i = 0; i <  ItemTiles.Length; i++) {
-            if(i >= PlayerManager.Instance.ActiveShop.ShopItems.Count)
+            if((i + PageIndex*ItemTiles.Length) >= PlayerManager.Instance.ActiveShop.ShopItems.Count)
                 ItemTiles[i].Hide();
             else
             {
                 ItemTiles[i].Show();
                 if(CurrentShopMode == ShopMode.buy)
-                    ItemTiles[i].Load(PlayerManager.Instance.ActiveShop.ShopItems[i].rpgItem.AtlasName, PlayerManager.Instance.ActiveShop.ShopItems[i].rpgItem.IconPath, PlayerManager.Instance.ActiveShop.ShopItems[i].CurrentAmount);
-                else
-                    ItemTiles[i].Load(PlayerManager.Instance.Hero.Inventory.Items[i].rpgItem.AtlasName, PlayerManager.Instance.Hero.Inventory.Items[i].rpgItem.IconPath, PlayerManager.Instance.Hero.Inventory.Items[i].CurrentAmount);
-            }
+					ItemTiles[i].Load(PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
+                else if(CurrentShopMode == ShopMode.sellNormal)
+					ItemTiles[i].Load(PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
+				else if(CurrentShopMode == ShopMode.sellArmor)
+					ItemTiles[i].Load(PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
+			}
         }
     }
     
@@ -238,9 +206,9 @@ public class ShopGUIController : BasicGUIController {
     
     public void ResetSelection()
     {
-        if(CurrentSelectedItemIndex != -1)
-            ItemTiles[CurrentSelectedItemIndex].Deselect();
-        CurrentSelectedItemIndex = -1;
+        if(_CurrentSelectedItemIndex != -1)
+            ItemTiles[_CurrentSelectedItemIndex].Deselect();
+        _CurrentSelectedItemIndex = -1;
         for (int i = 0; i <  ItemTiles.Length; i++) {
             ItemTiles[i].Unequip();
         }
@@ -285,5 +253,6 @@ public class ShopGUIController : BasicGUIController {
 public enum ShopMode
 {
     buy = 0,
-    sell = 1,
+    sellNormal = 1,
+	sellArmor = 2
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGEnemy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGEnemy>
+    <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
+    <PortraitAtlas>EnemiesAtlas</PortraitAtlas>
+    <Loots>
+      <LootItem>
+        <itemType>Currency</itemType>
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>50</minQuantity>
+        <maxQuantity>100</maxQuantity>
+        <dropRate>1</dropRate>
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>1</int>
+          <int>4</int>
+          <int>5</int>
+          <int>2</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>0.3</dropRate>
+      </LootItem>
+    </Loots>
+    <PrefabPaths>
+      <string>Enemies/Jim_Boss</string>
+    </PrefabPaths>
+    <ID>1</ID>
+    <Name>Jim</Name>
+    <Description>Scariest gym teacher in the entire universe.</Description>
+    <SystemDescription />
+  </RPGEnemy>
+</ArrayOfRPGEnemy>

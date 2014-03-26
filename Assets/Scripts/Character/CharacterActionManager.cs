@@ -1,15 +1,19 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PathologicalGames;
 
 public class CharacterActionManager : MonoBehaviour {
 
-    public ArmorSkill[] armorControllers = new ArmorSkill[5];
+    public ArmorSkill[] armorSkillsArray = new ArmorSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
     public Animation animationTarget;
 	public CharacterStatus myStatus;
     public CharacterMotor motor;
 	public PhotonView myPhotonView;
+	public SpawnPool effectsPool;
+
+	private Transform _myTransform;
 
     private Job leftJob;
     private Job rightJob;
@@ -34,16 +38,33 @@ public class CharacterActionManager : MonoBehaviour {
             return false;
     }
    
+	void Awake()
+	{
+		MakeSpawnPool();
+		_myTransform = transform;
+		Debug.Log("here");
+	}
     // Use this for initialization
     void Start () 
     {
         //animationTarget.Play("Default_Idle");
+
 		myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
     }
+
+	public bool MakeSpawnPool()
+	{
+		if(effectsPool == null)
+		{
+			effectsPool = PoolManager.Pools.Create(myStatus.characterName);
+			Debug.Log(effectsPool.poolName);
+		}
+		return true;
+	}
     
     public void AddArmorcontroller(ArmorSkill controller, PassiveArmorAnimationController animController, int index)
     {
-        armorControllers[index] = controller;
+        armorSkillsArray[index] = controller;
         armorAnimControllers[index] = animController;
     }
 
@@ -105,32 +126,36 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void LeftAction(InputTrigger trigger)
     {
-        if(armorControllers[2] == null || actionState == ActionState.rightAction)
+        if(armorSkillsArray[2] == null || actionState == ActionState.rightAction)
         {
-            //Debug.LogWarning("returning left");
             return;
         }
-        if(trigger == InputTrigger.OnPressDown && armorControllers[2].CanPressDown())
+        if(trigger == InputTrigger.OnPressDown && armorSkillsArray[2].CanPressDown())
         {
+			if(rightEndJob != null)
+			{
+				rightEndJob.kill();
+				//rightEndJob = null;
+				Debug.Log("htere");
+			}
+
             if(leftEndJob != null)
             {
                 leftEndJob.kill();
                 leftEndJob = null;
             }
-
-            //Debug.LogWarning("left action state");
             if(leftJob != null) leftJob.kill();
-            leftJob = Job.make( armorControllers[2].PressDown() );
+            leftJob = Job.make( armorSkillsArray[2].PressDown(), true );
             actionState = ActionState.leftAction;
         }
 
-        if(trigger == InputTrigger.OnPressUp && armorControllers[2].CanPressUp())
+        if(trigger == InputTrigger.OnPressUp && armorSkillsArray[2].CanPressUp())
         {
-            leftEndJob = Job.make( armorControllers[2].PressUp() );
+            leftEndJob = Job.make( armorSkillsArray[2].PressUp(), true );
             leftEndJob.jobComplete += (waskilled) => 
             {
                 actionState = ActionState.idle;
-                //Debug.Log("job ended, was killed = " + waskilled);
+				armorSkillsArray[2].Reset();
             };
         }
     }
@@ -138,39 +163,45 @@ public class CharacterActionManager : MonoBehaviour {
     public void RightAction(InputTrigger trigger)
     {
         //Debug.Log("here");
-        if(armorControllers[3] == null || actionState == ActionState.leftAction)
+        if(armorSkillsArray[3] == null || actionState == ActionState.leftAction)
         {
-            //Debug.LogWarning("returning");
-
             return;
         }
-        if(trigger == InputTrigger.OnPressDown && armorControllers[3].CanPressDown())
+        if(trigger == InputTrigger.OnPressDown && armorSkillsArray[3].CanPressDown())
         {
+			if(leftEndJob != null)
+			{
+				leftEndJob.kill();
+				leftEndJob = null;
+			}
+
             if(rightEndJob != null)
             {
                 rightEndJob.kill();
-                //Debug.LogWarning("right job killed");
                 rightEndJob = null;
             }
-
-            //Debug.Log("right action state");
             if(rightJob != null) rightJob.kill();
-            rightJob = Job.make( armorControllers[3].PressDown() );
+            rightJob = Job.make( armorSkillsArray[3].PressDown(), true);
             actionState = ActionState.rightAction;
         }
 
-        if(trigger == InputTrigger.OnPressUp && armorControllers[3].CanPressUp())
+        if(trigger == InputTrigger.OnPressUp && armorSkillsArray[3].CanPressUp())
         {
-                //Debug.LogError("right action end state");
-            rightEndJob = Job.make(armorControllers[3].PressUp());
+            rightEndJob = Job.make(armorSkillsArray[3].PressUp(), true);
             rightEndJob.jobComplete += (waskilled) => 
             {
-                if(!waskilled)
-                    actionState = ActionState.idle;
-                //Debug.LogWarning("job ended, was killed = " + waskilled);
+				if(waskilled)
+					Debug.Log(waskilled);
+                actionState = ActionState.idle;
+				armorSkillsArray[3].Reset();
             };
         }
     }
+
+	public void ResetActionState()
+	{
+		actionState = ActionState.idle;
+	}
 
     public void specialAction(InputTrigger trigger)
     {
@@ -230,7 +261,7 @@ public class CharacterActionManager : MonoBehaviour {
             animationTarget["Default_Idle"].time = 0;
             animationTarget.CrossFade("Default_Idle");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
-            for (int i = 0; i < armorControllers.Length ; i++)
+            for (int i = 0; i < armorSkillsArray.Length ; i++)
             {
                 if(armorAnimControllers[i] != null )
                 {
@@ -256,7 +287,7 @@ public class CharacterActionManager : MonoBehaviour {
             animationTarget["Default_Run"].time = 0;
             animationTarget.CrossFade("Default_Run");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
-            for (int i = 0; i < armorControllers.Length ; i++) 
+            for (int i = 0; i < armorSkillsArray.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
                 {
@@ -268,11 +299,23 @@ public class CharacterActionManager : MonoBehaviour {
         }
     }
 
+	public void EnableMovement()
+	{
+
+		motor.disableMovement = false;
+	}
+	
+	public void DisableMovement()
+	{
+		motor.disableMovement = true;
+		AnimateToIdle();
+	}
+
     public void UpdateRunningSpeed(float t)
     {
         animationTarget["Default_Run"].speed = Mathf.Lerp( 1f, 2f, t);
 
-        for (int i = 0; i < armorControllers.Length ; i++) {
+        for (int i = 0; i < armorSkillsArray.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
                 animationTarget[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = Mathf.Lerp(1f, 2f, t);
         }
@@ -280,6 +323,7 @@ public class CharacterActionManager : MonoBehaviour {
 
     #endregion
 
+	#region rpc animation functions
 	[RPC]
 	public void PlayAnimation(string name)
 	{
@@ -303,8 +347,49 @@ public class CharacterActionManager : MonoBehaviour {
 	{
 		animationTarget.Blend(name, target, timer);
 	}
+	#endregion
 
+	#region rpc effect prefab functions
 
+	[RPC]
+	public void SpawnParticleEffect()
+	{
+
+	}
+
+	[RPC]
+	public void SpawnProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int index)
+	{
+		Transform projectile = effectsPool.prefabs[projectileName];
+		Transform projectileInstance = effectsPool.Spawn(projectile, pos, rot, null);
+		IgnoreCollisions(projectileInstance.collider);
+		if(projectileInstance.rigidbody != null)
+			projectileInstance.rigidbody.AddForce( _myTransform.forward * speed);
+		BulletProjectile src = projectileInstance.GetComponent<BulletProjectile>();
+		if(src != null)
+		{
+			src.masterArmor = armorSkillsArray[index];
+			src.status = myStatus;
+			src.pool = effectsPool.poolName;
+        }
+    }
+    
+    public void IgnoreCollisions(Collider collider)
+	{
+		List<Collider> cols = myStatus.hitboxes;
+		for (int i = 0; i < cols.Count; i++) 
+		{
+			Physics.IgnoreCollision(collider, cols[i]);
+        }
+    }
+    
+    #endregion
+
+	public void OnDestroy()
+	{
+		Debug.Log("being destoyred");
+		//PoolManager.Pools.Destroy(effectsPool.poolName);
+	}
 }
 
 public enum MovementState

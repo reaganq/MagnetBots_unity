@@ -2,7 +2,7 @@ Shader "Unlit/Transparent Colored (SoftClip)"
 {
 	Properties
 	{
-		_MainTex ("Base (RGB), Alpha (A)", 2D) = "white" {}
+		_MainTex ("Base (RGB), Alpha (A)", 2D) = "black" {}
 	}
 
 	SubShader
@@ -23,6 +23,8 @@ Shader "Unlit/Transparent Colored (SoftClip)"
 			ZWrite Off
 			Offset -1, -1
 			Fog { Mode Off }
+			ColorMask RGB
+			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
@@ -91,6 +93,8 @@ Shader "Unlit/Transparent Colored (SoftClip)"
 			Lighting Off
 			ZWrite Off
 			Fog { Mode Off }
+			ColorMask RGB
+			AlphaTest Greater .01
 			Blend SrcAlpha OneMinusSrcAlpha
 			ColorMaterial AmbientAndDiffuse
 			

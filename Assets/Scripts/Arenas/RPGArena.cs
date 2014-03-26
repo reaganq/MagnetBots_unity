@@ -7,14 +7,19 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 
 //[XmlInclude(typeof(ShopCategory))]
-[XmlInclude(typeof(ShopItem))]
+[XmlInclude(typeof(RPGEnemy))]
 public class RPGArena : BasicItem
 {
-	public List<string> Enemies;
-	
+
+	public List<int> EnemyIDs;
+
+	[XmlIgnore]
+	public List<RPGEnemy> Enemies;
+
 	public RPGArena()
 	{
-		Enemies = new List<string>();
+		EnemyIDs = new List<int>();
+		Enemies = new List<RPGEnemy>();
 		Name = string.Empty;
 		Description = string.Empty;
 		preffix = "ARENA";

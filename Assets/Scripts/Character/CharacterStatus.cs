@@ -11,6 +11,7 @@ public class CharacterStatus : MonoBehaviour {
     public float MaxHealth = 0f;
     public float CurrentHealth = 0f;
     public CharacterActionManager ActionManager;
+	public SimpleFSM fsm;
     public CharacterMotor Motor;
     public float movementSpeed;
 	public float rotationSpeed;
@@ -25,11 +26,25 @@ public class CharacterStatus : MonoBehaviour {
 
 	private string characters = "abcdefghijklmnopqrstuvwxyz";
 
-	// Use this for initialization
-	void Start () {
+	public bool isAlive()
+	{
+		if(CurrentHealth <= 0)
+			return false;
+		else
+			return true;
+	}
 
+	void Awake()
+	{
 		characterName = GenerateRandomString(6);
-
+		if(isAI)
+			fsm = GetComponent<SimpleFSM>();
+		else
+			ActionManager = GetComponent<CharacterActionManager>();
+	}
+	// Use this for initialization
+	void Start () 
+	{
         CurrentHealth = MaxHealth;
 		myPhotonView = GetComponent<PhotonView>();
 		Collider[] colliders = GetComponentsInChildren<Collider>();
@@ -40,7 +55,6 @@ public class CharacterStatus : MonoBehaviour {
 				hitboxes.Add(colliders[i]);
 			}
 		}
-
 		HitBox[] hbs = GetComponentsInChildren<HitBox>();
 		for (int i = 0; i < hbs.Length; i++) 
 		{
@@ -57,13 +71,11 @@ public class CharacterStatus : MonoBehaviour {
 	public string GenerateRandomString(int l)
 	{
 		string name = "";
-
 		for (int i = 0; i < l; i++) 
 		{
 			int a = Random.Range(0, characters.Length);
 			name = name + characters[a];
 		}
-
 		return name;
 	}
 
@@ -76,10 +88,8 @@ public class CharacterStatus : MonoBehaviour {
 		MemoryStream mm = new MemoryStream(hit);
 		receivedHit = (HitInfo)bb.Deserialize(mm);
 		Debug.Log(receivedHit.sourceName + receivedHit.damage);
-
 		//TODO apply self buffs/debuffs to calculate final hit results
 		//TODO apply hit effects
-
 		if(myPhotonView.isMine)
 		{
 			Debug.Log("received Damage");
@@ -104,17 +114,7 @@ public class CharacterStatus : MonoBehaviour {
 	        {
 				if(isAI)
 				{
-					if(myPhotonView)
-					{
-						//int id = enemy.InitViewID;
-						PhotonNetwork.RemoveRPCs(myPhotonView);
-						myPhotonView.RPC("RevertOwner", PhotonTargets.All);
-						//PhotonNetwork.UnAllocateViewID(id);
-						PhotonNetwork.Destroy(this.gameObject);
-					}
-						//myPhotonView.RPC("DieAI", PhotonTargets.MasterClient);
-					else
-						Destroy(gameObject);
+					DieAI();
 				}
 				else
 				{
@@ -161,8 +161,7 @@ public class CharacterStatus : MonoBehaviour {
 	[RPC]
 	public void DieAI()
 	{
-		if(PhotonNetwork.isMasterClient)
-			PhotonNetwork.Destroy(this.gameObject);
+		fsm.state = SimpleFSM.AIState.Dead;
 	}
 
     public void EnableMovement(bool state)

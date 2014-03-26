@@ -11,7 +11,9 @@ public class RangedAISkill : AISkill {
     public ArmorAnimation followThroughAnimation;
 
     public Transform bulletLocation;
-	public GameObject bulletPrefab;
+	public Transform bulletPrefab;
+	public Transform projectileCollisionDecal;
+
     public float bulletSpeed;
 	public float maxShotsPerSession;
 	public float minShotsPerSession;
@@ -35,6 +37,8 @@ public class RangedAISkill : AISkill {
 		base.Start();
 		currentAmmoCount = maxAmmoCount;
 		_animator[recoilAnimation.clip.name].layer = 2;
+		AddPrefabToPool(bulletPrefab);
+		AddPrefabToPool(projectileCollisionDecal);
 		Reset();
 	}
 	
@@ -119,9 +123,10 @@ public class RangedAISkill : AISkill {
 		currentAmmoCount --;
 		currentShotsFired ++;
 		fireSpeedTimer = fireSpeed;
-		GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
+		fsm.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, fsm.targetObject.transform.position, skillIndex);
+		//GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
 		//Physics.IgnoreCollision(bullet.collider, characterCollider);
-		if(bullet.rigidbody != null)
+		/*if(bullet.rigidbody != null)
 		{
 			Vector3 dir = bulletLocation.forward;
 			dir.y = (fsm.targetObject.position - bulletLocation.position).normalized.y * 0.5f;
@@ -133,7 +138,7 @@ public class RangedAISkill : AISkill {
 			src.masterAISkill = this;
 			src.status = fsm.myStatus;
 			src.IgnoreCollisions();
-		}
+		}*/
 		//
 			//src.masterScript = this;
 		

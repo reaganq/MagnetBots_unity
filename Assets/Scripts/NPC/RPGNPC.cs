@@ -82,7 +82,8 @@ public class RPGNPC : IItem
 	
 	public int ShopID;
 	public int ArenaID;
-    public string LevelName;
+	public int MinigameID;
+	public int ActivityID;
 	
 	public RPGNPC()
 	{

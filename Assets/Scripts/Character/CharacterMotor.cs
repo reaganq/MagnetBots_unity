@@ -11,6 +11,7 @@ public class CharacterMotor : MonoBehaviour {
     public Animation animationTarget;
     public Avatar avatar;
     public InputController input;
+	public bool disableMovement;
     
     private Transform _myTransform;
     //private Transform rigidbodyTransform;
@@ -60,7 +61,7 @@ public class CharacterMotor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if(!GameManager.Instance.GameIsPaused)
+        if(!GameManager.Instance.GameIsPaused && !disableMovement)
         {
             UpdateFunction();
             AnimationUpdate();
@@ -84,7 +85,8 @@ public class CharacterMotor : MonoBehaviour {
             {
                 Quaternion newRotation = Quaternion.LookRotation(direction);
                 //Debug.Log(newRotation);
-                _myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
+				if(!disableMovement)
+                	_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
             }
                 direction *= 0.2f * (Vector3.Dot(_myTransform.forward,direction) + 1);
 

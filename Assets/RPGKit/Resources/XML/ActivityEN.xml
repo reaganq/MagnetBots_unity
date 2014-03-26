@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGActivity xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGActivity>
+    <ID>1</ID>
+    <Name>Bank</Name>
+    <Description />
+    <SystemDescription />
+  </RPGActivity>
+  <RPGActivity>
+    <ID>2</ID>
+    <Name>Anvil</Name>
+    <Description />
+    <SystemDescription />
+  </RPGActivity>
+</ArrayOfRPGActivity>

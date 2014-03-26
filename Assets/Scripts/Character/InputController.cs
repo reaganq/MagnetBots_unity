@@ -28,6 +28,7 @@ public class InputController : MonoBehaviour {
 	public LayerMask layerMask = -1;
 	public int terrainMask = 1<<16;
 	public int poiMask = 1<<15;
+	public int characterLayerMask = 1<<9;
 	private Vector2 lastPressDownPos;
 	public Vector3 targetWayPoint;
 	public bool hasWayPoint;
@@ -201,6 +202,18 @@ public class InputController : MonoBehaviour {
 								hit.collider.gameObject.SendMessage("ActivatePOI");
 								Debug.Log("activating POI");
 							}
+							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
+							{
+								GameObject hitCharacter = hit.collider.gameObject;
+								if(hitCharacter != PlayerManager.Instance.avatarObject)
+								{
+									if(!isDown)
+									{
+										GUIManager.Instance.DisplayCharacterPopUp(hit.collider.gameObject);
+									}
+								}
+								
+							}
 						}
 					}
 				}
@@ -214,13 +227,52 @@ public class InputController : MonoBehaviour {
 				Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
 				RaycastHit hit;
 				
-				if(Physics.Raycast(ray, out hit, Mathf.Infinity, poiMask))
+				if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 				{
-					if(!isDown)
+					int layermsk = (1<<hit.collider.gameObject.layer);
+
+					if(layermsk == poiMask && UICamera.currentTouchID == -1)
 					{
-						Debug.Log("hit poi");
-						hit.collider.gameObject.SendMessage("ActivatePOI");
+						if(!isDown)
+						{
+							Debug.Log("hit poi");
+							hit.collider.gameObject.SendMessage("ActivatePOI");
+						}
 					}
+					else if(layermsk == characterLayerMask && UICamera.currentTouchID == -1 && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
+					{
+						GameObject hitCharacter = hit.collider.gameObject;
+						if(hitCharacter != PlayerManager.Instance.avatarObject)
+						{
+							if(!isDown)
+							{
+								GUIManager.Instance.DisplayCharacterPopUp(hit.collider.gameObject);
+							}
+						}
+
+					}
+
+					else
+					{
+						if(!actionManager.isLocked())
+						{
+							if(isDown)
+							{	                   
+								if(UICamera.currentTouchID == -1)
+									actionManager.LeftAction(InputTrigger.OnPressDown);
+								if(UICamera.currentTouchID == -2)
+									actionManager.RightAction(InputTrigger.OnPressDown);
+							}
+							else
+							{
+								if(UICamera.currentTouchID == -1)
+									actionManager.LeftAction(InputTrigger.OnPressUp);
+								if(UICamera.currentTouchID == -2)
+									actionManager.RightAction(InputTrigger.OnPressUp);
+							}
+						}
+					}
+
 					/*int layermsk = (1<<hit.collider.gameObject.layer);
                         
                         if(layermsk == terrainMask)
@@ -235,26 +287,7 @@ public class InputController : MonoBehaviour {
                             Debug.Log("activating POI");
                         }*/
 				}
-				else
-				{
-					if(!actionManager.isLocked())
-					{
-		                if(isDown)
-		                {	                   
-	                        if(UICamera.currentTouchID == -1)
-	                            actionManager.LeftAction(InputTrigger.OnPressDown);
-	                        if(UICamera.currentTouchID == -2)
-	                            actionManager.RightAction(InputTrigger.OnPressDown);
-		                }
-		                else
-						{
-	                        if(UICamera.currentTouchID == -1)
-	                            actionManager.LeftAction(InputTrigger.OnPressUp);
-	                        if(UICamera.currentTouchID == -2)
-	                            actionManager.RightAction(InputTrigger.OnPressUp);
-		                }
-					}
-				}
+
             }
 		}
 

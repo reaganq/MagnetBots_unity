@@ -19,9 +19,9 @@ public class LongDurationMelee : ArmorSkill {
     /***************/
 
     #region setup and unequip
-    public override void Initialise(Animation target, Transform character, Collider masterCollider, CharacterStatus status, CharacterActionManager manager)
+    public override void Initialise(Transform character, CharacterActionManager manager, int index)
     {
-        base.Initialise(target,character, masterCollider, status, manager);
+        base.Initialise(character, manager, index);
         TransferAnimations();
         //Debug.Log("override");
 
@@ -55,20 +55,21 @@ public class LongDurationMelee : ArmorSkill {
 
         //Debug.Log("start skill");
 
+		ActivateSkill(true);
         armorState = ArmorState.casting;
 
-        characterAnimation[skillAnimation.castAnimation.clip.name].time = 0;
-        characterAnimation[skillAnimation.castAnimation.clip.name].speed = 1;
-        characterAnimation[skillAnimation.clip.name].time = 0;
-        characterAnimation[skillAnimation.followThroughAnimation.clip.name].time = 0;
+        myAnimation[skillAnimation.castAnimation.clip.name].time = 0;
+        myAnimation[skillAnimation.castAnimation.clip.name].speed = 1;
+        myAnimation[skillAnimation.clip.name].time = 0;
+        myAnimation[skillAnimation.followThroughAnimation.clip.name].time = 0;
 
         //characterAnimation.Play(skillAnimation.castAnimation.clip.name);
-		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.castAnimation.clip.name);
+		myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.castAnimation.clip.name);
         yield return new WaitForSeconds(skillAnimation.castAnimation.clip.length);
   
         armorState = ArmorState.onUse;
         //characterAnimation.Play(skillAnimation.clip.name);
-		characterManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.clip.name);
+		myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, skillAnimation.clip.name);
         //yield return new WaitForSeconds(attackduration);
 
        //Debug.Log("end of start action");
@@ -96,8 +97,7 @@ public class LongDurationMelee : ArmorSkill {
 
         if(armorState == ArmorState.onUse)
         {
-            _skillActive = false;
-            RemoveOnUseSkillEffects();
+			ActivateSkill(false);
         }
 
         /*float t = characterAnimation[castingAnimation.clip.name].normalizedTime;
@@ -118,8 +118,9 @@ public class LongDurationMelee : ArmorSkill {
            */
 
         //characterAnimation.CrossFade(skillAnimation.followThroughAnimation.clip.name);
-		characterManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, skillAnimation.followThroughAnimation.clip.name);
+		myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, skillAnimation.followThroughAnimation.clip.name);
         armorState = ArmorState.followThrough;
+		myManager.ResetActionState();
 
         //yield return new WaitForSeconds(followThroughAnimation.clip.length*0.3f);
 
@@ -130,13 +131,13 @@ public class LongDurationMelee : ArmorSkill {
         //Debug.Log("time pased: "+ (Time.realtimeSinceStartup - time));
         //Debug.Log("finish");
         
-        Reset();
+        //Reset();
 
     }
     
-    public void Reset()
+    public override void Reset()
     {
         armorState = ArmorState.ready;
-
+		RemoveOnUseSkillEffects();
     }
 }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 public class BaseLootItem
 {
 	public int StackAmount = 1;
+	public int Level = 1;
 	public ItemTypeEnum Preffix;
 	public int ID;
 	//public List<Condition> Conditions;
@@ -96,7 +97,7 @@ public class BaseLootItem
 		itemInWorld.rpgItem = item;
 		itemInWorld.UniqueItemId = item.UniqueId;
 		//if (item.Stackable)
-			itemInWorld.CurrentAmount = StackAmount;
+		itemInWorld.CurrentAmount = StackAmount;
 		//else
 			//itemInWorld.CurrentAmount = 1;
 		BaseLootItems.Add(itemInWorld);

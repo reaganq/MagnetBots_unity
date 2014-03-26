@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PathologicalGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -11,7 +12,8 @@ public class ArmorSkill : MonoBehaviour {
 
     public bool hasPressDownEvent;
     public bool hasPressUpEvent;
-    public EquipmentSlots equipmentSlot;
+	public bool disableMovement;
+    public int equipmentSlotIndex;
 
     public bool _skillActive = false;
 
@@ -34,23 +36,25 @@ public class ArmorSkill : MonoBehaviour {
     public List<SkillEffect> onHitSkillEffects;
     public List<SkillEffect> onReceiveHitSkillEffects;
 
-    public Transform characterTransform;
-    public Animation characterAnimation;
+    public Transform myTransform;
+    public Animation myAnimation;
     public CharacterStatus myStatus;
-    public CharacterActionManager characterManager;
-    public Collider characterCollider;
+	public CharacterMotor myMotor;
+    public CharacterActionManager myManager;
+    public Collider myCharacterCollider;
     public ArmorState armorState;
 
     public List<CharacterStatus> HitEnemies;
 	public List<CharacterStatus> HitAllies;
 
-    public virtual void Initialise(Animation target, Transform character, Collider masterCollider, CharacterStatus status, CharacterActionManager manager)
+    public virtual void Initialise(Transform character, CharacterActionManager manager, int index)
     {
-        characterAnimation = target;
-        characterTransform = character;
-        characterManager = manager;
-        characterCollider = masterCollider;
-        myStatus = status;
+		myManager = manager;
+        myAnimation = myManager.animationTarget;
+        myTransform = character;
+        myStatus = myManager.myStatus;
+		myMotor = myManager.motor;
+		equipmentSlotIndex = index;
     }
 
     public virtual IEnumerator PressUp()
@@ -73,41 +77,36 @@ public class ArmorSkill : MonoBehaviour {
         return false;
     }
 
-	public virtual void HitTarget(HitBox target, bool isAlly)
+	public virtual void Reset()
 	{
-		HitInfo newHit = new HitInfo();
-
-		if(!isAlly)
-		{
-			newHit.sourceName = myStatus.characterName;
-			newHit.damage = damage;
-			newHit.hitPosX = 1;
-			newHit.hitPosY = 1;
-			newHit.hitPosZ = 1;
-			for (int i = 0; i < onHitSkillEffects.Count; i++) 
-			{
-				if (onHitSkillEffects[i].effectTarget == TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == TargetType.allEnemies || onHitSkillEffects[i].effectTarget == TargetType.all) {
-					newHit.skillEffects.Add(onHitSkillEffects[i]);
-				}
-			}
-
-			//TODO apply self buffs from characterstatus
-			//TODO apply hitbox local buffs
-			BinaryFormatter b = new BinaryFormatter();
-			MemoryStream m = new MemoryStream();
-			b.Serialize(m, newHit);
-
-			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
-
-			//target.ReceiveHit(newHit);
-			//Debug.Log(finalhit.sourceName);
-			Debug.Log("hitenemy");
-		}
-		else
-		{
-			Debug.Log("hitally");
-		}
 	}
+
+	public void AddParticlesToPool()
+	{
+
+	}
+
+	public void AddPrefabToPool(Transform prefab)
+	{
+		//if(characterManager.MakeSpawnPool())
+		//{
+		if(myManager.effectsPool.GetPrefabPool(prefab) == null)
+		{
+			PrefabPool prefabPool = new PrefabPool(prefab);;
+			prefabPool.preloadAmount = 3;
+			prefabPool.preloadFrames = 5;
+			Debug.Log("here");
+			myManager.effectsPool.CreatePrefabPool(prefabPool);
+		}
+		//}
+	}
+
+	public void ActivateSkill(bool state)
+	{
+		_skillActive = state;
+	}
+        
+        #region skill effects
 
     public void ApplyOnHitSkillEffects()
     {
@@ -150,6 +149,10 @@ public class ArmorSkill : MonoBehaviour {
         }
     }
 
+	#endregion
+
+	#region skill effects and attributes setup
+
     public void InitializeAttributesStats(ArmorAttribute[] attributes, SkillEffect[] effects)
     {
         //characterTransform = Player.Instance.avatarObject.transform;
@@ -188,6 +191,8 @@ public class ArmorSkill : MonoBehaviour {
         return 0;
     }
 
+	#endregion
+
     #region Animation Setup
    
     public void TransferSkillAnimation(SkillAnimation anim)
@@ -204,15 +209,15 @@ public class ArmorSkill : MonoBehaviour {
     {
         if(anim.clip != null)
         {
-            characterAnimation.AddClip(anim.clip, anim.clip.name);
-            characterAnimation[anim.clip.name].layer = anim.animationLayer;
+            myAnimation.AddClip(anim.clip, anim.clip.name);
+            myAnimation[anim.clip.name].layer = anim.animationLayer;
             //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
             yield return null;
             
             if(anim.addMixingTransforms.Count>0)
             {
                 for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
-                    characterAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
+                    myAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
                 }
             }
 
@@ -220,7 +225,7 @@ public class ArmorSkill : MonoBehaviour {
             {
                 for (int i = 0; i < anim.removeMixingTransforms.Count; i++) 
                 {
-                    characterAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
+                    myAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
                 }
             }
         }
@@ -249,7 +254,7 @@ public class ArmorSkill : MonoBehaviour {
 
     public void RemoveAnimation(AnimationClip clip)
     {
-        characterAnimation.RemoveClip(clip.name);
+        myAnimation.RemoveClip(clip.name);
     }
 
     /*public IEnumerator MixingTransforms(List<string> bonelist, List<string> removelist, AnimationClip clip)
@@ -275,7 +280,7 @@ public class ArmorSkill : MonoBehaviour {
     
     public Transform GetBone(string bonename)
     {
-        Transform[] kids = characterTransform.GetComponentsInChildren<Transform>();
+        Transform[] kids = myTransform.GetComponentsInChildren<Transform>();
         //Debug.Log(kids.Length);
         for (int i = 0; i < kids.Length; i++) {
             if(kids[i].name == bonename)
@@ -288,6 +293,43 @@ public class ArmorSkill : MonoBehaviour {
     }
 
     #endregion
+
+	public virtual void HitTarget(HitBox target, bool isAlly)
+	{
+		HitInfo newHit = new HitInfo();
+		
+		if(!isAlly)
+		{
+			newHit.sourceName = myStatus.characterName;
+			newHit.damage = damage;
+			newHit.hitPosX = 1;
+			newHit.hitPosY = 1;
+			newHit.hitPosZ = 1;
+			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			{
+				if (onHitSkillEffects[i].effectTarget == TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == TargetType.allEnemies || onHitSkillEffects[i].effectTarget == TargetType.all) {
+					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				}
+			}
+			
+			//TODO apply self buffs from characterstatus
+			//TODO apply hitbox local buffs
+			BinaryFormatter b = new BinaryFormatter();
+			MemoryStream m = new MemoryStream();
+			b.Serialize(m, newHit);
+			
+			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
+			
+			//target.ReceiveHit(newHit);
+			//Debug.Log(finalhit.sourceName);
+			Debug.Log("hitenemy");
+		}
+		else
+		{
+			Debug.Log("hitally");
+		}
+	}
+
 }
 
 public enum ArmorState

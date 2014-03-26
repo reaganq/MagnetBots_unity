@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour {
 		PlayerManager.Instance.RefreshAvatar();
 		GUIManager.Instance.TurnOffAllOtherUI();
 		GUIManager.Instance.DisplayMainGUI();
-		
+		Debug.Log("load standard");
 		
 		if(inputType == InputType.TouchInput)
 		{
