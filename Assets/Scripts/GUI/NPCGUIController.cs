@@ -111,6 +111,8 @@ public class NPCGUIController : BasicGUIController {
 
 	public void OnEnterActivityButton()
 	{
+		if(PlayerManager.Instance.ActiveNPC.activity.ID == 2)
+			GUIManager.Instance.
 	}
 
 	public void OnEnterMiniGameButton()

@@ -34,15 +34,7 @@ public class ItemInWorld
 		}
 	}
 
-	public bool IsItemUpgradeable
-	{
-		get
-		{
-			if(rpgItem.IsUpgradeable)
-				return true;
-			return false;
-		}
-	}
+
 
 	public virtual void LoadItem()
 	{
