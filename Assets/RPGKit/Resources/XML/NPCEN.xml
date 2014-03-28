@@ -14,15 +14,15 @@
     <ShopID>0</ShopID>
     <ArenaID>0</ArenaID>
     <MinigameID>0</MinigameID>
-    <ActivityID>0</ActivityID>
+    <ActivityID>1</ActivityID>
     <ID>2</ID>
-    <Name>Bank</Name>
+    <Name>Oswald</Name>
     <Description>Magnet Central</Description>
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
     <ShopID>0</ShopID>
-    <ArenaID>0</ArenaID>
+    <ArenaID>1</ArenaID>
     <MinigameID>0</MinigameID>
     <ActivityID>0</ActivityID>
     <ID>3</ID>
@@ -54,7 +54,7 @@
     <ShopID>0</ShopID>
     <ArenaID>0</ArenaID>
     <MinigameID>0</MinigameID>
-    <ActivityID>0</ActivityID>
+    <ActivityID>2</ActivityID>
     <ID>6</ID>
     <Name>Anvil</Name>
     <Description />

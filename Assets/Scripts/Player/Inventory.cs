@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Inventory  : BasicInventory
 {
-	public List<InventoryItem> _headItems = new List<InventoryItem>();
+	private List<InventoryItem> _headItems = new List<InventoryItem>();
 	public List<InventoryItem> HeadItems
 	{
 		get
@@ -21,7 +21,7 @@ public class Inventory  : BasicInventory
 			return _headItems;
         }
     }
-    public List<InventoryItem> _BodyItems = new List<InventoryItem>();
+	private List<InventoryItem> _BodyItems = new List<InventoryItem>();
 	public List<InventoryItem> BodyItems
 	{
 		get
@@ -37,7 +37,7 @@ public class Inventory  : BasicInventory
 			return _BodyItems;
         }
     }
-	public List<InventoryItem> _ArmLItems = new List<InventoryItem>();
+	private List<InventoryItem> _ArmLItems = new List<InventoryItem>();
 	public List<InventoryItem> ArmLItems
 	{
 		get
@@ -53,7 +53,7 @@ public class Inventory  : BasicInventory
 			return _ArmLItems;
         }
     }
-    public List<InventoryItem> _ArmRItems = new List<InventoryItem>();
+	private List<InventoryItem> _ArmRItems = new List<InventoryItem>();
 	public List<InventoryItem> ArmRItems
 	{
 		get
@@ -69,7 +69,7 @@ public class Inventory  : BasicInventory
 			return _ArmRItems;
         }
     }
-    public List<InventoryItem> _LegsItems = new List<InventoryItem>();
+	private List<InventoryItem> _LegsItems = new List<InventoryItem>();
 	public List<InventoryItem> LegsItems
 	{
 		get
@@ -85,7 +85,7 @@ public class Inventory  : BasicInventory
 			return _LegsItems;
         }
     }
-    public List<InventoryItem> _UpgradeableItems = new List<InventoryItem>();
+	private List<InventoryItem> _UpgradeableItems = new List<InventoryItem>();
 	public List<InventoryItem> UpgradeableItems
 	{
 		get
@@ -101,7 +101,7 @@ public class Inventory  : BasicInventory
 			return _UpgradeableItems;
         }
     }
-    public List<InventoryItem> _UsableItems = new List<InventoryItem>();
+	private List<InventoryItem> _UsableItems = new List<InventoryItem>();
 	public List<InventoryItem> UsableItems
 	{
 		get
@@ -117,7 +117,7 @@ public class Inventory  : BasicInventory
 			return _UsableItems;
         }
     }
-    public List<InventoryItem> _QuestItems = new List<InventoryItem>();
+	private List<InventoryItem> _QuestItems = new List<InventoryItem>();
     public List<InventoryItem> QuestItems
 	{
 		get
@@ -130,11 +130,67 @@ public class Inventory  : BasicInventory
 			return _QuestItems;
 		}
 	}
-	public List<InventoryItem> ArmorItems;
+	private List<InventoryItem> _ArmorItems = new List<InventoryItem>();
+	public List<InventoryItem> ArmorItems
+	{
+		get
+		{
+			_ArmorItems.Clear();
+			for (int i = 0; i < Items.Count; i++) {
+				if(Items[i].rpgItem.ItemCategory == ItemType.Armor)
+					_ArmorItems.Add(Items[i]);
+			}
+			return _ArmorItems;
+		}
+	}
+	private List<InventoryItem> _UpgradeMaterials = new List<InventoryItem>();
+	public List<InventoryItem> UpgradeMaterials
+	{
+		get
+		{
+			_UpgradeMaterials.Clear();
+			for (int i = 0; i < Items.Count; i++) {
+				if(Items[i].rpgItem.ItemCategory == ItemType.UpgradeMaterials)
+					_UpgradeMaterials.Add(Items[i]);
+			}
+			return _UpgradeMaterials;
+		}
+	}
 
 	public Inventory() : base()
 	{
 		maximumItems = 50;
+	}
+
+	public void AddItem(InventoryItem item)
+	{
+		if (!DoYouHaveSpaceForThisItem(item))
+			return;
+		
+		if (item.rpgItem.Stackable)
+		{
+			foreach(InventoryItem inventoryItem in Items)
+			{
+				if (inventoryItem.rpgItem.UniqueId == item.rpgItem.UniqueId && inventoryItem.Level == item.Level)
+				{
+					inventoryItem.CurrentAmount += item.CurrentAmount;
+					return;
+				}
+			}
+			Items.Add(item);
+		}
+		else
+		{
+			for(int index = 1; index <= item.CurrentAmount; index++)
+			{
+				InventoryItem newItem = new InventoryItem();
+				newItem.rpgItem = item.rpgItem;
+				newItem.Level = item.Level;
+				newItem.UniqueItemId = item.rpgItem.UniqueId;
+				newItem.CurrentAmount = 1;
+				Items.Add(item);
+			}
+		}
 	}
 	
 	public void AddItem(RPGItem itemToAdd, int level)

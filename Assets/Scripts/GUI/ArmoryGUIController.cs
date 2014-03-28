@@ -147,7 +147,7 @@ public class ArmoryGUIController : BasicGUIController {
 	{
 		if(CurrentSelectedInventory == 0)
 		{
-			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmorItems;
+			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.Items;
 		}
 		if(CurrentSelectedInventory == 1)
 		{
@@ -177,8 +177,13 @@ public class ArmoryGUIController : BasicGUIController {
             if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
 			{
 				ItemTiles[i].Show();
-				ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.AtlasName, SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IconPath, SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount);
-				Debug.Log(i + SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.Name);
+				/*ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.AtlasName, 
+				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IconPath, 
+				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount,
+				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemUpgradeable,
+				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].Level);*/
+				ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)]);
+				//Debug.Log(i + SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.Name);
 			}
             else
             {
@@ -188,10 +193,14 @@ public class ArmoryGUIController : BasicGUIController {
 
 		if(pageIndex == 0)
 			PreviousPageButton.SetActive(false);
+		else
+			PreviousPageButton.SetActive(true);
 		if(((pageIndex+1)*ItemTiles.Length) >= SelectedItemList.Count)
 		{
 			NextPageButton.SetActive(false);
 		}
+		else
+			NextPageButton.SetActive(true);
     }
     
     public void RefreshSelection()
@@ -230,6 +239,7 @@ public class ArmoryGUIController : BasicGUIController {
 
 	public void NextPage()
 	{
+		pageIndex += 1;
 		ResetSelection();
 		RefreshInventoryIcons();
 		HideInfoPanel();
@@ -237,6 +247,9 @@ public class ArmoryGUIController : BasicGUIController {
 
 	public void PreviousPage()
 	{
+		pageIndex -= 1;
+		if(pageIndex <= 0)
+			pageIndex = 0;
 		ResetSelection();
 		RefreshInventoryIcons();
 		HideInfoPanel();

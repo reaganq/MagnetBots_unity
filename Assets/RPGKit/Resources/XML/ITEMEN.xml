@@ -6,11 +6,52 @@
     <Description>Michelin 3 Star meal in a box</Description>
     <SystemDescription />
     <IsUsable>true</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>Food</ItemCategory>
     <IconPath>Icon/nuts_bolts_cereal</IconPath>
-    <Value>10</Value>
+    <AtlasName />
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
     <Rarity>Worthless</Rarity>
-    <IsCopy>false</IsCopy>
-    <SourceItem>0</SourceItem>
+  </RPGItem>
+  <RPGItem>
+    <ID>2</ID>
+    <Name>Basic Quartz</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>true</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>UpgradeMaterials</ItemCategory>
+    <IconPath />
+    <AtlasName />
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>50</BuyValue>
+    <SellValue>10</SellValue>
+    <Rarity>Common</Rarity>
+  </RPGItem>
+  <RPGItem>
+    <ID>3</ID>
+    <Name>Trina</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>true</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>UpgradeMaterials</ItemCategory>
+    <IconPath />
+    <AtlasName />
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>0</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Legendary</Rarity>
   </RPGItem>
 </ArrayOfRPGItem>

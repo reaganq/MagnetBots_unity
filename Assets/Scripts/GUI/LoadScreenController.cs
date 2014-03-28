@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LoadScreenController : MonoBehaviour {
+public class LoadScreenController : BasicGUIController {
 
-	// Use this for initialization
-	void Start () {
-	
+	public GameObject Root;
+
+	public override void Enable ()
+	{
+		base.Enable ();
+		Root.SetActive(true);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public override void Disable ()
+	{
+		base.Disable ();
+		Root.SetActive(false);
 	}
 }

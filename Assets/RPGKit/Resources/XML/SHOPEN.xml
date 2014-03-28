@@ -8,27 +8,32 @@
     <Items>
       <ShopItem>
         <StackAmount>2</StackAmount>
-        <Preffix>WEAPON</Preffix>
+        <Level>1</Level>
+        <itemType>Armor</itemType>
         <ID>1</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>5</StackAmount>
-        <Preffix>WEAPON</Preffix>
+        <Level>3</Level>
+        <itemType>Armor</itemType>
         <ID>2</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>1</StackAmount>
-        <Preffix>WEAPON</Preffix>
+        <Level>2</Level>
+        <itemType>Armor</itemType>
         <ID>3</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>2</StackAmount>
-        <Preffix>WEAPON</Preffix>
+        <Level>1</Level>
+        <itemType>Armor</itemType>
         <ID>4</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>3</StackAmount>
-        <Preffix>WEAPON</Preffix>
+        <Level>4</Level>
+        <itemType>Armor</itemType>
         <ID>5</ID>
       </ShopItem>
     </Items>

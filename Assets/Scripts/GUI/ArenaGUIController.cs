@@ -10,12 +10,13 @@ public class ArenaGUIController : BasicGUIController {
 	public List<EnemyCard> EnemyCards;
 	public List<GameObject> EnemyCardObjects;
 	public GameObject DetailsBox;
+	public GameObject ScrollView;
 	public UISprite DetailsPortrait;
-	public Transform rootTransform;
 	public GameObject backButton;
 	public List<RPGEnemy> enemies;
 	public UILabel partyListText;
 
+	public GameObject Panel;
 	public int selectedCardIndex;
 
 	public void Start()
@@ -29,6 +30,10 @@ public class ArenaGUIController : BasicGUIController {
 
 	public override void Enable()
 	{
+		Panel.SetActive(true);
+		backButton.SetActive(true);
+		DetailsBox.SetActive(false);
+		ScrollView.SetActive(true);
 		enemies = PlayerManager.Instance.SelectedArena.Enemies;
 
 		for (int i = 0; i < EnemyCards.Count; i++) 
@@ -44,18 +49,12 @@ public class ArenaGUIController : BasicGUIController {
 			}
 
 		}
-		backButton.SetActive(true);
+
 	}
 
 	public override void Disable()
 	{
-		for (int i = 0; i < EnemyCards.Count; i++) 
-		{
-			EnemyCardObjects[i].SetActive(false);
-		}
-
-		backButton.SetActive(false);
-		DetailsBox.SetActive(false);
+		Panel.SetActive(false);
 	}
 
 	public void DisplayDetailsBox(int index)

@@ -369,10 +369,12 @@
      <Compile Include="Assets\Scripts\Enemies\Skills\JumpingMeleeAISkill.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\MeleeAISkill.cs" />
      <Compile Include="Assets\Scripts\Enemies\Skills\RangedAISkill.cs" />
+     <Compile Include="Assets\Scripts\GUI\AnvilGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\ArenaGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\ArmoryGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\AttackButtonMessage.cs" />
      <Compile Include="Assets\Scripts\GUI\BasicGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\ButtonCustomMessage.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemyCard.cs" />
      <Compile Include="Assets\Scripts\GUI\IntroGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />

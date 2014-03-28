@@ -14,13 +14,14 @@ public class NPCGUIController : BasicGUIController {
 	public UILabel activityLabel = null;
 
 	public GameObject root;
+	public GameObject panel;
 	public float offset;
     
 	// Use this for initialization
 	// Update is called once per frame
 	public override void Enable()
     {
-		root.SetActive(true);
+		panel.SetActive(true);
 		//textLabel.gameObject.SetActive(true);
         textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
 
@@ -28,46 +29,55 @@ public class NPCGUIController : BasicGUIController {
         if(PlayerManager.Instance.ActiveNPC.thisShop != null)
         {
             enterShopButton.SetActive(true);
+			enterShopButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
 			numberOfButtons += 1;
+			Debug.Log("shop here");
         }
         else
         {
             enterShopButton.SetActive(false);
         }
-        if(PlayerManager.Instance.ActiveNPC.arena != null )
+		if(PlayerManager.Instance.ActiveNPC.arena != null )
         {
             SetupArenaButton();
             arenaButton.SetActive(true);
+			arenaButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
 			numberOfButtons += 1;
+			Debug.Log("arena here");
         }
         else
         {
             arenaButton.SetActive(false);
         }
-		if(PlayerManager.Instance.ActiveNPC.activity != null )
+		if(PlayerManager.Instance.ActiveNPC.activity.ID > 0 )
 		{
-			SetupArenaButton();
+			SetupActivityButton();
 			activityButton.SetActive(true);
+			activityButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
 			numberOfButtons += 1;
+			Debug.Log("activity here");
 		}
 		else
 		{
-			arenaButton.SetActive(false);
+			activityButton.SetActive(false);
 		}
-		if(PlayerManager.Instance.ActiveNPC.miniGame != null )
+		if(PlayerManager.Instance.ActiveNPC.miniGame.ID > 0)
 		{
-			SetupArenaButton();
+			SetupMiniGameButton();
 			minigameButton.SetActive(true);
+			minigameButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
 			numberOfButtons += 1;
+			Debug.Log("minigame here");
 		}
 		else
 		{
-			arenaButton.SetActive(false);
+			minigameButton.SetActive(false);
 		}
 
 
         confirmButton.SetActive(true);
 		numberOfButtons +=1;
+		root.transform.localPosition = new Vector3(numberOfButtons*-0.25f*offset, 363, 0);
 
 		Debug.Log("enable npc gui");
     }
@@ -75,21 +85,22 @@ public class NPCGUIController : BasicGUIController {
     public void OnConfirmButtonPressed()
     {
         GUIManager.Instance.HideNPC();
-		GUIManager.Instance.DisplayMainGUI();
+		//GUIManager.Instance.DisplayMainGUI();
     }
     
     public void OnEnterShopButton()
     {
+		PlayerManager.Instance.ActiveShop = PlayerManager.Instance.ActiveNPC.thisShop;
         GUIManager.Instance.DisplayShop();
     }
 
     public void OnEnterArenaButton()
     {
 		PlayerManager.Instance.SelectedArena = PlayerManager.Instance.ActiveNPC.arena;
-		GUIManager.Instance.DisplayEnemieslist();
+		GUIManager.Instance.DisplayArenaUI();
         //Application.LoadLevel(PlayerManager.Instance.ActiveNPC.character.LevelName);
 		//PlayerManager.Instance.GoToArena(PlayerManager.Instance.ActiveWorld.GetAvailableArena("Gym"));
-		GUIManager.Instance.HideNPC();
+		//GUIManager.Instance.HideNPC();
 		//GUIManager.Instance.DisplayMainGUI();
 		/*if(PlayerManager.Instance.ActiveArena != null)
 		{
@@ -98,8 +109,17 @@ public class NPCGUIController : BasicGUIController {
 		}*/
     }
 
+	public void OnEnterActivityButton()
+	{
+	}
+
+	public void OnEnterMiniGameButton()
+	{
+	}
+
     public void SetupArenaButton()
     {
+		Debug.Log(PlayerManager.Instance.ActiveNPC.arena.Name);
         arenaLabel.text = PlayerManager.Instance.ActiveNPC.arena.Name;
     }
 
@@ -115,7 +135,7 @@ public class NPCGUIController : BasicGUIController {
 
 	public override void Disable()
 	{
-		textLabel.gameObject.SetActive(false);
-		root.SetActive(false);
+		//textLabel.gameObject.SetActive(false);
+		panel.SetActive(false);
 	}
 }

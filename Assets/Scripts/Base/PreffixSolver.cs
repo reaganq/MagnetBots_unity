@@ -10,7 +10,7 @@ public class PreffixSolver  {
          	case PreffixType.ARMOR:
 				RPGArmor armor = Storage.LoadById<RPGArmor>(ID, new RPGArmor());
              //armor.CurrentDurability = armor.Durability;
-				PlayerManager.Instance.Hero.MainInventory.AddItem(armor, level, amount);
+				PlayerManager.Instance.Hero.ArmoryInventory.AddItem(armor, level, amount);
 
             	/*if(armor.EquipmentSlotIndex == EquipmentSlots.Head)
 				{

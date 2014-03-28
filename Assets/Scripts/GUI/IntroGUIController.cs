@@ -20,7 +20,7 @@ public class IntroGUIController : MonoBehaviour {
     IEnumerator offlineload() {
         startButton.SetActive(false);
 		NGUITools.SetActive(startButton, false);
-        loadingLabel.SetActive(true);
+        //loadingLabel.SetActive(true);
 		
         async = Application.LoadLevelAsync(1);
         async.allowSceneActivation = false;
@@ -39,9 +39,10 @@ public class IntroGUIController : MonoBehaviour {
 
 	IEnumerator load()
 	{
-		startButton.SetActive(false);
-		loadingLabel.SetActive(true);
-		NetworkManager.Instance.Connect();
+		//startButton.SetActive(false);
+		//loadingLabel.SetActive(true);
+		//NetworkManager.Instance.Connect();
+		PhotonNetwork.JoinRandomRoom();
 		yield return null;
 		/*while(!NetworkManager.Instance.isConnectedToServer)
 		{

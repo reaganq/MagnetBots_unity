@@ -34,6 +34,7 @@ public class GUIManager : MonoBehaviour {
     public bool CanShowShop = true;
     public bool CanShowNPC = true;
 
+	public AnvilGUIController AnvilGUI = null;
     public ArmoryGUIController ArmoryGUI = null;
     public MainUIManager MainGUI = null;
 	public PartyGUIController PartyGUI = null;
@@ -114,10 +115,12 @@ public class GUIManager : MonoBehaviour {
 			NPCGUI.Enable();
 			break;
 		case UIState.arena:
+			ArenaGUI.Enable();
 			break;
 		case UIState.loading:
 			break;
 		case UIState.shop:
+			ShopGUI.Enable();
 			break;
 		case UIState.bank:
 			break;
@@ -125,6 +128,9 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.armory:
 			ArmoryGUI.Enable();
+			break;
+		case UIState.anvil:
+			AnvilGUI.Enable();
 			break;
 		}
 	}
@@ -146,6 +152,7 @@ public class GUIManager : MonoBehaviour {
 		case UIState.loading:
 			break;
 		case UIState.shop:
+			ShopGUI.Disable();
 			break;
 		case UIState.bank:
 			break;
@@ -153,6 +160,9 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.armory:
 			ArmoryGUI.Disable();
+			break;
+		case UIState.anvil:
+			AnvilGUI.Disable();
 			break;
 		}
 	}
@@ -178,8 +188,7 @@ public class GUIManager : MonoBehaviour {
 
     public void StartGame()
     {
-        HideIntroGUI();
-		uiState = UIState.main;
+		DisplayMainGUI();
         //DisplayMainGUI();
     }
     
@@ -290,12 +299,13 @@ public class GUIManager : MonoBehaviour {
 		PartyGUI.HideHoverBox();
 	}
 
-	public void DisplayEnemieslist()
+	public void DisplayArenaUI()
 	{
 		//HideNPC();
-		ArenaGUI.Enable();
+		/*ArenaGUI.Enable();
 		IsEnemiesListDisplayed = true;
-		HideMainGUI();
+		HideMainGUI();*/
+		uiState = UIState.arena;
 	}
 
 	public void HideEnemiesList()
@@ -330,6 +340,16 @@ public class GUIManager : MonoBehaviour {
         }*/
 		uiState = UIState.npc;
     }
+
+	public void DisplayAnvil()
+	{
+		uiState = UIState.npc;
+	}
+
+	public void HideAnvil()
+	{
+		uiState = UIState.npc;
+	}
 
 	public void DisplayLoadingScreen()
 	{
@@ -371,21 +391,16 @@ public class GUIManager : MonoBehaviour {
     
     public bool IsUIBusy()
     {
-        if(IsInventoryDisplayed)
-            return true;
-        else if(IsShopDisplayed)
-            return true;
-        else if(IsNPCGUIDisplayed)
-            return true;
-		else if(IsEnemiesListDisplayed)
-			return true;
+        if(uiState == UIState.main)
+			return false;
         else
-            return false;
+            return true;
     }
 }
 
 public enum UIState
 {
+	anvil,
 	main,
 	shop,
 	inventory,

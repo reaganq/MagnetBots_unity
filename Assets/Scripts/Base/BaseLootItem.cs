@@ -12,7 +12,7 @@ public class BaseLootItem
 {
 	public int StackAmount = 1;
 	public int Level = 1;
-	public ItemTypeEnum Preffix;
+	public ItemType itemType;
 	public int ID;
 	//public List<Condition> Conditions;
 	
@@ -37,13 +37,22 @@ public class BaseLootItem
         get{return true;}
 	}
 	
-	public void AddOneItem(List<ItemInWorld> BaseLootItems)
+	public void AddOneItem(List<InventoryItem> BaseLootItems)
 	{
 		//validate conditions
 		//if (!CanYouLoot)
 			//return;
-		RPGArmor armor = Storage.LoadById<RPGArmor>(ID, new RPGArmor());
-        RPGItem item = (RPGItem)armor;
+		RPGItem item = new RPGItem();
+		if(itemType == ItemType.Armor)
+		{
+			RPGArmor armor = Storage.LoadById<RPGArmor>(ID, new RPGArmor());
+        	item = (RPGItem)armor;
+		}
+		else if(itemType != ItemType.Armor && itemType != ItemType.Currency)
+		{
+			item = Storage.LoadById<RPGItem>(ID, new RPGItem());
+		}
+
         AddItem(item, BaseLootItems);
         //AddItem(
         
@@ -85,19 +94,20 @@ public class BaseLootItem
 	}
 	
 	
-	protected void AddItem(RPGItem item, List<ItemInWorld> BaseLootItems)
+	protected void AddItem(RPGItem item, List<InventoryItem> BaseLootItems)
 	{
-		foreach(ItemInWorld i in BaseLootItems)
+		foreach(InventoryItem i in BaseLootItems)
 		{
 			if (i.rpgItem.UniqueId == item.UniqueId)
 				return;
 		}
 		
-		ItemInWorld itemInWorld = new ItemInWorld();
+		InventoryItem itemInWorld = new InventoryItem();
 		itemInWorld.rpgItem = item;
 		itemInWorld.UniqueItemId = item.UniqueId;
 		//if (item.Stackable)
 		itemInWorld.CurrentAmount = StackAmount;
+		itemInWorld.Level = Level;
 		//else
 			//itemInWorld.CurrentAmount = 1;
 		BaseLootItems.Add(itemInWorld);

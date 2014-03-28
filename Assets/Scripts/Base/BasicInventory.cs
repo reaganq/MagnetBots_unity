@@ -43,6 +43,34 @@ public class BasicInventory
 		return DoYouHaveThisItem(itemToHave, level, 1);
 	}
  
+	public bool DoYouHaveSpaceForThisItem(InventoryItem itemToHave)
+	{
+		if (itemToHave == null)
+			return false;
+		
+		if(itemToHave.rpgItem.Stackable)
+		{
+			foreach(InventoryItem item in Items)
+			{
+				if(item.UniqueItemId== itemToHave.UniqueItemId && item.Level == itemToHave.Level )
+					return true;
+			}
+			
+			if(!IsFullInventory)
+				return true;
+			else
+				return false;
+		}
+		
+		else
+		{
+			if(maximumItems - Items.Count >= 1)
+				return true;
+			else
+				return false;
+		}
+	}
+
 	public bool DoYouHaveSpaceForThisItem(RPGItem itemToHave, int level, int amountToReach)
     {
         if (itemToHave == null)

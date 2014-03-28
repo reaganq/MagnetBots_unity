@@ -221,6 +221,34 @@ public class PlayerInformation  {
 
 		return false;
 	}
+
+	public bool DoYouHaveSpaceForThisItem(InventoryItem item)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			if(ArmoryInventory.DoYouHaveSpaceForThisItem(item))
+				return true;
+		}
+		else
+		{
+			if(MainInventory.DoYouHaveSpaceForThisItem(item))
+				return true;
+		}
+		
+		return false;
+	}
+
+	public void AddItem(InventoryItem item)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			ArmoryInventory.AddItem(item);
+		}
+		else
+		{
+			MainInventory.AddItem(item);
+		}
+	}
 	
 	public void RemoveItem(RPGItem item, int level)
 	{

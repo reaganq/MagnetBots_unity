@@ -54,7 +54,7 @@ public class NPCEditor : BaseEditorWindow
 		s.ShopID = EditorUtils.IntPopup(s.ShopID, Data.shopEditor.items, "Shop");
 		s.ArenaID = EditorUtils.IntPopup(s.ArenaID, Data.arenaEditor.items, "Arena");
 		//s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data..items, "Shop");
-		s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data.minigameEditor.items, "Activities");
+		s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data.activityEditor.items, "Activities");
 		s.MinigameID = EditorUtils.IntPopup(s.MinigameID, Data.minigameEditor.items, "Minigames");
 
 		EditorGUILayout.Separator();

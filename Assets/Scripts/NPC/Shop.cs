@@ -21,7 +21,7 @@ public class Shop : BasicItem
     public float RestockTime;
 	
 	[XmlIgnore]
-	public List<ItemInWorld> ShopItems = new List<ItemInWorld>();
+	public List<InventoryItem> ShopItems = new List<InventoryItem>();
     public float LastRestockTime = 0;
 	
 	public Shop()
@@ -72,7 +72,7 @@ public class Shop : BasicItem
             PlayerManager.Instance.Hero.RemoveCurrency(price, item.BuyCurrency);
 			
 			//remove item from current shop collection
-			foreach(ItemInWorld shopItem in ShopItems)
+			foreach(InventoryItem shopItem in ShopItems)
 			{
 				if (shopItem.rpgItem.UniqueId == item.UniqueId)
 				{
@@ -98,7 +98,7 @@ public class Shop : BasicItem
 
 	private void AddItem(RPGItem item, int Amount)
 	{
-		foreach(ItemInWorld i in ShopItems)
+		foreach(InventoryItem i in ShopItems)
 		{
 			if (i.rpgItem.UniqueId == item.UniqueId)
             {
@@ -107,10 +107,11 @@ public class Shop : BasicItem
             }
 		}
 		
-		ItemInWorld itemInWorld = new ItemInWorld();
+		InventoryItem itemInWorld = new InventoryItem();
 		itemInWorld.UniqueItemId = item.UniqueId;
 		itemInWorld.rpgItem = item;
 		itemInWorld.CurrentAmount = Amount;
+		itemInWorld.IsItemEquipped = false;
 		ShopItems.Add(itemInWorld);
 	}
 

@@ -142,9 +142,13 @@ public class ShopEditor : BaseEditorWindow
 		
 		//item.Preffix = (ItemTypeEnum)EditorGUILayout.EnumPopup(item.Preffix, GUILayout.Width(200));
 		EditorGUILayout.PrefixLabel(" ID: ");
-		item.ID = EditorGUILayout.IntField(item.ID, GUILayout.Width(90));
+		item.ID = EditorGUILayout.IntField(item.ID, GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel(" amount: ");
-		item.StackAmount = EditorGUILayout.IntField(item.StackAmount, GUILayout.Width(100));
+		item.StackAmount = EditorGUILayout.IntField(item.StackAmount, GUILayout.Width(50));
+		EditorGUILayout.PrefixLabel(" level: ");
+		item.Level = EditorGUILayout.IntField(item.Level, GUILayout.Width(50));
+		EditorGUILayout.PrefixLabel("Item Type");
+		item.itemType = (ItemType)EditorGUILayout.EnumPopup(item.itemType , GUILayout.Width(100));
 		
 	}
 	

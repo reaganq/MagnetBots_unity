@@ -230,6 +230,7 @@ public class InputController : MonoBehaviour {
 				if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 				{
 					int layermsk = (1<<hit.collider.gameObject.layer);
+					Debug.Log(layermsk);
 
 					if(layermsk == poiMask && UICamera.currentTouchID == -1)
 					{

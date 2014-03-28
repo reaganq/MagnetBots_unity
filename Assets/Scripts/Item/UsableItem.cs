@@ -71,6 +71,7 @@ public enum ItemType
     Quest = 3,
 	Normal = 4,
 	Currency = 5,
+	UpgradeMaterials = 6,
 }
 
 public enum UsageSkillType

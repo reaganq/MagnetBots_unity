@@ -26,6 +26,7 @@ public class RPGArmor : Equiped
 		AbilityString = "Use this";
 		IsEquippable = true;
 		IsUsable = false;
+		IsUpgradeable = true;
 	//EffectsOnHit = new List<Effect>();
 	}
 }
