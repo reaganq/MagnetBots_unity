@@ -116,23 +116,12 @@ public class ItemTileButton: MonoBehaviour
 			LevelLabel.enabled = true;
 		}
 		AmountLabel.text = item.CurrentAmount.ToString();
+		AmountLabel.enabled = true;
 	}
 
 	public void LoadWithCover(InventoryItem item, bool condition)
 	{
-		if(!Icon.enabled)
-			Icon.enabled = true;
-		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
-		Icon.atlas = atlas.GetComponent<UIAtlas>();
-		Icon.spriteName = item.rpgItem.IconPath;
-		if(!item.rpgItem.IsUpgradeable)
-			LevelLabel.enabled = false;
-		else
-		{
-			LevelLabel.text = item.Level.ToString();
-			LevelLabel.enabled = true;
-		}
-		AmountLabel.text = item.CurrentAmount.ToString();
+		Load(item);
 
 		if(condition)
 			Cover.enabled = false;
@@ -155,23 +144,12 @@ public class ItemTileButton: MonoBehaviour
 			LevelLabel.enabled = true;
 		}
         AmountLabel.text = amount.ToString();
+		AmountLabel.enabled = true;
     }
 
 	public void LoadWithCover(string atlaspath, string iconpath, int amount, bool displayLevel, int level, bool coverState )
 	{
-		if(!Icon.enabled)
-			Icon.enabled = true;
-		GameObject atlas = Resources.Load(atlaspath) as GameObject;
-		Icon.atlas = atlas.GetComponent<UIAtlas>();
-		Icon.spriteName = iconpath;
-		AmountLabel.text = amount.ToString();
-		if(!displayLevel)
-			LevelLabel.enabled = false;
-		else
-		{
-			LevelLabel.text = level.ToString();
-			LevelLabel.enabled = true;
-		}
+		Load(atlaspath, iconpath, amount, displayLevel, level);
 		if(coverState)
 			Cover.enabled = false;
 		else

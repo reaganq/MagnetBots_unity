@@ -13,7 +13,7 @@ public class CharacterMotor : MonoBehaviour {
     public InputController input;
 	public bool disableMovement;
     
-    private Transform _myTransform;
+    public Transform _myTransform;
     //private Transform rigidbodyTransform;
     
     //public bool canRun = true;
@@ -38,6 +38,7 @@ public class CharacterMotor : MonoBehaviour {
     public Vector3 characterVelocity;
     public Vector3 horizontalVelocity;
     public float currentSpeed;
+	public Vector3 impact = Vector3.zero;
 	
     //public Vector3 velocity = Vector3.zero;
     
@@ -61,12 +62,27 @@ public class CharacterMotor : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         
-        if(!GameManager.Instance.GameIsPaused && !disableMovement)
+        if(!GameManager.Instance.GameIsPaused)
         {
-            UpdateFunction();
-            AnimationUpdate();
+			if(!disableMovement)
+			{
+	            UpdateFunction();
+	            AnimationUpdate();
+			}
         }
         
+	}
+
+	void LateUpdate()
+	{
+		if(!GameManager.Instance.GameIsPaused)
+		{
+			if(impact.magnitude > 0.1f)
+			{
+				controller.Move(impact*Time.deltaTime);
+			}
+			impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime * 5);
+		}
 	}
     
     public void Move(Vector3 direction)
@@ -94,6 +110,13 @@ public class CharacterMotor : MonoBehaviour {
             //Debug.LogWarning(dir);
         }
     }
+
+	public void AddImpact(Vector3 dir, float force)
+	{
+		dir.Normalize();
+		dir = new Vector3(dir.x, 0, dir.z);
+		impact += dir.normalized * force / 1;
+	}
     
     void UpdateFunction()
     {
@@ -103,6 +126,10 @@ public class CharacterMotor : MonoBehaviour {
         velocity = ApplyInputVelocityChange(velocity);
         
         velocity += Physics.gravity;
+
+		//if(impact.magnitude > 0.1f)
+			//velocity += impact;
+
         Vector3 lastPosition = _myTransform.position;
         Vector3 currentMovementOffset = velocity * Time.deltaTime;
         
@@ -112,7 +139,8 @@ public class CharacterMotor : MonoBehaviour {
         characterVelocity = (_myTransform.position - lastPosition) / Time.deltaTime;
         var newHVelocity    = new Vector3(characterVelocity.x, 0, characterVelocity.z);
 
-
+		//if(impact.magnitude > 0.1f)
+		//impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime * 5);
         // The CharacterController can be moved in unwanted directions when colliding with things.
         // We want to prevent this from influencing the recorded velocity.
         if (oldHVelocity == Vector3.zero) {
@@ -195,9 +223,10 @@ public class CharacterMotor : MonoBehaviour {
     {
         horizontalVelocity = controller.velocity;
         horizontalVelocity.y = 0f;
+		Vector3 localVel = _myTransform.InverseTransformDirection(horizontalVelocity);
         currentSpeed = horizontalVelocity.magnitude;
         //Debug.Log(currentSpeed);
-        if(currentSpeed > 0)
+        if(localVel.z > 0)
         {
             float t = 0.0f;
             //Debug.Log(speed);

@@ -168,7 +168,7 @@ public class StandardGun : ArmorSkill {
             }
 
             armorState = ArmorState.wait;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1f);
             armorState = ArmorState.followThrough;
 			Debug.LogWarning("not here");
 			myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
@@ -203,11 +203,11 @@ public class StandardGun : ArmorSkill {
 		HitAllies.Clear();
 		HitEnemies.Clear();
 		ActivateSkill(false);
-        myAnimation[castAnimation.clip.name].time = 0;
+        /*myAnimation[castAnimation.clip.name].time = 0;
         myAnimation[durationAnimation.clip.name].time = 0;
         myAnimation[recoilAnimation.clip.name].time = 0;
         myAnimation[reloadAnimation.clip.name].time = 0;
-        myAnimation[followThroughAnimation.clip.name].time = 0;
+        myAnimation[followThroughAnimation.clip.name].time = 0;*/
         armorState = ArmorState.ready;
 
     }
@@ -221,7 +221,7 @@ public class StandardGun : ArmorSkill {
         currentAmmoCount --;
         fireSpeedTimer = fireSpeed;
         //GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
-		myManager.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, Quaternion.identity, bulletSpeed, equipmentSlotIndex);
+		myManager.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, equipmentSlotIndex);
         /*if(bullet.rigidbody != null)
             bullet.rigidbody.AddForce(characterTransform.forward * bulletSpeed);
         BulletProjectile src = bullet.GetComponent<BulletProjectile>();

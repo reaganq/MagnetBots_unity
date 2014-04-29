@@ -29,6 +29,7 @@ public class JimFSM : SimpleFSM {
     
     public override void EnterState(AIState stateEntered)
     {
+		base.EnterState(stateEntered);
         switch(stateEntered)
         {
 		case AIState.Resting:
@@ -85,11 +86,7 @@ public class JimFSM : SimpleFSM {
 				}
             };
             break;
-		case AIState.Dead:
-			//if(cancelSkillJob != null) cancelSkillJob.kill();
-			myPhotonView.RPC("PlayAnimation", PhotonTargets.All, deathAnim.name);
-			Debug.LogWarning("die");
-			break;
+		
         }
     }
 

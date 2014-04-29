@@ -1,0 +1,440 @@
+fileFormatVersion: 2
+guid: 2173752a5e82a4fb685054dd2e2211ef
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: bones:Chest
+    100004: bones:Eyes
+    100006: bones:Head
+    100008: bones:Head_Hover_a
+    100010: bones:Head_Hover_b
+    100012: bones:L_Ankle
+    100014: bones:L_Arm_Hover_a
+    100016: bones:L_Arm_Hover_b
+    100018: bones:L_Ball
+    100020: bones:L_Clavicle
+    100022: bones:L_Elbow
+    100024: bones:L_Eye
+    100026: bones:L_Eye_end
+    100028: bones:L_Forearm
+    100030: bones:L_Hand
+    100032: bones:L_IndexFinger
+    100034: bones:L_IndexFinger_end
+    100036: bones:L_Knee
+    100038: bones:L_SecondFinger
+    100040: bones:L_SecondFinger_End
+    100042: bones:L_Shoulder
+    100044: bones:L_ShoulderGuard
+    100046: bones:L_Thigh
+    100048: bones:L_Thumb
+    100050: bones:L_Thumb_End
+    100052: bones:L_Toe
+    100054: bones:LegsRoot
+    100056: bones:Lynne_NPC:pCube26
+    100058: bones:Lynne_NPC:pCube35
+    100060: bones:Lynne_NPC:pCube38
+    100062: bones:Lynne_NPC:pCube7
+    100064: bones:Lynne_NPC:pCube8
+    100066: bones:Lynne_NPC:pCylinder12
+    100068: bones:Lynne_NPC:pCylinder9
+    100070: bones:Lynne_NPC:polySurface19
+    100072: bones:Lynne_NPC:polySurface26
+    100074: bones:Lynne_NPC:polySurface31
+    100076: bones:Lynne_NPC:polySurface32
+    100078: bones:Lynne_NPC:polySurface33
+    100080: bones:Lynne_NPC:polySurface37
+    100082: bones:Lynne_NPC:polySurface38
+    100084: bones:Lynne_NPC:polySurface39
+    100086: bones:Lynne_NPC:polySurface40
+    100088: bones:Lynne_NPC:polySurface41
+    100090: bones:Lynne_NPC:polySurface42
+    100092: bones:Neck_Horizontal
+    100094: bones:Neck_Vertical
+    100096: bones:Pelvis
+    100098: bones:R_Ankle
+    100100: bones:R_Arm_Hover_a
+    100102: bones:R_Arm_Hover_b
+    100104: bones:R_Ball
+    100106: bones:R_Clavicle
+    100108: bones:R_Elbow
+    100110: bones:R_Eye
+    100112: bones:R_Eye_End
+    100114: bones:R_Forearm
+    100116: bones:R_Hand
+    100118: bones:R_IndexFinger
+    100120: bones:R_IndexFinger_end
+    100122: bones:R_Knee
+    100124: bones:R_SecondFinger
+    100126: bones:R_SecondFinger_End
+    100128: bones:R_Shoulder
+    100130: bones:R_ShoulderGuard
+    100132: bones:R_Thigh
+    100134: bones:R_Thumb
+    100136: bones:R_Thumb_End
+    100138: bones:R_Toe
+    100140: bones:Spine_1
+    100142: bones:Spine_2
+    100144: bones:Upperbody_Hover_a
+    100146: bones:Upperbody_Hover_b
+    400000: //RootNode
+    400002: bones:Chest
+    400004: bones:Eyes
+    400006: bones:Head
+    400008: bones:Head_Hover_a
+    400010: bones:Head_Hover_b
+    400012: bones:L_Ankle
+    400014: bones:L_Arm_Hover_a
+    400016: bones:L_Arm_Hover_b
+    400018: bones:L_Ball
+    400020: bones:L_Clavicle
+    400022: bones:L_Elbow
+    400024: bones:L_Eye
+    400026: bones:L_Eye_end
+    400028: bones:L_Forearm
+    400030: bones:L_Hand
+    400032: bones:L_IndexFinger
+    400034: bones:L_IndexFinger_end
+    400036: bones:L_Knee
+    400038: bones:L_SecondFinger
+    400040: bones:L_SecondFinger_End
+    400042: bones:L_Shoulder
+    400044: bones:L_ShoulderGuard
+    400046: bones:L_Thigh
+    400048: bones:L_Thumb
+    400050: bones:L_Thumb_End
+    400052: bones:L_Toe
+    400054: bones:LegsRoot
+    400056: bones:Lynne_NPC:pCube26
+    400058: bones:Lynne_NPC:pCube35
+    400060: bones:Lynne_NPC:pCube38
+    400062: bones:Lynne_NPC:pCube7
+    400064: bones:Lynne_NPC:pCube8
+    400066: bones:Lynne_NPC:pCylinder12
+    400068: bones:Lynne_NPC:pCylinder9
+    400070: bones:Lynne_NPC:polySurface19
+    400072: bones:Lynne_NPC:polySurface26
+    400074: bones:Lynne_NPC:polySurface31
+    400076: bones:Lynne_NPC:polySurface32
+    400078: bones:Lynne_NPC:polySurface33
+    400080: bones:Lynne_NPC:polySurface37
+    400082: bones:Lynne_NPC:polySurface38
+    400084: bones:Lynne_NPC:polySurface39
+    400086: bones:Lynne_NPC:polySurface40
+    400088: bones:Lynne_NPC:polySurface41
+    400090: bones:Lynne_NPC:polySurface42
+    400092: bones:Neck_Horizontal
+    400094: bones:Neck_Vertical
+    400096: bones:Pelvis
+    400098: bones:R_Ankle
+    400100: bones:R_Arm_Hover_a
+    400102: bones:R_Arm_Hover_b
+    400104: bones:R_Ball
+    400106: bones:R_Clavicle
+    400108: bones:R_Elbow
+    400110: bones:R_Eye
+    400112: bones:R_Eye_End
+    400114: bones:R_Forearm
+    400116: bones:R_Hand
+    400118: bones:R_IndexFinger
+    400120: bones:R_IndexFinger_end
+    400122: bones:R_Knee
+    400124: bones:R_SecondFinger
+    400126: bones:R_SecondFinger_End
+    400128: bones:R_Shoulder
+    400130: bones:R_ShoulderGuard
+    400132: bones:R_Thigh
+    400134: bones:R_Thumb
+    400136: bones:R_Thumb_End
+    400138: bones:R_Toe
+    400140: bones:Spine_1
+    400142: bones:Spine_2
+    400144: bones:Upperbody_Hover_a
+    400146: bones:Upperbody_Hover_b
+    2300000: //RootNode
+    2300002: bones:Lynne_NPC:pCube26
+    2300004: bones:Lynne_NPC:pCube35
+    2300006: bones:Lynne_NPC:pCube38
+    2300008: bones:Lynne_NPC:pCube7
+    2300010: bones:Lynne_NPC:pCube8
+    2300012: bones:Lynne_NPC:pCylinder12
+    2300014: bones:Lynne_NPC:pCylinder9
+    2300016: bones:Lynne_NPC:polySurface19
+    2300018: bones:Lynne_NPC:polySurface26
+    2300020: bones:Lynne_NPC:polySurface31
+    2300022: bones:Lynne_NPC:polySurface32
+    2300024: bones:Lynne_NPC:polySurface33
+    2300026: bones:Lynne_NPC:polySurface37
+    2300028: bones:Lynne_NPC:polySurface38
+    2300030: bones:Lynne_NPC:polySurface39
+    2300032: bones:Lynne_NPC:polySurface40
+    2300034: bones:Lynne_NPC:polySurface41
+    2300036: bones:Lynne_NPC:polySurface42
+    3300000: //RootNode
+    3300002: bones:Lynne_NPC:pCube26
+    3300004: bones:Lynne_NPC:pCube35
+    3300006: bones:Lynne_NPC:pCube38
+    3300008: bones:Lynne_NPC:pCube7
+    3300010: bones:Lynne_NPC:pCube8
+    3300012: bones:Lynne_NPC:pCylinder12
+    3300014: bones:Lynne_NPC:pCylinder9
+    3300016: bones:Lynne_NPC:polySurface19
+    3300018: bones:Lynne_NPC:polySurface26
+    3300020: bones:Lynne_NPC:polySurface31
+    3300022: bones:Lynne_NPC:polySurface32
+    3300024: bones:Lynne_NPC:polySurface33
+    3300026: bones:Lynne_NPC:polySurface37
+    3300028: bones:Lynne_NPC:polySurface38
+    3300030: bones:Lynne_NPC:polySurface39
+    3300032: bones:Lynne_NPC:polySurface40
+    3300034: bones:Lynne_NPC:polySurface41
+    3300036: bones:Lynne_NPC:polySurface42
+    4300000: polySurface31
+    4300002: bones:Lynne_NPC:polySurface31
+    4300004: bones:Lynne_NPC:pCube7
+    4300006: bones:Lynne_NPC:pCube8
+    4300008: bones:Lynne_NPC:polySurface42
+    4300010: bones:Lynne_NPC:polySurface32
+    4300012: bones:Lynne_NPC:polySurface41
+    4300014: bones:Lynne_NPC:polySurface33
+    4300016: bones:Lynne_NPC:polySurface26
+    4300018: bones:Lynne_NPC:polySurface19
+    4300020: bones:Lynne_NPC:pCube35
+    4300022: bones:Lynne_NPC:pCylinder9
+    4300024: bones:Lynne_NPC:polySurface38
+    4300026: bones:Lynne_NPC:polySurface37
+    4300028: bones:Lynne_NPC:pCube38
+    4300030: bones:Lynne_NPC:pCylinder12
+    4300032: bones:Lynne_NPC:polySurface39
+    4300034: bones:Lynne_NPC:polySurface40
+    4300036: bones:Lynne_NPC:pCube26
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 320
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:Lynne_NPC:pCube35
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:Lynne_NPC:pCylinder9
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:Lynne_NPC:polySurface38
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:Lynne_NPC:polySurface37
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:Lynne_NPC:pCube26
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:Lynne_NPC:polySurface40
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:Lynne_NPC:polySurface39
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:Lynne_NPC:pCylinder12
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:Lynne_NPC:pCube38
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Lynne_NPC:polySurface31
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:Lynne_NPC:pCube7
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:Lynne_NPC:pCube8
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:Lynne_NPC:polySurface42
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:Lynne_NPC:polySurface32
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Lynne_NPC:polySurface19
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Lynne_NPC:polySurface26
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:Lynne_NPC:polySurface33
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:Lynne_NPC:polySurface41
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

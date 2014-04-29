@@ -7,7 +7,7 @@ public class Zone : Photon.MonoBehaviour {
 
 	public Transform spawnPoint;
 	public ZoneType type;
-	
+	public GameObject zoneObject;
 }
 
 public enum ZoneType

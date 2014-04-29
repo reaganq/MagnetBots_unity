@@ -12,7 +12,7 @@ using System;
 //[XmlInclude(typeof(Condition))]
 public class Equiped : RPGItem {
   
-	public string FBXName;
+	public List<string> FBXName;
  //public int Durability;
  //public List<Condition> Conditions;
  //public List<Effect> WornEffects;

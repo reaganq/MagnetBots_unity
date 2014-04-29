@@ -1,17 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using Parse;
+
 
 public class IntroGUIController : MonoBehaviour {
 
-    public GameObject loadingLabel;
+    public UILabel loadingLabel;
     public GameObject startButton;
 	public GameObject signInButton;
 	public GameObject registerButton;
+	public GameObject panel;
 
+	public UIInput usernameInput;
+	public UIInput passwordInput;
 
-    public void OnStartPressed()
+	public bool loading;
+	public bool newAcct;
+	public bool quickStartClicked;
+
+	public void Awake()
+	{
+		loading = false;
+		newAcct = true;
+		quickStartClicked = false;
+	}
+
+	public void Enable()
+	{
+		panel.SetActive(true);
+	}
+
+	public void Disable()
+	{
+		panel.SetActive(false);
+	}
+
+	public void OnStartPressed()
+	{
+		if(!quickStartClicked)
+		{
+			quickStartClicked = true;
+			NetworkManager.Instance.usingParse = false;
+			PlayerManager.Instance.StartNewGame();
+			StartGame();
+		}
+	}
+
+    public void StartGame()
     {
-        StartCoroutine("load");
+		loadingLabel.text = "loading";
+		load();
+		GameManager.Instance.GameHasStarted = true;
     }
 
     public string levelName;
@@ -37,13 +77,13 @@ public class IntroGUIController : MonoBehaviour {
         ActivateScene();
     }
 
-	IEnumerator load()
+	public void load()
 	{
 		//startButton.SetActive(false);
 		//loadingLabel.SetActive(true);
 		//NetworkManager.Instance.Connect();
 		PhotonNetwork.JoinRandomRoom();
-		yield return null;
+		//yield return null;
 		/*while(!NetworkManager.Instance.isConnectedToServer)
 		{
 			yield return null;
@@ -57,8 +97,90 @@ public class IntroGUIController : MonoBehaviour {
     
     public void ActivateScene() {
         async.allowSceneActivation = true;
-        GameManager.Instance.GameHasStarted = true;
         GameManager.Instance.GameIsPaused = false;
         GUIManager.Instance.StartGame();
+    }
+
+	public void Register()
+	{
+		Debug.Log(usernameInput.value + passwordInput.value);
+		CreateNewUser(usernameInput.value, passwordInput.value);
+	}
+
+	public void Login()
+	{
+		Debug.Log(usernameInput.value + passwordInput.value);
+		authenticateUser(usernameInput.value, passwordInput.value);
+		loadingLabel.text = "signing in";
+	}
+
+	void Update()
+	{
+		if(NetworkManager.Instance.usingParse && !loading)
+		{
+			if(ParseUser.CurrentUser != null)
+			{
+				Debug.Log("true");
+				if(newAcct)
+				{
+					PlayerManager.Instance.StartNewGame();
+					StartGame();
+					loading = true;
+				}
+				else
+				{
+					PlayerManager.Instance.LoadGame();
+					loading = true;
+				}
+
+
+			}
+		}
+	}
+
+	public void authenticateUser(string username, string password)
+	{
+		
+		ParseUser.LogInAsync(username, password).ContinueWith(t =>
+		                                                      {
+			if (t.IsFaulted || t.IsCanceled)
+			{
+				// The login failed. Check t.Exception to see why.
+				//isAuthenticated = false;
+				loadingLabel.text = "username does not exist";
+			}
+			else
+			{
+
+				// Login was successful.
+				//isAuthenticated = true;
+			}
+		});
+		loadingLabel.text = "signing in";
+		newAcct = false;
+	}
+	
+	public void CreateNewUser(string userName, string password)
+	{
+		var user = new ParseUser()
+		{
+			Username = userName,
+			Password = password,
+			//Email = "reaganqiu@gmail.com"
+		};
+		
+        user.SignUpAsync().ContinueWith(t => 
+                                        {
+            if(t.IsFaulted || t.IsCanceled)
+            {
+                //Debug.Log(t.Exception);
+				loadingLabel.text = "account already exists";
+            }
+
+        });
+
+		loadingLabel.text = "creating new account";
+		newAcct = true;
+        //Application.LoadLevel("Demo");
     }
 }

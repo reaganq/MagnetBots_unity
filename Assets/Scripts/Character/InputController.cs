@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class InputController : MonoBehaviour {
@@ -230,13 +230,13 @@ public class InputController : MonoBehaviour {
 				if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 				{
 					int layermsk = (1<<hit.collider.gameObject.layer);
-					Debug.Log(layermsk);
+					//Debug.Log(layermsk);
 
 					if(layermsk == poiMask && UICamera.currentTouchID == -1)
 					{
 						if(!isDown)
 						{
-							Debug.Log("hit poi");
+							//Debug.Log("hit poi");
 							hit.collider.gameObject.SendMessage("ActivatePOI");
 						}
 					}

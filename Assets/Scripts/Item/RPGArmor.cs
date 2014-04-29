@@ -21,12 +21,14 @@ public class RPGArmor : Equiped
 	{
 		preffix = "ARMOR";
 		Name = string.Empty;
-		FBXName = "Armor/";
+		FBXName = new List<string>();
 		AbilityIconPath = "AbilityIcon/";
 		AbilityString = "Use this";
 		IsEquippable = true;
 		IsUsable = false;
 		IsUpgradeable = true;
+		AtlasName = "Atlases/Armor/";
+		Stackable = true;
 	//EffectsOnHit = new List<Effect>();
 	}
 }

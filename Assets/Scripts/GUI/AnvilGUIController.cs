@@ -30,6 +30,8 @@ public class AnvilGUIController : BasicGUIController {
 	public InventoryItem FinalItem = new InventoryItem();
 	public float timer;
 
+	public Anvil anvil;
+
 	void Update()
 	{
 		if(timer >= 0)
@@ -40,6 +42,9 @@ public class AnvilGUIController : BasicGUIController {
 	}
 	public override void Enable()
 	{
+		for (int i = 0; i < ItemTiles.Length; i++) {
+			ItemTiles[i].Deselect();
+		}
 		hasItem = false;
 		isInventoryDisplayed = false;
 		CanUpgrade = true;
@@ -55,6 +60,9 @@ public class AnvilGUIController : BasicGUIController {
 		Inventory.SetActive(false);
 		UpgradeButton.SetActive(false);
 		CollectButton.SetActive(false);
+		FinalItemTile.Hide();
+		UpgradeItemTile.Hide();
+		MaterialItemTile.Hide();
 	}
 
 	public void RefreshItemList()
@@ -67,32 +75,45 @@ public class AnvilGUIController : BasicGUIController {
 	public override void Disable ()
 	{
 		Panel.SetActive(false);
-
 	}
 
 	public void OnUpgradeItemTilePressed()
 	{
-		state = 1;
-		RefreshInventoryIcons();
-		ShowInventory();
+		if(CanUpgrade)
+		{
+			state = 1;
+			RefreshInventoryIcons();
+			ShowInventory();
+		}
 	}
 
 	public void OnUpgradeMaterialTilePressed()
 	{
-		state = 2;
-		RefreshInventoryIcons();
-		ShowInventory();
+		if(CanUpgrade)
+		{
+			state = 2;
+			RefreshInventoryIcons();
+			ShowInventory();
+		}
 	}
 	
 	public void OnItemTilePressed(int index)
 	{
+		if(ItemTiles[index].Cover.enabled)
+			return;
+
 		if(state == 1)
 		{
 			if(index >= ItemList.Count)
 				return;
 			else
 			{
-				UpgradeItem = ItemList[index+inventoryPageIndex*ItemTiles.Length];
+				InventoryItem tempItem = ItemList[index+inventoryPageIndex*ItemTiles.Length];
+				UpgradeItem = new InventoryItem();
+				UpgradeItem.rpgItem = tempItem.rpgItem;
+				UpgradeItem.UniqueItemId = tempItem.UniqueItemId;
+				UpgradeItem.Level = tempItem.Level;
+				UpgradeItem.CurrentAmount = 1;
 				UpgradeItemTile.Load(UpgradeItem);
 				hasItem = true;
 			}
@@ -103,13 +124,20 @@ public class AnvilGUIController : BasicGUIController {
 				return;
 			else
 			{
-				MaterialItem = MaterialsList[index+upgradeMaterialsPageIndex*ItemTiles.Length];
+				InventoryItem tempItem = MaterialsList[index+upgradeMaterialsPageIndex*ItemTiles.Length];
+				MaterialItem = new InventoryItem();
+				MaterialItem.rpgItem = tempItem.rpgItem;
+				MaterialItem.UniqueItemId = tempItem.UniqueItemId;
+				MaterialItem.Level = tempItem.Level;
+				MaterialItem.CurrentAmount = 1;
 				MaterialItemTile.Load(MaterialItem);
 				hasMaterial = true;
 			}
 		}
 
 		CheckIfCanUpgrade();
+		HideInventory();
+
 	}
 
 	public void CheckIfCanUpgrade()
@@ -130,6 +158,7 @@ public class AnvilGUIController : BasicGUIController {
 		{
 			upgradeMaterialsPageIndex += 1;
 		}
+		RefreshInventoryIcons();
 	}
 
 	public void PreviousPage()
@@ -146,6 +175,7 @@ public class AnvilGUIController : BasicGUIController {
 			if(upgradeMaterialsPageIndex < 0)
 				upgradeMaterialsPageIndex = 0;
 		}
+		RefreshInventoryIcons();
 	}
 
 	public void RefreshInventoryIcons()
@@ -181,10 +211,10 @@ public class AnvilGUIController : BasicGUIController {
 		if(state == 2)
 		{
 			for (int i = 0; i <  ItemTiles.Length; i++) {
-				if((i + upgradeMaterialsPageIndex*ItemTiles.Length) < ItemList.Count)
+				if((i + upgradeMaterialsPageIndex*ItemTiles.Length) < MaterialsList.Count)
 				{
 					ItemTiles[i].Show();
-					ItemTiles[i].Load(MaterialsList[(i + inventoryPageIndex*ItemTiles.Length)]);
+					ItemTiles[i].LoadWithCover(MaterialsList[(i + upgradeMaterialsPageIndex*ItemTiles.Length)], true);
 				}
 				else
 				{
@@ -204,6 +234,7 @@ public class AnvilGUIController : BasicGUIController {
 			else
 				NextPageButton.SetActive(true);
 		}
+		timer = 5.0f;
 	}
 
 	public void ShowInventory()
@@ -211,7 +242,7 @@ public class AnvilGUIController : BasicGUIController {
 		if(!isInventoryDisplayed)
 			Inventory.SetActive(true);
 		isInventoryDisplayed = true;
-		timer += 5.0f;
+		timer = 5.0f;
 	}
 
 	public void HideInventory()
@@ -223,38 +254,62 @@ public class AnvilGUIController : BasicGUIController {
 
 	public void OnUpgradePressed()
 	{
+		Debug.Log("ugprading");
 		HideInventory();
+		MaterialItemTile.Hide();
+		UpgradeItemTile.Hide();
+		float luck = Random.Range(0.0f, 1.0f);
+		Debug.Log("luck " + luck);
+		CanUpgrade = false;
+
+		if(luck < 0.5f)
+		{
+			FinalItem = new InventoryItem();
+			FinalItem.rpgItem = UpgradeItem.rpgItem;
+			FinalItem.CurrentAmount = 1;
+			FinalItem.Level = UpgradeItem.Level + 1;
+			FinalItem.UniqueItemId = UpgradeItem.UniqueItemId;
+			PlayerManager.Instance.Hero.AddItem(FinalItem);
+			PlayerManager.Instance.Hero.RemoveItem(UpgradeItem);
+			PlayerManager.Instance.Hero.RemoveItem(MaterialItem);
+			StartCoroutine(Success());
+		}
+		else
+		{
+			FinalItem = null;
+			PlayerManager.Instance.Hero.RemoveItem(UpgradeItem);
+			PlayerManager.Instance.Hero.RemoveItem(MaterialItem);
+			StartCoroutine(Fail());
+		}
 		MaterialItem = null;
 		UpgradeItem = null;
 		hasItem = false;
 		hasMaterial = false;
-
-		MaterialItemTile.Hide();
-		UpgradeItemTile.Hide();
-		float luck = Random.Range(0.0f, 1.0f);
-		if(luck < 0.5f)
-		{
-			//success
-			FinalItem = UpgradeItem;
-			FinalItem.Level += 1;
-			FinalItemTile.Load(FinalItem);
-			FinalItem.CurrentAmount = 1;
-			PlayerManager.Instance.Hero.AddItem(FinalItem);
-			CollectButton.SetActive(true);
-			CanUpgrade = false;
-		}
-		else
-		{
-			OnCollectPressed();
-		}
 		CheckIfCanUpgrade();
+	}
 
+	public IEnumerator Success()
+	{
+		anvil.Sucess();
+		yield return new WaitForSeconds(2);
+		Debug.Log("SUCCESS");
+		FinalItemTile.Load(FinalItem);
+		CollectButton.SetActive(true);
+	}
+
+	public IEnumerator Fail()
+	{
+		Debug.Log("FAIL");
+		anvil.Fail();
+		yield return new WaitForSeconds(2);
+		OnCollectPressed();
 	}
 
 	public void OnCollectPressed()
 	{
 		FinalItemTile.Hide();
 		FinalItem = null;
+		CollectButton.SetActive(false);
 		CanUpgrade = true;
 	}
 	

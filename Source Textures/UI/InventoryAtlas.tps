@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>unity</string>
         <key>textureFileName</key>
-        <filename>../../Assets/UI/InventoryUHD.png</filename>
+        <filename>../../Assets/Resources/Atlases/Main/InventoryUHD.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../../Assets/UI/InventoryUHD.txt</filename>
+        <filename>../../Assets/Resources/Atlases/Main/InventoryUHD.txt</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -172,6 +172,8 @@
             <filename>MenuButton.png</filename>
             <filename>currencybg.png</filename>
             <filename>Tile.png</filename>
+            <filename>mutebutton.png</filename>
+            <filename>soundbutton.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

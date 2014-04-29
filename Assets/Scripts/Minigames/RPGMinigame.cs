@@ -81,7 +81,10 @@ public class RPGMinigame: IItem {
 	}
 	#endregion
 
+	public string AtlasName;
+	public string PortraitIcon;
 	public string PrefabDirectory;
+	public List<LootItem> Loots;
 	
 	public RPGMinigame()
 	{
@@ -89,5 +92,7 @@ public class RPGMinigame: IItem {
 		SystemDescription = string.Empty;
 		Description = string.Empty;
 		PrefabDirectory = "MiniGames/";
+		AtlasName = "Atlases/MiniGames/";
+		Loots = new List<LootItem>();
 	}
 }

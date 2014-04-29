@@ -30,13 +30,17 @@ public class GameManager : MonoBehaviour {
     public GameObject characterJoyStick;
     public EasyJoystick joystick;
 
-    public bool GameIsPaused = true;
-    public bool GameHasStarted = false;
-    public bool teststate = false;
+    public bool GameIsPaused;
+    public bool GameHasStarted;
+	public bool teststate;
 
 
     void Awake()
     {
+		GameIsPaused = true;
+		GameHasStarted = false;
+		teststate = false;
+
         if(Instance != null && Instance != this)
         {
             teststate = true;
@@ -73,7 +77,6 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        GameIsPaused = false;
 		if(Application.loadedLevel == 0)
         	OnLevelWasLoaded(Application.loadedLevel);
     }
@@ -105,10 +108,11 @@ public class GameManager : MonoBehaviour {
 			//Debug.Log("not connected");
 			yield return null;
 		}
+		PlayerCamera.Instance.Reset();
 		PlayerManager.Instance.ChangeWorld();
 		//yield return new WaitForSeconds(1);
 		PlayerManager.Instance.RefreshAvatar();
-		GUIManager.Instance.TurnOffAllOtherUI();
+		//GUIManager.Instance.TurnOffAllOtherUI();
 		GUIManager.Instance.DisplayMainGUI();
 		Debug.Log("load standard");
 		

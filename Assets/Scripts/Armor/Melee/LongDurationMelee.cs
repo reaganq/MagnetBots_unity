@@ -130,13 +130,13 @@ public class LongDurationMelee : ArmorSkill {
         yield return new WaitForSeconds(skillAnimation.followThroughAnimation.clip.length);
         //Debug.Log("time pased: "+ (Time.realtimeSinceStartup - time));
         //Debug.Log("finish");
-        
         //Reset();
 
     }
     
     public override void Reset()
     {
+		Debug.Log("reset");
         armorState = ArmorState.ready;
 		RemoveOnUseSkillEffects();
     }

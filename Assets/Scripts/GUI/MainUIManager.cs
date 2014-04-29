@@ -4,13 +4,21 @@ using System.Collections;
 public class MainUIManager : BasicGUIController {
 
 	public UILabel MagnetsCounter = null;
+	public UILabel CrystalsCounter = null;
 	public GameObject OpenInventoryButton = null;
 	public GameObject ActionButtons;
 	public GameObject Root;
 
-	public void UpdateMagnetsCount()
+	public GameObject[] PartyMemberCards;
+	public GameObject QuitPartyButton;
+	public UILabel[] PartyMemberNames;
+
+	public UISprite soundButton;
+
+	public void UpdateCurrencyCount()
 	{
 		MagnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
+		CrystalsCounter.text = PlayerManager.Instance.Hero.Crystals.ToString();
 	}
 
 	public override void Enable()
@@ -25,17 +33,58 @@ public class MainUIManager : BasicGUIController {
 			ActionButtons.SetActive(false);
 		if(!GUIManager.Instance.CanShowInventory)
 			OpenInventoryButton.SetActive(false);
-		UpdateMagnetsCount();
+		UpdateCurrencyCount();
+		UpdatePartyMembers();
+		PlayerManager.Instance.avatarActionManager.EnableMovement();
 	}
 
-
+	public void QuitParty()
+	{
+		PlayerManager.Instance.ActiveWorld.DisbandParty();
+	}
+	
 	public override void Disable()
 	{
+		Debug.LogWarning("wtf");
 		Root.SetActive(false);
+		if(GameManager.Instance.inputType == InputType.TouchInput)
+		{
+			GameManager.Instance.joystick.enable = false;
+		}
+		PlayerManager.Instance.avatarActionManager.DisableMovement();
 	}
-}
 
-public class PartyMemberCard
-{
-	public UILabel name;
+	public void UpdatePartyMembers()
+	{
+
+		for (int i = 0; i < PartyMemberCards.Length; i++) 
+		{
+			if(i < PlayerManager.Instance.partyMembers.Count)
+			{
+				PartyMemberCards[i].SetActive(true);
+				PartyMemberNames[i].text = PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).ToString();
+			}
+			else
+				PartyMemberCards[i].SetActive(false);
+		}
+
+		if(PlayerManager.Instance.partyMembers.Count > 1)
+			QuitPartyButton.SetActive(true);
+		else
+			QuitPartyButton.SetActive(false);
+	}
+
+	public void MuteSound()
+	{
+		SfxManager.Instance.MuteBackgroundMusic();
+		if(SfxManager.Instance.isBackgroundMuted)
+		{
+			soundButton.spriteName = "mutebutton";
+		}
+		else
+		{
+			soundButton.spriteName = "soundbutton";
+		}
+	}
+
 }

@@ -21,6 +21,7 @@ public class RPGItem : UsableItem
      	preffix = "ITEM";
 		Stackable = true;
 		IsUpgradeable = false;
+		AtlasName = "Atlases/Item";
 		EquipmentSlotIndex = EquipmentSlots.None;
      //IconPath = "Icon/";
  	}

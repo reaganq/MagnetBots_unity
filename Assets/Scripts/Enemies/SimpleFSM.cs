@@ -16,7 +16,7 @@ public class SimpleFSM : MonoBehaviour {
 	public float targetAngleDifference;
     public AISkill[] skills;
     public AISkill selectedSkill;
-    public int selectedSkillIndex;
+    //public int selectedSkillIndex;
     public float[] skillChances;
 
 	public Job restJob;
@@ -62,6 +62,15 @@ public class SimpleFSM : MonoBehaviour {
 
 	public virtual void EnterState(AIState state)
 	{
+		switch(state)
+		{
+		case AIState.Dead:
+		//if(cancelSkillJob != null) cancelSkillJob.kill();
+			myPhotonView.RPC("PlayAnimation", PhotonTargets.All, deathAnim.name);
+			Debug.LogWarning("die");
+			arena.CheckDeathStatus();
+			break;
+		}
 	}
 
 	public virtual void ExitState(AIState state)
@@ -157,6 +166,15 @@ public class SimpleFSM : MonoBehaviour {
         _animator.Blend(clip, target, timer);
     }
 
+	[RPC]
+	public void PlayQueuedAnimation(string clip, int mode)
+	{
+		if(mode == 0)
+			_animator.PlayQueued(clip, QueueMode.PlayNow);
+		else if (mode == 1)
+			_animator.PlayQueued(clip, QueueMode.CompleteOthers);
+	}
+
 	//All
 	[RPC]
 	public void SetupArena(int id, int viewid)
@@ -219,6 +237,15 @@ public class SimpleFSM : MonoBehaviour {
 			src.status = myStatus;
 			src.pool = effectsPool.poolName;
 		}
+	}
+
+	[RPC]
+	public void SpawnParticle(string particleName, Vector3 pos)
+	{
+		Debug.Log("spawning particle: " + particleName);
+		Transform particle = effectsPool.prefabs[particleName];
+		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
+		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
 	}
 	
 	public void IgnoreCollisions(Collider collider)

@@ -52,75 +52,62 @@ public class MiniGameEditor : BaseEditorWindow
 		RPGMinigame s = (RPGMinigame)currentItem;
 		
 		s.PrefabDirectory = EditorUtils.TextField(s.PrefabDirectory, "Prefab Location");
-
-		/*ConditionsUtils.Conditions(s.ShopConditions, Data);
-		
-		s.SpellShopID = EditorUtils.IntPopup(s.SpellShopID, Data.spellShop.items, "Spell shop");
-		
+		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas");
+		s.PortraitIcon = EditorUtils.TextField(s.PortraitIcon, "portrait");
 		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		if (GUILayout.Button("No spell shop", GUILayout.Width(150)))
-		{
-			s.SpellShopID = 0;
-		}
-		EditorGUILayout.EndHorizontal();
 		
-		ConditionsUtils.Conditions(s.SpellShopConditions, Data);
 		
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		
-		EditorGUILayout.PrefixLabel("Repair");
-		s.Repairing = EditorGUILayout.Toggle(s.Repairing, GUILayout.Width(100));
-		if (s.Repairing)
-		{
-			EditorGUILayout.PrefixLabel("Price modifier");
-			s.RepairPriceModifier = EditorGUILayout.FloatField(s.RepairPriceModifier ,GUILayout.Width(200));
-			
-			EditorGUILayout.PrefixLabel("Currency");
-			s.RepairCurrencyID = EditorGUILayout.IntField(s.RepairCurrencyID ,GUILayout.Width(200));
-		}
-		EditorGUILayout.EndHorizontal();
-		
-		ConditionsUtils.Conditions(s.ReparingConditions, Data);
-		
-		EditorUtils.Label("Guild");
-		
-		s.IsGuildMember = EditorUtils.Toggle(s.IsGuildMember, "Guild");
-		
-		if (s.IsGuildMember)
-		{
-			s.GuildID = EditorUtils.IntPopup(s.GuildID, Data.guildEditor.items, "Guild ID");
-			
-			s.IsRecruit = EditorUtils.Toggle(s.IsRecruit, "Can recruit");
-			
-			s.AdvanceRankLevel = EditorUtils.IntField(s.AdvanceRankLevel, "Advance to rank");
-		}
-		
-		EditorUtils.Label("General conversation");
-		
-		EditorGUILayout.BeginHorizontal();
-		
-		if (GUILayout.Button("Add new conversation ID", GUILayout.Width(300)))
-		{
-			s.GeneralConversationID.Add(0);
-		}
-		
-		EditorGUILayout.EndHorizontal();
-		
-		for (int index = 0; index <= s.GeneralConversationID.Count -1; index++)
+		foreach(LootItem item in s.Loots)
 		{
 			
-			s.GeneralConversationID[index] = EditorUtils.IntPopup(s.GeneralConversationID[index], Data.conversationEditor.items, "Conversation ID", 200, FieldTypeEnum.BeginningOnly);
-			
-			if (GUILayout.Button("Delete", GUILayout.Width(150)))
+			//DisplayShopItem(item);
+			DisplayLootItem( item );
+			if (GUILayout.Button("Delete", GUILayout.Width(200)))
 			{
-				 s.GeneralConversationID.Remove(s.GeneralConversationID[index]);
+				s.Loots.Remove(item);
 				break;
 			}
 			EditorGUILayout.EndHorizontal();
-		}*/
+		}
+
+		EditorGUILayout.Separator();
 		
+		if (GUILayout.Button("Add Loot", GUILayout.Width(200)))
+		{
+			s.Loots.Add(new LootItem());
+		}
+
+		EditorGUILayout.Separator();
 		currentItem = s;
+	}
+
+	public void DisplayLootItem(LootItem item)
+	{
+		EditorGUILayout.Separator();
+		EditorGUILayout.BeginHorizontal();
+		item.itemType = (ItemType)EditorGUILayout.EnumPopup(item.itemType , GUILayout.Width(200));
+		EditorGUILayout.PrefixLabel(" ID: ");
+		for (int i = 0; i < item.itemID.Count; i++) 
+		{
+			item.itemID[i] = EditorGUILayout.IntField(item.itemID[i], GUILayout.Width(90));
+		}
+		if (GUILayout.Button("Add new item index", GUILayout.Width(100)))
+		{
+			item.itemID.Add(1);
+		}
+		if (GUILayout.Button("remove item index", GUILayout.Width(100)))
+		{
+			item.itemID.RemoveAt(item.itemID.Count -1);
+		}
+		EditorGUILayout.PrefixLabel(" itemlevel: ");
+		item.itemLevel = EditorGUILayout.IntField(item.itemLevel, GUILayout.Width(90));
+		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel(" min amount: ");
+		item.minQuantity = EditorGUILayout.IntField(item.minQuantity, GUILayout.Width(90));
+		EditorGUILayout.PrefixLabel(" max amount: ");
+		item.maxQuantity = EditorGUILayout.IntField(item.maxQuantity, GUILayout.Width(90));
+		EditorGUILayout.PrefixLabel(" droprate: ");
+		item.dropRate = EditorGUILayout.FloatField(item.dropRate, GUILayout.Width(90));
 	}
 }

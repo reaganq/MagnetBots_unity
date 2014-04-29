@@ -6,7 +6,7 @@ public class ArmoryGUIController : BasicGUIController {
 	
     public InventoryUICategory SelectedInventoryCategory = InventoryUICategory.None;
 	public List<InventoryItem> SelectedItemList;
-    public int CurrentSelectedInventory = -1;
+    public int CurrentSelectedInventory = 0;
     public int CurrentSelectedItemIndex = -1;
     public ItemTileButton[] ItemTiles = new ItemTileButton[10];
     public ItemTileButton[] CategoryButtons;
@@ -16,7 +16,7 @@ public class ArmoryGUIController : BasicGUIController {
     public GameObject EquipButton = null;
     public GameObject DestroyButton = null;
 
-	public GameObject Root = null;
+	public GameObject Panel = null;
 
 	public GameObject PreviousPageButton;
 	public GameObject NextPageButton;
@@ -28,16 +28,24 @@ public class ArmoryGUIController : BasicGUIController {
     //public UILabel ItemSkillDescriptionLabel = null;
     //public UISprite ItemSkillSprite = null;
     
+	void Update()
+	{
+		if(Input.GetKey(KeyCode.E))
+		{
+			OnEquipButtonPressed();
+		}
+	}
+
     public override void Enable()
     {
-		Root.SetActive(true);
-        OnInventoryPressed(0);
+		Panel.SetActive(true);
+        OnInventoryPressed(CurrentSelectedInventory);
         //Debug.Log("enable");   
     }
 
 	public override void Disable()
 	{
-		Root.SetActive(false);
+		Panel.SetActive(false);
 	}
     
 	public void OnBackButtonpressed()
@@ -137,8 +145,15 @@ public class ArmoryGUIController : BasicGUIController {
             ResetSelection();
             RefreshInventoryIcons();
             HideInfoPanel();
-            
             CategoryButtons[CurrentSelectedInventory].SelectCategory();
+        }
+		else
+		{
+			RefreshItemList();
+			ResetSelection();
+			RefreshInventoryIcons();
+			HideInfoPanel();
+			CategoryButtons[CurrentSelectedInventory].SelectCategory();
         }
         
     }

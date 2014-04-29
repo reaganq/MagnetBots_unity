@@ -50,6 +50,7 @@ ModelImporter:
     100088: bones:Upperbody_Hover_b
     100090: polySurface7
     100092: //RootNode
+    100094: polySurface8
     400000: bones:Chef:Head
     400002: bones:Chest
     400004: bones:Eyes
@@ -97,15 +98,18 @@ ModelImporter:
     400088: bones:Upperbody_Hover_b
     400090: polySurface7
     400092: //RootNode
+    400094: polySurface8
     2300000: bones:polySurface8
     3300000: bones:polySurface8
     4300000: bones:polySurface8
     4300002: polySurface7
+    4300004: polySurface8
     9500000: //RootNode
     11100000: //RootNode
     13700000: polySurface7
+    13700002: polySurface8
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

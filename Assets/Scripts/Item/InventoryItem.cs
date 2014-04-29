@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class InventoryItem : ItemInWorld {
 	public bool IsItemEquipped = false;
@@ -25,6 +26,16 @@ public class InventoryItem : ItemInWorld {
 			   return false;
 		}
 	}
+}
+
+[Serializable]
+public class ParseInventoryItem
+{
+	public bool IsItemEquipped;
+	public string UniqueItemId;
+	public int Amount;
+	public int ItemLevel;
+	
 }
 
 /*public enum InventoryTypeEnum

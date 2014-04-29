@@ -6,9 +6,12 @@
     <Description>Basic Currency</Description>
     <SystemDescription />
     <IsUsable>false</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>Currency</ItemCategory>
     <IconPath>MagnetIcon</IconPath>
-    <AtlasName>InventoryAtlas</AtlasName>
+    <AtlasName>Atlases/Main/InventoryAtlas</AtlasName>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <BuyCurrency>None</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
@@ -22,9 +25,12 @@
     <Description>Premium currency</Description>
     <SystemDescription />
     <IsUsable>false</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>Currency</ItemCategory>
     <IconPath>CrystalIcon</IconPath>
-    <AtlasName>InventoryAtlas</AtlasName>
+    <AtlasName>Atlases/Main/InventoryAtlas</AtlasName>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <BuyCurrency>None</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>

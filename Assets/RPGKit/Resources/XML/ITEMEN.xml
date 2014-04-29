@@ -27,8 +27,8 @@
     <IsEquippable>false</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>UpgradeMaterials</ItemCategory>
-    <IconPath />
-    <AtlasName />
+    <IconPath>NormalOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
@@ -45,8 +45,8 @@
     <IsEquippable>false</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>UpgradeMaterials</ItemCategory>
-    <IconPath />
-    <AtlasName />
+    <IconPath>GoldOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>

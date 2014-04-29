@@ -11,10 +11,12 @@ public class NormalMelee : ArmorSkill {
     public Transform weaponLocation;
     public GameObject weaponCollider;
     public float detectionRange;
+	public Transform hitDecal;
     //public float collisionRange;
     //can hit multiple enemies or heal multiple allies?
     public bool canHitMultipleTargets;
 
+	public TrailRenderer trail;
 
     /***************/
 
@@ -37,6 +39,11 @@ public class NormalMelee : ArmorSkill {
             }
             weaponCollider.SetActive(false);
         }
+
+		if(trail != null)
+			trail.enabled = false;
+		if(hitDecal)
+			AddPrefabToPool(hitDecal);
     }
 
     public void TransferAnimations()
@@ -54,10 +61,6 @@ public class NormalMelee : ArmorSkill {
     }
     #endregion
 
-	// Update is called once per frame
-	void Update () {
-
-	}
 
     public override bool CanPressDown()
     {
@@ -87,6 +90,8 @@ public class NormalMelee : ArmorSkill {
         //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
 		myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.05f);
 
+
+
         float totalTime = attackAnimations[i].clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
         float attackduration = (attackAnimations[i].followThroughTime * totalTime) - castTime;
@@ -103,7 +108,8 @@ public class NormalMelee : ArmorSkill {
         {
             weaponCollider.SetActive(true);
         }
-        
+		if(trail != null)
+			trail.enabled = true;
 
         yield return new WaitForSeconds(attackduration);
         armorState = ArmorState.followThrough;
@@ -113,6 +119,8 @@ public class NormalMelee : ArmorSkill {
         {
             weaponCollider.SetActive(false);
         }
+		if(trail != null)
+			trail.enabled = false;
 
 		if(disableMovement)
 			myManager.EnableMovement();

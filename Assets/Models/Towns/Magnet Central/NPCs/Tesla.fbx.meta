@@ -4,13 +4,130 @@ ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
+    100002: bones:Chest
+    100004: bones:Eyes
+    100006: bones:Head
+    100008: bones:Head_Hover_a
+    100010: bones:Head_Hover_b
+    100012: bones:L_Ankle
+    100014: bones:L_Arm_Hover_a
+    100016: bones:L_Arm_Hover_b
+    100018: bones:L_Ball
+    100020: bones:L_Clavicle
+    100022: bones:L_Elbow
+    100024: bones:L_Eye
+    100026: bones:L_Eye_end
+    100028: bones:L_Forearm
+    100030: bones:L_Hand
+    100032: bones:L_IndexFinger
+    100034: bones:L_IndexFinger_end
+    100036: bones:L_Knee
+    100038: bones:L_SecondFinger
+    100040: bones:L_SecondFinger_End
+    100042: bones:L_Shoulder
+    100044: bones:L_ShoulderGuard
+    100046: bones:L_Thigh
+    100048: bones:L_Thumb
+    100050: bones:L_Thumb_End
+    100052: bones:L_Toe
+    100054: bones:LegsRoot
+    100056: bones:Neck_Horizontal
+    100058: bones:Neck_Vertical
+    100060: bones:Pelvis
+    100062: bones:R_Ankle
+    100064: bones:R_Arm_Hover_a
+    100066: bones:R_Arm_Hover_b
+    100068: bones:R_Ball
+    100070: bones:R_Clavicle
+    100072: bones:R_Elbow
+    100074: bones:R_Eye
+    100076: bones:R_Eye_End
+    100078: bones:R_Forearm
+    100080: bones:R_Hand
+    100082: bones:R_IndexFinger
+    100084: bones:R_IndexFinger_end
+    100086: bones:R_Knee
+    100088: bones:R_SecondFinger
+    100090: bones:R_SecondFinger_End
+    100092: bones:R_Shoulder
+    100094: bones:R_ShoulderGuard
+    100096: bones:R_Thigh
+    100098: bones:R_Thumb
+    100100: bones:R_Thumb_End
+    100102: bones:R_Toe
+    100104: bones:Spine_1
+    100106: bones:Spine_2
+    100108: bones:Upperbody_Hover_a
+    100110: bones:Upperbody_Hover_b
+    100112: tesla_mesh
     400000: //RootNode
+    400002: bones:Chest
+    400004: bones:Eyes
+    400006: bones:Head
+    400008: bones:Head_Hover_a
+    400010: bones:Head_Hover_b
+    400012: bones:L_Ankle
+    400014: bones:L_Arm_Hover_a
+    400016: bones:L_Arm_Hover_b
+    400018: bones:L_Ball
+    400020: bones:L_Clavicle
+    400022: bones:L_Elbow
+    400024: bones:L_Eye
+    400026: bones:L_Eye_end
+    400028: bones:L_Forearm
+    400030: bones:L_Hand
+    400032: bones:L_IndexFinger
+    400034: bones:L_IndexFinger_end
+    400036: bones:L_Knee
+    400038: bones:L_SecondFinger
+    400040: bones:L_SecondFinger_End
+    400042: bones:L_Shoulder
+    400044: bones:L_ShoulderGuard
+    400046: bones:L_Thigh
+    400048: bones:L_Thumb
+    400050: bones:L_Thumb_End
+    400052: bones:L_Toe
+    400054: bones:LegsRoot
+    400056: bones:Neck_Horizontal
+    400058: bones:Neck_Vertical
+    400060: bones:Pelvis
+    400062: bones:R_Ankle
+    400064: bones:R_Arm_Hover_a
+    400066: bones:R_Arm_Hover_b
+    400068: bones:R_Ball
+    400070: bones:R_Clavicle
+    400072: bones:R_Elbow
+    400074: bones:R_Eye
+    400076: bones:R_Eye_End
+    400078: bones:R_Forearm
+    400080: bones:R_Hand
+    400082: bones:R_IndexFinger
+    400084: bones:R_IndexFinger_end
+    400086: bones:R_Knee
+    400088: bones:R_SecondFinger
+    400090: bones:R_SecondFinger_End
+    400092: bones:R_Shoulder
+    400094: bones:R_ShoulderGuard
+    400096: bones:R_Thigh
+    400098: bones:R_Thumb
+    400100: bones:R_Thumb_End
+    400102: bones:R_Toe
+    400104: bones:Spine_1
+    400106: bones:Spine_2
+    400108: bones:Upperbody_Hover_a
+    400110: bones:Upperbody_Hover_b
+    400112: tesla_mesh
     2300000: //RootNode
+    2300002: tesla_mesh
     3300000: //RootNode
+    3300002: tesla_mesh
     4300000: polySurface104
+    4300002: tesla_mesh
     9500000: //RootNode
+    11100000: //RootNode
+    13700000: tesla_mesh
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
@@ -27,8 +144,8 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .100000001
-    meshCompression: 0
+    globalScale: 1
+    meshCompression: 3
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
@@ -59,6 +176,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 1
   additionalBone: 0
   userData: 

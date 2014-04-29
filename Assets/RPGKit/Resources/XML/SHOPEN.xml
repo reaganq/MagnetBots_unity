@@ -10,31 +10,31 @@
         <StackAmount>2</StackAmount>
         <Level>1</Level>
         <itemType>Armor</itemType>
-        <ID>1</ID>
+        <ID>10</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>5</StackAmount>
         <Level>3</Level>
         <itemType>Armor</itemType>
-        <ID>2</ID>
+        <ID>15</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>1</StackAmount>
         <Level>2</Level>
         <itemType>Armor</itemType>
-        <ID>3</ID>
+        <ID>12</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>2</StackAmount>
         <Level>1</Level>
         <itemType>Armor</itemType>
-        <ID>4</ID>
+        <ID>14</ID>
       </ShopItem>
       <ShopItem>
         <StackAmount>3</StackAmount>
         <Level>4</Level>
         <itemType>Armor</itemType>
-        <ID>5</ID>
+        <ID>8</ID>
       </ShopItem>
     </Items>
     <RestockTime>100</RestockTime>

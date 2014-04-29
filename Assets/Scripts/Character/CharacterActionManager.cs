@@ -42,7 +42,6 @@ public class CharacterActionManager : MonoBehaviour {
 	{
 		MakeSpawnPool();
 		_myTransform = transform;
-		Debug.Log("here");
 	}
     // Use this for initialization
     void Start () 
@@ -57,13 +56,14 @@ public class CharacterActionManager : MonoBehaviour {
 		if(effectsPool == null)
 		{
 			effectsPool = PoolManager.Pools.Create(myStatus.characterName);
-			Debug.Log(effectsPool.poolName);
+			//Debug.Log(effectsPool.poolName);
 		}
 		return true;
 	}
     
     public void AddArmorcontroller(ArmorSkill controller, PassiveArmorAnimationController animController, int index)
     {
+		//Debug.LogWarning(index);
         armorSkillsArray[index] = controller;
         armorAnimControllers[index] = animController;
     }
@@ -126,7 +126,12 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void LeftAction(InputTrigger trigger)
     {
-        if(armorSkillsArray[2] == null || actionState == ActionState.rightAction)
+		if(armorSkillsArray[3] != null )
+		{
+			if(!armorSkillsArray[3].CanPressDown())
+				return;
+		}
+        if(armorSkillsArray[2] == null)
         {
             return;
         }
@@ -162,8 +167,13 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void RightAction(InputTrigger trigger)
     {
+		if(armorSkillsArray[2] != null)
+		{
+			if(!armorSkillsArray[2].CanPressDown())
+				return;
+		}
         //Debug.Log("here");
-        if(armorSkillsArray[3] == null || actionState == ActionState.leftAction)
+        if(armorSkillsArray[3] == null)
         {
             return;
         }
@@ -373,6 +383,15 @@ public class CharacterActionManager : MonoBehaviour {
 			src.pool = effectsPool.poolName;
         }
     }
+
+	[RPC]
+	public void SpawnParticle(string particleName, Vector3 pos)
+	{
+		Transform particle = effectsPool.prefabs[particleName];
+		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
+		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
+	}
+
     
     public void IgnoreCollisions(Collider collider)
 	{

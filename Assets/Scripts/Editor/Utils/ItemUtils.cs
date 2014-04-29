@@ -87,12 +87,14 @@ public class ItemUtils {
 		
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("Stackable");
+		item.Stackable = EditorGUILayout.Toggle(item.Stackable ,GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel("Upgradeable");
-		item.IsUpgradeable = EditorGUILayout.Toggle(item.IsUpgradeable ,GUILayout.Width(100));
+		item.IsUpgradeable = EditorGUILayout.Toggle(item.IsUpgradeable ,GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel("Usable");
-		item.IsUsable = EditorGUILayout.Toggle(item.IsUsable ,GUILayout.Width(100));
+		item.IsUsable = EditorGUILayout.Toggle(item.IsUsable ,GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel("Equippable");
-		item.IsEquippable = EditorGUILayout.Toggle(item.IsEquippable ,GUILayout.Width(100));
+		item.IsEquippable = EditorGUILayout.Toggle(item.IsEquippable ,GUILayout.Width(50));
 		EditorGUILayout.EndHorizontal();
 		if (item.IsUsable)
 		{
@@ -140,19 +142,35 @@ public class ItemUtils {
 	public static void AddEquiped(Equiped equiped, MainWindowEditor Data)
 	{
 		EditorUtils.Separator();
-		
-		equiped.FBXName = EditorUtils.TextField(equiped.FBXName, "FBX location");
-		
 
+		for (int i = 0; i < equiped.FBXName.Count; i++) {
+
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.PrefixLabel(" FBX location ");
+			equiped.FBXName[i] = EditorUtils.TextField(equiped.FBXName[i], "fbxname");
+			//DisplayShopItem(item);
+			if (GUILayout.Button("Delete", GUILayout.Width(200)))
+			{
+				equiped.FBXName.Remove(equiped.FBXName[i]);
+			}
+			EditorGUILayout.EndHorizontal();
+
+		}
 		
+		if (GUILayout.Button("Add fbx location", GUILayout.Width(200)))
+		{
+			equiped.FBXName.Add("Armor/");
+		}
+
+		EditorUtils.Separator();
 		//EffectUtils.EffectsEditor(equiped.WornEffects, Data, EffectTypeUsage.Equiped);
 		
 		//ConditionsUtils.Conditions(equiped.Conditions, Data);
 		
 		//equiped.Durability = EditorUtils.IntField(equiped.Durability, "Durability", 300, FieldTypeEnum.WholeLine);
 		
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
+		//EditorGUILayout.Separator();
+		//EditorGUILayout.BeginHorizontal();
 		        
 		/*if (GUILayout.Button("Add slot", GUILayout.Width(150)))
 		{

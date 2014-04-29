@@ -11,6 +11,8 @@ public class WorldManager : Photon.MonoBehaviour {
 	public Zone DefaultZone;
 	public PhotonView myPhotonView;
 	public List<ArenaManager> ArenaManagers;
+	public AudioClip soundtrack;
+
 
 	void Start()
 	{
@@ -204,7 +206,8 @@ public class WorldManager : Photon.MonoBehaviour {
 		ArenaManagers[zoneid].ownerID = ownerid;
 		ArenaManagers[zoneid].UpdateNewOwner();
 	}
-	
+
+	//all buffered
 	[RPC]
 	public void DecommissionArena(int zoneid)
 	{
@@ -223,6 +226,13 @@ public class WorldManager : Photon.MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	//players within arena
+	[RPC]
+	public void GiveArenaRewards( int zoneid )
+	{
+		ArenaManagers[zoneid].GiveRewards();
 	}
 
 	#endregion
@@ -295,6 +305,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	{
 		PlayerManager.Instance.isPartyLeader = false;
 		PlayerManager.Instance.partyMembers.Clear();
+		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
 
 	//quitter sends to partyleader
@@ -306,6 +317,7 @@ public class WorldManager : Photon.MonoBehaviour {
 			EndParty();
 		else
 			UpdatePartyMemberList(1);
+		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
 
 	/*[RPC]
@@ -325,6 +337,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			myPhotonView.RPC("UpdatePartyList", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), m.GetBuffer());
 		}
+		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
 
 	#endregion

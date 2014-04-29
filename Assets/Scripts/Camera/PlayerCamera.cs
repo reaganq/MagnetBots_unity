@@ -26,7 +26,13 @@ public class PlayerCamera: MonoBehaviour {
 
     public Transform targetTransform = null;
     public Transform childTransform = null;
+	public Camera childCamera;
     private Transform _myTransform;
+	public Transform defaultPos;
+	public Transform inventoryPos;
+	private Job movementJob;
+
+	private Transform newTransform;
     //private Vector3 offsetPosition;
     
     //public float rotationSpeed = 50;
@@ -59,7 +65,7 @@ public class PlayerCamera: MonoBehaviour {
             DontDestroyOnLoad(this);
         }
 
-        childTransform = transform.GetChild(0).transform;
+        //childTransform = transform.GetChild(0).transform;
         _myTransform = this.transform;
         //outputAngleVector = new Vector2(0,0);
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
@@ -94,6 +100,7 @@ public class PlayerCamera: MonoBehaviour {
         if(move.joystickName == "CharacterJoystick")
             outputAngleVector = new Vector2(0,0);
     }*/
+
     
 	// Update is called once per frame
 	void LateUpdate () {
@@ -121,5 +128,56 @@ public class PlayerCamera: MonoBehaviour {
  cameraPivot.Rotate( camRotation.y * -5, 0, 0 );*/
         
     }
+
+	public void TransitionToInventory()
+	{
+		if(movementJob != null)
+			movementJob.kill();
+
+		movementJob = Job.make(MoveTo(inventoryPos, 40, 1), true);
+		//StartCoroutine(MoveTo(inventoryPos, 40, 1));
+	}
+
+	public void TransitionToDefault()
+	{
+		if(movementJob != null)
+			movementJob.kill();
+		
+		movementJob = Job.make(MoveTo(defaultPos, 60, 1), true);
+		//StartCoroutine(MoveTo(defaultPos, 60, 1));
+	}
+
+	public void TransitionTo(Transform newTrans, float fov, float duration)
+	{
+		if(movementJob != null)
+			movementJob.kill();
+		
+		movementJob = Job.make(MoveTo(newTrans, fov, duration), true);
+        //StartCoroutine(MoveTo(newTrans, fov, duration));
+	}
+
+	public IEnumerator MoveTo(Transform newTrans, float fov, float duration)
+	{
+		float startTime = Time.time;
+		while(Time.time < startTime + duration)
+		{
+			childTransform.position = Vector3.Lerp(childTransform.position, newTrans.position, (Time.time - startTime)/duration);
+			childTransform.rotation = Quaternion.Lerp(childTransform.rotation, newTrans.rotation, (Time.time - startTime)/duration);
+			childCamera.fieldOfView = Mathf.Lerp(childCamera.fieldOfView, fov, (Time.time - startTime)/duration);
+			yield return null;
+		}
+		childTransform.position = newTrans.position;
+		childTransform.rotation = newTrans.rotation;
+		childCamera.fieldOfView = fov;
+		yield return null;
+
+	}
+
+	public void Reset()
+	{
+		childTransform.position = defaultPos.position;
+		childTransform.rotation = defaultPos.rotation;
+		childCamera.fieldOfView = 60;
+	}
 
 }

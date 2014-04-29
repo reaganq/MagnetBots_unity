@@ -220,35 +220,35 @@ public class Equipment
 	                PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedHead.UniqueItemId, EquippedHead.Level);
 	            EquippedHead = e;
 	            if(PlayerManager.Instance.avatar != null)
-	                PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Head);
+	                PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Head);
 	            break;
 	        case EquipmentSlots.Body:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.Body))
 				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedBody.UniqueItemId, EquippedBody.Level);
 	            EquippedBody = e;
 	            if(PlayerManager.Instance.avatar != null)
-					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Body);
+				PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Body);
 	            break;
 	        case EquipmentSlots.ArmL:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.ArmL))
 				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedArmL.UniqueItemId, EquippedArmL.Level);
 	            EquippedArmL = e;
 	            if(PlayerManager.Instance.avatar != null)
-					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.ArmL);
+				PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.ArmL);
 	            break;
 	        case EquipmentSlots.ArmR:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.ArmR))
 				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedArmR.UniqueItemId, EquippedArmR.Level);
 	            EquippedArmR = e;
 	            if(PlayerManager.Instance.avatar != null)
-					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.ArmR);
+				PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.ArmR);
 	            break;
 	        case EquipmentSlots.Legs:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.Legs))
 				PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedLegs.UniqueItemId, EquippedLegs.Level);
 	            EquippedLegs = e;
 	            if(PlayerManager.Instance.avatar != null)
-					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName, EquipmentSlots.Legs);
+				PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Legs);
 	            break;
 	    }
         

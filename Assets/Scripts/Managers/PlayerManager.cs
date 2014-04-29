@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Parse;
 
 
 public class PlayerManager : MonoBehaviour
@@ -43,9 +44,11 @@ public class PlayerManager : MonoBehaviour
  
  //public static float sellPriceModifier;
  
-    public UsableItem currentItem;
     public NPC ActiveNPC;
     public Shop ActiveShop;
+	public RPGActivity ActiveActivity;
+	public RPGMinigame ActiveMinigame;
+	public GameObject ActiveMinigameObject;
 	public RPGArena SelectedArena;
 	public WorldManager ActiveWorld;
 	public Zone ActiveZone;
@@ -56,13 +59,26 @@ public class PlayerManager : MonoBehaviour
     public GameObject avatarPrefab;
 
     public GameObject avatarObject;
+	public CharacterActionManager avatarActionManager;
     public Avatar avatar;
     public InputController avatarInput;
     public CharacterStatus avatarStatus;
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
 
-	public List<int> partyMembers = new List<int>();
+	private List<int> _partyMembers = new List<int>();
+
+	public List<int> partyMembers {
+		get {
+			return _partyMembers;
+		}
+		set {
+			_partyMembers = value;
+			GUIManager.Instance.MainGUI.UpdatePartyMembers();
+			Debug.Log("updated partymembers");
+		}
+	}
+
 	public bool isPartyLeader = false;
 
  //public static GeneralData Data;
@@ -96,18 +112,29 @@ public class PlayerManager : MonoBehaviour
 
     public void StartNewGame()
     {
-		GameManager.Instance.GameHasStarted = true;
+		Debug.Log("start new game");
         Hero.StartNewGame();
-		LoadAvatar();
+		//GameManager.Instance.GameHasStarted = true;
+		//LoadAvatar();
     }
+
+	public void LoadGame()
+	{
+		StartCoroutine(Hero.RetrieveParseData());
+	}
 	
     public void LoadAvatar()
     {
+		//SUPER HACK
+		if(NetworkManager.Instance.offlineMode)
+			StartNewGame();
+
 		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
 		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
 		//avatarObject.AddComponent<DontDestroy>();
 		avatarStatus = avatarObject.GetComponent<CharacterStatus>();
 		avatarInput = avatarObject.GetComponent<InputController>();
+		avatarActionManager = avatarObject.GetComponent<CharacterActionManager>();
 		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
 		cm.enabled = true;
 		//avatarInput.enabled = true;
@@ -123,11 +150,11 @@ public class PlayerManager : MonoBehaviour
     public void RefreshAvatar()
     {
 		//TODO OK THERE IS A PROBLEM HERE
-        if(avatarObject == null)
+        /*if(avatarObject == null)
         {
             StartNewGame();
 			return;
-        }
+        }*/
 
 		if(avatarObject == null)
 		{
@@ -153,6 +180,8 @@ public class PlayerManager : MonoBehaviour
 		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
 		ActiveZone = ActiveWorld.DefaultZone;
 		SpawnPoint = ActiveZone.spawnPoint;
+		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
+		GameManager.Instance.GameIsPaused = false;
 	}
 
 	/*public void ChangeZone(Zone newZone)
@@ -179,11 +208,11 @@ public class PlayerManager : MonoBehaviour
 		if(newZone != null)
 		{
 			Zone oldzone = ActiveZone;
-			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			newZone.zoneObject.SetActive(true);
 			ActiveZone = newZone;
 			SpawnPoint = ActiveZone.spawnPoint;
 			avatarObject.transform.position = SpawnPoint.position;
-			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			oldzone.zoneObject.SetActive(false);
 			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
 			if(ActiveArena == null)
 			{
@@ -194,7 +223,7 @@ public class PlayerManager : MonoBehaviour
 			ActiveWorld.myPhotonView.RPC("AddPlayer", PhotonTargets.AllBuffered, ActiveArena.ID, avatarPhotonView.viewID);
 			//TODO make the selected enemy dynamic
 			//ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, enemyID, avatarPhotonView.viewID, newid);
-			GUIManager.Instance.TurnOffAllOtherUI();
+			//GUIManager.Instance.TurnOffAllOtherUI();
 			GUIManager.Instance.DisplayMainGUI();
 			ResetNPC();
 			activityState = PlayerActivityState.arena;
@@ -206,20 +235,40 @@ public class PlayerManager : MonoBehaviour
 		if(newZone != null)
 		{
 			Zone oldzone = ActiveZone;
-			newZone.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+			newZone.zoneObject.SetActive(true);
 			ActiveZone = newZone;
 			SpawnPoint = ActiveZone.spawnPoint;
 			avatarObject.transform.position = SpawnPoint.position;
-			oldzone.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-			
+			oldzone.zoneObject.SetActive(false);
+
 			if(ActiveArena)
 			{
 				ActiveWorld.EndSession(ActiveArena);
 				//ActiveArena.EndSession(avatarPhotonView.viewID);
 				ActiveArena = null;
 			}
+
 			activityState = PlayerActivityState.idle;
+			GUIManager.Instance.DisplayMainGUI();
 		}
+	}
+
+	public void PlayMiniGame()
+	{
+		avatarObject.SetActive(false);
+		ActiveZone.zoneObject.SetActive(false);
+		ActiveMinigameObject = Instantiate(Resources.Load(ActiveNPC.miniGame.PrefabDirectory) as GameObject) as GameObject;
+		activityState = PlayerActivityState.minigame;
+		GUIManager.Instance.HideAllUI();
+	}
+
+	public void EndMiniGame()
+	{
+		ActiveZone.zoneObject.SetActive(true);
+		avatarObject.SetActive(true);
+		activityState = PlayerActivityState.idle;
+		Destroy(ActiveMinigameObject);
+		GUIManager.Instance.DisplayMainGUI();
 	}
 
 	public void ResetNPC()
@@ -235,15 +284,13 @@ public class PlayerManager : MonoBehaviour
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, Hero.Equip.EquippedHead.Slot);
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName, Hero.Equip.EquippedArmL.Slot);
         //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName, Hero.Equip.EquippedArmR.Slot);
-		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgArmor).FBXName, 
-		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgArmor).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgArmor).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgArmor).FBXName,
-		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgArmor).FBXName);
+		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedHead.Level, Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
+		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedBody.Level, Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1],
+		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedArmL.Level, Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1],
+		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedArmR.Level, Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1],
+		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedLegs.Level, Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1]);
     }
-
-
-
+	
     public void EnableAvatarInput()
     {
         avatarInput.enabled = true;
@@ -255,7 +302,91 @@ public class PlayerManager : MonoBehaviour
     }
 
 	//party leader send to party members when they join
+	public void GiveRewards(List<LootItem> loots)
+	{
+		List<InventoryItem> lootItems = new List<InventoryItem>();
+		for (int i = 0; i < loots.Count; i++) 
+		{
+			float chance = Random.Range(0.0f, 1.0f);
+			if(chance <= loots[i].dropRate)
+			{
+				Debug.Log(loots[i].itemType.ToString() + i);
+				InventoryItem newItem = new InventoryItem();
+				if(loots[i].itemType == ItemType.Currency)
+				{
+					RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
+					newItem.rpgItem = currency;
+				}
+				else if(loots[i].itemType == ItemType.Armor)
+				{
+					RPGArmor armor = Storage.LoadById<RPGArmor>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGArmor());
+					newItem.rpgItem = armor;
+				}
+				else if(loots[i].itemType == ItemType.Normal || loots[i].itemType == ItemType.UpgradeMaterials)
+				{
+					RPGItem item = Storage.LoadById<RPGItem>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGItem());
+					newItem.rpgItem = item;
+				}
+				newItem.CurrentAmount = Random.Range(loots[i].minQuantity, loots[i].maxQuantity);
+				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
+				newItem.Level = Random.Range(1, loots[i].itemLevel);
+				lootItems.Add(newItem);
+			}
+		}
+		
+		Debug.Log("total loot items = " + lootItems.Count);
+		GUIManager.Instance.DisplayRewards(lootItems);
+		//GUIManager
+		
+		//guimanager display rewards;
+	}
 
+	public void GiveRewards(int magnets, List<LootItem> loots)
+	{
+		List<InventoryItem> lootItems = new List<InventoryItem>();
+
+		if(magnets > 0)
+		{
+			InventoryItem newItem = new InventoryItem();
+			RPGCurrency currency = Storage.LoadById<RPGCurrency>(1, new RPGCurrency());
+			newItem.rpgItem = currency;
+			newItem.CurrentAmount = magnets;
+			newItem.UniqueItemId = newItem.rpgItem.UniqueId;
+			newItem.Level = 1;
+			lootItems.Add(newItem);
+		}
+		for (int i = 0; i < loots.Count; i++) 
+		{
+			float chance = Random.Range(0.0f, 1.0f);
+			if(chance <= loots[i].dropRate)
+			{
+				Debug.Log(loots[i].itemType.ToString() + i);
+				InventoryItem newItem = new InventoryItem();
+				if(loots[i].itemType == ItemType.Currency)
+				{
+					RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
+					newItem.rpgItem = currency;
+				}
+				else if(loots[i].itemType == ItemType.Armor)
+				{
+					RPGArmor armor = Storage.LoadById<RPGArmor>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGArmor());
+					newItem.rpgItem = armor;
+				}
+				else if(loots[i].itemType == ItemType.Normal || loots[i].itemType == ItemType.UpgradeMaterials)
+				{
+					RPGItem item = Storage.LoadById<RPGItem>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGItem());
+					newItem.rpgItem = item;
+				}
+				newItem.CurrentAmount = Random.Range(loots[i].minQuantity, loots[i].maxQuantity);
+				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
+				newItem.Level = Random.Range(1, loots[i].itemLevel);
+				lootItems.Add(newItem);
+			}
+		}
+		
+		Debug.Log("total loot items = " + lootItems.Count);
+		GUIManager.Instance.DisplayRewards(lootItems);
+	}
 }
 
 public enum PlayerActivityState

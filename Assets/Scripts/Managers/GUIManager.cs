@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GUIManager : MonoBehaviour {
  
@@ -23,7 +24,7 @@ public class GUIManager : MonoBehaviour {
             return instance;
         }
     }
-
+	
     //public static GUIManager Instance { get; private set; }
 
     public Camera mainCamera = null;
@@ -42,13 +43,18 @@ public class GUIManager : MonoBehaviour {
     public ShopGUIController ShopGUI = null;
     public NPCGUIController NPCGUI = null;
     public IntroGUIController IntroGUI = null;
-	public LoadScreenController loadingScreen = null;
+	public LoadScreenController loadingGUI = null;
+	public MiniGameGUIController minigameGUI = null;
+	public RewardsGUIController rewardsGUI = null;
+
+	public Transform minigameUIRoot;
     
     //public GameObject Joystick = null;
     
     //public GameObject ActionButtons = null;
     
-	private UIState _uistate;
+	private UIState _uistate = UIState.idle;
+	public UIState cachedState = UIState.idle;
 	public UIState uiState
 	{
 		get
@@ -58,13 +64,12 @@ public class GUIManager : MonoBehaviour {
 		set
 		{
 			ExitState(_uistate);
+			cachedState = _uistate;
 			_uistate = value;
 			EnterState(_uistate);
 		}
 	}
-
-
-    
+	
     public bool IsInventoryDisplayed = false;
     public bool IsShopDisplayed = false;
     public bool IsMainGUIDisplayed = false;
@@ -84,6 +89,7 @@ public class GUIManager : MonoBehaviour {
         //Instance = this;
         
         DontDestroyOnLoad(this);
+		//Debug.Log(_uistate);
         //UICameraRoot = GameObject.FindGameObjectWithTag("UICamera").transform;
         //mainCamera = Camera.main;
         //DisplayIntroGUI();
@@ -106,12 +112,15 @@ public class GUIManager : MonoBehaviour {
 		switch(state)
 		{
 		case UIState.login:
+			IntroGUI.Enable();
 			//IntroGUI
 			break;
 		case UIState.main:
+			Debug.Log("show main");
 			MainGUI.Enable();
 			break;
 		case UIState.npc:
+			Debug.Log("show npc");
 			NPCGUI.Enable();
 			break;
 		case UIState.arena:
@@ -128,9 +137,16 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.armory:
 			ArmoryGUI.Enable();
+			PlayerCamera.Instance.TransitionToInventory();
 			break;
 		case UIState.anvil:
 			AnvilGUI.Enable();
+			break;
+		case UIState.minigame:
+			minigameGUI.Enable();
+			break;
+		case UIState.rewards:
+			rewardsGUI.Enable();
 			break;
 		}
 	}
@@ -140,6 +156,7 @@ public class GUIManager : MonoBehaviour {
 		switch(state)
 		{
 		case UIState.login:
+			IntroGUI.Disable();
 			break;
 		case UIState.main:
 			MainGUI.Disable();
@@ -148,6 +165,7 @@ public class GUIManager : MonoBehaviour {
 			NPCGUI.Disable();
 			break;
 		case UIState.arena:
+			ArenaGUI.Disable();
 			break;
 		case UIState.loading:
 			break;
@@ -160,21 +178,24 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.armory:
 			ArmoryGUI.Disable();
+			PlayerCamera.Instance.TransitionToDefault();
 			break;
 		case UIState.anvil:
 			AnvilGUI.Disable();
+			PlayerCamera.Instance.TransitionToDefault();
+			break;
+		case UIState.minigame:
+			minigameGUI.Disable();
+			break;
+		case UIState.rewards:
+			rewardsGUI.Disable();
 			break;
 		}
 	}
 
     public void DisplayIntroGUI()
     {
-        if(!IsIntroGUIDisplayed)
-        {
-            //IntroGUI.SetActive(true);
-            IsIntroGUIDisplayed = true;
-            //Debug.LogWarning("intro displayed");
-        }
+		uiState = UIState.login;
     }
 
     public void HideIntroGUI()
@@ -185,15 +206,16 @@ public class GUIManager : MonoBehaviour {
             IsIntroGUIDisplayed = false;
         }
     }
-
+	
     public void StartGame()
     {
-		DisplayMainGUI();
+		uiState = UIState.main;
         //DisplayMainGUI();
     }
     
     public void DisplayMainGUI()
     {
+		Debug.Log("hmmmm");
 		uiState = UIState.main;
         //if(!IsMainGUIDisplayed)
         //{
@@ -308,7 +330,7 @@ public class GUIManager : MonoBehaviour {
 		uiState = UIState.arena;
 	}
 
-	public void HideEnemiesList()
+	public void HideArenaUI()
 	{
 		ArenaGUI.Disable();
 		IsEnemiesListDisplayed = false;
@@ -341,28 +363,52 @@ public class GUIManager : MonoBehaviour {
 		uiState = UIState.npc;
     }
 
-	public void DisplayAnvil()
+	public void DisplayAnvil(Anvil anvil)
 	{
-		uiState = UIState.npc;
+		uiState = UIState.anvil;
+		AnvilGUI.anvil = anvil;
 	}
 
 	public void HideAnvil()
 	{
-		uiState = UIState.npc;
+		uiState = cachedState;
 	}
 
 	public void DisplayLoadingScreen()
 	{
-		loadingScreen.gameObject.SetActive(true);
+		loadingGUI.gameObject.SetActive(true);
 	}
 
 	public void HideLoadingScreen()
 	{
-		loadingScreen.gameObject.SetActive(false);
+		loadingGUI.gameObject.SetActive(false);
 	}
-    
-    public void TurnOffAllOtherUI()
+
+	public void DisplayMinigame()
+	{
+		uiState = UIState.minigame;
+	}
+
+	public void HideMinigame()
+	{
+		uiState = UIState.npc;
+	}
+
+	public void DisplayRewards(List<InventoryItem> items)
+	{
+		rewardsGUI.items = items;
+		uiState = UIState.rewards;
+
+	}
+
+	public void HideRewards()
+	{
+		uiState = cachedState;
+	}
+	
+    public void HideAllUI()
     {
+		uiState = UIState.idle;
         /*if(IsInventoryDisplayed)
         {
             ArmoryGUI.SetActive(false);
@@ -391,7 +437,7 @@ public class GUIManager : MonoBehaviour {
     
     public bool IsUIBusy()
     {
-        if(uiState == UIState.main)
+        if(uiState == UIState.main || uiState == UIState.rewards)
 			return false;
         else
             return true;
@@ -400,12 +446,14 @@ public class GUIManager : MonoBehaviour {
 
 public enum UIState
 {
+	idle,
 	anvil,
 	main,
 	shop,
 	inventory,
 	armory,
 	equipment,
+	minigame,
 	loading,
 	login,
 	bank,
@@ -413,5 +461,6 @@ public enum UIState
 	npc,
 	arena,
 	settings,
-	friends
+	friends,
+	rewards
 }

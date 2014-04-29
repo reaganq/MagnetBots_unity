@@ -94,16 +94,17 @@ public class ShopGUIController : BasicGUIController {
 	        
 	        if(buyTransaction == BuyTransaction.OK)
 	        {
-	            UpdateInfoPanel();
 	            //allgood;
 	        }
 		}
 		else
 		{
+			PlayerManager.Instance.ActiveShop.SellItem(SelectedItemList[CurrentSelectedItemIndex].rpgItem, SelectedItemList[CurrentSelectedItemIndex].Level, quantity);
 
 		}
   
         RefreshInventoryIcons();
+		UpdateInfoPanel();
     }
 
 	public void ChangeShopMode(int index)
@@ -249,6 +250,13 @@ public class ShopGUIController : BasicGUIController {
 				ItemNameLabel.text = PlayerManager.Instance.Hero.ArmoryInventory.Items[CurrentSelectedItemIndex].rpgItem.Name;
 				ItemDescriptionLabel.text = PlayerManager.Hero.ArmoryInventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
 			}*/
+
+			if(CurrentSelectedItemIndex >= SelectedItemList.Count)
+			{
+				ResetSelection();
+				UpdateInfoPanel();
+				return;
+			}
 
 			ItemNameLabel.text = SelectedItemList[CurrentSelectedItemIndex].rpgItem.Name;
 			ItemDescriptionLabel.text = SelectedItemList[CurrentSelectedItemIndex].rpgItem.Description;

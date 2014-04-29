@@ -121,8 +121,8 @@ public class ArmorSkill : MonoBehaviour {
         for (int i = 0; i < onUseSkillEffects.Count; i++) {
             switch(onUseSkillEffects[i].effectType)
             {
-            case SkillEffectCategory.speed:
-                if(onUseSkillEffects[i].effectTarget == TargetType.self)
+            case (int)SkillEffectCategory.speed:
+                if(onUseSkillEffects[i].effectTarget == (int)TargetType.self)
                 {
                     myStatus.ChangeMovementSpeed(onUseSkillEffects[i].effectValue);
                 }
@@ -138,10 +138,11 @@ public class ArmorSkill : MonoBehaviour {
         for (int i = 0; i < onUseSkillEffects.Count; i++) {
             switch(onUseSkillEffects[i].effectType)
             {
-            case SkillEffectCategory.speed:
-                if(onUseSkillEffects[i].effectTarget == TargetType.self && onUseSkillEffects[i].durationFormat == SkillEffectFormat.useDuration)
+            case ((int)SkillEffectCategory.speed):
+                if(onUseSkillEffects[i].effectTarget == (int)TargetType.self && onUseSkillEffects[i].effectFormat == (int)SkillEffectFormat.useDuration)
                 {
                     myStatus.ChangeMovementSpeed((onUseSkillEffects[i].effectValue)* -1f);
+					Debug.Log("movement speed = " + myStatus.movementSpeed);
                 }
                 //Debug.Log("sopeed = " + characterManager.motor.runSpeed);
                 break;
@@ -173,11 +174,11 @@ public class ArmorSkill : MonoBehaviour {
     public void PopulateSkillEffects()
     {
         for (int i = 0; i < skillEffects.Length ; i++) {
-            if(skillEffects[i].effectTrigger == SkillEffectTrigger.onUse)
+            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onUse)
                 onUseSkillEffects.Add(skillEffects[i]);
-            if(skillEffects[i].effectTrigger == SkillEffectTrigger.onHit)
+            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onHit)
                 onHitSkillEffects.Add(skillEffects[i]);
-            if(skillEffects[i].effectTrigger == SkillEffectTrigger.onReceiveHit)
+            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onReceiveHit)
                 onReceiveHitSkillEffects.Add(skillEffects[i]);
         }
     }
@@ -302,12 +303,50 @@ public class ArmorSkill : MonoBehaviour {
 		{
 			newHit.sourceName = myStatus.characterName;
 			newHit.damage = damage;
-			newHit.hitPosX = 1;
-			newHit.hitPosY = 1;
-			newHit.hitPosZ = 1;
+			newHit.hitPosX = myTransform.position.x;
+			newHit.hitPosY = myTransform.position.y;
+			newHit.hitPosZ = myTransform.position.z;
+			newHit.skillEffects = new List<SkillEffect>();
 			for (int i = 0; i < onHitSkillEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == TargetType.allEnemies || onHitSkillEffects[i].effectTarget == TargetType.all) {
+				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
+					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				}
+			}
+			
+			//TODO apply self buffs from characterstatus
+			//TODO apply hitbox local buffs
+			BinaryFormatter b = new BinaryFormatter();
+			MemoryStream m = new MemoryStream();
+			b.Serialize(m, newHit);
+			
+			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
+			
+			//target.ReceiveHit(newHit);
+			//Debug.Log(finalhit.sourceName);
+			Debug.Log("hitenemy");
+		}
+		else
+		{
+			Debug.Log("hitally");
+		}
+	}
+
+	public virtual void HitTarget(HitBox target, bool isAlly, Vector3 originPos)
+	{
+		HitInfo newHit = new HitInfo();
+		
+		if(!isAlly)
+		{
+			newHit.sourceName = myStatus.characterName;
+			newHit.damage = damage;
+			newHit.hitPosX = originPos.x;
+			newHit.hitPosY = originPos.y;
+			newHit.hitPosZ = originPos.z;
+			newHit.skillEffects = new List<SkillEffect>();
+			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			{
+				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
 					newHit.skillEffects.Add(onHitSkillEffects[i]);
 				}
 			}

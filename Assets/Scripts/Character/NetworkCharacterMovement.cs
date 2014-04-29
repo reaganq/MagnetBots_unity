@@ -49,7 +49,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 			}
 			else
 			{
-				if(Vector3.Distance(_transform.position, realPosition) < 2)
+				if(Vector3.Distance(_transform.position, realPosition) < 10)
 					_transform.position = Vector3.Lerp(_transform.position, realPosition, 0.1f);
 				else
 					_transform.position = realPosition;

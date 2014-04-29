@@ -129,41 +129,20 @@ public class ArenaManager : Zone {
 			if(enemyFSMs[i].myStatus.isAlive())
 				return;
 		}
-		GiveRewards();
+
+		if(PhotonNetwork.player.ID == ownerID)
+		{
+			for (int i = 0; i < players.Count; i++) {
+				PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GiveArenaRewards", players[i].myPhotonView.owner, ID);
+				Debug.Log("give rewards to: " + players[i].myPhotonView.ownerId);
+			}
+
+		}
 	}
 
 	public void GiveRewards()
 	{
-		List<InventoryItem> lootItems = new List<InventoryItem>();
-		for (int i = 0; i < rpgEnemy.Loots.Count; i++) 
-		{
-			float chance = Random.Range(0.0f, 1.0f);
-			if(chance <= rpgEnemy.Loots[i].dropRate)
-			{
-				InventoryItem newItem = new InventoryItem();
-				if(rpgEnemy.Loots[i].itemType == ItemType.Currency)
-				{
-					RPGCurrency currency = Storage.LoadById<RPGCurrency>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGCurrency());
-					newItem.rpgItem = currency;
-				}
-				else if(rpgEnemy.Loots[i].itemType == ItemType.Armor)
-				{
-					RPGArmor armor = Storage.LoadById<RPGArmor>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGArmor());
-					newItem.rpgItem = armor;
-				}
-				else if(rpgEnemy.Loots[i].itemType == ItemType.Normal)
-				{
-					RPGItem item = Storage.LoadById<RPGItem>(Random.Range(1, rpgEnemy.Loots[i].itemID.Count), new RPGItem());
-					newItem.rpgItem = item;
-				}
-				newItem.CurrentAmount = Random.Range(rpgEnemy.Loots[i].minQuantity, rpgEnemy.Loots[i].maxQuantity);
-				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
-				newItem.Level = Random.Range(1, rpgEnemy.Loots[i].itemLevel);
-				lootItems.Add(newItem);
-			}
-		}
-
-		//guimanager display rewards;
+		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots);
 	}
 }
 

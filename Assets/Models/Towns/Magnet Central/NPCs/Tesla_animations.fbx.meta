@@ -1,0 +1,639 @@
+fileFormatVersion: 2
+guid: 70e674bc049de4302b372a8df349e6b7
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: bones:Chest
+    100002: bones:DrTesla_NPC_03:polySurface1
+    100004: bones:DrTesla_NPC_03:polySurface100
+    100006: bones:DrTesla_NPC_03:polySurface101
+    100008: bones:DrTesla_NPC_03:polySurface103
+    100010: bones:DrTesla_NPC_03:polySurface104
+    100012: bones:DrTesla_NPC_03:polySurface60
+    100014: bones:DrTesla_NPC_03:polySurface61
+    100016: bones:DrTesla_NPC_03:polySurface62
+    100018: bones:DrTesla_NPC_03:polySurface63
+    100020: bones:DrTesla_NPC_03:polySurface64
+    100022: bones:DrTesla_NPC_03:polySurface65
+    100024: bones:DrTesla_NPC_03:polySurface66
+    100026: bones:DrTesla_NPC_03:polySurface68
+    100028: bones:DrTesla_NPC_03:polySurface70
+    100030: bones:DrTesla_NPC_03:polySurface71
+    100032: bones:DrTesla_NPC_03:polySurface72
+    100034: bones:DrTesla_NPC_03:polySurface73
+    100036: bones:DrTesla_NPC_03:polySurface76
+    100038: bones:DrTesla_NPC_03:polySurface78
+    100040: bones:DrTesla_NPC_03:polySurface79
+    100042: bones:DrTesla_NPC_03:polySurface80
+    100044: bones:DrTesla_NPC_03:polySurface81
+    100046: bones:DrTesla_NPC_03:polySurface82
+    100048: bones:DrTesla_NPC_03:polySurface83
+    100050: bones:DrTesla_NPC_03:polySurface84
+    100052: bones:DrTesla_NPC_03:polySurface85
+    100054: bones:DrTesla_NPC_03:polySurface86
+    100056: bones:DrTesla_NPC_03:polySurface87
+    100058: bones:DrTesla_NPC_03:polySurface88
+    100060: bones:DrTesla_NPC_03:polySurface89
+    100062: bones:DrTesla_NPC_03:polySurface93
+    100064: bones:DrTesla_NPC_03:polySurface94
+    100066: bones:DrTesla_NPC_03:polySurface95
+    100068: bones:DrTesla_NPC_03:polySurface99
+    100070: bones:Eyes
+    100072: bones:Head
+    100074: bones:Head_Hover_a
+    100076: bones:Head_Hover_b
+    100078: bones:L_Ankle
+    100080: bones:L_Arm_Hover_a
+    100082: bones:L_Arm_Hover_b
+    100084: bones:L_Ball
+    100086: bones:L_Clavicle
+    100088: bones:L_Elbow
+    100090: bones:L_Eye
+    100092: bones:L_Eye_end
+    100094: bones:L_Forearm
+    100096: bones:L_Hand
+    100098: bones:L_IndexFinger
+    100100: bones:L_IndexFinger_end
+    100102: bones:L_Knee
+    100104: bones:L_SecondFinger
+    100106: bones:L_SecondFinger_End
+    100108: bones:L_Shoulder
+    100110: bones:L_ShoulderGuard
+    100112: bones:L_Thigh
+    100114: bones:L_Thumb
+    100116: bones:L_Thumb_End
+    100118: bones:L_Toe
+    100120: bones:LegsRoot
+    100122: bones:Neck_Horizontal
+    100124: bones:Neck_Vertical
+    100126: bones:Pelvis
+    100128: bones:R_Ankle
+    100130: bones:R_Arm_Hover_a
+    100132: bones:R_Arm_Hover_b
+    100134: bones:R_Ball
+    100136: bones:R_Clavicle
+    100138: bones:R_Elbow
+    100140: bones:R_Eye
+    100142: bones:R_Eye_End
+    100144: bones:R_Forearm
+    100146: bones:R_Hand
+    100148: bones:R_IndexFinger
+    100150: bones:R_IndexFinger_end
+    100152: bones:R_Knee
+    100154: bones:R_SecondFinger
+    100156: bones:R_SecondFinger_End
+    100158: bones:R_Shoulder
+    100160: bones:R_ShoulderGuard
+    100162: bones:R_Thigh
+    100164: bones:R_Thumb
+    100166: bones:R_Thumb_End
+    100168: bones:R_Toe
+    100170: bones:Spine_1
+    100172: bones:Spine_2
+    100174: bones:Upperbody_Hover_a
+    100176: bones:Upperbody_Hover_b
+    100178: //RootNode
+    400000: bones:Chest
+    400002: bones:DrTesla_NPC_03:polySurface1
+    400004: bones:DrTesla_NPC_03:polySurface100
+    400006: bones:DrTesla_NPC_03:polySurface101
+    400008: bones:DrTesla_NPC_03:polySurface103
+    400010: bones:DrTesla_NPC_03:polySurface104
+    400012: bones:DrTesla_NPC_03:polySurface60
+    400014: bones:DrTesla_NPC_03:polySurface61
+    400016: bones:DrTesla_NPC_03:polySurface62
+    400018: bones:DrTesla_NPC_03:polySurface63
+    400020: bones:DrTesla_NPC_03:polySurface64
+    400022: bones:DrTesla_NPC_03:polySurface65
+    400024: bones:DrTesla_NPC_03:polySurface66
+    400026: bones:DrTesla_NPC_03:polySurface68
+    400028: bones:DrTesla_NPC_03:polySurface70
+    400030: bones:DrTesla_NPC_03:polySurface71
+    400032: bones:DrTesla_NPC_03:polySurface72
+    400034: bones:DrTesla_NPC_03:polySurface73
+    400036: bones:DrTesla_NPC_03:polySurface76
+    400038: bones:DrTesla_NPC_03:polySurface78
+    400040: bones:DrTesla_NPC_03:polySurface79
+    400042: bones:DrTesla_NPC_03:polySurface80
+    400044: bones:DrTesla_NPC_03:polySurface81
+    400046: bones:DrTesla_NPC_03:polySurface82
+    400048: bones:DrTesla_NPC_03:polySurface83
+    400050: bones:DrTesla_NPC_03:polySurface84
+    400052: bones:DrTesla_NPC_03:polySurface85
+    400054: bones:DrTesla_NPC_03:polySurface86
+    400056: bones:DrTesla_NPC_03:polySurface87
+    400058: bones:DrTesla_NPC_03:polySurface88
+    400060: bones:DrTesla_NPC_03:polySurface89
+    400062: bones:DrTesla_NPC_03:polySurface93
+    400064: bones:DrTesla_NPC_03:polySurface94
+    400066: bones:DrTesla_NPC_03:polySurface95
+    400068: bones:DrTesla_NPC_03:polySurface99
+    400070: bones:Eyes
+    400072: bones:Head
+    400074: bones:Head_Hover_a
+    400076: bones:Head_Hover_b
+    400078: bones:L_Ankle
+    400080: bones:L_Arm_Hover_a
+    400082: bones:L_Arm_Hover_b
+    400084: bones:L_Ball
+    400086: bones:L_Clavicle
+    400088: bones:L_Elbow
+    400090: bones:L_Eye
+    400092: bones:L_Eye_end
+    400094: bones:L_Forearm
+    400096: bones:L_Hand
+    400098: bones:L_IndexFinger
+    400100: bones:L_IndexFinger_end
+    400102: bones:L_Knee
+    400104: bones:L_SecondFinger
+    400106: bones:L_SecondFinger_End
+    400108: bones:L_Shoulder
+    400110: bones:L_ShoulderGuard
+    400112: bones:L_Thigh
+    400114: bones:L_Thumb
+    400116: bones:L_Thumb_End
+    400118: bones:L_Toe
+    400120: bones:LegsRoot
+    400122: bones:Neck_Horizontal
+    400124: bones:Neck_Vertical
+    400126: bones:Pelvis
+    400128: bones:R_Ankle
+    400130: bones:R_Arm_Hover_a
+    400132: bones:R_Arm_Hover_b
+    400134: bones:R_Ball
+    400136: bones:R_Clavicle
+    400138: bones:R_Elbow
+    400140: bones:R_Eye
+    400142: bones:R_Eye_End
+    400144: bones:R_Forearm
+    400146: bones:R_Hand
+    400148: bones:R_IndexFinger
+    400150: bones:R_IndexFinger_end
+    400152: bones:R_Knee
+    400154: bones:R_SecondFinger
+    400156: bones:R_SecondFinger_End
+    400158: bones:R_Shoulder
+    400160: bones:R_ShoulderGuard
+    400162: bones:R_Thigh
+    400164: bones:R_Thumb
+    400166: bones:R_Thumb_End
+    400168: bones:R_Toe
+    400170: bones:Spine_1
+    400172: bones:Spine_2
+    400174: bones:Upperbody_Hover_a
+    400176: bones:Upperbody_Hover_b
+    400178: //RootNode
+    2300000: bones:DrTesla_NPC_03:polySurface1
+    2300002: bones:DrTesla_NPC_03:polySurface100
+    2300004: bones:DrTesla_NPC_03:polySurface101
+    2300006: bones:DrTesla_NPC_03:polySurface103
+    2300008: bones:DrTesla_NPC_03:polySurface104
+    2300010: bones:DrTesla_NPC_03:polySurface60
+    2300012: bones:DrTesla_NPC_03:polySurface61
+    2300014: bones:DrTesla_NPC_03:polySurface62
+    2300016: bones:DrTesla_NPC_03:polySurface63
+    2300018: bones:DrTesla_NPC_03:polySurface64
+    2300020: bones:DrTesla_NPC_03:polySurface65
+    2300022: bones:DrTesla_NPC_03:polySurface66
+    2300024: bones:DrTesla_NPC_03:polySurface68
+    2300026: bones:DrTesla_NPC_03:polySurface70
+    2300028: bones:DrTesla_NPC_03:polySurface71
+    2300030: bones:DrTesla_NPC_03:polySurface72
+    2300032: bones:DrTesla_NPC_03:polySurface73
+    2300034: bones:DrTesla_NPC_03:polySurface76
+    2300036: bones:DrTesla_NPC_03:polySurface78
+    2300038: bones:DrTesla_NPC_03:polySurface79
+    2300040: bones:DrTesla_NPC_03:polySurface80
+    2300042: bones:DrTesla_NPC_03:polySurface81
+    2300044: bones:DrTesla_NPC_03:polySurface82
+    2300046: bones:DrTesla_NPC_03:polySurface83
+    2300048: bones:DrTesla_NPC_03:polySurface84
+    2300050: bones:DrTesla_NPC_03:polySurface85
+    2300052: bones:DrTesla_NPC_03:polySurface86
+    2300054: bones:DrTesla_NPC_03:polySurface87
+    2300056: bones:DrTesla_NPC_03:polySurface88
+    2300058: bones:DrTesla_NPC_03:polySurface89
+    2300060: bones:DrTesla_NPC_03:polySurface93
+    2300062: bones:DrTesla_NPC_03:polySurface94
+    2300064: bones:DrTesla_NPC_03:polySurface95
+    2300066: bones:DrTesla_NPC_03:polySurface99
+    3300000: bones:DrTesla_NPC_03:polySurface1
+    3300002: bones:DrTesla_NPC_03:polySurface100
+    3300004: bones:DrTesla_NPC_03:polySurface101
+    3300006: bones:DrTesla_NPC_03:polySurface103
+    3300008: bones:DrTesla_NPC_03:polySurface104
+    3300010: bones:DrTesla_NPC_03:polySurface60
+    3300012: bones:DrTesla_NPC_03:polySurface61
+    3300014: bones:DrTesla_NPC_03:polySurface62
+    3300016: bones:DrTesla_NPC_03:polySurface63
+    3300018: bones:DrTesla_NPC_03:polySurface64
+    3300020: bones:DrTesla_NPC_03:polySurface65
+    3300022: bones:DrTesla_NPC_03:polySurface66
+    3300024: bones:DrTesla_NPC_03:polySurface68
+    3300026: bones:DrTesla_NPC_03:polySurface70
+    3300028: bones:DrTesla_NPC_03:polySurface71
+    3300030: bones:DrTesla_NPC_03:polySurface72
+    3300032: bones:DrTesla_NPC_03:polySurface73
+    3300034: bones:DrTesla_NPC_03:polySurface76
+    3300036: bones:DrTesla_NPC_03:polySurface78
+    3300038: bones:DrTesla_NPC_03:polySurface79
+    3300040: bones:DrTesla_NPC_03:polySurface80
+    3300042: bones:DrTesla_NPC_03:polySurface81
+    3300044: bones:DrTesla_NPC_03:polySurface82
+    3300046: bones:DrTesla_NPC_03:polySurface83
+    3300048: bones:DrTesla_NPC_03:polySurface84
+    3300050: bones:DrTesla_NPC_03:polySurface85
+    3300052: bones:DrTesla_NPC_03:polySurface86
+    3300054: bones:DrTesla_NPC_03:polySurface87
+    3300056: bones:DrTesla_NPC_03:polySurface88
+    3300058: bones:DrTesla_NPC_03:polySurface89
+    3300060: bones:DrTesla_NPC_03:polySurface93
+    3300062: bones:DrTesla_NPC_03:polySurface94
+    3300064: bones:DrTesla_NPC_03:polySurface95
+    3300066: bones:DrTesla_NPC_03:polySurface99
+    4300000: bones:DrTesla_NPC_03:polySurface104
+    4300002: bones:DrTesla_NPC_03:polySurface68
+    4300004: bones:DrTesla_NPC_03:polySurface66
+    4300006: bones:DrTesla_NPC_03:polySurface80
+    4300008: bones:DrTesla_NPC_03:polySurface65
+    4300010: bones:DrTesla_NPC_03:polySurface79
+    4300012: bones:DrTesla_NPC_03:polySurface70
+    4300014: bones:DrTesla_NPC_03:polySurface71
+    4300016: bones:DrTesla_NPC_03:polySurface73
+    4300018: bones:DrTesla_NPC_03:polySurface72
+    4300020: bones:DrTesla_NPC_03:polySurface83
+    4300022: bones:DrTesla_NPC_03:polySurface82
+    4300024: bones:DrTesla_NPC_03:polySurface85
+    4300026: bones:DrTesla_NPC_03:polySurface95
+    4300028: bones:DrTesla_NPC_03:polySurface84
+    4300030: bones:DrTesla_NPC_03:polySurface81
+    4300032: bones:DrTesla_NPC_03:polySurface86
+    4300034: bones:DrTesla_NPC_03:polySurface87
+    4300036: bones:DrTesla_NPC_03:polySurface89
+    4300038: bones:DrTesla_NPC_03:polySurface88
+    4300040: bones:DrTesla_NPC_03:polySurface103
+    4300042: bones:DrTesla_NPC_03:polySurface64
+    4300044: bones:DrTesla_NPC_03:polySurface62
+    4300046: bones:DrTesla_NPC_03:polySurface63
+    4300048: bones:DrTesla_NPC_03:polySurface61
+    4300050: bones:DrTesla_NPC_03:polySurface60
+    4300052: bones:DrTesla_NPC_03:polySurface101
+    4300054: bones:DrTesla_NPC_03:polySurface100
+    4300056: bones:DrTesla_NPC_03:polySurface99
+    4300058: bones:DrTesla_NPC_03:polySurface94
+    4300060: bones:DrTesla_NPC_03:polySurface93
+    4300062: bones:DrTesla_NPC_03:polySurface1
+    4300064: bones:DrTesla_NPC_03:polySurface76
+    4300066: bones:DrTesla_NPC_03:polySurface78
+    7400000: Take 001
+    7400002: Take 001 //// bones:Pelvis
+    9500000: //RootNode
+    11100000: //RootNode
+    11100002: bones:Chest
+    11100004: bones:DrTesla_NPC_03:polySurface1
+    11100006: bones:DrTesla_NPC_03:polySurface100
+    11100008: bones:DrTesla_NPC_03:polySurface101
+    11100010: bones:DrTesla_NPC_03:polySurface103
+    11100012: bones:DrTesla_NPC_03:polySurface104
+    11100014: bones:DrTesla_NPC_03:polySurface60
+    11100016: bones:DrTesla_NPC_03:polySurface61
+    11100018: bones:DrTesla_NPC_03:polySurface62
+    11100020: bones:DrTesla_NPC_03:polySurface63
+    11100022: bones:DrTesla_NPC_03:polySurface64
+    11100024: bones:DrTesla_NPC_03:polySurface65
+    11100026: bones:DrTesla_NPC_03:polySurface66
+    11100028: bones:DrTesla_NPC_03:polySurface68
+    11100030: bones:DrTesla_NPC_03:polySurface70
+    11100032: bones:DrTesla_NPC_03:polySurface71
+    11100034: bones:DrTesla_NPC_03:polySurface72
+    11100036: bones:DrTesla_NPC_03:polySurface73
+    11100038: bones:DrTesla_NPC_03:polySurface76
+    11100040: bones:DrTesla_NPC_03:polySurface78
+    11100042: bones:DrTesla_NPC_03:polySurface79
+    11100044: bones:DrTesla_NPC_03:polySurface80
+    11100046: bones:DrTesla_NPC_03:polySurface81
+    11100048: bones:DrTesla_NPC_03:polySurface82
+    11100050: bones:DrTesla_NPC_03:polySurface83
+    11100052: bones:DrTesla_NPC_03:polySurface84
+    11100054: bones:DrTesla_NPC_03:polySurface85
+    11100056: bones:DrTesla_NPC_03:polySurface86
+    11100058: bones:DrTesla_NPC_03:polySurface87
+    11100060: bones:DrTesla_NPC_03:polySurface88
+    11100062: bones:DrTesla_NPC_03:polySurface89
+    11100064: bones:DrTesla_NPC_03:polySurface93
+    11100066: bones:DrTesla_NPC_03:polySurface94
+    11100068: bones:DrTesla_NPC_03:polySurface95
+    11100070: bones:DrTesla_NPC_03:polySurface99
+    11100072: bones:Eyes
+    11100074: bones:Head
+    11100076: bones:Head_Hover_a
+    11100078: bones:Head_Hover_b
+    11100080: bones:L_Ankle
+    11100082: bones:L_Arm_Hover_a
+    11100084: bones:L_Arm_Hover_b
+    11100086: bones:L_Ball
+    11100088: bones:L_Clavicle
+    11100090: bones:L_Elbow
+    11100092: bones:L_Eye
+    11100094: bones:L_Eye_end
+    11100096: bones:L_Forearm
+    11100098: bones:L_Hand
+    11100100: bones:L_IndexFinger
+    11100102: bones:L_IndexFinger_end
+    11100104: bones:L_Knee
+    11100106: bones:L_SecondFinger
+    11100108: bones:L_SecondFinger_End
+    11100110: bones:L_Shoulder
+    11100112: bones:L_ShoulderGuard
+    11100114: bones:L_Thigh
+    11100116: bones:L_Thumb
+    11100118: bones:L_Thumb_End
+    11100120: bones:L_Toe
+    11100122: bones:LegsRoot
+    11100124: bones:Neck_Horizontal
+    11100126: bones:Neck_Vertical
+    11100128: bones:Pelvis
+    11100130: bones:R_Ankle
+    11100132: bones:R_Arm_Hover_a
+    11100134: bones:R_Arm_Hover_b
+    11100136: bones:R_Ball
+    11100138: bones:R_Clavicle
+    11100140: bones:R_Elbow
+    11100142: bones:R_Eye
+    11100144: bones:R_Eye_End
+    11100146: bones:R_Forearm
+    11100148: bones:R_Hand
+    11100150: bones:R_IndexFinger
+    11100152: bones:R_IndexFinger_end
+    11100154: bones:R_Knee
+    11100156: bones:R_SecondFinger
+    11100158: bones:R_SecondFinger_End
+    11100160: bones:R_Shoulder
+    11100162: bones:R_ShoulderGuard
+    11100164: bones:R_Thigh
+    11100166: bones:R_Thumb
+    11100168: bones:R_Thumb_End
+    11100170: bones:R_Toe
+    11100172: bones:Spine_1
+    11100174: bones:Spine_2
+    11100176: bones:Upperbody_Hover_a
+    11100178: bones:Upperbody_Hover_b
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 350
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:DrTesla_NPC_03:polySurface1
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:DrTesla_NPC_03:polySurface76
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:DrTesla_NPC_03:polySurface76/bones:DrTesla_NPC_03:polySurface78
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:DrTesla_NPC_03:polySurface60
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:DrTesla_NPC_03:polySurface61
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:DrTesla_NPC_03:polySurface62
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:DrTesla_NPC_03:polySurface62/bones:DrTesla_NPC_03:polySurface63
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:DrTesla_NPC_03:polySurface64
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:DrTesla_NPC_03:polySurface93
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:DrTesla_NPC_03:polySurface94
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:DrTesla_NPC_03:polySurface99
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:DrTesla_NPC_03:polySurface100
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:DrTesla_NPC_03:polySurface101
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:DrTesla_NPC_03:polySurface103
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:DrTesla_NPC_03:polySurface104
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:DrTesla_NPC_03:polySurface73
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:DrTesla_NPC_03:polySurface73/bones:DrTesla_NPC_03:polySurface72
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:DrTesla_NPC_03:polySurface70
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:DrTesla_NPC_03:polySurface70/bones:DrTesla_NPC_03:polySurface71
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:DrTesla_NPC_03:polySurface65
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:DrTesla_NPC_03:polySurface79
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:DrTesla_NPC_03:polySurface68
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:DrTesla_NPC_03:polySurface80
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:DrTesla_NPC_03:polySurface66
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:DrTesla_NPC_03:polySurface89
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:DrTesla_NPC_03:polySurface89/bones:DrTesla_NPC_03:polySurface88
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:DrTesla_NPC_03:polySurface86
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:DrTesla_NPC_03:polySurface86/bones:DrTesla_NPC_03:polySurface87
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:DrTesla_NPC_03:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:DrTesla_NPC_03:polySurface84
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:DrTesla_NPC_03:polySurface95
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:DrTesla_NPC_03:polySurface83
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:DrTesla_NPC_03:polySurface85
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:DrTesla_NPC_03:polySurface82
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

@@ -2,9 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Parse;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class PlayerInformation  {
- 
+
     public Inventory MainInventory;
 	public Inventory ArmoryInventory;
 	public Inventory DepositBox;
@@ -16,7 +19,7 @@ public class PlayerInformation  {
 
     public Equipment Equip;
 
- 	public int CurrentLevel;
+ 	/*public int CurrentLevel;
 	public int CurrentXP;
 	public int CurrentLevelXP;
     
@@ -25,45 +28,24 @@ public class PlayerInformation  {
 	public int BaseHp;
 	public int TotalHp;
 	public int BonusHp;
-	public int CurrentHp;
+	public int CurrentHp;*/
 	//public float HpRegeneration = 0.0f;
 	//public float ManaRegeneration = 0.5f;
 
 	public int Magnets;
 	public int Crystals;
 	public int BankMagnets;
+	public string ParseObjectId;
+	ParseObject playerData = new ParseObject("PlayerData");
  
     public PlayerInformation()
     {
         MainInventory = new Inventory();
 		ArmoryInventory = new Inventory();
 		DepositBox = new Inventory();
-        /*HeadInventory = new ArmoryInventory();
-        BodyInventory = new ArmoryInventory();
-        LegsInventory = new ArmoryInventory();
-        ArmLInventory = new ArmoryInventory();
-        ArmRInventory = new ArmoryInventory();*/
-     //Settings = new GlobalSettings();
-     //Controls = new InputControls();
-     //HeroPosition = new ObjectPosition();
         Equip = new Equipment();
-
-     
-     //TotalHp = BaseHp = CurrentHp = Settings.StartHitPoint;
-     //TotalMana = BaseMana = Settings.StartMana;
-     //CurrentHp = CurrentMana = 50;
-     //CurrentScene = -1;
- 	}
- 
- /*public void StorePlayerPosition(Transform transform)
- {   
-     
-     HeroPosition = ObjectPosition.FromTransform(transform);
-     
-     //game time and day cycle
-     gameTime.Store(RenderSettings.fogDensity);
- }*/
- 
+	}
+	
  	public void UpdatePlayerInformation()
  	{
      	foreach(InventoryItem item in MainInventory.Items)
@@ -79,13 +61,18 @@ public class PlayerInformation  {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
             //Debug.Log(i);
         }
+
+		for (int i = 6; i < 11; i++) {
+			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 1);
+				}
+
+		PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
         
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 1, 1);
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 5; i++) {
 			ArmoryInventory.EquipItem(ArmoryInventory.Items[i]);
 				}
         
-		Debug.Log("items count" + ArmoryInventory.Items.Count);
         /*BodyInventory.EquipItem(BodyInventory.Items[1]);
         HeadInventory.EquipItem(HeadInventory.Items[1]);
         ArmLInventory.EquipItem(ArmLInventory.Items[0]);
@@ -94,42 +81,14 @@ public class PlayerInformation  {
         
         AddCurrency(1000,BuyCurrencyType.Magnets);
         AddCurrency(100,BuyCurrencyType.Crystals);
+
+		if(NetworkManager.Instance.usingParse)
+			SaveParseData();
+
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 1, 1);
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 2, 1);
-        
-        
     }
- /*public void LevelUp()
- {
-     //you cannot have higher level than in settings
-     if (CurrentLevel >= Settings.MaximumLevel)
-         return;
-     
-     CurrentLevel++;
-     CurrentXP = CurrentXP - CurrentLevelXP;
-     //determine new amount for XP
-     if (Settings.Leveling == LevelingSystem.XP && !Settings.AllLevelsSameXp)
-     {
-         int totalXp = (CurrentLevelXP * (100 + Settings.NextLevelXp));
-         CurrentLevelXP = (int)(totalXp / 100);
-     }
-     
-     //add level up bonuses
-     BaseHp += Settings.HitPointPerLevel;
-        if (Settings.IsNewLevelHealPlayer)
-         CurrentHp = BaseHp;
-     AttributePoint += Settings.AttributePointPerLevel;
-     SkillPoint += Settings.SkillPointPerLevel;
- }*/
- 
-	public void AddXp(int amount)
-	{
-	    CurrentXP += amount;
-	     
-	     //if (IsNewLevel)
-	         //LevelUp();
-	}
-    
+
     public void AddCurrency(int amount, BuyCurrencyType currency)
     {
         if(currency == BuyCurrencyType.Magnets)
@@ -140,7 +99,8 @@ public class PlayerInformation  {
         {
             Crystals += amount;
         }
-        GUIManager.Instance.MainGUI.UpdateMagnetsCount();
+        GUIManager.Instance.MainGUI.UpdateCurrencyCount();
+		UpdateWalletParseData();
     }
     
     public void RemoveCurrency(int amount, BuyCurrencyType currency)
@@ -153,26 +113,9 @@ public class PlayerInformation  {
         {
             Crystals -= amount;
         }
-        GUIManager.Instance.MainGUI.UpdateMagnetsCount();
+        GUIManager.Instance.MainGUI.UpdateCurrencyCount();
+		UpdateWalletParseData();
     }
- 
- 	public void AddXpPercent(int percentOfLevel)
- 	{
-     	int amountToGain = (int)((CurrentLevelXP /100) * (100 + percentOfLevel));
-     	CurrentXP += amountToGain;
-     //if (IsNewLevel)
-         //LevelUp();
- 	}
- 
- 	public void ChangeHitPoint(int hitPointChange)
- 	{
-     	if (CurrentHp + hitPointChange > TotalHp)
-         	CurrentHp = TotalHp;
-     	else if (CurrentHp + hitPointChange < 0)
-         	CurrentHp = 0;
-     	else
-         	CurrentHp += hitPointChange;
- 	}
  
     public bool CanYouAfford(int price, BuyCurrencyType currency)
     {
@@ -193,17 +136,8 @@ public class PlayerInformation  {
         
         else
             return false;
-            
     }
-
- 	private bool IsNewLevel
- 	{
-     	get
-     	{
-         	return CurrentXP >= CurrentLevelXP;
-     	}
- 	}
-
+	
 	#region inventory
 
 	public bool DoYouHaveSpaceForThisItem(RPGItem item, int level, int amount)
@@ -240,13 +174,73 @@ public class PlayerInformation  {
 
 	public void AddItem(InventoryItem item)
 	{
+		Debug.Log(item.rpgItem.UniqueId + item.Level + item.rpgItem.Stackable);
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item);
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+		}
+		else if(item.rpgItem.ItemCategory == ItemType.Currency)
+		{
+			if(item.rpgItem.ID == 1)
+			{
+				AddCurrency(item.CurrentAmount, BuyCurrencyType.Magnets);
+			}
+			if(item.rpgItem.ID == 2)
+			{
+				AddCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
+			}
+			UpdateWalletParseData();
 		}
 		else
 		{
 			MainInventory.AddItem(item);
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+		}
+	}
+
+	public void RemoveItem(InventoryItem item)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			ArmoryInventory.RemoveItem(item);
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+		}
+		else if(item.rpgItem.ItemCategory == ItemType.Currency)
+		{
+			if(item.rpgItem.ID == 1)
+			{
+				RemoveCurrency(item.CurrentAmount, BuyCurrencyType.Magnets);
+			}
+			if(item.rpgItem.ID == 2)
+			{
+				RemoveCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
+			}
+			UpdateWalletParseData();
+		}
+		else
+		{
+			MainInventory.RemoveItem(item);
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+		}
+	}
+
+	public void AddItem(RPGItem item, int level)
+	{
+		AddItem(item, level, 1);
+	}
+	
+	public void AddItem(RPGItem item, int level, int amount)
+	{
+		if(item.ItemCategory == ItemType.Armor)
+		{
+			ArmoryInventory.AddItem(item, level, amount);
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+		}
+		else
+		{
+			MainInventory.AddItem(item, level, amount);
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 	
@@ -258,11 +252,155 @@ public class PlayerInformation  {
 	public void RemoveItem(RPGItem item, int level, int amount)
 	{
 		if(item.ItemCategory == ItemType.Armor)
+		{
 			ArmoryInventory.RemoveItem(item, level, amount);
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+		}
 		else
+		{
 			MainInventory.RemoveItem(item, level, amount);
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+		}
     }
     
     #endregion
- 
+
+	#region Parse Player Data
+
+	public void SaveParseData()
+	{
+		Debug.Log("saving parse data");
+		byte[] mainInventoryParseList = ParseInventoryList(MainInventory);
+		byte[] armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
+		byte[] depositBoxParseList = ParseInventoryList(DepositBox);
+		//IList<object> mainInventoryParseList = ParseInventoryList(MainInventory);
+		//Debug.Log(mainInventoryParseList[0]);
+		//IList<Object> armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
+		//Debug.Log(armoryInventoryParseList.Count);
+	
+		playerData["username"] = ParseUser.CurrentUser.Username;
+		playerData["InventoryList"] = mainInventoryParseList;
+		playerData["ArmoryList"] = armoryInventoryParseList;
+		playerData["DepositBox"] = depositBoxParseList;
+		playerData["magnets"] = Magnets;
+		playerData["crystals"] = Crystals;
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+			if(t.IsCompleted)
+			{
+				ParseObjectId = playerData.ObjectId;
+				Debug.Log(ParseObjectId);
+			}
+			else{
+				Debug.LogError(t.Exception.Message);
+			}
+		}
+		);
+	}
+
+	public void UpdateWalletParseData()
+	{
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		{
+			Debug.LogWarning("no parse id");
+			return;
+		}
+
+		playerData["magnets"] = Magnets;
+		playerData["crystals"] = Crystals;
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+			if(t.IsCompleted)
+			{
+				Debug.Log("truly updated wallet");
+			}
+		}
+		);
+		Debug.Log("updating wallet");
+	}
+
+	public void UpdateInventoryParseData(string field, byte[] inventoryList)
+	{
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		{
+			Debug.LogWarning("no parse id");
+			return;
+		}
+
+		playerData[field] = inventoryList;
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+			if(t.IsCompleted)
+			{
+				Debug.Log("truly updated " + field);
+			}
+		}
+		);
+		Debug.Log("updating " + field);
+	}
+
+	public IEnumerator RetrieveParseData()
+	{
+		var playerDataQuery = new ParseQuery<ParseObject>("PlayerData").WhereEqualTo("username", ParseUser.CurrentUser.Username);
+		var queryTask = playerDataQuery.FindAsync();
+		while (!queryTask.IsCompleted)
+			yield return null;
+
+		IEnumerable<ParseObject> obj = queryTask.Result;
+		foreach(var player in obj)
+		{
+			Debug.LogWarning("retrieved 1 player data profile");
+			//Debug.Log(player.Get<int>("magnets").ToString());
+			InterpretParseInventoryList(MainInventory, player.Get<byte[]>("InventoryList"));
+			InterpretParseInventoryList(ArmoryInventory, player.Get<byte[]>("ArmoryList"));
+			InterpretParseInventoryList(DepositBox, player.Get<byte[]>("DepositBox"));
+			Magnets = player.Get<int>("magnets");
+			Crystals = player.Get<int>("crystals");
+		}
+		
+		GUIManager.Instance.IntroGUI.StartGame();
+	}
+
+	public byte[] ParseInventoryList(Inventory invent)
+	{
+
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		List<ParseInventoryItem> items = new List<ParseInventoryItem>();
+
+		for (int i = 0; i < invent.Items.Count; i++) {
+			ParseInventoryItem item = new ParseInventoryItem();
+			item.IsItemEquipped = invent.Items[i].IsItemEquipped;
+			item.UniqueItemId = invent.Items[i].UniqueItemId;
+			item.Amount = invent.Items[i].CurrentAmount;
+			item.ItemLevel = invent.Items[i].Level;
+			items.Add(item);
+		}
+		//return items
+		b.Serialize(m, items);
+		return m.GetBuffer();
+	}
+
+	public void InterpretParseInventoryList(Inventory inventory, byte[] data)
+	{
+		List<ParseInventoryItem> items = new List<ParseInventoryItem>();
+		BinaryFormatter bb = new BinaryFormatter();
+		MemoryStream mm = new MemoryStream(data);
+		items = (List<ParseInventoryItem>)bb.Deserialize(mm);
+		for (int i = 0; i < items.Count; i++) 
+		{
+			if(items[i].UniqueItemId.IndexOf("ARMOR") != -1)
+			{
+				inventory.AddItem(Storage.LoadbyUniqueId<RPGArmor>(items[i].UniqueItemId, new RPGArmor()), items[i].ItemLevel, items[i].Amount);
+				if(items[i].IsItemEquipped)
+					inventory.EquipItem(items[i].UniqueItemId, items[i].ItemLevel);
+			}
+			else if(items[i].UniqueItemId.IndexOf("ITEM") != -1)
+			{
+				inventory.AddItem(Storage.LoadbyUniqueId<RPGItem>(items[i].UniqueItemId, new RPGItem()), items[i].ItemLevel, items[i].Amount);
+			}
+		}
+	}
+
+	#endregion
 }

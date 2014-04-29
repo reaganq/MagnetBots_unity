@@ -16,7 +16,9 @@ public class NPCGUIController : BasicGUIController {
 	public GameObject root;
 	public GameObject panel;
 	public float offset;
-    
+	public Transform cameraOvertakeTransform;
+
+
 	// Use this for initialization
 	// Update is called once per frame
 	public override void Enable()
@@ -76,8 +78,9 @@ public class NPCGUIController : BasicGUIController {
 
 
         confirmButton.SetActive(true);
+		confirmButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
 		numberOfButtons +=1;
-		root.transform.localPosition = new Vector3(numberOfButtons*-0.25f*offset, 363, 0);
+		root.transform.localPosition = new Vector3(((numberOfButtons-1)*-0.5f*offset), 363, 0);
 
 		Debug.Log("enable npc gui");
     }
@@ -112,11 +115,18 @@ public class NPCGUIController : BasicGUIController {
 	public void OnEnterActivityButton()
 	{
 		if(PlayerManager.Instance.ActiveNPC.activity.ID == 2)
-			GUIManager.Instance.
+		{
+			PlayerManager.Instance.ActiveActivity = PlayerManager.Instance.ActiveNPC.activity;
+			GUIManager.Instance.DisplayAnvil(PlayerManager.Instance.ActiveNPC.GetComponent<Anvil>());
+			PlayerCamera.Instance.TransitionTo(PlayerManager.Instance.ActiveNPC.targetCameraPos, PlayerManager.Instance.ActiveNPC.targetCameraFOV, 1);
+			//PlayerCamera.Instance.targetTransform = cameraOvertakeTransform;
+		}
 	}
 
 	public void OnEnterMiniGameButton()
 	{
+		PlayerManager.Instance.ActiveMinigame = PlayerManager.Instance.ActiveNPC.miniGame;
+		GUIManager.Instance.DisplayMinigame();
 	}
 
     public void SetupArenaButton()

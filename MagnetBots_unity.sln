@@ -9,7 +9,11 @@ Project("{2C6EA627-483D-252F-7399-3750CABC76B0}") = "MagnetBots_unity", "Assembl
 EndProject
 Project("{2C6EA627-483D-252F-7399-3750CABC76B0}") = "MagnetBots_unity", "Assembly-CSharp-Editor.csproj", "{B0BFB171-4825-BC16-5727-AFF089CD5251}"
 EndProject
+Project("{2C6EA627-483D-252F-7399-3750CABC76B0}") = "MagnetBots_unity", "Assembly-UnityScript-firstpass.unityproj", "{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}"
+EndProject
 Project("{2C6EA627-483D-252F-7399-3750CABC76B0}") = "MagnetBots_unity", "Assembly-UnityScript.unityproj", "{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}"
+EndProject
+Project("{2C6EA627-483D-252F-7399-3750CABC76B0}") = "MagnetBots_unity", "Assembly-UnityScript-Editor.unityproj", "{15B08AFA-9E8A-4CE2-964E-B146F2985A90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,15 +37,23 @@ Global
 		{B0BFB171-4825-BC16-5727-AFF089CD5251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0BFB171-4825-BC16-5727-AFF089CD5251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0BFB171-4825-BC16-5727-AFF089CD5251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B08AFA-9E8A-4CE2-964E-B146F2985A90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B08AFA-9E8A-4CE2-964E-B146F2985A90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B08AFA-9E8A-4CE2-964E-B146F2985A90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B08AFA-9E8A-4CE2-964E-B146F2985A90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																																								GlobalSection(MonoDevelopProperties) = preSolution
+																																																																																																																																																																																																																																																																																		GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

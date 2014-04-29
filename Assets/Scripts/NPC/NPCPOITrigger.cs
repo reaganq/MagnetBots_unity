@@ -9,7 +9,6 @@ public class NPCPOITrigger : MonoBehaviour {
 	{
 		if(npc)
 		{
-			Debug.Log("OPEN NPC");
 			npc.StartCoroutine(npc.ShowNPC());
 		}
 	}

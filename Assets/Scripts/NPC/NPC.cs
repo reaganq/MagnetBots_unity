@@ -15,6 +15,9 @@ public class NPC: MonoBehaviour
 	public GameObject trigger;
 	public Collider triggerCollider;
 
+	public Transform targetCameraPos;
+	public float targetCameraFOV = 60;
+
 	public Vector3 endScale = Vector3.one;
 	public Vector3 startScale = new Vector3(0.5f, 0.5f, 0.5f);
 
@@ -24,6 +27,7 @@ public class NPC: MonoBehaviour
 		{
 			triggerCollider = trigger.GetComponent<Collider>();
 			triggerCollider.enabled = false;
+			trigger.transform.localScale = startScale;
 		}
 		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
 
@@ -67,7 +71,6 @@ public class NPC: MonoBehaviour
         {
 			if(other.gameObject == PlayerManager.Instance.avatarObject)
 			{
-				Debug.Log("exit");
 				Reset();
 			}
             //StartCoroutine("HideNPC");
@@ -76,7 +79,6 @@ public class NPC: MonoBehaviour
     
     public IEnumerator ShowNPC()
     {
-		Debug.Log("wtf");
         yield return new WaitForEndOfFrame();
         Active = true;
         PlayerManager.Instance.ActiveNPC = this;

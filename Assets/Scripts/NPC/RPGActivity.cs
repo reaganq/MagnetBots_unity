@@ -88,3 +88,4 @@ public class RPGActivity: IItem {
 		Description = string.Empty;
 	}
 }
+

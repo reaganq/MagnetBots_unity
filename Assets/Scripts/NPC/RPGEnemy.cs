@@ -94,7 +94,7 @@ public class RPGEnemy : IItem
 
 		SystemDescription = string.Empty;
 		Description = string.Empty;
-		PortraitAtlas = "EnemiesAtlas";
+		PortraitAtlas = "Atlases/Enemy/EnemiesAtlas";
 	}
 }
 
@@ -106,6 +106,16 @@ public class LootItem
 	public int minQuantity;
 	public int maxQuantity;
 	public float dropRate;
+
+	public LootItem()
+	{
+		itemType = ItemType.Currency;
+		itemID = new List<int>();
+		itemLevel = 1;
+		minQuantity = 1;
+		maxQuantity = 1;
+		dropRate = 0.5f;
+	}
 }
 
 

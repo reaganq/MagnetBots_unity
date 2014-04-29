@@ -29,7 +29,7 @@ public class BulletProjectile : MonoBehaviour {
 	
     public void OnCollisionEnter(Collision other)
     {
-		//Debug.Log("trigger enter" + other.collider.gameObject.name);
+		Debug.Log("trigger enter" + other.collider.gameObject.name);
 
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();
 		ContactPoint contact = other.contacts[0];
@@ -44,7 +44,7 @@ public class BulletProjectile : MonoBehaviour {
 		            //{
 						//determine if friend or foe
 						//masterAISkill.HitEnemies.Add(cs);
-						masterAISkill.HitTarget(hb, false);
+						masterAISkill.HitTarget(hb, false, transform.position);
 		                //Debug.Log("I JUST HIT SOMETHING");
 		            //}
 				}
@@ -54,7 +54,7 @@ public class BulletProjectile : MonoBehaviour {
 					//{
 						//determine if friend or foe
 						//masterArmor.HitEnemies.Add(cs);
-						masterArmor.HitTarget(hb, false);
+						masterArmor.HitTarget(hb, false, transform.position);
 						//Debug.Log("I JUST HIT SOMETHING");
 					//}
 				}

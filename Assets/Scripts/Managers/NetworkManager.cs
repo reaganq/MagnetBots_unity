@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Parse;
 
 public class NetworkManager : MonoBehaviour {
 
@@ -26,7 +27,8 @@ public class NetworkManager : MonoBehaviour {
 
 	public bool isConnectedToServer = false;
 	public bool offlineMode;
-
+	public bool usingParse;
+	public bool showGUI;
 
 
 	void Awake()
@@ -65,7 +67,7 @@ public class NetworkManager : MonoBehaviour {
 
 	void OnGUI()
 	{
-		if(!offlineMode)
+		if(!offlineMode && showGUI)
 		{
 		GUILayout.Label( PhotonNetwork.connectionStateDetailed.ToString() );
 		}
@@ -89,8 +91,8 @@ public class NetworkManager : MonoBehaviour {
 		//PhotonNetwork.load
 		isConnectedToServer = true;
 		Debug.Log("OnJoinedRoom");
-		GameManager.Instance.GameIsPaused = false;
-		GUIManager.Instance.StartGame();
+
+		//GUIManager.Instance.StartGame();
 		if(!offlineMode)
 		{
 			Debug.Log("load level 1");
@@ -109,6 +111,16 @@ public class NetworkManager : MonoBehaviour {
 		Debug.LogError(cause);
 	}
 
+	#region parse
 
+
+
+	public void OnApplicationQuit()
+	{
+		if(usingParse)
+			ParseUser.LogOut();
+	}
+
+	#endregion
 	
 }

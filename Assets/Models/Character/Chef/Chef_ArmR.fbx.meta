@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 1f145d7c0384c47f3abfd27bacb66879
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: bones:polySurface49
     100002: bones:polySurface50
@@ -20,6 +20,53 @@ ModelImporter:
     100028: bones:R_Thumb_End
     100030: //RootNode
     100032: chef_armR
+    100034: bones:Chest
+    100036: bones:Eyes
+    100038: bones:Head
+    100040: bones:Head_Hover_a
+    100042: bones:Head_Hover_b
+    100044: bones:L_Arm_Hover_a
+    100046: bones:L_Arm_Hover_b
+    100048: bones:L_Clavicle
+    100050: bones:L_Elbow
+    100052: bones:L_Eye
+    100054: bones:L_Eye_end
+    100056: bones:L_Forearm
+    100058: bones:L_Hand
+    100060: bones:L_IndexFinger
+    100062: bones:L_IndexFinger_end
+    100064: bones:L_SecondFinger
+    100066: bones:L_SecondFinger_End
+    100068: bones:L_Shoulder
+    100070: bones:L_ShoulderGuard
+    100072: bones:L_Thumb
+    100074: bones:L_Thumb_End
+    100076: bones:Neck_Horizontal
+    100078: bones:Neck_Vertical
+    100080: bones:Pelvis
+    100082: bones:R_Arm_Hover_a
+    100084: bones:R_Clavicle
+    100086: bones:R_Eye
+    100088: bones:R_Eye_End
+    100090: bones:Spine_1
+    100092: bones:Spine_2
+    100094: bones:Upperbody_Hover_a
+    100096: bones:Upperbody_Hover_b
+    100098: bones:L_Ankle
+    100100: bones:L_Ball
+    100102: bones:L_Knee
+    100104: bones:L_Thigh
+    100106: bones:L_Toe
+    100108: bones:LegsRoot
+    100110: bones:R_Ankle
+    100112: bones:R_Ball
+    100114: bones:R_Knee
+    100116: bones:R_Thigh
+    100118: bones:R_Toe
+    100120: polySurface49
+    100122: polySurface50
+    100124: polySurface51
+    100126: polySurface52
     400000: bones:polySurface49
     400002: bones:polySurface50
     400004: bones:polySurface51
@@ -37,25 +84,147 @@ ModelImporter:
     400028: bones:R_Thumb_End
     400030: //RootNode
     400032: chef_armR
+    400034: bones:Chest
+    400036: bones:Eyes
+    400038: bones:Head
+    400040: bones:Head_Hover_a
+    400042: bones:Head_Hover_b
+    400044: bones:L_Arm_Hover_a
+    400046: bones:L_Arm_Hover_b
+    400048: bones:L_Clavicle
+    400050: bones:L_Elbow
+    400052: bones:L_Eye
+    400054: bones:L_Eye_end
+    400056: bones:L_Forearm
+    400058: bones:L_Hand
+    400060: bones:L_IndexFinger
+    400062: bones:L_IndexFinger_end
+    400064: bones:L_SecondFinger
+    400066: bones:L_SecondFinger_End
+    400068: bones:L_Shoulder
+    400070: bones:L_ShoulderGuard
+    400072: bones:L_Thumb
+    400074: bones:L_Thumb_End
+    400076: bones:Neck_Horizontal
+    400078: bones:Neck_Vertical
+    400080: bones:Pelvis
+    400082: bones:R_Arm_Hover_a
+    400084: bones:R_Clavicle
+    400086: bones:R_Eye
+    400088: bones:R_Eye_End
+    400090: bones:Spine_1
+    400092: bones:Spine_2
+    400094: bones:Upperbody_Hover_a
+    400096: bones:Upperbody_Hover_b
+    400098: bones:L_Ankle
+    400100: bones:L_Ball
+    400102: bones:L_Knee
+    400104: bones:L_Thigh
+    400106: bones:L_Toe
+    400108: bones:LegsRoot
+    400110: bones:R_Ankle
+    400112: bones:R_Ball
+    400114: bones:R_Knee
+    400116: bones:R_Thigh
+    400118: bones:R_Toe
+    400120: polySurface49
+    400122: polySurface50
+    400124: polySurface51
+    400126: polySurface52
     2300000: bones:polySurface49
     2300002: bones:polySurface50
     2300004: bones:polySurface51
+    2300006: polySurface49
+    2300008: polySurface50
+    2300010: polySurface51
     3300000: bones:polySurface49
     3300002: bones:polySurface50
     3300004: bones:polySurface51
+    3300006: polySurface49
+    3300008: polySurface50
+    3300010: polySurface51
     4300000: chef_armR
     4300002: bones:polySurface51
     4300004: bones:polySurface50
     4300006: bones:polySurface49
+    4300008: polySurface52
+    4300010: polySurface51
+    4300012: polySurface50
+    4300014: polySurface49
     9500000: //RootNode
     11100000: //RootNode
+    11100002: bones:polySurface49
+    11100004: bones:polySurface50
+    11100006: bones:polySurface51
+    11100008: bones:R_Arm_Hover_b
+    11100010: bones:R_Elbow
+    11100012: bones:R_Forearm
+    11100014: bones:R_Hand
+    11100016: bones:R_IndexFinger
+    11100018: bones:R_IndexFinger_end
+    11100020: bones:R_SecondFinger
+    11100022: bones:R_SecondFinger_End
+    11100024: bones:R_Shoulder
+    11100026: bones:R_ShoulderGuard
+    11100028: bones:R_Thumb
+    11100030: bones:R_Thumb_End
+    11100032: chef_armR
+    11100034: bones:Chest
+    11100036: bones:Eyes
+    11100038: bones:Head
+    11100040: bones:Head_Hover_a
+    11100042: bones:Head_Hover_b
+    11100044: bones:L_Ankle
+    11100046: bones:L_Arm_Hover_a
+    11100048: bones:L_Arm_Hover_b
+    11100050: bones:L_Ball
+    11100052: bones:L_Clavicle
+    11100054: bones:L_Elbow
+    11100056: bones:L_Eye
+    11100058: bones:L_Eye_end
+    11100060: bones:L_Forearm
+    11100062: bones:L_Hand
+    11100064: bones:L_IndexFinger
+    11100066: bones:L_IndexFinger_end
+    11100068: bones:L_Knee
+    11100070: bones:L_SecondFinger
+    11100072: bones:L_SecondFinger_End
+    11100074: bones:L_Shoulder
+    11100076: bones:L_ShoulderGuard
+    11100078: bones:L_Thigh
+    11100080: bones:L_Thumb
+    11100082: bones:L_Thumb_End
+    11100084: bones:L_Toe
+    11100086: bones:LegsRoot
+    11100088: bones:Neck_Horizontal
+    11100090: bones:Neck_Vertical
+    11100092: bones:Pelvis
+    11100094: bones:R_Ankle
+    11100096: bones:R_Arm_Hover_a
+    11100098: bones:R_Ball
+    11100100: bones:R_Clavicle
+    11100102: bones:R_Eye
+    11100104: bones:R_Eye_End
+    11100106: bones:R_Knee
+    11100108: bones:R_Thigh
+    11100110: bones:R_Toe
+    11100112: bones:Spine_1
+    11100114: bones:Spine_2
+    11100116: bones:Upperbody_Hover_a
+    11100118: bones:Upperbody_Hover_b
+    11100120: polySurface49
+    11100122: polySurface50
+    11100124: polySurface51
+    11100126: polySurface52
     13700000: chef_armR
+    13700002: bones:R_Arm_Hover_b
+    13700004: polySurface52
   materials:
     importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 4
+    legacyGenerateAnimations: 1
     bakeSimulation: 0
     optimizeGameObjects: 0
     animationCompression: 1
@@ -86,7 +255,7 @@ ModelImporter:
     splitTangentsAcrossUV: 1
     normalImportMode: 0
     tangentImportMode: 1
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     human: []
@@ -101,4 +270,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
+  additionalBone: 0
   userData: 

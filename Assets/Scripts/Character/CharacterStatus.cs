@@ -61,13 +61,7 @@ public class CharacterStatus : MonoBehaviour {
 			hbs[i].ownerCS = this;
 		}
 	}
-
-	/*public void Update()
-	{
-		if(myPhotonView.owner == null)
-			Debug.Log("wtf no owner");
-	}*/
-
+	
 	public string GenerateRandomString(int l)
 	{
 		string name = "";
@@ -88,13 +82,16 @@ public class CharacterStatus : MonoBehaviour {
 		MemoryStream mm = new MemoryStream(hit);
 		receivedHit = (HitInfo)bb.Deserialize(mm);
 		Debug.Log(receivedHit.sourceName + receivedHit.damage);
+		Vector3 origin = new Vector3(receivedHit.hitPosX, receivedHit.hitPosY, receivedHit.hitPosZ);
 		//TODO apply self buffs/debuffs to calculate final hit results
 		//TODO apply hit effects
 		if(myPhotonView.isMine)
 		{
 			Debug.Log("received Damage");
-			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.Others, receivedHit.damage);
-			ReceiveDamage(receivedHit.damage);
+			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, receivedHit.damage);
+			//ReceiveDamage(receivedHit.damage);
+			if(receivedHit.skillEffects.Count > 0)
+				ProcessHitEffects(receivedHit.skillEffects, origin);
 		}
 
 		if(myPhotonView.owner == null)
@@ -102,6 +99,20 @@ public class CharacterStatus : MonoBehaviour {
 			ReceiveDamage(receivedHit.damage);
 		}
 		//myPhotonView.RPC("ApplyReceivedHitEffects", PhotonTargets.All, 
+	}
+
+	public void ProcessHitEffects(List<SkillEffect> effects, Vector3 originPos)
+	{
+		for (int i = 0; i < effects.Count; i++) {
+			switch(effects[i].effectType)
+			{
+			case((int)SkillEffectCategory.knockback):
+				Debug.Log("KNOCKING ME BACK");
+				if(Motor)
+					Motor.AddImpact(Motor._myTransform.position - originPos, effects[i].effectValue);
+			break;
+			}
+		}
 	}
 	
     public void ReceiveDamage(float damage)
@@ -128,7 +139,25 @@ public class CharacterStatus : MonoBehaviour {
 	[RPC]
 	public void NetworkSyncHealth(float damage)
 	{
-		CurrentHealth -= damage;
+		if(CurrentHealth >0)
+		{
+			CurrentHealth -= damage;
+			Debug.Log("currentHP: "+CurrentHealth);
+			if(myPhotonView.isMine)
+			{
+				if(CurrentHealth <= 0)
+				{
+					if(isAI)
+					{
+						DieAI();
+					}
+					else
+					{
+						Die();
+					}
+				}
+			}
+		}
 	}
 
     public void Heal(int hp)

@@ -72,9 +72,50 @@ public class AISkill : MonoBehaviour {
 
 	public virtual void Reset()
 	{
+		HitEnemies.Clear();
+		HitAllies.Clear();
 	}
 
 	public virtual void HitTarget(HitBox target, bool isAlly)
+	{
+		HitInfo newHit = new HitInfo();
+		
+		if(!isAlly)
+		{
+			newHit.sourceName = fsm.myStatus.characterName;
+			newHit.damage = damage;
+			newHit.hitPosX = fsm._transform.position.x;
+			newHit.hitPosY = fsm._transform.position.y;
+			newHit.hitPosZ = fsm._transform.position.z;
+			newHit.skillEffects = new List<SkillEffect>();
+			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			{
+				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
+					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				}
+			}
+			Debug.Log("no. of skill effects = " + newHit.skillEffects.Count);
+
+			//TODO apply self buffs from characterstatus
+			//TODO apply hitbox local buffs
+			BinaryFormatter b = new BinaryFormatter();
+			MemoryStream m = new MemoryStream();
+			b.Serialize(m, newHit);
+			
+			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
+			
+			//target.ReceiveHit(newHit);
+			//Debug.Log(finalhit.sourceName);
+			Debug.Log("hitenemy");
+		}
+		else
+		{
+			Debug.Log("hitally");
+		}
+		//hb.ReceiveHit(newHit);
+	}
+
+	public virtual void HitTarget(HitBox target, bool isAlly, Vector3 originPos)
 	{
 		HitInfo newHit = new HitInfo();
 
@@ -82,12 +123,13 @@ public class AISkill : MonoBehaviour {
 		{
 			newHit.sourceName = fsm.myStatus.characterName;
 			newHit.damage = damage;
-			newHit.hitPosX = 1;
-			newHit.hitPosY = 1;
-			newHit.hitPosZ = 1;
+			newHit.hitPosX = originPos.x;
+			newHit.hitPosY = originPos.y;
+			newHit.hitPosZ = originPos.z;
+			newHit.skillEffects = new List<SkillEffect>();
 			for (int i = 0; i < onHitSkillEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == TargetType.allEnemies || onHitSkillEffects[i].effectTarget == TargetType.all) {
+				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
 					newHit.skillEffects.Add(onHitSkillEffects[i]);
 				}
 			}
@@ -109,5 +151,38 @@ public class AISkill : MonoBehaviour {
 			Debug.Log("hitally");
 		}
 		//hb.ReceiveHit(newHit);
+	}
+
+	public void OverlapSphere(Vector3 location, float radius)
+	{
+		Collider[] hitColliders = Physics.OverlapSphere(location, radius);
+		for (int i = 0; i < hitColliders.Length; i++) 
+		{
+			HitBox hb = hitColliders[i].gameObject.GetComponent<HitBox>();
+			//ContactPoint contact = other.contacts[0];
+			if(hb != null)
+			{
+				CharacterStatus cs = hb.ownerCS;
+				if(cs != fsm.myStatus)
+				{
+						if(!HitEnemies.Contains(cs) && !HitAllies.Contains(cs))
+						{
+							//determine if friend or foe
+							if(cs.isAI)
+							{
+								HitAllies.Add(cs);
+								HitTarget(hb, true);
+							}
+							else
+							{
+								HitEnemies.Add(cs);
+								HitTarget(hb, false);
+								//masterAISkill.fsm.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
+							}
+							//Debug.Log("I JUST HIT SOMETHING");
+						}
+				}
+			}
+		}
 	}
 }

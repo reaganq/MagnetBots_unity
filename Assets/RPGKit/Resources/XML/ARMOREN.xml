@@ -1,117 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGArmor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGArmor>
-    <ID>3</ID>
-    <Name>Knight Left Arm</Name>
-    <Description>awesome shield bro!</Description>
-    <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_armL</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
-    <FBXName>Armor/ArmL/Knight_ArmL</FBXName>
-    <HasAbility>true</HasAbility>
-    <AbilityString>Use this to block damage!</AbilityString>
-    <AbilityIconPath>abilityicon_knight_armL</AbilityIconPath>
-  </RPGArmor>
-  <RPGArmor>
     <ID>1</ID>
-    <Name>Helmet of the Holy Knight</Name>
-    <Description>Such plummage, much wow</Description>
-    <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_head</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
-    <FBXName>Armor/Head/Knight_Head</FBXName>
-    <HasAbility>false</HasAbility>
-    <AbilityString />
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
-  </RPGArmor>
-  <RPGArmor>
-    <ID>2</ID>
-    <Name>Knight Pauldron</Name>
-    <Description>Come at me bro!</Description>
-    <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_body</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Rare</Rarity>
-    <FBXName>Armor/Body/Knight_Body</FBXName>
-    <HasAbility>false</HasAbility>
-    <AbilityString />
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
-  </RPGArmor>
-  <RPGArmor>
-    <ID>4</ID>
-    <Name>Excalibur</Name>
-    <Description>Stick'em with the pointy end!</Description>
-    <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_armR</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
-    <BuyValue>150</BuyValue>
-    <SellValue>75</SellValue>
-    <Rarity>Legendary</Rarity>
-    <FBXName>Armor/ArmR/Knight_ArmR</FBXName>
-    <HasAbility>true</HasAbility>
-    <AbilityString>Use this to destroy your foes</AbilityString>
-    <AbilityIconPath>abilityicon_knight_armR</AbilityIconPath>
-  </RPGArmor>
-  <RPGArmor>
-    <ID>5</ID>
-    <Name>Robust knight legs</Name>
-    <Description>strong but slow</Description>
-    <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_legs</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
-    <FBXName>Armor/Legs/Knight_Legs</FBXName>
-    <HasAbility>false</HasAbility>
-    <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
-  </RPGArmor>
-  <RPGArmor>
-    <ID>6</ID>
     <Name>Average Head</Name>
     <Description>Pretty average</Description>
     <SystemDescription />
@@ -120,20 +10,22 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>basic_head</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
     <SellValue>4</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>Armor/Head/Basic_Head</FBXName>
+    <FBXName>
+      <string>Armor/Head/Basic_Head</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
   </RPGArmor>
   <RPGArmor>
-    <ID>7</ID>
+    <ID>2</ID>
     <Name>Plain Body</Name>
     <Description>Super plain</Description>
     <SystemDescription />
@@ -142,20 +34,22 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>basic_body</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
     <SellValue>5</SellValue>
     <Rarity>Worthless</Rarity>
-    <FBXName>Armor/Body/Basic_Body</FBXName>
+    <FBXName>
+      <string>Armor/Body/Basic_Body</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
   </RPGArmor>
   <RPGArmor>
-    <ID>8</ID>
+    <ID>3</ID>
     <Name>Basic Left Arm</Name>
     <Description>Your parents don't want you</Description>
     <SystemDescription />
@@ -164,20 +58,22 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>basic_armL</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>Armor/ArmL/Basic_ArmL</FBXName>
+    <FBXName>
+      <string>Armor/ArmL/Basic_ArmL</string>
+    </FBXName>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to shoot ata your enemies!</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
   </RPGArmor>
   <RPGArmor>
-    <ID>9</ID>
+    <ID>4</ID>
     <Name>Basic Right Arm</Name>
     <Description>No one wants to be your friend</Description>
     <SystemDescription />
@@ -186,20 +82,22 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>basic_armR</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>12</BuyValue>
     <SellValue>6</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>Armor/ArmR/Basic_ArmR</FBXName>
+    <FBXName>
+      <string>Armor/ArmR/Basic_ArmR</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Wield the power of the Thunder God</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
   </RPGArmor>
   <RPGArmor>
-    <ID>10</ID>
+    <ID>5</ID>
     <Name>Skinny Legs</Name>
     <Description>even hipsters think you're too underground</Description>
     <SystemDescription />
@@ -208,14 +106,146 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>basic_legs</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>Armor/Legs/Basic_Legs</FBXName>
+    <FBXName>
+      <string>Armor/Legs/Basic_Legs</string>
+    </FBXName>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>6</ID>
+    <Name>Helmet of the Holy Knight</Name>
+    <Description>Such plummage, much wow</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <FBXName>
+      <string>Armor/Head/Knight_Head1</string>
+      <string>Armor/Head/Knight_Head2</string>
+      <string>Armor/Head/Knight_Head3</string>
+    </FBXName>
+    <HasAbility>false</HasAbility>
+    <AbilityString />
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>7</ID>
+    <Name>Knight Pauldron</Name>
+    <Description>Come at me bro!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_body</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Rare</Rarity>
+    <FBXName>
+      <string>Armor/Body/Knight_Body1</string>
+      <string>Armor/Body/Knight_Body2</string>
+      <string>Armor/Body/Knight_Body3</string>
+    </FBXName>
+    <HasAbility>false</HasAbility>
+    <AbilityString />
+    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>8</ID>
+    <Name>Knight Left Arm</Name>
+    <Description>awesome shield bro!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <FBXName>
+      <string>Armor/ArmL/Knight_armL1</string>
+      <string>Armor/ArmL/Knight_armL2</string>
+      <string>Armor/ArmL/Knight_armL3</string>
+    </FBXName>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this to block damage!</AbilityString>
+    <AbilityIconPath>abilityicon_knight_armL</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>9</ID>
+    <Name>Excalibur</Name>
+    <Description>Stick'em with the pointy end!</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>150</BuyValue>
+    <SellValue>75</SellValue>
+    <Rarity>Legendary</Rarity>
+    <FBXName>
+      <string>Armor/ArmR/Knight_ArmR1</string>
+      <string>Armor/ArmR/Knight_ArmR2</string>
+      <string>Armor/ArmR/Knight_ArmR3</string>
+    </FBXName>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this to destroy your foes</AbilityString>
+    <AbilityIconPath>abilityicon_knight_armR</AbilityIconPath>
+  </RPGArmor>
+  <RPGArmor>
+    <ID>10</ID>
+    <Name>Robust knight legs</Name>
+    <Description>strong but slow</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <IconPath>knight_legs</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>10</BuyValue>
+    <SellValue>5</SellValue>
+    <Rarity>Common</Rarity>
+    <FBXName>
+      <string>Armor/Legs/Knight_Legs1</string>
+      <string>Armor/Legs/Knight_Legs2</string>
+      <string>Armor/Legs/Knight_Legs3</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -230,14 +260,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>boxer_armL</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>20</BuyValue>
     <SellValue>15</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>Armor/ArmL/Boxer_ArmL</FBXName>
+    <FBXName>
+      <string>Armor/ArmL/Boxer_ArmL</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -252,14 +284,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>boxer_head</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>50</BuyValue>
     <SellValue>10</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>Armor/Head/Boxer_Head</FBXName>
+    <FBXName>
+      <string>Armor/Head/Boxer_Head</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -274,14 +308,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>boxer_armR</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
     <SellValue>50</SellValue>
     <Rarity>Epic</Rarity>
-    <FBXName>Armor/ArmR/Boxer_ArmR</FBXName>
+    <FBXName>
+      <string>Armor/ArmR/Boxer_ArmR</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -296,14 +332,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>knight_armR</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
     <SellValue>50</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>Armor/ArmR/gumball_armR</FBXName>
+    <FBXName>
+      <string>Armor/ArmR/Gumball_armR</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -318,14 +356,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>chef_armR</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Worthless</Rarity>
-    <FBXName>Armor/ArmR/Chef_ArmR</FBXName>
+    <FBXName>
+      <string>Armor/ArmR/Chef_ArmR</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -340,14 +380,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>chef_head</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
     <SellValue>50</SellValue>
     <Rarity>Epic</Rarity>
-    <FBXName>Armor/Head/Chef_Head</FBXName>
+    <FBXName>
+      <string>Armor/Head/Chef_Head</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -362,14 +404,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>chef_armL</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>75</BuyValue>
     <SellValue>40</SellValue>
     <Rarity>Magic</Rarity>
-    <FBXName>Armor/ArmL/Chef_ArmL</FBXName>
+    <FBXName>
+      <string>Armor/ArmL/Chef_ArmL</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -384,14 +428,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>chef_body</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>200</BuyValue>
     <SellValue>100</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>Armor/Body/Chef_Body</FBXName>
+    <FBXName>
+      <string>Armor/Body/Chef_Body</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -406,14 +452,16 @@
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
     <IconPath>chef_legs</IconPath>
-    <AtlasName>ArmorAtlas</AtlasName>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>false</Stackable>
+    <Stackable>true</Stackable>
     <BuyValue>200</BuyValue>
     <SellValue>100</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>Armor/Legs/Chef_Legs</FBXName>
+    <FBXName>
+      <string>Armor/Legs/Chef_Legs</string>
+    </FBXName>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>

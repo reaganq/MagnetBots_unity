@@ -63,6 +63,7 @@ public class ArenaGUIController : BasicGUIController {
 		DetailsBox.SetActive(true);
 		UpdateDetailsBox();
 		selectedCardIndex = index;
+		ScrollView.SetActive(false);
 	}
 
 	public void UpdateDetailsBox()
@@ -110,6 +111,7 @@ public class ArenaGUIController : BasicGUIController {
 		b.Serialize(m, data);
 
 		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, PlayerManager.Instance.SelectedArena.Name, m.GetBuffer());
+		//GUIManager.Instance.DisplayMainGUI();
 	}
 
 	public void OnBackButtonPressed()

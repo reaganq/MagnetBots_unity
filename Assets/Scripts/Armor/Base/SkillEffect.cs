@@ -7,13 +7,13 @@ using System.Collections.Generic;
 public class SkillEffect{
 
     public float effectValue;
-    public SkillEffectCategory effectType;
-    public SkillEffectFormat durationFormat;
+    public int effectType;
+    public int effectFormat;
     public float effectDuration;
     public int numberOfProcs;
     public float procChance;
-    public TargetType effectTarget;
-    public SkillEffectTrigger effectTrigger;
+    public int effectTarget;
+    public int effectTrigger;
     public bool stackable;
     public bool refreshable;
 
@@ -22,18 +22,18 @@ public class SkillEffect{
 //what does the skill affect
 public enum SkillEffectCategory
 {
-    stun,
-    slow,
-    armor,
-    damage,
-    critPercent,
-    invulnerability,
-    damageBlock,
-    lifeDrain,
-    knockback,
-    moveTarget,
-    heal,
-    speed
+    stun = 0 ,
+    slow = 1,
+    armor = 2,
+    damage = 3,
+    critPercent = 4,
+    invulnerability = 5,
+    damageBlock = 6,
+    lifeDrain = 7,
+    knockback = 8,
+    moveTarget =9,
+    heal = 10,
+    speed = 11,
 }
 
 //format of skill

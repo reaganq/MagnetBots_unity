@@ -2,7 +2,7 @@
 <ArrayOfRPGEnemy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGEnemy>
     <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
-    <PortraitAtlas>EnemiesAtlas</PortraitAtlas>
+    <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
     <Loots>
       <LootItem>
         <itemType>Currency</itemType>
@@ -22,10 +22,20 @@
           <int>5</int>
           <int>2</int>
         </itemID>
+        <itemLevel>2</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+      </LootItem>
+      <LootItem>
+        <itemType>UpgradeMaterials</itemType>
+        <itemID>
+          <int>2</int>
+        </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>0.3</dropRate>
+        <dropRate>1</dropRate>
       </LootItem>
     </Loots>
     <PrefabPaths>

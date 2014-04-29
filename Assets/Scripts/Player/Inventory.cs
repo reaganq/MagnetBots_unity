@@ -92,10 +92,9 @@ public class Inventory  : BasicInventory
 		{
 			_UpgradeableItems.Clear();
 			for (int i = 0; i < Items.Count; i++) {
-				if(Items[i].IsItemUpgradeable)
+				if(Items[i].rpgItem.IsUpgradeable)
 				{
 					_UpgradeableItems.Add(Items[i]);
-					Debug.Log(i);
                 }
             }
 			return _UpgradeableItems;
@@ -178,6 +177,7 @@ public class Inventory  : BasicInventory
 				}
 			}
 			Items.Add(item);
+			Debug.LogWarning("ADDING ITEM: " + item.CurrentAmount + item.UniqueItemId + item.rpgItem.UniqueId);
 		}
 		else
 		{
@@ -236,19 +236,16 @@ public class Inventory  : BasicInventory
 
 	public bool RemoveItem(InventoryItem item)
 	{
-		Debug.Log(item.UniqueItemId);
+		Debug.Log(item.UniqueItemId + item.CurrentAmount);
 		for (int i = 0; i < Items.Count; i++) 
 		{
 			if(Items[i].UniqueItemId == item.UniqueItemId && Items[i].Level == item.Level)
 			{
-				Debug.Log("unique id" + Items[i].UniqueItemId);
-				Debug.Log("removed" + Items[i].rpgItem.Name);
-				Items.Remove(Items[i]);
-				Debug.Log(_headItems.Count);
-				for (int j = 0; j < _headItems.Count; j++) {
-					Debug.Log(_headItems[j].rpgItem.Name);
-				}
-
+				Debug.Log(Items[i].CurrentAmount);
+				Items[i].CurrentAmount -= item.CurrentAmount;
+				Debug.Log(Items[i].CurrentAmount);
+				if(Items[i].CurrentAmount <= 0)
+					Items.RemoveAt(i);
 			}
 
 		}
@@ -317,6 +314,22 @@ public class Inventory  : BasicInventory
         else
             return false;
     }
+
+	public bool EquipItem(string itemID, int level)
+	{
+		for (int i = 0; i < Items.Count; i++) 
+		{
+			if(Items[i].UniqueItemId == itemID && Items[i].Level == level)
+			{
+				if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)Items[i].rpgItem, Items[i].Level))
+				{
+					Items[i].IsItemEquipped = true;
+					return true;
+				}
+			}
+		}
+		return false;
+	}
     
     //TODO add in unequip functionality
     public bool UnequipItem(string itemID, int level)
