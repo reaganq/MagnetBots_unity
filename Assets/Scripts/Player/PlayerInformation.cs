@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Parse;
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 
 public class PlayerInformation  {
 
@@ -37,6 +39,11 @@ public class PlayerInformation  {
 	public int BankMagnets;
 	public string ParseObjectId;
 	ParseObject playerData = new ParseObject("PlayerData");
+
+	public void Awake()
+	{
+		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
+	}
  
     public PlayerInformation()
     {
