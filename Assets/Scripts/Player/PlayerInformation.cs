@@ -107,7 +107,9 @@ public class PlayerInformation  {
             Crystals += amount;
         }
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-		UpdateWalletParseData();
+
+		if(NetworkManager.Instance.usingParse)
+			UpdateWalletParseData();
     }
     
     public void RemoveCurrency(int amount, BuyCurrencyType currency)
@@ -121,7 +123,8 @@ public class PlayerInformation  {
             Crystals -= amount;
         }
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-		UpdateWalletParseData();
+		if(NetworkManager.Instance.usingParse)
+			UpdateWalletParseData();
     }
  
     public bool CanYouAfford(int price, BuyCurrencyType currency)
@@ -185,6 +188,7 @@ public class PlayerInformation  {
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
@@ -197,12 +201,14 @@ public class PlayerInformation  {
 			{
 				AddCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
 			}
-			UpdateWalletParseData();
+			if(NetworkManager.Instance.usingParse)
+				UpdateWalletParseData();
 		}
 		else
 		{
 			MainInventory.AddItem(item);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			if(NetworkManager.Instance.usingParse)
+				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 
@@ -211,6 +217,7 @@ public class PlayerInformation  {
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
@@ -223,11 +230,13 @@ public class PlayerInformation  {
 			{
 				RemoveCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
 			}
+			if(NetworkManager.Instance.usingParse)
 			UpdateWalletParseData();
 		}
 		else
 		{
 			MainInventory.RemoveItem(item);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
@@ -242,12 +251,14 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, level, amount);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else
 		{
 			MainInventory.AddItem(item, level, amount);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			if(NetworkManager.Instance.usingParse)
+				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 	
@@ -261,11 +272,13 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item, level, amount);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, level, amount);
+			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
     }
@@ -410,4 +423,5 @@ public class PlayerInformation  {
 	}
 
 	#endregion
+
 }

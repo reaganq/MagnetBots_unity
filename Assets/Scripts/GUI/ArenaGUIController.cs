@@ -21,6 +21,7 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void Start()
 	{
+		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
 		for (int i = 0; i < EnemyCards.Count; i++) 
 		{
 			EnemyCardObjects.Add(EnemyCards[i].gameObject);

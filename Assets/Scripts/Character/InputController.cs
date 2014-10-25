@@ -182,7 +182,7 @@ public class InputController : MonoBehaviour {
 				}
 				else
 				{
-					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 1.5f)
+					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 5f)
 					{
 						Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
 						RaycastHit hit;
