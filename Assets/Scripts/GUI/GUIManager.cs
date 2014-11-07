@@ -46,6 +46,7 @@ public class GUIManager : MonoBehaviour {
 	public LoadScreenController loadingGUI = null;
 	public MiniGameGUIController minigameGUI = null;
 	public RewardsGUIController rewardsGUI = null;
+	public ChatGUIController chatGUI = null;
 
 	public Transform minigameUIRoot;
     

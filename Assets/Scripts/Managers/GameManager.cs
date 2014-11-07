@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour {
         joystick.showDebugRadius = false;
 
         joystick.enable = false;
+		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GameObject.FindGameObjectWithTag("UICamera").camera;
 
         #endif
 		#if UNITY_WEBPLAYER || UNITY_STANDALONE

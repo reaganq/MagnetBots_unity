@@ -13,6 +13,9 @@ public class MainUIManager : BasicGUIController {
 	public GameObject QuitPartyButton;
 	public UILabel[] PartyMemberNames;
 
+	public Animation bottomPanelAnimation;
+	public bool isBottomTrayOpen = false;
+
 	public UISprite soundButton;
 
 	public void UpdateCurrencyCount()
@@ -30,7 +33,7 @@ public class MainUIManager : BasicGUIController {
 			GameManager.Instance.joystick.enable = true;
 		}
 		else
-			ActionButtons.SetActive(false);
+			DisplayActionButtons(false);
 		if(!GUIManager.Instance.CanShowInventory)
 			OpenInventoryButton.SetActive(false);
 		UpdateCurrencyCount();
@@ -42,7 +45,15 @@ public class MainUIManager : BasicGUIController {
 	{
 		PlayerManager.Instance.ActiveWorld.DisbandParty();
 	}
-	
+
+	public void DisplayActionButtons(bool state)
+	{
+		if(state)
+			ActionButtons.SetActive(true);
+		else
+			ActionButtons.SetActive(false);
+	}
+
 	public override void Disable()
 	{
 		Debug.LogWarning("wtf");
@@ -84,6 +95,22 @@ public class MainUIManager : BasicGUIController {
 		else
 		{
 			soundButton.spriteName = "soundbutton";
+		}
+	}
+
+	public void OpenChatBox(bool state)
+	{
+		if(state)
+		{
+			bottomPanelAnimation.Play("OpenChatBox");
+			isBottomTrayOpen = true;
+			DisplayActionButtons(false);
+		}
+		else
+		{
+			bottomPanelAnimation.Play("CloseChatBox");
+			isBottomTrayOpen = false;
+			DisplayActionButtons(true);
 		}
 	}
 

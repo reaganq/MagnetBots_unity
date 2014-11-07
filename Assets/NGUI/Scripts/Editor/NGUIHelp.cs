@@ -31,9 +31,7 @@ static public class NGUIHelp
 		if (type == typeof(UIAnchor))		return "http://www.tasharen.com/forum/index.php?topic=6712";
 		if (type == typeof(UIStretch))		return "http://www.tasharen.com/forum/index.php?topic=6713";
 		if (type == typeof(UISlider))		return "http://www.tasharen.com/forum/index.php?topic=6715";
-#if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_1 && !UNITY_4_2
 		if (type == typeof(UI2DSprite))		return "http://www.tasharen.com/forum/index.php?topic=6729";
-#endif
 		if (type == typeof(UIScrollBar))	return "http://www.tasharen.com/forum/index.php?topic=6733";
 		if (type == typeof(UIProgressBar))	return "http://www.tasharen.com/forum/index.php?topic=6738";
 		if (type == typeof(UIPopupList))	return "http://www.tasharen.com/forum/index.php?topic=6751";
@@ -41,6 +39,10 @@ static public class NGUIHelp
 		if (type == typeof(UIKeyBinding))	return "http://www.tasharen.com/forum/index.php?topic=6753";
 		if (type == typeof(UIGrid))			return "http://www.tasharen.com/forum/index.php?topic=6756";
 		if (type == typeof(UITable))		return "http://www.tasharen.com/forum/index.php?topic=6758";
+		if (type == typeof(UIKeyNavigation)) return "http://www.tasharen.com/forum/index.php?topic=8747";
+
+		if (type == typeof(PropertyBinding) || type == typeof(PropertyReference))
+			return "http://www.tasharen.com/forum/index.php?topic=8808";
 		
 		if (type == typeof(ActiveAnimation) || type == typeof(UIPlayAnimation))
 			return "http://www.tasharen.com/forum/index.php?topic=6762";
