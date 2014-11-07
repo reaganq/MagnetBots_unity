@@ -1,12 +1,21 @@
 ----------------------------------------------
             NGUI: Next-Gen UI kit
  Copyright © 2011-2014 Tasharen Entertainment
-            Version 3.5.4 r2
+            Version 3.7.5
     http://www.tasharen.com/?page_id=197
             support@tasharen.com
 ----------------------------------------------
 
 Thank you for buying NGUI!
+
+PLEASE NOTE that NGUI can only be legally downloaded from the following 3 sources:
+
+  1. Unity Asset Store (Standard License)
+  2. www.tasharen.com (Standard License)
+  3. github.com/tasharen/ngui (Professional and Site Licenses)
+
+If you've obtained NGUI via some other means then note that your license is effectively invalid,
+as Tasharen cannot provide support for pirated and/or potentially modified software.
 
 Documentation can be found here: http://www.tasharen.com/forum/index.php?topic=6754.0
 
@@ -17,9 +26,9 @@ drop by the NGUI forum, found here: http://www.tasharen.com/forum/index.php?boar
  How To Update NGUI
 --------------------
 
-If you have the Professional Edition of NGUI that comes with Git access, just pull the latest changes.
+If you have the Professional or Site License of NGUI that comes with Git access, just pull the latest changes.
 
-If you have a Standard Edition:
+If you have a Standard License:
 
 1. In Unity, File -> New Scene
 2. Delete the NGUI folder from the Project View.
@@ -45,6 +54,278 @@ and it will not be included in the build of your game. It's only used in the edi
 -----------------
  Version History
 -----------------
+
+3.7.5
+- NEW: UISavedOption now works with progress bars as well.
+- NEW: MathiasSoeholm's implementation for Labels with float spacing.
+- FIX: UIPopupList opened manually will now close automatically without requiring selection to be set.
+- FIX: UICamera will now use proper 'events go to colliders' flag from the first UICamera.
+- FIX: Unity 5 compilation tweaks.
+- FIX: Flash compilation fixes.
+
+3.7.4
+- FIX: UIInput no longer uses OnGUI unless you actually select the input field first (eliminates GC alloc).
+- FIX: UIEventTrigger's OnDragStart/OnDragEnd shouldn't have had parameters.
+- FIX: UIDragObject should now work properly with a constrained type UIRoot.
+- FIX: Key/controller interaction wasn't quite correct with sliders/scroll bars.
+- FIX: UIDragObject will now snap to pixels after the movement completes.
+
+3.7.3
+- NEW: New clipping option on panels: Texture Mask. Any texture with alpha will work (think round minimap etc).
+- NEW: UICamera now has an option for whether events go to colliders or rigidbodies.
+- NEW: Added Cell Alignment field to the UITable letting you change the content's alignment.
+- NEW: UIGrid now has a "cell snap" arrangement type for when you simply want to have widgets snap as you drag them.
+- NEW: 2D Sprites now have a "pixel size" property.
+- FIX: Pre-defined texture preview for the Prefab Tool wasn't quite working right.
+- FIX: UIPanel now always force-disables the "offset" option if it's on the UIRoot.
+- FIX: Handles will now automatically hide when multi-editing widgets, allowing you to use the transform move.
+
+3.7.2
+- NEW: You can now explicitly choose the panel used as a drag region for UIDragObject.
+- NEW: You can now specify a custom thumbnail texture for each item in the prefab toolbar.
+- NEW: TweenAlpha and TweenColor now work on Unity's SpriteRenderers.
+- NEW: Added UICamera.currentTouch.deltaTime (time since touch started).
+- FIX: UIGrid.Reposition should now work even without the component being started first.
+- FIX: Widgets with alpha 0 won't be selectable in the scene view anymore.
+- FIX: UIDragDropItem wasn't setting 'dragged' state properly if the item was cloned.
+- FIX: Alpha text encoding [Aa] style should no longer try to interpret non-hex characters.
+- FIX: Tweaks to how UICenterOnChild works and fixes to its paging functionality.
+- FIX: Minor fix to tween/play tween in regards to playing in reverse.
+- FIX: Bitmap labels now support thin spaces (U2009).
+- FIX: PropertyBinding now respects "editMode" flag properly.
+- FIX: Setting UILabel.material at run time on a dynamic font should now work as expected.
+- FIX: DX9 half pixel offset will now be ignored properly in /force OpenGL mode.
+- FIX: You should now be able to use the stylus on android devices.
+- DEL: UIInput.selectOnTab is now deprecated in favor of UIKeyNavigation (will auto-upgrade)
+
+3.7.1
+- NEW: Added generic delegates to UICamera you can subscribe to (onClick, onHover, etc) to replace the genericEventHandler.
+- NEW: Added a new option to UITexture and UI2DSprite to keep the original texture's aspect ratio.
+- NEW: Popup list items can now have arbitrary data associated with each entry.
+- NEW: You can now choose what kind of click will open the popup list.
+- NEW: New text symbol [c] will cause the text that follows it to ignore the label's color tint.
+- NEW: Added the missing OnDragStart and OnDragEnd to UIEventListener.
+- NEW: UICamera.onMouseMove notification.
+- FIX: UICamera will only send events to rigidbodies if there was no UIPanel present.
+- FIX: UIPanel will no longer use handles if the camera drawing it is not 2D.
+- FIX: Unity 4.3 compatibility.
+
+3.7.0
+- NEW: You can now set UIWidget.onRender to change material properties like in OnWillRenderObject.
+- NEW: Changing UITexture.mainTexture and shader is now super-quick if it's not batched.
+- NEW: UIRoot now has additional scaling constraints enabling new fill and fit modes.
+- NEW: Added the ability to ignore kerning information when making bitmap fonts.
+- NEW: NGUI's events sent via "3D" and "2D" event type UICameras will now go to the rigidbody instead of colliders.
+- NEW: UIKeyBinding now has a new setting "All" that will trigger both select and press/click logic.
+- NEW: UICamera.isOverUI, UICamera.currentTouch.isOverUI.
+- NEW: NGUI now uses the new rect transform tool instead of the move transform in Unity 4.6+.
+- NEW: UIPlaySound now has an OnEnable play option. For convenience.
+- NEW: UIEventListener now has OnTooltip.
+- NEW: TweenAlpha now works with renderers as well.
+- FIX: Removed code that was snapping draw call positions to pixels, allowing you animate panels smoothly.
+- FIX: Calling Reposition() on the grid and table now works even if its Start() hasn't executed.
+- FIX: Dynamic font baseline calculation work-around for some partial fonts.
+- FIX: Center On Child script got semi-broken in the last version.
+
+3.6.9
+- NEW: Added loop, play, pause and reset functionality to UI2DSpriteAnimation.
+- NEW: Added new automatic support for linear lighting.
+- NEW: Added a pivot point setting to UITable to match UIGrid.
+- NEW: Added warnings to UIAnchor and UIStretch components that inform the user about them being deprecated.
+- NEW: Property binding can now let you select properties that only have either get or set, depending on what's needed.
+- NEW: Added settable delegates to UICamera: GetKey, GetKeyDown, GetKeyUp, GetAxis.
+- NEW: UIRect has a new anchor update setting: OnStart. It will only update anchors once.
+- NEW: Panels have a new option to ignore soft border when constraining scroll view content.
+- FIX: Added alexkring's work-around for the rare "texture destroyed" issue in the Atlas Maker.
+- FIX: Dragging 2D UI elements into a scene with a 3D UI should no longer create many UI Roots.
+- FIX: Labels will now use the draw region, making them usable as the slider's foreground.
+- FIX: Localization with multi-line entries would skip the first word.
+- FIX: The layout system's anchors should now work even for 3D UIs.
+- FIX: UIWrapContent was not setting the restrict within panel flag correctly.
+- FIX: UILabel.GetWordAtPosition now works with line breaks properly.
+- FIX: Embedded URL retrieval code wasn't capping when it encountered a /url tag.
+- FIX: Embedded URL retrieval is now much more precise.
+- FIX: Mouse scroll wheel should again work with UICenterOnChild.
+- FIX: UILocalize will now change UIButton's normal sprite.
+- FIX: UIToggle transitions will now be instant if the value was changed while the toggle is disabled.
+- FIX: UIDragDropitem will now work with 2D colliders (thanks HanzaRu).
+- FIX: Bold can now be mixed with underline properly.
+- DEL: Removed the old "Shader Quality" script that was messing up the refractive atlas.
+
+3.6.8
+- NEW: UIWrapContent now has a range limit you can set for indices (such as -10 to 10).
+- NEW: Added Transform.OverlayPosition to make it easy to position widgets using 3D object positions.
+- FIX: Progress bars / sliders will no longer show the foreground if the value is 0.
+- FIX: Changing UI2DSprite.sprite2D will now immediately re-add the widget to the panel.
+- FIX: UIDragDropItem will now delay enabling the drag scroll view script (thanks, slumtrimpet!)
+- FIX: Re-added a hack-around for Adreno GPU crashes. Looks like Unity 4.5 did not fix the problem, despite the patch notes.
+- FIX: Seeing as BetterList is slower at sorting than List, some instances of BetterList were replaced with List.
+- FIX: UIPanel's option to cull widgets while the scroll view is being dragged is now on by default.
+- FIX: UIRoot now considers WP8 and BlackBerry to be mobile devices.
+- FIX: More tweaks for how camera's region gets calculated.
+
+3.6.7
+- NEW: Added a lookup table to the atlas in order to make GetSprite() faster.
+- NEW: Added OnPostFill functionality to widgets, in case you want to further modify the geometry.
+- NEW: Added OnMomentumMove and OnStoppedMoving notifications to UIScrollView in addition to OnDragFinished.
+- NEW: Added NGUI -> Extras -> Align Scene View to UI (thanks NikolayLezhnev)
+- FIX: UIGrid's smooth snapping will now ignore time scale.
+- FIX: Nicki's optimizations (Shader.PropertyToID instead of by name).
+- FIX: Null check for 'mKeyboard' being null in UIInput (rare case).
+
+3.6.6
+- NEW: UIWrapContent now has a settable delegate to initialize items, and will call it on Start().
+- NEW: Added OnDragStarted to the scroll view for those that needed it.
+- NEW: Added the missing OnDragOver/OnDragOut to the UIEventListener.
+- FIX: Hiding game view behind the scene view should now work as expected (thanks NikolayLezhnev).
+- FIX: Localization was not always handling double quotes properly.
+- FIX: Mobile keyboard-related fix (thanks niniane).
+- FIX: 2D raycasts were not working quite right...
+- FIX: Underline and strike-out should now look better and will be affected by the gradient.
+- DEL: Commented out NGUITools.OpenURL since it causes network permissions to be used on mobile. Uncomment them if you need them.
+- DEL: Cleaned up pre-Unity 4.3 code.
+
+3.6.5
+- NEW: Added a way to show the transform gizmo without disabling the drag handles (NGUI->Options).
+- NEW: Added an "onCenter" notification to UICenterOnChild.
+- FIX: Drag & drop example wasn't working properly due to a missed line in UICamera.
+- FIX: UIToggle.value will now return the starting state if the toggle has not yet been activated.
+- FIX: WP8/iOS UIInput fix, and force the keyboard to show up when it's in a 'password' mode.
+- FIX: Flash compilation fixes.
+- FIX: Nicki's optimizations.
+
+3.6.4
+- NEW: Added the way to set the label alignment for popup lists.
+- NEW: EventDelegate.Add(list, callback) now returns an EventDelegate to work with.
+- NEW: Added an option to execute the UICenterOnChild in the editor via right-click.
+- FIX: Fix for a regression bug causing bar view foreground's collider was never adjusted properly.
+- FIX: UILabel now automatically clears NGUIText font references after using them.
+- FIX: Nested anchors set to update in OnEnable will now work as expected when the hierarchy gets re-enabled.
+- FIX: Unified inspector look can now be modified properly.
+- FIX: Switching from 3D to 2D UI will now remove the 3D rigidbody.
+- FIX: Drag & drop example wasn't working properly due to a missed line in UICamera. (3.6.4b)
+- FIX: UIToggle.value will now return the starting state if the toggle has not yet been activated (3.6.4b)
+
+3.6.3
+- NEW: Added onFinished and Finish() to the Typewriter script.
+- FIX: Changed the way "hide input" logic works in UIInput.
+- FIX: UIInput was not setting its starting value correctly in some cases.
+- FIX: Hide Input setting on the input field is now a separate field.
+- FIX: UIlabel.Wrap was not using the provided height.
+- FIX: Flash compile fixes.
+
+3.6.2
+- NEW: Added an optional different (minimalistic) look for NGUI's components (change via Options -> Inspector Look).
+- NEW: Typewriter script can now fade in letters gradually using alpha (have a look at Tutorial 5).
+- NEW: You can now embed overriding alpha in text using [Aa] format.
+- NEW: UIButton can now swap 2D sprites as well.
+- FIX: Embedded color's alpha now also affects the shadow and outline effects.
+- FIX: Typewriter effect should now be able to fade in multiple tags properly.
+- FIX: Replaced all usage of UICamera.lastHit.point with UICamera.lastWorldPosition (for 2D events).
+- FIX: Certain widget elements should now support 2D colliders properly (sliders and such)
+- FIX: Fixed an issue with double space in an input field causing issues.
+- FIX: Yet more WP8 stuff.
+
+3.6.1
+- NEW: NGUI now fully supports 2D colliders, and will create them by default if UICamera is in 2D UI mode.
+- NEW: Added a way to automatically switch the entire UI to use 2D or 3D colliders via the NGUI->Extras.
+- NEW: Added support for TouchScreenKeyboard.hideInput (input caret, selection, etc on mobiles)
+- NEW: Added pre-generated Prefab Toolbar preview icons for Unity Free.
+- NEW: EnvelopContent script will now execute itself every time it's enabled, and will update anchors.
+- NEW: You can now see your NGUI's version via the Help menu.
+- FIX: NGUIText now supports unicode spaces (contributed by Graham Reeves).
+- FIX: Popup list was not highlighting the selection properly in some cases.
+- FIX: Popup list will now always be closed when any item gets chosen.
+- FIX: UIProgressBar will now work properly with 2D sprites and UITextures.
+- FIX: Nested scroll views instantiated at run-time should now be clipped properly.
+- FIX: Grid will now sort the list of children in GetChildList() since the hack-around didn't work.
+- FIX: Localization will load the data in the Exists() function as well.
+- FIX: Still more WP8 fixes.
+- DEL: Upgrade tools are no longer a part of the package. Grab them from the website instead.
+
+3.6.0
+- NOTE: NGUI now requires Unity 4.3.4 or higher!
+- NEW: Added a new tool -- Prefab Toolbar. It lets you drop prefabs onto it for easy preview.
+- NEW: Unity2D Sprite now has all the same options as an NGUI sprite (sliced, filled, tiled, etc).
+- NEW: UITexture now has all the same options as an NGUI sprite.
+- NEW: You can now choose components as parameters for functions via inspector.
+- NEW: Added support for full RGBA32 color encoding in text (RrGgBbAa).
+- NEW: UISpriteAnimation example script now has pixel snap setting as optional.
+- NEW: Extended the Typewriter Effect script with additional functionality.
+- FIX: In some cases changing sprites on a prefab wouldn't "take".
+- FIX: WP8/WSA fixes, courtesy of LoneCoder from the forums.
+- FIX: Pixel-snap a tiled sprite should no longer revert it to single sprite's dimensions.
+- FIX: Nested scroll views were not culling widgets properly in some cases when scrolled.
+- FIX: Calculating widget dimensions will now ignore widgets in clipped panels.
+
+3.5.9
+- NEW: Added an event delegate drawer in case you want to use the Event Delegate in your own scripts.
+- NEW: You can now explicitly specify what the Return key will do on the input field regardless of the label's multi-line setting.
+- NEW: Added GetIndex() to UIGrid and improved its look in the inspector.
+- FIX: Scroll view will no longer jump back and forth by 1 pixel when it's not using momentum.
+- FIX: Input fields should respect the "starting value" if the "saved as" is left blank.
+- FIX: Text printing issue if the line begins with a double space.
+- FIX: You can now call UIButton.ResetDefaultColor to restore the original color, even after setting 'defaultColor' to something else.
+- FIX: UIKeyNavigation will now respect UIButton's isEnabled state if it's present.
+- FIX: UIPlaySound will now respect UIButton's isEnabled state if it's present.
+- FIX: UIDrawCall copy material creation now also copies shader keywords.
+- FIX: UICamera.inputHasFocus should now work properly again.
+- FIX: The Sorting Order will now always be exposed on the UIPanel in inspector.
+- DEL: Moving DataNode over to TNet since it makes a lot more sense to have it there instead of in NGUI.
+
+3.5.8
+- NEW: Added a generic node-based class for simple text-based serialization (DataNode).
+- NEW: UITexture now has flip options just like UISprite.
+- NEW: Moved the SetRect function from UIWidget to UIRect, making it usable by panels as well.
+- NEW: Added convenience add and remove functions to the UIGrid.
+- NEW: Added NGUIMath.ScreenToPixels for when you need to convert from screen to virtual pixels.
+- NEW: UIButton's SetState is now public, in case you need it.
+- NEW: UIInput.caret is now exposed in case you need it.
+- FIX: Re-added the "New" button to the atlas maker that was removed for no reason.
+- FIX: Added [NonSerialized] next to private variables. Unity apparently serialized private variables in prefabs (sigh).
+- FIX: "Flip" option is now exposed in inspector with tiled sprites.
+- FIX: Changed all "HIDDEN" shaders to be "Hidden" instead, effectively hiding them.
+- FIX: Text list should no longer break when a very long line of text is added.
+- FIX: DragDropItem script wasn't un-highlighting things quite right.
+- FIX: Clip softness can now be 0.
+- DEL: Localization is now a static class, and can no longer be included in the scene.
+
+3.5.7
+- NEW: Added OnDragOver/OnDragOut to the Event Trigger.
+- FIX: Event delegate compilation on platforms that don't support reflection.
+- FIX: The example tooltip should no longer go off-screen.
+- FIX: Exposed UISprite's 'flip' option to scripting.
+- FIX: Context menu 'Attach' options should now work with multiple objects selected.
+- FIX: 'Attach' menu options should now all be undo-able via CTRL+Z.
+- FIX: Exposed UIButton.state for those that may need it for any reason.
+- FIX: UICamera's raycasts can now be clipped by nested panels.
+- FIX: MakePixelPerfect should not change the width if the label is set to "resize height".
+- FIX: Made UIButton.isEnabled work with a 2D collider.
+- FIX: Unity 4.2 compatibility tweaks.
+- FIX: Clip softness can now be 0.
+
+3.5.6
+- NEW: Added basic built-in data binding support (PropertyBinding script).
+- NEW: All delegates now support any number of parameters that you can set in inspector.
+- NEW: You can now nest scroll views (scroll views within scroll views). The built-in shaders support up to 3 scroll views, but you can add more.
+- NEW: You can now nest non-clipped panels within clipped panels and clipping will still work.
+- FIX: Fix for scroll bar size being wrong if the content was smaller than the scroll view.
+- FIX: UIInput will now load the saved value properly even if the "starting value" is not empty.
+- FIX: Drag & drop item will now always disable the tween or spring effect when it begins dragging.
+- FIX: UICamera's 'inputHasFocus' flag is now set when selection changes rather than every frame.
+- FIX: Anchors set to update only in OnEnable will now still update while in edit mode.
+- FIX: Triggering ActiveAnimation.Play will now immediately sample the animation.
+- FIX: Fixed the bug that was causing the atlas maker to eat up CPU.
+
+3.5.5
+- NEW: Added built-in support for endless scroll view (UIWrapContent).
+- NEW: Added a new example showing how to make endless scroll views.
+- NEW: Added an "Pivot" setting to the UIGrid that controls how the content is positioned.
+- NEW: Keyboard and controller navigation has been simplified (UIKeyNavigation).
+- NEW: Added EnvelopContent example script that shows how to resize a sprite to envelop custom content.
+- NEW: Widget anchors now have an option to be executed only when enabled, rather than every update.
+- FIX: UIWidget.SetRect will now work properly again.
+- FIX: Unity 4.0, 4.1 and 4.2 compile fix.
 
 3.5.4
 - NEW: You can now bake basic effects into bitmap fonts via inspector: soft shadow, soft outline, bevel, etc.

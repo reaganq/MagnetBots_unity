@@ -127,7 +127,7 @@ public class ComponentSelector : ScriptableWizard
 		{
 			string[] paths = AssetDatabase.GetAllAssetPaths();
 			bool isComponent = mType.IsSubclassOf(typeof(Component));
-			BetterList<Object> list = new BetterList<Object>();
+			List<Object> list = new List<Object>();
 
 			for (int i = 0; i < mObjects.Length; ++i)
 				if (mObjects[i] != null)
@@ -196,7 +196,7 @@ public class ComponentSelector : ScriptableWizard
 			{
 				if (GUILayout.Button("Open the Font Maker", GUILayout.Width(150f)))
 				{
-					EditorWindow.GetWindow<UIFontMaker>(false, "Font Maker", true);
+					EditorWindow.GetWindow<UIFontMaker>(false, "Font Maker", true).Show();
 					isDone = true;
 				}
 			}
@@ -204,7 +204,7 @@ public class ComponentSelector : ScriptableWizard
 			{
 				if (GUILayout.Button("Open the Atlas Maker", GUILayout.Width(150f)))
 				{
-					EditorWindow.GetWindow<UIAtlasMaker>(false, "Atlas Maker", true);
+					EditorWindow.GetWindow<UIAtlasMaker>(false, "Atlas Maker", true).Show();
 					isDone = true;
 				}
 			}

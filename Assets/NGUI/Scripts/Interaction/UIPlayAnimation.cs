@@ -3,10 +3,6 @@
 // Copyright © 2011-2014 Tasharen Entertainment
 //----------------------------------------------
 
-#if !UNITY_3_5 && !UNITY_4_0 && !UNITY_4_1 && !UNITY_4_2
-#define USE_MECANIM
-#endif
-
 using UnityEngine;
 using System.Collections.Generic;
 using AnimationOrTween;
@@ -19,19 +15,20 @@ using AnimationOrTween;
 [AddComponentMenu("NGUI/Interaction/Play Animation")]
 public class UIPlayAnimation : MonoBehaviour
 {
+	static public UIPlayAnimation current = null;
+
 	/// <summary>
 	/// Target animation to activate.
 	/// </summary>
 
 	public Animation target;
 
-#if USE_MECANIM
 	/// <summary>
 	/// Target animator system.
 	/// </summary>
 
 	public Animator animator;
-#endif
+
 	/// <summary>
 	/// Optional clip name, if the animation has more than one clip.
 	/// </summary>
@@ -114,7 +111,6 @@ public class UIPlayAnimation : MonoBehaviour
 	{
 		mStarted = true;
 
-#if USE_MECANIM
 		// Automatically try to find the animator
 		if (target == null && animator == null)
 		{
@@ -132,7 +128,6 @@ public class UIPlayAnimation : MonoBehaviour
 			// Don't continue since we already have an animator to work with
 			return;
 		}
-#endif // USE_MECANIM
 
 		if (target == null)
 		{
@@ -161,6 +156,18 @@ public class UIPlayAnimation : MonoBehaviour
 			if (trigger == Trigger.OnHover || trigger == Trigger.OnHoverTrue)
 				mActivated = (UICamera.currentTouch.current == gameObject);
 		}
+
+		UIToggle toggle = GetComponent<UIToggle>();
+		if (toggle != null) EventDelegate.Add(toggle.onChange, OnToggle);
+	}
+
+	void OnDisable ()
+	{
+#if UNITY_EDITOR
+		if (!Application.isPlaying) return;
+#endif
+		UIToggle toggle = GetComponent<UIToggle>();
+		if (toggle != null) EventDelegate.Remove(toggle.onChange, OnToggle);
 	}
 
 	void OnHover (bool isOver)
@@ -175,15 +182,24 @@ public class UIPlayAnimation : MonoBehaviour
 	void OnPress (bool isPressed)
 	{
 		if (!enabled) return;
+		if (UICamera.currentTouchID < -1) return;
 		if ( trigger == Trigger.OnPress ||
 			(trigger == Trigger.OnPressTrue && isPressed) ||
 			(trigger == Trigger.OnPressFalse && !isPressed))
 			Play(isPressed, dualState);
 	}
 
-	void OnClick () { if (enabled && trigger == Trigger.OnClick) Play(true, false); }
+	void OnClick ()
+	{
+		if (UICamera.currentTouchID < -1) return;
+		if (enabled && trigger == Trigger.OnClick) Play(true, false);
+	}
 
-	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Play(true, false); }
+	void OnDoubleClick ()
+	{
+		if (UICamera.currentTouchID < -1) return;
+		if (enabled && trigger == Trigger.OnDoubleClick) Play(true, false);
+	}
 
 	void OnSelect (bool isSelected)
 	{
@@ -194,13 +210,13 @@ public class UIPlayAnimation : MonoBehaviour
 			Play(isSelected, dualState);
 	}
 
-	void OnActivate (bool isActive)
+	void OnToggle ()
 	{
-		if (!enabled) return;
+		if (!enabled || UIToggle.current == null) return;
 		if (trigger == Trigger.OnActivate ||
-			(trigger == Trigger.OnActivateTrue && isActive) ||
-			(trigger == Trigger.OnActivateFalse && !isActive))
-			Play(isActive, dualState);
+			(trigger == Trigger.OnActivateTrue && UIToggle.current.value) ||
+			(trigger == Trigger.OnActivateFalse && !UIToggle.current.value))
+			Play(UIToggle.current.value, dualState);
 	}
 
 	void OnDragOver ()
@@ -236,11 +252,7 @@ public class UIPlayAnimation : MonoBehaviour
 
 	public void Play (bool forward, bool onlyIfDifferent)
 	{
-#if USE_MECANIM
 		if (target || animator)
-#else
-		if (target)
-#endif
 		{
 			if (onlyIfDifferent)
 			{
@@ -253,13 +265,9 @@ public class UIPlayAnimation : MonoBehaviour
 
 			int pd = -(int)playDirection;
 			Direction dir = forward ? playDirection : ((Direction)pd);
-#if USE_MECANIM
 			ActiveAnimation anim = target ?
 				ActiveAnimation.Play(target, clipName, dir, ifDisabledOnPlay, disableWhenFinished) :
 				ActiveAnimation.Play(animator, clipName, dir, ifDisabledOnPlay, disableWhenFinished);
-#else
-			ActiveAnimation anim = ActiveAnimation.Play(target, clipName, dir, ifDisabledOnPlay, disableWhenFinished);
-#endif
 
 			if (anim != null)
 			{
@@ -276,12 +284,17 @@ public class UIPlayAnimation : MonoBehaviour
 
 	void OnFinished ()
 	{
-		EventDelegate.Execute(onFinished);
+		if (current == null)
+		{
+			current = this;
+			EventDelegate.Execute(onFinished);
 
-		// Legacy functionality
-		if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
-			eventReceiver.SendMessage(callWhenFinished, SendMessageOptions.DontRequireReceiver);
+			// Legacy functionality
+			if (eventReceiver != null && !string.IsNullOrEmpty(callWhenFinished))
+				eventReceiver.SendMessage(callWhenFinished, SendMessageOptions.DontRequireReceiver);
 
-		eventReceiver = null;
+			eventReceiver = null;
+			current = null;
+		}
 	}
 }
