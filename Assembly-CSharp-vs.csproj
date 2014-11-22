@@ -343,6 +343,7 @@
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\ReallySimpleAudioSpawner.cs" />
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\ReallySimpleParticleSpawner.cs" />
      <Compile Include="Assets\PoolManagerExampleFiles\Scripts\SimpleSpawner.cs" />
+     <Compile Include="Assets\Scripts\Admin\Friend.cs" />
      <Compile Include="Assets\Scripts\Arenas\ArenaExit.cs" />
      <Compile Include="Assets\Scripts\Arenas\RPGArena.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\ArmorAnimation.cs" />
@@ -352,7 +353,6 @@
      <Compile Include="Assets\Scripts\Armor\Base\PassiveArmorAnimationController.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\SkillAnimation.cs" />
      <Compile Include="Assets\Scripts\Armor\Base\SkillEffect.cs" />
-     <Compile Include="Assets\Scripts\Armor\Base\SpecialArmorAnimation.cs" />
      <Compile Include="Assets\Scripts\Armor\Melee\HitBox.cs" />
      <Compile Include="Assets\Scripts\Armor\Melee\LongDurationMelee.cs" />
      <Compile Include="Assets\Scripts\Armor\Melee\NormalMelee.cs" />
@@ -379,7 +379,6 @@
      <Compile Include="Assets\Scripts\ControllerRefactor\BotController.cs" />
      <Compile Include="Assets\Scripts\ControllerRefactor\BotNetworkFunctions.cs" />
      <Compile Include="Assets\Scripts\ControllerRefactor\CharacterStats.cs" />
-     <Compile Include="Assets\Scripts\CreateAccount.cs" />
      <Compile Include="Assets\Scripts\Enemies\JimFSM.cs" />
      <Compile Include="Assets\Scripts\Enemies\NetworkAIMovement.cs" />
      <Compile Include="Assets\Scripts\Enemies\SimpleFSM.cs" />
@@ -396,6 +395,7 @@
      <Compile Include="Assets\Scripts\GUI\ChatBox.cs" />
      <Compile Include="Assets\Scripts\GUI\ChatGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemyCard.cs" />
+     <Compile Include="Assets\Scripts\GUI\FriendBox.cs" />
      <Compile Include="Assets\Scripts\GUI\GUIManager.cs" />
      <Compile Include="Assets\Scripts\GUI\IntroGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />
@@ -406,7 +406,6 @@
      <Compile Include="Assets\Scripts\GUI\PartyGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\RewardsGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\ShopGUIController.cs" />
-     <Compile Include="Assets\Scripts\HighScoreEntry.cs" />
      <Compile Include="Assets\Scripts\Item\EquipedItem.cs" />
      <Compile Include="Assets\Scripts\Item\InventoryItem.cs" />
      <Compile Include="Assets\Scripts\Item\ItemInWorld.cs" />
@@ -414,15 +413,14 @@
      <Compile Include="Assets\Scripts\Item\RPGCurrency.cs" />
      <Compile Include="Assets\Scripts\Item\RPGItem.cs" />
      <Compile Include="Assets\Scripts\Item\UsableItem.cs" />
-     <Compile Include="Assets\Scripts\Login.cs" />
      <Compile Include="Assets\Scripts\Managers\ArenaManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
      <Compile Include="Assets\Scripts\Managers\JobManager.cs" />
      <Compile Include="Assets\Scripts\Managers\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
      <Compile Include="Assets\Scripts\Managers\SfxManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\SocialManager.cs" />
      <Compile Include="Assets\Scripts\Managers\TownManager.cs" />
-     <Compile Include="Assets\Scripts\Managers\WorldChatManager.cs" />
      <Compile Include="Assets\Scripts\Managers\WorldManager.cs" />
      <Compile Include="Assets\Scripts\Managers\Zone.cs" />
      <Compile Include="Assets\Scripts\Minigames\BurgerMemory.cs" />
@@ -441,7 +439,11 @@
      <Compile Include="Assets\Scripts\NPC\Shop.cs" />
      <Compile Include="Assets\Scripts\NPC\ShopItem.cs" />
      <Compile Include="Assets\Scripts\Networking\NetworkDebugging.cs" />
-     <Compile Include="Assets\Scripts\ParseHelperMethods.cs" />
+     <Compile Include="Assets\Scripts\Parse\CreateAccount.cs" />
+     <Compile Include="Assets\Scripts\Parse\HighScoreEntry.cs" />
+     <Compile Include="Assets\Scripts\Parse\Login.cs" />
+     <Compile Include="Assets\Scripts\Parse\ParseHelperMethods.cs" />
+     <Compile Include="Assets\Scripts\Parse\ShowHighScores.cs" />
      <Compile Include="Assets\Scripts\Player\Equiped.cs" />
      <Compile Include="Assets\Scripts\Player\Equipment.cs" />
      <Compile Include="Assets\Scripts\Player\Inventory.cs" />
@@ -449,7 +451,6 @@
      <Compile Include="Assets\Scripts\SaveLoad\Encryption.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\Entities\SaveContent.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
-     <Compile Include="Assets\Scripts\ShowHighScores.cs" />
      <Compile Include="Assets\Scripts\Storage\IStorage.cs" />
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
      <Compile Include="Assets\Scripts\Storage\XMLStorage.cs" />

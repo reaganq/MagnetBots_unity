@@ -216,7 +216,6 @@ public class GUIManager : MonoBehaviour {
     
     public void DisplayMainGUI()
     {
-		Debug.Log("hmmmm");
 		uiState = UIState.main;
         //if(!IsMainGUIDisplayed)
         //{

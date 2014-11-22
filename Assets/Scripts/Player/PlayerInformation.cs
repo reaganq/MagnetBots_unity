@@ -92,6 +92,10 @@ public class PlayerInformation  {
 		if(NetworkManager.Instance.usingParse)
 			SaveParseData();
 
+		for (int i = 0; i < 20; i++) {
+			SocialManager.Instance.AddFriend("friend" + i);
+				}
+
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 1, 1);
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 2, 1);
     }
