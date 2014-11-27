@@ -1,31 +1,19 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/ChatGUIController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NGUI/Scripts/Interaction/UIDragDropItem.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="116" Column="26" />
-      <File FileName="Assets/Scripts/Admin/Friend.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/SocialManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UIWrapContent.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/UI/UIInput.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/IntroGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/UI/UITextList.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonHandler.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UITable.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/MainUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/AttackButtonMessage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/InputController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/ChatGUIController.cs" Line="162" Column="51" />
-      <File FileName="Assets/Scripts/GUI/ChatBox.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/FriendBox.cs" Line="28" Column="45" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="95" Column="25" />
-      <File FileName="Assets/Scripts/Item/EquipedItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/SfxManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UICenterOnClick.cs" Line="31" Column="4" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="36" Column="38" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/AnvilGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/LoadScreenController.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="14" Column="2" />
+      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="33" Column="3" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="146" Column="10" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ArmoryGUIController.cs" Line="207" Column="30" />
+      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="160" Column="6" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ChatGUIController.cs" Line="1" Column="1" />
       <File FileName="Assets/NGUI/Examples/Scripts/Other/ExampleDragDropItem.cs" Line="45" Column="25" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UIDragDropItem.cs" Line="139" Column="82" />
+      <File FileName="Assets/NGUI/Scripts/Interaction/UIDragDropItem.cs" Line="69" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -38,17 +26,23 @@
                 </Node>
               </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="Interaction" expanded="True" />
+                <Node name="Interaction" expanded="True">
+                  <Node name="UIDragDropItem.cs" selected="True" />
+                </Node>
               </Node>
             </Node>
             <Node name="Scripts" expanded="True">
               <Node name="Admin" expanded="True" />
+              <Node name="Base" expanded="True" />
               <Node name="Character" expanded="True" />
+              <Node name="Enemies" expanded="True" />
               <Node name="GUI" expanded="True">
-                <Node name="ChatGUIController.cs" selected="True" />
+                <Node name="Controllers" expanded="True" />
               </Node>
+              <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
               <Node name="Player" expanded="True" />
+              <Node name="PlayerShop" expanded="True" />
             </Node>
           </Node>
         </State>

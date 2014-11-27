@@ -3,7 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ArmoryGUIController : BasicGUIController {
-	
+
+	public GameObject itemTilePrefab;
+	public UIGrid gridPanel;
+	public GameObject inventoryPanelRoot;
+
+	public int inventoryMasterCategory = 1;
+	public int selectedInventorySubCategory = 0;
+	public GameObject armoryCategoryButtons;
+	public GameObject itemCategoryButtons;
+	public List<ItemTileButton> itemTiles;
+
     public InventoryUICategory SelectedInventoryCategory = InventoryUICategory.None;
 	public List<InventoryItem> SelectedItemList;
     public int CurrentSelectedInventory = 0;
@@ -39,7 +49,7 @@ public class ArmoryGUIController : BasicGUIController {
     public override void Enable()
     {
 		Panel.SetActive(true);
-        OnInventoryPressed(CurrentSelectedInventory);
+        OnSubcategoryPressed(CurrentSelectedInventory);
         //Debug.Log("enable");   
     }
 
@@ -133,14 +143,14 @@ public class ArmoryGUIController : BasicGUIController {
 		Debug.Log(PlayerManager.Instance.Hero.ArmoryInventory.HeadItems.Count);
     }
     
-    public void OnInventoryPressed(int index)
+    public void OnSubcategoryPressed(int index)
     {
         if(CurrentSelectedInventory != index)
         {
             if(CurrentSelectedInventory >= 0)
 				CategoryButtons[CurrentSelectedInventory].DeselectCategory();
 			CurrentSelectedInventory = index;
-			pageIndex = 0;
+			//pageIndex = 0;
 			RefreshItemList();
             ResetSelection();
             RefreshInventoryIcons();
@@ -188,7 +198,30 @@ public class ArmoryGUIController : BasicGUIController {
     
     public void RefreshInventoryIcons()
     {
-        for (int i = 0; i <  ItemTiles.Length; i++) {
+		int num = SelectedItemList.Count - itemTiles.Count;
+		if(num>0)
+		{
+			for (int i = 0; i < num; i++) {
+				GameObject itemTile = NGUITools.AddChild(inventoryPanelRoot, itemTilePrefab);
+				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
+				itemTiles.Add(tileButton);
+			}
+		}
+		for (int i = 0; i < itemTiles.Count; i++) {
+			if(i>=SelectedItemList.Count)
+			{
+				itemTiles[i].gameObject.SetActive(false);
+			}
+			else
+			{
+				itemTiles[i].gameObject.SetActive(true);
+				itemTiles[i].Load(SelectedItemList[i]);
+			}
+		}
+
+
+
+        /*for (int i = 0; i <  ItemTiles.Length; i++) {
             if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
 			{
 				ItemTiles[i].Show();
@@ -197,9 +230,9 @@ public class ArmoryGUIController : BasicGUIController {
 				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount,
 				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemUpgradeable,
 				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].Level);*/
-				ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)]);
+				//ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)]);
 				//Debug.Log(i + SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.Name);
-			}
+			/*}
             else
             {
 				ItemTiles[i].Hide();
@@ -215,7 +248,7 @@ public class ArmoryGUIController : BasicGUIController {
 			NextPageButton.SetActive(false);
 		}
 		else
-			NextPageButton.SetActive(true);
+			NextPageButton.SetActive(true);*/
     }
     
     public void RefreshSelection()
@@ -252,7 +285,7 @@ public class ArmoryGUIController : BasicGUIController {
         }
     }
 
-	public void NextPage()
+	/*public void NextPage()
 	{
 		pageIndex += 1;
 		ResetSelection();
@@ -268,7 +301,7 @@ public class ArmoryGUIController : BasicGUIController {
 		ResetSelection();
 		RefreshInventoryIcons();
 		HideInfoPanel();
-	}
+	}*/
     
     public void HideInfoPanel()
     {

@@ -204,14 +204,20 @@ public class InputController : MonoBehaviour {
 							}
 							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
 							{
-								GameObject hitCharacter = hit.collider.gameObject;
+								CharacterStatus cs = hit.collider.gameObject.GetComponent<CharacterStatus>();
+
+								if(cs != null)
+								{
+									GUIManager.Instance.DisplayHoverPopup(cs);
+								}
+								/*GameObject hitCharacter = hit.collider.gameObject;
 								if(hitCharacter != PlayerManager.Instance.avatarObject)
 								{
 									if(!isDown)
 									{
 										GUIManager.Instance.DisplayCharacterPopUp(hit.collider.gameObject);
 									}
-								}
+								}*/
 								
 							}
 						}

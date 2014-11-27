@@ -18,7 +18,7 @@ public class NPCGUIController : BasicGUIController {
 	public float offset;
 	public Transform cameraOvertakeTransform;
 
-
+		
 	// Use this for initialization
 	// Update is called once per frame
 	public override void Enable()

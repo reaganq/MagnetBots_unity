@@ -60,6 +60,12 @@ public class CharacterStatus : MonoBehaviour {
 		{
 			hbs[i].ownerCS = this;
 		}
+		if(myPhotonView.isMine)
+		{
+			this.tag = "Player";
+		}
+		else
+			this.tag = "OtherPlayer";
 	}
 	
 	public string GenerateRandomString(int l)

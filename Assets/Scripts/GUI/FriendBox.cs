@@ -29,7 +29,7 @@ public class FriendBox : MonoBehaviour {
 		tween.Play(!tween.tweenTarget.activeSelf);
 	}
 
-	public void OnRemoveclick()
+	public void OnRemoveFriendclick()
 	{
 		GUIManager.Instance.chatGUI.RemoveFriend(this);
 	}

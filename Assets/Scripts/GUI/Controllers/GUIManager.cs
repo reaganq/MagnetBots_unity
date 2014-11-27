@@ -47,6 +47,7 @@ public class GUIManager : MonoBehaviour {
 	public MiniGameGUIController minigameGUI = null;
 	public RewardsGUIController rewardsGUI = null;
 	public ChatGUIController chatGUI = null;
+	public HoverPopupGUIController hoverPopupGUI = null;
 
 	public Transform minigameUIRoot;
     
@@ -321,6 +322,11 @@ public class GUIManager : MonoBehaviour {
 		PartyGUI.HideHoverBox();
 	}
 
+	public void DisplayHoverPopup(CharacterStatus cs)
+	{
+		hoverPopupGUI.SelectPlayer(cs);
+	}
+
 	public void DisplayArenaUI()
 	{
 		//HideNPC();
@@ -404,6 +410,10 @@ public class GUIManager : MonoBehaviour {
 	public void HideRewards()
 	{
 		uiState = cachedState;
+	}
+
+	public void DisplayItemDetails()
+	{
 	}
 	
     public void HideAllUI()

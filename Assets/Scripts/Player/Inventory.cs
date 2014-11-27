@@ -156,6 +156,8 @@ public class Inventory  : BasicInventory
 		}
 	}
 
+	//types
+
 	public Inventory() : base()
 	{
 		maximumItems = 50;

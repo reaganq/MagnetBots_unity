@@ -67,18 +67,19 @@ public enum ItemType
 {
     Armor = 0,
     Food = 1,
-    Chest = 2,
+    RewardChest = 2,
     Quest = 3,
 	Normal = 4,
 	Currency = 5,
 	UpgradeMaterials = 6,
+	Toys = 7,
 }
 
 public enum UsageSkillType
 {
- Combat = 0,
- Spell = 1,
- Item = 2
+	 Combat = 0,
+	 Spell = 1,
+	 Item = 2
 }
 
 public enum EquipmentSlots

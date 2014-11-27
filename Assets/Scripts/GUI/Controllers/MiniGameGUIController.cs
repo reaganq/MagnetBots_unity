@@ -19,10 +19,10 @@ public class MiniGameGUIController : BasicGUIController {
 		base.Enable ();
 	}
 
-	public override void Disable ()
+	public override void Disable (bool resetState)
 	{
 		panel.SetActive(false);
-		base.Disable ();
+		base.Disable(resetState);
 	}
 
 	public void OnPlayButtonPressed()

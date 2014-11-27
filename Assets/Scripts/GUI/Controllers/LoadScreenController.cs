@@ -3,17 +3,15 @@ using System.Collections;
 
 public class LoadScreenController : BasicGUIController {
 
-	public GameObject Root;
-
 	public override void Enable ()
 	{
 		base.Enable ();
 		Root.SetActive(true);
 	}
 
-	public override void Disable ()
+	public override void Disable (bool resetState)
 	{
-		base.Disable ();
 		Root.SetActive(false);
+		base.Disable(resetState);
 	}
 }

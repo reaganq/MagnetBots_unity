@@ -33,9 +33,7 @@ public class ItemInWorld
 			return false;
 		}
 	}
-
-
-
+	
 	public virtual void LoadItem()
 	{
 		if (UniqueItemId.IndexOf("ITEM") != -1)
