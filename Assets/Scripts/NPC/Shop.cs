@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 //[XmlInclude(typeof(ShopCategory))]
 [XmlInclude(typeof(ShopItem))]
-public class Shop : BasicItem
+public class Shop : NPCActivity
 {
 	//public int CurrencyID;
 	//public float BuyPriceModifier;
@@ -37,6 +37,7 @@ public class Shop : BasicItem
         Name = string.Empty;
         Description = string.Empty;
         preffix = "SHOP";
+		activityType = NPCActivityType.Shop;
 	}
 	
 	public BuyTransaction BuyItem(RPGItem item, int level, int Amount)

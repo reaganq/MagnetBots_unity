@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ public class ArenaEditor : BaseEditorWindow
 	
 	protected override void LoadData()
 	{
-		List<RPGArena> list = Storage.Load<RPGArena>(new RPGArena());
+		List<NPCArena> list = Storage.Load<NPCArena>(new NPCArena());
 		items = new List<IItem>();
-		foreach(RPGArena category in list)
+		foreach(NPCArena category in list)
 		{
 			items.Add((IItem)category);
 		}
@@ -26,17 +26,17 @@ public class ArenaEditor : BaseEditorWindow
 	
 	protected override void StartNewIItem()
 	{
-		currentItem = new RPGArena();
+		currentItem = new NPCArena();
 	}
 	
-	public List<RPGArena> NPC
+	public List<NPCArena> NPC
 	{
 		get
 		{
-			List<RPGArena> list = new List<RPGArena>();
+			List<NPCArena> list = new List<NPCArena>();
 			foreach(IItem category in items)
 			{
-				list.Add((RPGArena)category);
+				list.Add((NPCArena)category);
 			}
 			return list;
 		}
@@ -44,12 +44,12 @@ public class ArenaEditor : BaseEditorWindow
 	
 	protected override void SaveCollection()
 	{
-		Storage.Save<RPGArena>(NPC, new RPGArena());
+		Storage.Save<NPCArena>(NPC, new NPCArena());
 	}
 	
 	protected override void EditPart()
 	{
-		RPGArena s = (RPGArena)currentItem;
+		NPCArena s = (NPCArena)currentItem;
 
 		EditorGUILayout.Separator();
 

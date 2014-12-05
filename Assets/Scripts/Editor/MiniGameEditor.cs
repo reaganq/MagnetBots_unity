@@ -16,9 +16,9 @@ public class MiniGameEditor : BaseEditorWindow
 	
 	protected override void LoadData()
 	{
-		List<RPGMinigame> list = Storage.Load<RPGMinigame>(new RPGMinigame());
+		List<NPCMinigame> list = Storage.Load<NPCMinigame>(new NPCMinigame());
 		items = new List<IItem>();
-		foreach(RPGMinigame category in list)
+		foreach(NPCMinigame category in list)
 		{
 			items.Add((IItem)category);
 		}
@@ -26,17 +26,17 @@ public class MiniGameEditor : BaseEditorWindow
 	
 	protected override void StartNewIItem()
 	{
-		currentItem = new RPGMinigame();
+		currentItem = new NPCMinigame();
 	}
 	
-	public List<RPGMinigame> MiniGame
+	public List<NPCMinigame> MiniGame
 	{
 		get
 		{
-			List<RPGMinigame> list = new List<RPGMinigame>();
+			List<NPCMinigame> list = new List<NPCMinigame>();
 			foreach(IItem category in items)
 			{
-				list.Add((RPGMinigame)category);
+				list.Add((NPCMinigame)category);
 			}
 			return list;
 		}
@@ -44,12 +44,12 @@ public class MiniGameEditor : BaseEditorWindow
 	
 	protected override void SaveCollection()
 	{
-		Storage.Save<RPGMinigame>(MiniGame, new RPGMinigame());
+		Storage.Save<NPCMinigame>(MiniGame, new NPCMinigame());
 	}
 	
 	protected override void EditPart()
 	{
-		RPGMinigame s = (RPGMinigame)currentItem;
+		NPCMinigame s = (NPCMinigame)currentItem;
 		
 		s.PrefabDirectory = EditorUtils.TextField(s.PrefabDirectory, "Prefab Location");
 		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas");

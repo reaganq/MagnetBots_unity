@@ -22,6 +22,7 @@ public class CharacterMotor : MonoBehaviour {
     public bool canRotate = true;
     
     public Vector3 dir;
+	public Transform rotationTarget;
     //public Vector3[] speed = new Vector3[2];
     
     //public float Speed;
@@ -69,6 +70,21 @@ public class CharacterMotor : MonoBehaviour {
 	            UpdateFunction();
 	            AnimationUpdate();
 			}
+			else
+			{
+				if(rotationTarget != null)
+				{
+					Vector3 _direction = (rotationTarget.position - _myTransform.position).normalized;
+					_direction.y = 0;
+					Quaternion _lookrotation = Quaternion.LookRotation(_direction);
+					_myTransform.rotation = Quaternion.Slerp(_myTransform.rotation, _lookrotation, Time.deltaTime*myStatus.rotationSpeed);
+					if(Vector3.Angle( _myTransform.forward, _direction) < 1)
+					{
+						rotationTarget = null;
+						Debug.Log("hah");
+					}
+				}
+			}
         }
         
 	}
@@ -89,6 +105,11 @@ public class CharacterMotor : MonoBehaviour {
     {
         moveDirection = direction;
     }
+
+	public void RotateTo(Transform target)
+	{
+		rotationTarget = target;
+	}
     
     Vector3 direction;
     private Vector3 moveDirection

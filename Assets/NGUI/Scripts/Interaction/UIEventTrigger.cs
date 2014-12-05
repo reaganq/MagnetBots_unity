@@ -13,6 +13,8 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/Event Trigger")]
 public class UIEventTrigger : MonoBehaviour
 {
+	public float movementThreshold = 5;
+	public Vector2 lastPressDownPos;
 	static public UIEventTrigger current;
 
 	public List<EventDelegate> onHoverOver = new List<EventDelegate>();
@@ -28,6 +30,7 @@ public class UIEventTrigger : MonoBehaviour
 	public List<EventDelegate> onDragOver = new List<EventDelegate>();
 	public List<EventDelegate> onDragOut = new List<EventDelegate>();
 	public List<EventDelegate> onDrag = new List<EventDelegate>();
+	public List<EventDelegate> onCustomRelease = new List<EventDelegate>();
 
 	void OnHover (bool isOver)
 	{
@@ -42,8 +45,17 @@ public class UIEventTrigger : MonoBehaviour
 	{
 		if (current != null) return;
 		current = this;
-		if (pressed) EventDelegate.Execute(onPress);
-		else EventDelegate.Execute(onRelease);
+		if (pressed)
+		{
+			EventDelegate.Execute(onPress);
+			lastPressDownPos = UICamera.lastTouchPosition;
+		}
+		else 
+		{
+			EventDelegate.Execute(onRelease);
+			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
+				EventDelegate.Execute(onCustomRelease);
+		}
 		current = null;
 	}
 

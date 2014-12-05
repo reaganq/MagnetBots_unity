@@ -80,21 +80,24 @@ public class RPGNPC : IItem
 	}
 	#endregion
 	
-	public int ShopID;
-	public int ArenaID;
-	public int MinigameID;
-	public int ActivityID;
+	//public int ShopID;
+	//public int ArenaID;
+	//public int MinigameID;
+	//public int ActivityID;
+	public List<ActivityData> activities;
 	
 	public RPGNPC()
 	{
 		Name = string.Empty;
 		SystemDescription = string.Empty;
 		Description = string.Empty;
-		ShopID = 0;
-		ArenaID = 0;
-		MinigameID = 0;
-		ActivityID = 0;
 	}
 }
 
+[Serializable]
+public class ActivityData
+{
+	public int activityID;
+	public NPCActivityType activityType;
+}
 

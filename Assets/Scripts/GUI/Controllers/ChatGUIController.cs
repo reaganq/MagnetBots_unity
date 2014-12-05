@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ChatGUIController : MonoBehaviour {
+public class ChatGUIController : BasicGUIController {
 
 	//chat box/friend box prefabs
 	public GameObject chatboxMessageObject;
@@ -44,7 +44,7 @@ public class ChatGUIController : MonoBehaviour {
 	public GameObject mainChatScrollBar;
 	public GameObject friendsListScrollBar;
 	public GameObject mainScrollPanelCollider;
-
+	public Animation animation;
 	// Use this for initialization
 	public void Start()
 	{
@@ -60,6 +60,16 @@ public class ChatGUIController : MonoBehaviour {
 			chatBox.SetActive(false);
 		}*/
 		UpdateChatPanel();
+	}
+
+	public override void Enable()
+	{
+		animation.Play("OpenChatBox");
+	}
+
+	public override void Disable()
+	{
+		animation.Play("CloseChatBox");
 	}
 
 	public void OnSubmit()

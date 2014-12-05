@@ -175,9 +175,9 @@
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewInspector.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\PhotonViewPrefabApply.cs" />
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\ServerSettingsInspector.cs" />
-     <Compile Include="Assets\Scripts\Editor\ActivityEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ArenaEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ArmorEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\ConversationEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\CurrencyEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\EnemyEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\Generator\ArmorGenerator.cs" />
@@ -187,9 +187,13 @@
      <Compile Include="Assets\Scripts\Editor\MainWindowEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\MiniGameEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\NPCEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\QuestEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\ServiceEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ShopEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\BaseEditorWindow.cs" />
+     <Compile Include="Assets\Scripts\Editor\Utils\ConditionUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\EditorUtils.cs" />
+     <Compile Include="Assets\Scripts\Editor\Utils\EventUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\GUIUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\ItemUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\Validation\XMLError.cs" />
@@ -202,6 +206,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\DirectionLM\T4M 3 TexturesBumped DLM.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\CONVERSATIONEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Specular\T4M 3 TexturesSpec.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\AlphaTest-BumpSpec.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Bump_Rim_OneLight.shader" />
@@ -258,6 +263,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel3\Specular\T4M 2 TexturesSpec.shader" />
      <None Include="Assets\Lightmapping Extended\Presets\Built-in\Low Quality.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Bump\T4M 4 TexturesBump.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\QUESTEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\DirectionLM\T4M 2 TexturesBumped DLM.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\Alpha-Glossy.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowCompose.shader" />
@@ -329,6 +335,7 @@
      <None Include="Assets\Resources\Atlases\Enemy\EnemiesUHD.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\EN.xml" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_RimOutline_BumpSpec_OneLight.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_BumpSpec_Rim_OneLight.shader" />
@@ -387,7 +394,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlurClear.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\5TexturesUnlit.shader" />
-     <None Include="Assets\RPGKit\Resources\XML\ActivityEN.xml" />
+     <None Include="Assets\RPGKit\Resources\XML\SERVICEEN.xml" />
      <None Include="Assets\HUD Text\Examples\Atlases\Arimo20.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionEffect.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GrayscaleEffect.shader" />
@@ -491,8 +498,6 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
       <Project>{808A5F33-CFF1-4E19-FE26-74000AD54513}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
-    <ProjectReference Include="Assembly-CSharp-vs.csproj">
-      <Project>{069BC169-F5CB-8D98-450E-FC28C89E7512}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass-vs.csproj">
       <Project>{699C3200-F9CF-5986-22E9-5BFBDB278BD6}</Project>      <Name>Assembly-CSharp-Editor-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>

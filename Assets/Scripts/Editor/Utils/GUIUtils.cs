@@ -71,7 +71,7 @@ public class GUIUtils {
             new Vector2(wr2.x - Mathf.Abs(wr2.x - (wr.x + wr.width)) / 2, wr2.y + wr2.height / 2), color, 2, false,20);
     }*/
 	
-	/*public static void ConditionsEvents(List<Condition> Conditions, List<ActionEvent> Events, MainWindowEditor Data)
+	public static void ConditionsEvents(List<Condition> Conditions, List<ActionEvent> Events, MainWindowEditor Data)
 	{
 		ConditionsUtils.Conditions(Conditions, Data);
 		
@@ -95,7 +95,7 @@ public class GUIUtils {
 			Events.Add(new ActionEvent());
 		}
 		EditorGUILayout.EndHorizontal();
-	}*/
+	}
 	
 	public static int NewAttributeID<T>(List<T> items)
 	{

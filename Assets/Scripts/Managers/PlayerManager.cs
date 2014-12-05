@@ -44,16 +44,17 @@ public class PlayerManager : MonoBehaviour
  
  //public static float sellPriceModifier;
  
-    public NPC ActiveNPC;
-    public Shop ActiveShop;
-	public RPGActivity ActiveActivity;
-	public RPGMinigame ActiveMinigame;
+    //public NPC ActiveNPC;
+    //public Shop ActiveShop;
+	//public NPCActivity ActiveActivity;
+	public NPCMinigame ActiveMinigame;
 	public GameObject ActiveMinigameObject;
-	public RPGArena SelectedArena;
+	public NPCArena SelectedArena;
 	public WorldManager ActiveWorld;
 	public Zone ActiveZone;
 	public ArenaManager ActiveArena;
 	public PlayerActivityState activityState;
+	public GeneralData data;
 
     public Transform SpawnPoint;
     public GameObject avatarPrefab;
@@ -109,6 +110,11 @@ public class PlayerManager : MonoBehaviour
         //ChangeMinimap(false);
         //gameObject.AddComponent<GUIScale>();
     }
+
+	public void Start()
+	{
+		data = new GeneralData();
+	}
 
     public void StartNewGame()
     {

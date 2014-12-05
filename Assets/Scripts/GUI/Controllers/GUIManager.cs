@@ -36,7 +36,7 @@ public class GUIManager : MonoBehaviour {
     public bool CanShowNPC = true;
 
 	public AnvilGUIController AnvilGUI = null;
-    public ArmoryGUIController ArmoryGUI = null;
+    public InventoryGUIController ArmoryGUI = null;
     public MainUIManager MainGUI = null;
 	public PartyGUIController PartyGUI = null;
 	public ArenaGUIController ArenaGUI = null;
@@ -51,6 +51,10 @@ public class GUIManager : MonoBehaviour {
 
 	public Transform minigameUIRoot;
     
+	//npc stuff
+	public RPGConversation activeConversation;
+	public NPCActivity activeActivity;
+	public NPC activeNPC;
     //public GameObject Joystick = null;
     
     //public GameObject ActionButtons = null;
@@ -139,7 +143,7 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.armory:
 			ArmoryGUI.Enable();
-			PlayerCamera.Instance.TransitionToInventory();
+
 			break;
 		case UIState.anvil:
 			AnvilGUI.Enable();
@@ -277,8 +281,9 @@ public class GUIManager : MonoBehaviour {
         }*/
     }
     
-    public void DisplayNPC()
+    public void DisplayNPC(NPC npc)
     {
+		activeNPC = npc;
 		uiState = UIState.npc;
         /*if(!IsNPCGUIDisplayed)
         {
@@ -292,6 +297,7 @@ public class GUIManager : MonoBehaviour {
     
     public void HideNPC()
     {
+		activeNPC = null;
 		uiState = UIState.main;
         /*if(IsNPCGUIDisplayed)
         {

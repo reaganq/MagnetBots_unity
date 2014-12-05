@@ -51,12 +51,9 @@ public class ShopEditor : BaseEditorWindow
 	{
 		Shop s = (Shop)currentItem;
 
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
 		//EditorGUILayout.PrefixLabel("Respawn");
 		
 		//s.RespawnTimer = (ShopRespawnTimer)EditorGUILayout.EnumPopup(s.RespawnTimer,  GUILayout.Width(300));
-		EditorGUILayout.EndHorizontal();
 		
 		//s.CurrencyID = EditorUtils.IntPopup(s.CurrencyID, Data.itemEditor.items, "Currency");
 		
@@ -85,8 +82,7 @@ public class ShopEditor : BaseEditorWindow
 				s.SellCategories.Add(new ShopCategory());
 			}
 		}*/
-		
-		EditorUtils.Separator();
+
 		
 		//shop categories
 		/*foreach(ShopCategory category in s.Categories)
@@ -108,17 +104,16 @@ public class ShopEditor : BaseEditorWindow
 		//shop items
 		foreach(ShopItem item in s.Items)
 		{
-            
-			DisplayShopItem(item);
+			EditorGUILayout.BeginVertical(skin.box);
+            DisplayShopItem(item);
 			
 			if (GUILayout.Button("Delete", GUILayout.Width(200)))
 			{
 				s.Items.Remove(item);
 				break;
 			}
-			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.EndVertical();
 		}
-		EditorUtils.Separator();
 		if (GUILayout.Button("Add item", GUILayout.Width(200)))
 		{
 			s.Items.Add(new ShopItem());
@@ -135,20 +130,20 @@ public class ShopEditor : BaseEditorWindow
 	void DisplayShopItem(ShopItem item)
 	{
 		//ConditionsUtils.Conditions(item.Conditions, Data);
-		
-		EditorGUILayout.Separator();
+
 		EditorGUILayout.BeginHorizontal();
 		//EditorGUILayout.PrefixLabel("Item");
 		
 		//item.Preffix = (ItemTypeEnum)EditorGUILayout.EnumPopup(item.Preffix, GUILayout.Width(200));
 		EditorGUILayout.PrefixLabel(" ID: ");
 		item.ID = EditorGUILayout.IntField(item.ID, GUILayout.Width(50));
-		EditorGUILayout.PrefixLabel(" amount: ");
-		item.StackAmount = EditorGUILayout.IntField(item.StackAmount, GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel(" level: ");
 		item.Level = EditorGUILayout.IntField(item.Level, GUILayout.Width(50));
+		EditorGUILayout.PrefixLabel(" amount: ");
+		item.StackAmount = EditorGUILayout.IntField(item.StackAmount, GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel("Item Type");
 		item.itemType = (ItemType)EditorGUILayout.EnumPopup(item.itemType , GUILayout.Width(100));
+		EditorGUILayout.EndHorizontal();
 		
 	}
 	

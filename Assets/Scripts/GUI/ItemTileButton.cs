@@ -10,28 +10,16 @@ using UnityEngine;
 /// </summary>
 
 [AddComponentMenu("NGUI/Interaction/Button Message")]
-public class ItemTileButton: MonoBehaviour
+public class ItemTileButton: UIDragDropItem
 {
-	public enum Trigger
-	{
-		OnClick,
-		OnMouseOver,
-		OnMouseOut,
-		OnPress,
-		OnRelease,
-		OnDoubleClick,
-	}
- 
     public int index;
 	public GameObject target;
-	public string functionName;
-	public Trigger trigger = Trigger.OnClick;
     
-    public UISprite Icon = null;
-    public UISprite Border = null;
+    public UISprite icon = null;
+    public UISprite selectBorder = null;
 	public UISprite Cover = null;
-	public UISprite Background = null;
-    public UILabel AmountLabel = null;
+	public UISprite background = null;
+    public UILabel amountLabel = null;
 	public UILabel LevelLabel = null;
     public bool IsEquipped = false;
     
@@ -50,14 +38,15 @@ public class ItemTileButton: MonoBehaviour
 
 	void OnPress (bool isPressed)
 	{
-		if (enabled)
+		if(isPressed)
 		{
-			if (((isPressed && trigger == Trigger.OnPress) ||
-				(!isPressed && trigger == Trigger.OnRelease))) Send();
+			Debug.Log("pressed down on item tile");
 		}
+		else
+			Debug.Log("released item tile");
 	}
 
-	void OnClick () { if (enabled && trigger == Trigger.OnClick) Send(); }
+	/*void OnClick () { if (enabled && trigger == Trigger.OnClick) Send(); }
 
 	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Send(); }
 
@@ -69,33 +58,33 @@ public class ItemTileButton: MonoBehaviour
   
 		    target.SendMessage(functionName, index, SendMessageOptions.DontRequireReceiver);
 
-	}
+	}*/
     
     public void Select()
     {
-        if(!Border.enabled)
-            Border.enabled = true;
+        //if(!selectBorder.enabled)
+            //selectBorder.enabled = true;
         
     }
     
     public void Deselect()
     {
-        if(!IsEquipped && Border.enabled)
-            Border.enabled = false;
+        //if(!IsEquipped && selectBorder.enabled)
+            //selectBorder.enabled = false;
     }
     
     public void Show()
     {
-        Icon.enabled = true;
-        AmountLabel.enabled = true;
+        icon.enabled = true;
+        amountLabel.enabled = true;
     }
     
     public void Hide()
     {
-        Icon.enabled = false;
-        AmountLabel.enabled = false;
-        if(Border.enabled)
-            Border.enabled = false;
+        icon.enabled = false;
+        amountLabel.enabled = false;
+        if(selectBorder.enabled)
+            selectBorder.enabled = false;
 		if(Cover != null && Cover.enabled)
 			Cover.enabled = false;
 		LevelLabel.enabled = false;
@@ -103,11 +92,11 @@ public class ItemTileButton: MonoBehaviour
 
 	public void Load(InventoryItem item)
 	{
-		if(!Icon.enabled)
-			Icon.enabled = true;
+		if(!icon.enabled)
+			icon.enabled = true;
 		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
-		Icon.atlas = atlas.GetComponent<UIAtlas>();
-		Icon.spriteName = item.rpgItem.IconPath;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = item.rpgItem.IconPath;
 		if(!item.rpgItem.IsUpgradeable)
 			LevelLabel.enabled = false;
 		else
@@ -115,8 +104,8 @@ public class ItemTileButton: MonoBehaviour
 			LevelLabel.text = item.Level.ToString();
 			LevelLabel.enabled = true;
 		}
-		AmountLabel.text = item.CurrentAmount.ToString();
-		AmountLabel.enabled = true;
+		amountLabel.text = item.CurrentAmount.ToString();
+		amountLabel.enabled = true;
 	}
 
 	public void LoadWithCover(InventoryItem item, bool condition)
@@ -131,11 +120,11 @@ public class ItemTileButton: MonoBehaviour
     
     public void Load(string atlaspath, string iconpath, int amount, bool displayLevel, int level )
     {
-        if(!Icon.enabled)
-            Icon.enabled = true;
+        if(!icon.enabled)
+            icon.enabled = true;
         GameObject atlas = Resources.Load(atlaspath) as GameObject;
-        Icon.atlas = atlas.GetComponent<UIAtlas>();
-        Icon.spriteName = iconpath;
+        icon.atlas = atlas.GetComponent<UIAtlas>();
+        icon.spriteName = iconpath;
 		if(!displayLevel)
 			LevelLabel.enabled = false;
 		else
@@ -143,8 +132,8 @@ public class ItemTileButton: MonoBehaviour
 			LevelLabel.text = level.ToString();
 			LevelLabel.enabled = true;
 		}
-        AmountLabel.text = amount.ToString();
-		AmountLabel.enabled = true;
+        amountLabel.text = amount.ToString();
+		amountLabel.enabled = true;
     }
 
 	public void LoadWithCover(string atlaspath, string iconpath, int amount, bool displayLevel, int level, bool coverState )
@@ -158,14 +147,14 @@ public class ItemTileButton: MonoBehaviour
     
     public void Equip()
     {
-        Border.color = EquippedColor;
+        //selectBorder.color = EquippedColor;
         Select();
         IsEquipped = true;
     }
     
     public void Unequip()
     {
-        Border.color = SelectedColor;
+        //selectBorder.color = SelectedColor;
         IsEquipped = false;
         Deselect();
     }

@@ -20,6 +20,7 @@ public class PlayerInformation  {
     public ArmoryInventory LegsInventory;*/
 
     public Equipment Equip;
+	public QuestLog Quest;
 
  	/*public int CurrentLevel;
 	public int CurrentXP;
@@ -51,6 +52,7 @@ public class PlayerInformation  {
 		ArmoryInventory = new Inventory();
 		DepositBox = new Inventory();
         Equip = new Equipment();
+		Quest = new QuestLog();
 	}
 	
  	public void UpdatePlayerInformation()

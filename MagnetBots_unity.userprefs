@@ -1,48 +1,49 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/NGUI/Scripts/Interaction/UIDragDropItem.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/Controllers/NPCGUIController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="36" Column="38" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/AnvilGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/LoadScreenController.cs" Line="5" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="14" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="33" Column="3" />
-      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="146" Column="10" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ArmoryGUIController.cs" Line="207" Column="30" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="160" Column="6" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ChatGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/NGUI/Examples/Scripts/Other/ExampleDragDropItem.cs" Line="45" Column="25" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UIDragDropItem.cs" Line="69" Column="18" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="20" Column="3" />
+      <File FileName="Assets/Scripts/Minigames/NPCMinigame.cs" Line="15" Column="32" />
+      <File FileName="Assets/Scripts/NPC/NPCService.cs" Line="15" Column="3" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="268" Column="33" />
+      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="64" Column="4" />
+      <File FileName="Assets/Scripts/NPC/RPGNPC.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Quest/RPGQuest.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="14" Column="35" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="50" Column="36" />
+      <File FileName="Assets/Scripts/NPC/NPCQuest.cs" Line="13" Column="2" />
+      <File FileName="Assets/Scripts/NPC/Shop.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/NPCArena.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Storage/IStorage.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/PreffixSolver.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="13" Column="1" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="144" Column="36" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="38" Column="35" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="NGUI" expanded="True">
-              <Node name="Examples" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="Other" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="Scripts" expanded="True">
-                <Node name="Interaction" expanded="True">
-                  <Node name="UIDragDropItem.cs" selected="True" />
-                </Node>
-              </Node>
-            </Node>
             <Node name="Scripts" expanded="True">
-              <Node name="Admin" expanded="True" />
               <Node name="Base" expanded="True" />
-              <Node name="Character" expanded="True" />
-              <Node name="Enemies" expanded="True" />
               <Node name="GUI" expanded="True">
-                <Node name="Controllers" expanded="True" />
+                <Node name="Controllers" expanded="True">
+                  <Node name="NPCGUIController.cs" selected="True" />
+                </Node>
               </Node>
-              <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
+              <Node name="Minigames" expanded="True" />
+              <Node name="NPC" expanded="True" />
               <Node name="Player" expanded="True" />
-              <Node name="PlayerShop" expanded="True" />
+              <Node name="Quest" expanded="True" />
+              <Node name="Storage" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Editor" expanded="True">
+                <Node name="Utils" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

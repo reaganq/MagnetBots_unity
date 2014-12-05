@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-16"?>
-<ArrayOfRPGMinigame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <RPGMinigame>
+<ArrayOfNPCMinigame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NPCMinigame>
+    <ID>1</ID>
+    <Name>Burger Memory</Name>
+    <Description>Follow and copy the instructions to make the most epic burger of all time!</Description>
+    <SystemDescription />
+    <activityType>Minigame</activityType>
     <AtlasName>Atlases/MiniGames/MinigamesAtlas</AtlasName>
     <PortraitIcon>burgermemory</PortraitIcon>
     <PrefabDirectory>MiniGames/BurgerMemory</PrefabDirectory>
     <Loots>
       <LootItem>
-        <itemType>UpgradeMaterials</itemType>
+        <itemType>Currency</itemType>
         <itemID>
           <int>2</int>
         </itemID>
@@ -16,9 +21,5 @@
         <dropRate>1</dropRate>
       </LootItem>
     </Loots>
-    <ID>1</ID>
-    <Name>Burger Memory</Name>
-    <Description>Follow and copy the instructions to make the most epic burger of all time!</Description>
-    <SystemDescription />
-  </RPGMinigame>
-</ArrayOfRPGMinigame>
+  </NPCMinigame>
+</ArrayOfNPCMinigame>

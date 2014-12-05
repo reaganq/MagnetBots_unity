@@ -9,9 +9,10 @@ public class NPC: MonoBehaviour
     public int ID;
     public bool Active = false;
     public Shop thisShop = null;
-	public RPGArena arena = null;
-	public RPGActivity activity = null;
-	public RPGMinigame miniGame = null;
+	//public NPCArena arena = null;
+	//public NPCActivity activity = null;
+	//public NPCMinigame miniGame = null;
+	public List<NPCActivity> activities;
 	public GameObject trigger;
 	public Collider triggerCollider;
 
@@ -30,10 +31,43 @@ public class NPC: MonoBehaviour
 			trigger.transform.localScale = startScale;
 		}
 		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
-
-		if(character.ArenaID > 0)
+		foreach(ActivityData ad in character.activities)
 		{
-			arena = Storage.LoadById<RPGArena>(character.ArenaID, new RPGArena());
+			if(ad.activityType == NPCActivityType.Minigame)
+			{
+				NPCMinigame minigame = Storage.LoadById<NPCMinigame>(ad.activityID, new NPCMinigame());
+				activities.Add(minigame);
+			}
+			else if(ad.activityType == NPCActivityType.Quest)
+			{
+				NPCQuest quest = Storage.LoadById<NPCQuest>(ad.activityID, new NPCQuest());
+				activities.Add(quest);
+			}
+			else if(ad.activityType == NPCActivityType.Shop)
+			{
+				Shop shop = Storage.LoadById<Shop>(ad.activityID, new Shop());
+				shop.PopulateItems();
+				activities.Add(shop);
+			}
+			else if(ad.activityType == NPCActivityType.Service)
+			{
+				NPCService service = Storage.LoadById<NPCService>(ad.activityID, new NPCService());
+				activities.Add(service);
+			}
+			else if(ad.activityType == NPCActivityType.Arena)
+			{
+				NPCArena arena = Storage.LoadById<NPCArena>(ad.activityID, new NPCArena());
+				for (int j = 0; j < arena.EnemyIDs.Count; j++) 
+				{
+					arena.Enemies.Add(Storage.LoadById<RPGEnemy>(arena.EnemyIDs[j], new RPGEnemy()));
+				}
+				activities.Add(arena);
+			}
+		}
+
+		/*if(character.ArenaID > 0)
+		{
+			arena = Storage.LoadById<NPCArena>(character.ArenaID, new NPCArena());
 
 				for (int j = 0; j < arena.EnemyIDs.Count; j++) 
 				{
@@ -42,14 +76,14 @@ public class NPC: MonoBehaviour
 		}
 		if(character.MinigameID > 0)
 		{
-			miniGame = Storage.LoadById<RPGMinigame>(character.MinigameID, new RPGMinigame());
+			miniGame = Storage.LoadById<NPCMinigame>(character.MinigameID, new NPCMinigame());
 
 		}
 
 		if(character.ActivityID > 0)
 		{
-			activity = Storage.LoadById<RPGActivity>(character.ActivityID, new RPGActivity());
-		}
+			activity = Storage.LoadById<NPCActivity>(character.ActivityID, new NPCActivity());
+		}*/
     }
     
     public void OnTriggerEnter ( Collider other )
@@ -81,9 +115,10 @@ public class NPC: MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         Active = true;
-        PlayerManager.Instance.ActiveNPC = this;
+        //PlayerManager.Instance.ActiveNPC = this;
         //Player.Instance.ActiveNPCName = character.Name;
-        if(character.ShopID > 0)
+		GUIManager.Instance.DisplayNPC(this);
+        /*if(character.ShopID > 0)
         {
             if(thisShop == null)
             {   
@@ -91,7 +126,7 @@ public class NPC: MonoBehaviour
             }
             thisShop.PopulateItems();
             //PlayerManager.Instance.ActiveShop = thisShop;
-        }
+        }*/
 
         GUIManager.Instance.DisplayNPC();
     }
@@ -99,7 +134,7 @@ public class NPC: MonoBehaviour
     public IEnumerator HideNPC()
     {
         yield return new WaitForEndOfFrame();
-        PlayerManager.Instance.ActiveNPC = null;
+        //PlayerManager.Instance.ActiveNPC = null;
         /*if(PlayerManager.Instance.ActiveShop != null && character.ShopID == PlayerManager.Instance.ActiveShop.ID)
         {
             PlayerManager.Instance.ActiveShop = null;

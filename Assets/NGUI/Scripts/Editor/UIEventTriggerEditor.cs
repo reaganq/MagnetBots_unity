@@ -15,6 +15,7 @@ public class UIEventTriggerEditor : Editor
 	void OnEnable ()
 	{
 		mTrigger = target as UIEventTrigger;
+		EditorPrefs.SetFloat("ET11", mTrigger.movementThreshold);
 		EditorPrefs.SetBool("ET0", EventDelegate.IsValid(mTrigger.onHoverOver));
 		EditorPrefs.SetBool("ET1", EventDelegate.IsValid(mTrigger.onHoverOut));
 		EditorPrefs.SetBool("ET2", EventDelegate.IsValid(mTrigger.onPress));
@@ -25,6 +26,7 @@ public class UIEventTriggerEditor : Editor
 		EditorPrefs.SetBool("ET7", EventDelegate.IsValid(mTrigger.onDoubleClick));
 		EditorPrefs.SetBool("ET8", EventDelegate.IsValid(mTrigger.onDragOver));
 		EditorPrefs.SetBool("ET9", EventDelegate.IsValid(mTrigger.onDragOut));
+		EditorPrefs.SetBool("ET10", EventDelegate.IsValid(mTrigger.onCustomRelease));
 	}
 
 	public override void OnInspectorGUI ()
@@ -42,6 +44,8 @@ public class UIEventTriggerEditor : Editor
 		DrawEvents("ET7", "On Double-Click/Tap", mTrigger.onDoubleClick, minimalistic);
 		DrawEvents("ET8", "On Drag Over", mTrigger.onDragOver, minimalistic);
 		DrawEvents("ET9", "On Drag Out", mTrigger.onDragOut, minimalistic);
+		DrawEvents("ET10", "On Custom Release", mTrigger.onCustomRelease, minimalistic);
+
 	}
 
 	void DrawEvents (string key, string text, List<EventDelegate> list, bool minimalistic)

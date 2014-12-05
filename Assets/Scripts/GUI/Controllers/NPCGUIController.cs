@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NPCGUIController : BasicGUIController {
  
@@ -25,7 +26,7 @@ public class NPCGUIController : BasicGUIController {
     {
 		panel.SetActive(true);
 		//textLabel.gameObject.SetActive(true);
-        textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
+        textLabel.text = GUIManager.Instance.activeNPC.character.Name;
 
 		int numberOfButtons = 0;
         if(PlayerManager.Instance.ActiveNPC.thisShop != null)

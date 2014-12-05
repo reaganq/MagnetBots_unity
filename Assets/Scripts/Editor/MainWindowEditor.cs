@@ -25,7 +25,7 @@ public class MainWindowEditor : EditorWindow
 	public EnemyEditor enemyEditor;
 	//public EquipmentSlotEditor equipmentSlotEditor;
 	//public TeleportEditor teleportEditor;
-	//public ConversationEditor conversationEditor;
+	public ConversationEditor conversationEditor;
 	public ShopEditor shopEditor;
 	public CurrencyEditor currencyEditor;
 	//public SpellEditor spellEditor;
@@ -38,7 +38,8 @@ public class MainWindowEditor : EditorWindow
 	//public WeaponEditor weaponEditor;
 	public NPCEditor npcEditor;
 	public MiniGameEditor minigameEditor;
-	public ActivityEditor activityEditor;
+	public ServiceEditor serviceEditor;
+	public QuestEditor questEditor;
 	//public RaceEditor raceEditor;
 	//public ClassEditor classEditor;
 	//public GuildEditor guildEditor;
@@ -87,9 +88,11 @@ public class MainWindowEditor : EditorWindow
 		
 		//teleportEditor = new TeleportEditor(Skin, this);
 		
-		//conversationEditor = new ConversationEditor(Skin, this);
+		conversationEditor = new ConversationEditor(Skin, this);
 		
 		shopEditor = new ShopEditor(Skin, this);
+
+		questEditor = new QuestEditor(Skin, this);
 		
 		//spellEditor = new SpellEditor(Skin, this);
 		
@@ -101,7 +104,7 @@ public class MainWindowEditor : EditorWindow
 
 		minigameEditor = new MiniGameEditor(Skin, this);
 
-		activityEditor = new ActivityEditor(Skin, this);
+		serviceEditor = new ServiceEditor(Skin, this);
 		
 		//spellShop = new SpellShopEditor(Skin, this);
 		
@@ -172,10 +175,7 @@ public class MainWindowEditor : EditorWindow
 			MainWindowType = MainWindowTypeEnum.Container;
 		}
 		
-		if (GUILayout.Button(conversationEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Conversation;
-		}
+
 		
 		if (GUILayout.Button(enemyEditor.EditorName, GUILayout.Width(100)))
 		{
@@ -191,7 +191,12 @@ public class MainWindowEditor : EditorWindow
 		{
 			MainWindowType = MainWindowTypeEnum.Guild;
 		}*/
-		
+
+		if (GUILayout.Button(conversationEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Conversation;
+		}
+
 		if (GUILayout.Button(itemEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.Item;
@@ -260,9 +265,14 @@ public class MainWindowEditor : EditorWindow
 			MainWindowType = MainWindowTypeEnum.MiniGame;
 		}
 
-		if (GUILayout.Button(activityEditor.EditorName, GUILayout.Width(100)))
+		if (GUILayout.Button(serviceEditor.EditorName, GUILayout.Width(100)))
 		{
-			MainWindowType = MainWindowTypeEnum.Activity;
+			MainWindowType = MainWindowTypeEnum.Service;
+		}
+
+		if (GUILayout.Button(questEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Quest;
 		}
 		
 		/*if (GUILayout.Button(skillEditor.EditorName, GUILayout.Width(100)))
@@ -380,9 +390,7 @@ public class MainWindowEditor : EditorWindow
 				teleportEditor.DisplayWindow(position);
 				break;
 			
-			case MainWindowTypeEnum.Conversation:
-				conversationEditor.DisplayWindow(position);
-				break;
+
 			
 			case MainWindowTypeEnum.Scene:
 				sceneEditor.DisplayWindow(position);
@@ -391,7 +399,10 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.SpawnPoint:
 				spawnEditor.DisplayWindow(position);
 				break;*/
-			
+			case MainWindowTypeEnum.Conversation:
+				conversationEditor.DisplayWindow(position);
+				break;
+
 			case MainWindowTypeEnum.Shop:
 				shopEditor.DisplayWindow(position);
 				break;
@@ -418,10 +429,12 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.MiniGame:
 				minigameEditor.DisplayWindow(position);
 				break;
-			case MainWindowTypeEnum.Activity:
-				activityEditor.DisplayWindow(position);
+			case MainWindowTypeEnum.Service:
+				serviceEditor.DisplayWindow(position);
 				break;
-
+			case MainWindowTypeEnum.Quest:
+				questEditor.DisplayWindow(position);
+				break;
 
             /*case MainWindowTypeEnum.QuestCategory:
                 questCategoryEditor.DisplayWindow(position);
@@ -434,7 +447,7 @@ public class MainWindowEditor : EditorWindow
 public enum MainWindowTypeEnum
 {
 	None,
-	Activity,
+	Service,
 	Armor,
 	Attribute,
 	Class,

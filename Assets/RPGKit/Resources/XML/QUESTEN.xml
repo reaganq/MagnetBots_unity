@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGQuest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGQuest>
+    <ID>1</ID>
+    <Name />
+    <Description />
+    <SystemDescription />
+    <QuestSteps>
+      <QuestStep QLN="" BN="" SN="1">
+        <IsLastStep>false</IsLastStep>
+        <Tasks>
+          <Task TT="KillEnemy" ATR="0" PT="ENEMY" TASKTARGET="1" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </QuestSteps>
+    <Repeatable>false</Repeatable>
+    <Failed>false</Failed>
+    <FinalQuestLog />
+    <QuestCategoryID>0</QuestCategoryID>
+    <Rewarded>false</Rewarded>
+  </RPGQuest>
+</ArrayOfRPGQuest>

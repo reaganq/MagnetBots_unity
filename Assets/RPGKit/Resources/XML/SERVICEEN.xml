@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfNPCService xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NPCService>
+    <ID>1</ID>
+    <Name>Bank</Name>
+    <Description />
+    <SystemDescription />
+    <activityType>Service</activityType>
+  </NPCService>
+  <NPCService>
+    <ID>2</ID>
+    <Name>Anvil</Name>
+    <Description />
+    <SystemDescription />
+    <activityType>Service</activityType>
+  </NPCService>
+</ArrayOfNPCService>
