@@ -50,89 +50,55 @@ public class NPCEditor : BaseEditorWindow
 	protected override void EditPart()
 	{
 		RPGNPC s = (RPGNPC)currentItem;
-		
-		s.ShopID = EditorUtils.IntPopup(s.ShopID, Data.shopEditor.items, "Shop");
-		s.ArenaID = EditorUtils.IntPopup(s.ArenaID, Data.arenaEditor.items, "Arena");
-		//s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data..items, "Shop");
-		s.ActivityID = EditorUtils.IntPopup(s.ActivityID, Data.serviceEditor.items, "Activities");
-		s.MinigameID = EditorUtils.IntPopup(s.MinigameID, Data.minigameEditor.items, "Minigames");
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("default conversation id");
+		s.defaultConversationID = EditorGUILayout.IntField(s.defaultConversationID, GUILayout.Width(100));
+		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.Separator();
 
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		if (GUILayout.Button("No shop", GUILayout.Width(150)))
-		{
-			s.ShopID = 0;
-		}
-		EditorGUILayout.EndHorizontal();
-
-		/*ConditionsUtils.Conditions(s.ShopConditions, Data);
-		
-		s.SpellShopID = EditorUtils.IntPopup(s.SpellShopID, Data.spellShop.items, "Spell shop");
-		
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		if (GUILayout.Button("No spell shop", GUILayout.Width(150)))
-		{
-			s.SpellShopID = 0;
-		}
-		EditorGUILayout.EndHorizontal();
-		
-		ConditionsUtils.Conditions(s.SpellShopConditions, Data);
-		
-		EditorGUILayout.Separator();
-		EditorGUILayout.BeginHorizontal();
-		
-		EditorGUILayout.PrefixLabel("Repair");
-		s.Repairing = EditorGUILayout.Toggle(s.Repairing, GUILayout.Width(100));
-		if (s.Repairing)
-		{
-			EditorGUILayout.PrefixLabel("Price modifier");
-			s.RepairPriceModifier = EditorGUILayout.FloatField(s.RepairPriceModifier ,GUILayout.Width(200));
-			
-			EditorGUILayout.PrefixLabel("Currency");
-			s.RepairCurrencyID = EditorGUILayout.IntField(s.RepairCurrencyID ,GUILayout.Width(200));
-		}
-		EditorGUILayout.EndHorizontal();
-		
-		ConditionsUtils.Conditions(s.ReparingConditions, Data);
-		
-		EditorUtils.Label("Guild");
-		
-		s.IsGuildMember = EditorUtils.Toggle(s.IsGuildMember, "Guild");
-		
-		if (s.IsGuildMember)
-		{
-			s.GuildID = EditorUtils.IntPopup(s.GuildID, Data.guildEditor.items, "Guild ID");
-			
-			s.IsRecruit = EditorUtils.Toggle(s.IsRecruit, "Can recruit");
-			
-			s.AdvanceRankLevel = EditorUtils.IntField(s.AdvanceRankLevel, "Advance to rank");
-		}
-		
-		EditorUtils.Label("General conversation");
-		
-		EditorGUILayout.BeginHorizontal();
-		
-		if (GUILayout.Button("Add new conversation ID", GUILayout.Width(300)))
-		{
-			s.GeneralConversationID.Add(0);
-		}
-		
-		EditorGUILayout.EndHorizontal();
-		
-		for (int index = 0; index <= s.GeneralConversationID.Count -1; index++)
-		{
-			
-			s.GeneralConversationID[index] = EditorUtils.IntPopup(s.GeneralConversationID[index], Data.conversationEditor.items, "Conversation ID", 200, FieldTypeEnum.BeginningOnly);
-			
-			if (GUILayout.Button("Delete", GUILayout.Width(150)))
+		for (int h = 0; h < s.overrideActivities.Count; h++) {
+			EditorGUILayout.BeginVertical(skin.box);
+			AddActivityData(s.overrideActivities[h], h);
+			if (GUILayout.Button("Delete Priority Activity", GUILayout.Width(400)))
 			{
-				 s.GeneralConversationID.Remove(s.GeneralConversationID[index]);
+				s.overrideActivities.Remove(s.overrideActivities[h]);
 				break;
 			}
-			EditorGUILayout.EndHorizontal();
-		}*/
-		
+			EditorGUILayout.EndVertical();
+		}
+		if (GUILayout.Button("Add Priority Activity", GUILayout.Width(400)))
+		{
+			NPCActivityData p = new NPCActivityData();
+			s.overrideActivities.Add(p);
+		}
+		EditorGUILayout.Separator();
+
+		for (int i = 0; i < s.activities.Count; i++) {
+			EditorGUILayout.BeginVertical(skin.box);
+			AddActivityData(s.activities[i], i);
+			if (GUILayout.Button("Delete Activity", GUILayout.Width(400)))
+			{
+				s.activities.Remove(s.activities[i]);
+				break;
+			}
+			EditorGUILayout.EndVertical();
+		}
+		if (GUILayout.Button("Add Activity", GUILayout.Width(400)))
+		{
+			NPCActivityData p = new NPCActivityData();
+			s.activities.Add(p);
+		}
 		currentItem = s;
+	}
+
+	public void AddActivityData(NPCActivityData s, int j)
+	{
+		EditorUtils.Label("activity No. "+j);
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("activity id");
+		s.activityID = EditorGUILayout.IntField(s.activityID, GUILayout.Width(100));
+		EditorGUILayout.PrefixLabel("activity type");
+		s.activityType = (NPCActivityType)EditorGUILayout.EnumPopup(s.activityType, GUILayout.Width(300));
+		EditorGUILayout.EndHorizontal();
 	}
 }

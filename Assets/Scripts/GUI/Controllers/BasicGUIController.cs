@@ -27,6 +27,7 @@ public class BasicGUIController : MonoBehaviour {
 	{
 		if(resetState)
 			Reset();
+		Hide();
 	}
 
 	public virtual void Reset()

@@ -11,10 +11,21 @@ using System.IO;
 public class NPCActivity: BasicItem {
 	
 	public NPCActivityType activityType;
-	public RPGConversation conversation;
+	public int conversationID;
 	public string npcIconAtlas;
 	public string npcIconSprite;
 	public string npcButtonText;
+	public List<Condition> Conditions;
+
+	public bool Validate()
+	{
+		foreach (Condition condition in Conditions)
+		{
+			if (condition.Validate() == false)
+				return false;
+		}
+		return true;
+	}
 }
 
 public enum NPCActivityType

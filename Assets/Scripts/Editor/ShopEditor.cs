@@ -123,6 +123,7 @@ public class ShopEditor : BaseEditorWindow
         EditorGUILayout.PrefixLabel("Restock Time");
         
         s.RestockTime = EditorGUILayout.FloatField(s.RestockTime, GUILayout.Width(100));
+		ConditionsUtils.Conditions(s.Conditions, Data);
 			
 		currentItem = s;
 	}

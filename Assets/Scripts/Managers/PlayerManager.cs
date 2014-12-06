@@ -44,7 +44,7 @@ public class PlayerManager : MonoBehaviour
  
  //public static float sellPriceModifier;
  
-    //public NPC ActiveNPC;
+    public NPC ActiveNPC;
     //public Shop ActiveShop;
 	//public NPCActivity ActiveActivity;
 	public NPCMinigame ActiveMinigame;
@@ -231,7 +231,7 @@ public class PlayerManager : MonoBehaviour
 			//ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, enemyID, avatarPhotonView.viewID, newid);
 			//GUIManager.Instance.TurnOffAllOtherUI();
 			GUIManager.Instance.DisplayMainGUI();
-			ResetNPC();
+			//ResetNPC();
 			activityState = PlayerActivityState.arena;
 		}
 	}
@@ -263,7 +263,7 @@ public class PlayerManager : MonoBehaviour
 	{
 		avatarObject.SetActive(false);
 		ActiveZone.zoneObject.SetActive(false);
-		ActiveMinigameObject = Instantiate(Resources.Load(ActiveNPC.miniGame.PrefabDirectory) as GameObject) as GameObject;
+		ActiveMinigameObject = Instantiate(Resources.Load(ActiveMinigame.PrefabDirectory) as GameObject) as GameObject;
 		activityState = PlayerActivityState.minigame;
 		GUIManager.Instance.HideAllUI();
 	}
@@ -277,11 +277,11 @@ public class PlayerManager : MonoBehaviour
 		GUIManager.Instance.DisplayMainGUI();
 	}
 
-	public void ResetNPC()
+	/*public void ResetNPC()
 	{
 		if(ActiveNPC != null)
 			ActiveNPC.Reset();
-	}
+	}*/
 
     void LoadCharacterParts()
     {

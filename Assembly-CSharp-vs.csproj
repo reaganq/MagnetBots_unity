@@ -415,6 +415,7 @@
      <Compile Include="Assets\Scripts\GUI\FriendBox.cs" />
      <Compile Include="Assets\Scripts\GUI\HoverButton.cs" />
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\NPCActivityButton.cs" />
      <Compile Include="Assets\Scripts\GUI\UiButtonBase.cs" />
      <Compile Include="Assets\Scripts\Item\EquipedItem.cs" />
      <Compile Include="Assets\Scripts\Item\InventoryItem.cs" />

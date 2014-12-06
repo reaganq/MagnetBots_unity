@@ -92,5 +92,6 @@ public enum ActionEventType
 	UseTeleport = 10,
 	DisplayQuestDetails = 11,
 	GiveQuestRewards = 12,
-	Continueconversation = 13
+	Continueconversation = 13,
+	OpenActivityGUI = 14,
 }

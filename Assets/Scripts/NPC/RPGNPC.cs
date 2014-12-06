@@ -84,18 +84,22 @@ public class RPGNPC : IItem
 	//public int ArenaID;
 	//public int MinigameID;
 	//public int ActivityID;
-	public List<ActivityData> activities;
+	public List<NPCActivityData> activities;
+	public List<NPCActivityData> overrideActivities;
+	public int defaultConversationID;
 	
 	public RPGNPC()
 	{
 		Name = string.Empty;
 		SystemDescription = string.Empty;
 		Description = string.Empty;
+		activities = new List<NPCActivityData>();
+		overrideActivities = new List<NPCActivityData>();
 	}
 }
 
 [Serializable]
-public class ActivityData
+public class NPCActivityData
 {
 	public int activityID;
 	public NPCActivityType activityType;

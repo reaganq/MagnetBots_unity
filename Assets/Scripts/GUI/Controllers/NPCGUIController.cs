@@ -5,30 +5,50 @@ using System.Collections.Generic;
 public class NPCGUIController : BasicGUIController {
  
     public UILabel textLabel = null;
-    public GameObject enterShopButton = null;
     public GameObject confirmButton = null;
-    public GameObject arenaButton = null;
-	public GameObject activityButton = null;
-	public GameObject minigameButton = null;
-    public UILabel arenaLabel = null;
-	public UILabel minigameLabel = null;
-	public UILabel activityLabel = null;
+	public List<NPCActivityButton> activityButtons;
+	public GameObject activityButtonPrefab;
 
-	public GameObject root;
-	public GameObject panel;
+	public GameObject activityButtonsParent;
 	public float offset;
 	public Transform cameraOvertakeTransform;
+	public List<NPCActivity> activities;
+
+	public NPCActivity activeActivity;
 
 		
 	// Use this for initialization
 	// Update is called once per frame
 	public override void Enable()
     {
-		panel.SetActive(true);
-		//textLabel.gameObject.SetActive(true);
-        textLabel.text = GUIManager.Instance.activeNPC.character.Name;
+		activities = PlayerManager.Instance.ActiveNPC.activities;
 
-		int numberOfButtons = 0;
+		//textLabel.gameObject.SetActive(true);
+        textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
+
+		//check npc for override conversations
+		int num = activities.Count - activityButtons.Count;
+
+		if(num >0)
+		{
+			for (int i = 0; i < num; i++) {
+				GameObject activitybutton = NGUITools.AddChild(activityButtonsParent, activityButtonPrefab);
+				NPCActivityButton nab = activitybutton.GetComponent<NPCActivityButton>();
+				activityButtons.Add(nab);
+			}
+		}
+		for (int i = 0; i < activityButtons.Count; i++) {
+			if(i >= PlayerManager.Instance.ActiveNPC.activities.Count)
+				activityButtons[i].gameObject.SetActive(false);
+			else
+			{
+				activityButtons[i].gameObject.SetActive(true);
+				activityButtons[i].LoadActivityButton(activities[i], i);
+				activityButtons[i].transform.localPosition = new Vector3(i*offset, -50, 0);
+			}
+		}
+
+		/*int numberOfButtons = 0;
         if(PlayerManager.Instance.ActiveNPC.thisShop != null)
         {
             enterShopButton.SetActive(true);
@@ -75,15 +95,17 @@ public class NPCGUIController : BasicGUIController {
 		else
 		{
 			minigameButton.SetActive(false);
-		}
+		}*/
 
 
         confirmButton.SetActive(true);
-		confirmButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
-		numberOfButtons +=1;
-		root.transform.localPosition = new Vector3(((numberOfButtons-1)*-0.5f*offset), 363, 0);
-
-		Debug.Log("enable npc gui");
+		confirmButton.transform.localPosition = new Vector3(activities.Count*offset, -50, 0);
+		//numberOfButtons +=1;
+		if(activities.Count>0)
+			activityButtonsParent.transform.localPosition = new Vector3(((activities.Count+1)*-0.5f*offset), 363, 0);
+		else
+			activityButtonsParent.transform.localPosition = new Vector3(0, 363, 0);
+		base.Enable();
     }
     
     public void OnConfirmButtonPressed()
@@ -91,8 +113,15 @@ public class NPCGUIController : BasicGUIController {
         GUIManager.Instance.HideNPC();
 		//GUIManager.Instance.DisplayMainGUI();
     }
+
+	public void OnActivityButtonPressed(int index)
+	{
+		activeActivity = activities[index];
+
+		//load activity's conversation
+	}
     
-    public void OnEnterShopButton()
+    /*public void OnEnterShopButton()
     {
 		PlayerManager.Instance.ActiveShop = PlayerManager.Instance.ActiveNPC.thisShop;
         GUIManager.Instance.DisplayShop();
@@ -110,7 +139,7 @@ public class NPCGUIController : BasicGUIController {
 		{
 			Debug.Log("we have an arena");
 			PlayerManager.Instance.ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, "Jim");
-		}*/
+		}
     }
 
 	public void OnEnterActivityButton()
@@ -128,27 +157,28 @@ public class NPCGUIController : BasicGUIController {
 	{
 		PlayerManager.Instance.ActiveMinigame = PlayerManager.Instance.ActiveNPC.miniGame;
 		GUIManager.Instance.DisplayMinigame();
-	}
+	}*/
 
     public void SetupArenaButton()
     {
-		Debug.Log(PlayerManager.Instance.ActiveNPC.arena.Name);
-        arenaLabel.text = PlayerManager.Instance.ActiveNPC.arena.Name;
+		//Debug.Log(PlayerManager.Instance.ActiveNPC.arena.Name);
+        //arenaLabel.text = PlayerManager.Instance.ActiveNPC.arena.Name;
     }
 
 	public void SetupMiniGameButton()
 	{
-		minigameLabel.text = PlayerManager.Instance.ActiveNPC.miniGame.Name;
+		//minigameLabel.text = PlayerManager.Instance.ActiveNPC.miniGame.Name;
 	}
 
 	public void SetupActivityButton()
 	{
-		activityLabel.text = PlayerManager.Instance.ActiveNPC.activity.Name;
+		//activityLabel.text = PlayerManager.Instance.ActiveNPC.activity.Name;
 	}
 
 	public override void Disable()
 	{
 		//textLabel.gameObject.SetActive(false);
-		panel.SetActive(false);
+		//activities.Clear();
+		base.Disable();
 	}
 }

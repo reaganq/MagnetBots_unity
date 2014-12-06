@@ -5,6 +5,35 @@
     <Name>Gym boss initial quest</Name>
     <Description>Gym boss initial quest</Description>
     <SystemDescription />
-    <ConversationParagraphs />
+    <ConversationParagraphs>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <nextParagraphID>0</nextParagraphID>
+        <displayTimer>0</displayTimer>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+      </RPGParagraph>
+    </ConversationParagraphs>
+  </RPGConversation>
+  <RPGConversation>
+    <ID>2</ID>
+    <Name>General Store's shop greeting</Name>
+    <Description />
+    <SystemDescription />
+    <ConversationParagraphs>
+      <RPGParagraph>
+        <PT>Howdy, what do you fancy today?</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+        </Actions>
+        <nextParagraphID>0</nextParagraphID>
+        <displayTimer>0</displayTimer>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+      </RPGParagraph>
+    </ConversationParagraphs>
   </RPGConversation>
 </ArrayOfRPGConversation>

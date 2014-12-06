@@ -54,7 +54,6 @@ public class GUIManager : MonoBehaviour {
 	//npc stuff
 	public RPGConversation activeConversation;
 	public NPCActivity activeActivity;
-	public NPC activeNPC;
     //public GameObject Joystick = null;
     
     //public GameObject ActionButtons = null;
@@ -280,10 +279,15 @@ public class GUIManager : MonoBehaviour {
             
         }*/
     }
+
+	public void DisplayNPC()
+	{
+		DisplayNPC(PlayerManager.Instance.ActiveNPC);
+	}
     
     public void DisplayNPC(NPC npc)
     {
-		activeNPC = npc;
+		PlayerManager.Instance.ActiveNPC = npc;
 		uiState = UIState.npc;
         /*if(!IsNPCGUIDisplayed)
         {
@@ -297,7 +301,7 @@ public class GUIManager : MonoBehaviour {
     
     public void HideNPC()
     {
-		activeNPC = null;
+		PlayerManager.Instance.ActiveNPC = null;
 		uiState = UIState.main;
         /*if(IsNPCGUIDisplayed)
         {

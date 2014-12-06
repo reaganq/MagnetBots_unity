@@ -30,19 +30,20 @@ public class ShopGUIController : BasicGUIController {
 	public UILabel QuantityLabel = null;
 	public UILabel PriceLabel;
 	public int quantity = 1;
+	public Shop activeShop;
 
     
     public ShopMode CurrentShopMode = ShopMode.buy;
     //public UISprite ItemSkillSprite = null;
     
-    public override void Enable()
+    public void Enable(Shop newShop)
     {
+		activeShop = newShop;
         //OnInventoryPressed(0);
 		//ActiveShop = PlayerManager.Instance.ActiveShop;
 		Panel.SetActive(true);
 		ChangeShopMode(0);
-		ShopNameLabel.text = PlayerManager.Instance.ActiveShop.Name;
-
+		ShopNameLabel.text = activeShop.Name;
     }
 
 	public override void Disable()
@@ -80,7 +81,7 @@ public class ShopGUIController : BasicGUIController {
     {
 		if(CurrentShopMode == ShopMode.buy)
 		{
-			BuyTransaction buyTransaction = PlayerManager.Instance.ActiveShop.BuyItem(PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].rpgItem, PlayerManager.Instance.ActiveShop.ShopItems[CurrentSelectedItemIndex].Level, quantity);
+			BuyTransaction buyTransaction = activeShop.BuyItem(activeShop.ShopItems[CurrentSelectedItemIndex].rpgItem, activeShop.ShopItems[CurrentSelectedItemIndex].Level, quantity);
 	        if(buyTransaction == BuyTransaction.NotEnoughGold)
 	        {
 	            return;
@@ -99,7 +100,7 @@ public class ShopGUIController : BasicGUIController {
 		}
 		else
 		{
-			PlayerManager.Instance.ActiveShop.SellItem(SelectedItemList[CurrentSelectedItemIndex].rpgItem, SelectedItemList[CurrentSelectedItemIndex].Level, quantity);
+			activeShop.SellItem(SelectedItemList[CurrentSelectedItemIndex].rpgItem, SelectedItemList[CurrentSelectedItemIndex].Level, quantity);
 
 		}
   
@@ -116,7 +117,7 @@ public class ShopGUIController : BasicGUIController {
 		if(index == 0)
 		{
 			CurrentShopMode = ShopMode.buy;
-			SelectedItemList = PlayerManager.Instance.ActiveShop.ShopItems;
+			SelectedItemList = activeShop.ShopItems;
 		}
 		else if(index == 1)
 		{
@@ -275,7 +276,7 @@ public class ShopGUIController : BasicGUIController {
 	            ItemNameLabel.enabled = true;
 	            ItemNameLabel.text = "";
 	            ItemDescriptionLabel.enabled = true;
-	            ItemDescriptionLabel.text = PlayerManager.Instance.ActiveShop.Description;
+	            ItemDescriptionLabel.text = activeShop.Description;
 	            ItemSkillDescriptionLabel.enabled = false;
 	        }
 	        else
@@ -283,7 +284,7 @@ public class ShopGUIController : BasicGUIController {
 	            ItemNameLabel.enabled = true;
 	            ItemNameLabel.text = "";
 	            ItemDescriptionLabel.enabled = true;
-	            ItemDescriptionLabel.text = PlayerManager.Instance.ActiveShop.Description;
+				ItemDescriptionLabel.text = activeShop.Description;
 	            ItemSkillDescriptionLabel.enabled = false;
 	        }
 			HideTransactionBox();

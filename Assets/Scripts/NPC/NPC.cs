@@ -13,6 +13,22 @@ public class NPC: MonoBehaviour
 	//public NPCActivity activity = null;
 	//public NPCMinigame miniGame = null;
 	public List<NPCActivity> activities;
+	public List<NPCActivity> _activities;
+	public List<NPCActivity> availableActivities
+	{
+		get{
+			_activities.Clear();
+			for (int i = 0; i < activities.Count; i++) {
+				if(activities[i].Validate())
+				{
+
+					_activities.Add(activities[i]);
+				}
+					
+			}
+			return _activities;
+		}
+	}
 	public GameObject trigger;
 	public Collider triggerCollider;
 
@@ -31,7 +47,7 @@ public class NPC: MonoBehaviour
 			trigger.transform.localScale = startScale;
 		}
 		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
-		foreach(ActivityData ad in character.activities)
+		foreach(NPCActivityData ad in character.activities)
 		{
 			if(ad.activityType == NPCActivityType.Minigame)
 			{
@@ -127,8 +143,6 @@ public class NPC: MonoBehaviour
             thisShop.PopulateItems();
             //PlayerManager.Instance.ActiveShop = thisShop;
         }*/
-
-        GUIManager.Instance.DisplayNPC();
     }
     
     public IEnumerator HideNPC()
