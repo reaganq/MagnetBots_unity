@@ -2,8 +2,8 @@
 <ArrayOfRPGQuest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGQuest>
     <ID>1</ID>
-    <Name />
-    <Description />
+    <Name>Cooking Quest</Name>
+    <Description>Collect ingredients</Description>
     <SystemDescription />
     <QuestSteps>
       <QuestStep QLN="" BN="" SN="1">
@@ -13,7 +13,7 @@
         </Tasks>
       </QuestStep>
     </QuestSteps>
-    <Repeatable>false</Repeatable>
+    <Repeatable>true</Repeatable>
     <Failed>false</Failed>
     <FinalQuestLog />
     <QuestCategoryID>0</QuestCategoryID>

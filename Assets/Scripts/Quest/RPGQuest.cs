@@ -15,12 +15,18 @@ public class RPGQuest : BasicItem
 	public List<QuestStep> QuestSteps;
 	//public List<AlternateEnd> AlternateEnds;
 	public bool Repeatable;
+	public bool Timed;
+	public float timeLimit;
 	public bool Failed;
 	//public int GuildID;
 	//public int GuildRank;
 	public string FinalQuestLog;
 	public int QuestCategoryID;
 	public bool Rewarded;
+
+	[XmlIgnore]
+	public float startTime;
+	public float endTime;
 	
 	public RPGQuest()
 	{
@@ -70,7 +76,13 @@ public class RPGQuest : BasicItem
 			return result;
 		}
 	}
-	
+
+	public bool HasFailed()
+	{
+		if(Timed && ((Time.realtimeSinceStartup - startTime) > timeLimit))
+			return true;
+		return false;
+	}
 	//paragraph task
 	public void CheckParagraph(int paragraphID)
 	{

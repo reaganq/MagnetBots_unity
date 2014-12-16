@@ -31,4 +31,9 @@ public class RPGArmor : Equiped
 		Stackable = true;
 	//EffectsOnHit = new List<Effect>();
 	}
+
+	public override void Use()
+	{
+		base.Use();
+	}
 }

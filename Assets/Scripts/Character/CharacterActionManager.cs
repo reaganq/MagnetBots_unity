@@ -126,6 +126,9 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void LeftAction(InputTrigger trigger)
     {
+		if(isLocked())
+			return;
+
 		if(armorSkillsArray[3] != null )
 		{
 			if(!armorSkillsArray[3].CanPressDown())
@@ -167,6 +170,9 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void RightAction(InputTrigger trigger)
     {
+		if(isLocked())
+			return;
+
 		if(armorSkillsArray[2] != null)
 		{
 			if(!armorSkillsArray[2].CanPressDown())

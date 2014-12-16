@@ -31,6 +31,11 @@ public class RPGItem : UsableItem
 	public int BuyValue;
 	public int SellValue;
 	public RarityType Rarity;
+
+	public virtual void Use()
+	{
+		Debug.Log("using item: " + Name);
+	}
 }
 
 public enum RarityType

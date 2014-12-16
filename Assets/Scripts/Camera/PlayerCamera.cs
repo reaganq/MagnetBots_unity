@@ -29,7 +29,7 @@ public class PlayerCamera: MonoBehaviour {
 	public Camera childCamera;
     private Transform _myTransform;
 	public Transform defaultPos;
-	public Transform inventoryPos;
+	public Transform quickArmoryPos;
 	private Job movementJob;
 
 	private Transform newTransform;
@@ -134,7 +134,7 @@ public class PlayerCamera: MonoBehaviour {
 		if(movementJob != null)
 			movementJob.kill();
 
-		movementJob = Job.make(MoveTo(inventoryPos, 40, 1), true);
+		movementJob = Job.make(MoveTo(quickArmoryPos, 40, 1), true);
 		//StartCoroutine(MoveTo(inventoryPos, 40, 1));
 	}
 

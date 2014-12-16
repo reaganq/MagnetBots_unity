@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_IPHONE;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_WWW;ENABLE_IMAGEEFFECTS;UNITY_IPHONE_API;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;UNITY_IOS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_OSX;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_GENERICS;ENABLE_SUBSTANCE;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_GAMECENTER;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;UNITY_4_3_4;UNITY_4_3;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_OSX</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -371,9 +371,9 @@
      <Compile Include="Assets\Scripts\Camera\PlayerCamera.cs" />
      <Compile Include="Assets\Scripts\Camera\UI3DCamera.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterActionManager.cs" />
+     <Compile Include="Assets\Scripts\Character\CharacterInputController.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterMotor.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterStatus.cs" />
-     <Compile Include="Assets\Scripts\Character\InputController.cs" />
      <Compile Include="Assets\Scripts\Character\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Cinematic\Cutscene.cs" />
      <Compile Include="Assets\Scripts\ControllerRefactor\AbilitySkill.cs" />
@@ -402,19 +402,23 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\HoverPopupGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\IntroGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\InventoryGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\ItemInfoBox.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ItemInfoBoxGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\LoadScreenController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\MainUIManager.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\MiniGameGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\NPCGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\PartyGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\PlayerShopGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\QuestGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\QuickInventoryGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\RewardsGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ShopGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemyCard.cs" />
      <Compile Include="Assets\Scripts\GUI\FriendBox.cs" />
      <Compile Include="Assets\Scripts\GUI\HoverButton.cs" />
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\MainSpeechBubble.cs" />
      <Compile Include="Assets\Scripts\GUI\NPCActivityButton.cs" />
      <Compile Include="Assets\Scripts\GUI\UiButtonBase.cs" />
      <Compile Include="Assets\Scripts\Item\EquipedItem.cs" />
@@ -426,6 +430,7 @@
      <Compile Include="Assets\Scripts\Item\UsableItem.cs" />
      <Compile Include="Assets\Scripts\Managers\ArenaManager.cs" />
      <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Managers\GlobalInputManager.cs" />
      <Compile Include="Assets\Scripts\Managers\JobManager.cs" />
      <Compile Include="Assets\Scripts\Managers\NetworkManager.cs" />
      <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />

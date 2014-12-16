@@ -163,7 +163,7 @@ public class Inventory  : BasicInventory
 		maximumItems = 50;
 	}
 
-	public void AddItem(InventoryItem item)
+	public void AddItem(InventoryItem item, int amount)
 	{
 		if (!DoYouHaveSpaceForThisItem(item))
 			return;
@@ -174,16 +174,16 @@ public class Inventory  : BasicInventory
 			{
 				if (inventoryItem.rpgItem.UniqueId == item.rpgItem.UniqueId && inventoryItem.Level == item.Level)
 				{
-					inventoryItem.CurrentAmount += item.CurrentAmount;
+					inventoryItem.CurrentAmount += amount;
 					return;
 				}
 			}
 			Items.Add(item);
-			Debug.LogWarning("ADDING ITEM: " + item.CurrentAmount + item.UniqueItemId + item.rpgItem.UniqueId);
+			Debug.LogWarning("ADDING ITEM: " + amount + item.UniqueItemId + item.rpgItem.UniqueId);
 		}
 		else
 		{
-			for(int index = 1; index <= item.CurrentAmount; index++)
+			for(int index = 1; index <= amount; index++)
 			{
 				InventoryItem newItem = new InventoryItem();
 				newItem.rpgItem = item.rpgItem;
@@ -236,15 +236,15 @@ public class Inventory  : BasicInventory
 		}
 	}
 
-	public bool RemoveItem(InventoryItem item)
+	public bool RemoveItem(InventoryItem item, int amount)
 	{
-		Debug.Log(item.UniqueItemId + item.CurrentAmount);
+		Debug.Log(item.UniqueItemId + amount);
 		for (int i = 0; i < Items.Count; i++) 
 		{
 			if(Items[i].UniqueItemId == item.UniqueItemId && Items[i].Level == item.Level)
 			{
 				Debug.Log(Items[i].CurrentAmount);
-				Items[i].CurrentAmount -= item.CurrentAmount;
+				Items[i].CurrentAmount -= amount;
 				Debug.Log(Items[i].CurrentAmount);
 				if(Items[i].CurrentAmount <= 0)
 					Items.RemoveAt(i);

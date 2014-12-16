@@ -13,20 +13,20 @@ public class NPC: MonoBehaviour
 	//public NPCActivity activity = null;
 	//public NPCMinigame miniGame = null;
 	public List<NPCActivity> activities;
-	public List<NPCActivity> _activities;
+	public List<NPCActivity> _availableActivities;
 	public List<NPCActivity> availableActivities
 	{
 		get{
-			_activities.Clear();
+			_availableActivities.Clear();
 			for (int i = 0; i < activities.Count; i++) {
 				if(activities[i].Validate())
 				{
 
-					_activities.Add(activities[i]);
+					_availableActivities.Add(activities[i]);
 				}
 					
 			}
-			return _activities;
+			return _availableActivities;
 		}
 	}
 	public GameObject trigger;
@@ -134,15 +134,6 @@ public class NPC: MonoBehaviour
         //PlayerManager.Instance.ActiveNPC = this;
         //Player.Instance.ActiveNPCName = character.Name;
 		GUIManager.Instance.DisplayNPC(this);
-        /*if(character.ShopID > 0)
-        {
-            if(thisShop == null)
-            {   
-                thisShop = Storage.LoadById<Shop>(character.ShopID, new Shop());
-            }
-            thisShop.PopulateItems();
-            //PlayerManager.Instance.ActiveShop = thisShop;
-        }*/
     }
     
     public IEnumerator HideNPC()

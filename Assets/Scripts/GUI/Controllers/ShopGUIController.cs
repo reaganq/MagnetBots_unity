@@ -5,23 +5,17 @@ using System.Collections.Generic;
 public class ShopGUIController : BasicGUIController {
 
 	//public Shop ActiveShop;
-	public List<InventoryItem> SelectedItemList;
-    public int _CurrentSelectedItemIndex = -1;
-	public int pageIndex = 0;
-	public ItemTileButton[] ItemTiles = new ItemTileButton[10];
-	public ItemTileButton[] CategoryButtons;
-	public int CurrentSelectedItemIndex {
-		get {
-			return (_CurrentSelectedItemIndex + pageIndex* ItemTiles.Length);
-		}
-	}
+	public List<InventoryItem> selectedItemList;
+    public int CurrentSelectedItemIndex = -1;
+	public List<ItemTileButton> itemTiles;
 
-	public GameObject Panel = null;
+	public GameObject itemTilePrefab;
     public GameObject InfoPanel = null;
 	public GameObject TransactionBox = null;
     public GameObject BuyButton = null;
 	public GameObject PreviousPageButton;
 	public GameObject NextPageButton;
+	public GameObject inventoryRoot;
     
     public UILabel ItemNameLabel = null;
     public UILabel ItemDescriptionLabel = null;
@@ -41,19 +35,19 @@ public class ShopGUIController : BasicGUIController {
 		activeShop = newShop;
         //OnInventoryPressed(0);
 		//ActiveShop = PlayerManager.Instance.ActiveShop;
-		Panel.SetActive(true);
 		ChangeShopMode(0);
 		ShopNameLabel.text = activeShop.Name;
+		Enable();
     }
 
 	public override void Disable()
 	{
-		Panel.SetActive(false);
+		base.Disable();
 	}
     
     public void OnItemTilePressed(int index)
     {
-        if(index == _CurrentSelectedItemIndex || index >= SelectedItemList.Count)
+        /*if(index == _CurrentSelectedItemIndex || index >= selectedItemList.Count)
         {
 			UpdateInfoPanel();
         }
@@ -68,8 +62,13 @@ public class ShopGUIController : BasicGUIController {
 
             //Player.Instance.currentItem 
         }
-		ResetQuantity();
+		ResetQuantity();*/
     }
+
+	public void CloseShop()
+	{
+		GUIManager.Instance.NPCGUI.HideShop();
+	}
 
 	public void ResetQuantity()
 	{
@@ -100,7 +99,7 @@ public class ShopGUIController : BasicGUIController {
 		}
 		else
 		{
-			activeShop.SellItem(SelectedItemList[CurrentSelectedItemIndex].rpgItem, SelectedItemList[CurrentSelectedItemIndex].Level, quantity);
+			activeShop.SellItem(selectedItemList[CurrentSelectedItemIndex].rpgItem, selectedItemList[CurrentSelectedItemIndex].Level, quantity);
 
 		}
   
@@ -112,26 +111,24 @@ public class ShopGUIController : BasicGUIController {
 	{
 		Debug.Log("changing shop mode" + index);
 
-		CategoryButtons[(int)CurrentShopMode].DeselectCategory();
+		//CategoryButtons[(int)CurrentShopMode].DeselectCategory();
 
 		if(index == 0)
 		{
 			CurrentShopMode = ShopMode.buy;
-			SelectedItemList = activeShop.ShopItems;
+			selectedItemList = activeShop.ShopItems;
 		}
 		else if(index == 1)
 		{
 			CurrentShopMode = ShopMode.sellNormal;
-			SelectedItemList = PlayerManager.Instance.Hero.MainInventory.Items;
+			selectedItemList = PlayerManager.Instance.Hero.MainInventory.Items;
 		}
 		else if(index == 2)
 		{
 			CurrentShopMode = ShopMode.sellArmor;
-			SelectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.Items;
+			selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.Items;
 		}
 
-		CategoryButtons[index].SelectCategory();
-		pageIndex = 0;
 		RefreshInventoryIcons();
 		ResetSelection();
 		UpdateInfoPanel();
@@ -139,97 +136,38 @@ public class ShopGUIController : BasicGUIController {
     
     public void RefreshInventoryIcons()
     {
-
-		for (int i = 0; i <  ItemTiles.Length; i++) {
-			if((i + pageIndex*ItemTiles.Length) >= SelectedItemList.Count)
-				ItemTiles[i].Hide();
+		int num = selectedItemList.Count - itemTiles.Count;
+		if(num>0)
+		{
+			for (int i = 0; i < num; i++) {
+				GameObject itemTile = NGUITools.AddChild(inventoryRoot, itemTilePrefab);
+				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
+				tileButton.index = itemTiles.Count + i;
+				itemTiles.Add(tileButton);
+			}
+		}
+		for (int i = 0; i < itemTiles.Count; i++) {
+			if(i>=selectedItemList.Count)
+			{
+				itemTiles[i].gameObject.SetActive(false);
+			}
 			else
 			{
-				ItemTiles[i].Show();
-				/*ItemTiles[i].LoadWithCover(SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.AtlasName, 
-				                           SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IconPath, 
-				                           SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount, 
-				                           SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IsUpgradeable,
-				                           SelectedItemList[(i + pageIndex*ItemTiles.Length)].Level,
-				                           SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemTradeable);*/
-				ItemTiles[i].LoadWithCover(SelectedItemList[(i + pageIndex*ItemTiles.Length)], SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemTradeable);
+				itemTiles[i].gameObject.SetActive(true);
+				itemTiles[i].LoadShopItem(selectedItemList[i]);
 			}
 		}
-
-		if(pageIndex == 0)
-			PreviousPageButton.SetActive(false);
-		else
-			PreviousPageButton.SetActive(true);
-
-		if(((pageIndex+1)*ItemTiles.Length) >= SelectedItemList.Count)
-		{
-			NextPageButton.SetActive(false);
-		}
-		else
-			NextPageButton.SetActive(true);
-
-		ResetQuantity();
-		/*if(CurrentShopMode == ShopMode.buy)
-		{
-	        for (int i = 0; i <  ItemTiles.Length; i++) {
-	            if((i + PageIndex*ItemTiles.Length) >= PlayerManager.Instance.ActiveShop.ShopItems.Count)
-	                ItemTiles[i].Hide();
-	            else
-	            {
-	                ItemTiles[i].Show();
-					ItemTiles[i].Load(PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.ActiveShop.ShopItems[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
-				}
-	        }
-		}
-
-		if(CurrentShopMode == ShopMode.sellNormal)
-		{
-			for (int i = 0; i <  ItemTiles.Length; i++) {
-				if((i + PageIndex*ItemTiles.Length) >= PlayerManager.Instance.Hero.MainInventory.Items.Count)
-					ItemTiles[i].Hide();
-				else
-				{
-					ItemTiles[i].Show();
-					ItemTiles[i].Load(PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.Hero.MainInventory.Items[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
-
-				}
-			}
-		}
-		if(CurrentShopMode == ShopMode.sellArmor)
-		{
-			for (int i = 0; i <  ItemTiles.Length; i++) {
-				if((i + PageIndex*ItemTiles.Length) >= PlayerManager.Instance.Hero.ArmoryInventory.Items.Count)
-					ItemTiles[i].Hide();
-				else
-				{
-					ItemTiles[i].Show();
-					ItemTiles[i].Load(PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.AtlasName, PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].rpgItem.IconPath, PlayerManager.Instance.Hero.ArmoryInventory.Items[(i + PageIndex*ItemTiles.Length)].CurrentAmount);
-				}
-			}
-		}*/
     }
 
 	public void ResetSelection()
 	{
-		for (int i = 0; i < ItemTiles.Length; i++) {
+		/*for (int i = 0; i < ItemTiles.Length; i++) {
 			ItemTiles[i].Deselect();
 				}
 		_CurrentSelectedItemIndex = -1;
 		/*for (int i = 0; i <  ItemTiles.Length; i++) {
 			ItemTiles[i].Unequip();
 		}*/
-	}
-
-	public void DisplayTransactionBox()
-	{
-		TransactionBox.SetActive(true);
-		ResetQuantity();
-		UpdatePriceLabel();
-	}
-
-	public void HideTransactionBox()
-	{
-		TransactionBox.SetActive(false);
 	}
     
     public void UpdateInfoPanel()
@@ -252,22 +190,16 @@ public class ShopGUIController : BasicGUIController {
 				ItemDescriptionLabel.text = PlayerManager.Hero.ArmoryInventory.Items[CurrentSelectedItemIndex].rpgItem.Description;
 			}*/
 
-			if(CurrentSelectedItemIndex >= SelectedItemList.Count)
+			if(CurrentSelectedItemIndex >= selectedItemList.Count)
 			{
 				ResetSelection();
 				UpdateInfoPanel();
 				return;
 			}
 
-			ItemNameLabel.text = SelectedItemList[CurrentSelectedItemIndex].rpgItem.Name;
-			ItemDescriptionLabel.text = SelectedItemList[CurrentSelectedItemIndex].rpgItem.Description;
+			ItemNameLabel.text = selectedItemList[CurrentSelectedItemIndex].rpgItem.Name;
+			ItemDescriptionLabel.text = selectedItemList[CurrentSelectedItemIndex].rpgItem.Description;
 
-			if(SelectedItemList[CurrentSelectedItemIndex].IsItemEquipped)
-			{
-				HideTransactionBox();
-			}
-			else
-				DisplayTransactionBox();
 		}
 		else
 		{
@@ -287,31 +219,14 @@ public class ShopGUIController : BasicGUIController {
 				ItemDescriptionLabel.text = activeShop.Description;
 	            ItemSkillDescriptionLabel.enabled = false;
 	        }
-			HideTransactionBox();
 		}
     }
-
-	public void NextPage()
-	{
-		pageIndex += 1;
-		RefreshInventoryIcons();
-		OnItemTilePressed(0);
-	}
-
-	public void PreviousPage()
-	{
-		pageIndex -= 1;
-		if(pageIndex < 0)
-			pageIndex = 0;
-		RefreshInventoryIcons();
-		OnItemTilePressed(0);
-	}
     
     public void IncreaseCount()
 	{
 		quantity += 1;
-		if(quantity > SelectedItemList[CurrentSelectedItemIndex].CurrentAmount)
-			quantity = SelectedItemList[CurrentSelectedItemIndex].CurrentAmount;
+		if(quantity > selectedItemList[CurrentSelectedItemIndex].CurrentAmount)
+			quantity = selectedItemList[CurrentSelectedItemIndex].CurrentAmount;
 		QuantityLabel.text = quantity.ToString();
 		UpdatePriceLabel();
 	}
@@ -328,9 +243,9 @@ public class ShopGUIController : BasicGUIController {
 	public void UpdatePriceLabel()
 	{
 		if(CurrentShopMode == ShopMode.buy)
-			PriceLabel.text = (SelectedItemList[CurrentSelectedItemIndex].rpgItem.BuyValue * quantity).ToString();
+			PriceLabel.text = (selectedItemList[CurrentSelectedItemIndex].rpgItem.BuyValue * quantity).ToString();
 		else
-			PriceLabel.text = (SelectedItemList[CurrentSelectedItemIndex].rpgItem.SellValue * quantity).ToString();
+			PriceLabel.text = (selectedItemList[CurrentSelectedItemIndex].rpgItem.SellValue * quantity).ToString();
 	}
 }
 

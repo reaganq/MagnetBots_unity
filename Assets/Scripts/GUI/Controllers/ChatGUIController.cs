@@ -62,16 +62,16 @@ public class ChatGUIController : BasicGUIController {
 		UpdateChatPanel();
 	}
 
-	public override void Enable()
+	public void OpenChatGUI()
 	{
 		animation.Play("OpenChatBox");
 	}
 
-	public override void Disable()
+	public void CloseChatGUI()
 	{
 		animation.Play("CloseChatBox");
 	}
-
+	
 	public void OnSubmit()
 	{
 		string text = NGUIText.StripSymbols(chatInput.value);
@@ -126,6 +126,7 @@ public class ChatGUIController : BasicGUIController {
 		friendsTable.gameObject.SetActive(false);
 		friendListControls.SetActive(false);
 		mainChatScrollBar.SetActive(true);
+		friendsListScrollBar.SetActive(true);
 		friendsListScrollBar.SetActive(false);
 	}
 

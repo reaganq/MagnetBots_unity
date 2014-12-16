@@ -27,8 +27,6 @@ public class MainUIManager : BasicGUIController {
 
 	public override void Enable()
 	{
-		Root.SetActive(true);
-
 		if(GameManager.Instance.inputType == InputType.TouchInput)
 		{
 			GameManager.Instance.joystick.enable = true;
@@ -38,18 +36,18 @@ public class MainUIManager : BasicGUIController {
 		UpdateCurrencyCount();
 		UpdatePartyMembers();
 		PlayerManager.Instance.avatarActionManager.EnableMovement();
+		base.Enable();
 	}
 
 	public override void Disable()
 	{
-		Debug.LogWarning("wtf");
-		Root.SetActive(false);
 		sideTray.SetActive(false);
 		if(GameManager.Instance.inputType == InputType.TouchInput)
 		{
 			GameManager.Instance.joystick.enable = false;
 		}
 		PlayerManager.Instance.avatarActionManager.DisableMovement();
+		base.Disable();
 	}
 
 	public override void Hide ()
@@ -90,7 +88,7 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnInventoryClick()
 	{
-		GUIManager.Instance.DisplayInventory();
+		GUIManager.Instance.DisplayQuickArmory();
 	}
 
 	public void OnSettingsClick()

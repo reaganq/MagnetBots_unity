@@ -10,7 +10,7 @@ public class CharacterMotor : MonoBehaviour {
     public CharacterStatus myStatus;
     public Animation animationTarget;
     public Avatar avatar;
-    public InputController input;
+    public CharacterInputController input;
 	public bool disableMovement;
     
     public Transform _myTransform;
@@ -48,7 +48,7 @@ public class CharacterMotor : MonoBehaviour {
     
 	void Awake () {
 	    controller=GetComponent<CharacterController>();
-        input = GetComponent<InputController>();
+        input = GetComponent<CharacterInputController>();
         avatar = GetComponent<Avatar>();
         myStatus = GetComponent<CharacterStatus>();
         _myTransform = transform;
@@ -81,7 +81,6 @@ public class CharacterMotor : MonoBehaviour {
 					if(Vector3.Angle( _myTransform.forward, _direction) < 1)
 					{
 						rotationTarget = null;
-						Debug.Log("hah");
 					}
 				}
 			}

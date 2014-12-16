@@ -13,6 +13,7 @@ public class PlayerInformation  {
     public Inventory MainInventory;
 	public Inventory ArmoryInventory;
 	public Inventory DepositBox;
+	public Inventory PlayerShop;
     /*public ArmoryInventory HeadInventory;
     public ArmoryInventory BodyInventory;
     public ArmoryInventory ArmLInventory;
@@ -21,7 +22,7 @@ public class PlayerInformation  {
 
     public Equipment Equip;
 	public QuestLog Quest;
-
+		
  	/*public int CurrentLevel;
 	public int CurrentXP;
 	public int CurrentLevelXP;
@@ -190,29 +191,34 @@ public class PlayerInformation  {
 
 	public void AddItem(InventoryItem item)
 	{
+		AddItem(item, item.CurrentAmount);
+	}
+
+	public void AddItem(InventoryItem item, int amount)
+	{
 		Debug.Log(item.rpgItem.UniqueId + item.Level + item.rpgItem.Stackable);
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
-			ArmoryInventory.AddItem(item);
+			ArmoryInventory.AddItem(item, amount);
 			if(NetworkManager.Instance.usingParse)
-			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
 		{
 			if(item.rpgItem.ID == 1)
 			{
-				AddCurrency(item.CurrentAmount, BuyCurrencyType.Magnets);
+				AddCurrency(amount, BuyCurrencyType.Magnets);
 			}
 			if(item.rpgItem.ID == 2)
 			{
-				AddCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
+				AddCurrency(amount, BuyCurrencyType.Crystals);
 			}
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
 		}
 		else
 		{
-			MainInventory.AddItem(item);
+			MainInventory.AddItem(item, amount);
 			if(NetworkManager.Instance.usingParse)
 				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
@@ -220,30 +226,35 @@ public class PlayerInformation  {
 
 	public void RemoveItem(InventoryItem item)
 	{
+		RemoveItem(item, item.CurrentAmount);
+	}
+
+	public void RemoveItem(InventoryItem item, int amount)
+	{
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
-			ArmoryInventory.RemoveItem(item);
+			ArmoryInventory.RemoveItem(item, amount);
 			if(NetworkManager.Instance.usingParse)
-			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
 		{
 			if(item.rpgItem.ID == 1)
 			{
-				RemoveCurrency(item.CurrentAmount, BuyCurrencyType.Magnets);
+				RemoveCurrency(amount, BuyCurrencyType.Magnets);
 			}
 			if(item.rpgItem.ID == 2)
 			{
-				RemoveCurrency(item.CurrentAmount, BuyCurrencyType.Crystals);
+				RemoveCurrency(amount, BuyCurrencyType.Crystals);
 			}
 			if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+				UpdateWalletParseData();
 		}
 		else
 		{
-			MainInventory.RemoveItem(item);
+			MainInventory.RemoveItem(item, amount);
 			if(NetworkManager.Instance.usingParse)
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 
@@ -288,6 +299,16 @@ public class PlayerInformation  {
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
     }
+
+	public void FeedPlayer(InventoryItem item)
+	{
+		Debug.Log("feed " + item.rpgItem.Name);
+	}
+
+	public void PlayToy(InventoryItem item)
+	{
+		Debug.Log("playing with toy " + item.rpgItem.Name);
+	}
     
     #endregion
 

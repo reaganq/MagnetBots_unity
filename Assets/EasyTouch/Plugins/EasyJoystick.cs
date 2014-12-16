@@ -61,7 +61,10 @@ public class EasyJoystick : MonoBehaviour {
 	public delegate void JoystickDoubleTapHandler(MovingJoystick move);
 	public delegate void JoystickTouchUpHandler(MovingJoystick move);
 	#endregion
-	
+
+	public bool isTouchStarted;
+	public bool isJoyStickDisplayed;
+
 	#region Event
 	/// <summary>
 	/// Occurs the joystick starts move.
@@ -922,10 +925,10 @@ public class EasyJoystick : MonoBehaviour {
 	
 	void OnGUI(){
 							
-		if (enable){
+		if ((enable && joystickValue.sqrMagnitude > 0 && !isJoyStickDisplayed) || (enable && isTouchStarted && isJoyStickDisplayed)){
 	
 			GUI.depth = guiDepth;
-			
+			isJoyStickDisplayed = true;
 			useGUILayout = isUseGuiLayout;
 			
 			if (dynamicJoystick && Application.isEditor && !Application.isPlaying){
@@ -1017,6 +1020,7 @@ public class EasyJoystick : MonoBehaviour {
 		}
 		else{
 			EasyTouch.RemoveReservedArea( areaRect );	
+			isJoyStickDisplayed = false;
 		}
 	}
 	
@@ -1387,6 +1391,8 @@ public class EasyJoystick : MonoBehaviour {
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 
 			if (isActivated){
+				//Debug.Log("touch started");
+				isTouchStarted = true;
 				if (!dynamicJoystick){
 				
 					Vector2 center = new Vector2( (anchorPosition.x+joystickCenter.x) * VirtualScreen.xRatio , (VirtualScreen.height-anchorPosition.y - joystickCenter.y) * VirtualScreen.yRatio);
@@ -1532,6 +1538,8 @@ public class EasyJoystick : MonoBehaviour {
 		
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 			if (isActivated){
+				//Debug.Log("touch ended");
+				isTouchStarted = false;
 				if (gesture.fingerIndex == joystickIndex){
 					joystickIndex=-1;
 					if (dynamicJoystick){

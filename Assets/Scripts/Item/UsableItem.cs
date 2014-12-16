@@ -22,7 +22,7 @@ public class UsableItem : BasicItem
  	public string IconPath;
     public string AtlasName;
 	public EquipmentSlots EquipmentSlotIndex; 
-
+	public bool isLimitedUse;
 
  //public Texture2D Icon;
  
@@ -35,11 +35,6 @@ public class UsableItem : BasicItem
         AtlasName = string.Empty;
  }
  
- public virtual bool UseItem()
- {
-     return false;
- }
-
     public bool CheckCondition()
  {
      /*foreach(Condition condition in UseConditions)

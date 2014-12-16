@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -114,7 +114,7 @@ public class AnvilGUIController : BasicGUIController {
 				UpgradeItem.UniqueItemId = tempItem.UniqueItemId;
 				UpgradeItem.Level = tempItem.Level;
 				UpgradeItem.CurrentAmount = 1;
-				UpgradeItemTile.Load(UpgradeItem);
+				UpgradeItemTile.LoadQuickInventoryItem(UpgradeItem);
 				hasItem = true;
 			}
 		}
@@ -130,7 +130,7 @@ public class AnvilGUIController : BasicGUIController {
 				MaterialItem.UniqueItemId = tempItem.UniqueItemId;
 				MaterialItem.Level = tempItem.Level;
 				MaterialItem.CurrentAmount = 1;
-				MaterialItemTile.Load(MaterialItem);
+				MaterialItemTile.LoadQuickInventoryItem(MaterialItem);
 				hasMaterial = true;
 			}
 		}
@@ -186,12 +186,12 @@ public class AnvilGUIController : BasicGUIController {
 			for (int i = 0; i <  ItemTiles.Length; i++) {
 				if((i + inventoryPageIndex*ItemTiles.Length) < ItemList.Count)
 				{
-					ItemTiles[i].Show();
-					ItemTiles[i].LoadWithCover(ItemList[(i + inventoryPageIndex*ItemTiles.Length)], ItemList[(i + inventoryPageIndex*ItemTiles.Length)].IsItemUpgradeable);
+					//ItemTiles[i].Show();
+					//ItemTiles[i].LoadWithCover(ItemList[(i + inventoryPageIndex*ItemTiles.Length)], ItemList[(i + inventoryPageIndex*ItemTiles.Length)].IsItemUpgradeable);
 				}
 				else
 				{
-					ItemTiles[i].Hide();
+					//ItemTiles[i].Hide();
 				}
 			}
 
@@ -213,8 +213,8 @@ public class AnvilGUIController : BasicGUIController {
 			for (int i = 0; i <  ItemTiles.Length; i++) {
 				if((i + upgradeMaterialsPageIndex*ItemTiles.Length) < MaterialsList.Count)
 				{
-					ItemTiles[i].Show();
-					ItemTiles[i].LoadWithCover(MaterialsList[(i + upgradeMaterialsPageIndex*ItemTiles.Length)], true);
+					//ItemTiles[i].Show();
+					//ItemTiles[i].LoadWithCover(MaterialsList[(i + upgradeMaterialsPageIndex*ItemTiles.Length)], true);
 				}
 				else
 				{
@@ -293,7 +293,7 @@ public class AnvilGUIController : BasicGUIController {
 		anvil.Sucess();
 		yield return new WaitForSeconds(2);
 		Debug.Log("SUCCESS");
-		FinalItemTile.Load(FinalItem);
+		FinalItemTile.LoadQuickInventoryItem(FinalItem);
 		CollectButton.SetActive(true);
 	}
 

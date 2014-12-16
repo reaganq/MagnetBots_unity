@@ -15,20 +15,81 @@ public class NPCGUIController : BasicGUIController {
 	public List<NPCActivity> activities;
 
 	public NPCActivity activeActivity;
+	public Shop activeShop;
+	public ShopGUIController shopGUI;
+	public NPCGUIState _state;
+	public NPCGUIState state
+	{
+		get{
+			return _state;
+		}
+		set{
+			cachedState = _state;
+			ExitState(_state);
+			_state = value;
+			EnterState(_state);
+		}
+	}
+	public NPCGUIState cachedState;
 
+	public void EnterState(NPCGUIState newState)
+	{
+		switch(newState)
+		{
+		case NPCGUIState.shop:
+
+			break;
+		case NPCGUIState.activityButtons:
+			DisplayActivityButtons();
+			break;
+		}
+	}
+
+	public void ExitState(NPCGUIState oldState)
+	{
+		switch(oldState)
+		{
+		case NPCGUIState.nothing:
+			break;
+		case NPCGUIState.activityButtons:
+			HideActivityButtons();
+			break;
+		case NPCGUIState.shop:
+			shopGUI.Disable();
+			break;
+		}
+	}
+
+	void Start()
+	{
+		_state = NPCGUIState.nothing;
+	}
 		
 	// Use this for initialization
 	// Update is called once per frame
 	public override void Enable()
     {
 		activities = PlayerManager.Instance.ActiveNPC.activities;
+		if(PlayerManager.Instance.ActiveNPC.character.defaultConversationID <= 0)
+			state = NPCGUIState.activityButtons;
+		base.Enable();
+    }
 
-		//textLabel.gameObject.SetActive(true);
-        textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
+	public override void Disable()
+	{
+		state= NPCGUIState.nothing;
+		//base.Disable();
+		GUIManager.Instance.HideNPCConversationBubble();
+		base.Disable();
+	}
+
+	public void DisplayActivityButtons()
+	{
+		textLabel.gameObject.SetActive(true);
+		textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
 
 		//check npc for override conversations
 		int num = activities.Count - activityButtons.Count;
-
 		if(num >0)
 		{
 			for (int i = 0; i < num; i++) {
@@ -47,66 +108,21 @@ public class NPCGUIController : BasicGUIController {
 				activityButtons[i].transform.localPosition = new Vector3(i*offset, -50, 0);
 			}
 		}
-
-		/*int numberOfButtons = 0;
-        if(PlayerManager.Instance.ActiveNPC.thisShop != null)
-        {
-            enterShopButton.SetActive(true);
-			enterShopButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
-			numberOfButtons += 1;
-			Debug.Log("shop here");
-        }
-        else
-        {
-            enterShopButton.SetActive(false);
-        }
-		if(PlayerManager.Instance.ActiveNPC.arena != null )
-        {
-            SetupArenaButton();
-            arenaButton.SetActive(true);
-			arenaButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
-			numberOfButtons += 1;
-			Debug.Log("arena here");
-        }
-        else
-        {
-            arenaButton.SetActive(false);
-        }
-		if(PlayerManager.Instance.ActiveNPC.activity.ID > 0 )
-		{
-			SetupActivityButton();
-			activityButton.SetActive(true);
-			activityButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
-			numberOfButtons += 1;
-			Debug.Log("activity here");
-		}
-		else
-		{
-			activityButton.SetActive(false);
-		}
-		if(PlayerManager.Instance.ActiveNPC.miniGame.ID > 0)
-		{
-			SetupMiniGameButton();
-			minigameButton.SetActive(true);
-			minigameButton.transform.localPosition = new Vector3(numberOfButtons*offset, -50, 0);
-			numberOfButtons += 1;
-			Debug.Log("minigame here");
-		}
-		else
-		{
-			minigameButton.SetActive(false);
-		}*/
-
-
-        confirmButton.SetActive(true);
+		confirmButton.SetActive(true);
 		confirmButton.transform.localPosition = new Vector3(activities.Count*offset, -50, 0);
 		//numberOfButtons +=1;
 		if(activities.Count>0)
-			activityButtonsParent.transform.localPosition = new Vector3(((activities.Count+1)*-0.5f*offset), 363, 0);
+			activityButtonsParent.transform.localPosition = new Vector3(((activities.Count)*-0.5f*offset), 363, 0);
 		else
 			activityButtonsParent.transform.localPosition = new Vector3(0, 363, 0);
-		base.Enable();
-    }
+		activityButtonsParent.SetActive(true);
+	}
+
+	public void HideActivityButtons()
+	{
+		textLabel.gameObject.SetActive(false);
+		activityButtonsParent.SetActive(false);
+	}
     
     public void OnConfirmButtonPressed()
     {
@@ -117,7 +133,12 @@ public class NPCGUIController : BasicGUIController {
 	public void OnActivityButtonPressed(int index)
 	{
 		activeActivity = activities[index];
-
+		switch(activeActivity.activityType)
+		{
+		case NPCActivityType.Shop:
+			DisplayShop((Shop)activeActivity);
+			break;
+		}
 		//load activity's conversation
 	}
     
@@ -175,10 +196,24 @@ public class NPCGUIController : BasicGUIController {
 		//activityLabel.text = PlayerManager.Instance.ActiveNPC.activity.Name;
 	}
 
-	public override void Disable()
+	public void DisplayShop(Shop newShop)
 	{
-		//textLabel.gameObject.SetActive(false);
-		//activities.Clear();
-		base.Disable();
+		state = NPCGUIState.shop;
+		shopGUI.Enable(newShop);
 	}
+
+	public void HideShop()
+	{
+		state = cachedState;
+	}
+	
+}
+
+public enum NPCGUIState
+{
+	nothing,
+	activityButtons,
+	shop,
+	quest,
+	arena,
 }

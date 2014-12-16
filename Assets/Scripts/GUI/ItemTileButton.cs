@@ -13,12 +13,12 @@ using UnityEngine;
 public class ItemTileButton: UIDragDropItem
 {
     public int index;
-	public GameObject target;
     
     public UISprite icon = null;
     public UISprite selectBorder = null;
 	public UISprite Cover = null;
 	public UISprite background = null;
+	public UISprite equippedIndicator = null;
     public UILabel amountLabel = null;
 	public UILabel LevelLabel = null;
     public bool IsEquipped = false;
@@ -27,39 +27,65 @@ public class ItemTileButton: UIDragDropItem
     public Color SelectedColor = Color.white;
 	public UISprite mainSprite;
 
+	public bool draggable;
+	public ItemTileType itemTileType;
 
+	private Vector2 lastPressDownPos;
+	public float movementThreshold = 5;
 	//bool mStarted = false;
 	//bool mHighlighted = false;
 
-	void Start () { //mStarted = true; 
-    }
-
-	//void OnEnable () { if (mStarted && mHighlighted) OnHover(UICamera.IsHighlighted(gameObject)); }
-
 	void OnPress (bool isPressed)
 	{
-		if(isPressed)
+		if (isPressed)
 		{
-			Debug.Log("pressed down on item tile");
+			lastPressDownPos = UICamera.lastTouchPosition;
 		}
-		else
-			Debug.Log("released item tile");
+		else 
+		{
+			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
+			{
+				if(itemTileType == ItemTileType.Shop)
+				{
+					//GUIManager.Instance.ShopGUI
+				}
+			}
+		}
+	}
+	
+	protected override void StartDragging ()
+	{
+		if(draggable)
+			base.StartDragging ();
+	}
+    
+	protected override void OnDragDropEnd ()
+	{
+		if(draggable)
+			base.OnDragDropEnd ();
 	}
 
-	/*void OnClick () { if (enabled && trigger == Trigger.OnClick) Send(); }
-
-	void OnDoubleClick () { if (enabled && trigger == Trigger.OnDoubleClick) Send(); }
-
-	void Send ()
+	protected override void OnDragDropRelease (GameObject surface)
 	{
-        //Debug.Log("send");
-		if (string.IsNullOrEmpty(functionName)) return;
-		//if (target == null) target = gameObject;
-  
-		    target.SendMessage(functionName, index, SendMessageOptions.DontRequireReceiver);
+		if(draggable)
+		{
+			if(surface != null)
+			{
+				ExampleDragDropSurface dds = surface.GetComponent<ExampleDragDropSurface>();
+				
+				if (dds != null)
+				{
+					if(itemTileType == ItemTileType.quickInventory)
+						GUIManager.Instance.QuickInventoryGUI.OnDragDrop(index);
+					// Destroy this icon as it's no longer needed
+					NGUITools.Destroy(gameObject);
+					return;
+				}
+			}
+			base.OnDragDropRelease (surface);
+		}
+	}
 
-	}*/
-    
     public void Select()
     {
         //if(!selectBorder.enabled)
@@ -90,7 +116,7 @@ public class ItemTileButton: UIDragDropItem
 		LevelLabel.enabled = false;
     }
 
-	public void Load(InventoryItem item)
+	public void LoadQuickInventoryItem(InventoryItem item)
 	{
 		if(!icon.enabled)
 			icon.enabled = true;
@@ -104,70 +130,78 @@ public class ItemTileButton: UIDragDropItem
 			LevelLabel.text = item.Level.ToString();
 			LevelLabel.enabled = true;
 		}
+		selectBorder.enabled = false;
+		/*if(item.IsItemEquipped)
+		{
+			equippedIndicator.enabled = true;
+		}*/
 		amountLabel.text = item.CurrentAmount.ToString();
 		amountLabel.enabled = true;
+		draggable = true;
+		itemTileType = ItemTileType.quickInventory;
 	}
 
-	public void LoadWithCover(InventoryItem item, bool condition)
+	public void LoadShopItem(InventoryItem item)
 	{
-		Load(item);
-
-		if(condition)
-			Cover.enabled = false;
-		else
-			Cover.enabled = true;
-	}
-    
-    public void Load(string atlaspath, string iconpath, int amount, bool displayLevel, int level )
-    {
-        if(!icon.enabled)
-            icon.enabled = true;
-        GameObject atlas = Resources.Load(atlaspath) as GameObject;
-        icon.atlas = atlas.GetComponent<UIAtlas>();
-        icon.spriteName = iconpath;
-		if(!displayLevel)
+		if(!icon.enabled)
+			icon.enabled = true;
+		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = item.rpgItem.IconPath;
+		if(!item.rpgItem.IsUpgradeable)
 			LevelLabel.enabled = false;
 		else
 		{
-			LevelLabel.text = level.ToString();
+			LevelLabel.text = item.Level.ToString();
 			LevelLabel.enabled = true;
 		}
-        amountLabel.text = amount.ToString();
+		selectBorder.enabled = false;
+		amountLabel.text = item.CurrentAmount.ToString();
 		amountLabel.enabled = true;
-    }
+		selectBorder.enabled = false;
+		itemTileType = ItemTileType.Shop;
+	}
 
-	public void LoadWithCover(string atlaspath, string iconpath, int amount, bool displayLevel, int level, bool coverState )
+	public void LoadInventoryItem(InventoryItem item)
 	{
-		Load(atlaspath, iconpath, amount, displayLevel, level);
-		if(coverState)
-			Cover.enabled = false;
+		if(!icon.enabled)
+			icon.enabled = true;
+		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = item.rpgItem.IconPath;
+		if(!item.rpgItem.IsUpgradeable)
+			LevelLabel.enabled = false;
 		else
-			Cover.enabled = true;
+		{
+			LevelLabel.text = item.Level.ToString();
+			LevelLabel.enabled = true;
+		}
+		selectBorder.enabled = false;
+		if(item.IsItemEquipped)
+		{
+			equippedIndicator.enabled = true;
+		}
+		amountLabel.text = item.CurrentAmount.ToString();
+		amountLabel.enabled = true;
+		draggable = false;
+		itemTileType = ItemTileType.Inventory;
 	}
     
     public void Equip()
     {
-        //selectBorder.color = EquippedColor;
-        Select();
-        IsEquipped = true;
+		equippedIndicator.enabled = false;
     }
     
     public void Unequip()
     {
-        //selectBorder.color = SelectedColor;
-        IsEquipped = false;
-        Deselect();
+		equippedIndicator.enabled = false;
     }
+}
 
-	public void SelectCategory()
-	{
-		mainSprite.color = SelectedColor;
-	}
-
-	public void DeselectCategory()
-	{
-		mainSprite.color = Color.grey;
-	}
-    
-    
+public enum ItemTileType
+{
+	quickInventory,
+	Inventory,
+	Shop,
+	Other,
 }

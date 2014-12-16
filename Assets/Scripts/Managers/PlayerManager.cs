@@ -62,7 +62,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject avatarObject;
 	public CharacterActionManager avatarActionManager;
     public Avatar avatar;
-    public InputController avatarInput;
+    public CharacterInputController avatarInput;
     public CharacterStatus avatarStatus;
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
@@ -139,13 +139,13 @@ public class PlayerManager : MonoBehaviour
 		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
 		//avatarObject.AddComponent<DontDestroy>();
 		avatarStatus = avatarObject.GetComponent<CharacterStatus>();
-		avatarInput = avatarObject.GetComponent<InputController>();
+		avatarInput = avatarObject.GetComponent<CharacterInputController>();
 		avatarActionManager = avatarObject.GetComponent<CharacterActionManager>();
 		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
 		cm.enabled = true;
 		//avatarInput.enabled = true;
 		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();
-		UICamera.fallThrough = avatarObject;
+		//UICamera.fallThrough = avatarObject;
 		avatar = avatarObject.GetComponent<Avatar>();
 		avatarPhotonView = avatarObject.GetComponent<PhotonView>();
 		RefreshAvatar();

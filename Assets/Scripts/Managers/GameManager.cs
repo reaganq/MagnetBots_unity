@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
 
-		#if UNITY_IPHONE || UNITY_EDITOR 
+		#if UNITY_IPHONE || UNITY_EDITOR || UNITY_STANDALONE
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour {
 		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GameObject.FindGameObjectWithTag("UICamera").camera;
 
         #endif
-		#if UNITY_WEBPLAYER || UNITY_STANDALONE
+		#if UNITY_WEBPLAYER 
         	inputType = InputType.WASDInput;
             //Debug.LogWarning("wasd");
             //joystick.gameObject.SetActive(false);

@@ -28,4 +28,12 @@ public class NPCActivityButton : MonoBehaviour {
 		index = i;
 	}
 
+	void OnPress(bool pressed)
+	{
+		if(!pressed)
+		{
+			GUIManager.Instance.NPCGUI.OnActivityButtonPressed(index);
+		}
+	}
+
 }

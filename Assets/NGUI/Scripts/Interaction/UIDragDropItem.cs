@@ -110,7 +110,7 @@ public class UIDragDropItem : MonoBehaviour
 			if (restriction == Restriction.Horizontal)
 			{
 				Vector2 delta = UICamera.currentTouch.totalDelta;
-				if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y)) return;
+				if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y)*0.5f) return;
 			}
 			else if (restriction == Restriction.Vertical)
 			{
