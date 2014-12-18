@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,15 +7,12 @@ public class QuickInventoryGUIController : BasicGUIController {
 	public GameObject itemTilePrefab;
 	public UIGrid gridPanel;
 	public GameObject inventoryPanelRoot;
-
-	public int inventoryMasterCategory = 1;
-	public int selectedInventorySubCategory = 0;
-	public GameObject armoryCategoryButtons;
-	public GameObject itemCategoryButtons;
-	public List<ItemTileButton> itemTiles;
 	
-    public QuickInventoryUICategory selectedInventoryCategory = QuickInventoryUICategory.None;
+	public List<ItemTileButton> itemTiles;
+    public ItemCategories selectedMainInventoryCategory = ItemCategories.None;
+	public List<ItemCategoryData> subCategories;
 	public List<InventoryItem> selectedItemList;
+	public List<CategoryButton> subcategoryButtons;
     public int currentSelectedSubcategory = 0;
     public int currentSelectedItemIndex = -1;
    // public ItemTileButton[] ItemTiles = new ItemTileButton[10];
@@ -34,29 +31,54 @@ public class QuickInventoryGUIController : BasicGUIController {
     //public UILabel ItemSkillDescriptionLabel = null;
     //public UISprite ItemSkillSprite = null;
     
-    public void Enable(QuickInventoryUICategory category)
+    public void Enable(ItemCategories category)
     {
-		Root.SetActive(true);
-		if(selectedInventoryCategory == category)
-        	OnSubcategoryPressed(currentSelectedSubcategory);
-		else
+		Enable();
+		selectedMainInventoryCategory = category;
+		//setup categories
+		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
-			selectedInventoryCategory = category;
-			OnSubcategoryPressed(0);
-		}
-		if(selectedInventoryCategory == QuickInventoryUICategory.Armors)
-		{
-			PlayerCamera.Instance.TransitionToInventory();
+			PlayerCamera.Instance.TransitionToQuickArmory();
 			PlayerManager.Instance.avatarStatus.Motor.RotateTo(PlayerCamera.Instance.quickArmoryPos);
+			subCategories = PlayerManager.Instance.data.GetSubcategories("Armor");
 		}
-        //Debug.Log("enable");   
+		else if(selectedMainInventoryCategory == ItemCategories.Food)
+		{
+			PlayerCamera.Instance.TransitionToQuickInventory();
+			subCategories = PlayerManager.Instance.data.GetSubcategories("Food");
+		}
+		else if(selectedMainInventoryCategory == ItemCategories.Toys)
+		{
+			PlayerCamera.Instance.TransitionToQuickInventory();
+			subCategories = PlayerManager.Instance.data.GetSubcategories("Toys");
+		}
+		SetupSubCategories();
+		OnCategoryPressed(0, 1);
     }
+
+	public void SetupSubCategories()
+	{
+		for (int i = 0; i < subcategoryButtons.Count; i++) {
+			if(i>=subCategories.Count)
+			{
+				subcategoryButtons[i].gameObject.SetActive(false);
+			}
+			else
+			{
+				subcategoryButtons[i].gameObject.SetActive(true);
+				subcategoryButtons[i].LoadCategoryButton(subCategories[i], i, 1);
+			}
+		}
+	}
 
 	public override void Disable()
 	{
-		if(selectedInventoryCategory == QuickInventoryUICategory.Armors)
-			PlayerCamera.Instance.TransitionToDefault();
-		Root.SetActive(false);
+		if(selectedMainInventoryCategory == ItemCategories.Armors)
+		{
+			PlayerManager.Instance.avatarStatus.Motor.RotationReset();
+		}
+		PlayerCamera.Instance.TransitionToDefault();
+		base.Disable();
 	}
     
 	public void OnBackButtonpressed()
@@ -64,18 +86,18 @@ public class QuickInventoryGUIController : BasicGUIController {
         GUIManager.Instance.HideQuickInventory();
     }
 
-	public void OnDragDrop(int index)
+	public override void OnDragDrop(int index)
 	{
 		Debug.Log("dropped " + index); 
-		if(selectedInventoryCategory == QuickInventoryUICategory.Armors)
+		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
 			PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(selectedItemList[index]);
 		}
-		else if(selectedInventoryCategory == QuickInventoryUICategory.Food)
+		else if(selectedMainInventoryCategory == ItemCategories.Food)
 		{
 			PlayerManager.Instance.Hero.FeedPlayer(selectedItemList[index]);
 		}
-		else if(selectedInventoryCategory == QuickInventoryUICategory.Toys)
+		else if(selectedMainInventoryCategory == ItemCategories.Toys)
 		{
 			PlayerManager.Instance.Hero.PlayToy(selectedItemList[index]);
 		}
@@ -135,44 +157,16 @@ public class QuickInventoryGUIController : BasicGUIController {
 		UpdateInfoPanel();
 	}*/
 
-    public void OnSubcategoryPressed(int index)
+	public override void OnCategoryPressed(int index, int level)
     {
         if(currentSelectedSubcategory != index)
- 			currentSelectedSubcategory = index;
-
-		RefreshItemList();
-		RefreshInventoryIcons();
-    }
-
-	public void RefreshItemList()
-	{
-		if(selectedInventoryCategory == QuickInventoryUICategory.Armors)
 		{
-			if(currentSelectedSubcategory == 0)
-			{
-				selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.Items;
-			}
-			if(currentSelectedSubcategory == 1)
-			{
-				selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.HeadItems;
-			}
-			if(currentSelectedSubcategory == 2)
-			{
-				selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.BodyItems;
-			}
-			if(currentSelectedSubcategory == 3)
-			{
-				selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmLItems;
-			}
-			if(currentSelectedSubcategory == 4)
-	        {
-	            selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.ArmRItems;
-	        }
-			if(currentSelectedSubcategory == 5)
-			{
-				selectedItemList = PlayerManager.Instance.Hero.ArmoryInventory.LegsItems;
-			}
+			subcategoryButtons[currentSelectedSubcategory].DeselectCategory();
+ 			currentSelectedSubcategory = index;
 		}
+		subcategoryButtons[index].SelectCategory();
+		selectedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
+		RefreshInventoryIcons();
     }
     
     public void RefreshInventoryIcons()
@@ -184,7 +178,6 @@ public class QuickInventoryGUIController : BasicGUIController {
 				GameObject itemTile = NGUITools.AddChild(inventoryPanelRoot, itemTilePrefab);
 				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
 				itemTiles.Add(tileButton);
-				tileButton.index = itemTiles.Count-1;
 			}
 		}
 		for (int i = 0; i < itemTiles.Count; i++) {
@@ -195,40 +188,9 @@ public class QuickInventoryGUIController : BasicGUIController {
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadQuickInventoryItem(selectedItemList[i]);
+				itemTiles[i].LoadItemTile(selectedItemList[i], this, InventoryGUIType.quickInventory, i);
 			}
 		}
-
-
-
-        /*for (int i = 0; i <  ItemTiles.Length; i++) {
-            if((i + pageIndex*ItemTiles.Length) < SelectedItemList.Count)
-			{
-				ItemTiles[i].Show();
-				/*ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.AtlasName, 
-				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.IconPath, 
-				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].CurrentAmount,
-				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].IsItemUpgradeable,
-				                  SelectedItemList[(i + pageIndex*ItemTiles.Length)].Level);*/
-				//ItemTiles[i].Load(SelectedItemList[(i + pageIndex*ItemTiles.Length)]);
-				//Debug.Log(i + SelectedItemList[(i + pageIndex*ItemTiles.Length)].rpgItem.Name);
-			/*}
-            else
-            {
-				ItemTiles[i].Hide();
-            }
-        }
-
-		if(pageIndex == 0)
-			PreviousPageButton.SetActive(false);
-		else
-			PreviousPageButton.SetActive(true);
-		if(((pageIndex+1)*ItemTiles.Length) >= SelectedItemList.Count)
-		{
-			NextPageButton.SetActive(false);
-		}
-		else
-			NextPageButton.SetActive(true);*/
     }
     
     /*public void RefreshSelection()
@@ -296,10 +258,3 @@ public class QuickInventoryGUIController : BasicGUIController {
     
 }
 
-public enum QuickInventoryUICategory
-{
-	None,
-	Armors,
-	Food,
-	Toys
-}

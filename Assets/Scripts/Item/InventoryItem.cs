@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class InventoryItem : ItemInWorld {
 	public bool IsItemEquipped = false;
-
+	public bool isItemViewed;
 	public bool IsItemTradeable
 	{
 		get
@@ -32,6 +32,7 @@ public class InventoryItem : ItemInWorld {
 public class ParseInventoryItem
 {
 	public bool IsItemEquipped;
+	public bool isItemViewed;
 	public string UniqueItemId;
 	public int Amount;
 	public int ItemLevel;

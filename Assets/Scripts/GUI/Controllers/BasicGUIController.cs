@@ -6,19 +6,37 @@ public class BasicGUIController : MonoBehaviour {
 	public UIPlayTween tween;
 	public GameObject Root;
 	public bool isDisplayed;
+	public bool autoPlay;
 
 	public virtual void Enable()
 	{
-		if(Root != null)
-			Root.SetActive(true);
 		isDisplayed = true;
+		if(tween != null && autoPlay)
+		{
+			tween.Play(isDisplayed);
+		}
+		else
+		{
+			if(Root != null)
+				Root.SetActive(true);
+
+		}
+
 	}
 
 	public virtual void Hide()
 	{
-		if(Root != null)
-			Root.SetActive(false);
 		isDisplayed = false;
+		if(tween != null && autoPlay)
+		{
+			tween.Play(isDisplayed);
+		}
+		else
+		{
+			if(Root != null)
+				Root.SetActive(false);
+		}
+
 	}
 
 	public virtual void Disable()
@@ -36,5 +54,18 @@ public class BasicGUIController : MonoBehaviour {
 	public virtual void Reset()
 	{
 	}
+
+	public virtual void OnCategoryPressed(int index, int level)
+	{
+	}
+	
+	public virtual void OnItemTilePressed(int index)
+	{
+	}
+
+	public virtual void OnDragDrop(int index)
+	{
+	}
+
 
 }

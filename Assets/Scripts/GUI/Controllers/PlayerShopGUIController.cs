@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -154,7 +154,7 @@ public class PlayerShopGUIController : BasicGUIController {
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadShopItem(selectedItemList[i]);
+				itemTiles[i].LoadItemTile(selectedItemList[i], this, InventoryGUIType.Playershop, i);
 			}
 		}
     }

@@ -68,6 +68,7 @@ public enum ItemType
 	Currency = 5,
 	UpgradeMaterials = 6,
 	Toys = 7,
+	Other = 8
 }
 
 public enum UsageSkillType

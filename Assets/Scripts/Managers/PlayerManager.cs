@@ -111,11 +111,6 @@ public class PlayerManager : MonoBehaviour
         //gameObject.AddComponent<GUIScale>();
     }
 
-	public void Start()
-	{
-		data = new GeneralData();
-	}
-
     public void StartNewGame()
     {
 		Debug.Log("start new game");

@@ -34,7 +34,7 @@ public class RewardsGUIController : BasicGUIController {
 			if(i < items.Count)
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadQuickInventoryItem(items[i]);
+				//itemTiles[i].LoadItemTile(items[i]);
 				itemTiles[i].transform.localPosition = new Vector3(index*offset, 0 ,0);
 				index ++;
 				Debug.Log(i);

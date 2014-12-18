@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -142,7 +142,6 @@ public class ShopGUIController : BasicGUIController {
 			for (int i = 0; i < num; i++) {
 				GameObject itemTile = NGUITools.AddChild(inventoryRoot, itemTilePrefab);
 				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
-				tileButton.index = itemTiles.Count + i;
 				itemTiles.Add(tileButton);
 			}
 		}
@@ -154,7 +153,7 @@ public class ShopGUIController : BasicGUIController {
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadShopItem(selectedItemList[i]);
+				itemTiles[i].LoadItemTile(selectedItemList[i], this, InventoryGUIType.Shop, i);
 			}
 		}
     }

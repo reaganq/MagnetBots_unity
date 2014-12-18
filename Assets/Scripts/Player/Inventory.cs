@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -156,7 +156,36 @@ public class Inventory  : BasicInventory
 		}
 	}
 
-	//types
+	public List<InventoryItem> FilteredItemByCategory(ItemType category)
+	{
+		List<InventoryItem> result = new List<InventoryItem>();
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].rpgItem.ItemCategory == category)
+				result.Add(Items[i]);
+		}
+		return result;
+	}
+
+	public List<InventoryItem> FilteredArmorBySlot(EquipmentSlots slot)
+	{
+		List<InventoryItem> result = new List<InventoryItem>();
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].rpgItem.EquipmentSlotIndex == slot)
+				result.Add(Items[i]);
+        }
+        return result;
+    }
+
+	public static List<InventoryItem> FilteredItemByLevel(List<InventoryItem> Items, int minLevel, int maxLevel)
+	{
+		List<InventoryItem> result = new List<InventoryItem>();
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].Level >= minLevel && Items[i].Level <= maxLevel)
+				result.Add(Items[i]);
+        }
+        return result;
+    }
+    //types
 
 	public Inventory() : base()
 	{
@@ -175,9 +204,11 @@ public class Inventory  : BasicInventory
 				if (inventoryItem.rpgItem.UniqueId == item.rpgItem.UniqueId && inventoryItem.Level == item.Level)
 				{
 					inventoryItem.CurrentAmount += amount;
+					inventoryItem.isItemViewed = false;
 					return;
 				}
 			}
+			item.isItemViewed = false;
 			Items.Add(item);
 			Debug.LogWarning("ADDING ITEM: " + amount + item.UniqueItemId + item.rpgItem.UniqueId);
 		}
@@ -190,6 +221,7 @@ public class Inventory  : BasicInventory
 				newItem.Level = item.Level;
 				newItem.UniqueItemId = item.rpgItem.UniqueId;
 				newItem.CurrentAmount = 1;
+				newItem.isItemViewed = false;
 				Items.Add(item);
 			}
 		}
@@ -202,6 +234,11 @@ public class Inventory  : BasicInventory
 	
 	public void AddItem(RPGItem itemToAdd, int level, int amount)
 	{
+		AddItem(itemToAdd, level, amount, false);
+	}
+
+	public void AddItem(RPGItem itemToAdd, int level, int amount, bool viewedState)
+	{
 		if (!DoYouHaveSpaceForThisItem(itemToAdd, level, amount))
 			return;
 		
@@ -212,6 +249,7 @@ public class Inventory  : BasicInventory
 				if (inventoryItem.rpgItem.UniqueId == itemToAdd.UniqueId && inventoryItem.Level == level)
 				{
 					inventoryItem.CurrentAmount += amount;
+					inventoryItem.isItemViewed = viewedState;
 					return;
 				}
 			}
@@ -220,6 +258,7 @@ public class Inventory  : BasicInventory
 			item.Level = level;
 			item.UniqueItemId = itemToAdd.UniqueId;
 			item.CurrentAmount = amount;
+			item.isItemViewed = viewedState;
 			Items.Add(item);
 		}
 		else
@@ -231,6 +270,7 @@ public class Inventory  : BasicInventory
 				item.Level = level;
 				item.UniqueItemId = itemToAdd.UniqueId;
 				item.CurrentAmount = 1;
+				item.isItemViewed = viewedState;
 				Items.Add(item);
 			}
 		}
@@ -311,6 +351,7 @@ public class Inventory  : BasicInventory
         if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)item.rpgItem, item.Level))
         {
             item.IsItemEquipped = true;
+			item.isItemViewed = true;
             return true;
         }
         else
@@ -326,6 +367,7 @@ public class Inventory  : BasicInventory
 				if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)Items[i].rpgItem, Items[i].Level))
 				{
 					Items[i].IsItemEquipped = true;
+					Items[i].isItemViewed = true;
 					return true;
 				}
 			}

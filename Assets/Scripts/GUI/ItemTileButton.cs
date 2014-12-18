@@ -13,14 +13,15 @@ using UnityEngine;
 public class ItemTileButton: UIDragDropItem
 {
     public int index;
-    
-    public UISprite icon = null;
-    public UISprite selectBorder = null;
-	public UISprite Cover = null;
-	public UISprite background = null;
-	public UISprite equippedIndicator = null;
-    public UILabel amountLabel = null;
-	public UILabel LevelLabel = null;
+	public BasicGUIController owner;
+    public UISprite icon;
+    public UISprite selectBorder;
+	public UISprite Cover;
+	public UISprite background;
+	public UISprite equippedIndicator;
+    public UILabel amountLabel;
+	public UILabel levelLabel;
+	public UISprite newItemGlow;
     public bool IsEquipped = false;
     
     public Color EquippedColor = Color.cyan;
@@ -28,7 +29,7 @@ public class ItemTileButton: UIDragDropItem
 	public UISprite mainSprite;
 
 	public bool draggable;
-	public ItemTileType itemTileType;
+	public InventoryGUIType itemTileType;
 
 	private Vector2 lastPressDownPos;
 	public float movementThreshold = 5;
@@ -45,10 +46,7 @@ public class ItemTileButton: UIDragDropItem
 		{
 			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
 			{
-				if(itemTileType == ItemTileType.Shop)
-				{
-					//GUIManager.Instance.ShopGUI
-				}
+				owner.OnItemTilePressed(index);
 			}
 		}
 	}
@@ -75,8 +73,7 @@ public class ItemTileButton: UIDragDropItem
 				
 				if (dds != null)
 				{
-					if(itemTileType == ItemTileType.quickInventory)
-						GUIManager.Instance.QuickInventoryGUI.OnDragDrop(index);
+					owner.OnDragDrop(index);
 					// Destroy this icon as it's no longer needed
 					NGUITools.Destroy(gameObject);
 					return;
@@ -113,10 +110,10 @@ public class ItemTileButton: UIDragDropItem
             selectBorder.enabled = false;
 		if(Cover != null && Cover.enabled)
 			Cover.enabled = false;
-		LevelLabel.enabled = false;
+		levelLabel.enabled = false;
     }
 
-	public void LoadQuickInventoryItem(InventoryItem item)
+	public void LoadGeneric(InventoryItem item)
 	{
 		if(!icon.enabled)
 			icon.enabled = true;
@@ -124,67 +121,43 @@ public class ItemTileButton: UIDragDropItem
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.rpgItem.IconPath;
 		if(!item.rpgItem.IsUpgradeable)
-			LevelLabel.enabled = false;
+			levelLabel.enabled = false;
 		else
 		{
-			LevelLabel.text = item.Level.ToString();
-			LevelLabel.enabled = true;
+			levelLabel.text = item.Level.ToString();
+			levelLabel.enabled = true;
 		}
-		selectBorder.enabled = false;
-		/*if(item.IsItemEquipped)
-		{
-			equippedIndicator.enabled = true;
-		}*/
 		amountLabel.text = item.CurrentAmount.ToString();
 		amountLabel.enabled = true;
-		draggable = true;
-		itemTileType = ItemTileType.quickInventory;
+		selectBorder.enabled = false;
 	}
 
-	public void LoadShopItem(InventoryItem item)
+	public void LoadItemTile(InventoryItem item, BasicGUIController newOwner, InventoryGUIType type, int i)
 	{
-		if(!icon.enabled)
-			icon.enabled = true;
-		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
-		icon.atlas = atlas.GetComponent<UIAtlas>();
-		icon.spriteName = item.rpgItem.IconPath;
-		if(!item.rpgItem.IsUpgradeable)
-			LevelLabel.enabled = false;
-		else
+		index = i;
+		owner = newOwner;
+		LoadGeneric(item);
+		itemTileType = type;
+		switch (type)
 		{
-			LevelLabel.text = item.Level.ToString();
-			LevelLabel.enabled = true;
+		case InventoryGUIType.Inventory:
+			draggable = false;
+			newItemGlow.enabled = !item.isItemViewed;
+			break;
+		case InventoryGUIType.quickInventory:
+			draggable = true;
+			newItemGlow.enabled = false;
+			break;
+		case InventoryGUIType.Shop:
+			draggable = false;
+			newItemGlow.enabled = false;
+			break;
 		}
-		selectBorder.enabled = false;
-		amountLabel.text = item.CurrentAmount.ToString();
-		amountLabel.enabled = true;
-		selectBorder.enabled = false;
-		itemTileType = ItemTileType.Shop;
 	}
 
-	public void LoadInventoryItem(InventoryItem item)
+	public void setDraggable(bool state)
 	{
-		if(!icon.enabled)
-			icon.enabled = true;
-		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
-		icon.atlas = atlas.GetComponent<UIAtlas>();
-		icon.spriteName = item.rpgItem.IconPath;
-		if(!item.rpgItem.IsUpgradeable)
-			LevelLabel.enabled = false;
-		else
-		{
-			LevelLabel.text = item.Level.ToString();
-			LevelLabel.enabled = true;
-		}
-		selectBorder.enabled = false;
-		if(item.IsItemEquipped)
-		{
-			equippedIndicator.enabled = true;
-		}
-		amountLabel.text = item.CurrentAmount.ToString();
-		amountLabel.enabled = true;
-		draggable = false;
-		itemTileType = ItemTileType.Inventory;
+		draggable = state;
 	}
     
     public void Equip()
@@ -196,12 +169,4 @@ public class ItemTileButton: UIDragDropItem
     {
 		equippedIndicator.enabled = false;
     }
-}
-
-public enum ItemTileType
-{
-	quickInventory,
-	Inventory,
-	Shop,
-	Other,
 }

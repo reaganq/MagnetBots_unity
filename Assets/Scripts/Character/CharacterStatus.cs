@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class CharacterStatus : MonoBehaviour {
+public class CharacterStatus : CharacterAttributes {
 
 	public string characterName;
 	public bool isAI = false;
@@ -28,7 +28,7 @@ public class CharacterStatus : MonoBehaviour {
 
 	public bool isAlive()
 	{
-		if(CurrentHealth <= 0)
+		if(curHealth <= 0)
 			return false;
 		else
 			return true;
@@ -45,7 +45,7 @@ public class CharacterStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-        CurrentHealth = MaxHealth;
+		curHealth = maxHealth;
 		myPhotonView = GetComponent<PhotonView>();
 		Collider[] colliders = GetComponentsInChildren<Collider>();
 		for (int i = 0; i <	colliders.Length; i++) 
@@ -123,11 +123,11 @@ public class CharacterStatus : MonoBehaviour {
 	
     public void ReceiveDamage(float damage)
     {
-		if(CurrentHealth >0)
+		if(curHealth >0)
 		{
-	        CurrentHealth -= damage;
-			Debug.Log("currentHP: "+CurrentHealth);
-	        if(CurrentHealth <= 0)
+			curHealth -= damage;
+			Debug.Log("currentHP: "+curHealth);
+			if(curHealth <= 0)
 	        {
 				if(isAI)
 				{
@@ -145,13 +145,13 @@ public class CharacterStatus : MonoBehaviour {
 	[RPC]
 	public void NetworkSyncHealth(float damage)
 	{
-		if(CurrentHealth >0)
+		if(curHealth >0)
 		{
-			CurrentHealth -= damage;
-			Debug.Log("currentHP: "+CurrentHealth);
+			curHealth -= damage;
+			Debug.Log("currentHP: "+curHealth);
 			if(myPhotonView.isMine)
 			{
-				if(CurrentHealth <= 0)
+				if(curHealth <= 0)
 				{
 					if(isAI)
 					{
@@ -168,16 +168,16 @@ public class CharacterStatus : MonoBehaviour {
 
     public void Heal(int hp)
     {
-        CurrentHealth += hp;
-        if(CurrentHealth > MaxHealth)
+        curHealth += hp;
+		if(curHealth > maxHealth)
         {
-            CurrentHealth = MaxHealth;
+			curHealth = maxHealth;
         }
     }
 
     public void ChangeMovementSpeed(float change)
     {
-        movementSpeed += change;
+        curMovementSpeed += change;
         if(ActionManager != null)
         {
             ActionManager.motor.AnimationUpdate();

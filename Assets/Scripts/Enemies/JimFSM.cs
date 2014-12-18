@@ -254,7 +254,7 @@ public class JimFSM : SimpleFSM {
 	            availableTargets.Add(alltargets[i]);
 	            Debug.Log("adding player");
 	        }*/
-			if(alltargets[i] != null && alltargets[i].CurrentHealth > 0 )
+			if(alltargets[i] != null && alltargets[i].curHealth > 0 )
 	        {
 	            //availableTargets.Remove(alltargets[i]);
 				availableTargets.Add(alltargets[i]);

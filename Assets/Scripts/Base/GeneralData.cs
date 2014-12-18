@@ -2,11 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GeneralData{
+public class GeneralData: MonoBehaviour{
 
 	public List<RPGQuest> quests;
+	public List<ItemCategoryData> itemCategories;
 	// Use this for initialization
-	public GeneralData()
+	public void Awake()
 	{
 		quests = Storage.Load<RPGQuest>(new RPGQuest());
 		Debug.Log(quests.Count + "quests");
@@ -20,4 +21,21 @@ public class GeneralData{
 		}
 		return null;
 	}
+
+	public List<ItemCategoryData> GetSubcategories(string category)
+	{
+		for (int i = 0; i < itemCategories.Count; i++) {
+			if(itemCategories[i].name == category)
+				return itemCategories[i].subcategories;
+		}
+		return null;
+	}
+}
+
+[System.Serializable]
+public class ItemCategoryData
+{
+	public string name;
+	public string iconName;
+	public List<ItemCategoryData> subcategories;
 }

@@ -17,6 +17,7 @@ public class NPCGUIController : BasicGUIController {
 	public NPCActivity activeActivity;
 	public Shop activeShop;
 	public ShopGUIController shopGUI;
+	public ArenaGUIController arenaGUI;
 	public NPCGUIState _state;
 	public NPCGUIState state
 	{
@@ -216,4 +217,5 @@ public enum NPCGUIState
 	shop,
 	quest,
 	arena,
+	bank,
 }

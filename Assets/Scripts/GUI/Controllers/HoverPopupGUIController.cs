@@ -164,14 +164,17 @@ public class HoverPopupGUIController : BasicGUIController {
 
 	public void OpenArmory()
 	{
+		GUIManager.Instance.DisplayQuickInventory(ItemCategories.Armors);
 	}
 
 	public void OpenFood()
 	{
+		GUIManager.Instance.DisplayQuickInventory(ItemCategories.Food);
 	}
 
 	public void OpenToys()
 	{
+		GUIManager.Instance.DisplayQuickInventory(ItemCategories.Toys);
 	}
 
 	public void Update()

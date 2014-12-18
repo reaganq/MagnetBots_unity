@@ -22,7 +22,7 @@ public class CharacterMotor : MonoBehaviour {
     public bool canRotate = true;
     
     public Vector3 dir;
-	public Transform rotationTarget;
+	public Vector3 rotationTarget;
     //public Vector3[] speed = new Vector3[2];
     
     //public float Speed;
@@ -36,6 +36,7 @@ public class CharacterMotor : MonoBehaviour {
     //public float runSpeed;
 
     //----- DON'T TOUCH -----//
+	public Vector3 cachedRotation;
     public Vector3 characterVelocity;
     public Vector3 horizontalVelocity;
     public float currentSpeed;
@@ -69,23 +70,24 @@ public class CharacterMotor : MonoBehaviour {
 			{
 	            UpdateFunction();
 	            AnimationUpdate();
+
 			}
-			else
-			{
-				if(rotationTarget != null)
-				{
-					Vector3 _direction = (rotationTarget.position - _myTransform.position).normalized;
-					_direction.y = 0;
-					Quaternion _lookrotation = Quaternion.LookRotation(_direction);
-					_myTransform.rotation = Quaternion.Slerp(_myTransform.rotation, _lookrotation, Time.deltaTime*myStatus.rotationSpeed);
-					if(Vector3.Angle( _myTransform.forward, _direction) < 1)
-					{
-						rotationTarget = null;
-					}
-				}
-			}
+			if(characterVelocity == Vector3.zero && rotationTarget != Vector3.zero)
+				ManipulateRotate();
         }
         
+	}
+
+	void ManipulateRotate()
+	{
+		Vector3 _direction = (rotationTarget - _myTransform.position).normalized;
+		_direction.y = 0;
+		Quaternion _lookrotation = Quaternion.LookRotation(_direction);
+		_myTransform.rotation = Quaternion.Slerp(_myTransform.rotation, _lookrotation, Time.deltaTime*myStatus.rotationSpeed);
+		if(Vector3.Angle( _myTransform.forward, _direction) < 1)
+		{
+			rotationTarget = Vector3.zero;
+		}
 	}
 
 	void LateUpdate()
@@ -107,7 +109,13 @@ public class CharacterMotor : MonoBehaviour {
 
 	public void RotateTo(Transform target)
 	{
-		rotationTarget = target;
+		cachedRotation = _myTransform.forward + _myTransform.position;
+		rotationTarget = target.position;
+	}
+
+	public void RotationReset()
+	{
+		rotationTarget = cachedRotation;
 	}
     
     Vector3 direction;

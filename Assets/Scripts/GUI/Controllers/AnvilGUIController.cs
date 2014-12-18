@@ -108,14 +108,14 @@ public class AnvilGUIController : BasicGUIController {
 				return;
 			else
 			{
-				InventoryItem tempItem = ItemList[index+inventoryPageIndex*ItemTiles.Length];
+				/*InventoryItem tempItem = ItemList[index+inventoryPageIndex*ItemTiles.Length];
 				UpgradeItem = new InventoryItem();
 				UpgradeItem.rpgItem = tempItem.rpgItem;
 				UpgradeItem.UniqueItemId = tempItem.UniqueItemId;
 				UpgradeItem.Level = tempItem.Level;
 				UpgradeItem.CurrentAmount = 1;
-				UpgradeItemTile.LoadQuickInventoryItem(UpgradeItem);
-				hasItem = true;
+				UpgradeItemTile.LoadItemTile(UpgradeItem);
+				hasItem = true;*/
 			}
 		}
 		if(state == 2)
@@ -124,14 +124,14 @@ public class AnvilGUIController : BasicGUIController {
 				return;
 			else
 			{
-				InventoryItem tempItem = MaterialsList[index+upgradeMaterialsPageIndex*ItemTiles.Length];
+				/*InventoryItem tempItem = MaterialsList[index+upgradeMaterialsPageIndex*ItemTiles.Length];
 				MaterialItem = new InventoryItem();
 				MaterialItem.rpgItem = tempItem.rpgItem;
 				MaterialItem.UniqueItemId = tempItem.UniqueItemId;
 				MaterialItem.Level = tempItem.Level;
 				MaterialItem.CurrentAmount = 1;
-				MaterialItemTile.LoadQuickInventoryItem(MaterialItem);
-				hasMaterial = true;
+				MaterialItemTile.LoadItemTile(MaterialItem);
+				hasMaterial = true;*/
 			}
 		}
 
@@ -293,7 +293,7 @@ public class AnvilGUIController : BasicGUIController {
 		anvil.Sucess();
 		yield return new WaitForSeconds(2);
 		Debug.Log("SUCCESS");
-		FinalItemTile.LoadQuickInventoryItem(FinalItem);
+		//FinalItemTile.LoadItemTile(FinalItem);
 		CollectButton.SetActive(true);
 	}
 

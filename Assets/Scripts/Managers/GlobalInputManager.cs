@@ -30,6 +30,7 @@ public class GlobalInputManager : MonoBehaviour {
 				{
 					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 5f)
 					{
+						Debug.Log("clicking");
 						Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
 						RaycastHit hit;
 						if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))

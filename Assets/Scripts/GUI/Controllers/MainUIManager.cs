@@ -88,7 +88,7 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnInventoryClick()
 	{
-		GUIManager.Instance.DisplayQuickArmory();
+		GUIManager.Instance.DisplayInventory();
 	}
 
 	public void OnSettingsClick()

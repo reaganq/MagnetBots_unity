@@ -421,6 +421,7 @@ public class PlayerInformation  {
 			item.UniqueItemId = invent.Items[i].UniqueItemId;
 			item.Amount = invent.Items[i].CurrentAmount;
 			item.ItemLevel = invent.Items[i].Level;
+			item.isItemViewed = invent.Items[i].isItemViewed;
 			items.Add(item);
 		}
 		//return items
@@ -438,13 +439,13 @@ public class PlayerInformation  {
 		{
 			if(items[i].UniqueItemId.IndexOf("ARMOR") != -1)
 			{
-				inventory.AddItem(Storage.LoadbyUniqueId<RPGArmor>(items[i].UniqueItemId, new RPGArmor()), items[i].ItemLevel, items[i].Amount);
+				inventory.AddItem(Storage.LoadbyUniqueId<RPGArmor>(items[i].UniqueItemId, new RPGArmor()), items[i].ItemLevel, items[i].Amount, items[i].isItemViewed);
 				if(items[i].IsItemEquipped)
 					inventory.EquipItem(items[i].UniqueItemId, items[i].ItemLevel);
 			}
 			else if(items[i].UniqueItemId.IndexOf("ITEM") != -1)
 			{
-				inventory.AddItem(Storage.LoadbyUniqueId<RPGItem>(items[i].UniqueItemId, new RPGItem()), items[i].ItemLevel, items[i].Amount);
+				inventory.AddItem(Storage.LoadbyUniqueId<RPGItem>(items[i].UniqueItemId, new RPGItem()), items[i].ItemLevel, items[i].Amount, items[i].isItemViewed);
 			}
 		}
 	}

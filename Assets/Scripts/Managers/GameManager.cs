@@ -29,11 +29,12 @@ public class GameManager : MonoBehaviour {
     public InputType inputType;
     public GameObject characterJoyStick;
     public EasyJoystick joystick;
+	public float defaultAspectRatio;
+	public float nativeAspectRatio;
 
     public bool GameIsPaused;
     public bool GameHasStarted;
 	public bool teststate;
-
 
     void Awake()
     {
@@ -53,8 +54,8 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(this);
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
-
-		#if UNITY_IPHONE || UNITY_EDITOR || UNITY_STANDALONE
+		Debug.LogWarning("WTF");
+		#if UNITY_IPHONE || UNITY_STANDALONE
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
@@ -73,13 +74,15 @@ public class GameManager : MonoBehaviour {
         #if UNITY_ANDROID && !UNITY_EDITOR
             inputType = InputType.WASDInput;
         #endif
-        
+
     }
 
     void Start()
     {
 		if(Application.loadedLevel == 0)
         	OnLevelWasLoaded(Application.loadedLevel);
+		defaultAspectRatio = 2048.0f/1536.0f;
+		nativeAspectRatio = ((float)Screen.width)/((float)Screen.height);
     }
 
     public void OnLevelWasLoaded(int level)

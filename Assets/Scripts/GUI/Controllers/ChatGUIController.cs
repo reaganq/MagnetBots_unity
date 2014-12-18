@@ -65,6 +65,7 @@ public class ChatGUIController : BasicGUIController {
 	public void OpenChatGUI()
 	{
 		animation.Play("OpenChatBox");
+		GUIManager.Instance.HideHoverPopup();	
 	}
 
 	public void CloseChatGUI()

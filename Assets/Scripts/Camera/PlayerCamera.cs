@@ -33,6 +33,8 @@ public class PlayerCamera: MonoBehaviour {
 	private Job movementJob;
 
 	private Transform newTransform;
+
+	public float quickInventoryCameraRectOffset;
     //private Vector3 offsetPosition;
     
     //public float rotationSpeed = 50;
@@ -65,110 +67,67 @@ public class PlayerCamera: MonoBehaviour {
             DontDestroyOnLoad(this);
         }
 
-        //childTransform = transform.GetChild(0).transform;
         _myTransform = this.transform;
-        //outputAngleVector = new Vector2(0,0);
-        //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
+
+
+	}
+
+	void Start()
+	{
+		quickInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-1090/2048)*100) / 100;
+		Debug.Log(Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-1090/2048)*100));
+		Debug.Log(quickInventoryCameraRectOffset);
 	}
     
-    /*void OnEnable(){
-        EasyJoystick.On_JoystickMove += On_JoystickMove;
-        EasyJoystick.On_JoystickMoveEnd += On_JoystickMoveEnd;
-    }
- 
-    void OnDisable(){
-        EasyJoystick.On_JoystickMove -= On_JoystickMove ;
-        EasyJoystick.On_JoystickMoveEnd -= On_JoystickMoveEnd;
-    }
-     
-    void OnDestroy(){
-        EasyJoystick.On_JoystickMove -= On_JoystickMove;    
-        EasyJoystick.On_JoystickMoveEnd -= On_JoystickMoveEnd;
-    }
-	
-    void On_JoystickMove( MovingJoystick move )
-    {
-        if(move.joystickName == "CharacterJoystick")
-        {
-            //move.joystickAxis
-            outputAngleVector = move.joystickAxis;
-        }
-    }
-    
-    void On_JoystickMoveEnd( MovingJoystick move )
-    {
-        if(move.joystickName == "CharacterJoystick")
-            outputAngleVector = new Vector2(0,0);
-    }*/
-
-    
-	// Update is called once per frame
 	void LateUpdate () {
-        
-        //outputAngle = Mathf.Atan2(joystick.JoystickAxis.x, joystick.JoystickAxis.y);
         
         if(targetTransform != null)
             _myTransform.position = targetTransform.position;
-        //camRotation = new Vector2(Mathf.Sin(outputAngle), Mathf.Cos(outputAngle));
-        //camRotation.x *= rotationSpeed;
-        //camRotation *= Time.deltaTime;
-        
-        
-        //pivotTransform.Rotate(0, camRotation.x, 0, Space.World );
-        
-        
-        /*var camRotation = new Vector2(Mathf.Sin(joystickCircle.outputAngleRad) , Mathf.Cos(joystickCircle.outputAngleRad));
- camRotation.x *= rotationSpeed.x;
- camRotation.y *= rotationSpeed.y;
- camRotation *= Time.deltaTime;
- 
- // Rotate around the character horizontally in world, but use local space
- // for vertical rotation
- cameraPivot.Rotate( 0, camRotation.x, 0, Space.World );
- cameraPivot.Rotate( camRotation.y * -5, 0, 0 );*/
         
     }
 
-	public void TransitionToInventory()
+	public void TransitionToQuickArmory()
 	{
-		if(movementJob != null)
-			movementJob.kill();
+		TransitionTo(quickArmoryPos, 40, 0.8f, quickInventoryCameraRectOffset);
+	}
 
-		movementJob = Job.make(MoveTo(quickArmoryPos, 40, 1), true);
-		//StartCoroutine(MoveTo(inventoryPos, 40, 1));
+	public void TransitionToQuickInventory()
+	{
+		TransitionTo(defaultPos, 60, 0.8f, quickInventoryCameraRectOffset);
 	}
 
 	public void TransitionToDefault()
 	{
-		if(movementJob != null)
-			movementJob.kill();
-		
-		movementJob = Job.make(MoveTo(defaultPos, 60, 1), true);
+		TransitionTo(defaultPos, 60, 0.55f, 0);
 		//StartCoroutine(MoveTo(defaultPos, 60, 1));
 	}
 
-	public void TransitionTo(Transform newTrans, float fov, float duration)
+	public void TransitionTo(Transform newTrans, float fov, float duration, float offset)
 	{
 		if(movementJob != null)
 			movementJob.kill();
 		
-		movementJob = Job.make(MoveTo(newTrans, fov, duration), true);
+		movementJob = Job.make(MoveTo(newTrans, fov, duration, offset), true);
         //StartCoroutine(MoveTo(newTrans, fov, duration));
 	}
 
-	public IEnumerator MoveTo(Transform newTrans, float fov, float duration)
+	public IEnumerator MoveTo(Transform newTrans, float fov, float duration, float offset)
 	{
 		float startTime = Time.time;
+		//Vector4 curRect = childCamera.rect;
+		//Vector4 newRect = new Vector4(offset, curRect.y, curRect.z, curRect.w);
 		while(Time.time < startTime + duration)
 		{
 			childTransform.position = Vector3.Lerp(childTransform.position, newTrans.position, (Time.time - startTime)/duration);
 			childTransform.rotation = Quaternion.Lerp(childTransform.rotation, newTrans.rotation, (Time.time - startTime)/duration);
 			childCamera.fieldOfView = Mathf.Lerp(childCamera.fieldOfView, fov, (Time.time - startTime)/duration);
+			childCamera.rect = new Rect(Mathf.Lerp(childCamera.rect.x, offset, (Time.time - startTime)/duration), childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
 			yield return null;
 		}
 		childTransform.position = newTrans.position;
 		childTransform.rotation = newTrans.rotation;
 		childCamera.fieldOfView = fov;
+		childCamera.rect = new Rect(offset, childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
 		yield return null;
 
 	}

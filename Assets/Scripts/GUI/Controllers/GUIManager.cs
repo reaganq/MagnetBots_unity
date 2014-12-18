@@ -31,23 +31,17 @@ public class GUIManager : MonoBehaviour {
     
     public Transform UICameraRoot = null;
     
-    public bool CanShowInventory = true;
-    public bool CanShowShop = true;
-    public bool CanShowNPC = true;
-
-	public AnvilGUIController AnvilGUI = null;
-    public QuickInventoryGUIController QuickInventoryGUI = null;
-    public MainUIManager MainGUI = null;
-	public PartyGUIController PartyGUI = null;
-	public ArenaGUIController ArenaGUI = null;
-    public ShopGUIController ShopGUI = null;
-    public NPCGUIController NPCGUI = null;
-    public IntroGUIController IntroGUI = null;
-	public LoadScreenController loadingGUI = null;
-	public MiniGameGUIController minigameGUI = null;
-	public RewardsGUIController rewardsGUI = null;
-	public ChatGUIController chatGUI = null;
-	public HoverPopupGUIController hoverPopupGUI = null;
+	public InventoryGUIController InventoryGUI;
+    public QuickInventoryGUIController QuickInventoryGUI;
+    public MainUIManager MainGUI;
+	public PartyGUIController PartyGUI;
+    public PlayerShopGUIController PlayerShopGUI;
+    public NPCGUIController NPCGUI;
+    public IntroGUIController IntroGUI;
+	public LoadScreenController loadingGUI;
+	public RewardsGUIController rewardsGUI;
+	public ChatGUIController chatGUI;
+	public HoverPopupGUIController hoverPopupGUI;
 	public MainSpeechBubble mainNPCSpeechBubble;
 
 	public Transform minigameUIRoot;
@@ -59,7 +53,7 @@ public class GUIManager : MonoBehaviour {
     
     //public GameObject ActionButtons = null;
     
-	private UIState _uistate = UIState.idle;
+	public UIState _uistate = UIState.idle;
 	public UIState cachedState = UIState.idle;
 	public UIState uiState
 	{
@@ -127,35 +121,15 @@ public class GUIManager : MonoBehaviour {
 		case UIState.npc:
 			NPCGUI.Enable();
 			break;
-		case UIState.arena:
-			ArenaGUI.Enable();
-			break;
 		case UIState.loading:
 			break;
-		case UIState.shop:
-			ShopGUI.Enable();
-			break;
-		case UIState.bank:
+		case UIState.playerShop:
+			PlayerShopGUI.Enable();
 			break;
 		case UIState.inventory:
+			InventoryGUI.Enable();
 			break;
-		case UIState.quickArmory:
-			QuickInventoryGUI.Enable(QuickInventoryUICategory.Armors);
-			break;
-		case UIState.quickFood:
-			QuickInventoryGUI.Enable(QuickInventoryUICategory.Food);
-			break;
-		case UIState.quickToys:
-			QuickInventoryGUI.Enable(QuickInventoryUICategory.Toys);
-			break;
-		case UIState.anvil:
-			AnvilGUI.Enable();
-			break;
-		case UIState.minigame:
-			minigameGUI.Enable();
-			break;
-		case UIState.rewards:
-			rewardsGUI.Enable();
+		case UIState.quickInventory:
 			break;
 		}
 		if(IsUIBusy())
@@ -175,36 +149,16 @@ public class GUIManager : MonoBehaviour {
 		case UIState.npc:
 			NPCGUI.Disable();
 			break;
-		case UIState.arena:
-			ArenaGUI.Disable();
-			break;
 		case UIState.loading:
 			break;
-		case UIState.shop:
-			ShopGUI.Disable();
-			break;
-		case UIState.bank:
+		case UIState.playerShop:
+			PlayerShopGUI.Disable();
 			break;
 		case UIState.inventory:
+			InventoryGUI.Disable();
 			break;
-		case UIState.quickArmory:
+		case UIState.quickInventory:
 			QuickInventoryGUI.Disable();
-			break;
-		case UIState.quickFood:
-			QuickInventoryGUI.Disable();
-			break;
-		case UIState.quickToys:
-			QuickInventoryGUI.Disable();
-			break;
-		case UIState.anvil:
-			AnvilGUI.Disable();
-			PlayerCamera.Instance.TransitionToDefault();
-			break;
-		case UIState.minigame:
-			minigameGUI.Disable();
-			break;
-		case UIState.rewards:
-			rewardsGUI.Disable();
 			break;
 		}
 	}
@@ -232,63 +186,31 @@ public class GUIManager : MonoBehaviour {
     public void DisplayMainGUI()
     {
 		uiState = UIState.main;
-        //if(!IsMainGUIDisplayed)
-        //{
-			//Debug.Log(" display main gui");
-            //MainGUI.gameObject.SetActive(true);
-			//MainGUI.Enable();
-            //IsMainGUIDisplayed = true;
-        //}
     }
     
     public void HideMainGUI()
     {
-        /*if(IsMainGUIDisplayed)
-        {
-            if(GameManager.Instance.inputType == InputType.TouchInput)
-            {
-                //Joystick.SetActive(false);
-                //GameManager.Instance.joystick.resetFingerExit();
-                GameManager.Instance.joystick.enable = false;
-            }
-            MainGUI.gameObject.SetActive(false);
-            IsMainGUIDisplayed = false;
-			Debug.Log("hide main gui");
-            //Debug.Log("hide main");
-        }*/
     }
+
+	public void DisplayInventory()
+	{
+		uiState = UIState.inventory;
+	}
+
+	public void HideInventory()
+	{
+		uiState = UIState.main;
+	}
     
-    public void DisplayQuickArmory ()
+    public void DisplayQuickInventory (ItemCategories category)
     {
-		uiState = UIState.quickArmory;
-        //if(!IsInventoryDisplayed && CanShowInventory)
-        //{
-            //Inventory3DCamera = GameObject.FindGameObjectWithTag("UI3DCamera").GetComponent<Camera>();
-            //HideMainGUI();
-            //TurnOffAllOtherUI();
-            //ArmoryGUI.SetActive(true);
-            //IsInventoryDisplayed = true;
-           // Inventory3DCamera.gameObject.SetActive(true);
-            //Inventory3DCamera.enabled = true;
-            //mainCamera.enabled = false;
-            //ArmoryGUI.SendMessage("Enable");
-        //}
+		uiState = UIState.quickInventory;
+		QuickInventoryGUI.Enable(category);
     }
     
     public void HideQuickInventory ()
     {
 		uiState = UIState.main;
-        /*if(IsInventoryDisplayed)
-        {
-            ArmoryGUI.SetActive(false);
-            IsInventoryDisplayed = false;
-            //Debug.Log("hiding inventory");
-            DisplayMainGUI();
-            //mainCamera.enabled = true;
-           // Inventory3DCamera.gameObject.SetActive(false);
-           // Inventory3DCamera.enabled = false;
-            
-        }*/
     }
 
 	public void DisplayNPC()
@@ -348,6 +270,7 @@ public class GUIManager : MonoBehaviour {
 		if(IsUIBusy())
 			return;
 		hoverPopupGUI.SelectPlayer(cs);
+		Debug.Log("display hover");
 	}
 
 	public void HideHoverPopup()
@@ -355,60 +278,7 @@ public class GUIManager : MonoBehaviour {
 		if(hoverPopupGUI.isDisplayed)
 			hoverPopupGUI.Disable();
 	}
-
-	public void DisplayArenaUI()
-	{
-		//HideNPC();
-		/*ArenaGUI.Enable();
-		IsEnemiesListDisplayed = true;
-		HideMainGUI();*/
-		uiState = UIState.arena;
-	}
-
-	public void HideArenaUI()
-	{
-		ArenaGUI.Disable();
-		IsEnemiesListDisplayed = false;
-		DisplayNPC();
-	}
     
-    public void DisplayShop ()
-    {
-        /*if(!IsShopDisplayed && CanShowShop)
-        {
-            HideMainGUI();
-            TurnOffAllOtherUI();
-            ShopGUI.SetActive(true);
-            //mainCamera.enabled = false;
-            IsShopDisplayed = true;
-            ShopGUI.SendMessage("Enable");
-        }*/
-		uiState = UIState.shop;
-    }
-    
-    public void HideShop()
-    {
-        /*if(IsShopDisplayed)
-        {
-            //mainCamera.enabled = true;
-            ShopGUI.SetActive(false);
-            IsShopDisplayed = false;
-            DisplayMainGUI();
-        }*/
-		uiState = UIState.npc;
-    }
-
-	public void DisplayAnvil(Anvil anvil)
-	{
-		uiState = UIState.anvil;
-		AnvilGUI.anvil = anvil;
-	}
-
-	public void HideAnvil()
-	{
-		uiState = cachedState;
-	}
-
 	public void DisplayLoadingScreen()
 	{
 		loadingGUI.gameObject.SetActive(true);
@@ -417,16 +287,6 @@ public class GUIManager : MonoBehaviour {
 	public void HideLoadingScreen()
 	{
 		loadingGUI.gameObject.SetActive(false);
-	}
-
-	public void DisplayMinigame()
-	{
-		uiState = UIState.minigame;
-	}
-
-	public void HideMinigame()
-	{
-		uiState = UIState.npc;
 	}
 
 	public void DisplayRewards(List<InventoryItem> items)
@@ -496,21 +356,13 @@ public class GUIManager : MonoBehaviour {
 public enum UIState
 {
 	idle,
-	anvil,
 	main,
-	shop,
+	playerShop,
 	inventory,
-	quickArmory,
-	quickFood,
-	quickToys,
-	equipment,
-	minigame,
+	quickInventory,
 	loading,
 	login,
-	bank,
-	upgrading,
 	npc,
-	arena,
 	settings,
 	friends,
 	rewards

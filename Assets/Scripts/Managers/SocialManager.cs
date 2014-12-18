@@ -62,8 +62,7 @@ public class SocialManager : MonoBehaviour {
 		Friend friend = new Friend();
 		friend.Name = name;
 		friends.Add(friend);
-		Debug.Log(friend.Name);
-		Debug.Log("adding new friend" + name);
+
 	}
 
 	public void RemoveFriend(string name)
@@ -71,8 +70,11 @@ public class SocialManager : MonoBehaviour {
 		int index = -1;
 		for (int i = 0; i < friends.Count; i++) {
 			if(friends[i].Name == name)
+			{
 				index = i;
-				}
+				continue;
+			}
+		}
 		if(index > -1)
 			friends.RemoveAt(index);
 	}
