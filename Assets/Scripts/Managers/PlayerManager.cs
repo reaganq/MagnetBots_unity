@@ -63,7 +63,7 @@ public class PlayerManager : MonoBehaviour
 	public CharacterActionManager avatarActionManager;
     public Avatar avatar;
     public CharacterInputController avatarInput;
-    public CharacterStatus avatarStatus;
+    public PlayerCharacter avatarStatus;
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
 
@@ -133,10 +133,10 @@ public class PlayerManager : MonoBehaviour
 		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
 		//avatarObject = GameObject.Instantiate(Resources.Load("PlayerAvatar"), SpawnPoint.position, Quaternion.identity) as GameObject;
 		//avatarObject.AddComponent<DontDestroy>();
-		avatarStatus = avatarObject.GetComponent<CharacterStatus>();
+		avatarStatus = avatarObject.GetComponent<PlayerCharacter>();
 		avatarInput = avatarObject.GetComponent<CharacterInputController>();
 		avatarActionManager = avatarObject.GetComponent<CharacterActionManager>();
-		CharacterMotor cm = avatarObject.GetComponent<CharacterMotor>();
+		PlayerMotor cm = avatarObject.GetComponent<PlayerMotor>();
 		cm.enabled = true;
 		//avatarInput.enabled = true;
 		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();

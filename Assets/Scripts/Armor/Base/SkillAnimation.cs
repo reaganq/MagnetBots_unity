@@ -13,8 +13,9 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class SkillAnimation: ArmorAnimation
+public class SkillAnimation
 {
+	public ArmorAnimation precastAnimation;
     public ArmorAnimation castAnimation;
     public ArmorAnimation followThroughAnimation;
     public float castTime;

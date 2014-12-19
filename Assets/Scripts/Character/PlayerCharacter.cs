@@ -3,16 +3,30 @@ using System.Collections;
 
 public class PlayerCharacter : CharacterStatus {
 
-	public CharacterActionManager ActionManager;
+	public CharacterActionManager characterActionManager;
+	public Avatar avatar;
+
 	// Use this for initialization
-	void Awake () {
-		characterName = GenerateRandomString(6
+	public override void Awake () {
+		base.Awake();
+		characterName = GenerateRandomString(6);
 		characterType = CharacterType.Playable;
-		ActionManager = GetComponent<CharacterActionManager>();
+		enemyCharacterType = CharacterType.AI;
+		characterActionManager = GetComponent<CharacterActionManager>();
+		if(myPhotonView.isMine)
+		{
+			this.tag = "Player";
+		}
+		else
+			this.tag = "OtherPlayer";
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public override void ChangeMovementSpeed(float change)
+	{
+		base.ChangeMovementSpeed(change);
+		if(characterActionManager != null)
+		{
+			characterActionManager.motor.AnimationUpdate();
+		}
 	}
 }

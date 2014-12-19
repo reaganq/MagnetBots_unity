@@ -5,55 +5,44 @@ using PathologicalGames;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public class ArmorSkill : MonoBehaviour {
+public class BaseSkill : MonoBehaviour {
 
-   
-    public bool isLimitedUse;
-
+	public int ID;
+	public string skillName;
+	public SkillType skillType;
+	public bool _isSkillActive = false;
     public bool hasPressDownEvent;
     public bool hasPressUpEvent;
 	public bool disableMovement;
     public int equipmentSlotIndex;
-
-    public bool _skillActive = false;
-
+	public SkillAnimation baseSkillAnimation;
     /*** attribute ***/
-
-    public int itemID;
     public float cooldown;
     public int maxAmmoCount;
     public float fireSpeed;
-
-    public bool isReloading;
-    public float cooldownTimer;
-    public float fireSpeedTimer;
+    //public bool isReloading;
+    //public float cooldownTimer;
+    //public float fireSpeedTimer;
 	public float damage;
 
     public ArmorAttribute[] armorAttributes;
-    private SkillEffect[] skillEffects;
+    public List<StatusEffectData> skillStatusEffects;
 
-    public List<SkillEffect> onUseSkillEffects;
-    public List<SkillEffect> onHitSkillEffects;
-    public List<SkillEffect> onReceiveHitSkillEffects;
-
-    public Transform myTransform;
-    public Animation myAnimation;
-    public CharacterStatus myStatus;
-	public CharacterMotor myMotor;
-    public CharacterActionManager myManager;
-    public Collider myCharacterCollider;
-    public ArmorState armorState;
+    public CharacterStatus owner;
+	public ActionManager ownerManager;
+	public Animation ownerAnimation;
+	public Transform ownerTransform;
+    public SkillState armorState;
 
     public List<CharacterStatus> HitEnemies;
 	public List<CharacterStatus> HitAllies;
 
-    public virtual void Initialise(Transform character, CharacterActionManager manager, int index)
+    public virtual void Initialise(CharacterStatus ownerStatus, int index)
     {
-		myManager = manager;
-        myAnimation = myManager.animationTarget;
-        myTransform = character;
-        myStatus = myManager.myStatus;
-		myMotor = myManager.motor;
+        owner = ownerStatus;
+		ownerManager = ownerStatus.actionManager;
+		ownerAnimation = ownerManager.myAnimation;
+		ownerTransform = ownerStatus._myTransform;
 		equipmentSlotIndex = index;
     }
 
@@ -90,75 +79,81 @@ public class ArmorSkill : MonoBehaviour {
 	{
 		//if(characterManager.MakeSpawnPool())
 		//{
-		if(myManager.effectsPool.GetPrefabPool(prefab) == null)
+		if(ownerManager.effectsPool.GetPrefabPool(prefab) == null)
 		{
 			PrefabPool prefabPool = new PrefabPool(prefab);;
 			prefabPool.preloadAmount = 3;
 			prefabPool.preloadFrames = 5;
 			Debug.Log("here");
-			myManager.effectsPool.CreatePrefabPool(prefabPool);
+			ownerManager.effectsPool.CreatePrefabPool(prefabPool);
 		}
 		//}
 	}
 
 	public void ActivateSkill(bool state)
 	{
-		_skillActive = state;
+		_isSkillActive = state;
 	}
         
         #region skill effects
 
-    public void ApplyOnHitSkillEffects()
-    {
-    }
-
-    public void ApplyOnReceiveHitSkillEffects()
-    {
-    }
-
-    public void ApplyOnUseSkillEffects()
-    {
-        for (int i = 0; i < onUseSkillEffects.Count; i++) {
-            switch(onUseSkillEffects[i].effectType)
-            {
-            case (int)SkillEffectCategory.speed:
-                if(onUseSkillEffects[i].effectTarget == (int)TargetType.self)
-                {
-                    myStatus.ChangeMovementSpeed(onUseSkillEffects[i].effectValue);
-                }
-                //Debug.Log("sopeed = " + characterManager.motor.runSpeed);
-                break;
-            }
-        }
-        //Debug.Log("onuseskilleffects");
-    }
-
-    public void RemoveOnUseSkillEffects()
-    {
-        for (int i = 0; i < onUseSkillEffects.Count; i++) {
-            switch(onUseSkillEffects[i].effectType)
-            {
-            case ((int)SkillEffectCategory.speed):
-                if(onUseSkillEffects[i].effectTarget == (int)TargetType.self && onUseSkillEffects[i].effectFormat == (int)SkillEffectFormat.useDuration)
-                {
-                    myStatus.ChangeMovementSpeed((onUseSkillEffects[i].effectValue)* -1f);
-					Debug.Log("movement speed = " + myStatus.movementSpeed);
-                }
-                //Debug.Log("sopeed = " + characterManager.motor.runSpeed);
-                break;
-            }
-        }
-    }
+	//give generic status effects to target
+	public virtual void ProcessStatusEffects(int condition, CharacterStatus target, int allyFlag)
+	{
+		if(!owner.myPhotonView.isMine)
+			return;
+		
+		foreach(StatusEffectData effect in skillStatusEffects)
+		{
+			if(effect.triggerCondition == condition)
+			{
+				//myself
+				if(effect.affectSelf && allyFlag == 0)
+				{
+					if(effect.effect == 5)
+					{
+						owner.motor.AddImpact(ownerTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
+					}
+					//attribute change
+					if(effect.effect == 3 || effect.effect == 1 || effect.effect == 6)
+					{
+						StatusEffect newEffect = owner.gameObject.AddComponent<StatusEffect>();
+						newEffect.statusEffect = effect;
+						newEffect.ownerSkill = this;
+						owner.AddStatusEffect(newEffect);
+						Debug.Log("adding status effect to myself");
+					}
+				}
+				else if(effect.affectAlly && allyFlag == 1 || effect.affectEnemy && allyFlag == 2)
+				{
+					if(effect.effect == 5)
+					{
+						target.AddImpact(target._myTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
+					}
+					//attribute change
+					if(effect.effect == 3 || effect.effect == 1 || effect.effect == 6)
+					{
+						StatusEffect newEffect = target.gameObject.AddComponent<StatusEffect>();
+						newEffect.statusEffect = effect;
+						newEffect.ownerSkill = this;
+						target.AddStatusEffect(newEffect);
+					}
+				}
+				//target
+				
+			}
+		}
+	}
 
 	#endregion
 
 	#region skill effects and attributes setup
 
-    public void InitializeAttributesStats(ArmorAttribute[] attributes, SkillEffect[] effects)
+    public void InitializeAttributesStats(ArmorAttribute[] attributes, StatusEffectData[] effects)
     {
         //characterTransform = Player.Instance.avatarObject.transform;
-        skillEffects = effects;
-        armorAttributes = attributes;
+        //skillEffects = effects;
+        //armorAttributes = attributes;
     }
 
     public void InitializeAttributesStats()
@@ -173,14 +168,14 @@ public class ArmorSkill : MonoBehaviour {
 
     public void PopulateSkillEffects()
     {
-        for (int i = 0; i < skillEffects.Length ; i++) {
+        /*for (int i = 0; i < skillEffects.Length ; i++) {
             if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onUse)
                 onUseSkillEffects.Add(skillEffects[i]);
             if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onHit)
                 onHitSkillEffects.Add(skillEffects[i]);
             if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onReceiveHit)
                 onReceiveHitSkillEffects.Add(skillEffects[i]);
-        }
+        }*/
     }
 
     public float GetAttributeValue(ArmorAttributeName name)
@@ -198,8 +193,8 @@ public class ArmorSkill : MonoBehaviour {
    
     public void TransferSkillAnimation(SkillAnimation anim)
     {
-        if(anim.clip != null)
-            StartCoroutine(TransferAnimation(anim));
+        if(anim.precastAnimation.clip != null)
+            StartCoroutine(TransferAnimation(anim.precastAnimation));
         if(anim.castAnimation.clip != null)
             StartCoroutine(TransferAnimation(anim.castAnimation));
         if(anim.followThroughAnimation.clip != null)
@@ -210,15 +205,15 @@ public class ArmorSkill : MonoBehaviour {
     {
         if(anim.clip != null)
         {
-            myAnimation.AddClip(anim.clip, anim.clip.name);
-            myAnimation[anim.clip.name].layer = anim.animationLayer;
+            ownerAnimation.AddClip(anim.clip, anim.clip.name);
+            ownerAnimation[anim.clip.name].layer = anim.animationLayer;
             //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
             yield return null;
             
             if(anim.addMixingTransforms.Count>0)
             {
                 for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
-                    myAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
+                    ownerAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
                 }
             }
 
@@ -226,7 +221,7 @@ public class ArmorSkill : MonoBehaviour {
             {
                 for (int i = 0; i < anim.removeMixingTransforms.Count; i++) 
                 {
-                    myAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
+                    ownerAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
                 }
             }
         }
@@ -239,8 +234,8 @@ public class ArmorSkill : MonoBehaviour {
 
     public void RemoveSkillAnimation(SkillAnimation anim)
     {
-        if(anim.clip != null)
-            RemoveAnimation(anim.clip);
+        if(anim.precastAnimation.clip != null)
+            RemoveAnimation(anim.precastAnimation.clip);
         if(anim.castAnimation.clip != null)
             RemoveAnimation(anim.castAnimation.clip);
         if(anim.followThroughAnimation.clip != null)
@@ -255,7 +250,7 @@ public class ArmorSkill : MonoBehaviour {
 
     public void RemoveAnimation(AnimationClip clip)
     {
-        myAnimation.RemoveClip(clip.name);
+        ownerAnimation.RemoveClip(clip.name);
     }
 
     /*public IEnumerator MixingTransforms(List<string> bonelist, List<string> removelist, AnimationClip clip)
@@ -281,7 +276,7 @@ public class ArmorSkill : MonoBehaviour {
     
     public Transform GetBone(string bonename)
     {
-        Transform[] kids = myTransform.GetComponentsInChildren<Transform>();
+        Transform[] kids = ownerTransform.GetComponentsInChildren<Transform>();
         //Debug.Log(kids.Length);
         for (int i = 0; i < kids.Length; i++) {
             if(kids[i].name == bonename)
@@ -301,16 +296,16 @@ public class ArmorSkill : MonoBehaviour {
 		
 		if(!isAlly)
 		{
-			newHit.sourceName = myStatus.characterName;
+			newHit.sourceName = owner.characterName;
 			newHit.damage = damage;
-			newHit.hitPosX = myTransform.position.x;
-			newHit.hitPosY = myTransform.position.y;
-			newHit.hitPosZ = myTransform.position.z;
-			newHit.skillEffects = new List<SkillEffect>();
-			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			newHit.hitPosX = ownerTransform.position.x;
+			newHit.hitPosY = ownerTransform.position.y;
+			newHit.hitPosZ = ownerTransform.position.z;
+			newHit.skillEffects = new List<StatusEffectData>();
+			for (int i = 0; i < skillStatusEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
-					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				if (skillStatusEffects[i].affectEnemy) {
+					newHit.skillEffects.Add(skillStatusEffects[i]);
 				}
 			}
 			
@@ -338,16 +333,16 @@ public class ArmorSkill : MonoBehaviour {
 		
 		if(!isAlly)
 		{
-			newHit.sourceName = myStatus.characterName;
+			newHit.sourceName = owner.characterName;
 			newHit.damage = damage;
 			newHit.hitPosX = originPos.x;
 			newHit.hitPosY = originPos.y;
 			newHit.hitPosZ = originPos.z;
-			newHit.skillEffects = new List<SkillEffect>();
-			for (int i = 0; i < onHitSkillEffects.Count; i++) 
+			newHit.skillEffects = new List<StatusEffectData>();
+			for (int i = 0; i < skillStatusEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
-					newHit.skillEffects.Add(onHitSkillEffects[i]);
+				if (skillStatusEffects[i].affectEnemy) {
+					newHit.skillEffects.Add(skillStatusEffects[i]);
 				}
 			}
 			
@@ -371,7 +366,7 @@ public class ArmorSkill : MonoBehaviour {
 
 }
 
-public enum ArmorState
+public enum SkillState
 {
     ready,
     casting,

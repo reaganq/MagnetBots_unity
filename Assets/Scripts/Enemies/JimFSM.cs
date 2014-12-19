@@ -159,7 +159,7 @@ public class JimFSM : SimpleFSM {
 
                 Vector3 moveDirection = targetObject.position - _transform.position;
                 moveDirection.y = 0;
-				Vector3 movementOffset = moveDirection.normalized * myStatus.movementSpeed * Time.deltaTime;
+				Vector3 movementOffset = moveDirection.normalized * myStatus.curMovementSpeed * Time.deltaTime;
 				//movementOffset += Physics.gravity;
 				movementOffset += Physics.gravity;
                 _controller.Move(movementOffset);

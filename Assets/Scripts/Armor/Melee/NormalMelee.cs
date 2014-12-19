@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class NormalMelee : ArmorSkill {
+public class NormalMelee : BaseSkill {
 
 
     /***** set up in inspector *****/
@@ -25,16 +25,16 @@ public class NormalMelee : ArmorSkill {
     #endregion
 
     #region setup and unequip
-    public override void Initialise(Transform character,CharacterActionManager manager, int index)
+    public override void Initialise(CharacterStatus ownerStatus, int index)
     {
-        base.Initialise(character,manager, index);
+		base.Initialise(ownerStatus, index);
         TransferAnimations();
         if(weaponCollider != null)
         {
             TriggerCollider tc = weaponCollider.GetComponent<TriggerCollider>();
             if(tc != null)
             {
-                tc.status = myStatus;
+                tc.status = owner;
 				tc.masterArmor = this;
             }
             weaponCollider.SetActive(false);
@@ -64,7 +64,7 @@ public class NormalMelee : ArmorSkill {
 
     public override bool CanPressDown()
     {
-        if(attackAnimations.Length == 0 || armorState != ArmorState.ready)
+        if(attackAnimations.Length == 0 || armorState != SkillState.ready)
         {
             return false;
 
@@ -78,21 +78,21 @@ public class NormalMelee : ArmorSkill {
     {
 		if(disableMovement)
 		{
-			myManager.DisableMovement();
+			ownerManager.DisableMovement();
 		}
 
 		ActivateSkill(true);
-        armorState = ArmorState.casting;
+        armorState = SkillState.casting;
 
         int i = Random.Range(0, attackAnimations.Length);
         //Debug.Log("i = "+i);
-        myAnimation[attackAnimations[i].clip.name].time = 0;
+        ownerAnimation[attackAnimations[i].precastAnimation.clip.name].time = 0;
         //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
-		myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.05f);
+		ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.05f);
 
 
 
-        float totalTime = attackAnimations[i].clip.length;
+        float totalTime = attackAnimations[i].castAnimation.clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
         float attackduration = (attackAnimations[i].followThroughTime * totalTime) - castTime;
         float followThroughTime = totalTime - attackduration - castTime;
@@ -103,7 +103,7 @@ public class NormalMelee : ArmorSkill {
         Debug.Log(followThroughTime);*/
 
         yield return new WaitForSeconds(castTime);
-        armorState = ArmorState.onUse;
+        armorState = SkillState.onUse;
         if(weaponCollider != null)
         {
             weaponCollider.SetActive(true);
@@ -112,7 +112,7 @@ public class NormalMelee : ArmorSkill {
 			trail.enabled = true;
 
         yield return new WaitForSeconds(attackduration);
-        armorState = ArmorState.followThrough;
+        armorState = SkillState.followThrough;
         
 
         if(weaponCollider != null)
@@ -123,11 +123,11 @@ public class NormalMelee : ArmorSkill {
 			trail.enabled = false;
 
 		if(disableMovement)
-			myManager.EnableMovement();
+			ownerManager.EnableMovement();
 
         yield return new WaitForSeconds(followThroughTime*0.3f);
         //characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
-		myManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
+		ownerManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
 
         yield return new WaitForSeconds(followThroughTime * 0.7f);
 
@@ -137,7 +137,7 @@ public class NormalMelee : ArmorSkill {
 
     public override void Reset()
     {
-        armorState = ArmorState.ready;
+        armorState = SkillState.ready;
         HitEnemies.Clear();
 		HitAllies.Clear();
 		ActivateSkill(false);

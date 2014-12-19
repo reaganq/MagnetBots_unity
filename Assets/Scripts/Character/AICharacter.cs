@@ -8,10 +8,12 @@ public class AICharacter : CharacterStatus {
 	// Use this for initialization
 	void Start () {
 		characterType = CharacterType.AI;
+		enemyCharacterType = CharacterType.Playable;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	public override void Die()
+	{
+		fsm.state = SimpleFSM.AIState.Dead;
 	}
 }

@@ -1,15 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class CharacterMotor : MonoBehaviour {
+public class PlayerMotor : Motor {
  
     //public ArmorController[] ArmorControllers = new ArmorController[5];
     
-    public CharacterController controller;
+    
     public CharacterActionManager animationManager;
     public CharacterStatus myStatus;
     public Animation animationTarget;
-    public Avatar avatar;
     public CharacterInputController input;
 	public bool disableMovement;
     
@@ -28,10 +27,6 @@ public class CharacterMotor : MonoBehaviour {
     //public float Speed;
     //public float rotSpeed = 11.5f;
     public float rotAngle;
-    
-    public float rollSpeed;
-    public float rollCounter = 0f;
-    public float rollSlowTime;
     public float acceleration;
     //public float runSpeed;
 
@@ -40,17 +35,15 @@ public class CharacterMotor : MonoBehaviour {
     public Vector3 characterVelocity;
     public Vector3 horizontalVelocity;
     public float currentSpeed;
-	public Vector3 impact = Vector3.zero;
 	
     //public Vector3 velocity = Vector3.zero;
     
 	// Use this for initialization
 
     
-	void Awake () {
-	    controller=GetComponent<CharacterController>();
+	public override void Start () {
+	    
         input = GetComponent<CharacterInputController>();
-        avatar = GetComponent<Avatar>();
         myStatus = GetComponent<CharacterStatus>();
         _myTransform = transform;
         characterVelocity = Vector3.zero;
@@ -107,16 +100,7 @@ public class CharacterMotor : MonoBehaviour {
         moveDirection = direction;
     }
 
-	public void RotateTo(Transform target)
-	{
-		cachedRotation = _myTransform.forward + _myTransform.position;
-		rotationTarget = target.position;
-	}
 
-	public void RotationReset()
-	{
-		rotationTarget = cachedRotation;
-	}
     
     Vector3 direction;
     private Vector3 moveDirection
@@ -206,7 +190,7 @@ public class CharacterMotor : MonoBehaviour {
         var desiredLocalDirection = _myTransform.InverseTransformDirection(dir);
         //var maxSpeed = MaxSpeedInDirection(desiredLocalDirection);
         //return _myTransform.TransformDirection(desiredLocalDirection * maxSpeed);
-        return _myTransform.TransformDirection(desiredLocalDirection * myStatus.movementSpeed);
+        return _myTransform.TransformDirection(desiredLocalDirection * myStatus.curMovementSpeed);
     }
     
     float MaxSpeedInDirection (Vector3 desiredMovementDirection)
@@ -215,9 +199,9 @@ public class CharacterMotor : MonoBehaviour {
             return 0;
         else 
         {
-            var zAxisEllipseMultiplier  = (desiredMovementDirection.z > 0 ? myStatus.movementSpeed : myStatus.movementSpeed) / myStatus.movementSpeed;
+            var zAxisEllipseMultiplier  = (desiredMovementDirection.z > 0 ? myStatus.curMovementSpeed : myStatus.curMovementSpeed) / myStatus.curMovementSpeed;
             var temp    = new Vector3(desiredMovementDirection.x, 0, desiredMovementDirection.z / zAxisEllipseMultiplier).normalized;
-            var length  = new Vector3(temp.x,0,temp.z * zAxisEllipseMultiplier).magnitude * myStatus.movementSpeed;
+            var length  = new Vector3(temp.x,0,temp.z * zAxisEllipseMultiplier).magnitude * myStatus.curMovementSpeed;
             Debug.Log("length: "+length);
             return length;
         }
@@ -258,7 +242,7 @@ public class CharacterMotor : MonoBehaviour {
         {
             float t = 0.0f;
             //Debug.Log(speed);
-            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.movementSpeed ), 0, myStatus.movementSpeed );
+            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.curMovementSpeed ), 0, myStatus.curMovementSpeed );
             animationManager.UpdateRunningSpeed(t);
             animationManager.AnimateToRunning();
         }

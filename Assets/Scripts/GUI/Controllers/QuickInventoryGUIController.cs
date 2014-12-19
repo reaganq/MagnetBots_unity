@@ -39,7 +39,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
 			PlayerCamera.Instance.TransitionToQuickArmory();
-			PlayerManager.Instance.avatarStatus.Motor.RotateTo(PlayerCamera.Instance.quickArmoryPos);
+			PlayerManager.Instance.avatarActionManager.RotateTo(PlayerCamera.Instance.quickArmoryPos);
 			subCategories = PlayerManager.Instance.data.GetSubcategories("Armor");
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Food)
@@ -75,7 +75,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 	{
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
-			PlayerManager.Instance.avatarStatus.Motor.RotationReset();
+			PlayerManager.Instance.avatarActionManager.RotationReset();
 		}
 		PlayerCamera.Instance.TransitionToDefault();
 		base.Disable();

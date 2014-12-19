@@ -5,7 +5,7 @@ using PathologicalGames;
 
 public class BulletProjectile : MonoBehaviour {
 
-    public ArmorSkill masterArmor;
+    public BaseSkill masterArmor;
 	public AISkill masterAISkill;
     public float timer;
 	public CharacterStatus status;

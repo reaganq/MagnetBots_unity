@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 public class TriggerCollider : MonoBehaviour {
 
-    public ArmorSkill masterArmor;
+    public BaseSkill masterArmor;
 	public AISkill masterAISkill;
 	public CharacterStatus status;
 	public Transform hitDecal;
@@ -43,7 +43,7 @@ public class TriggerCollider : MonoBehaviour {
 					if(!masterAISkill.HitEnemies.Contains(cs) && !masterAISkill.HitAllies.Contains(cs))
 					{
 						//determine if friend or foe
-						if(cs.isAI)
+						if(cs.characterType == masterAISkill.fsm.myStatus.enemyCharacterType)
 						{
 							masterAISkill.HitAllies.Add(cs);
 							masterAISkill.HitTarget(hb, true);
@@ -63,17 +63,17 @@ public class TriggerCollider : MonoBehaviour {
 					if(!masterArmor.HitEnemies.Contains(cs) && !masterArmor.HitAllies.Contains(cs))
                     {
                         //determine if friend or foe
-						if(cs.isAI)
+						if(cs.characterType == masterArmor.owner.enemyCharacterType)
 						{
                         	masterArmor.HitEnemies.Add(cs);
                         	masterArmor.HitTarget(hb, false);
-							masterArmor.myManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
+							masterArmor.ownerManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
 						}
 						else
 						{
 							masterArmor.HitAllies.Add(cs);
 							masterArmor.HitTarget(hb, true);
-							masterArmor.myManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
+							masterArmor.ownerManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
 						}
                         //Debug.Log("I JUST HIT SOMETHING");
                     }

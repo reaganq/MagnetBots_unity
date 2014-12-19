@@ -6,7 +6,7 @@ public class ArmorController : MonoBehaviour {
  
     public Animation rootAnimationTarget;
     public Animation myAnimation;
-    public CharacterMotor controller;
+    public PlayerMotor controller;
     
     public UsageType usageType;
     public WeaponType weaponType;
@@ -54,7 +54,7 @@ public class ArmorController : MonoBehaviour {
     }
     
     #region animation transfers
-    public void TransferAnimations(Animation target, CharacterMotor newcontroller)
+    public void TransferAnimations(Animation target, PlayerMotor newcontroller)
     {
         
         rootAnimationTarget = target;

@@ -7,65 +7,41 @@ using System.IO;
 public class CharacterStatus : CharacterAttributes {
 
 	public string characterName;
-	public bool isAI = false;
-    public float MaxHealth = 0f;
-    public float CurrentHealth = 0f;
-    public CharacterActionManager ActionManager;
-	public SimpleFSM fsm;
-    public CharacterMotor Motor;
-    public float movementSpeed;
-	public float rotationSpeed;
-    //can't be disjointed
-    public bool Invulnerable = false;
-    //cant be disjointed or damaged
-    public bool Invincinble = false;
-    public bool canMove = true;
+    public Motor motor;
+	public ActionManager actionManager;
 	public PhotonView myPhotonView;
-
+	public CharacterType enemyCharacterType;
 	public List<Collider> hitboxes;
+	public Transform _myTransform;
+	public List<StatusEffect> statusEffects;
+	
+	public bool Invulnerable = false;
+	public bool canMove = true;
 
 	private string characters = "abcdefghijklmnopqrstuvwxyz";
 
-	public bool isAlive()
-	{
-		if(curHealth <= 0)
-			return false;
-		else
-			return true;
-	}
-
-	void Awake()
-	{
-		characterName = GenerateRandomString(6);
-		if(isAI)
-			fsm = GetComponent<SimpleFSM>();
-		else
-			ActionManager = GetComponent<CharacterActionManager>();
-	}
-	// Use this for initialization
-	void Start () 
+	public virtual void Awake () 
 	{
 		curHealth = maxHealth;
+		curMovementSpeed = maxMovementSpeed;
+
+		_myTransform = this.transform;
+		actionManager = GetComponent<ActionManager>();
 		myPhotonView = GetComponent<PhotonView>();
-		Collider[] colliders = GetComponentsInChildren<Collider>();
-		for (int i = 0; i <	colliders.Length; i++) 
-		{
-			if(colliders[i].gameObject.layer == 13)
-			{
-				hitboxes.Add(colliders[i]);
-			}
-		}
+
+		UpdateHitBoxes();
+
+	}
+
+	public void UpdateHitBoxes()
+	{
 		HitBox[] hbs = GetComponentsInChildren<HitBox>();
 		for (int i = 0; i < hbs.Length; i++) 
 		{
 			hbs[i].ownerCS = this;
+			if(!hitboxes.Contains(hbs[i].collider))
+				hitboxes.Add(hbs[i].collider);
 		}
-		if(myPhotonView.isMine)
-		{
-			this.tag = "Player";
-		}
-		else
-			this.tag = "OtherPlayer";
 	}
 	
 	public string GenerateRandomString(int l)
@@ -78,6 +54,114 @@ public class CharacterStatus : CharacterAttributes {
 		}
 		return name;
 	}
+
+	public bool isAlive()
+	{
+		if(curHealth <= 0)
+			return false;
+		else
+			return true;
+	}
+
+	/*public void ProcessHitEffects(List<StatusEffectData> effects, Vector3 originPos)
+	{
+		for (int i = 0; i < effects.Count; i++) {
+			switch(effects[i].effectType)
+			{
+			case((int)StatusEffectCategory.knockback):
+				Debug.Log("KNOCKING ME BACK");
+				//if(motor)
+					//motor.AddImpact(_myTransform.position - originPos, effects[i].effectValue);
+			break;
+			}
+		}
+	}*/
+
+	public void AddImpact(Vector3 dir, float force, float duration, float acceleration)
+	{
+		motor.AddImpact(dir, force, duration, acceleration);
+    }
+	
+    public void ReceiveDamage(float damage)
+    {
+		if(curHealth >0)
+		{
+			curHealth -= damage;
+			Debug.Log("currentHP: "+curHealth);
+			if(curHealth <= 0)
+	        {
+            	Die();
+	        }
+		}
+    }
+
+    public void Heal(int hp)
+    {
+        curHealth += hp;
+		if(curHealth > maxHealth)
+        {
+			curHealth = maxHealth;
+        }
+    }
+
+    public virtual void ChangeMovementSpeed(float change)
+    {
+        curMovementSpeed += change;
+    }
+	
+    public virtual void Die()
+    {
+        Debug.Log("died");
+		if(GetComponent<PhotonView>().isMine)
+		{
+			PhotonNetwork.Destroy(this.gameObject);
+		}
+    }
+
+	public void AddStatusEffect(StatusEffect effect)
+	{
+		if(effect.statusEffect.effect == 1)
+		{
+			//speedModifiers.Add(effect);
+			effect.StartEffect(this, statusEffects.Count - 1);
+		}
+		else if (effect.statusEffect.effect == 3) 
+		{
+			//attackBonusModifiers.Add(effect);
+			effect.StartEffect(this, statusEffects.Count - 1);
+		}
+		else if (effect.statusEffect.effect == 6) 
+		{
+			//defenseBonusModifiers.Add(effect);
+			effect.StartEffect(this, statusEffects.Count - 1);
+        }
+    }
+
+	public void RemoveStatusEffect(BaseSkill ownerSkill)
+	{
+		for (int i = statusEffects.Count - 1; i > -1; i--) 
+		{
+			if(statusEffects[i].ownerSkill == ownerSkill && statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.timed)
+			{
+				statusEffects[i].EndEffect();
+			}
+		}
+    }
+
+	public void RemoveStatusEffect(StatusEffect effect)
+	{
+		if(statusEffects.Contains(effect))
+		{
+			statusEffects.Remove(effect);
+			return;
+		}
+    }
+    
+    
+    public void EnableMovement(bool state)
+    {
+        canMove = state;
+    }
 
 	[RPC]
 	public void ReceiveHit(byte[] hit)
@@ -96,8 +180,8 @@ public class CharacterStatus : CharacterAttributes {
 			Debug.Log("received Damage");
 			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, receivedHit.damage);
 			//ReceiveDamage(receivedHit.damage);
-			if(receivedHit.skillEffects.Count > 0)
-				ProcessHitEffects(receivedHit.skillEffects, origin);
+			//if(receivedHit.skillEffects.Count > 0)
+				//ProcessHitEffects(receivedHit.skillEffects, origin);
 		}
 
 		if(myPhotonView.owner == null)
@@ -106,40 +190,6 @@ public class CharacterStatus : CharacterAttributes {
 		}
 		//myPhotonView.RPC("ApplyReceivedHitEffects", PhotonTargets.All, 
 	}
-
-	public void ProcessHitEffects(List<SkillEffect> effects, Vector3 originPos)
-	{
-		for (int i = 0; i < effects.Count; i++) {
-			switch(effects[i].effectType)
-			{
-			case((int)SkillEffectCategory.knockback):
-				Debug.Log("KNOCKING ME BACK");
-				if(Motor)
-					Motor.AddImpact(Motor._myTransform.position - originPos, effects[i].effectValue);
-			break;
-			}
-		}
-	}
-	
-    public void ReceiveDamage(float damage)
-    {
-		if(curHealth >0)
-		{
-			curHealth -= damage;
-			Debug.Log("currentHP: "+curHealth);
-			if(curHealth <= 0)
-	        {
-				if(isAI)
-				{
-					DieAI();
-				}
-				else
-				{
-	            	Die();
-				}
-	        }
-		}
-    }
 
 	//others
 	[RPC]
@@ -153,56 +203,11 @@ public class CharacterStatus : CharacterAttributes {
 			{
 				if(curHealth <= 0)
 				{
-					if(isAI)
-					{
-						DieAI();
-					}
-					else
-					{
-						Die();
-					}
+					Die();
 				}
 			}
 		}
 	}
-
-    public void Heal(int hp)
-    {
-        curHealth += hp;
-		if(curHealth > maxHealth)
-        {
-			curHealth = maxHealth;
-        }
-    }
-
-    public void ChangeMovementSpeed(float change)
-    {
-        curMovementSpeed += change;
-        if(ActionManager != null)
-        {
-            ActionManager.motor.AnimationUpdate();
-        }
-    }
-	
-    public void Die()
-    {
-        Debug.Log("died");
-		if(GetComponent<PhotonView>().isMine)
-		{
-			PhotonNetwork.Destroy(this.gameObject);
-		}
-    }
-
-	[RPC]
-	public void DieAI()
-	{
-		fsm.state = SimpleFSM.AIState.Dead;
-	}
-
-    public void EnableMovement(bool state)
-    {
-        canMove = state;
-    }
 }
 
 [System.Serializable]
@@ -213,6 +218,6 @@ public class HitInfo
 	public float hitPosY;
 	public float hitPosZ;
 	public float damage;
-	public List<SkillEffect> skillEffects;
+	public List<StatusEffectData> skillEffects;
 }
 

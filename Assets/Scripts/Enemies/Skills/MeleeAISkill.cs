@@ -41,9 +41,9 @@ public class MeleeAISkill : AISkill {
 			yield return new WaitForSeconds(attackAnimations[i].castAnimation.clip.length);
 		}
 
-		fsm.myPhotonView.RPC("PlayQueuedAnimation", PhotonTargets.All, attackAnimations[i].clip.name, 0);
+		fsm.myPhotonView.RPC("PlayQueuedAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, 0);
 
-        float totalTime = attackAnimations[i].clip.length;
+        float totalTime = attackAnimations[i].precastAnimation.clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
         float attackduration = (attackAnimations[i].followThroughTime * totalTime) - castTime;
         float followThroughTime = totalTime - attackduration - castTime;
@@ -77,7 +77,7 @@ public class MeleeAISkill : AISkill {
 		if(attackAnimations[i].followThroughAnimation.clip == null)
 		{
 	        yield return new WaitForSeconds(followThroughTime*0.3f);
-			fsm.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].clip.name, 0f, followThroughTime*0.7f);
+			fsm.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, 0f, followThroughTime*0.7f);
 	        //fsm.BlendAnimation(attackAnimations[i].clip, 0f, followThroughTime*0.7f);
 	        
 	        yield return new WaitForSeconds(followThroughTime * 0.7f);

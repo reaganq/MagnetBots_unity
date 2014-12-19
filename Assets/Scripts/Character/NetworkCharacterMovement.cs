@@ -4,7 +4,7 @@ using System.Collections;
 public class NetworkCharacterMovement : Photon.MonoBehaviour {
 
 	private Transform _transform;
-	private CharacterMotor _motor;
+	private PlayerMotor _motor;
 	private CharacterStatus myStatus;
 	Vector3 realPosition = Vector3.zero;
 	float currentSpeed;
@@ -35,7 +35,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 	void Start()
 	{
 		_transform = transform;
-		_motor = GetComponent<CharacterMotor>();
+		_motor = GetComponent<PlayerMotor>();
 		myStatus = GetComponent<CharacterStatus>();
 		actionManager = GetComponent<CharacterActionManager>();
 	}
@@ -59,7 +59,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 				{
 					float t = 0.0f;
 					//Debug.Log(speed);
-					t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.movementSpeed ), 0, myStatus.movementSpeed );
+					t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.curMovementSpeed ), 0, myStatus.curMovementSpeed );
 					actionManager.UpdateRunningSpeed(t);
 					actionManager.AnimateToRunning();
 				}

@@ -1,14 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using PathologicalGames;
 
-public class AISkill : MonoBehaviour {
+public class AISkill : BaseSkill {
 
-    public string skillName;
-    public SkillType skillType;
+    
     public float weighting = 0f;
     public SimpleFSM fsm;
 	public int skillIndex;
@@ -22,9 +21,9 @@ public class AISkill : MonoBehaviour {
 	public float skillMinRange;
 	public float damage;
 
-	public List<SkillEffect> onUseSkillEffects;
-	public List<SkillEffect> onHitSkillEffects;
-	public List<SkillEffect> onReceiveHitSkillEffects;
+	public List<StatusEffectData> onUseSkillEffects;
+	public List<StatusEffectData> onHitSkillEffects;
+	public List<StatusEffectData> onReceiveHitSkillEffects;
 
 	public List<CharacterStatus> HitEnemies;
 	public List<CharacterStatus> HitAllies;
@@ -87,10 +86,10 @@ public class AISkill : MonoBehaviour {
 			newHit.hitPosX = fsm._transform.position.x;
 			newHit.hitPosY = fsm._transform.position.y;
 			newHit.hitPosZ = fsm._transform.position.z;
-			newHit.skillEffects = new List<SkillEffect>();
+			newHit.skillEffects = new List<StatusEffectData>();
 			for (int i = 0; i < onHitSkillEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
+				if (onHitSkillEffects[i].affectEnemy) {
 					newHit.skillEffects.Add(onHitSkillEffects[i]);
 				}
 			}
@@ -126,10 +125,10 @@ public class AISkill : MonoBehaviour {
 			newHit.hitPosX = originPos.x;
 			newHit.hitPosY = originPos.y;
 			newHit.hitPosZ = originPos.z;
-			newHit.skillEffects = new List<SkillEffect>();
+			newHit.skillEffects = new List<StatusEffectData>();
 			for (int i = 0; i < onHitSkillEffects.Count; i++) 
 			{
-				if (onHitSkillEffects[i].effectTarget == (int)TargetType.hitEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.allEnemies || onHitSkillEffects[i].effectTarget == (int)TargetType.all) {
+				if (onHitSkillEffects[i].affectEnemy) {
 					newHit.skillEffects.Add(onHitSkillEffects[i]);
 				}
 			}
@@ -168,7 +167,7 @@ public class AISkill : MonoBehaviour {
 						if(!HitEnemies.Contains(cs) && !HitAllies.Contains(cs))
 						{
 							//determine if friend or foe
-							if(cs.isAI)
+							if(cs.characterType == CharacterType.AI)
 							{
 								HitAllies.Add(cs);
 								HitTarget(hb, true);

@@ -3,18 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using PathologicalGames;
 
-public class CharacterActionManager : MonoBehaviour {
+public class CharacterActionManager : ActionManager {
 
-    public ArmorSkill[] armorSkillsArray = new ArmorSkill[5];
+    public BaseSkill[] armorSkillsArray = new BaseSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
-    public Animation animationTarget;
-	public CharacterStatus myStatus;
-    public CharacterMotor motor;
-	public PhotonView myPhotonView;
-	public SpawnPool effectsPool;
-
-	private Transform _myTransform;
-
+	public PlayerMotor playerMotor;
+    
     private Job leftJob;
     private Job rightJob;
     private Job leftEndJob;
@@ -38,30 +32,16 @@ public class CharacterActionManager : MonoBehaviour {
             return false;
     }
    
-	void Awake()
-	{
-		MakeSpawnPool();
-		_myTransform = transform;
-	}
-    // Use this for initialization
-    void Start () 
+    public override void Start () 
     {
         //animationTarget.Play("Default_Idle");
-
+		base.Start();
 		myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
     }
 
-	public bool MakeSpawnPool()
-	{
-		if(effectsPool == null)
-		{
-			effectsPool = PoolManager.Pools.Create(myStatus.characterName);
-			//Debug.Log(effectsPool.poolName);
-		}
-		return true;
-	}
+
     
-    public void AddArmorcontroller(ArmorSkill controller, PassiveArmorAnimationController animController, int index)
+    public void AddArmorcontroller(BaseSkill controller, PassiveArmorAnimationController animController, int index)
     {
 		//Debug.LogWarning(index);
         armorSkillsArray[index] = controller;
@@ -270,12 +250,23 @@ public class CharacterActionManager : MonoBehaviour {
 
     #region movement functions
 
+	public void RotateTo(Transform target)
+	{
+		playerMotor.cachedRotation = _myTransform.forward + _myTransform.position;
+		playerMotor.rotationTarget = target.position;
+	}
+	
+	public void RotationReset()
+	{
+		playerMotor.rotationTarget = playerMotor.cachedRotation;
+    }
+
     public void AnimateToIdle()
     {
         if(movementState != MovementState.idle)
         {
-            animationTarget["Default_Idle"].time = 0;
-            animationTarget.CrossFade("Default_Idle");
+            myAnimation["Default_Idle"].time = 0;
+			myAnimation.CrossFade("Default_Idle");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
             for (int i = 0; i < armorSkillsArray.Length ; i++)
             {
@@ -283,8 +274,8 @@ public class CharacterActionManager : MonoBehaviour {
                 {
                     if(armorAnimControllers[i].idleOverrideAnim.clip != null)
                     {
-                        animationTarget[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
-                        animationTarget.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
+						myAnimation[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
+						myAnimation.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
                     }
                     //if(movementState == MovementState.moving && armorAnimControllers[i].runningOverrideAnim.clip != null)
                         //animationTarget.Blend(armorAnimControllers[i].runningOverrideAnim.clip.name, 0, 0.1f);
@@ -300,15 +291,15 @@ public class CharacterActionManager : MonoBehaviour {
     {
         if(movementState != MovementState.moving)
         {
-            animationTarget["Default_Run"].time = 0;
-            animationTarget.CrossFade("Default_Run");
+			myAnimation["Default_Run"].time = 0;
+			myAnimation.CrossFade("Default_Run");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
             for (int i = 0; i < armorSkillsArray.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
                 {
-                    animationTarget[armorAnimControllers[i].runningOverrideAnim.clip.name].time = 0;
-                    animationTarget.CrossFade(armorAnimControllers[i].runningOverrideAnim.clip.name);
+					myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].time = 0;
+					myAnimation.CrossFade(armorAnimControllers[i].runningOverrideAnim.clip.name);
                 }
             }
             movementState = MovementState.moving;
@@ -329,11 +320,11 @@ public class CharacterActionManager : MonoBehaviour {
 
     public void UpdateRunningSpeed(float t)
     {
-        animationTarget["Default_Run"].speed = Mathf.Lerp( 1f, 2f, t);
+		myAnimation["Default_Run"].speed = Mathf.Lerp( 1f, 2f, t);
 
         for (int i = 0; i < armorSkillsArray.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
-                animationTarget[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = Mathf.Lerp(1f, 2f, t);
+				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = Mathf.Lerp(1f, 2f, t);
         }
     }
 
@@ -343,25 +334,25 @@ public class CharacterActionManager : MonoBehaviour {
 	[RPC]
 	public void PlayAnimation(string name)
 	{
-		animationTarget.Play(name);
+		myAnimation.Play(name);
 	}
 
 	[RPC]
 	public void CrossFadeAnimation(string name)
 	{
-		animationTarget.CrossFade(name);
+		myAnimation.CrossFade(name);
 	}
 
 	[RPC]
 	public void CrossFadeAnimation(string name, float timer)
 	{
-		animationTarget.CrossFade(name, timer);
+		myAnimation.CrossFade(name, timer);
 	}
 
 	[RPC]
 	public void BlendAnimation(string name, float target, float timer)
 	{
-		animationTarget.Blend(name, target, timer);
+		myAnimation.Blend(name, target, timer);
 	}
 	#endregion
 

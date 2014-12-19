@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class StandardGun : ArmorSkill {
+public class StandardGun : BaseSkill {
 
     public ArmorAnimation castAnimation;
     public ArmorAnimation durationAnimation;
@@ -17,12 +17,15 @@ public class StandardGun : ArmorSkill {
 
     public int currentAmmoCount = 0;
     public int shotsFired = 0;
+	public float cooldownTimer;
+	public float fireSpeedTimer;
+	public bool isReloading;
 
 	// Use this for initialization
     #region setup and unequip
-    public override void Initialise(Transform character, CharacterActionManager manager, int index)
+    public override void Initialise(CharacterStatus manager, int index)
     {
-        base.Initialise(character, manager, index);
+        base.Initialise(manager, index);
         TransferAnimations();
         currentAmmoCount = maxAmmoCount;
 		AddPrefabToPool(bulletPrefab);
@@ -65,7 +68,7 @@ public class StandardGun : ArmorSkill {
             isReloading = false;
         }
 
-        if(_skillActive)
+        if(_isSkillActive)
         {
             if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
                 FireOneShot();
@@ -75,7 +78,7 @@ public class StandardGun : ArmorSkill {
     public override bool CanPressDown()
     {
         //if(armorState == ArmorState.ready || armorState == ArmorState.onUse || armorState == ArmorState.followThrough || )
-        if(armorState == ArmorState.casting)
+        if(armorState == SkillState.casting)
             return false;
         else
             return true;
@@ -86,17 +89,17 @@ public class StandardGun : ArmorSkill {
     public override IEnumerator PressDown()
     {
 
-        if(armorState == ArmorState.ready || armorState == ArmorState.followThrough)
+        if(armorState == SkillState.ready || armorState == SkillState.followThrough)
         {
-            armorState = ArmorState.casting;
+            armorState = SkillState.casting;
             //characterAnimation.CrossFade(castAnimation.clip.name, 0.05f);
 
             //characterAnimation.Play(castAnimation.clip.name);
-			myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, castAnimation.clip.name);
+			ownerManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, castAnimation.clip.name);
             yield return new WaitForSeconds(castAnimation.clip.length);
 
             //characterAnimation.Play(durationAnimation.clip.name);
-			myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
+			ownerManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
 
             if(fireSpeedTimer >0)
                 yield return new WaitForSeconds(fireSpeedTimer);
@@ -105,7 +108,7 @@ public class StandardGun : ArmorSkill {
             //FireOneShot();
 
         }
-        else if(armorState == ArmorState.onUse || armorState == ArmorState.wait || armorState == ArmorState.recoiling || armorState == ArmorState.reloading)
+        else if(armorState == SkillState.onUse || armorState == SkillState.wait || armorState == SkillState.recoiling || armorState == SkillState.reloading)
         {
             ActivateSkill(true);
             /*armorState = ArmorState.onUse;
@@ -131,7 +134,7 @@ public class StandardGun : ArmorSkill {
 
     public override bool CanPressUp ()
     {
-        if(armorState == ArmorState.ready)
+        if(armorState == SkillState.ready)
         {
             return false;
         }
@@ -141,7 +144,7 @@ public class StandardGun : ArmorSkill {
 
     public override IEnumerator PressUp()
     {
-        while(armorState == ArmorState.casting)
+        while(armorState == SkillState.casting)
         {
             yield return new WaitForEndOfFrame();
         }
@@ -158,20 +161,20 @@ public class StandardGun : ArmorSkill {
 
 */
         //if(armorState == ArmorState.onUse || armorState == ArmorState.recoiling || armorState == ArmorState.reloading )
-        if(_skillActive)
+        if(_isSkillActive)
         {
             ActivateSkill(false);
-			myManager.ResetActionState();
+			//ownerManager.ResetActionState();
             while(isReloading)
             {
                 yield return new WaitForEndOfFrame();
             }
 
-            armorState = ArmorState.wait;
+            armorState = SkillState.wait;
             yield return new WaitForSeconds(1f);
-            armorState = ArmorState.followThrough;
+            armorState = SkillState.followThrough;
 			Debug.LogWarning("not here");
-			myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
+			ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
             yield return new WaitForSeconds(followThroughAnimation.clip.length);
 
             //Reset();
@@ -196,7 +199,7 @@ public class StandardGun : ArmorSkill {
 		//{
 			//armorState = ArmorState.followThrough;
 			Debug.Log("here");
-			myManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
+			ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
 		//}
 
 
@@ -208,7 +211,7 @@ public class StandardGun : ArmorSkill {
         myAnimation[recoilAnimation.clip.name].time = 0;
         myAnimation[reloadAnimation.clip.name].time = 0;
         myAnimation[followThroughAnimation.clip.name].time = 0;*/
-        armorState = ArmorState.ready;
+        armorState = SkillState.ready;
 
     }
 
@@ -216,12 +219,12 @@ public class StandardGun : ArmorSkill {
     {
         //fire bullet
         //Debug.Log("fire one shot");
-        armorState = ArmorState.onUse;
+        armorState = SkillState.onUse;
         shotsFired ++;
         currentAmmoCount --;
         fireSpeedTimer = fireSpeed;
         //GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
-		myManager.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, equipmentSlotIndex);
+		ownerManager.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, equipmentSlotIndex);
         /*if(bullet.rigidbody != null)
             bullet.rigidbody.AddForce(characterTransform.forward * bulletSpeed);
         BulletProjectile src = bullet.GetComponent<BulletProjectile>();
@@ -235,9 +238,9 @@ public class StandardGun : ArmorSkill {
 
         //Debug.Log("ammo: " + currentAmmoCount);
         //play recoil animation
-        armorState = ArmorState.recoiling;
+        armorState = SkillState.recoiling;
         //characterAnimation.Play(recoilAnimation.clip.name);
-		myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
+		ownerManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
         if(currentAmmoCount <= 0)
         {
             cooldownTimer = cooldown + recoilAnimation.clip.length;
@@ -255,12 +258,12 @@ public class StandardGun : ArmorSkill {
         yield return new WaitForSeconds(sec);
 
 
-        armorState = ArmorState.reloading;
+        armorState = SkillState.reloading;
         //characterAnimation.Play(reloadAnimation.clip.name);
-		myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
+		ownerManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
         yield return new WaitForSeconds(reloadAnimation.clip.length);
         //characterAnimation.Play(durationAnimation.clip.name);
-		myManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
+		ownerManager.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
         //Debug.Log("back to fire mode");
         currentAmmoCount = maxAmmoCount;
 

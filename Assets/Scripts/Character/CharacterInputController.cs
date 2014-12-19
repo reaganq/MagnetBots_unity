@@ -9,7 +9,7 @@ public class CharacterInputController : MonoBehaviour {
     public InputType inputType;
     public CharacterController character = null;
     private Transform _myTransform;
-    public CharacterMotor motor = null;
+    public PlayerMotor motor = null;
     public CharacterActionManager actionManager = null;
     public CharacterStatus characterStatus = null;
     
@@ -40,7 +40,7 @@ public class CharacterInputController : MonoBehaviour {
     {
         _myTransform = transform;
         character = gameObject.GetComponent<CharacterController>();
-        motor = gameObject.GetComponent<CharacterMotor>();
+        motor = gameObject.GetComponent<PlayerMotor>();
         //uiCamera = Camera.main.gameObject.GetComponent<UICamera>();
         //UICamera.fallThrough = this.gameObject;
         //outputAngleVector = new Vector2(0,0);
