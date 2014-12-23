@@ -74,7 +74,7 @@ public class NormalMelee : BaseSkill {
     }
 
 
-    public override IEnumerator PressDown()
+	public override IEnumerator PressDownSequence()
     {
 		if(disableMovement)
 		{
@@ -131,11 +131,11 @@ public class NormalMelee : BaseSkill {
 
         yield return new WaitForSeconds(followThroughTime * 0.7f);
 
-        Reset();
+        ResetSkill();
 
     }
 
-    public override void Reset()
+    public override void ResetSkill()
     {
         armorState = SkillState.ready;
         HitEnemies.Clear();

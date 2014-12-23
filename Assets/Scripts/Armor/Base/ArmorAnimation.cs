@@ -8,8 +8,11 @@ public class ArmorAnimation{
 
     public AnimationClip clip;
     public int animationLayer;
-    public List<string> addMixingTransforms;
-    public List<string> removeMixingTransforms;
+	public bool useArmLBones;
+	public bool useArmRBones;
+	public bool useVerticalBones;
+    //public List<string> addMixingTransforms;
+    //public List<string> removeMixingTransforms;
 
     public void TransferAnimation(Animation target, Transform avatar)
     {
@@ -19,7 +22,29 @@ public class ArmorAnimation{
         //StartCoroutine(MixingTransforms( addMixingTransforms, removeMixingTransforms, clip));
         //yield return null;
         
-        if(addMixingTransforms.Count>0)
+		if(useArmLBones)
+		{
+			for (int i = 0; i < GeneralData.armLBones.Length; i++) {
+				target[clip.name].AddMixingTransform(GetBone(GeneralData.armLBones[i], avatar), false);
+			}
+		}
+		
+		if(useArmRBones)
+		{
+			for (int i = 0; i < GeneralData.armRBones.Length; i++) {
+				target[clip.name].AddMixingTransform(GetBone(GeneralData.armRBones[i], avatar), false);
+			}
+		}
+
+		if(useVerticalBones)
+		{
+			for (int i = 0; i < GeneralData.verticalBones.Length; i++) {
+				target[clip.name].AddMixingTransform(GetBone(GeneralData.verticalBones[i], avatar), false);
+			}
+		}
+
+
+        /*if(addMixingTransforms.Count>0)
         {
             for (int i = 0; i < addMixingTransforms.Count; i++) {
                 target[clip.name].AddMixingTransform(GetBone(addMixingTransforms[i], avatar), false);
@@ -34,7 +59,7 @@ public class ArmorAnimation{
                 target[clip.name].RemoveMixingTransform(GetBone(removeMixingTransforms[i], avatar));
                 //yield return null;
             }
-        }
+        }*/
     }
     /*public IEnumerator MixingTransforms(List<string> bonelist, List<string> removelist, AnimationClip clip)
     {

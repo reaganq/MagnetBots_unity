@@ -8,6 +8,8 @@ public class CharacterActionManager : ActionManager {
     public BaseSkill[] armorSkillsArray = new BaseSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
+
+
     
     private Job leftJob;
     private Job rightJob;
@@ -36,12 +38,11 @@ public class CharacterActionManager : ActionManager {
     {
         //animationTarget.Play("Default_Idle");
 		base.Start();
-		myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
+		//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
+		CrossfadeAnimation("Default_Idle", true);
     }
-
-
-    
-    public void AddArmorcontroller(BaseSkill controller, PassiveArmorAnimationController animController, int index)
+	
+    public void AddSkill(BaseSkill controller, PassiveArmorAnimationController animController, int index)
     {
 		//Debug.LogWarning(index);
         armorSkillsArray[index] = controller;
@@ -106,92 +107,34 @@ public class CharacterActionManager : ActionManager {
 
     public void LeftAction(InputTrigger trigger)
     {
-		if(isLocked())
+		if(isLocked() || armorSkillsArray[3].isBusy)
 			return;
 
-		if(armorSkillsArray[3] != null )
-		{
-			if(!armorSkillsArray[3].CanPressDown())
-				return;
-		}
-        if(armorSkillsArray[2] == null)
+        if(trigger == InputTrigger.OnPressDown)
         {
-            return;
-        }
-        if(trigger == InputTrigger.OnPressDown && armorSkillsArray[2].CanPressDown())
-        {
-			if(rightEndJob != null)
-			{
-				rightEndJob.kill();
-				//rightEndJob = null;
-				Debug.Log("htere");
-			}
-
-            if(leftEndJob != null)
-            {
-                leftEndJob.kill();
-                leftEndJob = null;
-            }
-            if(leftJob != null) leftJob.kill();
-            leftJob = Job.make( armorSkillsArray[2].PressDown(), true );
-            actionState = ActionState.leftAction;
+			armorSkillsArray[2].PressDown();
         }
 
-        if(trigger == InputTrigger.OnPressUp && armorSkillsArray[2].CanPressUp())
+        else if(trigger == InputTrigger.OnPressUp)
         {
-            leftEndJob = Job.make( armorSkillsArray[2].PressUp(), true );
-            leftEndJob.jobComplete += (waskilled) => 
-            {
-                actionState = ActionState.idle;
-				armorSkillsArray[2].Reset();
-            };
+			armorSkillsArray[2].PressUp();
         }
     }
 
     public void RightAction(InputTrigger trigger)
     {
-		if(isLocked())
+		if(isLocked() || armorSkillsArray[2].isBusy)
 			return;
-
-		if(armorSkillsArray[2] != null)
+		
+		if(trigger == InputTrigger.OnPressDown)
 		{
-			if(!armorSkillsArray[2].CanPressDown())
-				return;
+			armorSkillsArray[3].PressDown();
 		}
-        //Debug.Log("here");
-        if(armorSkillsArray[3] == null)
-        {
-            return;
-        }
-        if(trigger == InputTrigger.OnPressDown && armorSkillsArray[3].CanPressDown())
-        {
-			if(leftEndJob != null)
-			{
-				leftEndJob.kill();
-				leftEndJob = null;
-			}
-
-            if(rightEndJob != null)
-            {
-                rightEndJob.kill();
-                rightEndJob = null;
-            }
-            if(rightJob != null) rightJob.kill();
-            rightJob = Job.make( armorSkillsArray[3].PressDown(), true);
-            actionState = ActionState.rightAction;
-        }
-
-        if(trigger == InputTrigger.OnPressUp && armorSkillsArray[3].CanPressUp())
-        {
-            rightEndJob = Job.make(armorSkillsArray[3].PressUp(), true);
-            rightEndJob.jobComplete += (waskilled) => 
-            {
-				if(waskilled)
-					Debug.Log(waskilled);
-                actionState = ActionState.idle;
-				armorSkillsArray[3].Reset();
-            };
-        }
+		
+		else if(trigger == InputTrigger.OnPressUp)
+		{
+			armorSkillsArray[3].PressUp();
+		}
     }
 
 	public void ResetActionState()
@@ -261,6 +204,7 @@ public class CharacterActionManager : ActionManager {
 		playerMotor.rotationTarget = playerMotor.cachedRotation;
     }
 
+	[RPC]
     public void AnimateToIdle()
     {
         if(movementState != MovementState.idle)
@@ -306,21 +250,21 @@ public class CharacterActionManager : ActionManager {
         }
     }
 
-	public void EnableMovement()
+	public override void EnableMovement()
 	{
-
-		motor.disableMovement = false;
+		base.EnableMovement();
 	}
 	
-	public void DisableMovement()
+	public override void DisableMovement()
 	{
-		motor.disableMovement = true;
+		base.DisableMovement();
 		AnimateToIdle();
 	}
 
-    public void UpdateRunningSpeed(float t)
+    public override void UpdateRunningSpeed(float t)
     {
-		myAnimation["Default_Run"].speed = Mathf.Lerp( 1f, 2f, t);
+		currentRunningAnimationSpeed = Mathf.Lerp( currentRunningAnimationSpeed, t*runningAnimationSpeedMultiplier, 0.1f);
+		myAnimation["Default_Run"].speed = currentRunningAnimationSpeed;
 
         for (int i = 0; i < armorSkillsArray.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
@@ -331,7 +275,7 @@ public class CharacterActionManager : ActionManager {
     #endregion
 
 	#region rpc animation functions
-	[RPC]
+	/*[RPC]
 	public void PlayAnimation(string name)
 	{
 		myAnimation.Play(name);
@@ -353,7 +297,7 @@ public class CharacterActionManager : ActionManager {
 	public void BlendAnimation(string name, float target, float timer)
 	{
 		myAnimation.Blend(name, target, timer);
-	}
+	}*/
 	#endregion
 
 	#region rpc effect prefab functions

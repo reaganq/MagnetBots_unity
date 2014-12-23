@@ -59,7 +59,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 				{
 					float t = 0.0f;
 					//Debug.Log(speed);
-					t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.curMovementSpeed ), 0, myStatus.curMovementSpeed );
+					t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
 					actionManager.UpdateRunningSpeed(t);
 					actionManager.AnimateToRunning();
 				}

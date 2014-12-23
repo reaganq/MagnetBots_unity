@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerCharacter : CharacterStatus {
 
-	public CharacterActionManager characterActionManager;
+	public CharacterActionManager playerActionManager;
 	public Avatar avatar;
 
 	// Use this for initialization
@@ -12,7 +12,7 @@ public class PlayerCharacter : CharacterStatus {
 		characterName = GenerateRandomString(6);
 		characterType = CharacterType.Playable;
 		enemyCharacterType = CharacterType.AI;
-		characterActionManager = GetComponent<CharacterActionManager>();
+		playerActionManager = GetComponent<CharacterActionManager>();
 		if(myPhotonView.isMine)
 		{
 			this.tag = "Player";
@@ -24,9 +24,9 @@ public class PlayerCharacter : CharacterStatus {
 	public override void ChangeMovementSpeed(float change)
 	{
 		base.ChangeMovementSpeed(change);
-		if(characterActionManager != null)
+		if(playerActionManager != null)
 		{
-			characterActionManager.motor.AnimationUpdate();
+			playerActionManager.motor.AnimationUpdate();
 		}
 	}
 }

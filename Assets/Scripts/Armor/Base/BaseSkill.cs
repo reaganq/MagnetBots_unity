@@ -7,35 +7,42 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class BaseSkill : MonoBehaviour {
 
+	//automated stuff
 	public int ID;
+	public bool isPressedDown = false;
+	public CharacterStatus owner;
+	public ActionManager ownerManager;
+	public Animation ownerAnimation;
+	public Transform ownerTransform;
+	public SkillState armorState;
+	public List<CharacterStatus> HitEnemies;
+	public List<CharacterStatus> HitAllies;
+	public Job pressDownJob;
+	public Job pressUpJob;
+	public bool isBusy = false;
+
 	public string skillName;
 	public SkillType skillType;
-	public bool _isSkillActive = false;
     public bool hasPressDownEvent;
     public bool hasPressUpEvent;
+	public bool resetAfterDown;
+	public bool resetAfterUp;
+	public bool canUseWhileBusy;
 	public bool disableMovement;
+	public bool restrictedMovement;
     public int equipmentSlotIndex;
 	public SkillAnimation baseSkillAnimation;
+	public float targetLimit = Mathf.Infinity;
+	public bool continuousUse;
+
     /*** attribute ***/
     public float cooldown;
     public int maxAmmoCount;
     public float fireSpeed;
-    //public bool isReloading;
-    //public float cooldownTimer;
-    //public float fireSpeedTimer;
 	public float damage;
 
     public ArmorAttribute[] armorAttributes;
     public List<StatusEffectData> skillStatusEffects;
-
-    public CharacterStatus owner;
-	public ActionManager ownerManager;
-	public Animation ownerAnimation;
-	public Transform ownerTransform;
-    public SkillState armorState;
-
-    public List<CharacterStatus> HitEnemies;
-	public List<CharacterStatus> HitAllies;
 
     public virtual void Initialise(CharacterStatus ownerStatus, int index)
     {
@@ -44,17 +51,65 @@ public class BaseSkill : MonoBehaviour {
 		ownerAnimation = ownerManager.myAnimation;
 		ownerTransform = ownerStatus._myTransform;
 		equipmentSlotIndex = index;
+		TransferSkillAnimation(baseSkillAnimation);
     }
 
-    public virtual IEnumerator PressUp()
+	public virtual void UnEquip()
+	{
+		RemoveSkillAnimation(baseSkillAnimation);
+	}
+
+	public virtual void PressDown()
+	{
+		isPressedDown = true;
+
+		if(hasPressDownEvent)
+		{
+			if(!isBusy || (isBusy && canUseWhileBusy))
+			{
+				if(pressDownJob != null)
+					pressDownJob.kill();
+				if(pressUpJob != null)
+					pressUpJob.kill();
+				pressDownJob = Job.make(PressDownSequence(), true);
+				pressDownJob.jobComplete += (wasKilled) =>
+				{
+					if(resetAfterDown)
+						ResetSkill();
+				};
+			}
+		}
+	}
+
+	public virtual void PressUp()
+	{
+		isPressedDown = false;
+		if(!hasPressDownEvent && isBusy && !canUseWhileBusy)
+			return;
+
+		if(hasPressUpEvent)
+		{
+			if(pressDownJob != null)
+				pressDownJob.kill();
+			pressUpJob = Job.make(PressUpSequence());
+			pressUpJob.jobComplete += (wasKilled) =>
+			{
+				if(resetAfterUp)
+					ResetSkill();
+			};
+		}
+	}
+
+
+    public virtual IEnumerator PressDownSequence()
     {
         yield return null;
     }
 
-    public virtual IEnumerator PressDown()
-    {
-        yield return null;
-    }
+	public virtual IEnumerator PressUpSequence()
+	{
+		yield return null;
+	}
 
     public virtual bool CanPressDown()
     {
@@ -66,15 +121,23 @@ public class BaseSkill : MonoBehaviour {
         return false;
     }
 
-	public virtual void Reset()
+	public virtual void ResetSkill()
 	{
+		isBusy = false;
 	}
+
+	public void ActivateSkill(bool state)
+	{
+		isPressedDown = state;
+	}
+
+	#region pooling
 
 	public void AddParticlesToPool()
 	{
-
+		
 	}
-
+	
 	public void AddPrefabToPool(Transform prefab)
 	{
 		//if(characterManager.MakeSpawnPool())
@@ -90,12 +153,9 @@ public class BaseSkill : MonoBehaviour {
 		//}
 	}
 
-	public void ActivateSkill(bool state)
-	{
-		_isSkillActive = state;
-	}
+	#endregion
         
-        #region skill effects
+	#region apply status effects
 
 	//give generic status effects to target
 	public virtual void ProcessStatusEffects(int condition, CharacterStatus target, int allyFlag)
@@ -147,58 +207,23 @@ public class BaseSkill : MonoBehaviour {
 
 	#endregion
 
-	#region skill effects and attributes setup
-
-    public void InitializeAttributesStats(ArmorAttribute[] attributes, StatusEffectData[] effects)
-    {
-        //characterTransform = Player.Instance.avatarObject.transform;
-        //skillEffects = effects;
-        //armorAttributes = attributes;
-    }
-
-    public void InitializeAttributesStats()
-    {
-        for (int i = 0; i < armorAttributes.Length ; i++) {
-            if(armorAttributes[i].attributeName == ArmorAttributeName.cooldown)
-                cooldown = armorAttributes[i].attributeValue;
-			if(armorAttributes[i].attributeName == ArmorAttributeName.damage)
-				damage = armorAttributes[i].attributeValue;
-        }
-    }
-
-    public void PopulateSkillEffects()
-    {
-        /*for (int i = 0; i < skillEffects.Length ; i++) {
-            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onUse)
-                onUseSkillEffects.Add(skillEffects[i]);
-            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onHit)
-                onHitSkillEffects.Add(skillEffects[i]);
-            if(skillEffects[i].effectTrigger == (int)SkillEffectTrigger.onReceiveHit)
-                onReceiveHitSkillEffects.Add(skillEffects[i]);
-        }*/
-    }
-
-    public float GetAttributeValue(ArmorAttributeName name)
-    {
-        for (int i = 0; i < armorAttributes.Length; i++) {
-            if(armorAttributes[i].attributeName == name)
-                return armorAttributes[i].attributeValue;
-        }
-        return 0;
-    }
-
-	#endregion
-
     #region Animation Setup
    
     public void TransferSkillAnimation(SkillAnimation anim)
     {
         if(anim.precastAnimation.clip != null)
-            StartCoroutine(TransferAnimation(anim.precastAnimation));
-        if(anim.castAnimation.clip != null)
-            StartCoroutine(TransferAnimation(anim.castAnimation));
-        if(anim.followThroughAnimation.clip != null)
-            StartCoroutine(TransferAnimation(anim.followThroughAnimation));
+			anim.precastAnimation.TransferAnimation(ownerAnimation, ownerTransform);
+		if(anim.castAnimation.clip != null)
+			anim.castAnimation.TransferAnimation(ownerAnimation, ownerTransform);
+		if(anim.followThroughAnimation.clip != null)
+			anim.followThroughAnimation.TransferAnimation(ownerAnimation, ownerTransform);
+		if(anim.loopAnimation.clip != null)
+			anim.loopAnimation.TransferAnimation(ownerAnimation, ownerTransform);
+            //StartCoroutine(TransferAnimation(anim.precastAnimation));
+       // if(anim.castAnimation.clip != null)
+            //StartCoroutine(TransferAnimation(anim.castAnimation));
+        //if(anim.followThroughAnimation.clip != null)
+           // StartCoroutine(TransferAnimation(anim.followThroughAnimation));
     }
 
     public IEnumerator TransferAnimation(ArmorAnimation anim)
@@ -210,7 +235,7 @@ public class BaseSkill : MonoBehaviour {
             //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
             yield return null;
             
-            if(anim.addMixingTransforms.Count>0)
+            /*if(anim.addMixingTransforms.Count>0)
             {
                 for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
                     ownerAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
@@ -223,13 +248,8 @@ public class BaseSkill : MonoBehaviour {
                 {
                     ownerAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
                 }
-            }
+            }*/
         }
-    }
-
-    public virtual void UnEquip()
-    {
-
     }
 
     public void RemoveSkillAnimation(SkillAnimation anim)
@@ -240,6 +260,8 @@ public class BaseSkill : MonoBehaviour {
             RemoveAnimation(anim.castAnimation.clip);
         if(anim.followThroughAnimation.clip != null)
             RemoveAnimation(anim.followThroughAnimation.clip);
+		if(anim.loopAnimation.clip != null)
+			RemoveAnimation(anim.loopAnimation.clip);
     }
 
     public void RemoveArmorAnimation(ArmorAnimation anim)
@@ -253,26 +275,7 @@ public class BaseSkill : MonoBehaviour {
         ownerAnimation.RemoveClip(clip.name);
     }
 
-    /*public IEnumerator MixingTransforms(List<string> bonelist, List<string> removelist, AnimationClip clip)
-    {
-        yield return null;
-        
-        if(bonelist.Count>0)
-        {
-            for (int i = 0; i < bonelist.Count; i++) {
-                animationTarget[clip.name].AddMixingTransform(GetBone(bonename), false);
-            }
-        }
-        
-        if(removelist.Count>0)
-        {
-            foreach(string bonename in removelist)
-            {
-                animationTarget[clip.name].RemoveMixingTransform(GetBone(bonename));
-            }
-        }
-        
-    }*/
+
     
     public Transform GetBone(string bonename)
     {
@@ -289,6 +292,8 @@ public class BaseSkill : MonoBehaviour {
     }
 
     #endregion
+
+	#region hitting targets
 
 	public virtual void HitTarget(HitBox target, bool isAlly)
 	{
@@ -363,6 +368,8 @@ public class BaseSkill : MonoBehaviour {
 			Debug.Log("hitally");
 		}
 	}
+
+	#endregion
 
 }
 

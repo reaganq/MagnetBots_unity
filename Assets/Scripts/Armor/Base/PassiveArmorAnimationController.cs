@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class PassiveArmorAnimationController : MonoBehaviour {
 
-    public ArmorAnimation braceAnimation;
+   // public ArmorAnimation braceAnimation;
     public ArmorAnimation idleOverrideAnim;
-    public ArmorAnimation walkingOverrideAnim;
+    //public ArmorAnimation walkingOverrideAnim;
     public ArmorAnimation runningOverrideAnim;
 
     public Animation animationTarget;
-    public Avatar avatar;
+    //public Avatar avatar;
 
     public void RemoveAnimations()
     {
@@ -27,7 +27,8 @@ public class PassiveArmorAnimationController : MonoBehaviour {
 
         if(idleOverrideAnim != null)
         {
-            StartCoroutine(TransferAnimation(target, idleOverrideAnim, character));
+            //StartCoroutine(TransferAnimation(target, idleOverrideAnim, character));
+			idleOverrideAnim.TransferAnimation( target, character);
         }
 
         if(runningOverrideAnim != null)
@@ -35,7 +36,8 @@ public class PassiveArmorAnimationController : MonoBehaviour {
             //animationTarget.AddClip(runningOverrideAnim.clip, runningOverrideAnim.clip.name);
             //animationTarget[runningOverrideAnim.clip.name].layer = runningOverrideAnim.animationLayer;
             //StartCoroutine(MixingTransforms( runningOverrideAnim.addMixingTransforms, runningOverrideAnim.removeMixingTransforms, runningOverrideAnim.clip));
-            StartCoroutine(TransferAnimation(target, runningOverrideAnim, character));
+            //StartCoroutine(TransferAnimation(target, runningOverrideAnim, character));
+			runningOverrideAnim.TransferAnimation(target, character);
         }
     }
 
@@ -46,7 +48,7 @@ public class PassiveArmorAnimationController : MonoBehaviour {
         //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
         yield return null;
         
-        if(anim.addMixingTransforms.Count>0)
+        /*if(anim.addMixingTransforms.Count>0)
         {
             for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
                 target[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i], avatar), false);
@@ -59,7 +61,7 @@ public class PassiveArmorAnimationController : MonoBehaviour {
             {
                 target[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i], avatar));
             }
-        }
+        }*/
     }
     
     public Transform GetBone(string bonename, Transform avatar)
@@ -75,6 +77,4 @@ public class PassiveArmorAnimationController : MonoBehaviour {
         }
         return null;
     }
-
-
 }

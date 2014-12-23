@@ -69,7 +69,7 @@ public class AISkill : BaseSkill {
         yield return null;
     }
 
-	public virtual void Reset()
+	public virtual void ResetSkill()
 	{
 		HitEnemies.Clear();
 		HitAllies.Clear();

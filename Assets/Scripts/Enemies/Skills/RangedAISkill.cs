@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class RangedAISkill : AISkill {
@@ -39,7 +39,7 @@ public class RangedAISkill : AISkill {
 		_animator[recoilAnimation.clip.name].layer = 2;
 		AddPrefabToPool(bulletPrefab);
 		AddPrefabToPool(projectileCollisionDecal);
-		Reset();
+		ResetSkill();
 	}
 	
 	// Update is called once per frame
@@ -106,11 +106,11 @@ public class RangedAISkill : AISkill {
 		//fsm.CrossFadeAnimation(followThroughAnimation.clip);
 		fsm.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
 		yield return new WaitForSeconds(followThroughAnimation.clip.length);
-		Reset();
+		ResetSkill();
 
 	}
 
-	public override void Reset()
+	public override void ResetSkill()
 	{
 		currentShotsFired = 0f;
 	}

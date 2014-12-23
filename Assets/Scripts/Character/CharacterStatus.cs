@@ -63,20 +63,6 @@ public class CharacterStatus : CharacterAttributes {
 			return true;
 	}
 
-	/*public void ProcessHitEffects(List<StatusEffectData> effects, Vector3 originPos)
-	{
-		for (int i = 0; i < effects.Count; i++) {
-			switch(effects[i].effectType)
-			{
-			case((int)StatusEffectCategory.knockback):
-				Debug.Log("KNOCKING ME BACK");
-				//if(motor)
-					//motor.AddImpact(_myTransform.position - originPos, effects[i].effectValue);
-			break;
-			}
-		}
-	}*/
-
 	public void AddImpact(Vector3 dir, float force, float duration, float acceleration)
 	{
 		motor.AddImpact(dir, force, duration, acceleration);
@@ -120,24 +106,11 @@ public class CharacterStatus : CharacterAttributes {
 
 	public void AddStatusEffect(StatusEffect effect)
 	{
-		if(effect.statusEffect.effect == 1)
-		{
-			//speedModifiers.Add(effect);
-			effect.StartEffect(this, statusEffects.Count - 1);
-		}
-		else if (effect.statusEffect.effect == 3) 
-		{
-			//attackBonusModifiers.Add(effect);
-			effect.StartEffect(this, statusEffects.Count - 1);
-		}
-		else if (effect.statusEffect.effect == 6) 
-		{
-			//defenseBonusModifiers.Add(effect);
-			effect.StartEffect(this, statusEffects.Count - 1);
-        }
+		statusEffects.Add(effect);
+		effect.StartEffect(this, statusEffects.Count - 1);
     }
 
-	public void RemoveStatusEffect(BaseSkill ownerSkill)
+	public void RemoveStatusEffectFromSkill(BaseSkill ownerSkill)
 	{
 		for (int i = statusEffects.Count - 1; i > -1; i--) 
 		{
@@ -155,12 +128,6 @@ public class CharacterStatus : CharacterAttributes {
 			statusEffects.Remove(effect);
 			return;
 		}
-    }
-    
-    
-    public void EnableMovement(bool state)
-    {
-        canMove = state;
     }
 
 	[RPC]

@@ -2,61 +2,25 @@ using UnityEngine;
 using System.Collections;
 
 public class PlayerMotor : Motor {
- 
-    //public ArmorController[] ArmorControllers = new ArmorController[5];
-    
-    
-    public CharacterActionManager animationManager;
-    public CharacterStatus myStatus;
-    public Animation animationTarget;
+     
+    public CharacterActionManager myActionManager;
     public CharacterInputController input;
-	public bool disableMovement;
-    
-    public Transform _myTransform;
-    //private Transform rigidbodyTransform;
-    
-    //public bool canRun = true;
-    //public bool isRunning = false;
+
     public bool canControl = true;
     public bool canRotate = true;
-    
     public Vector3 dir;
-	public Vector3 rotationTarget;
-    //public Vector3[] speed = new Vector3[2];
-    
-    //public float Speed;
-    //public float rotSpeed = 11.5f;
-    public float rotAngle;
-    public float acceleration;
-    //public float runSpeed;
-
-    //----- DON'T TOUCH -----//
-	public Vector3 cachedRotation;
-    public Vector3 characterVelocity;
-    public Vector3 horizontalVelocity;
-    public float currentSpeed;
 	
-    //public Vector3 velocity = Vector3.zero;
-    
-	// Use this for initialization
-
-    
 	public override void Start () {
 	    
         input = GetComponent<CharacterInputController>();
-        myStatus = GetComponent<CharacterStatus>();
-        _myTransform = transform;
-        characterVelocity = Vector3.zero;
-        animationManager = GetComponent<CharacterActionManager>();
-        //rigidbodyTransform = rigidbody.transform;
-        //SetRotAngle(_myTransform.position+(Vector3.forward * -10f));
-        //UpdateAnimation(); 
+        myActionManager = GetComponent<CharacterActionManager>();
+		base.Start();
 	}
 	
 #region Movement
 	// Update is called once per frame
 	void Update () {
-        
+
         if(!GameManager.Instance.GameIsPaused)
         {
 			if(!disableMovement)
@@ -66,42 +30,21 @@ public class PlayerMotor : Motor {
 
 			}
 			if(characterVelocity == Vector3.zero && rotationTarget != Vector3.zero)
-				ManipulateRotate();
+				ManualRotate();
         }
         
 	}
 
-	void ManipulateRotate()
+	public override void LateUpdate()
 	{
-		Vector3 _direction = (rotationTarget - _myTransform.position).normalized;
-		_direction.y = 0;
-		Quaternion _lookrotation = Quaternion.LookRotation(_direction);
-		_myTransform.rotation = Quaternion.Slerp(_myTransform.rotation, _lookrotation, Time.deltaTime*myStatus.rotationSpeed);
-		if(Vector3.Angle( _myTransform.forward, _direction) < 1)
-		{
-			rotationTarget = Vector3.zero;
-		}
-	}
-
-	void LateUpdate()
-	{
-		if(!GameManager.Instance.GameIsPaused)
-		{
-			if(impact.magnitude > 0.1f)
-			{
-				controller.Move(impact*Time.deltaTime);
-			}
-			impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime * 5);
-		}
+		base.LateUpdate();
 	}
     
     public void Move(Vector3 direction)
     {
         moveDirection = direction;
     }
-
-
-    
+	
     Vector3 direction;
     private Vector3 moveDirection
     {
@@ -112,35 +55,22 @@ public class PlayerMotor : Motor {
             if(direction.magnitude > 0.1f)  
             {
                 Quaternion newRotation = Quaternion.LookRotation(direction);
-                //Debug.Log(newRotation);
 				if(!disableMovement)
                 	_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
             }
                 direction *= 0.2f * (Vector3.Dot(_myTransform.forward,direction) + 1);
 
             dir = direction;
-            //Debug.LogWarning(dir);
         }
     }
-
-	public void AddImpact(Vector3 dir, float force)
-	{
-		dir.Normalize();
-		dir = new Vector3(dir.x, 0, dir.z);
-		impact += dir.normalized * force / 1;
-	}
     
     void UpdateFunction()
     {
-        //Debug.Log("moving");
         Vector3 velocity = characterVelocity;
         
         velocity = ApplyInputVelocityChange(velocity);
         
         velocity += Physics.gravity;
-
-		//if(impact.magnitude > 0.1f)
-			//velocity += impact;
 
         Vector3 lastPosition = _myTransform.position;
         Vector3 currentMovementOffset = velocity * Time.deltaTime;
@@ -151,10 +81,6 @@ public class PlayerMotor : Motor {
         characterVelocity = (_myTransform.position - lastPosition) / Time.deltaTime;
         var newHVelocity    = new Vector3(characterVelocity.x, 0, characterVelocity.z);
 
-		//if(impact.magnitude > 0.1f)
-		//impact = Vector3.Lerp(impact, Vector3.zero, Time.deltaTime * 5);
-        // The CharacterController can be moved in unwanted directions when colliding with things.
-        // We want to prevent this from influencing the recorded velocity.
         if (oldHVelocity == Vector3.zero) {
             characterVelocity = new Vector3(0, characterVelocity.y, 0);
         }
@@ -162,7 +88,6 @@ public class PlayerMotor : Motor {
             var projectedNewVelocity    = Vector3.Dot(newHVelocity, oldHVelocity) / oldHVelocity.sqrMagnitude;
             characterVelocity = oldHVelocity * Mathf.Clamp01(projectedNewVelocity) + characterVelocity.y * Vector3.up;
         }
-        //Debug.Log(characterVelocity);
     }
     
     public Vector3 ApplyInputVelocityChange(Vector3 velocity)
@@ -188,8 +113,6 @@ public class PlayerMotor : Motor {
     public Vector3 GetDesiredHorizontalVelocity()
     {
         var desiredLocalDirection = _myTransform.InverseTransformDirection(dir);
-        //var maxSpeed = MaxSpeedInDirection(desiredLocalDirection);
-        //return _myTransform.TransformDirection(desiredLocalDirection * maxSpeed);
         return _myTransform.TransformDirection(desiredLocalDirection * myStatus.curMovementSpeed);
     }
     
@@ -202,32 +125,9 @@ public class PlayerMotor : Motor {
             var zAxisEllipseMultiplier  = (desiredMovementDirection.z > 0 ? myStatus.curMovementSpeed : myStatus.curMovementSpeed) / myStatus.curMovementSpeed;
             var temp    = new Vector3(desiredMovementDirection.x, 0, desiredMovementDirection.z / zAxisEllipseMultiplier).normalized;
             var length  = new Vector3(temp.x,0,temp.z * zAxisEllipseMultiplier).magnitude * myStatus.curMovementSpeed;
-            Debug.Log("length: "+length);
             return length;
         }
     }
-        
-    void UpdateMovementFixed()
-    {
-        
-        //Debug.LogWarning("moving");
-        /*rigidbody.MovePosition(new Vector3(rigidbodyTransform.position.x,0f,rigidbodyTransform.position.z)+(speed[0]*Time.deltaTime));
-        horizontalVelocity = rigidbody.velocity;
-        Debug.LogError(horizontalVelocity);*/
-        
-    }
-
-    /*public void SetRotAngle(Vector3 destination)
-    {
-        dir=(destination-new Vector3(_myTransform.position.x,0f,_myTransform.position.z));
-        float distTotal=dir.magnitude;
-        dir/=distTotal;
-        
-        rotAngle = (Mathf.Atan2((destination.z - _myTransform.position.z),(destination.x-_myTransform.position.x)))*(180f/Mathf.PI);
-        rotAngle=(-rotAngle+90f);
-        
-        //Debug.Log("rotAngle: "+rotAngle);
-    }*/
 
     #endregion
 
@@ -236,41 +136,16 @@ public class PlayerMotor : Motor {
         horizontalVelocity = controller.velocity;
         horizontalVelocity.y = 0f;
 		Vector3 localVel = _myTransform.InverseTransformDirection(horizontalVelocity);
-        currentSpeed = horizontalVelocity.magnitude;
-        //Debug.Log(currentSpeed);
         if(localVel.z > 0)
         {
             float t = 0.0f;
-            //Debug.Log(speed);
-            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.curMovementSpeed ), 0, myStatus.curMovementSpeed );
-            animationManager.UpdateRunningSpeed(t);
-            animationManager.AnimateToRunning();
+            t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
+            myActionManager.UpdateRunningSpeed(t);
+            myActionManager.AnimateToRunning();
         }
         else
         {
-            //if(animationManager.myState == 
-            animationManager.AnimateToIdle();
+            myActionManager.AnimateToIdle();
         }
     }
 }
-
-
-
-// idle
-// run
-// armLpreattack
-//armLattack
-//armLrecoil
-//armLpostattack
-
-// armRpreattack
-//armRattack
-//armRrecoil
-//armRpostattack
-
-//specialattack
-
-//stunned
-//frozen
-//victory
-//death

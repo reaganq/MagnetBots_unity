@@ -18,6 +18,7 @@ public class SkillAnimation
 	public ArmorAnimation precastAnimation;
     public ArmorAnimation castAnimation;
     public ArmorAnimation followThroughAnimation;
+	public ArmorAnimation loopAnimation;
     public float castTime;
     public float followThroughTime;
 }

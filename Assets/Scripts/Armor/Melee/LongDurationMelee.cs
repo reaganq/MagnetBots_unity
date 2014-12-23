@@ -49,7 +49,7 @@ public class LongDurationMelee : BaseSkill {
     }
     
     // Update is called once per frame
-    public override IEnumerator PressDown()
+	public override IEnumerator PressDownSequence()
     {
 
 
@@ -60,7 +60,7 @@ public class LongDurationMelee : BaseSkill {
 
         ownerAnimation[skillAnimation.castAnimation.clip.name].time = 0;
         ownerAnimation[skillAnimation.castAnimation.clip.name].speed = 1;
-        ownerAnimation[skillAnimation.precastAnimation.clip.name].time = 0;
+        //ownerAnimation[skillAnimation.precastAnimation.clip.name].time = 0;
         ownerAnimation[skillAnimation.followThroughAnimation.clip.name].time = 0;
 
         //characterAnimation.Play(skillAnimation.castAnimation.clip.name);
@@ -86,7 +86,7 @@ public class LongDurationMelee : BaseSkill {
             return true;
     }
 
-    public override IEnumerator PressUp()
+    public override IEnumerator PressUpSequence()
     {
 
 
@@ -134,7 +134,7 @@ public class LongDurationMelee : BaseSkill {
 
     }
     
-    public override void Reset()
+    public override void ResetSkill()
     {
 		Debug.Log("reset");
         armorState = SkillState.ready;

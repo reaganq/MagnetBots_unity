@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class Avatar : MonoBehaviour {
 
 	// Use this for initialization
-    public PlayerMotor characterMotor;
+    public PlayerMotor myMotor;
     public Animation animationTarget;
-    public CharacterActionManager actionManager;
+    public CharacterActionManager myActionManager;
     public CharacterStatus myStatus;
 	public PhotonView myPhotonView;
     
@@ -33,8 +33,8 @@ public class Avatar : MonoBehaviour {
     public Transform _myTransform;
 
 	void Awake () {
-        characterMotor = GetComponent<PlayerMotor>();
-        actionManager = GetComponent<CharacterActionManager>();
+        myMotor = GetComponent<PlayerMotor>();
+        myActionManager = GetComponent<CharacterActionManager>();
         animationTarget = PelvisBone.GetComponent<Animation>();
         _myTransform = this.transform;
         myStatus = GetComponent<CharacterStatus>();
@@ -222,15 +222,15 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmLObjects.Count > 0)
         {
-            if(actionManager.armorSkillsArray[2] != null)
+            if(myActionManager.armorSkillsArray[2] != null)
             {
-                actionManager.armorSkillsArray[2].UnEquip();
-                actionManager.armorSkillsArray[2] = null;
+                myActionManager.armorSkillsArray[2].UnEquip();
+                myActionManager.armorSkillsArray[2] = null;
             }
-            if(actionManager.armorAnimControllers[2] != null)
+            if(myActionManager.armorAnimControllers[2] != null)
             {
-                actionManager.armorAnimControllers[2].RemoveAnimations();
-                actionManager.armorAnimControllers[2] = null;
+                myActionManager.armorAnimControllers[2].RemoveAnimations();
+                myActionManager.armorAnimControllers[2] = null;
             }
             for (int i = 0; i < ArmLObjects.Count; i++) {
                 Destroy(ArmLObjects[i]);
@@ -259,7 +259,7 @@ public class Avatar : MonoBehaviour {
             armLAnimController.TransferAnimations(animationTarget, _myTransform);
         }
 
-        actionManager.AddArmorcontroller(armLcontroller, armLAnimController, 2);
+        myActionManager.AddSkill(armLcontroller, armLAnimController, 2);
         ArmLObjects.Add(temp);
         //ArmorController armLcontroller = ArmL.GetComponent<ArmorController>();
 
@@ -285,15 +285,15 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmRObjects.Count > 0)
         {
-            if(actionManager.armorSkillsArray[3] != null)
+            if(myActionManager.armorSkillsArray[3] != null)
             {
-                actionManager.armorSkillsArray[3].UnEquip();
-                actionManager.armorSkillsArray[3] = null;
+                myActionManager.armorSkillsArray[3].UnEquip();
+                myActionManager.armorSkillsArray[3] = null;
             }
-            if(actionManager.armorAnimControllers[3] != null)
+            if(myActionManager.armorAnimControllers[3] != null)
             {
-                actionManager.armorAnimControllers[3].RemoveAnimations();
-                actionManager.armorAnimControllers[3] = null;
+                myActionManager.armorAnimControllers[3].RemoveAnimations();
+                myActionManager.armorAnimControllers[3] = null;
             }
             for (int i = 0; i < ArmRObjects.Count; i++) {
                 Destroy(ArmRObjects[i]);
@@ -326,7 +326,7 @@ public class Avatar : MonoBehaviour {
             //animManager.
         }
 
-        actionManager.AddArmorcontroller(armRcontroller, armRAnimController,3);
+        myActionManager.AddSkill(armRcontroller, armRAnimController,3);
         ArmRObjects.Add(temp);
         /*if(armRcontroller != null)
         {

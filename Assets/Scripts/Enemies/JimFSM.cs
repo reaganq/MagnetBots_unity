@@ -105,7 +105,7 @@ public class JimFSM : SimpleFSM {
 				Debug.Log("killing job");
 			}
 
-			selectedSkill.Reset();
+			selectedSkill.ResetSkill();
 			targetObject = null;
 			targetCharacterController = null;
 			fireObject = null;

@@ -68,7 +68,7 @@ public class StandardGun : BaseSkill {
             isReloading = false;
         }
 
-        if(_isSkillActive)
+        if(isPressedDown)
         {
             if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
                 FireOneShot();
@@ -86,7 +86,7 @@ public class StandardGun : BaseSkill {
             //return false;
     }
 
-    public override IEnumerator PressDown()
+	public override IEnumerator PressDownSequence()
     {
 
         if(armorState == SkillState.ready || armorState == SkillState.followThrough)
@@ -142,7 +142,7 @@ public class StandardGun : BaseSkill {
             return true;
     }
 
-    public override IEnumerator PressUp()
+    public override IEnumerator PressUpSequence()
     {
         while(armorState == SkillState.casting)
         {
@@ -161,7 +161,7 @@ public class StandardGun : BaseSkill {
 
 */
         //if(armorState == ArmorState.onUse || armorState == ArmorState.recoiling || armorState == ArmorState.reloading )
-        if(_isSkillActive)
+        if(isPressedDown)
         {
             ActivateSkill(false);
 			//ownerManager.ResetActionState();
@@ -192,7 +192,7 @@ public class StandardGun : BaseSkill {
         }
     }
 
-    public override void Reset()
+    public override void ResetSkill()
     {
 		Debug.Log("resetting" + armorState.ToString());
 		//if(armorState != ArmorState.casting || armorState == ArmorState.reloading)

@@ -75,6 +75,7 @@ public class CharacterInputController : MonoBehaviour {
 
     public void onPress(int index)
     {
+		Debug.Log("pressed button: " + index);
         if(index == -1)
             actionManager.LeftAction(InputTrigger.OnPressDown);
         else if(index == -2)
@@ -83,6 +84,7 @@ public class CharacterInputController : MonoBehaviour {
     
     public void onRelease(int index)
     {
+		Debug.Log("released button: " + index);
         if(index == -1)
             actionManager.LeftAction(InputTrigger.OnPressUp);
         else if(index == -2)
