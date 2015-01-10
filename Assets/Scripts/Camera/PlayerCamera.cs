@@ -88,17 +88,17 @@ public class PlayerCamera: MonoBehaviour {
 
 	public void TransitionToQuickArmory()
 	{
-		TransitionTo(quickArmoryPos, 40, 0.8f, quickInventoryCameraRectOffset);
+		TransitionTo(quickArmoryPos, 40, 0.3f, quickInventoryCameraRectOffset);
 	}
 
 	public void TransitionToQuickInventory()
 	{
-		TransitionTo(defaultPos, 60, 0.8f, quickInventoryCameraRectOffset);
+		TransitionTo(defaultPos, 60, 0.3f, quickInventoryCameraRectOffset);
 	}
 
 	public void TransitionToDefault()
 	{
-		TransitionTo(defaultPos, 60, 0.55f, 0);
+		TransitionTo(defaultPos, 60, 0.3f, 0);
 		//StartCoroutine(MoveTo(defaultPos, 60, 1));
 	}
 
@@ -114,14 +114,20 @@ public class PlayerCamera: MonoBehaviour {
 	public IEnumerator MoveTo(Transform newTrans, float fov, float duration, float offset)
 	{
 		float startTime = Time.time;
+		float timer = 0;
+		Vector3 origPos = childTransform.position;
+		Quaternion origRot = childTransform.rotation;
+		float origFov = childCamera.fieldOfView;
+		float origX = childCamera.rect.x;
 		//Vector4 curRect = childCamera.rect;
 		//Vector4 newRect = new Vector4(offset, curRect.y, curRect.z, curRect.w);
 		while(Time.time < startTime + duration)
 		{
-			childTransform.position = Vector3.Lerp(childTransform.position, newTrans.position, (Time.time - startTime)/duration);
-			childTransform.rotation = Quaternion.Lerp(childTransform.rotation, newTrans.rotation, (Time.time - startTime)/duration);
-			childCamera.fieldOfView = Mathf.Lerp(childCamera.fieldOfView, fov, (Time.time - startTime)/duration);
-			childCamera.rect = new Rect(Mathf.Lerp(childCamera.rect.x, offset, (Time.time - startTime)/duration), childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
+			childTransform.position = Vector3.Lerp(origPos, newTrans.position, timer);
+			childTransform.rotation = Quaternion.Lerp(origRot, newTrans.rotation, timer);
+			childCamera.fieldOfView = Mathf.Lerp(origFov, fov, timer);
+			childCamera.rect = new Rect(Mathf.Lerp(origX, offset, timer), childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
+			timer += Time.deltaTime/duration;
 			yield return null;
 		}
 		childTransform.position = newTrans.position;

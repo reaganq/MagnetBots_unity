@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(this);
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
-		Debug.LogWarning("WTF");
 		#if UNITY_IPHONE || UNITY_STANDALONE
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;

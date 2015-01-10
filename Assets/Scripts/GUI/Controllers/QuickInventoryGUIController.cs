@@ -7,11 +7,11 @@ public class QuickInventoryGUIController : BasicGUIController {
 	public GameObject itemTilePrefab;
 	public UIGrid gridPanel;
 	public GameObject inventoryPanelRoot;
-	
+	public InventoryGUIType inventoryType = InventoryGUIType.quickInventory;
 	public List<ItemTileButton> itemTiles;
     public ItemCategories selectedMainInventoryCategory = ItemCategories.None;
 	public List<ItemCategoryData> subCategories;
-	public List<InventoryItem> selectedItemList;
+	public List<InventoryItem> displayedItemList;
 	public List<CategoryButton> subcategoryButtons;
     public int currentSelectedSubcategory = 0;
     public int currentSelectedItemIndex = -1;
@@ -54,6 +54,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		}
 		SetupSubCategories();
 		OnCategoryPressed(0, 1);
+		currentSelectedItemIndex = -1;
     }
 
 	public void SetupSubCategories()
@@ -91,15 +92,15 @@ public class QuickInventoryGUIController : BasicGUIController {
 		Debug.Log("dropped " + index); 
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
-			PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(selectedItemList[index]);
+			PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(displayedItemList[index]);
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Food)
 		{
-			PlayerManager.Instance.Hero.FeedPlayer(selectedItemList[index]);
+			PlayerManager.Instance.Hero.FeedPlayer(displayedItemList[index]);
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Toys)
 		{
-			PlayerManager.Instance.Hero.PlayToy(selectedItemList[index]);
+			PlayerManager.Instance.Hero.PlayToy(displayedItemList[index]);
 		}
 	}
     
@@ -165,13 +166,13 @@ public class QuickInventoryGUIController : BasicGUIController {
  			currentSelectedSubcategory = index;
 		}
 		subcategoryButtons[index].SelectCategory();
-		selectedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
+		displayedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
 		RefreshInventoryIcons();
     }
     
     public void RefreshInventoryIcons()
     {
-		int num = selectedItemList.Count - itemTiles.Count;
+		int num = displayedItemList.Count - itemTiles.Count;
 		if(num>0)
 		{
 			for (int i = 0; i < num; i++) {
@@ -181,17 +182,31 @@ public class QuickInventoryGUIController : BasicGUIController {
 			}
 		}
 		for (int i = 0; i < itemTiles.Count; i++) {
-			if(i>=selectedItemList.Count)
+			if(i>=displayedItemList.Count)
 			{
 				itemTiles[i].gameObject.SetActive(false);
 			}
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadItemTile(selectedItemList[i], this, InventoryGUIType.quickInventory, i);
+				itemTiles[i].LoadItemTile(displayedItemList[i], this, inventoryType, i);
 			}
 		}
     }
+
+	public override void OnItemTilePressed(int index)
+	{
+		GUIManager.Instance.DisplayItemDetails( displayedItemList[index], inventoryType, this);
+		Debug.Log("pressed down" + index);
+		currentSelectedItemIndex = index;
+	}
+
+	public override void ReceiveEquipButtonMessage ()
+	{
+		OnDragDrop(currentSelectedItemIndex);
+		currentSelectedItemIndex = -1;
+		GUIManager.Instance.HideItemDetails();
+	}
     
     /*public void RefreshSelection()
     {

@@ -6,6 +6,8 @@ using System.IO;
 
 public class CharacterStatus : CharacterAttributes {
 
+	public UILabel nameLabel;
+	public UISprite hpBar;
 	public string characterName;
     public Motor motor;
 	public ActionManager actionManager;
@@ -17,8 +19,6 @@ public class CharacterStatus : CharacterAttributes {
 	
 	public bool Invulnerable = false;
 	public bool canMove = true;
-
-	private string characters = "abcdefghijklmnopqrstuvwxyz";
 
 	public virtual void Awake () 
 	{
@@ -33,6 +33,12 @@ public class CharacterStatus : CharacterAttributes {
 
 	}
 
+	public void Update()
+	{
+		if(hpBar != null)
+			hpBar.fillAmount = curHealth/maxHealth;
+	}
+
 	public void UpdateHitBoxes()
 	{
 		HitBox[] hbs = GetComponentsInChildren<HitBox>();
@@ -44,16 +50,7 @@ public class CharacterStatus : CharacterAttributes {
 		}
 	}
 	
-	public string GenerateRandomString(int l)
-	{
-		string name = "";
-		for (int i = 0; i < l; i++) 
-		{
-			int a = Random.Range(0, characters.Length);
-			name = name + characters[a];
-		}
-		return name;
-	}
+
 
 	public bool isAlive()
 	{

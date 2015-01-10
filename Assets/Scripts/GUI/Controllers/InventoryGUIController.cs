@@ -10,7 +10,7 @@ public class InventoryGUIController : BasicGUIController {
 	public float cachedMainScrollVal;
 	public UIGrid gridPanel;
 	public GameObject gridPanelRoot;
-
+	public InventoryGUIType inventoryType = InventoryGUIType.Inventory;
 	public List<List<InventoryItem>> fullItemList;
 	public List<InventoryItem> selectedItemList;
 	public List<ItemTileButton> itemTiles;
@@ -223,11 +223,10 @@ public class InventoryGUIController : BasicGUIController {
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadItemTile(selectedItemList[i], this, InventoryGUIType.Inventory, i);
+				itemTiles[i].LoadItemTile(selectedItemList[i], this, inventoryType, i);
 			}
 		}
 	}
-	
 }
 
 public enum InventoryGUIType

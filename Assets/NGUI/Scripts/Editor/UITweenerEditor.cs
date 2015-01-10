@@ -28,9 +28,10 @@ public class UITweenerEditor : Editor
 
 			GUI.changed = false;
 
+
 			UITweener.Style style = (UITweener.Style)EditorGUILayout.EnumPopup("Play Style", tw.style);
 			AnimationCurve curve = EditorGUILayout.CurveField("Animation Curve", tw.animationCurve, GUILayout.Width(170f), GUILayout.Height(62f));
-			//UITweener.Method method = (UITweener.Method)EditorGUILayout.EnumPopup("Play Method", tw.method);
+			UITweener.Method method = (UITweener.Method)EditorGUILayout.EnumPopup("Play Method", tw.method);
 
 			GUILayout.BeginHorizontal();
 			float dur = EditorGUILayout.FloatField("Duration", tw.duration, GUILayout.Width(170f));
@@ -49,7 +50,7 @@ public class UITweenerEditor : Editor
 			{
 				NGUIEditorTools.RegisterUndo("Tween Change", tw);
 				tw.animationCurve = curve;
-				//tw.method = method;
+				tw.method = method;
 				tw.style = style;
 				tw.ignoreTimeScale = ts;
 				tw.tweenGroup = tg;

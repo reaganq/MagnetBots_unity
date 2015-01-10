@@ -43,6 +43,8 @@ public class GUIManager : MonoBehaviour {
 	public ChatGUIController chatGUI;
 	public HoverPopupGUIController hoverPopupGUI;
 	public MainSpeechBubble mainNPCSpeechBubble;
+	public ItemInfoBoxGUIController itemInfoGUI;
+	public ProfileGUIController profileGUI;
 
 	public Transform minigameUIRoot;
     
@@ -131,6 +133,8 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.quickInventory:
 			break;
+		case UIState.profile:
+			break;
 		}
 		if(IsUIBusy())
 			HideHoverPopup();
@@ -201,6 +205,16 @@ public class GUIManager : MonoBehaviour {
 	{
 		uiState = UIState.main;
 	}
+
+	public void DisplayQuest()
+	{
+		uiState = UIState.quest;
+	}
+
+	public void HideQuest()
+	{
+		uiState = UIState.main;
+	}
     
     public void DisplayQuickInventory (ItemCategories category)
     {
@@ -231,6 +245,16 @@ public class GUIManager : MonoBehaviour {
             IsNPCGUIDisplayed = true;
         }*/
     }
+
+	public void DisplayProfile(PlayerProfile profile)
+	{
+		profileGUI.Enable();
+	}
+
+	public void HideProfile()
+	{
+		uiState = UIState.main;
+	}
     
     public void HideNPC()
     {
@@ -351,6 +375,16 @@ public class GUIManager : MonoBehaviour {
 	{
 		mainNPCSpeechBubble.HideSpeechBubble();
 	}
+
+	public void DisplayItemDetails(InventoryItem item, InventoryGUIType type, BasicGUIController gui)
+	{
+		itemInfoGUI.DisplayItemDetails(item, type, gui);
+	}
+
+	public void HideItemDetails()
+	{
+		itemInfoGUI.Disable();
+	}
 }
 
 public enum UIState
@@ -360,6 +394,8 @@ public enum UIState
 	playerShop,
 	inventory,
 	quickInventory,
+	quest,
+	profile,
 	loading,
 	login,
 	npc,

@@ -44,7 +44,7 @@ public class BulletProjectile : MonoBehaviour {
 		            //{
 						//determine if friend or foe
 						//masterAISkill.HitEnemies.Add(cs);
-						masterAISkill.HitTarget(hb, false, transform.position);
+						//masterAISkill.HitTarget(hb, false, transform.position);
 		                //Debug.Log("I JUST HIT SOMETHING");
 		            //}
 				}
@@ -54,7 +54,7 @@ public class BulletProjectile : MonoBehaviour {
 					//{
 						//determine if friend or foe
 						//masterArmor.HitEnemies.Add(cs);
-						masterArmor.HitTarget(hb, false, transform.position);
+						//masterArmor.HitTarget(hb, false, transform.position);
 						//Debug.Log("I JUST HIT SOMETHING");
 					//}
 				}

@@ -9,16 +9,24 @@ public class PlayerCharacter : CharacterStatus {
 	// Use this for initialization
 	public override void Awake () {
 		base.Awake();
-		characterName = GenerateRandomString(6);
 		characterType = CharacterType.Playable;
 		enemyCharacterType = CharacterType.AI;
+
 		playerActionManager = GetComponent<CharacterActionManager>();
 		if(myPhotonView.isMine)
 		{
 			this.tag = "Player";
+			characterName = PlayerManager.Instance.Hero.profile.name;
+			if(nameLabel != null)
+				nameLabel.text = characterName;
+			Debug.LogWarning(characterName);
 		}
 		else
+		{
 			this.tag = "OtherPlayer";
+			//request name
+			//request parts
+		}
 	}
 	
 	public override void ChangeMovementSpeed(float change)

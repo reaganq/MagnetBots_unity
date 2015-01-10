@@ -47,6 +47,7 @@ public class ItemTileButton: UIDragDropItem
 			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
 			{
 				owner.OnItemTilePressed(index);
+				Debug.Log("PRESSED");
 			}
 		}
 	}

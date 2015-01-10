@@ -8,7 +8,7 @@ public class Avatar : MonoBehaviour {
     public PlayerMotor myMotor;
     public Animation animationTarget;
     public CharacterActionManager myActionManager;
-    public CharacterStatus myStatus;
+    public PlayerCharacter myStatus;
 	public PhotonView myPhotonView;
     
     public Transform PelvisBone;
@@ -32,12 +32,65 @@ public class Avatar : MonoBehaviour {
     //private string HeadRootName = "bones:Head_Hover_b";
     public Transform _myTransform;
 
+	#region store bones
+	public Transform clavicleL;
+	public Transform shoulderL;
+	public Transform shoulderGuardL;
+	public Transform elbowL;
+	public Transform forearmL;
+	public Transform handL;
+	public Transform clavicleR;
+	public Transform shoulderR;
+	public Transform shoulderGuardR;
+	public Transform elbowR;
+	public Transform forearmR;
+	public Transform handR;
+	public Transform spine2;
+	public Transform neckHorizontal;
+
+	public void LoadBones()
+	{
+		Transform[] kids = GetComponentsInChildren<Transform>();
+		for (int i = 0; i < kids.Length; i++) {
+			if(kids[i].name == "bones:R_Clavicle")
+				clavicleR = kids[i];
+			else if(kids[i].name == "bones:R_Shoulder")
+				shoulderR = kids[i];
+			else if(kids[i].name == "bones:R_ShoulderGuard")
+				shoulderGuardR = kids[i];
+			else if(kids[i].name == "bones:R_Elbow")
+				elbowR = kids[i];
+			else if(kids[i].name == "bones:R_Forearm")
+				forearmR = kids[i];
+			else if(kids[i].name == "bones:R_Hand")
+				handR = kids[i];
+			else if(kids[i].name == "bones:L_Clavicle")
+				clavicleL = kids[i];
+			else if(kids[i].name == "bones:L_Shoulder")
+				shoulderL = kids[i];
+			else if(kids[i].name == "bones:L_ShoulderGuard")
+				shoulderGuardL = kids[i];
+			else if(kids[i].name == "bones:L_Elbow")
+				elbowL = kids[i];
+			else if(kids[i].name == "bones:L_Forearm")
+				forearmL = kids[i];
+			else if(kids[i].name == "bones:L_Hand")
+				handL = kids[i];
+			else if(kids[i].name == "bones:Spine_2")
+				spine2 = kids[i];
+			else if(kids[i].name == "bones:Neck_Horizontal")
+				neckHorizontal = kids[i];
+		}
+	}
+
+	#endregion
 	void Awake () {
         myMotor = GetComponent<PlayerMotor>();
         myActionManager = GetComponent<CharacterActionManager>();
         animationTarget = PelvisBone.GetComponent<Animation>();
         _myTransform = this.transform;
-        myStatus = GetComponent<CharacterStatus>();
+        myStatus = GetComponent<PlayerCharacter>();
+		LoadBones();
 	}
 
 	public void LoadAllBodyParts(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
@@ -53,6 +106,7 @@ public class Avatar : MonoBehaviour {
 		SpawnArmL(armLPath);
 		SpawnArmR(armRPath);
 		SpawnLegs(legsPath);
+		LoadBones();
 	}
 
     public void EquipBodyPart(string objectpath, EquipmentSlots slot)
@@ -83,6 +137,7 @@ public class Avatar : MonoBehaviour {
             SpawnFace(objectpath);
                 break;
         }
+		LoadBones();
     }
 
 
@@ -247,16 +302,19 @@ public class Avatar : MonoBehaviour {
                 PositionArmL(temp.transform.GetChild(i));
             }
         }
-        BaseSkill armLcontroller = temp.GetComponent<BaseSkill>();
+		BasePlayerSkill armLcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armLcontroller != null)
         {
             armLcontroller.Initialise(myStatus, 2);
+			GUIManager.Instance.MainGUI.EnableActionButton(true, 0);
         }
+		else
+			GUIManager.Instance.MainGUI.EnableActionButton(false, 0);
 
         PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
         if(armLAnimController != null)
         {
-            armLAnimController.TransferAnimations(animationTarget, _myTransform);
+            armLAnimController.TransferAnimations(animationTarget, this);
         }
 
         myActionManager.AddSkill(armLcontroller, armLAnimController, 2);
@@ -311,18 +369,20 @@ public class Avatar : MonoBehaviour {
             }
         }
 
-        BaseSkill armRcontroller = temp.GetComponent<BaseSkill>();
+		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armRcontroller != null)
         {
             armRcontroller.Initialise(myStatus, 3);
-
+			GUIManager.Instance.MainGUI.EnableActionButton(true, 1);
             //Debug.Log("transfer animation");
         }
+		else
+			GUIManager.Instance.MainGUI.EnableActionButton(false, 1);
 
         PassiveArmorAnimationController armRAnimController = temp.GetComponent<PassiveArmorAnimationController>();
         if(armRAnimController != null)
         {
-            armRAnimController.TransferAnimations(animationTarget, _myTransform);
+            armRAnimController.TransferAnimations(animationTarget, this);
             //animManager.
         }
 

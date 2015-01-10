@@ -9,6 +9,8 @@ public class MainUIManager : BasicGUIController {
 	public GameObject actionButtonsRoot;
 	public GameObject sideTray;
 
+	public GameObject[] actionButtons;
+
 	public GameObject[] PartyMemberCards;
 	public GameObject QuitPartyButton;
 	public UILabel[] PartyMemberNames;
@@ -77,6 +79,11 @@ public class MainUIManager : BasicGUIController {
 		}
 	}
 
+	public void EnableActionButton(bool state, int index)
+	{
+		actionButtons[index].SetActive(state);
+	}
+
 	#region side tray functions
 
 	public void OnSideTrayClick()
@@ -101,6 +108,11 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnShopWizardClick()
 	{
+	}
+
+	public void OnProfileClick()
+	{
+		GUIManager.Instance.DisplayProfile(PlayerManager.Instance.Hero.profile);
 	}
 
 	#endregion

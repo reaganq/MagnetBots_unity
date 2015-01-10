@@ -9,32 +9,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Reflection;
 
 public class PlayerInformation  {
-
+	
     public Inventory MainInventory;
 	public Inventory ArmoryInventory;
 	public Inventory DepositBox;
 	public Inventory PlayerShop;
-    /*public ArmoryInventory HeadInventory;
-    public ArmoryInventory BodyInventory;
-    public ArmoryInventory ArmLInventory;
-    public ArmoryInventory ArmRInventory;
-    public ArmoryInventory LegsInventory;*/
 
     public Equipment Equip;
 	public QuestLog Quest;
+	public Jukebox jukeBox;
 		
- 	/*public int CurrentLevel;
-	public int CurrentXP;
-	public int CurrentLevelXP;
-    
-	public int Trophies;
+	public Inventory playerShopInventory;
+	public int shopTill;
 
-	public int BaseHp;
-	public int TotalHp;
-	public int BonusHp;
-	public int CurrentHp;*/
-	//public float HpRegeneration = 0.0f;
-	//public float ManaRegeneration = 0.5f;
+	public PlayerProfile profile;
 
 	public int Magnets;
 	public int Crystals;
@@ -54,6 +42,7 @@ public class PlayerInformation  {
 		DepositBox = new Inventory();
         Equip = new Equipment();
 		Quest = new QuestLog();
+		profile = new PlayerProfile();
 	}
 	
  	public void UpdatePlayerInformation()
@@ -67,6 +56,9 @@ public class PlayerInformation  {
     
     public void StartNewGame()
     {
+		profile.name = PlayerManager.Instance.data.GenerateRandomString(6);
+		Debug.LogWarning(profile.name);
+
         for (int i = 1; i < 20 ; i++) {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
             //Debug.Log(i);
@@ -452,4 +444,12 @@ public class PlayerInformation  {
 
 	#endregion
 
+}
+
+public enum PlayerEnergyState
+{
+	empty,
+	low,
+	enough,
+	full,
 }

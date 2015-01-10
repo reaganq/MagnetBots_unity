@@ -67,5 +67,27 @@ public class BasicGUIController : MonoBehaviour {
 	{
 	}
 
+	public virtual void ReceiveEquipButtonMessage()
+	{
+	}
 
+	public virtual void ReceiveUseButtonMessage()
+	{
+	}
+
+	public virtual void ReceiveDestroyButtonMessage()
+	{
+	}
+
+	public virtual void ReceiveWithdrawButtonMessage()
+	{
+	}
+
+	public virtual void ReceiveDepositButtonMessage()
+	{
+	}
+
+	public virtual void ReceiveBuyButtonMessage()
+	{
+	}
 }

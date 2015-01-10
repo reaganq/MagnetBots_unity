@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class NormalMelee : BaseSkill {
+public class NormalMelee : BasePlayerSkill {
 
 
     /***** set up in inspector *****/
@@ -25,7 +25,7 @@ public class NormalMelee : BaseSkill {
     #endregion
 
     #region setup and unequip
-    public override void Initialise(CharacterStatus ownerStatus, int index)
+    public override void Initialise(PlayerCharacter ownerStatus, int index)
     {
 		base.Initialise(ownerStatus, index);
         TransferAnimations();
@@ -86,9 +86,10 @@ public class NormalMelee : BaseSkill {
 
         int i = Random.Range(0, attackAnimations.Length);
         //Debug.Log("i = "+i);
-        ownerAnimation[attackAnimations[i].precastAnimation.clip.name].time = 0;
+        //ownerAnimation[attackAnimations[i].castAnimation.clip.name].time = 0;
+		ownerManager.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);
         //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
-		ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.05f);
+		//ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.05f);
 
 
 
@@ -125,13 +126,14 @@ public class NormalMelee : BaseSkill {
 		if(disableMovement)
 			ownerManager.EnableMovement();
 
-        yield return new WaitForSeconds(followThroughTime*0.3f);
+        //yield return new WaitForSeconds(followThroughTime*0.3f);
         //characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
-		ownerManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
+		//ownerManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
+		//ownerManager.FadeOutAnimation(attackAnimations[i].castAnimation.clip.name);
 
-        yield return new WaitForSeconds(followThroughTime * 0.7f);
+        //yield return new WaitForSeconds(followThroughTime * 0.7f);
 
-        ResetSkill();
+        //ResetSkill();
 
     }
 

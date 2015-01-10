@@ -14,25 +14,51 @@ public class ArmorAnimation{
     //public List<string> addMixingTransforms;
     //public List<string> removeMixingTransforms;
 
-    public void TransferAnimation(Animation target, Transform avatar)
+    /*public void TransferAnimation(Animation target, Avatar avatar)
     {
-        Debug.LogWarning("here");
+        //Debug.LogWarning("here");
         target.AddClip(clip, clip.name);
         target[clip.name].layer = animationLayer;
         //StartCoroutine(MixingTransforms( addMixingTransforms, removeMixingTransforms, clip));
         //yield return null;
-        
+        if(useArmLBones)
+		{
+			target[clip.name].AddMixingTransform(avatar.clavicleL, false);
+			target[clip.name].AddMixingTransform(avatar.shoulderL, false);
+			target[clip.name].AddMixingTransform(avatar.shoulderGuardL, false);
+			target[clip.name].AddMixingTransform(avatar.elbowL, false);
+			target[clip.name].AddMixingTransform(avatar.forearmL, false);
+			target[clip.name].AddMixingTransform(avatar.handL, false);
+		}
+
+		if(useArmRBones)
+		{
+			target[clip.name].AddMixingTransform(avatar.clavicleR, false);
+			target[clip.name].AddMixingTransform(avatar.shoulderR, false);
+			target[clip.name].AddMixingTransform(avatar.shoulderGuardR, false);
+			target[clip.name].AddMixingTransform(avatar.elbowR, false);
+			target[clip.name].AddMixingTransform(avatar.forearmR, false);
+			target[clip.name].AddMixingTransform(avatar.handR, false);
+		}
+
+		if(useVerticalBones)
+		{
+			target[clip.name].AddMixingTransform(avatar.spine2, false);
+			target[clip.name].AddMixingTransform(avatar.neckHorizontal, false);
+		}
+
+		/*if(useArmRBones)
+		{
+			for (int i = 0; i < GeneralData.armRBones.Length; i++) {
+				target[clip.name].AddMixingTransform(GetBone(GeneralData.armRBones[i], avatar), false);
+			}
+		}
+
 		if(useArmLBones)
 		{
 			for (int i = 0; i < GeneralData.armLBones.Length; i++) {
 				target[clip.name].AddMixingTransform(GetBone(GeneralData.armLBones[i], avatar), false);
-			}
-		}
-		
-		if(useArmRBones)
-		{
-			for (int i = 0; i < GeneralData.armRBones.Length; i++) {
-				target[clip.name].AddMixingTransform(GetBone(GeneralData.armRBones[i], avatar), false);
+				//Debug.Log(GeneralData.armLBones[i]);
 			}
 		}
 
@@ -41,7 +67,8 @@ public class ArmorAnimation{
 			for (int i = 0; i < GeneralData.verticalBones.Length; i++) {
 				target[clip.name].AddMixingTransform(GetBone(GeneralData.verticalBones[i], avatar), false);
 			}
-		}
+		}*/
+
 
 
         /*if(addMixingTransforms.Count>0)
@@ -60,7 +87,7 @@ public class ArmorAnimation{
                 //yield return null;
             }
         }*/
-    }
+    //}
     /*public IEnumerator MixingTransforms(List<string> bonelist, List<string> removelist, AnimationClip clip)
     {
         yield return null;
@@ -82,9 +109,9 @@ public class ArmorAnimation{
         
     }*/
     
-    public Transform GetBone(string bonename, Transform avatar)
+    /*public Transform GetBone(string bonename, Transform avatar)
     {
-        Debug.LogWarning(avatar.name);
+        //Debug.LogWarning(avatar.name);
         Transform[] kids = avatar.GetComponentsInChildren<Transform>();
         //Debug.Log(kids.Length);
         for (int i = 0; i < kids.Length; i++) {
@@ -95,5 +122,5 @@ public class ArmorAnimation{
             }
         }
         return null;
-    }
+    }*/
 }

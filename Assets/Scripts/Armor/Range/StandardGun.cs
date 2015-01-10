@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class StandardGun : BaseSkill {
+public class StandardGun : BasePlayerSkill {
 
     public ArmorAnimation castAnimation;
     public ArmorAnimation durationAnimation;
@@ -23,7 +23,7 @@ public class StandardGun : BaseSkill {
 
 	// Use this for initialization
     #region setup and unequip
-    public override void Initialise(CharacterStatus manager, int index)
+    public override void Initialise(PlayerCharacter manager, int index)
     {
         base.Initialise(manager, index);
         TransferAnimations();

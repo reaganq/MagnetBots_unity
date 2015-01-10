@@ -17,23 +17,18 @@ public class BaseSkill : MonoBehaviour {
 	public SkillState armorState;
 	public List<CharacterStatus> HitEnemies;
 	public List<CharacterStatus> HitAllies;
-	public Job pressDownJob;
-	public Job pressUpJob;
+
 	public bool isBusy = false;
 
 	public string skillName;
 	public SkillType skillType;
-    public bool hasPressDownEvent;
-    public bool hasPressUpEvent;
-	public bool resetAfterDown;
-	public bool resetAfterUp;
-	public bool canUseWhileBusy;
+    
 	public bool disableMovement;
 	public bool restrictedMovement;
-    public int equipmentSlotIndex;
+    
 	public SkillAnimation baseSkillAnimation;
 	public float targetLimit = Mathf.Infinity;
-	public bool continuousUse;
+
 
     /*** attribute ***/
     public float cooldown;
@@ -44,72 +39,9 @@ public class BaseSkill : MonoBehaviour {
     public ArmorAttribute[] armorAttributes;
     public List<StatusEffectData> skillStatusEffects;
 
-    public virtual void Initialise(CharacterStatus ownerStatus, int index)
-    {
-        owner = ownerStatus;
-		ownerManager = ownerStatus.actionManager;
-		ownerAnimation = ownerManager.myAnimation;
-		ownerTransform = ownerStatus._myTransform;
-		equipmentSlotIndex = index;
-		TransferSkillAnimation(baseSkillAnimation);
-    }
-
-	public virtual void UnEquip()
-	{
-		RemoveSkillAnimation(baseSkillAnimation);
-	}
-
-	public virtual void PressDown()
-	{
-		isPressedDown = true;
-
-		if(hasPressDownEvent)
-		{
-			if(!isBusy || (isBusy && canUseWhileBusy))
-			{
-				if(pressDownJob != null)
-					pressDownJob.kill();
-				if(pressUpJob != null)
-					pressUpJob.kill();
-				pressDownJob = Job.make(PressDownSequence(), true);
-				pressDownJob.jobComplete += (wasKilled) =>
-				{
-					if(resetAfterDown)
-						ResetSkill();
-				};
-			}
-		}
-	}
-
-	public virtual void PressUp()
-	{
-		isPressedDown = false;
-		if(!hasPressDownEvent && isBusy && !canUseWhileBusy)
-			return;
-
-		if(hasPressUpEvent)
-		{
-			if(pressDownJob != null)
-				pressDownJob.kill();
-			pressUpJob = Job.make(PressUpSequence());
-			pressUpJob.jobComplete += (wasKilled) =>
-			{
-				if(resetAfterUp)
-					ResetSkill();
-			};
-		}
-	}
+    
 
 
-    public virtual IEnumerator PressDownSequence()
-    {
-        yield return null;
-    }
-
-	public virtual IEnumerator PressUpSequence()
-	{
-		yield return null;
-	}
 
     public virtual bool CanPressDown()
     {
@@ -207,91 +139,7 @@ public class BaseSkill : MonoBehaviour {
 
 	#endregion
 
-    #region Animation Setup
-   
-    public void TransferSkillAnimation(SkillAnimation anim)
-    {
-        if(anim.precastAnimation.clip != null)
-			anim.precastAnimation.TransferAnimation(ownerAnimation, ownerTransform);
-		if(anim.castAnimation.clip != null)
-			anim.castAnimation.TransferAnimation(ownerAnimation, ownerTransform);
-		if(anim.followThroughAnimation.clip != null)
-			anim.followThroughAnimation.TransferAnimation(ownerAnimation, ownerTransform);
-		if(anim.loopAnimation.clip != null)
-			anim.loopAnimation.TransferAnimation(ownerAnimation, ownerTransform);
-            //StartCoroutine(TransferAnimation(anim.precastAnimation));
-       // if(anim.castAnimation.clip != null)
-            //StartCoroutine(TransferAnimation(anim.castAnimation));
-        //if(anim.followThroughAnimation.clip != null)
-           // StartCoroutine(TransferAnimation(anim.followThroughAnimation));
-    }
-
-    public IEnumerator TransferAnimation(ArmorAnimation anim)
-    {
-        if(anim.clip != null)
-        {
-            ownerAnimation.AddClip(anim.clip, anim.clip.name);
-            ownerAnimation[anim.clip.name].layer = anim.animationLayer;
-            //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
-            yield return null;
-            
-            /*if(anim.addMixingTransforms.Count>0)
-            {
-                for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
-                    ownerAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
-                }
-            }
-
-            if(anim.removeMixingTransforms.Count>0)
-            {
-                for (int i = 0; i < anim.removeMixingTransforms.Count; i++) 
-                {
-                    ownerAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
-                }
-            }*/
-        }
-    }
-
-    public void RemoveSkillAnimation(SkillAnimation anim)
-    {
-        if(anim.precastAnimation.clip != null)
-            RemoveAnimation(anim.precastAnimation.clip);
-        if(anim.castAnimation.clip != null)
-            RemoveAnimation(anim.castAnimation.clip);
-        if(anim.followThroughAnimation.clip != null)
-            RemoveAnimation(anim.followThroughAnimation.clip);
-		if(anim.loopAnimation.clip != null)
-			RemoveAnimation(anim.loopAnimation.clip);
-    }
-
-    public void RemoveArmorAnimation(ArmorAnimation anim)
-    {
-        if(anim.clip != null)
-            RemoveAnimation(anim.clip);
-    }
-
-    public void RemoveAnimation(AnimationClip clip)
-    {
-        ownerAnimation.RemoveClip(clip.name);
-    }
-
-
     
-    public Transform GetBone(string bonename)
-    {
-        Transform[] kids = ownerTransform.GetComponentsInChildren<Transform>();
-        //Debug.Log(kids.Length);
-        for (int i = 0; i < kids.Length; i++) {
-            if(kids[i].name == bonename)
-            {
-                //Debug.Log(kids[i].name);
-                return kids[i];
-            }
-        }
-        return null;
-    }
-
-    #endregion
 
 	#region hitting targets
 
@@ -332,11 +180,11 @@ public class BaseSkill : MonoBehaviour {
 		}
 	}
 
-	public virtual void HitTarget(HitBox target, bool isAlly, Vector3 originPos)
+	public virtual void HitTarget(int targetID, bool isAlly, Vector3 detectorPos, Vector3 targetPos)
 	{
-		HitInfo newHit = new HitInfo();
+		//HitInfo newHit = new HitInfo();
 		
-		if(!isAlly)
+		/*if(!isAlly)
 		{
 			newHit.sourceName = owner.characterName;
 			newHit.damage = damage;
@@ -366,7 +214,7 @@ public class BaseSkill : MonoBehaviour {
 		else
 		{
 			Debug.Log("hitally");
-		}
+		}*/
 	}
 
 	#endregion

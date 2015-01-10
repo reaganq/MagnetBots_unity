@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerShopGUIController : BasicGUIController {
 
+	public bool isNPC;
 	//public Shop ActiveShop;
 	public List<InventoryItem> selectedItemList;
     public int CurrentSelectedItemIndex = -1;
@@ -33,12 +34,17 @@ public class PlayerShopGUIController : BasicGUIController {
     public void Enable(Shop newShop)
     {
 		activeShop = newShop;
+		isNPC = true;
         //OnInventoryPressed(0);
 		//ActiveShop = PlayerManager.Instance.ActiveShop;
 		ChangeShopMode(0);
 		ShopNameLabel.text = activeShop.Name;
 		Enable();
     }
+
+	public void Enable()
+	{
+	}
 
 	public override void Disable()
 	{

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class LongDurationMelee : BaseSkill {
+public class LongDurationMelee : BasePlayerSkill {
 
     /***** set up in inspector *****/
     public SkillAnimation skillAnimation; 
@@ -19,7 +19,7 @@ public class LongDurationMelee : BaseSkill {
     /***************/
 
     #region setup and unequip
-    public override void Initialise(CharacterStatus manager, int index)
+    public override void Initialise(PlayerCharacter manager, int index)
     {
         base.Initialise(manager, index);
         TransferAnimations();

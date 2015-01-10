@@ -5,6 +5,10 @@ using PathologicalGames;
 
 public class ActionManager : MonoBehaviour {
 
+	public GameObject speechBubble;
+	public UILabel speechBubbleText;
+	public UIPlayTween speechBubbleTween;
+
 	public SpawnPool effectsPool;
 	public CharacterStatus myStatus;
 	public Transform _myTransform;
@@ -14,12 +18,14 @@ public class ActionManager : MonoBehaviour {
 	public BaseSkill activeSkill;
 	public float runningAnimationSpeedMultiplier;
 	public float currentRunningAnimationSpeed;
+	public Avatar myAvatar;
 	// Use this for initialization
 	public virtual void Start () {
 	
 		MakeSpawnPool();
 		_myTransform = transform;
 		myPhotonView = GetComponent<PhotonView>();
+		myAvatar = GetComponent<Avatar>();
 	}
 
 	public bool MakeSpawnPool()
@@ -82,17 +88,35 @@ public class ActionManager : MonoBehaviour {
 				myPhotonView.RPC("NetworkCrossfadeAnimation", PhotonTargets.All, name);
 		}
 	}
-	
-	public void BlendAnimation(string name)
+
+	public void CrossfadeAnimation(string name, float fadeTime)
 	{
-		BlendAnimation(name, false);
+		CrossfadeAnimation(name, fadeTime, false);
 	}
 	
-	public void BlendAnimation(string name, bool acrossNetwork)
+	public void CrossfadeAnimation(string name, float fadeTime, bool acrossNetwork)
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.Blend(name, 1, 0.4f);
+			myAnimation.CrossFade(name, fadeTime);
+		}
+		else
+		{
+			if(myPhotonView.isMine)
+				myPhotonView.RPC("NetworkCrossfadeAnimationWithTime", PhotonTargets.All, name);
+		}
+	}
+	
+	public void BlendAnimation(string name, float targetWeight, float fadeLength)
+	{
+		BlendAnimation(name, targetWeight, fadeLength, false);
+	}
+	
+	public void BlendAnimation(string name, float targetWeight, float fadeLength, bool acrossNetwork)
+	{
+		if(!acrossNetwork)
+		{
+			myAnimation.Blend(name, targetWeight, fadeLength);
 		}
 		else
 		{
@@ -131,6 +155,20 @@ public class ActionManager : MonoBehaviour {
 				myPhotonView.RPC("NetworkStopAnimation", PhotonTargets.All, name);
 		}
 	}
+
+	[RPC]
+	public void NetworkTalk(string text)
+	{
+		CancelInvoke("HideSpeechBubble");
+		speechBubbleText.text = text;
+		speechBubbleTween.Play(true);
+		Invoke("HideSpeechBubble", 3);
+	}
+
+	public void HideSpeechBubble()
+	{
+		speechBubbleTween.Play(false);
+	}
 	
 	[RPC]
 	public void NetworkPlayAnimation(string name)
@@ -143,11 +181,17 @@ public class ActionManager : MonoBehaviour {
 	{
 		myAnimation.CrossFade(name);
 	}
+
+	[RPC]
+	public void NetworkCrossfadeAnimationWithTime(string name, float fadeTime)
+	{
+		myAnimation.CrossFade(name, fadeTime);
+	}
 	
 	[RPC]
-	public void NetworkBlendAnimation(string name)
+	public void NetworkBlendAnimation(string name, float weight, float length)
 	{
-		myAnimation.Blend(name, 1, 0.4f);
+		myAnimation.Blend(name, weight, length);
 	}
 	
 	[RPC]

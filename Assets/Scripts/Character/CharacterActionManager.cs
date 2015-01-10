@@ -5,11 +5,9 @@ using PathologicalGames;
 
 public class CharacterActionManager : ActionManager {
 
-    public BaseSkill[] armorSkillsArray = new BaseSkill[5];
+    public BasePlayerSkill[] armorSkillsArray = new BasePlayerSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
-
-
     
     private Job leftJob;
     private Job rightJob;
@@ -42,7 +40,7 @@ public class CharacterActionManager : ActionManager {
 		CrossfadeAnimation("Default_Idle", true);
     }
 	
-    public void AddSkill(BaseSkill controller, PassiveArmorAnimationController animController, int index)
+	public void AddSkill(BasePlayerSkill controller, PassiveArmorAnimationController animController, int index)
     {
 		//Debug.LogWarning(index);
         armorSkillsArray[index] = controller;
@@ -107,33 +105,37 @@ public class CharacterActionManager : ActionManager {
 
     public void LeftAction(InputTrigger trigger)
     {
-		if(isLocked() || armorSkillsArray[3].isBusy)
+		if(isLocked())
 			return;
 
         if(trigger == InputTrigger.OnPressDown)
         {
-			armorSkillsArray[2].PressDown();
+			if(armorSkillsArray[2] != null)
+				armorSkillsArray[2].PressDown();
         }
 
         else if(trigger == InputTrigger.OnPressUp)
         {
-			armorSkillsArray[2].PressUp();
+			if(armorSkillsArray[2] != null)
+				armorSkillsArray[2].PressUp();
         }
     }
 
     public void RightAction(InputTrigger trigger)
     {
-		if(isLocked() || armorSkillsArray[2].isBusy)
+		if(isLocked())
 			return;
 		
 		if(trigger == InputTrigger.OnPressDown)
 		{
-			armorSkillsArray[3].PressDown();
+			if(armorSkillsArray[3] != null)
+				armorSkillsArray[3].PressDown();
 		}
 		
 		else if(trigger == InputTrigger.OnPressUp)
 		{
-			armorSkillsArray[3].PressUp();
+			if(armorSkillsArray[3] != null)
+				armorSkillsArray[3].PressUp();
 		}
     }
 
@@ -235,6 +237,7 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.moving)
         {
+			//UpdateRunningSpeed();
 			myAnimation["Default_Run"].time = 0;
 			myAnimation.CrossFade("Default_Run");
 			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
@@ -268,7 +271,7 @@ public class CharacterActionManager : ActionManager {
 
         for (int i = 0; i < armorSkillsArray.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
-				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = Mathf.Lerp(1f, 2f, t);
+				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = currentRunningAnimationSpeed;
         }
     }
 
