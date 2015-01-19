@@ -8,7 +8,7 @@
 // <author>developer@exitgames.com</author>
 // --------------------------------------------------------------------------------------------------------------------
 
-#if UNITY_EDITOR || (!UNITY_IPHONE && !UNITY_ANDROID && !UNITY_PS3)
+#if UNITY_EDITOR || (!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_PS3 && !UNITY_WINRT && !UNITY_WP8)
 
 namespace ExitGames.Client.Photon
 {
@@ -61,7 +61,7 @@ namespace ExitGames.Client.Photon
         {
             if (this.ReportDebugOfLevel(DebugLevel.INFO))
             {
-                this.Listener.DebugReturn(DebugLevel.INFO, "CSharpSocket.Disconnect()");
+                this.EnqueueDebugReturn(DebugLevel.INFO, "CSharpSocket.Disconnect()");
             }
 
             this.State = PhotonSocketState.Disconnecting;
@@ -76,8 +76,10 @@ namespace ExitGames.Client.Photon
                     }
                     catch (Exception ex)
                     {
-                        this.Listener.DebugReturn(DebugLevel.INFO, "Exception in Disconnect(): " + ex);
+                        this.EnqueueDebugReturn(DebugLevel.INFO, "Exception in Disconnect(): " + ex);
                     }
+
+                    this.sock = null;
                 }
             }
 

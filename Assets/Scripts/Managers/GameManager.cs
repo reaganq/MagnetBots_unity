@@ -101,7 +101,9 @@ public class GameManager : MonoBehaviour {
         else
         {
 			//Debug.Log("onlevelwasloaded");
+			Debug.Log("load standard");
 			StartCoroutine("LoadStandard");
+
         }
     }
 
@@ -114,11 +116,9 @@ public class GameManager : MonoBehaviour {
 		}
 		PlayerCamera.Instance.Reset();
 		PlayerManager.Instance.ChangeWorld();
-		//yield return new WaitForSeconds(1);
 		PlayerManager.Instance.RefreshAvatar();
-		//GUIManager.Instance.TurnOffAllOtherUI();
 		GUIManager.Instance.DisplayMainGUI();
-		Debug.Log("load standard");
+
 		
 		if(inputType == InputType.TouchInput)
 		{

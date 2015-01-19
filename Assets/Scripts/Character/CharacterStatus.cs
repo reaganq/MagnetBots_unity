@@ -39,6 +39,36 @@ public class CharacterStatus : CharacterAttributes {
 			hpBar.fillAmount = curHealth/maxHealth;
 	}
 
+	public void DisplayName(bool state)
+	{
+		if(nameLabel != null);
+		nameLabel.gameObject.SetActive(state);
+	}
+
+	public void DisplayHpBar(bool state)
+	{
+		if(hpBar != null);
+		hpBar.gameObject.SetActive(state);
+	}
+
+	public void HideInfo()
+	{
+		DisplayName(false);
+		DisplayHpBar(false);
+	}
+
+	public void DisplayInfoByZone()
+	{
+		DisplayName(true);
+		if(PlayerManager.Instance.ActiveZone.type == ZoneType.arena)
+		{
+			DisplayHpBar(true);
+		}
+		else
+			DisplayHpBar(false);
+		Debug.LogWarning("display info by zone");
+	}
+
 	public void UpdateHitBoxes()
 	{
 		HitBox[] hbs = GetComponentsInChildren<HitBox>();

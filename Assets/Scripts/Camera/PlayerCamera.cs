@@ -75,8 +75,6 @@ public class PlayerCamera: MonoBehaviour {
 	void Start()
 	{
 		quickInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-1090/2048)*100) / 100;
-		Debug.Log(Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-1090/2048)*100));
-		Debug.Log(quickInventoryCameraRectOffset);
 	}
     
 	void LateUpdate () {
@@ -88,7 +86,7 @@ public class PlayerCamera: MonoBehaviour {
 
 	public void TransitionToQuickArmory()
 	{
-		TransitionTo(quickArmoryPos, 40, 0.3f, quickInventoryCameraRectOffset);
+		TransitionTo(quickArmoryPos, 60, 0.3f, quickInventoryCameraRectOffset);
 	}
 
 	public void TransitionToQuickInventory()
@@ -98,7 +96,7 @@ public class PlayerCamera: MonoBehaviour {
 
 	public void TransitionToDefault()
 	{
-		TransitionTo(defaultPos, 60, 0.3f, 0);
+		TransitionTo(defaultPos, 60, 0.2f, 0);
 		//StartCoroutine(MoveTo(defaultPos, 60, 1));
 	}
 

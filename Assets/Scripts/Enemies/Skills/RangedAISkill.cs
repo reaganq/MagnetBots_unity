@@ -19,10 +19,6 @@ public class RangedAISkill : AISkill {
 	public float minShotsPerSession;
 	public float targetShotsPerSession;
 
-	public float cooldown;
-	public float maxAmmoCount;
-	public float fireSpeed;
-
 	public bool isReloading;
 	public float cooldownTimer;
 	public float fireSpeedTimer;

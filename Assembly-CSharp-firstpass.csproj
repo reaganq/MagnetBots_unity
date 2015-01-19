@@ -46,6 +46,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Plugins\ChatApi\ChatChannel.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatClient.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatDisconnectCause.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatEventCode.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatOperationCode.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatParameterCode.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatPeer.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatState.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\ChatUserStatus.cs" />
+     <Compile Include="Assets\Plugins\ChatApi\IChatClientListener.cs" />
      <Compile Include="Assets\Plugins\FingerGestures\Dev\FingerDebug.cs" />
      <Compile Include="Assets\Plugins\FingerGestures\Scripts\Base\ContinuousGestureRecognizer.cs" />
      <Compile Include="Assets\Plugins\FingerGestures\Scripts\Base\DiscreteGestureRecognizer.cs" />
@@ -323,6 +333,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Spec_OneLight.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\Photon Unity Networking\Demos\DemoPickup\Assets\3dFont\3dText.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\AlphaTest-VertexLit.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Outline_Basic_Rim_OneLight.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrain.shader" />

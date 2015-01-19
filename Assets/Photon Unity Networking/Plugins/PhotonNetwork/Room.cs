@@ -8,6 +8,7 @@
 // <author>developer@exitgames.com</author>
 // ----------------------------------------------------------------------------
 
+using System;
 using ExitGames.Client.Photon;
 using UnityEngine;
 
@@ -49,7 +50,7 @@ public class Room : RoomInfo
             this.nameField = value;
         }
     }
-    
+
     /// <summary>
     /// Sets a limit of players to this room. This property is shown in lobby, too.
     /// If the room is full (players count == maxplayers), joining this room will fail.
@@ -65,12 +66,12 @@ public class Room : RoomInfo
         {
             if (!this.Equals(PhotonNetwork.room))
             {
-                PhotonNetwork.networkingPeer.DebugReturn(DebugLevel.WARNING, "Can't set room properties when not in that room.");
+                UnityEngine.Debug.LogWarning("Can't set maxPlayers when not in that room.");
             }
 
             if (value > 255)
             {
-                UnityEngine.Debug.LogError("Error: room.maxPlayers called with value " + value + ". This has been reverted to the max of 255 players, because internally a 'byte' is used.");
+                UnityEngine.Debug.LogWarning("Can't set Room.maxPlayers to: " + value + ". Using max value: 255.");
                 value = 255;
             }
 
@@ -86,8 +87,8 @@ public class Room : RoomInfo
     /// <summary>
     /// Defines if the room can be joined.
     /// This does not affect listing in a lobby but joining the room will fail if not open.
-    /// If not open, the room is excluded from random matchmaking. 
-    /// Due to racing conditions, found matches might become closed before they are joined. 
+    /// If not open, the room is excluded from random matchmaking.
+    /// Due to racing conditions, found matches might become closed before they are joined.
     /// Simply re-connect to master and find another.
     /// Use property "visible" to not list the room.
     /// </summary>
@@ -102,7 +103,7 @@ public class Room : RoomInfo
         {
             if (!this.Equals(PhotonNetwork.room))
             {
-                PhotonNetwork.networkingPeer.DebugReturn(DebugLevel.WARNING, "Can't set room properties when not in that room.");
+                UnityEngine.Debug.LogWarning("Can't set open when not in that room.");
             }
 
             if (value != this.openField && !PhotonNetwork.offlineMode)
@@ -130,7 +131,7 @@ public class Room : RoomInfo
         {
             if (!this.Equals(PhotonNetwork.room))
             {
-                PhotonNetwork.networkingPeer.DebugReturn(DebugLevel.WARNING, "Can't set room properties when not in that room.");
+                UnityEngine.Debug.LogWarning("Can't set visible when not in that room.");
             }
 
             if (value != this.visibleField && !PhotonNetwork.offlineMode)
@@ -158,50 +159,38 @@ public class Room : RoomInfo
         }
     }
 
-    internal Room(string roomName, Hashtable properties) : base(roomName, properties)
+    internal Room(string roomName, RoomOptions options) : base(roomName, null)
     {
-        this.propertiesListedInLobby = new string[0];
-    }
-
-    internal Room(string roomName, Hashtable properties, bool isVisible, bool isOpen, int maxPlayers, bool autoCleanUp, string[] propsListedInLobby) : base(roomName, properties)
-    {
-        this.visibleField = isVisible;
-        this.openField = isOpen;
-        this.autoCleanUpField = autoCleanUp;
-
-        if (maxPlayers > 255)
+        if (options == null)
         {
-            UnityEngine.Debug.LogError("Error: Room() called with " + maxPlayers + " maxplayers. This has been reverted to the max of 255 players, because internally a 'byte' is used.");
-            maxPlayers = 255;
+            options = new RoomOptions();
         }
 
-        this.maxPlayersField = (byte)maxPlayers;
+        this.visibleField = options.isVisible;
+        this.openField = options.isOpen;
+        this.maxPlayersField = (byte)options.maxPlayers;
+        this.autoCleanUpField = false;  // defaults to false, unless set to true when room gets created.
 
-        if (propsListedInLobby != null)
-        {
-            this.propertiesListedInLobby = propsListedInLobby;
-        }
-        else
-        {
-            this.propertiesListedInLobby = new string[0];
-        }
+        this.CacheProperties(options.customRoomProperties);
+        this.propertiesListedInLobby = options.customRoomPropertiesForLobby;
     }
 
     /// <summary>
     /// Updates and synchronizes the named properties of this Room with the values of propertiesToSet.
     /// </summary>
     /// <remarks>
-    /// Any player can set a Room's properties. Room properties are available until changed, deleted or 
+    /// Any player can set a Room's properties. Room properties are available until changed, deleted or
     /// until the last player leaves the room.
     /// Access them by: Room.CustomProperties (read-only!).
-    /// 
+    ///
+    /// To reduce network traffic, set only values that actually changed.
+    ///
     /// New properties are added, existing values are updated.
     /// Other values will not be changed, so only provide values that changed or are new.
     /// To delete a named (custom) property of this room, use null as value.
     /// Only string-typed keys are applied (everything else is ignored).
-    /// 
+    ///
     /// Local cache is updated immediately, other clients are updated through Photon with a fitting operation.
-    /// To reduce network traffic, set only values that actually changed.
     /// </remarks>
     /// <param name="propertiesToSet">Hashtable of props to udpate, set and sync. See description.</param>
     public void SetCustomProperties(Hashtable propertiesToSet)
@@ -215,10 +204,14 @@ public class Room : RoomInfo
         this.customProperties.MergeStringKeys(propertiesToSet); // includes a Equals check (simplifying things)
         this.customProperties.StripKeysWithNullValues();
 
+
         // send (sync) these new values
         Hashtable customProps = propertiesToSet.StripToStringKeys() as Hashtable;
-		PhotonNetwork.networkingPeer.OpSetCustomPropertiesOfRoom(customProps, true, 0);
-		NetworkingPeer.SendMonoMessage(PhotonNetworkingMessage.OnPhotonCustomRoomPropertiesChanged);
+        if (!PhotonNetwork.offlineMode)
+        {
+            PhotonNetwork.networkingPeer.OpSetCustomPropertiesOfRoom(customProps, true, 0);
+        }
+        NetworkingPeer.SendMonoMessage(PhotonNetworkingMessage.OnPhotonCustomRoomPropertiesChanged, propertiesToSet);
     }
 
     /// <summary>
@@ -235,5 +228,20 @@ public class Room : RoomInfo
         PhotonNetwork.networkingPeer.OpSetPropertiesOfRoom(customProps, false, 0);
 
         this.propertiesListedInLobby = propsListedInLobby;
+    }
+
+
+    /// <summary>Returns a summary of this Room instance as string.</summary>
+    /// <returns>Summary of this Room instance.</returns>
+    public override string ToString()
+    {
+        return string.Format("Room: '{0}' {1},{2} {4}/{3} players.", this.nameField, this.visibleField ? "visible" : "hidden", this.openField ? "open" : "closed", this.maxPlayersField, this.playerCount);
+    }
+
+    /// <summary>Returns a summary of this Room instance as longer string, including Custom Properties.</summary>
+    /// <returns>Summary of this Room instance.</returns>
+    public new string ToStringFull()
+    {
+        return string.Format("Room: '{0}' {1},{2} {4}/{3} players.\ncustomProps: {5}", this.nameField, this.visibleField ? "visible" : "hidden", this.openField ? "open" : "closed", this.maxPlayersField, this.playerCount, this.customProperties.ToStringFull());
     }
 }

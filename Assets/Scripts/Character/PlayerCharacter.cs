@@ -5,6 +5,7 @@ public class PlayerCharacter : CharacterStatus {
 
 	public CharacterActionManager playerActionManager;
 	public Avatar avatar;
+	public Zone parentZone;
 
 	// Use this for initialization
 	public override void Awake () {
@@ -27,6 +28,7 @@ public class PlayerCharacter : CharacterStatus {
 			//request name
 			//request parts
 		}
+		DisplayInfoByZone();
 	}
 	
 	public override void ChangeMovementSpeed(float change)

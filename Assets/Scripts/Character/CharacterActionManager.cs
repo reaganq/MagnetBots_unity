@@ -8,6 +8,7 @@ public class CharacterActionManager : ActionManager {
     public BasePlayerSkill[] armorSkillsArray = new BasePlayerSkill[5];
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
+	public NetworkCharacterMovement networkMovement;
     
     private Job leftJob;
     private Job rightJob;
@@ -194,6 +195,30 @@ public class CharacterActionManager : ActionManager {
     #endregion
 
     #region movement functions
+
+	public void DisableNetworking()
+	{
+		networkMovement.ExitActiveState();
+	}
+
+	public void EnableNetworking()
+	{
+		networkMovement.EnterActiveState();
+	}
+
+	public void TransitionToQuickArmory()
+	{
+		RotateTo(PlayerCamera.Instance.quickArmoryPos);
+		DisableNetworking();
+		myStatus.DisplayName(false);
+		myStatus.DisplayHpBar(false);
+	}
+
+	public void TransitionToDefault()
+	{
+		RotationReset();
+		EnableNetworking();
+	}
 
 	public void RotateTo(Transform target)
 	{

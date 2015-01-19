@@ -50,10 +50,11 @@ public class GlobalInputManager : MonoBehaviour {
 							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
 							{
 								CharacterStatus cs = hit.collider.gameObject.GetComponent<CharacterStatus>();
-								
+								Debug.Log("hey");
 								if(cs != null)
 								{
 									GUIManager.Instance.DisplayHoverPopup(cs);
+									Debug.Log("wtf");
 								}
 							}
 						}

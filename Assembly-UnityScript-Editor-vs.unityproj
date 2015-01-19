@@ -263,6 +263,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Spec_OneLight.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\Photon Unity Networking\Demos\DemoPickup\Assets\3dFont\3dText.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\AlphaTest-VertexLit.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Outline_Basic_Rim_OneLight.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseAndGrain.shader" />

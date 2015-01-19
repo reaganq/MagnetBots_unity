@@ -9,27 +9,18 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 	Vector3 realPosition = Vector3.zero;
 	float currentSpeed;
 	Quaternion realRotation = Quaternion.identity;
-
-	private bool _isActive = true;
 	public CharacterActionManager actionManager;
 
-	public bool IsActive
+	public bool IsActive;
+
+	public void EnterActiveState()
 	{
-		get{return _isActive;}
-		set
-		{
-			ExitActiveState(_isActive);
-			_isActive = value;
-			EnterActiveState(_isActive);
-		}
+		IsActive = true;
 	}
 
-	void EnterActiveState(bool state)
+	public void ExitActiveState()
 	{
-	}
-
-	void ExitActiveState(bool state)
-	{
+		IsActive = false;
 	}
 
 	void Start()

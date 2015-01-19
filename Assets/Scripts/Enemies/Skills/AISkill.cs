@@ -25,9 +25,6 @@ public class AISkill : BaseSkill {
 	public List<StatusEffectData> onHitSkillEffects;
 	public List<StatusEffectData> onReceiveHitSkillEffects;
 
-	public List<CharacterStatus> HitEnemies;
-	public List<CharacterStatus> HitAllies;
-
 	// Use this for initialization
     public virtual void Start()
     {

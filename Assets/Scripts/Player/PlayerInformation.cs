@@ -91,6 +91,7 @@ public class PlayerInformation  {
 			SocialManager.Instance.AddFriend("friend" + i);
 				}
 
+		Debug.Log("finished loading player information");
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 1, 1);
         //PreffixSolver.GiveItem(PreffixType.ARMOR, 2, 1);
     }

@@ -1,173 +1,242 @@
-#if !(UNITY_WINRT || UNITY_WP8 || UNITY_PS3 || UNITY_WIIU)
-
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
+using ExitGames.Client.Photon;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
-/// <summary>
-/// This script is automatically added to the PhotonHandler gameobject by PUN.
-/// It will auto-ping the ExitGames cloud regions via Awake.
-/// This is done only once per client and the result is saved in PlayerPrefs. 
-/// Use PhotonNetwork.ConnectToBestCloudServer(gameVersion) to connect to cloud region with best ping.
-/// </summary>
-public class PingCloudRegions : MonoBehaviour
+
+#if UNITY_EDITOR || (!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_PS3 && !UNITY_WINRT)
+
+using System.Net.Sockets;
+
+/// <summary>Uses C# Socket class from System.Net.Sockets (as Unity usually does).</summary>
+/// <remarks>Incompatible with Windows 8 Store/Phone API.</remarks>
+public class PingMonoEditor : PhotonPing
 {
+    private Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-
-    public static CloudServerRegion closestRegion = CloudServerRegion.US;
-    static public PingCloudRegions SP;
-
-    private bool isPinging = false;
-    private int lowestRegionAverage = -1;
-    private const string playerPrefsKey = "PUNCloudBestRegion";
-
-
-    void Awake()
+    public override bool StartPing(string ip)
     {
-        SP = this;
+        base.Init();
 
-        // load settings and ping only if none available
-        if (PlayerPrefs.GetString(playerPrefsKey, "") != "")
+        try
         {
-            string reg = PlayerPrefs.GetString(playerPrefsKey, "");
-            closestRegion = (CloudServerRegion)Enum.Parse(typeof(CloudServerRegion), reg, true);
-            return;
+            sock.ReceiveTimeout = 5000;
+            sock.Connect(ip, 5055);
+
+            PingBytes[PingBytes.Length - 1] = PingId;
+            sock.Send(PingBytes);
+            PingBytes[PingBytes.Length - 1] = (byte)(PingId - 1);
         }
-        StartCoroutine(PingAllRegions());
-    }
-
-
-    public static void OverrideRegion(CloudServerRegion region)
-    {
-        SetRegion(region);
-    }
-
-
-    public static void RefreshCloudServerRating()
-    {
-        if (SP != null)
+        catch (Exception e)
         {
-            SP.StartCoroutine(SP.PingAllRegions());
-        }
-    }
-
-
-    public static void ConnectToBestRegion(string gameVersion)
-    {
-        SP.StartCoroutine(SP.ConnectToBestRegionInternal(gameVersion));
-    }
-
-
-    // Ping all PUN cloud regions (unless offline mode)
-    public IEnumerator PingAllRegions()
-    {
-        ServerSettings settings = (ServerSettings)Resources.Load(PhotonNetwork.serverSettingsAssetFile, typeof(ServerSettings));
-        if (settings.HostType == ServerSettings.HostingOption.OfflineMode)
-            yield break;
-
-        isPinging = true;
-        foreach (CloudServerRegion region in System.Enum.GetValues(typeof(CloudServerRegion)))
-        {
-            yield return StartCoroutine(PingRegion(region));
-        }
-        isPinging = false;
-    }
-
-    
-    IEnumerator PingRegion(CloudServerRegion region)
-    {
-        string hostname = ServerSettings.FindServerAddressForRegion(region);
-        string regionIp = ResolveHost(hostname);
-
-        if (string.IsNullOrEmpty(regionIp))
-        { 
-            Debug.LogError("Could not resolve host: " + hostname);
-            yield break;
+            sock = null;
+            Console.WriteLine(e);
         }
 
-        int averagePing = 0;
-        int tries = 3;
-        int skipped = 0;
-        float timeout = 0.500f; // 500 milliseconds is our max, after this we assume a timeout.
-        for (int i = 0; i < tries; i++)
+        return false;
+    }
+
+    public override bool Done()
+    {
+        if (this.GotResult || sock == null)
         {
-            float startTime = Time.time;
-            Ping ping = new Ping(regionIp);
-            while (!ping.isDone && Time.time < startTime + timeout)
-            { 
-                // Timeout after 500ms: sometimes Unity ping never returns
-                yield return 0;
-            }
-            if (ping.time == -1)
+            return true;
+        }
+
+        if (sock.Available <= 0)
+        {
+            return false;
+        }
+
+        int read = sock.Receive(PingBytes, SocketFlags.None);
+        //Debug.Log("Got: " + SupportClass.ByteArrayToString(PingBytes));
+        bool replyMatch = PingBytes[PingBytes.Length - 1] == PingId && read == PingLength;
+        if (!replyMatch) Debug.Log("ReplyMatch is false! ");
+
+
+        this.Successful = read == PingBytes.Length && PingBytes[PingBytes.Length - 1] == PingId;
+        this.GotResult = true;
+        return true;
+    }
+
+    public override void Dispose()
+    {
+        try
+        {
+            sock.Close();
+        }
+        catch
+        {
+        }
+        sock = null;
+    }
+
+}
+#endif
+
+
+
+public class PhotonPingManager
+{
+    public bool UseNative;
+    public static int Attempts = 5;
+    public static bool IgnoreInitialAttempt = true;
+    public static int MaxMilliseconsPerPing = 800;  // enter a value you're sure some server can beat (have a lower rtt)
+
+
+    public Region BestRegion
+    {
+        get
+        {
+            Region result = null;
+            int bestRtt = Int32.MaxValue;
+            foreach (Region region in PhotonNetwork.networkingPeer.AvailableRegions)
             {
-                if (skipped > 5)
+                Debug.Log("BestRegion checks region: " + region);
+                if (region.Ping != 0 && region.Ping < bestRtt)
                 {
-                    averagePing += (int)(timeout * 1000) * tries;
-                    break;
-                }
-                else
-                {
-                    i -= 1; //Sometimes Unity ping doesnt return, we therefor retry a few times..
-                    skipped++;
-                    continue;
+                    bestRtt = region.Ping;
+                    result = region;
                 }
             }
 
-            averagePing += ping.time;
-        }
-
-        int regionAverage = averagePing / tries;
-        //Debug.LogWarning (hostname + ": " + regionAverage + "ms");
-
-        if (regionAverage < lowestRegionAverage || lowestRegionAverage == -1)
-        {
-            lowestRegionAverage = regionAverage;
-            SetRegion(region);
+            return (Region)result;
         }
     }
 
-    private static void SetRegion(CloudServerRegion region)
-    {
-        closestRegion = region;
-        PlayerPrefs.SetString(playerPrefsKey, region.ToString());
-    }
+    public bool Done { get { return this.PingsRunning == 0; } }
+    private int PingsRunning;
 
-    IEnumerator ConnectToBestRegionInternal(string gameVersion)
-    {
-        while (isPinging)
-        {
-            yield return 0; // wait until pinging finished (offline mode won't ping)
-        }
 
-        ServerSettings settings = (ServerSettings)Resources.Load(PhotonNetwork.serverSettingsAssetFile, typeof(ServerSettings));
-        if (settings.HostType == ServerSettings.HostingOption.OfflineMode)
+    /// <remarks>
+    /// Affected by frame-rate of app, as this Coroutine checks the socket for a result once per frame.
+    /// </remarks>
+    public IEnumerator PingSocket(Region region)
+    {
+        region.Ping = Attempts*MaxMilliseconsPerPing;
+
+        this.PingsRunning++;        // TODO: Add try-catch to make sure the PingsRunning are reduced at the end and that the lib does not crash the app
+        PhotonPing ping;
+        //Debug.Log("PhotonHandler.PingImplementation " + PhotonHandler.PingImplementation);
+        if (PhotonHandler.PingImplementation == typeof(PingNativeDynamic))
         {
-            PhotonNetwork.ConnectUsingSettings(gameVersion);
+            Debug.Log("Using constructor for new PingNativeDynamic()"); // it seems on android, the Activator can't find the default Constructor
+            ping = new PingNativeDynamic();
         }
         else
         {
-            PhotonNetwork.Connect(ServerSettings.FindServerAddressForRegion(closestRegion), settings.ServerPort, settings.AppID, gameVersion);
+            ping = (PhotonPing)Activator.CreateInstance(PhotonHandler.PingImplementation);
         }
+
+        //Debug.Log("Ping is: " + ping + " type " + ping.GetType());
+
+        float rttSum = 0.0f;
+        int replyCount = 0;
+
+
+        // PhotonPing.StartPing() requires a plain IP address without port (on all but Windows 8 platforms).
+        // So: remove port and do the DNS-resolving if needed
+        string cleanIpOfRegion = region.HostAndPort;
+        int indexOfColon = cleanIpOfRegion.LastIndexOf(':');
+        if (indexOfColon > 1)
+        {
+            cleanIpOfRegion = cleanIpOfRegion.Substring(0, indexOfColon);
+        }
+        cleanIpOfRegion = ResolveHost(cleanIpOfRegion);
+        //Debug.Log("Resolved and port-less IP is: " + cleanIpOfRegion);
+
+
+        for (int i = 0; i < Attempts; i++)
+        {
+            bool overtime = false;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            try
+            {
+                ping.StartPing(cleanIpOfRegion);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("catched: " + e);
+                this.PingsRunning--;
+                break;
+            }
+
+
+            while (!ping.Done())
+            {
+                if (sw.ElapsedMilliseconds >= MaxMilliseconsPerPing)
+                {
+                    overtime = true;
+                    break;
+                }
+                yield return 0; // keep this loop tight, to avoid adding local lag to rtt.
+            }
+            int rtt = (int)sw.ElapsedMilliseconds;
+
+
+            if (IgnoreInitialAttempt && i == 0)
+            {
+                // do nothing.
+            }
+            else if (ping.Successful && !overtime)
+            {
+                rttSum += rtt;
+                replyCount++;
+                region.Ping = (int)((rttSum) / replyCount);
+                //Debug.Log("region " + region.Code + " RTT " + region.Ping + " success: " + ping.Successful + " over: " + overtime);
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        this.PingsRunning--;
+
+        //Debug.Log("this.PingsRunning: " + this.PingsRunning + " this debug: " + ping.DebugString);
+        yield return null;
     }
+
+#if UNITY_WINRT && !UNITY_EDITOR
+
+    public static string ResolveHost(string hostName)
+    {
+        return hostName;
+    }
+
+#else
 
     /// <summary>
     /// Attempts to resolve a hostname into an IP string or returns empty string if that fails.
     /// </summary>
-    /// <param name="hostString">Hostname to resolve.</param>
+    /// <param name="hostName">Hostname to resolve.</param>
     /// <returns>IP string or empty string if resolution fails</returns>
-    public static string ResolveHost(string hostString)
+    public static string ResolveHost(string hostName)
     {
         try
         {
-            IPAddress[] address = Dns.GetHostAddresses(hostString);
+            IPAddress[] address = Dns.GetHostAddresses(hostName);
 
+            if (address.Length == 1)
+            {
+                return address[0].ToString();
+            }
+
+            // if we got more addresses, try to pick a IPv4 one
             for (int index = 0; index < address.Length; index++)
             {
                 IPAddress ipAddress = address[index];
-                if (ipAddress != null)//) && ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                if (ipAddress != null)
                 {
-                    return ipAddress.ToString();
+                    string ipString = ipAddress.ToString();
+                    if (ipString.IndexOf('.') >= 0)
+                    {
+                        return ipString;
+                    }
                 }
             }
         }
@@ -176,7 +245,7 @@ public class PingCloudRegions : MonoBehaviour
             Debug.Log("Exception caught! " + e.Source + " Message: " + e.Message);
         }
 
-        return string.Empty;
+        return String.Empty;
     }
-}
 #endif
+}

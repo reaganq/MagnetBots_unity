@@ -139,7 +139,12 @@ public static class Extensions
     public static void StripKeysWithNullValues(this IDictionary original)
     {
         object[] keys = new object[original.Count];
-        original.Keys.CopyTo(keys, 0);
+        //original.Keys.CopyTo(keys, 0);
+        int i = 0;
+        foreach (object k in original.Keys)
+        {
+            keys[i++] = k;
+        }
 
         for (int index = 0; index < keys.Length; index++)
         {
@@ -175,4 +180,28 @@ public static class Extensions
 
         return false;
     }
+}
+
+
+/// <summary>Small number of extension methods that make it easier for PUN to work cross-Unity-versions.</summary>
+public static class GameObjectExtensions
+{
+    /// <summary>Unity-version-independent replacement for active GO property.</summary>
+    /// <returns>Unity 3.5: active. Any newer Unity: activeInHierarchy.</returns>
+    public static bool GetActive(this GameObject target)
+    {
+        #if UNITY_3_5
+        return target.active;
+        #else
+        return target.activeInHierarchy;
+        #endif
+    }
+
+    #if UNITY_3_5
+    /// <summary>Unity-version-independent setter for active and SetActive().</summary>
+    public static void SetActive(this GameObject target, bool value)
+    {
+        target.active = value;
+    }
+    #endif
 }

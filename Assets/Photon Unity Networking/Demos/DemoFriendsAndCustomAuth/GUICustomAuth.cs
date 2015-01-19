@@ -5,11 +5,9 @@ public class GUICustomAuth : MonoBehaviour
 {
     public Rect GuiRect;
     
-    private bool authFailed;
     private string authName = "usr";
     private string authToken = "usr";
     private string authDebugMessage = string.Empty;
-
 
 
     void Start()
@@ -37,9 +35,48 @@ public class GUICustomAuth : MonoBehaviour
     public void OnCustomAuthenticationFailed(string debugMessage)
     {
         this.authDebugMessage = debugMessage;
-        this.authFailed = true;
+        SetStateAuthFailed();
     }
 
+
+    enum GuiState { AuthOrNot, AuthInput, AuthHelp, AuthFailed  }
+    private GuiState guiState;
+    public GameObject RootOf3dButtons;
+
+    public void SetStateAuthInput()
+    {
+        RootOf3dButtons.SetActive(false);
+        guiState = GuiState.AuthInput;
+    }
+
+    public void SetStateAuthHelp()
+    {
+        RootOf3dButtons.SetActive(false);
+        guiState = GuiState.AuthHelp;
+    }
+
+    public void SetStateAuthOrNot()
+    {
+        RootOf3dButtons.SetActive(true);
+        guiState = GuiState.AuthOrNot; 
+    }
+
+    public void SetStateAuthFailed()
+    {
+        RootOf3dButtons.SetActive(false);
+        guiState = GuiState.AuthFailed; 
+    }
+
+    public void ConnectWithNickname()
+    {
+        RootOf3dButtons.SetActive(false);
+
+        PhotonNetwork.AuthValues = null; // null by default but maybe set in a previous session.
+        PhotonNetwork.ConnectUsingSettings("1.0");
+
+        // PhotonNetwork.playerName gets set in GUIFriendFinding
+        // a UserID is not used in this case (no AuthValues set)
+    }
 
     void OnGUI()
     {
@@ -51,53 +88,90 @@ public class GUICustomAuth : MonoBehaviour
 
 
         GUILayout.BeginArea(GuiRect);
-        if (authFailed)
+        switch (guiState)
         {
-            GUILayout.Label("Custom Authentication");
-            GUILayout.Label("Failed. Debug Message (customizable in your service):");
-            GUILayout.Label("'" + this.authDebugMessage + "'");
-        }
-        else
-        {
-            GUILayout.Label("Custom Authentication");
-            GUILayout.Label("Photon Cloud can be setup to use an external service to verify players.");
-            GUILayout.Label("By default, Photon Cloud allows anonymous connects. In the Dashboard, Custom Authentication can be made mandatory.");
-            GUILayout.Label("Set PhotonNetwork.AuthValues before you call PhotonNetwork.ConnectUsingSetting().");
-            GUILayout.Label("The demo service logs you in for: name == token.");
-            GUILayout.Label("The script GUIFriendFinding will set a random username (independent from Custom Authentication).");
+            case GuiState.AuthFailed:
+                GUILayout.Label("Authentication Failed");
+
+                GUILayout.Space(10);
+
+                GUILayout.Label("Error message:\n'" + this.authDebugMessage + "'");
+
+                GUILayout.Space(10);
+
+                GUILayout.Label("For this demo set the Authentication URL in the Dashboard to:\nhttp://photon.webscript.io/auth-demo-equals");
+                GUILayout.Label("That authentication-service has no user-database. It confirms any user if 'name equals password'.");
+                GUILayout.Label("The error message comes from that service and can be customized.");
+
+                GUILayout.Space(10);
+
+                GUILayout.BeginHorizontal();
+                if (GUILayout.Button("Back"))
+                {
+                    SetStateAuthInput();
+                }
+                if (GUILayout.Button("Help"))
+                {
+                    SetStateAuthHelp();
+                }
+                GUILayout.EndHorizontal();
+                break;
+
+            case GuiState.AuthHelp:
+
+                GUILayout.Label("By default, any player can connect to Photon.\n'Custom Authentication' can be enabled to reject players without valid user-account.");
+
+                GUILayout.Label("The actual authentication must be done by a web-service which you host and customize. Example sourcecode for these services is available on the docs page.");
+                
+                GUILayout.Label("For this demo set the Authentication URL in the Dashboard to:\nhttp://photon.webscript.io/auth-demo-equals");
+                GUILayout.Label("That authentication-service has no user-database. It confirms any user if 'name equals password'.");
+
+                GUILayout.Space(10);
+                if (GUILayout.Button("Configure Authentication (Dashboard)"))
+                {
+                    Application.OpenURL("https://cloud.exitgames.com/dashboard");
+                }
+                if (GUILayout.Button("Authentication Docs"))
+                {
+                    Application.OpenURL("http://doc.exitgames.com/en/pun/current/tutorials/pun-and-facebook-custom-authentication");
+                }
+
+
+                GUILayout.Space(10);
+                if (GUILayout.Button("Back to input"))
+                {
+                    SetStateAuthInput();
+                }
+                break;
+
+            case GuiState.AuthInput:
+                
+                GUILayout.Label("Authenticate yourself");
+
+                GUILayout.BeginHorizontal();
+                this.authName = GUILayout.TextField(this.authName, GUILayout.Width(Screen.width/4 - 5));
+                GUILayout.FlexibleSpace();
+                this.authToken = GUILayout.TextField(this.authToken, GUILayout.Width(Screen.width/4 - 5));
+                GUILayout.EndHorizontal();
+
+
+                if (GUILayout.Button("Authenticate"))
+                {
+                    PhotonNetwork.AuthValues = new AuthenticationValues();
+                    PhotonNetwork.AuthValues.SetAuthParameters(this.authName, this.authToken);
+                    PhotonNetwork.ConnectUsingSettings("1.0");
+                }
+
+                GUILayout.Space(10);
+
+                if (GUILayout.Button("Help", GUILayout.Width(100)))
+                {
+                    SetStateAuthHelp();
+                }
+
+                break;
         }
 
-        GUILayout.BeginHorizontal();
-        this.authName = GUILayout.TextField(this.authName, GUILayout.Width(Screen.width / 4 - 5));
-        GUILayout.FlexibleSpace();
-        this.authToken = GUILayout.TextField(this.authToken, GUILayout.Width(Screen.width / 4 - 5));
-        GUILayout.EndHorizontal();
-
-
-        if (GUILayout.Button("Login with Custom Authentication"))
-        {
-            PhotonNetwork.AuthValues = new AuthenticationValues();
-            PhotonNetwork.AuthValues.SetAuthParameters(this.authName, this.authToken);
-            PhotonNetwork.ConnectUsingSettings("1.0");
-            this.authFailed = false;
-        }
-        if (GUILayout.Button("Skip Custom Authentication"))
-        {
-            PhotonNetwork.AuthValues = null;    // null by default but maybe set in a previous session.
-            PhotonNetwork.ConnectUsingSettings("1.0");
-            this.authFailed = false;
-        }
-
-        GUILayout.Space(8.0f);
-
-        if (GUILayout.Button("Open Dashboard (for Setup)"))
-        {
-            Application.OpenURL("https://cloud.exitgames.com/dashboard");
-        }
-        if (GUILayout.Button("Open Custom Auth doc page"))
-        {
-            Application.OpenURL("http://doc.exitgames.com/photon-cloud/CustomAuthentication");
-        }
         GUILayout.EndArea();
     }
 }

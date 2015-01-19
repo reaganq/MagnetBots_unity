@@ -83,7 +83,7 @@ public class NetworkManager : MonoBehaviour {
 	void OnPhotonRandomJoinFailed() 
 	{
 		Debug.Log("join room failed");
-		PhotonNetwork.CreateRoom( null );
+		PhotonNetwork.CreateRoom( null);
 	}
 
 	void OnJoinedRoom()
@@ -91,12 +91,12 @@ public class NetworkManager : MonoBehaviour {
 		//PhotonNetwork.load
 		isConnectedToServer = true;
 		Debug.Log("OnJoinedRoom");
-
+		//PhotonNetwork.LoadLevel(1);
 		//GUIManager.Instance.StartGame();
 		if(!offlineMode)
 		{
 			Debug.Log("load level 1");
-			PhotonNetwork.LoadLevel(1);
+			PhotonNetwork.LoadLevel(2);
 
 		}
 		else
