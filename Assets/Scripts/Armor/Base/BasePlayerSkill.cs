@@ -5,7 +5,7 @@ public class BasePlayerSkill : BaseSkill {
 
 	public Job pressDownJob;
 	public Job pressUpJob;
-
+	public bool hasSkill = true;
 	public bool hasPressDownEvent;
 	public bool hasPressUpEvent;
 	public bool resetAfterDown;

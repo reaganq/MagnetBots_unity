@@ -51,7 +51,8 @@ public enum RarityType
 
 public enum BuyCurrencyType
 {
-    Magnets = 0,
-    Crystals = 1,
-	None = 2,
+    Coins = 0,
+    Sparks = 1,
+	Magnets = 2,
+	None = 3,
 }

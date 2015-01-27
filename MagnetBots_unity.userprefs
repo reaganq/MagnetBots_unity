@@ -1,59 +1,83 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/PlayerCharacter.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Utility/DynamicWidth.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="127" Column="21" />
-      <File FileName="Assets/Scripts/NPC/Shop.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="77" Column="152" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="117" Column="26" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="33" Column="44" />
       <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="94" Column="52" />
-      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/NetworkingPeer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="104" Column="41" />
-      <File FileName="Assets/Photon Unity Networking/Demos/DemoRPGMovement/Scripts/RPGMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/UtilityScripts/ConnectAndJoinRandom.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/IntroGUIController.cs" Line="124" Column="15" />
-      <File FileName="Assets/Scripts/Enemies/Skills/RangedAISkill.cs" Line="16" Column="2" />
-      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="8" Column="33" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="8" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs" Line="10" Column="44" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="30" Column="1" />
+      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/IntroGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Networking/NetworkDebugging.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ProfileGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/NPCActivity.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/Shop.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/RPGNPC.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/NPCActivityButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/GeneralData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/Inventory.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/Equipment.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/PreffixSolver.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/EquipedItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGArmor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Editor/ArmorEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/UsableItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Utility/DynamicWidth.cs" Line="25" Column="6" />
+      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="77" Column="79" />
+      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/PlayerMotor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
+            <Node name="NGUI" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="Interaction" expanded="True" />
+              </Node>
+            </Node>
             <Node name="Photon Unity Networking" expanded="True">
+              <Node name="Demos" expanded="True">
+                <Node name="MarcoPolo-Tutorial" expanded="True" />
+              </Node>
               <Node name="Plugins" expanded="True">
                 <Node name="PhotonNetwork" expanded="True" />
               </Node>
-              <Node name="UtilityScripts" expanded="True" />
             </Node>
             <Node name="Scripts" expanded="True">
               <Node name="Armor" expanded="True">
                 <Node name="Base" expanded="True" />
+                <Node name="Melee" expanded="True" />
               </Node>
+              <Node name="Base" expanded="True" />
               <Node name="Camera" expanded="True" />
-              <Node name="Character" expanded="True">
-                <Node name="PlayerCharacter.cs" selected="True" />
-              </Node>
-              <Node name="Enemies" expanded="True">
-                <Node name="Skills" expanded="True" />
-              </Node>
+              <Node name="Character" expanded="True" />
               <Node name="GUI" expanded="True">
                 <Node name="Controllers" expanded="True" />
               </Node>
+              <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
+              <Node name="Networking" expanded="True" />
+              <Node name="NPC" expanded="True" />
               <Node name="Player" expanded="True" />
+              <Node name="Utility" expanded="True">
+                <Node name="DynamicWidth.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Editor" expanded="True" />
             </Node>
           </Node>
         </State>

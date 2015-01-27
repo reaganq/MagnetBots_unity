@@ -10,7 +10,12 @@
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
-    <activities />
+    <activities>
+      <NPCActivityData>
+        <activityID>1</activityID>
+        <activityType>Service</activityType>
+      </NPCActivityData>
+    </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
     <ID>2</ID>
@@ -19,16 +24,26 @@
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
-    <activities />
+    <activities>
+      <NPCActivityData>
+        <activityID>1</activityID>
+        <activityType>Arena</activityType>
+      </NPCActivityData>
+    </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
     <ID>3</ID>
-    <Name>Gym</Name>
+    <Name>Jim</Name>
     <Description>Magnet Central</Description>
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
-    <activities />
+    <activities>
+      <NPCActivityData>
+        <activityID>1</activityID>
+        <activityType>Minigame</activityType>
+      </NPCActivityData>
+    </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
     <ID>4</ID>
@@ -55,7 +70,21 @@
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
     <ID>6</ID>
-    <Name>Anvil</Name>
+    <Name>Combobulator</Name>
+    <Description />
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <activities>
+      <NPCActivityData>
+        <activityID>1</activityID>
+        <activityType>Teleporter</activityType>
+      </NPCActivityData>
+    </activities>
+    <overrideActivities />
+    <defaultConversationID>0</defaultConversationID>
+    <ID>7</ID>
+    <Name>Magnet Central Teleporter</Name>
     <Description />
     <SystemDescription />
   </RPGNPC>

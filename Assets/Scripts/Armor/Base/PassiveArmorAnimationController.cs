@@ -14,9 +14,9 @@ public class PassiveArmorAnimationController : MonoBehaviour {
 
     public void RemoveAnimations()
     {
-        if(idleOverrideAnim != null)
+        if(idleOverrideAnim.clip != null)
             animationTarget.RemoveClip(idleOverrideAnim.clip.name);
-        if(runningOverrideAnim != null)
+        if(runningOverrideAnim.clip != null)
             animationTarget.RemoveClip(runningOverrideAnim.clip.name);
     }
 
@@ -25,13 +25,13 @@ public class PassiveArmorAnimationController : MonoBehaviour {
         animationTarget = target;
         //avatar = character;
 
-        if(idleOverrideAnim != null)
+        if(idleOverrideAnim.clip != null)
         {
             StartCoroutine(TransferAnimation(target, idleOverrideAnim, character));
 			//idleOverrideAnim.TransferAnimation(target, character);
         }
 
-        if(runningOverrideAnim != null)
+        if(runningOverrideAnim.clip != null)
         {
             //animationTarget.AddClip(runningOverrideAnim.clip, runningOverrideAnim.clip.name);
             //animationTarget[runningOverrideAnim.clip.name].layer = runningOverrideAnim.animationLayer;

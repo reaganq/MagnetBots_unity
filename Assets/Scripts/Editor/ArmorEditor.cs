@@ -81,8 +81,6 @@ public class ArmorEditor : BaseEditorWindow
         s.AbilityIconPath = EditorGUILayout.TextField(s.AbilityIconPath, GUILayout.Width(500));
         
         s.AbilityString = EditorGUILayout.TextField(s.AbilityString, GUILayout.Width(1000));
-        
-        
 		
 		ItemUtils.DisplayItemPart(s, Data);
 		

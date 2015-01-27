@@ -25,7 +25,7 @@ public class Motor : MonoBehaviour {
 
 	public float acceleration;
 
-	public virtual void Start()
+	public virtual void Awake()
 	{
 		controller=GetComponent<CharacterController>();
 		characterVelocity = Vector3.zero;

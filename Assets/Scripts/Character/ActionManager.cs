@@ -32,7 +32,7 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(effectsPool == null)
 		{
-			effectsPool = PoolManager.Pools.Create(myStatus.characterName);
+			effectsPool = PoolManager.Pools.Create(myPhotonView.viewID.ToString());
 			//Debug.Log(effectsPool.poolName);
 		}
 		return true;

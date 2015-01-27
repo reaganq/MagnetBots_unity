@@ -41,9 +41,6 @@ public class NetworkDebugging : MonoBehaviour {
 			GUILayout.Label(PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).ToString());
 		}
 
-		if(PlayerManager.Instance.isPartyLeader)
-			GUILayout.Label("im the leader");
-
 		if(PlayerManager.Instance.partyMembers.Count >0)
 		{
 			if(GUILayout.Button("quit party"))

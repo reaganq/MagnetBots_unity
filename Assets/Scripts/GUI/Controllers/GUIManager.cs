@@ -28,7 +28,7 @@ public class GUIManager : MonoBehaviour {
     //public static GUIManager Instance { get; private set; }
 
     public Camera mainCamera = null;
-    
+	public Camera uiCamera = null;
     public Transform UICameraRoot = null;
     
 	public InventoryGUIController InventoryGUI;
@@ -45,6 +45,7 @@ public class GUIManager : MonoBehaviour {
 	public MainSpeechBubble mainNPCSpeechBubble;
 	public ItemInfoBoxGUIController itemInfoGUI;
 	public ProfileGUIController profileGUI;
+	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;
     
@@ -269,9 +270,9 @@ public class GUIManager : MonoBehaviour {
         }*/
     }
 
-	public void DisplayPartyNotification(PhotonPlayer player)
+	public void DisplayPartyNotification(PhotonPlayer player, int partyleaderID)
 	{
-		PartyGUI.DisplayNotificationBox(player);
+		PartyGUI.DisplayNotificationBox(player, partyleaderID);
 	}
 
 	public void HidePartyNotification()

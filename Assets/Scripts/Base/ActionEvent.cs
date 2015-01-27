@@ -40,11 +40,11 @@ public class ActionEvent
 		{
 			//quest start
 		case ActionEventType.QuestStart:
-			PlayerManager.Instance.Hero.Quest.StartQuest(Item);
+			PlayerManager.Instance.Hero.questLog.StartQuest(Item);
 			break;
 			//quest end
 		case ActionEventType.QuestEnd:
-			PlayerManager.Instance.Hero.Quest.EndQuest(Item);
+			PlayerManager.Instance.Hero.questLog.EndQuest(Item);
 			break;
 			//give item
 		case ActionEventType.GiveItem:

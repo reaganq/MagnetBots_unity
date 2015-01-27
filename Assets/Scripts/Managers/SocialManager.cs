@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class SocialManager : MonoBehaviour {
 
-	private static SocialManager instance = null;
+	private static SocialManager instance;
 	
 	private SocialManager() {}
 	
@@ -46,7 +46,7 @@ public class SocialManager : MonoBehaviour {
 		myPhotonView.RPC("AddChatMessage", PhotonTargets.All, playerName, chatText, timeStamp, messageType); 
 	}
 
-	[RPC]
+	//[RPC]
 	public void AddChatMessage(string playerName, string chatText, float timeStamp, int messageType)
 	{
 		ChatMessage cm = new ChatMessage();

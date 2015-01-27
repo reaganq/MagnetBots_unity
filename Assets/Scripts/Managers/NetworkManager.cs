@@ -96,7 +96,7 @@ public class NetworkManager : MonoBehaviour {
 		if(!offlineMode)
 		{
 			Debug.Log("load level 1");
-			PhotonNetwork.LoadLevel(2);
+			PhotonNetwork.LoadLevel(1);
 
 		}
 		else

@@ -3,8 +3,9 @@ using System.Collections;
 
 public class MainUIManager : BasicGUIController {
 
-	public UILabel MagnetsCounter = null;
-	public UILabel CrystalsCounter = null;
+	public UILabel coinsCounter = null;
+	public UILabel sparksCounter = null;
+	public UILabel magnetsCounter = null;
 	public GameObject mainButton = null;
 	public GameObject actionButtonsRoot;
 	public GameObject sideTray;
@@ -23,8 +24,9 @@ public class MainUIManager : BasicGUIController {
 
 	public void UpdateCurrencyCount()
 	{
-		MagnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
-		CrystalsCounter.text = PlayerManager.Instance.Hero.Crystals.ToString();
+		coinsCounter.text = PlayerManager.Instance.Hero.Coins.ToString();
+		sparksCounter.text = PlayerManager.Instance.Hero.Sparks.ToString();
+		//magnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
 	}
 
 	public override void Enable()

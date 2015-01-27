@@ -130,7 +130,7 @@ public class Shop : NPCActivity
 		//remove item
 		PlayerManager.Instance.Hero.RemoveItem(item, Amount);
 		//add gold
-		PlayerManager.Instance.Hero.AddCurrency(price, BuyCurrencyType.Magnets);
+		PlayerManager.Instance.Hero.AddCurrency(price, item.BuyCurrency);
 		//add item to temp shop collection
         //AddItem(item, Amount);
         return true;

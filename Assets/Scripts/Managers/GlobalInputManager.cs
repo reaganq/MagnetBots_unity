@@ -23,14 +23,13 @@ public class GlobalInputManager : MonoBehaviour {
 		}
 		else
 		{
-			if(inputType == InputType.TouchInput)
+			if(inputType == InputType.TouchInput || inputType == InputType.WASDInput)
 			{
 			//send message: clicked outside of UI
 				if(!GUIManager.Instance.IsUIBusy())
 				{
 					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 5f)
 					{
-						Debug.Log("clicking");
 						Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
 						RaycastHit hit;
 						if(Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
@@ -44,17 +43,14 @@ public class GlobalInputManager : MonoBehaviour {
 							}
 							else if(layermsk == poiMask)
 							{
-								Debug.Log("hit POI");
 								hit.collider.gameObject.SendMessage("ActivatePOI");
 							}
 							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
 							{
 								CharacterStatus cs = hit.collider.gameObject.GetComponent<CharacterStatus>();
-								Debug.Log("hey");
 								if(cs != null)
 								{
 									GUIManager.Instance.DisplayHoverPopup(cs);
-									Debug.Log("wtf");
 								}
 							}
 						}

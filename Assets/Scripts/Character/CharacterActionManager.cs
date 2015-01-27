@@ -37,15 +37,23 @@ public class CharacterActionManager : ActionManager {
     {
         //animationTarget.Play("Default_Idle");
 		base.Start();
+		myAnimation["Default_Idle"].layer = 0;
+		myAnimation["Default_Run"].layer = 0;
 		//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
-		CrossfadeAnimation("Default_Idle", true);
+		//Debug.LogWarning("FADING IDLE");
+		//CrossfadeAnimation("Default_Idle", false);
     }
+
+	public void AddPassiveAnimation(PassiveArmorAnimationController animController, int index)
+	{
+		armorAnimControllers[index] = animController;
+	}
 	
-	public void AddSkill(BasePlayerSkill controller, PassiveArmorAnimationController animController, int index)
+	public void AddSkill(BasePlayerSkill controller, int index)
     {
 		//Debug.LogWarning(index);
         armorSkillsArray[index] = controller;
-        armorAnimControllers[index] = animController;
+        
     }
 
     #region action states
@@ -154,7 +162,7 @@ public class CharacterActionManager : ActionManager {
 
     #region movement states
 
-    private MovementState _movementState;
+    public MovementState _movementState;
     public MovementState movementState
     {
         get{ return _movementState; }
@@ -238,7 +246,6 @@ public class CharacterActionManager : ActionManager {
         {
             myAnimation["Default_Idle"].time = 0;
 			myAnimation.CrossFade("Default_Idle");
-			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
             for (int i = 0; i < armorSkillsArray.Length ; i++)
             {
                 if(armorAnimControllers[i] != null )
@@ -247,11 +254,8 @@ public class CharacterActionManager : ActionManager {
                     {
 						myAnimation[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
 						myAnimation.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
+						Debug.Log(armorAnimControllers[i].idleOverrideAnim.clip.name);
                     }
-                    //if(movementState == MovementState.moving && armorAnimControllers[i].runningOverrideAnim.clip != null)
-                        //animationTarget.Blend(armorAnimControllers[i].runningOverrideAnim.clip.name, 0, 0.1f);
-                    //if(movementState == MovementState.moving && armorAnimControllers[i].walkingOverrideAnim.clip != null)
-                        //animationTarget.Blend(armorAnimControllers[i].walkingOverrideAnim.clip.name, 0, 0.1f);
                 }
             }
             movementState = MovementState.idle;
@@ -262,10 +266,8 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.moving)
         {
-			//UpdateRunningSpeed();
 			myAnimation["Default_Run"].time = 0;
 			myAnimation.CrossFade("Default_Run");
-			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Run");
             for (int i = 0; i < armorSkillsArray.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
@@ -293,7 +295,6 @@ public class CharacterActionManager : ActionManager {
     {
 		currentRunningAnimationSpeed = Mathf.Lerp( currentRunningAnimationSpeed, t*runningAnimationSpeedMultiplier, 0.1f);
 		myAnimation["Default_Run"].speed = currentRunningAnimationSpeed;
-
         for (int i = 0; i < armorSkillsArray.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
 				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = currentRunningAnimationSpeed;

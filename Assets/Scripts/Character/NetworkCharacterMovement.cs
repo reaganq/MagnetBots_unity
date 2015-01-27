@@ -4,10 +4,10 @@ using System.Collections;
 public class NetworkCharacterMovement : Photon.MonoBehaviour {
 
 	private Transform _transform;
-	private PlayerMotor _motor;
-	private CharacterStatus myStatus;
+	public PlayerMotor _motor;
+	public CharacterStatus myStatus;
 	Vector3 realPosition = Vector3.zero;
-	float currentSpeed;
+	public float currentSpeed;
 	Quaternion realRotation = Quaternion.identity;
 	public CharacterActionManager actionManager;
 
@@ -23,7 +23,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 		IsActive = false;
 	}
 
-	void Start()
+	void Awake()
 	{
 		_transform = transform;
 		_motor = GetComponent<PlayerMotor>();
@@ -49,10 +49,12 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 				if(currentSpeed > 0)
 				{
 					float t = 0.0f;
-					//Debug.Log(speed);
-					t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
+					//t = Mathf.Clamp( Mathf.Abs( currentSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
+					t = Mathf.Clamp( Mathf.Abs( myStatus.curMovementSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
+
 					actionManager.UpdateRunningSpeed(t);
 					actionManager.AnimateToRunning();
+					Debug.Log(t);
 				}
 				else
 				{
@@ -72,13 +74,15 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 			{
 				stream.SendNext(_transform.position);
 				stream.SendNext(_transform.rotation);
-				stream.SendNext(_motor.currentSpeed);
+				stream.SendNext(_motor.controller.velocity.sqrMagnitude);
+				stream.SendNext(myStatus.curMovementSpeed);
 			}
 			else
 			{
 				realPosition = (Vector3)stream.ReceiveNext();
 				realRotation = (Quaternion)stream.ReceiveNext();
 				currentSpeed = (float)stream.ReceiveNext();
+				myStatus.curMovementSpeed = (float)stream.ReceiveNext();
 			}
 		}
 	}

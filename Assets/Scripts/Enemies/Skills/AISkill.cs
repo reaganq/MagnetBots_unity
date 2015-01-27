@@ -19,7 +19,6 @@ public class AISkill : BaseSkill {
 	public float angleTolerance = 15f;
     public float skillMaxRange;
 	public float skillMinRange;
-	public float damage;
 
 	public List<StatusEffectData> onUseSkillEffects;
 	public List<StatusEffectData> onHitSkillEffects;
@@ -36,7 +35,7 @@ public class AISkill : BaseSkill {
     {
     }
 
-	public void AddParticlesToPool()
+	/*public void AddParticlesToPool()
 	{
 		
 	}
@@ -54,7 +53,7 @@ public class AISkill : BaseSkill {
 			fsm.effectsPool.CreatePrefabPool(prefabPool);
 		}
 		//}
-	}
+	}*/
 
     public virtual IEnumerator UseSkill()
     {
@@ -66,13 +65,13 @@ public class AISkill : BaseSkill {
         yield return null;
     }
 
-	public virtual void ResetSkill()
+	public override void ResetSkill()
 	{
 		HitEnemies.Clear();
 		HitAllies.Clear();
 	}
 
-	public virtual void HitTarget(HitBox target, bool isAlly)
+	public override void HitTarget(HitBox target, bool isAlly)
 	{
 		HitInfo newHit = new HitInfo();
 		

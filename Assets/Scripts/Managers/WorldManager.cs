@@ -12,7 +12,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	public PhotonView myPhotonView;
 	public List<ArenaManager> ArenaManagers;
 	public AudioClip soundtrack;
-
+	public List<int> allAvatars;
 
 	void Start()
 	{
@@ -30,6 +30,39 @@ public class WorldManager : Photon.MonoBehaviour {
 			ArenaManagers[i].ID = ArenaManagers.IndexOf(ArenaManagers[i]);
 		}
 	}
+
+	#region register players
+
+
+	public void RegisterNewAvatar()
+	{
+		//local player adds him/herself to the world manager's master list of all players
+
+	}
+
+	[RPC]
+	public void NetworkRegisterNewAvatar(int id)
+	{
+		if(PhotonNetwork.isMasterClient)
+		{
+			allAvatars.Add(id);
+		}
+		else
+		{
+		}
+	}
+
+	[RPC]
+	public void NetworkUpdateAvatarList()
+	{
+	}
+	
+	public void RequestAvatarInfo()
+	{
+		//request initialise info for avatar of other players
+	}
+		
+	#endregion
 
 	#region arena logic
 
@@ -246,51 +279,36 @@ public class WorldManager : Photon.MonoBehaviour {
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(partyList);
 		PlayerManager.Instance.partyMembers = (List<int>)b.Deserialize(m);
-
-		if(PlayerManager.Instance.partyMembers[0] == PhotonNetwork.player.ID)
-			PlayerManager.Instance.isPartyLeader = true;
+		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
 	
 	//party leader send to prospective party members
 	[RPC]
-	public void SendPartyInvite(PhotonMessageInfo info)
+	public void SendPartyInvite(int partyLeaderID,PhotonMessageInfo info)
 	{
-		if(PlayerManager.Instance.partyMembers.Count == 0 && !PlayerManager.Instance.isPartyLeader)
-		{
-			GUIManager.Instance.DisplayPartyNotification(info.sender);
-		}
+		GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
+		Debug.Log("received party invite");
 	}
 	
 	//invitees reply back to prospective/party leader
 	[RPC]
 	public void AcceptPartyInvite(PhotonMessageInfo info)
 	{
+		//failsafe
 		if(PlayerManager.Instance.partyMembers.Count == 0)
 		{
 			PlayerManager.Instance.partyMembers.Add(PhotonNetwork.player.ID);
-			PlayerManager.Instance.isPartyLeader = true;
 		}
 		PlayerManager.Instance.partyMembers.Add(info.sender.ID);
-		UpdatePartyMemberList(1);
+		UpdatePartyMemberList();
 	}
 
 	public void DisbandParty()
 	{
-		if(PlayerManager.Instance.isPartyLeader)
+		if(PlayerManager.Instance.partyMembers[0] == PhotonNetwork.player.ID)
 		{
-			PlayerManager.Instance.partyMembers.Remove(PhotonNetwork.player.ID);
-			if(PlayerManager.Instance.partyMembers.Count <= 1)
-			{
-				for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
-				{
-					myPhotonView.RPC("EndParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]));
-				}
-			}
-			else
-			{
-				UpdatePartyMemberList(0);
-				//myPhotonView.RPC("TakeOverAsPartyLeader", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[0]));
-			}
+			//find next party leader
+			myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[1]));
 		}
 		else
 		{
@@ -303,7 +321,6 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void EndParty()
 	{
-		PlayerManager.Instance.isPartyLeader = false;
 		PlayerManager.Instance.partyMembers.Clear();
 		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
@@ -316,8 +333,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		if(PlayerManager.Instance.partyMembers.Count <= 1)
 			EndParty();
 		else
-			UpdatePartyMemberList(1);
-		GUIManager.Instance.MainGUI.UpdatePartyMembers();
+			UpdatePartyMemberList();
 	}
 
 	/*[RPC]
@@ -328,14 +344,15 @@ public class WorldManager : Photon.MonoBehaviour {
 	}*/
 
 	//used by party leader
-	public void UpdatePartyMemberList(int index)
+	public void UpdatePartyMemberList()
 	{
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream();
 		b.Serialize(m, PlayerManager.Instance.partyMembers);
-		for (int i = index; i < PlayerManager.Instance.partyMembers.Count; i++) 
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
 		{
-			myPhotonView.RPC("UpdatePartyList", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), m.GetBuffer());
+			if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
+				myPhotonView.RPC("UpdatePartyList", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), m.GetBuffer());
 		}
 		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
@@ -362,8 +379,7 @@ public class WorldManager : Photon.MonoBehaviour {
 					EndParty();
 				else
 				{
-					PlayerManager.Instance.isPartyLeader = true;
-					UpdatePartyMemberList(1);
+					UpdatePartyMemberList();
 				}
 			}
 		}

@@ -27,26 +27,8 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    /*public static PlayerManager Instance
-    {
-        get;
-        private set;
-    }*/
-
     public PlayerInformation Hero;
- //public GeneralPlayerSounds sounds;
- //public RPGScene scene;
- //public static bool isChangingScene;
- //public bool doEvents;
- 
- //public static ContainerType Container;
- //public static RPGContainer rpgContainer;
- 
- //public static float sellPriceModifier;
- 
     public NPC ActiveNPC;
-    //public Shop ActiveShop;
-	//public NPCActivity ActiveActivity;
 	public NPCMinigame ActiveMinigame;
 	public GameObject ActiveMinigameObject;
 	public NPCArena SelectedArena;
@@ -79,8 +61,6 @@ public class PlayerManager : MonoBehaviour
 			Debug.Log("updated partymembers");
 		}
 	}
-
-	public bool isPartyLeader = false;
 
  //public static GeneralData Data;
  
@@ -136,8 +116,8 @@ public class PlayerManager : MonoBehaviour
 		avatarStatus = avatarObject.GetComponent<PlayerCharacter>();
 		avatarInput = avatarObject.GetComponent<CharacterInputController>();
 		avatarActionManager = avatarObject.GetComponent<CharacterActionManager>();
-		PlayerMotor cm = avatarObject.GetComponent<PlayerMotor>();
-		cm.enabled = true;
+		//PlayerMotor cm = avatarObject.GetComponent<PlayerMotor>();
+		//cm.enabled = true;
 		//avatarInput.enabled = true;
 		avatarNetworkMovement = avatarObject.GetComponent<NetworkCharacterMovement>();
 		//UICamera.fallThrough = avatarObject;
@@ -163,8 +143,6 @@ public class PlayerManager : MonoBehaviour
 			return;
 		}
 
-		Debug.Log(PhotonNetwork.isMessageQueueRunning);
-
         PlayerCamera.Instance.targetTransform = avatarObject.transform;
 
         avatarObject.transform.position = SpawnPoint.position;
@@ -172,8 +150,7 @@ public class PlayerManager : MonoBehaviour
         EnableAvatarInput();
 
 		//TODO hacky party list refresh
-		partyMembers.Clear();
-		isPartyLeader = false;
+		_partyMembers.Clear();
     }
 
 	public void ChangeWorld()
@@ -280,16 +257,13 @@ public class PlayerManager : MonoBehaviour
 
     void LoadCharacterParts()
     {
-        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedBody.rpgItem).FBXName, Hero.Equip.EquippedBody.Slot);
-        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedLegs.rpgItem).FBXName, Hero.Equip.EquippedLegs.Slot);
-        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedHead.rpgItem).FBXName, Hero.Equip.EquippedHead.Slot);
-        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmL.rpgItem).FBXName, Hero.Equip.EquippedArmL.Slot);
-        //avatar.EquipBodyPart(((RPGArmor)Hero.Equip.EquippedArmR.rpgItem).FBXName, Hero.Equip.EquippedArmR.Slot);
-		avatar.LoadAllBodyParts(((RPGArmor)Hero.Equip.EquippedHead.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedHead.Level, Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
-		                        ((RPGArmor)Hero.Equip.EquippedBody.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedBody.Level, Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1],
-		                        ((RPGArmor)Hero.Equip.EquippedArmL.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedArmL.Level, Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1],
-		                        ((RPGArmor)Hero.Equip.EquippedArmR.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedArmR.Level, Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1],
-		                        ((RPGArmor)Hero.Equip.EquippedLegs.rpgArmor).FBXName[Mathf.Min(Hero.Equip.EquippedLegs.Level, Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1]);
+		avatar.LoadAllBodyParts(Hero.profile.name,
+		                        Hero.Equip.EquippedFace.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedFace.Level, Hero.Equip.EquippedFace.rpgArmor.FBXName.Count) - 1], 
+		                        Hero.Equip.EquippedHead == null? null : Hero.Equip.EquippedHead.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedHead.Level, Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
+		                        Hero.Equip.EquippedBody.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedBody.Level, Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1],
+		                        Hero.Equip.EquippedArmL.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedArmL.Level, Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1],
+		                        Hero.Equip.EquippedArmR.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedArmR.Level, Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1],
+		                        Hero.Equip.EquippedLegs.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedLegs.Level, Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1]);
     }
 	
     public void EnableAvatarInput()

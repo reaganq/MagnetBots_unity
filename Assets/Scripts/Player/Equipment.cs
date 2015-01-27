@@ -16,7 +16,6 @@ public class Equipment
 	public EquipedItem EquippedArmR;
 	public EquipedItem EquippedLegs;
 	public EquipedItem EquippedFace;
-    
     //public List<EquipedItem> Items;
  
  //[XmlIgnore]
@@ -25,12 +24,18 @@ public class Equipment
  public Equipment()
  {
         //Items = new List<EquipedItem>();
-		EquippedHead = new EquipedItem();
+		/*EquippedHead = new EquipedItem();
 		EquippedBody = new EquipedItem();
 		EquippedArmL = new EquipedItem();
 		EquippedArmR = new EquipedItem();
 		EquippedLegs = new EquipedItem();
-		EquippedFace = new EquipedItem();
+		EquippedFace = new EquipedItem();*/
+		EquippedHead = null;
+		EquippedBody = null;
+		EquippedArmL = null;
+		EquippedArmR = null;
+		EquippedLegs = null;
+		EquippedFace = null;
      //Weapon = new RPGWeapon();
  }
 
@@ -111,6 +116,10 @@ public class Equipment
             if(EquippedLegs != null)
                 return true;
             break;
+		case EquipmentSlots.Face:
+			if(EquippedFace != null)
+				return true;
+			break;
     }
         return false;
  }
@@ -212,9 +221,15 @@ public class Equipment
 		e.UniqueItemId = armor.UniqueId;
 		e.rpgArmor = armor;
 		e.Level = level;
-        
 	    switch (e.rpgArmor.EquipmentSlotIndex)
 	    {
+			case EquipmentSlots.Face:
+				if(IsEquipmentSlotUsed(EquipmentSlots.Face))
+					PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedFace.UniqueItemId, EquippedFace.Level);
+				EquippedFace = e;
+				if(PlayerManager.Instance.avatar != null)
+					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Face);
+				break;
 	        case EquipmentSlots.Head:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.Head))
 	                PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedHead.UniqueItemId, EquippedHead.Level);

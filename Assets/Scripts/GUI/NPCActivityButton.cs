@@ -11,7 +11,6 @@ public class NPCActivityButton : MonoBehaviour {
 		switch (activity.activityType)
 		{
 		case NPCActivityType.Arena:
-
 			break;
 		case NPCActivityType.Minigame:
 			break;
@@ -22,6 +21,9 @@ public class NPCActivityButton : MonoBehaviour {
 		case NPCActivityType.Service:
 			break;
 		case NPCActivityType.Quest:
+			break;
+		case NPCActivityType.Teleporter:
+			//display teleporter UI
 			break;
 		}
 		textLabel.text = activity.Name;

@@ -33,6 +33,13 @@ public class CharacterStatus : CharacterAttributes {
 
 	}
 
+	public void UpdateNameTag(string nameString)
+	{
+		characterName = nameString;
+		if(nameLabel != null)
+			nameLabel.text = characterName;
+	}
+
 	public void Update()
 	{
 		if(hpBar != null)
@@ -66,7 +73,6 @@ public class CharacterStatus : CharacterAttributes {
 		}
 		else
 			DisplayHpBar(false);
-		Debug.LogWarning("display info by zone");
 	}
 
 	public void UpdateHitBoxes()

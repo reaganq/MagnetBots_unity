@@ -29,7 +29,6 @@ public class Avatar : MonoBehaviour {
     private string LShoulderRootName = "bones:L_Arm_Hover_b";
     private string RShoulderRootName = "bones:R_Arm_Hover_b";
     private string LegsRootName = "bones:LegsRoot";
-    //private string HeadRootName = "bones:Head_Hover_b";
     public Transform _myTransform;
 
 	#region store bones
@@ -84,6 +83,7 @@ public class Avatar : MonoBehaviour {
 	}
 
 	#endregion
+
 	void Awake () {
         myMotor = GetComponent<PlayerMotor>();
         myActionManager = GetComponent<CharacterActionManager>();
@@ -93,20 +93,44 @@ public class Avatar : MonoBehaviour {
 		LoadBones();
 	}
 
-	public void LoadAllBodyParts(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	public void RequestInitInfo()
 	{
-		myPhotonView.RPC("LoadAll", PhotonTargets.AllBuffered, headPath, bodyPath, armLPath, armRPath, legsPath);
+		myPhotonView.RPC("NetworkRequestInitInfo", myPhotonView.owner);
+	}
+
+	//send to owner
+	[RPC]
+	public void NetworkRequestInitInfo(PhotonMessageInfo info)
+	{
+		myPhotonView.RPC("NetworkInitialiseAvatar", info.sender, 
+		                 PlayerManager.Instance.Hero.profile.name,
+		                 PlayerManager.Instance.Hero.Equip.EquippedFace.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedFace.Level, PlayerManager.Instance.Hero.Equip.EquippedFace.rpgArmor.FBXName.Count) - 1],
+		                 PlayerManager.Instance.Hero.Equip.EquippedHead == null? null : PlayerManager.Instance.Hero.Equip.EquippedHead.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedHead.Level, PlayerManager.Instance.Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
+		                 PlayerManager.Instance.Hero.Equip.EquippedBody.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedBody.Level, PlayerManager.Instance.Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1], 
+		                 PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedArmL.Level, PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1], 
+		                 PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedArmR.Level, PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1], 
+		                 PlayerManager.Instance.Hero.Equip.EquippedLegs.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedLegs.Level, PlayerManager.Instance.Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1]
+		                 );
+	}
+
+	public void LoadAllBodyParts(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	{
+		myPhotonView.RPC("NetworkInitialiseAvatar", PhotonTargets.All, characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
 	}
 
 	[RPC]
-	public void LoadAll(string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	public void NetworkInitialiseAvatar(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
 	{
-		SpawnHead(headPath);
+		SpawnFace(facePath);
+		if(!string.IsNullOrEmpty(headPath))
+			SpawnHead(headPath);
 		SpawnBody(bodyPath);
 		SpawnArmL(armLPath);
 		SpawnArmR(armRPath);
 		SpawnLegs(legsPath);
 		LoadBones();
+		myStatus.UpdateNameTag(characterName);
+		animationTarget.Play("Default_Idle");
 	}
 
     public void EquipBodyPart(string objectpath, EquipmentSlots slot)
@@ -114,45 +138,44 @@ public class Avatar : MonoBehaviour {
         switch(slot)
         {
             case EquipmentSlots.Head:
-			myPhotonView.RPC("SpawnHead", PhotonTargets.AllBuffered, objectpath);
+			myPhotonView.RPC("SpawnHead", PhotonTargets.All, objectpath);
             //SpawnHead(objectpath);
                 break;
             case EquipmentSlots.Body:
-			myPhotonView.RPC("SpawnBody", PhotonTargets.AllBuffered, objectpath);
+			myPhotonView.RPC("SpawnBody", PhotonTargets.All, objectpath);
             //SpawnBody(objectpath);
                 break;
             case EquipmentSlots.ArmL:
-			myPhotonView.RPC("SpawnArmL", PhotonTargets.AllBuffered, objectpath);
+			myPhotonView.RPC("SpawnArmL", PhotonTargets.All, objectpath);
             //SpawnArmL(objectpath);
                 break;
             case EquipmentSlots.ArmR:
-			myPhotonView.RPC("SpawnArmR", PhotonTargets.AllBuffered, objectpath);
+			myPhotonView.RPC("SpawnArmR", PhotonTargets.All, objectpath);
             //SpawnArmR(objectpath);
                 break;
             case EquipmentSlots.Legs:
-			myPhotonView.RPC("SpawnLegs", PhotonTargets.AllBuffered, objectpath);
+			myPhotonView.RPC("SpawnLegs", PhotonTargets.All, objectpath);
             //SpawnLegs(objectpath);
                 break;
             case EquipmentSlots.Face:
-            SpawnFace(objectpath);
+			myPhotonView.RPC("SpawnFace", PhotonTargets.All, objectpath);
                 break;
         }
-		LoadBones();
     }
 
-
+	[RPC]
     public void SpawnFace(string objectpath)
     {
         if(FaceObjects.Count > 0)
         {
-            for (int i = 0; i < HeadObjects.Count ; i++) {
-                Destroy(HeadObjects[i]);
+			for (int i = 0; i < FaceObjects.Count ; i++) {
+				Destroy(FaceObjects[i]);
             }
-            HeadObjects.Clear();
+            FaceObjects.Clear();
         }
 
         GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;
-        temp.transform.parent = _myTransform;
+        temp.transform.parent = BodyRoot;
         temp.transform.localRotation = Quaternion.identity;
         temp.transform.localPosition = Vector3.zero;
         
@@ -161,11 +184,9 @@ public class Avatar : MonoBehaviour {
         foreach( SkinnedMeshRenderer smr in BonedObjects )
         {
             FaceObjects.Add(ProcessBonedObject( smr ));
-            
         }
         
         Destroy(temp);
-
     }
 
 	[RPC]
@@ -185,6 +206,7 @@ public class Avatar : MonoBehaviour {
         temp.transform.localPosition = Vector3.zero;
         temp.transform.localRotation = Quaternion.Euler(-90, 90, 0);
         HeadObjects.Add(temp);
+
     }
    
 #region SpawnBody
@@ -209,11 +231,10 @@ public class Avatar : MonoBehaviour {
         foreach( SkinnedMeshRenderer smr in BonedObjects )
         {
             BodyObjects.Add(ProcessBonedObject( smr ));
-
         }
         
         Destroy(temp);
-        
+		LoadBones();
     }
     
     private GameObject ProcessBonedObject( SkinnedMeshRenderer ThisRenderer )
@@ -229,19 +250,11 @@ public class Avatar : MonoBehaviour {
         
         // Assemble Bone Structure  
         Transform[] MyBones = new Transform[ ThisRenderer.bones.Length ];
-        
-        //Debug.Log("bone number" + ThisRenderer.bones.Length);
-    
-        /*foreach(Transform bone in ThisRenderer.bones)
-    {
-        Debug.Log(bone.ToString());
-        
-    }*/
+
         // As clips are using bones by their names, we find them that way.
         for( int i = 0; i < ThisRenderer.bones.Length; i++ )
         {
-            //Debug.Log(ThisRenderer.bones[i].name);
-            MyBones[ i ] = FindChildByName( ThisRenderer.bones[ i ].name, transform );
+            MyBones[ i ] = FindChildByName( ThisRenderer.bones[ i ].name, _myTransform );
         }
     //
         //Debug.Log("mybones: "+MyBones.Length);
@@ -302,11 +315,16 @@ public class Avatar : MonoBehaviour {
                 PositionArmL(temp.transform.GetChild(i));
             }
         }
+		LoadBones();
 		BasePlayerSkill armLcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armLcontroller != null)
         {
             armLcontroller.Initialise(myStatus, 2);
-			GUIManager.Instance.MainGUI.EnableActionButton(true, 0);
+			if(armLcontroller.hasSkill)
+				GUIManager.Instance.MainGUI.EnableActionButton(true, 0);
+			else
+				GUIManager.Instance.MainGUI.EnableActionButton(false, 0);
+			myActionManager.AddSkill(armLcontroller, 2);
         }
 		else
 			GUIManager.Instance.MainGUI.EnableActionButton(false, 0);
@@ -315,19 +333,9 @@ public class Avatar : MonoBehaviour {
         if(armLAnimController != null)
         {
             armLAnimController.TransferAnimations(animationTarget, this);
+			myActionManager.AddPassiveAnimation(armLAnimController, 2);
         }
-
-        myActionManager.AddSkill(armLcontroller, armLAnimController, 2);
         ArmLObjects.Add(temp);
-        //ArmorController armLcontroller = ArmL.GetComponent<ArmorController>();
-
-        /*if(armLcontroller != null)
-        {
-            armLcontroller.TransferAnimations(animationTarget, animationController);
-            animationController.ArmorControllers[2] = armLcontroller;
-        }*/
-        
-        //animationController.UpdateAnimation();
     }
     
     public void PositionArmL(Transform obj)
@@ -368,12 +376,16 @@ public class Avatar : MonoBehaviour {
                 PositionArmR(temp.transform.GetChild(i));
             }
         }
-
+		LoadBones();
 		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armRcontroller != null)
         {
             armRcontroller.Initialise(myStatus, 3);
-			GUIManager.Instance.MainGUI.EnableActionButton(true, 1);
+			if(armRcontroller.hasSkill)
+				GUIManager.Instance.MainGUI.EnableActionButton(true, 1);
+			else
+				GUIManager.Instance.MainGUI.EnableActionButton(false, 1);
+			myActionManager.AddSkill(armRcontroller, 2);
             //Debug.Log("transfer animation");
         }
 		else
@@ -384,18 +396,10 @@ public class Avatar : MonoBehaviour {
         {
             armRAnimController.TransferAnimations(animationTarget, this);
             //animManager.
+			myActionManager.AddPassiveAnimation(armRAnimController, 3);
         }
 
-        myActionManager.AddSkill(armRcontroller, armRAnimController,3);
         ArmRObjects.Add(temp);
-        /*if(armRcontroller != null)
-        {
-            armRcontroller.TransferAnimations(animationTarget, animationController);
-            animationController.ArmorControllers[3] = armRcontroller;
-            
-        }*/
-
-        //animationController.UpdateAnimation();
     }
     
     public void PositionArmR(Transform obj)
@@ -427,7 +431,7 @@ public class Avatar : MonoBehaviour {
 
         GameObject legRoot = pelvis.transform.FindChild(LegsRootName).gameObject;
         legRoot.transform.parent = PelvisBone;
-
+		LoadBones();
 
         LegObjects.Add(pelvis);
         LegObjects.Add(legRoot);

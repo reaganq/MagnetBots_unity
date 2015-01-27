@@ -12,6 +12,7 @@ public class NPCActivity: BasicItem {
 	
 	public NPCActivityType activityType;
 	public int conversationID;
+	public int paragraphID;
 	public string npcIconAtlas;
 	public string npcIconSprite;
 	public string npcButtonText;
@@ -35,5 +36,6 @@ public enum NPCActivityType
 	Quest = 2,
 	Service = 3,
 	Arena = 4,
-	Default = 5
+	Default = 5,
+	Teleporter = 6,
 }

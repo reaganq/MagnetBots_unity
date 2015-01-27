@@ -17,7 +17,7 @@ public class ProfileGUIController : BasicGUIController {
 
 	public void OnBackButtonPressed()
 	{
-
+		Disable();
 	}
 
 }

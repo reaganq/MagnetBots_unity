@@ -7,19 +7,21 @@
     <SystemDescription />
     <IsUsable>false</IsUsable>
     <IsEquippable>true</IsEquippable>
-    <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>NakedArmor</ItemCategory>
     <IconPath>basic_head</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
-    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <EquipmentSlotIndex>Face</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
+    <Stackable>false</Stackable>
     <BuyValue>10</BuyValue>
     <SellValue>4</SellValue>
     <Rarity>Common</Rarity>
     <FBXName>
-      <string>Armor/Head/Basic_Head</string>
+      <string>Armor/Faces/Basic_Face</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -32,10 +34,11 @@
     <IsUsable>false</IsUsable>
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
+    <ItemCategory>NakedArmor</ItemCategory>
     <IconPath>basic_body</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
@@ -44,6 +47,7 @@
     <FBXName>
       <string>Armor/Body/Basic_Body</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -56,10 +60,11 @@
     <IsUsable>false</IsUsable>
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
+    <ItemCategory>NakedArmor</ItemCategory>
     <IconPath>basic_armL</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
@@ -68,6 +73,7 @@
     <FBXName>
       <string>Armor/ArmL/Basic_ArmL</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to shoot ata your enemies!</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -80,10 +86,11 @@
     <IsUsable>false</IsUsable>
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
+    <ItemCategory>NakedArmor</ItemCategory>
     <IconPath>basic_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>12</BuyValue>
@@ -92,6 +99,7 @@
     <FBXName>
       <string>Armor/ArmR/Basic_ArmR</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Wield the power of the Thunder God</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -104,10 +112,11 @@
     <IsUsable>false</IsUsable>
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
-    <ItemCategory>Armor</ItemCategory>
+    <ItemCategory>NakedArmor</ItemCategory>
     <IconPath>basic_legs</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
@@ -116,6 +125,7 @@
     <FBXName>
       <string>Armor/Legs/Basic_Legs</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -132,6 +142,7 @@
     <IconPath>knight_head</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
@@ -142,6 +153,7 @@
       <string>Armor/Head/Knight_Head2</string>
       <string>Armor/Head/Knight_Head3</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString />
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -158,6 +170,7 @@
     <IconPath>knight_body</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
@@ -168,6 +181,7 @@
       <string>Armor/Body/Knight_Body2</string>
       <string>Armor/Body/Knight_Body3</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString />
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -184,6 +198,7 @@
     <IconPath>knight_armL</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
@@ -194,6 +209,7 @@
       <string>Armor/ArmL/Knight_armL2</string>
       <string>Armor/ArmL/Knight_armL3</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to block damage!</AbilityString>
     <AbilityIconPath>abilityicon_knight_armL</AbilityIconPath>
@@ -210,6 +226,7 @@
     <IconPath>knight_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>150</BuyValue>
@@ -220,6 +237,7 @@
       <string>Armor/ArmR/Knight_ArmR2</string>
       <string>Armor/ArmR/Knight_ArmR3</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to destroy your foes</AbilityString>
     <AbilityIconPath>abilityicon_knight_armR</AbilityIconPath>
@@ -236,6 +254,7 @@
     <IconPath>knight_legs</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
@@ -246,6 +265,7 @@
       <string>Armor/Legs/Knight_Legs2</string>
       <string>Armor/Legs/Knight_Legs3</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -262,6 +282,7 @@
     <IconPath>boxer_armL</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>20</BuyValue>
@@ -270,6 +291,7 @@
     <FBXName>
       <string>Armor/ArmL/Boxer_ArmL</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -286,6 +308,7 @@
     <IconPath>boxer_head</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>50</BuyValue>
@@ -294,6 +317,7 @@
     <FBXName>
       <string>Armor/Head/Boxer_Head</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -310,6 +334,7 @@
     <IconPath>boxer_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
@@ -318,6 +343,7 @@
     <FBXName>
       <string>Armor/ArmR/Boxer_ArmR</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -334,6 +360,7 @@
     <IconPath>knight_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
@@ -342,6 +369,7 @@
     <FBXName>
       <string>Armor/ArmR/Gumball_armR</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -358,6 +386,7 @@
     <IconPath>chef_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
@@ -366,6 +395,7 @@
     <FBXName>
       <string>Armor/ArmR/Chef_ArmR</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -382,6 +412,7 @@
     <IconPath>chef_head</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>100</BuyValue>
@@ -390,6 +421,7 @@
     <FBXName>
       <string>Armor/Head/Chef_Head</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -406,6 +438,7 @@
     <IconPath>chef_armL</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>75</BuyValue>
@@ -414,6 +447,7 @@
     <FBXName>
       <string>Armor/ArmL/Chef_ArmL</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -430,6 +464,7 @@
     <IconPath>chef_body</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>200</BuyValue>
@@ -438,6 +473,7 @@
     <FBXName>
       <string>Armor/Body/Chef_Body</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
@@ -454,6 +490,7 @@
     <IconPath>chef_legs</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>200</BuyValue>
@@ -462,6 +499,7 @@
     <FBXName>
       <string>Armor/Legs/Chef_Legs</string>
     </FBXName>
+    <requiredMagneticLevel>0</requiredMagneticLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>

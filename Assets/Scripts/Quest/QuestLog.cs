@@ -4,11 +4,15 @@ using System.Collections.Generic;
 
 public class QuestLog 
 {
+	//repeatable quests
+	//finished quests
+	public List<RPGQuest> FinishedQuests;
 	public List<RPGQuest> CurrentQuests;
 	
 	public QuestLog()
 	{
 		CurrentQuests = new List<RPGQuest>();
+		FinishedQuests = new List<RPGQuest>();
 	}
 	
 	//quest step in progress
@@ -66,11 +70,10 @@ public class QuestLog
 	{
 		if (IsQuestStarted(questId))
 			return false;
-		
-		List<RPGQuest> quests = Storage.Load<RPGQuest>(new RPGQuest());
+
 		bool result = false;	
 		
-		foreach(RPGQuest q in quests)
+		foreach(RPGQuest q in GeneralData.quests)
 		{
 			if (q.ID == questId)
 			{
@@ -101,6 +104,8 @@ public class QuestLog
 		if (!result)
 			return false;
 		quest.GiveReward();
+		if(!quest.Repeatable)
+			FinishedQuests.Add(quest);
 		
 		/*if (!quest.Repeatable)
 		{
@@ -212,3 +217,5 @@ public class QuestLog
 		
 	}
 }
+
+

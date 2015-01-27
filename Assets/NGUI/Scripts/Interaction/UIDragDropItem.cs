@@ -215,8 +215,13 @@ public class UIDragDropItem : MonoBehaviour
 		mTable = NGUITools.FindInParents<UITable>(mParent);
 
 		// Re-parent the item
-		if (UIDragDropRoot.root != null)
+		/*if (UIDragDropRoot.root != null)
+		{
 			mTrans.parent = UIDragDropRoot.root;
+			Debug.LogWarning("item tile parent chanted");
+		}*/
+
+		mTrans.parent = GUIManager.Instance.dragDropRoot;
 
 		Vector3 pos = mTrans.localPosition;
 		pos.z = 0f;

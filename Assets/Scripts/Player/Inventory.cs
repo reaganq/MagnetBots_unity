@@ -192,6 +192,26 @@ public class Inventory  : BasicInventory
 		maximumItems = 50;
 	}
 
+	public void ReplaceNakedItem(RPGItem itemToAdd, int level, int amount)
+	{
+		int index = -1;
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].rpgItem.EquipmentSlotIndex == itemToAdd.EquipmentSlotIndex)
+			{
+				index = i;
+			}
+		}
+		if(index > -1)
+			Items.RemoveAt(index);
+		InventoryItem item = new InventoryItem();
+		item.rpgItem = itemToAdd;
+		item.Level = level;
+		item.UniqueItemId = itemToAdd.UniqueId;
+		item.CurrentAmount = amount;
+		item.isItemViewed = true;
+		Items.Add(item);
+	}
+
 	public void AddItem(InventoryItem item, int amount)
 	{
 		if (!DoYouHaveSpaceForThisItem(item))

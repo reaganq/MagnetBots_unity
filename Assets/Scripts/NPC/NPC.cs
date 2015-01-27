@@ -79,6 +79,13 @@ public class NPC: MonoBehaviour
 				}
 				activities.Add(arena);
 			}
+			else if(ad.activityType == NPCActivityType.Teleporter)
+			{
+				NPCActivity teleporter = new NPCActivity();
+				teleporter.activityType = NPCActivityType.Teleporter;
+				teleporter.Name = "Teleporter";
+				activities.Add(teleporter);
+			}
 		}
 
 		/*if(character.ArenaID > 0)

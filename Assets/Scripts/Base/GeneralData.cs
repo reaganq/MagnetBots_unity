@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class GeneralData: MonoBehaviour{
 
-	public List<RPGQuest> quests;
+	public static List<RPGQuest> quests;
 	public List<ItemCategoryData> itemCategories;
-	public string defaultHeadObj;
-	public string defaultChestObj;
-	public string defaultArmLObj;
-	public string defaultArmRObj;
-	public string defaultLegsObj;
+	public int defaultHeadObj = 1;
+	public int defaultChestObj = 2;
+	public int defaultArmLObj = 3;
+	public int defaultArmRObj = 4;
+	public int defaultLegsObj = 5;
 	public static string[] armRBones = new string[6] {"bones:R_Clavicle", "bones:R_Shoulder", "bones:R_ShoulderGuard", "bones:R_Elbow", "bones:R_Forearm", "bones:R_Hand"};
 	public static string[] armLBones = new string[6] {"bones:L_Clavicle", "bones:L_Shoulder", "bones:L_ShoulderGuard", "bones:L_Elbow", "bones:L_Forearm", "bones:L_Hand"};
 	public static string[] verticalBones = new string[2] {"bones:Spine_2", "bones:Neck_Horizontal"};

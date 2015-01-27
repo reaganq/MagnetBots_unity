@@ -29,8 +29,16 @@ public class GameManager : MonoBehaviour {
     public InputType inputType;
     public GameObject characterJoyStick;
     public EasyJoystick joystick;
-	public float defaultAspectRatio;
-	public float nativeAspectRatio;
+	public float defaultScreenHeight = 1536.0f;
+	public float defaultScreenWidth = 2048.0f;
+	public float defaultAspectRatio
+	{
+		get{return 2048.0f/1536.0f;}
+	}
+	public float nativeAspectRatio
+	{
+		get{return ((float)Screen.width)/((float)Screen.height);}
+	}
 
     public bool GameIsPaused;
     public bool GameHasStarted;
@@ -54,14 +62,14 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(this);
         }
         //joystick = GameObject.FindGameObjectWithTag("GameController").GetComponent<EasyJoystick>();
-		#if UNITY_IPHONE || UNITY_STANDALONE
+		#if UNITY_IPHONE || UNITY_EDITOR || UNITY_STANDALONE
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
         joystick = characterJoyStick.GetComponent<EasyJoystick>();
         joystick.showDebugRadius = false;
 
         joystick.enable = false;
-		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GameObject.FindGameObjectWithTag("UICamera").camera;
+		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GUIManager.Instance.uiCamera;
 
         #endif
 		#if UNITY_WEBPLAYER 
@@ -80,8 +88,6 @@ public class GameManager : MonoBehaviour {
     {
 		if(Application.loadedLevel == 0)
         	OnLevelWasLoaded(Application.loadedLevel);
-		defaultAspectRatio = 2048.0f/1536.0f;
-		nativeAspectRatio = ((float)Screen.width)/((float)Screen.height);
     }
 
     public void OnLevelWasLoaded(int level)

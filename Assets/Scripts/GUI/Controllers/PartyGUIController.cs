@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PartyGUIController : MonoBehaviour {
+public class PartyGUIController : BasicGUIController {
 
 	public GameObject notificationBox;
 	public UILabel notificationMessage;
@@ -11,6 +11,7 @@ public class PartyGUIController : MonoBehaviour {
 	public GameObject hoverBox;
 	public GameObject addToFriendButton;
 	public GameObject inviteButton;
+	public UIPlayTween notificationTween;
 
 	// Use this for initialization
 	public void UpdateMessage (string name) 
@@ -24,19 +25,19 @@ public class PartyGUIController : MonoBehaviour {
 			return;
 		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("AcceptPartyInvite", prospectivePartyLeader);
 		prospectivePartyLeader = null;
-		GUIManager.Instance.HidePartyNotification();
+		notificationTween.Play(false);
 	}
 
 	public void OnReject()
 	{
-		GUIManager.Instance.HidePartyNotification();
+		notificationTween.Play(false);
 	}
 
-	public void DisplayNotificationBox(PhotonPlayer player)
+	public void DisplayNotificationBox(PhotonPlayer player, int partyLeaderID)
 	{
-		notificationBox.SetActive(true);
 		UpdateMessage(player.ToString());
-		prospectivePartyLeader = player;
+		notificationTween.Play(true);
+		prospectivePartyLeader = PhotonPlayer.Find(partyLeaderID);
 	}
 
 	public void HideNotificationBox()
@@ -53,9 +54,8 @@ public class PartyGUIController : MonoBehaviour {
 	{
 		//Debug.Log(PlayerManager.Instance.partyMembers.Count);
 		//TODO allow non party leader to recommend party invites.
-		if(PlayerManager.Instance.isPartyLeader || PlayerManager.Instance.partyMembers.Count == 0)
-			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner);
-		GUIManager.Instance.HideCharacterPopUp();
+		//PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner);
+		//GUIManager.Instance.HideCharacterPopUp();
 	}
 
 	public void DisplayHoverBox(GameObject character)

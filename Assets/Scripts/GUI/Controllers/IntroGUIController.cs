@@ -38,6 +38,9 @@ public class IntroGUIController : MonoBehaviour {
 
 	public void OnStartPressed()
 	{
+		if(!PhotonNetwork.insideLobby)
+			return;
+
 		if(!quickStartClicked)
 		{
 			quickStartClicked = true;

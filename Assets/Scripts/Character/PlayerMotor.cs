@@ -10,16 +10,20 @@ public class PlayerMotor : Motor {
     public bool canRotate = true;
     public Vector3 dir;
 	
-	public override void Start () {
+	public override void Awake () {
 	    
-        input = GetComponent<CharacterInputController>();
+		base.Awake();
+        //input = GetComponent<CharacterInputController>();
         myActionManager = GetComponent<CharacterActionManager>();
-		base.Start();
+		if(!myStatus.myPhotonView.isMine)
+			enabled = false;
 	}
 	
 #region Movement
 	// Update is called once per frame
 	void Update () {
+
+
 
         if(!GameManager.Instance.GameIsPaused)
         {

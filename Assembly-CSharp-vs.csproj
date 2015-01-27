@@ -544,6 +544,7 @@
      <Compile Include="Assets\Scripts\Storage\IStorage.cs" />
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
      <Compile Include="Assets\Scripts\Storage\XMLStorage.cs" />
+     <Compile Include="Assets\Scripts\Utility\DynamicWidth.cs" />
      <Compile Include="Assets\Sliding\Demo\DemoSlide.cs" />
      <Compile Include="Assets\Sliding\Demo\DemoSlidingPuzzle.cs" />
      <Compile Include="Assets\Sliding\Standard Assets\Scripts\SliderMain.cs" />

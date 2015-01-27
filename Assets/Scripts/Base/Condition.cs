@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Xml;
 using System.Text;
 using System.Collections;
@@ -61,16 +61,16 @@ public class Condition
 			return state;
 			//quest not started
 		case ConditionTypeEnum.QuestNotStarted: 
-			return !PlayerManager.Instance.Hero.Quest.IsQuestStarted(Convert.ToInt32(ItemToHave));
+			return !PlayerManager.Instance.Hero.questLog.IsQuestStarted(Convert.ToInt32(ItemToHave));
 			//quest startet not finished (some of the tasks are not completed)
 		case ConditionTypeEnum.QuestInProgress: 
-			return PlayerManager.Instance.Hero.Quest.IsQuestInProgress(Convert.ToInt32(ItemToHave));
+			return PlayerManager.Instance.Hero.questLog.IsQuestInProgress(Convert.ToInt32(ItemToHave));
 			//quest finished = you can end it now
 		case ConditionTypeEnum.QuestFinished: 
-			return PlayerManager.Instance.Hero.Quest.IsQuestFinished(Convert.ToInt32(ItemToHave));
+			return PlayerManager.Instance.Hero.questLog.IsQuestFinished(Convert.ToInt32(ItemToHave));
 			//quest completed = in quest log "quest completed"
 		case ConditionTypeEnum.QuestCompleted:
-			return PlayerManager.Instance.Hero.Quest.IsQuestCompleted(Convert.ToInt32(ItemToHave));	
+			return PlayerManager.Instance.Hero.questLog.IsQuestCompleted(Convert.ToInt32(ItemToHave));	
 			//maximum level
 		/*case ConditionTypeEnum.LevelMaximum:
 			if (PlayerManager.Instance.Hero.CurrentLevel <= AmountToReach)
@@ -185,7 +185,7 @@ public class Condition
 			break;*/
 			//quest step in progress
 		case ConditionTypeEnum.QuestStepInProgress:
-			if (PlayerManager.Instance.Hero.Quest.IsQuestStepInProgress(Convert.ToInt32(ItemToHave), SecondaryID))
+			if (PlayerManager.Instance.Hero.questLog.IsQuestStepInProgress(Convert.ToInt32(ItemToHave), SecondaryID))
 				return true;
 			break;
 			
