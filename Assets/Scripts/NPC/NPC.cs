@@ -52,6 +52,7 @@ public class NPC: MonoBehaviour
 			if(ad.activityType == NPCActivityType.Minigame)
 			{
 				NPCMinigame minigame = Storage.LoadById<NPCMinigame>(ad.activityID, new NPCMinigame());
+				Debug.Log(minigame.activityType.ToString());
 				activities.Add(minigame);
 			}
 			else if(ad.activityType == NPCActivityType.Quest)
@@ -73,11 +74,11 @@ public class NPC: MonoBehaviour
 			else if(ad.activityType == NPCActivityType.Arena)
 			{
 				NPCArena arena = Storage.LoadById<NPCArena>(ad.activityID, new NPCArena());
-				for (int j = 0; j < arena.EnemyIDs.Count; j++) 
-				{
-					arena.Enemies.Add(Storage.LoadById<RPGEnemy>(arena.EnemyIDs[j], new RPGEnemy()));
-				}
+				arena.LoadArena();
+				arena.activityType = NPCActivityType.Arena;
 				activities.Add(arena);
+				Debug.Log(arena.activityType + " " + arena.Enemies.Count);
+				Debug.LogWarning("adding arena" + arena.Name);
 			}
 			else if(ad.activityType == NPCActivityType.Teleporter)
 			{

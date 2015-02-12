@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class WorldManager : Photon.MonoBehaviour {
-
+	
 	public List<ArenaLists> Arenas;
 	public Zone DefaultZone;
 	public PhotonView myPhotonView;
@@ -29,6 +29,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			ArenaManagers[i].ID = ArenaManagers.IndexOf(ArenaManagers[i]);
 		}
+		ArenaManagers.Clear();
 	}
 
 	#region register players
@@ -65,6 +66,11 @@ public class WorldManager : Photon.MonoBehaviour {
 	#endregion
 
 	#region arena logic
+
+	public void SpawnNewArena(NPCArena arena)
+	{
+
+	}
 
 	//from battle challenge initiator to Master
 	[RPC]

@@ -14,6 +14,6 @@ public class AICharacter : CharacterStatus {
 	// Update is called once per frame
 	public override void Die()
 	{
-		fsm.state = SimpleFSM.AIState.Dead;
+		fsm.EnterAIState(SimpleFSM.AIState.death);
 	}
 }

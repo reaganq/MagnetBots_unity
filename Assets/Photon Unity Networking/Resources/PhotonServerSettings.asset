@@ -88,4 +88,16 @@ MonoBehaviour:
   - NetworkRequestInitInfo
   - NetworkUpdateAvatarList
   - SpawnFace
+  - PressDownAction
+  - PressUpAction
+  - PlayOneShot
+  - NetworkEnterAIState
+  - NetworkInitialiseAI
+  - NetworkStartBattle
+  - NetworkUseAISkill
+  - NetworkSelectSkill
+  - NetworkSelectTarget
+  - NetworkFireOneShot
+  - NetworkPlayOneShot
+  - NetworkUseActiveSkill
   DisableAutoOpenWizard: 0

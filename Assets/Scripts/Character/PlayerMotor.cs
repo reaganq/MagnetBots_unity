@@ -23,8 +23,6 @@ public class PlayerMotor : Motor {
 	// Update is called once per frame
 	void Update () {
 
-
-
         if(!GameManager.Instance.GameIsPaused)
         {
 			if(!disableMovement)
@@ -135,7 +133,7 @@ public class PlayerMotor : Motor {
 
     #endregion
 
-    public void AnimationUpdate()
+    public override void AnimationUpdate()
     {
         horizontalVelocity = controller.velocity;
         horizontalVelocity.y = 0f;

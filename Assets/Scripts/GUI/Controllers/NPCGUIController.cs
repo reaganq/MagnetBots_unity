@@ -15,7 +15,6 @@ public class NPCGUIController : BasicGUIController {
 	public List<NPCActivity> activities;
 
 	public NPCActivity activeActivity;
-	public Shop activeShop;
 	public ShopGUIController shopGUI;
 	public ArenaGUIController arenaGUI;
 	public NPCGUIState _state;
@@ -70,7 +69,7 @@ public class NPCGUIController : BasicGUIController {
 	// Update is called once per frame
 	public override void Enable()
     {
-		activities = PlayerManager.Instance.ActiveNPC.activities;
+		activities = PlayerManager.Instance.ActiveNPC.availableActivities;
 		if(PlayerManager.Instance.ActiveNPC.character.defaultConversationID <= 0)
 			state = NPCGUIState.activityButtons;
 		base.Enable();
@@ -133,11 +132,16 @@ public class NPCGUIController : BasicGUIController {
 
 	public void OnActivityButtonPressed(int index)
 	{
+		Debug.Log("activity pressed" + index);
+		Debug.Log(activities[index].activityType.ToString() + activities[index].Name);
 		activeActivity = activities[index];
 		switch(activeActivity.activityType)
 		{
 		case NPCActivityType.Shop:
 			DisplayShop((Shop)activeActivity);
+			break;
+		case NPCActivityType.Arena:
+			DisplayArena((NPCArena)activeActivity);
 			break;
 		}
 		//load activity's conversation
@@ -180,6 +184,12 @@ public class NPCGUIController : BasicGUIController {
 		PlayerManager.Instance.ActiveMinigame = PlayerManager.Instance.ActiveNPC.miniGame;
 		GUIManager.Instance.DisplayMinigame();
 	}*/
+
+	public void DisplayArena(NPCArena newArena)
+	{
+		state = NPCGUIState.arena;
+		arenaGUI.Enable(newArena);
+	}
 
     public void SetupArenaButton()
     {

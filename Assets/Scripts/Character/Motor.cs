@@ -10,7 +10,6 @@ public class Motor : MonoBehaviour {
 	public Vector3 impact = Vector3.zero;
 	public Vector3 characterVelocity;
 	public CharacterStatus myStatus;
-	public Animation myAnimation;
 	public Vector3 rotationTarget;
 	public Vector3 cachedRotation;
 	public bool disableMovement;
@@ -78,5 +77,9 @@ public class Motor : MonoBehaviour {
 			if(impacts[i].force <= 0)
 				impacts.RemoveAt(i);
 		}
+	}
+
+	public virtual void AnimationUpdate()
+	{
 	}
 }

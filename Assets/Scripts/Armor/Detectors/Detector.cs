@@ -6,9 +6,12 @@ public class Detector : MonoBehaviour {
 	public Collider collider;
 	public BaseSkill ownerSkill;
 	public bool isActive = false;
+	[HideInInspector]
 	public float currentNumberOfTargets;
+	public SkillEventTrigger activationEvent;
+	public SkillEventTrigger deactivationEvent;
 
-	public virtual void IgnoreCollisions(Collider ownerHitBox)
+	public virtual void IgnoreOwnCollisions(Collider ownerHitBox)
 	{
 		Physics.IgnoreCollision(collider, ownerHitBox);
 	}
@@ -16,11 +19,13 @@ public class Detector : MonoBehaviour {
 	public virtual void Activate()
 	{
 		isActive = true;
+		this.gameObject.SetActive(true);
 	}
 	
 	public virtual void Deactivate()
 	{
 		isActive = false;
+		this.gameObject.SetActive(false);
 	}
 
 	public virtual void Initialise(BaseSkill skill)

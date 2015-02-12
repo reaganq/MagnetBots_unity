@@ -7,78 +7,133 @@ using PathologicalGames;
 
 public class AISkill : BaseSkill {
 
-    
+	public Transform fireObject;
+	public float cooldown;
+	public int maxAmmoCount;
+	public float fireSpeed;
+	public float damage;
+	public bool isLimitedUse;
+	public float skillUsageLimit = Mathf.Infinity;
+	private float usageCount;
+	public bool resetAfterUse;
+	//how likely we should use this attack
     public float weighting = 0f;
-    public SimpleFSM fsm;
-	public int skillIndex;
-    public Animation _animator;
+	public List<AISkillUseCondition> UseConditions;
+	public List<AISkillRequirements> UseRequirements;
 
-    public bool requiresTarget;
+	//do we need a target for this skill?
+    public int targetRequirement;
+	public float skillRangeMax;
+	public float skillRangeMin;
+
+	public SimpleFSM ownerFSM;
 	public bool requiresTargetLock;
 	public bool requiresLineOfSight;
 	public float angleTolerance = 15f;
-    public float skillMaxRange;
-	public float skillMinRange;
 
-	public List<StatusEffectData> onUseSkillEffects;
-	public List<StatusEffectData> onHitSkillEffects;
-	public List<StatusEffectData> onReceiveHitSkillEffects;
+	public Job useSkillJob;
 
+	public virtual void Start()
+	{
+	}
 	// Use this for initialization
-    public virtual void Start()
+	public virtual void InitialiseAISkill(CharacterStatus status, int skillIndex)
     {
-        fsm = GetComponent<SimpleFSM>();
-        _animator = GetComponent<Animation>();
+		usageCount = 0;
+		ownerStatus = status;
+		ownerManager = status.actionManager;
+		ownerFSM = (SimpleFSM)ownerManager;
+		ownerTransform = status._myTransform;
+		ownerAnimation = ownerFSM.myAnimation;
+		skillID = skillIndex;
+		SetupAnimations();
+		BasicSetup();
     }
 	
     public virtual void SetupAnimations()
     {
     }
 
-	/*public void AddParticlesToPool()
+	public virtual bool CanUseSkill()
 	{
-		
-	}
-	
-	public void AddPrefabToPool(Transform prefab)
-	{
-		//if(characterManager.MakeSpawnPool())
-		//{
-		if(fsm.effectsPool.GetPrefabPool(prefab) == null)
+		if(usageCount > skillUsageLimit)
+			return false;
+		if(ownerFSM.NumTargetsInRange(skillRangeMax) < targetRequirement)
 		{
-			PrefabPool prefabPool = new PrefabPool(prefab);;
-			prefabPool.preloadAmount = 3;
-			prefabPool.preloadFrames = 5;
-			Debug.Log("here");
-			fsm.effectsPool.CreatePrefabPool(prefabPool);
+			return false;
 		}
-		//}
-	}*/
-
-    public virtual IEnumerator UseSkill()
-    {
-        yield return null;
-    }
-
-    public virtual IEnumerator CancelSkill()
-    {
-        yield return null;
-    }
-
-	public override void ResetSkill()
-	{
-		HitEnemies.Clear();
-		HitAllies.Clear();
+		for (int i = 0; i < UseRequirements.Count; i++) {
+			if(UseRequirements[i].requirementType == AISkillRequirementType.healthGreatherThan && ownerStatus.curHealth < UseRequirements[i].targetValue)
+			{
+				return false;
+			}
+			else if(UseRequirements[i].requirementType == AISkillRequirementType.healthLessThan && ownerStatus.curHealth > UseRequirements[i].targetValue)
+			{
+				return false;
+			}
+				}
+		return true;
 	}
 
-	public override void HitTarget(HitBox target, bool isAlly)
+	public void FulfillSkillConditions()
+	{
+		FulfillSkillConditionSequence();
+	}
+
+	public virtual void FulfillSkillConditionSequence()
+	{
+		for (int i = 0; i < UseConditions.Count; i++) {
+			if(UseConditions[i].conditionType == AISkillUseConditionType.range)
+			{
+				ownerFSM.SetTargetDistance(UseConditions[i].targetValue1);
+			}
+			if(UseConditions[i].conditionType == AISkillUseConditionType.direction)
+			{
+				ownerFSM.SetTargetAngle(UseConditions[i].targetValue1);
+			}
+		}
+		if(fireObject != null)
+			ownerFSM.fireObject = fireObject;
+	}
+
+	public void UseSkill()
+	{
+		useSkillJob = Job.make(UseSkillSequence());
+		useSkillJob.jobComplete += (wasKilled) =>
+		{
+			if(resetAfterUse)
+				ResetSkill();
+		};
+	}
+
+    public virtual IEnumerator UseSkillSequence()
+    {
+        yield return null;
+    }
+
+	public void CancelSkill()
+	{
+	}
+
+    public virtual IEnumerator CancelSkillSequence()
+    {
+        yield return null;
+    }
+
+	public override void ResetSkill ()
+	{
+		base.ResetSkill ();
+		ownerFSM.moveToTarget = false;
+		ownerFSM.aimAtTarget = false;
+	}
+
+	/*public override void HitTarget(HitBox target, bool isAlly)
 	{
 		HitInfo newHit = new HitInfo();
 		
 		if(!isAlly)
 		{
 			newHit.sourceName = fsm.myStatus.characterName;
-			newHit.damage = damage;
 			newHit.hitPosX = fsm._transform.position.x;
 			newHit.hitPosY = fsm._transform.position.y;
 			newHit.hitPosZ = fsm._transform.position.z;
@@ -108,8 +163,8 @@ public class AISkill : BaseSkill {
 			Debug.Log("hitally");
 		}
 		//hb.ReceiveHit(newHit);
-	}
-
+	}*/
+	/*
 	public virtual void HitTarget(HitBox target, bool isAlly, Vector3 originPos)
 	{
 		HitInfo newHit = new HitInfo();
@@ -117,7 +172,7 @@ public class AISkill : BaseSkill {
 		if(!isAlly)
 		{
 			newHit.sourceName = fsm.myStatus.characterName;
-			newHit.damage = damage;
+			//newHit.damage = damage;
 			newHit.hitPosX = originPos.x;
 			newHit.hitPosY = originPos.y;
 			newHit.hitPosZ = originPos.z;
@@ -146,7 +201,7 @@ public class AISkill : BaseSkill {
 			Debug.Log("hitally");
 		}
 		//hb.ReceiveHit(newHit);
-	}
+	}*/
 
 	public void OverlapSphere(Vector3 location, float radius)
 	{
@@ -158,26 +213,50 @@ public class AISkill : BaseSkill {
 			if(hb != null)
 			{
 				CharacterStatus cs = hb.ownerCS;
-				if(cs != fsm.myStatus)
+				if(cs != ownerFSM.myStatus)
 				{
-						if(!HitEnemies.Contains(cs) && !HitAllies.Contains(cs))
+					if(!HitEnemies.Contains(cs) && !HitAllies.Contains(cs))
+					{
+						//determine if friend or foe
+						if(cs.characterType == CharacterType.AI)
 						{
-							//determine if friend or foe
-							if(cs.characterType == CharacterType.AI)
-							{
-								HitAllies.Add(cs);
-								HitTarget(hb, true);
-							}
-							else
-							{
-								HitEnemies.Add(cs);
-								HitTarget(hb, false);
-								//masterAISkill.fsm.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
-							}
-							//Debug.Log("I JUST HIT SOMETHING");
+							HitAllies.Add(cs);
+							HitTarget(hb, true);
 						}
+						else
+						{
+							HitEnemies.Add(cs);
+							HitTarget(hb, false);
+							//masterAISkill.fsm.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
+						}
+					}
 				}
 			}
 		}
 	}
+}
+
+public class AISkillUseCondition
+{
+	public AISkillUseConditionType conditionType;
+	public float targetValue1;
+	public float targetValue2;
+}
+
+public enum AISkillUseConditionType
+{
+	range,
+	direction,
+}
+
+public class AISkillRequirements
+{
+	public AISkillRequirementType requirementType;
+	public float targetValue;
+}
+
+public enum AISkillRequirementType
+{
+	healthLessThan,
+	healthGreatherThan,
 }

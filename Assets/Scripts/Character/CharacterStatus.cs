@@ -24,13 +24,10 @@ public class CharacterStatus : CharacterAttributes {
 	{
 		curHealth = maxHealth;
 		curMovementSpeed = maxMovementSpeed;
-
 		_myTransform = this.transform;
 		actionManager = GetComponent<ActionManager>();
 		myPhotonView = GetComponent<PhotonView>();
-
 		UpdateHitBoxes();
-
 	}
 
 	public void UpdateNameTag(string nameString)

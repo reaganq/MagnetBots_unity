@@ -864,7 +864,6 @@ MonoBehaviour:
   impact: {x: 0, y: 0, z: 0}
   characterVelocity: {x: 0, y: 0, z: 0}
   myStatus: {fileID: 11400026}
-  myAnimation: {fileID: 0}
   rotationTarget: {x: 0, y: 0, z: 0}
   cachedRotation: {x: 0, y: 0, z: 0}
   disableMovement: 0
@@ -886,10 +885,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e05fc3c1a4e64a4f85a1db5b4e49d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMotor: {fileID: 0}
+  myMotor: {fileID: 11400002}
   animationTarget: {fileID: 11100000}
-  myActionManager: {fileID: 0}
-  myStatus: {fileID: 0}
+  myActionManager: {fileID: 11400008}
+  myStatus: {fileID: 11400026}
   myPhotonView: {fileID: 11400014}
   PelvisBone: {fileID: 400044}
   BodyRoot: {fileID: 0}
@@ -964,20 +963,14 @@ MonoBehaviour:
   speechBubbleTween: {fileID: 0}
   effectsPool: {fileID: 0}
   myStatus: {fileID: 11400026}
-  _myTransform: {fileID: 0}
+  _myTransform: {fileID: 400278}
   myAnimation: {fileID: 11100000}
   myPhotonView: {fileID: 11400014}
-  motor: {fileID: 11400002}
-  activeSkill: {fileID: 0}
+  myMotor: {fileID: 11400002}
   runningAnimationSpeedMultiplier: 1.60000002
   currentRunningAnimationSpeed: 1.60000002
   myAvatar: {fileID: 0}
-  armorSkillsArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  armorSkills: []
   armorAnimControllers:
   - {fileID: 0}
   - {fileID: 0}
@@ -1109,7 +1102,7 @@ MonoBehaviour:
   motor: {fileID: 11400002}
   actionManager: {fileID: 11400008}
   myPhotonView: {fileID: 11400014}
-  enemyCharacterType: 0
+  enemyCharacterType: 1
   hitboxes: []
   _myTransform: {fileID: 0}
   statusEffects: []

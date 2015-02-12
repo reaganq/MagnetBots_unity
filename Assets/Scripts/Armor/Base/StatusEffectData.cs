@@ -53,14 +53,17 @@ public enum StatusEffectTarget
 }
 
 //when is the skill triggered
-public enum SkillEffectTrigger
+public enum SkillEventTrigger
 {
-    onEquip,
+    onReady,
    	onPreCast,
-	onCast,
+	onUse,
+	onFireOneShot,
     onHit,
     onHitSuccess,
-    onReceiveHit
+    onReceiveHit,
+	onFollowThrough,
+	none
 }
 
 [Serializable]

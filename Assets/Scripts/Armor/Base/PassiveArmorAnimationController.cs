@@ -48,32 +48,34 @@ public class PassiveArmorAnimationController : MonoBehaviour {
         //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
         yield return null;
 
-		if(anim.useArmLBones)
+		if(!anim.useWholeBody)
 		{
-			target[anim.clip.name].AddMixingTransform(avatar.clavicleL, false);
-			target[anim.clip.name].AddMixingTransform(avatar.shoulderL, false);
-			target[anim.clip.name].AddMixingTransform(avatar.shoulderGuardL, false);
-			target[anim.clip.name].AddMixingTransform(avatar.elbowL, false);
-			target[anim.clip.name].AddMixingTransform(avatar.forearmL, false);
-			target[anim.clip.name].AddMixingTransform(avatar.handL, false);
+			if(anim.useArmLBones)
+			{
+				target[anim.clip.name].AddMixingTransform(avatar.clavicleL, false);
+				target[anim.clip.name].AddMixingTransform(avatar.shoulderL, false);
+				target[anim.clip.name].AddMixingTransform(avatar.shoulderGuardL, false);
+				target[anim.clip.name].AddMixingTransform(avatar.elbowL, false);
+				target[anim.clip.name].AddMixingTransform(avatar.forearmL, false);
+				target[anim.clip.name].AddMixingTransform(avatar.handL, false);
+			}
+			
+			if(anim.useArmRBones)
+			{
+				target[anim.clip.name].AddMixingTransform(avatar.clavicleR, false);
+				target[anim.clip.name].AddMixingTransform(avatar.shoulderR, false);
+				target[anim.clip.name].AddMixingTransform(avatar.shoulderGuardR, false);
+				target[anim.clip.name].AddMixingTransform(avatar.elbowR, false);
+				target[anim.clip.name].AddMixingTransform(avatar.forearmR, false);
+				target[anim.clip.name].AddMixingTransform(avatar.handR, false);
+			}
+			
+			if(anim.useVerticalBones)
+			{
+				target[anim.clip.name].AddMixingTransform(avatar.spine2, false);
+				target[anim.clip.name].AddMixingTransform(avatar.neckHorizontal, false);
+			}
 		}
-		
-		if(anim.useArmRBones)
-		{
-			target[anim.clip.name].AddMixingTransform(avatar.clavicleR, false);
-			target[anim.clip.name].AddMixingTransform(avatar.shoulderR, false);
-			target[anim.clip.name].AddMixingTransform(avatar.shoulderGuardR, false);
-			target[anim.clip.name].AddMixingTransform(avatar.elbowR, false);
-			target[anim.clip.name].AddMixingTransform(avatar.forearmR, false);
-			target[anim.clip.name].AddMixingTransform(avatar.handR, false);
-		}
-		
-		if(anim.useVerticalBones)
-		{
-			target[anim.clip.name].AddMixingTransform(avatar.spine2, false);
-			target[anim.clip.name].AddMixingTransform(avatar.neckHorizontal, false);
-		}
-        
         /*if(anim.addMixingTransforms.Count>0)
         {
             for (int i = 0; i < anim.addMixingTransforms.Count; i++) {

@@ -3,99 +3,151 @@ using System.Collections;
 
 public class BasePlayerSkill : BaseSkill {
 
+	[HideInInspector]
+	public CharacterActionManager ownerCAM;
 	public Job pressDownJob;
 	public Job pressUpJob;
+	public int equipmentSlotIndex;
 	public bool hasSkill = true;
 	public bool hasPressDownEvent;
 	public bool hasPressUpEvent;
 	public bool resetAfterDown;
 	public bool resetAfterUp;
 	public bool canUseWhileBusy;
-	public bool continuousUse;
-	public int equipmentSlotIndex;
-	public Avatar myAvatar;
+	//player can't move AT ALL while using this skill
+	public bool disableMovement;
+	public bool disableRotation;
+	//player has limited movement when using this skill. Think charge attacks
+	public bool restrictedMovement;
+	//public bool continuousUse;
+	public string skillButtonSpritePath;
+	public string skillButtonAtlasPath;
 
-	public virtual void Initialise(PlayerCharacter ownerStatus, int index)
+	[HideInInspector]
+	public Avatar ownerAvatar;
+	public bool isPressedDown = false;
+	public bool isPressedUp = false;
+
+
+	public virtual void Initialise(PlayerCharacter status, int skillIndex)
 	{
-		owner = ownerStatus;
+		ownerStatus = status;
 		ownerManager = ownerStatus.actionManager;
-		ownerAnimation = ownerManager.myAnimation;
+		ownerCAM = (CharacterActionManager)ownerStatus.actionManager;
+		ownerAnimation = ownerCAM.myAnimation;
 		ownerTransform = ownerStatus._myTransform;
-		equipmentSlotIndex = index;
-		TransferSkillAnimation(baseSkillAnimation);
-		myAvatar = ownerStatus.avatar;
+		skillID = skillIndex;
+		ownerAvatar = ownerCAM.myAvatar;
+		TransferSkillAnimations();
+		BasicSetup();
+	}
+
+	public virtual void TransferSkillAnimations()
+	{
+		if(baseSkillAnimation != null)
+		{
+			TransferSkillAnimation(baseSkillAnimation);
+		}
 	}
 
 	public virtual void UnEquip()
 	{
-		RemoveSkillAnimation(baseSkillAnimation);
+		RemoveSkillAnimations();
+		ownerCAM.armorSkills.Remove(this);
+	}
+
+	public virtual void RemoveSkillAnimations()
+	{
+		if(baseSkillAnimation != null)
+		{
+			RemoveSkillAnimation(baseSkillAnimation);
+		}
+	}
+
+	public virtual bool CanPressDown()
+	{
+		if(hasPressDownEvent && (!isBusy || (isBusy && canUseWhileBusy)))
+			return true;
+		else
+			return false;
 	}
 	
 	public virtual void PressDown()
 	{
-		isPressedDown = true;
-		
-		if(hasPressDownEvent)
+		if(pressDownJob != null)
+			pressDownJob.kill();
+		if(pressUpJob != null)
+			pressUpJob.kill();
+		pressDownJob = Job.make(PressDownSequence(), true);
+		pressDownJob.jobComplete += (wasKilled) =>
 		{
-			if(!isBusy || (isBusy && canUseWhileBusy))
-			{
-				if(pressDownJob != null)
-					pressDownJob.kill();
-				if(pressUpJob != null)
-					pressUpJob.kill();
-				pressDownJob = Job.make(PressDownSequence(), true);
-				pressDownJob.jobComplete += (wasKilled) =>
-				{
-					if(resetAfterDown)
-						ResetSkill();
-				};
-			}
-		}
+			if(resetAfterDown)
+				ResetSkill();
+		};
+	}
+
+	public virtual bool CanPressUp()
+	{
+		if(hasPressUpEvent && (!isBusy ||(isBusy && canUseWhileBusy)))
+			return true;
+		else
+			return false;
 	}
 	
 	public virtual void PressUp()
 	{
-		isPressedDown = false;
-		if(!hasPressDownEvent && isBusy && !canUseWhileBusy)
-			return;
-		
-		if(hasPressUpEvent)
+		//if(pressDownJob != null)
+		//	pressDownJob.kill();
+		if(pressUpJob != null)
+			pressUpJob.kill();
+		pressUpJob = Job.make(PressUpSequence());
+		pressUpJob.jobComplete += (wasKilled) =>
 		{
-			if(pressDownJob != null)
-				pressDownJob.kill();
-			pressUpJob = Job.make(PressUpSequence());
-			pressUpJob.jobComplete += (wasKilled) =>
-			{
-				if(resetAfterUp)
-					ResetSkill();
-			};
-		}
+			if(resetAfterUp)
+				ResetSkill();
+		};
 	}
 	
-	
+	//main action sequence when attack button is pressed down
 	public virtual IEnumerator PressDownSequence()
 	{
 		yield return null;
 	}
-	
+
+	//main action sequence when attack button is pressed up
 	public virtual IEnumerator PressUpSequence()
 	{
 		yield return null;
+	}
+
+	public override void EnterState(SkillState state)
+	{
+		switch(state)
+		{
+		case SkillState.ready:
+			TriggerSkillEvents(SkillEventTrigger.onReady);
+			break;
+		case SkillState.precast:
+			TriggerSkillEvents(SkillEventTrigger.onPreCast);
+			break;
+		case SkillState.onUse:
+			TriggerSkillEvents(SkillEventTrigger.onUse);
+			break;
+		case SkillState.followThrough:
+			TriggerSkillEvents(SkillEventTrigger.onFollowThrough);
+			break;
+		}
+	}
+
+	public void SetupSkillButtons()
+	{
+		GUIManager.Instance.MainGUI.EnableActionButton(equipmentSlotIndex, skillID );
 	}
 
 	#region Animation Setup
 	
 	public void TransferSkillAnimation(SkillAnimation anim)
 	{
-		/*if(anim.precastAnimation.clip != null)
-			anim.precastAnimation.TransferAnimation(ownerAnimation, myAvatar);
-		if(anim.castAnimation.clip != null)
-			anim.castAnimation.TransferAnimation(ownerAnimation, myAvatar);
-		if(anim.followThroughAnimation.clip != null)
-			anim.followThroughAnimation.TransferAnimation(ownerAnimation, myAvatar);
-		if(anim.loopAnimation.clip != null)
-			anim.loopAnimation.TransferAnimation(ownerAnimation, myAvatar);*/
-		//StartCoroutine(TransferAnimation(anim.precastAnimation));
 		if(anim.precastAnimation.clip != null)
 			StartCoroutine(TransferAnimation(anim.precastAnimation));
 		if(anim.castAnimation.clip != null)
@@ -112,23 +164,35 @@ public class BasePlayerSkill : BaseSkill {
 		{
 			ownerAnimation.AddClip(anim.clip, anim.clip.name);
 			ownerAnimation[anim.clip.name].layer = anim.animationLayer;
-			//StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
 			yield return null;
-			
-			/*if(anim.addMixingTransforms.Count>0)
-            {
-                for (int i = 0; i < anim.addMixingTransforms.Count; i++) {
-                    ownerAnimation[anim.clip.name].AddMixingTransform(GetBone(anim.addMixingTransforms[i]), false);
-                }
-            }
-
-            if(anim.removeMixingTransforms.Count>0)
-            {
-                for (int i = 0; i < anim.removeMixingTransforms.Count; i++) 
-                {
-                    ownerAnimation[anim.clip.name].RemoveMixingTransform(GetBone(anim.removeMixingTransforms[i]));
-                }
-            }*/
+			if(!anim.useWholeBody)
+			{
+				if(anim.useArmLBones)
+				{
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.clavicleL, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.shoulderL, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.shoulderGuardL, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.elbowL, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.forearmL, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.handL, false);
+				}
+				
+				if(anim.useArmRBones)
+				{
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.clavicleR, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.shoulderR, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.shoulderGuardR, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.elbowR, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.forearmR, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.handR, false);
+				}
+				
+				if(anim.useVerticalBones)
+				{
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.spine2, false);
+					ownerAnimation[anim.clip.name].AddMixingTransform(ownerAvatar.neckHorizontal, false);
+				}
+			}
 		}
 	}
 	
@@ -158,11 +222,9 @@ public class BasePlayerSkill : BaseSkill {
 	public Transform GetBone(string bonename)
 	{
 		Transform[] kids = ownerTransform.GetComponentsInChildren<Transform>();
-		//Debug.Log(kids.Length);
 		for (int i = 0; i < kids.Length; i++) {
 			if(kids[i].name == bonename)
 			{
-				//Debug.Log(kids[i].name);
 				return kids[i];
 			}
 		}

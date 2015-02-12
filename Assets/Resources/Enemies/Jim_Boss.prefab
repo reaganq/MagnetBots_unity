@@ -804,7 +804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100104
 GameObject:
   m_ObjectHideFlags: 1
@@ -1803,12 +1803,13 @@ MonoBehaviour:
   ownerId: 0
   group: 0
   prefixBackup: -1
-  observed: {fileID: 11400022}
+  observed: {fileID: 0}
   synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 11400022}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -1824,10 +1825,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1427513be6b43548d7309a48be5135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterArmor: {fileID: 0}
-  masterAISkill: {fileID: 0}
-  status: {fileID: 0}
-  hitDecal: {fileID: 400000, guid: 9c4f0954744674d109754c8d266f53c3, type: 2}
+  collider: {fileID: 0}
+  ownerSkill: {fileID: 0}
+  isActive: 0
+  currentNumberOfTargets: 0
+  activationEvent: 0
+  deactivationEvent: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1887,94 +1890,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f28204b7f79934ecba4aac7476f6225d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  isPressedDown: 0
-  owner: {fileID: 0}
-  ownerManager: {fileID: 0}
+  skillID: 0
+  ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
-  armorState: 0
+  ownerManager: {fileID: 0}
   HitEnemies: []
   HitAllies: []
   isBusy: 0
+  isActive: 0
   skillName: Weights Gun
   skillType: 1
   disableMovement: 0
+  disableRotation: 0
   restrictedMovement: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  skillStatusEffects: []
+  skillDetectors: []
+  skillVFXs: []
+  _skillState: 0
+  fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
   fireSpeed: 1
   damage: 0
-  armorAttributes: []
-  skillStatusEffects: []
+  isLimitedUse: 0
+  skillUsageLimit: Infinity
+  resetAfterUse: 0
   weighting: .5
-  fsm: {fileID: 0}
-  skillIndex: 0
-  _animator: {fileID: 0}
-  requiresTarget: 1
+  targetRequirement: 0
+  skillRangeMax: 0
+  skillRangeMin: 0
+  ownerFSM: {fileID: 0}
   requiresTargetLock: 1
   requiresLineOfSight: 0
   angleTolerance: 20
-  skillMaxRange: 20
-  skillMinRange: 1
-  onUseSkillEffects: []
-  onHitSkillEffects: []
-  onReceiveHitSkillEffects: []
-  castAnimation:
-    clip: {fileID: 7400002, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-    animationLayer: 0
-    useArmLBones: 0
-    useArmRBones: 0
-    useVerticalBones: 0
-  durationAnimation:
-    clip: {fileID: 7400006, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-    animationLayer: 0
-    useArmLBones: 0
-    useArmRBones: 0
-    useVerticalBones: 0
   recoilAnimation:
     clip: {fileID: 7400004, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
     animationLayer: 1
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   reloadAnimation:
     clip: {fileID: 0}
     animationLayer: 0
-    useArmLBones: 0
-    useArmRBones: 0
-    useVerticalBones: 0
-  followThroughAnimation:
-    clip: {fileID: 7400008, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-    animationLayer: 0
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
@@ -2004,89 +1996,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad20ba615fb9a4dbda8ede1f4c38a955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  isPressedDown: 0
-  owner: {fileID: 0}
-  ownerManager: {fileID: 0}
+  skillID: 0
+  ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
-  armorState: 0
+  ownerManager: {fileID: 0}
   HitEnemies: []
   HitAllies: []
   isBusy: 0
+  isActive: 0
   skillName: Hammer Smack
   skillType: 0
   disableMovement: 0
+  disableRotation: 0
   restrictedMovement: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  skillStatusEffects: []
+  skillDetectors: []
+  skillVFXs: []
+  _skillState: 0
+  fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
   fireSpeed: 0
   damage: 0
-  armorAttributes: []
-  skillStatusEffects: []
+  isLimitedUse: 0
+  skillUsageLimit: Infinity
+  resetAfterUse: 0
   weighting: .5
-  fsm: {fileID: 0}
-  skillIndex: 0
-  _animator: {fileID: 0}
-  requiresTarget: 1
+  targetRequirement: 0
+  skillRangeMax: 0
+  skillRangeMin: 0
+  ownerFSM: {fileID: 0}
   requiresTargetLock: 0
   requiresLineOfSight: 0
   angleTolerance: 5
-  skillMaxRange: 2.5
-  skillMinRange: 0
-  onUseSkillEffects: []
-  onHitSkillEffects: []
-  onReceiveHitSkillEffects: []
   attackAnimations:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
@@ -2108,26 +2109,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183be214d9494408aa8754e8407639bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speechBubble: {fileID: 0}
+  speechBubbleText: {fileID: 0}
+  speechBubbleTween: {fileID: 0}
+  effectsPool: {fileID: 0}
+  myStatus: {fileID: 0}
+  _myTransform: {fileID: 0}
+  myAnimation: {fileID: 0}
+  myPhotonView: {fileID: 0}
+  myMotor: {fileID: 0}
+  runningAnimationSpeedMultiplier: 0
+  currentRunningAnimationSpeed: 0
+  myAvatar: {fileID: 0}
   alltargets: []
   availableTargets: []
-  _transform: {fileID: 0}
-  _animator: {fileID: 0}
-  _collider: {fileID: 0}
-  _controller: {fileID: 0}
-  myPhotonView: {fileID: 0}
-  myStatus: {fileID: 0}
   targetAngleDifference: 0
   skills:
   - {fileID: 11400016}
   - {fileID: 11400014}
   - {fileID: 11400026}
-  selectedSkill: {fileID: 0}
-  skillChances: []
+  activeSkill: {fileID: 0}
+  availableSkills: []
   targetObject: {fileID: 0}
   targetCharacterController: {fileID: 0}
   fireObject: {fileID: 0}
-  visionRange: 0
+  moveToTarget: 0
+  targetDistance: 0
   aimAtTarget: 0
+  targetAngle: 0
   effectsPool: {fileID: 0}
   idleAnim: {fileID: 7400000, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   runningAnim: {fileID: 7400018, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
@@ -2187,89 +2196,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad20ba615fb9a4dbda8ede1f4c38a955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  isPressedDown: 0
-  owner: {fileID: 0}
-  ownerManager: {fileID: 0}
+  skillID: 0
+  ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
-  armorState: 0
+  ownerManager: {fileID: 0}
   HitEnemies: []
   HitAllies: []
   isBusy: 0
+  isActive: 0
   skillName: HammerShock
   skillType: 0
   disableMovement: 0
+  disableRotation: 0
   restrictedMovement: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  skillStatusEffects: []
+  skillDetectors: []
+  skillVFXs: []
+  _skillState: 0
+  fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
   fireSpeed: 0
   damage: 0
-  armorAttributes: []
-  skillStatusEffects: []
+  isLimitedUse: 0
+  skillUsageLimit: Infinity
+  resetAfterUse: 0
   weighting: .5
-  fsm: {fileID: 0}
-  skillIndex: 0
-  _animator: {fileID: 0}
-  requiresTarget: 1
+  targetRequirement: 0
+  skillRangeMax: 0
+  skillRangeMin: 0
+  ownerFSM: {fileID: 0}
   requiresTargetLock: 0
   requiresLineOfSight: 0
   angleTolerance: 5
-  skillMaxRange: 2.5
-  skillMinRange: 0
-  onUseSkillEffects: []
-  onHitSkillEffects: []
-  onReceiveHitSkillEffects: []
   attackAnimations:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 7400010, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 7400014, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0

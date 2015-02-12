@@ -5,15 +5,10 @@ using PathologicalGames;
 
 public class CharacterActionManager : ActionManager {
 
-    public BasePlayerSkill[] armorSkillsArray = new BasePlayerSkill[5];
+	public List<BasePlayerSkill> armorSkills = new List<BasePlayerSkill>();
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
 	public NetworkCharacterMovement networkMovement;
-    
-    private Job leftJob;
-    private Job rightJob;
-    private Job leftEndJob;
-    private Job rightEndJob;
 
     public bool isLocked()
     {
@@ -37,6 +32,7 @@ public class CharacterActionManager : ActionManager {
     {
         //animationTarget.Play("Default_Idle");
 		base.Start();
+		MakeSpawnPool();
 		myAnimation["Default_Idle"].layer = 0;
 		myAnimation["Default_Run"].layer = 0;
 		//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
@@ -49,11 +45,16 @@ public class CharacterActionManager : ActionManager {
 		armorAnimControllers[index] = animController;
 	}
 	
-	public void AddSkill(BasePlayerSkill controller, int index)
+	public void AddSkill(BasePlayerSkill skill)
     {
 		//Debug.LogWarning(index);
-        armorSkillsArray[index] = controller;
-        
+        //armorSkills[index] = controller;
+		armorSkills.Add(skill);
+		skill.Initialise((PlayerCharacter)myStatus, armorSkills.IndexOf(skill));
+		if(myPhotonView.isMine)
+		{
+			skill.SetupSkillButtons();
+		}
     }
 
     #region action states
@@ -112,51 +113,30 @@ public class CharacterActionManager : ActionManager {
 
     #region action functions
 
-    public void LeftAction(InputTrigger trigger)
-    {
+	public void UseSkill(InputTrigger trigger, int skillIndex)
+	{
 		if(isLocked())
 			return;
-
-        if(trigger == InputTrigger.OnPressDown)
-        {
-			if(armorSkillsArray[2] != null)
-				armorSkillsArray[2].PressDown();
-        }
-
-        else if(trigger == InputTrigger.OnPressUp)
-        {
-			if(armorSkillsArray[2] != null)
-				armorSkillsArray[2].PressUp();
-        }
-    }
-
-    public void RightAction(InputTrigger trigger)
-    {
-		if(isLocked())
-			return;
-		
 		if(trigger == InputTrigger.OnPressDown)
 		{
-			if(armorSkillsArray[3] != null)
-				armorSkillsArray[3].PressDown();
+			if(armorSkills[skillIndex].CanPressDown())
+			{
+				myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex);
+			}
 		}
-		
 		else if(trigger == InputTrigger.OnPressUp)
 		{
-			if(armorSkillsArray[3] != null)
-				armorSkillsArray[3].PressUp();
+			if(armorSkills[skillIndex].CanPressUp())
+			{
+				myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex);
+			}
 		}
-    }
+	}
 
 	public void ResetActionState()
 	{
 		actionState = ActionState.idle;
 	}
-
-    public void specialAction(InputTrigger trigger)
-    {
-
-    }
 
     #endregion
 
@@ -238,15 +218,14 @@ public class CharacterActionManager : ActionManager {
 	{
 		playerMotor.rotationTarget = playerMotor.cachedRotation;
     }
-
-	[RPC]
+	
     public void AnimateToIdle()
     {
         if(movementState != MovementState.idle)
         {
             myAnimation["Default_Idle"].time = 0;
 			myAnimation.CrossFade("Default_Idle");
-            for (int i = 0; i < armorSkillsArray.Length ; i++)
+			for (int i = 0; i < armorAnimControllers.Length ; i++)
             {
                 if(armorAnimControllers[i] != null )
                 {
@@ -254,7 +233,6 @@ public class CharacterActionManager : ActionManager {
                     {
 						myAnimation[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
 						myAnimation.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
-						Debug.Log(armorAnimControllers[i].idleOverrideAnim.clip.name);
                     }
                 }
             }
@@ -268,7 +246,7 @@ public class CharacterActionManager : ActionManager {
         {
 			myAnimation["Default_Run"].time = 0;
 			myAnimation.CrossFade("Default_Run");
-            for (int i = 0; i < armorSkillsArray.Length ; i++) 
+            for (int i = 0; i < armorAnimControllers.Length ; i++) 
             {
                 if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
                 {
@@ -295,7 +273,7 @@ public class CharacterActionManager : ActionManager {
     {
 		currentRunningAnimationSpeed = Mathf.Lerp( currentRunningAnimationSpeed, t*runningAnimationSpeedMultiplier, 0.1f);
 		myAnimation["Default_Run"].speed = currentRunningAnimationSpeed;
-        for (int i = 0; i < armorSkillsArray.Length ; i++) {
+        for (int i = 0; i < armorAnimControllers.Length ; i++) {
             if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
 				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].speed = currentRunningAnimationSpeed;
         }
@@ -330,7 +308,29 @@ public class CharacterActionManager : ActionManager {
 	#endregion
 
 	#region rpc effect prefab functions
+	[RPC]
+	public void PressDownAction(int index)
+	{
+		armorSkills[index].PressDown();
+	}
 
+	[RPC]
+	public void PressUpAction(int index)
+	{
+		armorSkills[index].PressUp();
+	}
+
+	public void PlayOneShot(int index)
+	{
+		myPhotonView.RPC("NetworkPlayOneShot", PhotonTargets.All, index);
+	}
+
+	[RPC]
+	public void NetworkPlayOneShot(int index)
+	{
+		armorSkills[index].FireOneShot();
+	}
+	
 	[RPC]
 	public void SpawnParticleEffect()
 	{
@@ -348,7 +348,7 @@ public class CharacterActionManager : ActionManager {
 		BulletProjectile src = projectileInstance.GetComponent<BulletProjectile>();
 		if(src != null)
 		{
-			src.masterArmor = armorSkillsArray[index];
+			src.masterArmor = armorSkills[index];
 			src.status = myStatus;
 			src.pool = effectsPool.poolName;
         }

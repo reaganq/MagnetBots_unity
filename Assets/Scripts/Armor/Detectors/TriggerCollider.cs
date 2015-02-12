@@ -2,28 +2,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class TriggerCollider : MonoBehaviour {
+public class TriggerCollider : Detector {
 
-    public BaseSkill masterArmor;
-	public AISkill masterAISkill;
-	public CharacterStatus status;
-	public Transform hitDecal;
-
-	public void Start()
+	public override void Initialise (BaseSkill skill)
 	{
-		//IgnoreCollisions();
+		base.Initialise (skill);
+		IgnoreOwnCollisions();
 	}
 
-	public void IgnoreCollisions()
+	public void IgnoreOwnCollisions()
 	{
-		if(status != null)
+		for (int i = 0; i < ownerSkill.ownerStatus.hitboxes.Count; i++) 
 		{
-			List<Collider> cols = status.hitboxes;
-			for (int i = 0; i < cols.Count; i++) 
-			{
-				Physics.IgnoreCollision(collider, cols[i]);
-			}
-	        //Debug.Log("ignore collision");
+			Physics.IgnoreCollision(collider, ownerSkill.ownerStatus.hitboxes[i]);
 		}
     }
 
@@ -31,14 +22,37 @@ public class TriggerCollider : MonoBehaviour {
     {
 		//Debug.Log("COLLISION" + other.gameObject.name);
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();
-		Vector3 hitPos = other.collider.ClosestPointOnBounds(status.transform.position);
+		Vector3 hitPos = other.collider.ClosestPointOnBounds(ownerSkill.ownerTransform.position);
 		//ContactPoint contact = other.contacts[0];
 		if(hb != null)
 		{
 			CharacterStatus cs = hb.ownerCS;
-			if(cs != status)
+
+			if(cs != ownerSkill.ownerStatus)
 			{
-				if(masterAISkill != null)
+				bool isFoe;
+				if(ownerSkill.ownerStatus.enemyCharacterType == cs.characterType)
+					isFoe = true;
+				else
+					isFoe = false;
+
+				if(isFoe)
+				{
+					if(!ownerSkill.HitEnemies.Contains(cs))
+					{
+						ownerSkill.HitEnemies.Add(cs);
+					//masterAISkill.HitTarget(hb, true);
+					}
+				}
+				else
+				{
+					if(!ownerSkill.HitAllies.Contains(cs))
+					{
+						ownerSkill.HitAllies.Add(cs);
+					}
+				}
+			
+				/*if(masterAISkill != null)
 				{
 					if(!masterAISkill.HitEnemies.Contains(cs) && !masterAISkill.HitAllies.Contains(cs))
 					{
@@ -77,7 +91,7 @@ public class TriggerCollider : MonoBehaviour {
 						}
                         //Debug.Log("I JUST HIT SOMETHING");
                     }
-                }
+                }*/
             }
         }
     }

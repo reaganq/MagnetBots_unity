@@ -9,9 +9,8 @@ using UnityEngine;
 /// Sends a message to the remote object when something happens.
 /// </summary>
 
-public class AttackButtonMessage : MonoBehaviour
+public class SkillButton : MonoBehaviour
 {
-   
     public delegate void OnClickEvent(int index);
     public static event OnClickEvent onSingleClick;
     
@@ -21,8 +20,13 @@ public class AttackButtonMessage : MonoBehaviour
     public delegate void OnReleaseEvent(int index);
     public static event OnReleaseEvent onRelease;
  
-    public int id;
-    
+	public int skillIndex;
+	public UISprite skillIcon;
+	
+	public void SetupSkillButton(int index)
+	{
+		skillIndex = index;
+	}
 
  //bool mStarted = false;
  //bool mHighlighted = false;
@@ -42,7 +46,7 @@ public class AttackButtonMessage : MonoBehaviour
             {
                 if(onPress != null)
                 {
-                    onPress(id);
+					onPress(skillIndex);
                     //Debug.Log("press");
                 }
              
@@ -52,7 +56,7 @@ public class AttackButtonMessage : MonoBehaviour
             {
                 if(onRelease != null)
                 {
-                    onRelease(id);
+					onRelease(skillIndex);
                     //Debug.Log("release");
                 }
             }
@@ -65,33 +69,9 @@ public class AttackButtonMessage : MonoBehaviour
         {
             if(onSingleClick != null)
             {
-                onSingleClick(id);
+				onSingleClick(skillIndex);
                 //Debug.Log("click");
             }
         }
     }
-
- //void OnDoubleClick () { if (enabled) Send(); }
-
- /*void Send ()
- {
-        Debug.Log("send");
-     if (string.IsNullOrEmpty(functionName)) return;
-     if (target == null) target = gameObject;
-
-     if (includeChildren)
-     {
-         Transform[] transforms = target.GetComponentsInChildren<Transform>();
-
-         for (int i = 0, imax = transforms.Length; i < imax; ++i)
-         {
-             Transform t = transforms[i];
-             t.gameObject.SendMessage(functionName, gameObject, SendMessageOptions.DontRequireReceiver);
-         }
-     }
-     else
-     {
-         target.SendMessage(functionName, gameObject, SendMessageOptions.DontRequireReceiver);
-     }
- }*/
 }

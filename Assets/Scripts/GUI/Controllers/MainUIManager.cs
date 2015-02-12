@@ -81,9 +81,15 @@ public class MainUIManager : BasicGUIController {
 		}
 	}
 
-	public void EnableActionButton(bool state, int index)
+	public void EnableActionButton(int index, int skillID)
 	{
-		actionButtons[index].SetActive(state);
+		actionButtons[index].SetActive(true);
+		actionButtons[index].GetComponent<SkillButton>().SetupSkillButton(skillID);
+	}
+
+	public void DisableActionButton(int index)
+	{
+		actionButtons[index].SetActive(false);
 	}
 
 	#region side tray functions

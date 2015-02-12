@@ -2,13 +2,9 @@ using UnityEngine;
 using System.Collections;
 
 public class RangedAISkill : AISkill {
-
 	
-	public ArmorAnimation castAnimation;
-    public ArmorAnimation durationAnimation;
     public ArmorAnimation recoilAnimation;
     public ArmorAnimation reloadAnimation;
-    public ArmorAnimation followThroughAnimation;
 
     public Transform bulletLocation;
 	public Transform bulletPrefab;
@@ -32,7 +28,7 @@ public class RangedAISkill : AISkill {
 	public override void Start () {
 		base.Start();
 		currentAmmoCount = maxAmmoCount;
-		_animator[recoilAnimation.clip.name].layer = 2;
+		ownerAnimation[recoilAnimation.clip.name].layer = 2;
 		AddPrefabToPool(bulletPrefab);
 		AddPrefabToPool(projectileCollisionDecal);
 		ResetSkill();
@@ -58,33 +54,33 @@ public class RangedAISkill : AISkill {
 		if(isSkillActive)
 		{
 			if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
-				FireOneShot();
+				ownerFSM.FireOneShot();
 		}
 		if(requiresTargetLock)
 		{
 			//if
 		}
-
 	}
 
-	public override IEnumerator UseSkill ()
+	public override IEnumerator UseSkillSequence ()
 	{
 
 		//Debug.Log("huh?");
 		targetShotsPerSession = Random.Range((int)minShotsPerSession, (int)maxShotsPerSession);
 		//if(requiresTargetLock)
 			//fsm.aimAtTarget = true;
-		fsm.fireObject = bulletLocation;
+		//ownerFSM.fireObject = bulletLocation;
 		//fsm.PlayAnimation(castAnimation.clip);
-		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, castAnimation.clip.name);
-		yield return new WaitForSeconds(castAnimation.clip.length);
-		while(fsm.targetAngleDifference > angleTolerance)
+		ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		//ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, baseSkillAnimation.castAnimation.clip.name);
+		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length);
+		while(ownerFSM.targetAngleDifference > angleTolerance)
 		{
 			yield return new WaitForEndOfFrame();
 		}
 		//Debug.Log("cast to fire");
 		//fsm.PlayAnimation(durationAnimation.clip);
-		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
+		ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, baseSkillAnimation.loopAnimation.clip.name);
 		isSkillActive = true;
 		while(isSkillActive)
 		{
@@ -92,16 +88,13 @@ public class RangedAISkill : AISkill {
 		}
 	}
 
-	public override IEnumerator CancelSkill ()
+	public override IEnumerator CancelSkillSequence ()
 	{
 		while(isReloading)
 			yield return null;
 		isSkillActive = false;
-		if(requiresTargetLock)
-			fsm.aimAtTarget = false;
-		//fsm.CrossFadeAnimation(followThroughAnimation.clip);
-		fsm.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, followThroughAnimation.clip.name);
-		yield return new WaitForSeconds(followThroughAnimation.clip.length);
+		ownerFSM.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, baseSkillAnimation.followThroughAnimation.clip.name);
+		yield return new WaitForSeconds(baseSkillAnimation.followThroughAnimation.clip.length);
 		ResetSkill();
 
 	}
@@ -111,7 +104,7 @@ public class RangedAISkill : AISkill {
 		currentShotsFired = 0f;
 	}
 	
-	public void FireOneShot()
+	public override void FireOneShot()
 	{
 		//fire bullet
 		//Debug.Log("fire one shot");
@@ -119,7 +112,7 @@ public class RangedAISkill : AISkill {
 		currentAmmoCount --;
 		currentShotsFired ++;
 		fireSpeedTimer = fireSpeed;
-		fsm.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, fsm.targetObject.transform.position, skillIndex);
+		ownerFSM.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, ownerFSM.targetObject.transform.position, skillID);
 		//GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
 		//Physics.IgnoreCollision(bullet.collider, characterCollider);
 		/*if(bullet.rigidbody != null)
@@ -142,7 +135,7 @@ public class RangedAISkill : AISkill {
 		//Debug.Log("ammo: " + currentAmmoCount);
 		//play recoil animation
 		//fsm.PlayAnimation(recoilAnimation.clip);
-		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
+		ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
 
 		Invoke("CheckAmmo", recoilAnimation.clip.length);
 	}
@@ -157,7 +150,7 @@ public class RangedAISkill : AISkill {
 		else
 		{
 			if(currentShotsFired >= targetShotsPerSession)
-				StartCoroutine(CancelSkill());
+				StartCoroutine(CancelSkillSequence());
 		}
 	}
 	
@@ -172,9 +165,9 @@ public class RangedAISkill : AISkill {
 		isReloading = true;
 		yield return new WaitForSeconds(sec);
 		//characterAnimation.Play(reloadAnimation.clip.name);
-		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
+		ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, reloadAnimation.clip.name);
 		yield return new WaitForSeconds(reloadAnimation.clip.length);
-		fsm.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, durationAnimation.clip.name);
+		ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, baseSkillAnimation.loopAnimation.clip.name);
 		//Debug.Log("back to fire mode");
 		currentAmmoCount = maxAmmoCount;
 		

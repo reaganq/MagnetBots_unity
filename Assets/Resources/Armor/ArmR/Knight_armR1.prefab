@@ -211,7 +211,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 54: {fileID: 5400000}
   m_Layer: 12
-  m_Name: WeaponLocation
+  m_Name: triggerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,12 +522,14 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: ec5bda8689c9248e2b6a33ab17ff73a4, type: 2}
     animationLayer: 2
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
     useVerticalBones: 0
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: c1d23e33abd444065b22b68767ddef49, type: 2}
     animationLayer: 2
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
     useVerticalBones: 0
@@ -544,15 +546,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  isPressedDown: 0
-  owner: {fileID: 0}
-  ownerManager: {fileID: 0}
+  ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
-  armorState: 0
+  ownerManager: {fileID: 0}
   HitEnemies: []
   HitAllies: []
   isBusy: 0
+  isActive: 0
   skillName: Uber Slash
   skillType: 0
   disableMovement: 1
@@ -561,24 +562,28 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
@@ -589,39 +594,54 @@ MonoBehaviour:
   maxAmmoCount: 0
   fireSpeed: 0
   damage: 10
-  armorAttributes: []
   skillStatusEffects: []
+  skillDetectors:
+  - {fileID: 11400004}
+  skillVFXs:
+  - vfxTrail: {fileID: 9600000}
+    obj: {fileID: 0}
+    activationEvent: 2
+    deactivationEvent: 7
+  _skillState: 0
+  ownerCAM: {fileID: 0}
+  equipmentSlotIndex: 1
   hasSkill: 1
   hasPressDownEvent: 1
   hasPressUpEvent: 0
   resetAfterDown: 1
   resetAfterUp: 0
   canUseWhileBusy: 0
-  continuousUse: 0
-  equipmentSlotIndex: 0
-  myAvatar: {fileID: 0}
+  skillButtonSpritePath: 
+  skillButtonAtlasPath: 
+  ownerAvatar: {fileID: 0}
+  isPressedDown: 0
+  isPressedUp: 0
   attackAnimations:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 7400000, guid: c3c253988f0054f8084411102a99436f, type: 2}
       animationLayer: 4
+      useWholeBody: 0
       useArmLBones: 1
       useArmRBones: 1
       useVerticalBones: 1
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
@@ -630,36 +650,34 @@ MonoBehaviour:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 7400000, guid: 44a2c376e75d94518aed3aeb983ee9bd, type: 2}
       animationLayer: 4
+      useWholeBody: 0
       useArmLBones: 1
       useArmRBones: 1
       useVerticalBones: 1
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castTime: .100000001
     followThroughTime: .899999976
-  detectionMethod: 2
-  weaponLocation: {fileID: 400026}
-  weaponCollider: {fileID: 100026}
-  detectionRange: 1
   hitDecal: {fileID: 400000, guid: 9c4f0954744674d109754c8d266f53c3, type: 2}
-  canHitMultipleTargets: 1
-  trail: {fileID: 9600000}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,10 +689,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1427513be6b43548d7309a48be5135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterArmor: {fileID: 0}
-  masterAISkill: {fileID: 0}
-  status: {fileID: 0}
-  hitDecal: {fileID: 400000, guid: 9c4f0954744674d109754c8d266f53c3, type: 2}
+  collider: {fileID: 6500000}
+  ownerSkill: {fileID: 0}
+  isActive: 0
+  currentNumberOfTargets: 0
+  activationEvent: 2
+  deactivationEvent: 7
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -686,10 +706,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1427513be6b43548d7309a48be5135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterArmor: {fileID: 0}
-  masterAISkill: {fileID: 0}
-  status: {fileID: 0}
-  hitDecal: {fileID: 0}
+  collider: {fileID: 0}
+  ownerSkill: {fileID: 0}
+  isActive: 0
+  currentNumberOfTargets: 0
+  activationEvent: 0
+  deactivationEvent: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

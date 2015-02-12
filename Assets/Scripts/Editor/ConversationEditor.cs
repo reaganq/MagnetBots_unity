@@ -98,14 +98,14 @@ public class ConversationEditor : BaseEditorWindow {
 		for (int i = 0; i < s.LineTexts.Count; i++) {
 			EditorGUILayout.BeginVertical(skin.box);
 			AddLinetext(s.LineTexts[i], i);
-			if (GUILayout.Button("Delete Player Reply" + i, GUILayout.Width(400)))
+			if (GUILayout.Button("Delete Player Reply" + i, GUILayout.Width(200)))
 			{
 				s.LineTexts.Remove(s.LineTexts[i]);
 				break;
 			}
 			EditorGUILayout.EndVertical();
 		}
-		if (GUILayout.Button("Add Player Reply", GUILayout.Width(400)))
+		if (GUILayout.Button("Add Player Reply", GUILayout.Width(200)))
 		{
 			LineText p = new LineText();
 			s.LineTexts.Add(p);

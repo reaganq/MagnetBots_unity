@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PathologicalGames;
@@ -8,66 +9,108 @@ using System.Runtime.Serialization.Formatters.Binary;
 public class BaseSkill : MonoBehaviour {
 
 	//automated stuff
-	public int ID;
-	public bool isPressedDown = false;
-	public CharacterStatus owner;
-	public ActionManager ownerManager;
+	public int skillID;
+	[HideInInspector]
+	public CharacterStatus ownerStatus;
+	[HideInInspector]
 	public Animation ownerAnimation;
+	[HideInInspector]
 	public Transform ownerTransform;
-	public SkillState armorState;
+	[HideInInspector]
+	public ActionManager ownerManager;
+	//all the enemies hit during the usage of this skill
 	public List<CharacterStatus> HitEnemies;
+	//all the allies hit during the usage of this skill
 	public List<CharacterStatus> HitAllies;
 
 	public bool isBusy = false;
-
+	public bool isActive = false;
 	public string skillName;
 	public SkillType skillType;
     
+	//player can't move AT ALL while using this skill
 	public bool disableMovement;
+	public bool disableRotation;
+	//player has limited movement when using this skill. Think charge attacks
 	public bool restrictedMovement;
     
+	//default skill animation set
 	public SkillAnimation baseSkillAnimation;
+	//max number of unique targets we can hit with each attack
 	public float targetLimit = Mathf.Infinity;
-
-
+	
     /*** attribute ***/
-    public float cooldown;
-    public int maxAmmoCount;
-    public float fireSpeed;
-	public float damage;
 
-    public ArmorAttribute[] armorAttributes;
+    //public ArmorAttribute[] armorAttributes;
     public List<StatusEffectData> skillStatusEffects;
+	public List<Detector> skillDetectors;
+	public List<SkillVFX> skillVFXs;
 
-    
+	public SkillState _skillState;
+	public SkillState skillState
+	{
+		get{return _skillState;}
+		set
+		{
+			ExitState(_skillState);
+			_skillState = value;
+			EnterState(_skillState);
+		}
+	}
 
+	public void BasicSetup()
+	{
+		for (int i = 0; i < skillDetectors.Count; i++) {
+			skillDetectors[i].Initialise(this);
+		}
+	}
 
+	public void TriggerSkillEvents(SkillEventTrigger trigger)
+	{
+		for (int i = 0; i < skillVFXs.Count; i++) {
+			if(skillVFXs[i].activationEvent == trigger)
+				skillVFXs[i].Activate();
+			if(skillVFXs[i].deactivationEvent == trigger)
+				skillVFXs[i].Deactivate();
+		}
+		for (int i = 0; i < skillDetectors.Count; i++) {
+			if(skillDetectors[i].activationEvent == trigger)
+				skillDetectors[i].Activate();
+			if(skillDetectors[i].deactivationEvent == trigger)
+				skillDetectors[i].Deactivate();
+		}
+	}
 
-    public virtual bool CanPressDown()
-    {
-        return false;
-    }
-
-    public virtual bool CanPressUp()
-    {
-        return false;
-    }
+	public virtual void EnterState(SkillState state)
+	{
+	}
+	public virtual void ExitState(SkillState state)
+	{
+	}
 
 	public virtual void ResetSkill()
 	{
 		isBusy = false;
+		ActivateSkill(false);
+		HitEnemies.Clear();
+		HitAllies.Clear();
+		skillState = SkillState.ready;
 	}
 
 	public void ActivateSkill(bool state)
 	{
-		isPressedDown = state;
+		isActive = state;
+	}
+
+	public virtual void FireOneShot()
+	{
+		TriggerSkillEvents(SkillEventTrigger.onFireOneShot);
 	}
 
 	#region pooling
 
 	public void AddParticlesToPool()
 	{
-		
 	}
 	
 	public void AddPrefabToPool(Transform prefab)
@@ -82,7 +125,6 @@ public class BaseSkill : MonoBehaviour {
 			Debug.Log("here");
 			ownerManager.effectsPool.CreatePrefabPool(prefabPool);
 		}
-		//}
 	}
 
 	#endregion
@@ -90,9 +132,9 @@ public class BaseSkill : MonoBehaviour {
 	#region apply status effects
 
 	//give generic status effects to target
-	public virtual void ProcessStatusEffects(int condition, CharacterStatus target, int allyFlag)
+	public virtual void ApplyStatusEffects(int condition, CharacterStatus target, int allyFlag)
 	{
-		if(!owner.myPhotonView.isMine)
+		if(!ownerStatus.myPhotonView.isMine)
 			return;
 		
 		foreach(StatusEffectData effect in skillStatusEffects)
@@ -104,15 +146,15 @@ public class BaseSkill : MonoBehaviour {
 				{
 					if(effect.effect == 5)
 					{
-						owner.motor.AddImpact(ownerTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
+						ownerStatus.motor.AddImpact(ownerTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
 					}
 					//attribute change
 					if(effect.effect == 3 || effect.effect == 1 || effect.effect == 6)
 					{
-						StatusEffect newEffect = owner.gameObject.AddComponent<StatusEffect>();
+						StatusEffect newEffect = ownerStatus.gameObject.AddComponent<StatusEffect>();
 						newEffect.statusEffect = effect;
 						newEffect.ownerSkill = this;
-						owner.AddStatusEffect(newEffect);
+						ownerStatus.AddStatusEffect(newEffect);
 						Debug.Log("adding status effect to myself");
 					}
 				}
@@ -130,16 +172,12 @@ public class BaseSkill : MonoBehaviour {
 						newEffect.ownerSkill = this;
 						target.AddStatusEffect(newEffect);
 					}
-				}
-				//target
-				
+				}	
 			}
 		}
 	}
 
 	#endregion
-
-    
 
 	#region hitting targets
 
@@ -149,8 +187,8 @@ public class BaseSkill : MonoBehaviour {
 		
 		if(!isAlly)
 		{
-			newHit.sourceName = owner.characterName;
-			newHit.damage = damage;
+			newHit.sourceName = ownerStatus.characterName;
+			//newHit.damage = damage;
 			newHit.hitPosX = ownerTransform.position.x;
 			newHit.hitPosY = ownerTransform.position.y;
 			newHit.hitPosZ = ownerTransform.position.z;
@@ -224,7 +262,7 @@ public class BaseSkill : MonoBehaviour {
 public enum SkillState
 {
     ready,
-    casting,
+    precast,
     onUse,
     followThrough,
     recoiling,
@@ -256,5 +294,41 @@ public enum SkillType
     Ranged,
     JumpingMelee,
     Buff
+}
+
+[Serializable]
+public class SkillAnimation
+{
+	public ArmorAnimation precastAnimation;
+	public ArmorAnimation castAnimation;
+	public ArmorAnimation followThroughAnimation;
+	public ArmorAnimation loopAnimation;
+	public float castTime;
+	public float followThroughTime;
+}
+
+[Serializable]
+public class SkillVFX
+{
+	public TrailRenderer vfxTrail;
+	public GameObject obj;
+	public SkillEventTrigger activationEvent;
+	public SkillEventTrigger deactivationEvent;
+
+	public void Activate()
+	{
+		if(vfxTrail != null)
+			vfxTrail.enabled = true;
+		if(obj != null)
+			obj.SetActive(true);
+	}
+
+	public void Deactivate()
+	{
+		if(vfxTrail != null)
+			vfxTrail.enabled = false;
+		if(obj != null)
+			obj.SetActive(false);
+	}
 }
 

@@ -31,6 +31,8 @@ public class Avatar : MonoBehaviour {
     private string LegsRootName = "bones:LegsRoot";
     public Transform _myTransform;
 
+	//TODO add hitboxes to playercharacter list
+
 	#region store bones
 	public Transform clavicleL;
 	public Transform shoulderL;
@@ -290,11 +292,12 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmLObjects.Count > 0)
         {
-            if(myActionManager.armorSkillsArray[2] != null)
-            {
-                myActionManager.armorSkillsArray[2].UnEquip();
-                myActionManager.armorSkillsArray[2] = null;
-            }
+			for (int i = 0; i < myActionManager.armorSkills.Count; i++) {
+				if(myActionManager.armorSkills[i].equipmentSlotIndex == 2)
+				{
+					myActionManager.armorSkills[i].UnEquip();
+				}
+			}
             if(myActionManager.armorAnimControllers[2] != null)
             {
                 myActionManager.armorAnimControllers[2].RemoveAnimations();
@@ -319,15 +322,10 @@ public class Avatar : MonoBehaviour {
 		BasePlayerSkill armLcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armLcontroller != null)
         {
-            armLcontroller.Initialise(myStatus, 2);
-			if(armLcontroller.hasSkill)
-				GUIManager.Instance.MainGUI.EnableActionButton(true, 0);
-			else
-				GUIManager.Instance.MainGUI.EnableActionButton(false, 0);
-			myActionManager.AddSkill(armLcontroller, 2);
+			myActionManager.AddSkill(armLcontroller);
         }
 		else
-			GUIManager.Instance.MainGUI.EnableActionButton(false, 0);
+			GUIManager.Instance.MainGUI.DisableActionButton(0);
 
         PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
         if(armLAnimController != null)
@@ -351,10 +349,11 @@ public class Avatar : MonoBehaviour {
     {
         if(ArmRObjects.Count > 0)
         {
-            if(myActionManager.armorSkillsArray[3] != null)
-            {
-                myActionManager.armorSkillsArray[3].UnEquip();
-                myActionManager.armorSkillsArray[3] = null;
+            for (int i = 0; i < myActionManager.armorSkills.Count; i++) {
+            	if(myActionManager.armorSkills[i].equipmentSlotIndex == 3)
+				{
+					myActionManager.armorSkills[i].UnEquip();
+				}
             }
             if(myActionManager.armorAnimControllers[3] != null)
             {
@@ -380,16 +379,12 @@ public class Avatar : MonoBehaviour {
 		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
         if(armRcontroller != null)
         {
-            armRcontroller.Initialise(myStatus, 3);
-			if(armRcontroller.hasSkill)
-				GUIManager.Instance.MainGUI.EnableActionButton(true, 1);
-			else
-				GUIManager.Instance.MainGUI.EnableActionButton(false, 1);
-			myActionManager.AddSkill(armRcontroller, 2);
+            //armRcontroller.Initialise(myStatus, 3);
+			myActionManager.AddSkill(armRcontroller);
             //Debug.Log("transfer animation");
         }
 		else
-			GUIManager.Instance.MainGUI.EnableActionButton(false, 1);
+			GUIManager.Instance.MainGUI.DisableActionButton(1);
 
         PassiveArmorAnimationController armRAnimController = temp.GetComponent<PassiveArmorAnimationController>();
         if(armRAnimController != null)

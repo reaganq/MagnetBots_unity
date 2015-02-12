@@ -5,27 +5,30 @@ using PathologicalGames;
 
 public class ActionManager : MonoBehaviour {
 
+	//ui shit
 	public GameObject speechBubble;
 	public UILabel speechBubbleText;
 	public UIPlayTween speechBubbleTween;
 
+	//common usage
 	public SpawnPool effectsPool;
 	public CharacterStatus myStatus;
 	public Transform _myTransform;
 	public Animation myAnimation;
 	public PhotonView myPhotonView;
-	public PlayerMotor motor;
-	public BaseSkill activeSkill;
+	public Motor myMotor;
+
+	//exclusive for player
 	public float runningAnimationSpeedMultiplier;
 	public float currentRunningAnimationSpeed;
 	public Avatar myAvatar;
 	// Use this for initialization
 	public virtual void Start () {
 	
-		MakeSpawnPool();
 		_myTransform = transform;
 		myPhotonView = GetComponent<PhotonView>();
 		myAvatar = GetComponent<Avatar>();
+		myMotor = GetComponent<Motor>();
 	}
 
 	public bool MakeSpawnPool()
@@ -40,12 +43,12 @@ public class ActionManager : MonoBehaviour {
 	
 	public virtual void EnableMovement()
 	{
-		motor.disableMovement = false;
+		myMotor.disableMovement = false;
 	}
 	
 	public virtual void DisableMovement()
 	{
-		motor.disableMovement = true;
+		myMotor.disableMovement = true;
 	}
 
 	public virtual void UpdateRunningSpeed(float t)

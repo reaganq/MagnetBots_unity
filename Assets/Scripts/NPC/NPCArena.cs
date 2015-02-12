@@ -24,4 +24,13 @@ public class NPCArena : NPCActivity
 		preffix = "ARENA";
 		activityType = NPCActivityType.Arena;
 	}
+
+	public void LoadArena()
+	{
+		Enemies.Clear();
+		for (int i = 0; i < EnemyIDs.Count; i++) {
+			RPGEnemy newEnemy = Storage.LoadById<RPGEnemy>(EnemyIDs[i], new RPGEnemy());
+			Enemies.Add(newEnemy);
+		}
+	}
 }

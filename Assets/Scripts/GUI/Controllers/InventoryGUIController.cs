@@ -10,6 +10,7 @@ public class InventoryGUIController : BasicGUIController {
 	public float cachedMainScrollVal;
 	public UIGrid gridPanel;
 	public GameObject gridPanelRoot;
+	public GameObject inventoryPanel;
 	public InventoryGUIType inventoryType = InventoryGUIType.Inventory;
 	public List<List<InventoryItem>> fullItemList;
 	public List<InventoryItem> selectedItemList;
@@ -19,6 +20,18 @@ public class InventoryGUIController : BasicGUIController {
 	public int selectedCategoryIndex = -1;
 	public int selectedSubCategoryIndex = -1;
 	public ItemCategories selectedMainInventoryCategory;
+
+	//item details view
+	public InventoryItem selectedItem;
+	public GameObject itemDetailsPanel;
+	public float buttonsGap;
+	public GameObject[] allButtons;
+	public Transform buttonsStartPos;
+	public GameObject EquipButton = null;
+	public GameObject DestroyButton = null;
+	public UILabel nameLabel;
+	public UILabel descriptionLabel;
+	public UISprite icon;
 
 	private int newItemCount;
 
@@ -41,6 +54,8 @@ public class InventoryGUIController : BasicGUIController {
 
 	public override void OnCategoryPressed (int index, int level)
 	{
+		itemDetailsPanel.SetActive(false);
+		inventoryPanel.SetActive(true);
 		if(level == 0)
 		{
 			if(selectedCategoryIndex != index )
@@ -224,6 +239,39 @@ public class InventoryGUIController : BasicGUIController {
 			{
 				itemTiles[i].gameObject.SetActive(true);
 				itemTiles[i].LoadItemTile(selectedItemList[i], this, inventoryType, i);
+			}
+		}
+	}
+
+	public override void OnItemTilePressed(int index)
+	{
+		inventoryPanel.SetActive(false);
+		DisplayItemDetails(index);
+	}
+
+	public void DisplayItemDetails(int index)
+	{
+		itemDetailsPanel.SetActive(true);
+		selectedItem = selectedItemList[index];
+		nameLabel.text = selectedItem.rpgItem.Name;
+		descriptionLabel.text = selectedItem.rpgItem.Description;
+		GameObject atlas = Resources.Load(selectedItem.rpgItem.AtlasName) as GameObject;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = selectedItem.rpgItem.IconPath;
+		for (int i = 0; i < allButtons.Length; i++) {
+			allButtons[i].SetActive(false);
+		}
+		if(selectedItem.IsItemEquippable)
+		{
+			EquipButton.SetActive(true);
+		}
+		DestroyButton.SetActive(true);
+		int count = 0;
+		for (int i = 0; i < allButtons.Length; i++) {
+			if(allButtons[i].activeSelf)
+			{
+				allButtons[i].transform.localPosition = new Vector3(buttonsStartPos.localPosition.x + count*buttonsGap, buttonsStartPos.localPosition.y, buttonsStartPos.localPosition.z);
+				count++;
 			}
 		}
 	}

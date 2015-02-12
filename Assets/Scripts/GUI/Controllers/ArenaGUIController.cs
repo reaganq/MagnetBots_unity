@@ -14,9 +14,9 @@ public class ArenaGUIController : BasicGUIController {
 	public UISprite DetailsPortrait;
 	public GameObject backButton;
 	public List<RPGEnemy> enemies;
+	public NPCArena activeArena;
 	public UILabel partyListText;
-
-	public GameObject Panel;
+	
 	public int selectedCardIndex;
 
 	public void Start()
@@ -29,20 +29,21 @@ public class ArenaGUIController : BasicGUIController {
 		}
 	}
 
-	public override void Enable()
+	public void Enable(NPCArena newArena)
 	{
-		Panel.SetActive(true);
+		Enable();
+		activeArena = newArena;
 		backButton.SetActive(true);
 		DetailsBox.SetActive(false);
 		ScrollView.SetActive(true);
-		enemies = PlayerManager.Instance.SelectedArena.Enemies;
+		//enemies = PlayerManager.Instance.SelectedArena.Enemies;
 
 		for (int i = 0; i < EnemyCards.Count; i++) 
 		{
-			if(i < enemies.Count)
+			if(i < activeArena.Enemies.Count)
 			{
 				EnemyCardObjects[i].SetActive(true);
-				EnemyCards[i].LoadEnemy(enemies[i].Name, enemies[i].PortraitAtlas, enemies[i].PortraitIcon, enemies[i].Description, i);
+				EnemyCards[i].LoadEnemy(activeArena.Enemies[i].Name, activeArena.Enemies[i].PortraitAtlas, activeArena.Enemies[i].PortraitIcon, activeArena.Enemies[i].Description, i);
 			}
 			else
 			{
@@ -55,7 +56,7 @@ public class ArenaGUIController : BasicGUIController {
 
 	public override void Disable()
 	{
-		Panel.SetActive(false);
+		base.Disable();
 	}
 
 	public void DisplayDetailsBox(int index)
@@ -92,7 +93,7 @@ public class ArenaGUIController : BasicGUIController {
 	{
 		int newid = PhotonNetwork.AllocateViewID();
 		EnterArenaData data = new EnterArenaData();
-		data.EnemyID = enemies[selectedCardIndex].ID;
+		data.EnemyID = activeArena.Enemies[selectedCardIndex].ID;
 		data.NewViewID = newid;
 		Debug.Log(data.NewViewID);
 
@@ -111,7 +112,7 @@ public class ArenaGUIController : BasicGUIController {
 		MemoryStream m = new MemoryStream();
 		b.Serialize(m, data);
 
-		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, PlayerManager.Instance.SelectedArena.Name, m.GetBuffer());
+		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, activeArena.Name, m.GetBuffer());
 		//GUIManager.Instance.DisplayMainGUI();
 	}
 

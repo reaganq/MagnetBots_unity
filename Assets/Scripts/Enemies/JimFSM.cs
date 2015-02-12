@@ -4,27 +4,15 @@ using System.Collections.Generic;
 
 public class JimFSM : SimpleFSM {
    
-    
     public MeshRenderer indicator;
     public float skillRange;
     public float maxMovementTimer;
     public float curMovementTimer;
 
-    
-
-	// Use this for initialization
-	public override void Awake () {
-        base.Awake();
-	}
-
 	public override void Start()
 	{
 		base.Start();
-		if(myPhotonView.isMine)
-		{
-			Debug.LogWarning("THIS IS MINE");
-			state = AIState.Resting;
-        }
+		state = AIState.preInitialised;
     }
     
     public override void EnterState(AIState stateEntered)
@@ -32,21 +20,21 @@ public class JimFSM : SimpleFSM {
 		base.EnterState(stateEntered);
         switch(stateEntered)
         {
-		case AIState.Resting:
-			restJob = Job.make(Rest(), true);
+		case AIState.preInitialised:
+			//restJob = Job.make(Rest(), true);
 			break;
-        case AIState.Searching:
-            indicator.material.color = Color.green;
-            searchTargetJob = new Job(SearchForTarget(), true);
-			Debug.Log("aistate searching");
+        case AIState.initialised:
+            //indicator.material.color = Color.green;
+            //searchTargetJob = new Job(SearchForTarget(), true);
             break;
-        case AIState.SelectSkill:
-            indicator.material.color = Color.white;
+        case AIState.ready:
+			restJob = Job.make(Rest());
+            /*indicator.material.color = Color.white;
             if(skills.Length >0)
             {
-                selectedSkill = ChooseSkill();
-                Debug.Log("selected skill: "+selectedSkill.skillName);
-                if(selectedSkill.requiresTarget)
+                activeSkill = ChooseSkill();
+                Debug.Log("selected skill: "+activeSkill.skillName);
+                if(activeSkill.requiresTarget)
                     state = AIState.Searching;
                 else
                 {
@@ -54,16 +42,16 @@ public class JimFSM : SimpleFSM {
                 }
             }
             else
-                state = AIState.Idling;
+                state = AIState.Idling;*/
             break;
-        case AIState.MovingTowardsTarget:
-            indicator.material.color = Color.blue;
+        case AIState.battleTaunts:
+            /*indicator.material.color = Color.blue;
 			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, runningAnim.name);
-            curMovementTimer = maxMovementTimer;
+            curMovementTimer = maxMovementTimer;*/
             break;
-        case AIState.UsingSkill:
-            indicator.material.color = Color.red;
-            usingSkillJob = Job.make(selectedSkill.UseSkill(), true);
+        case AIState.selectingSkill:
+            /*indicator.material.color = Color.red;
+            usingSkillJob = Job.make(activeSkill.UseSkill(), true);
             usingSkillJob.jobComplete += (waskilled) => 
             {
                 if(!waskilled)
@@ -74,7 +62,7 @@ public class JimFSM : SimpleFSM {
 				{
 					Debug.LogWarning("killing job");
 	
-					cancelSkillJob = Job.make(selectedSkill.CancelSkill(), true);
+					cancelSkillJob = Job.make(activeSkill.CancelSkill(), true);
 					cancelSkillJob.jobComplete += (killed) =>
 					{
 						if(state != AIState.Dead)
@@ -84,9 +72,23 @@ public class JimFSM : SimpleFSM {
 						}
 					};
 				}
-            };
+            };*/
+			SelectSkill();
             break;
-		
+		case AIState.checkingSkillRequirements:
+			break;
+		case AIState.fulfillingSkillConditions:
+			activeSkill.FulfillSkillConditions();
+			break;
+		case AIState.executingSkill:
+			UseActiveSkill();
+			break;
+		case AIState.rest:
+			break;
+		case AIState.taunting:
+			break;
+		case AIState.victory:
+			break;
         }
     }
 
@@ -94,44 +96,70 @@ public class JimFSM : SimpleFSM {
     {
         switch(stateExited)
         {
-		case AIState.Resting:
+			//just instantiated
+		case AIState.preInitialised:
+			break;
+			//has owner arena and all intended targets
+		case AIState.initialised:
+			break;
+			//all players have loaded into arena
+		case AIState.ready:
+			break;
+			//play battle taunts
+		case AIState.battleTaunts:
+			break;
+		case AIState.selectingSkill:
+			SelectSkill();
+			break;
+		case AIState.rest:
 			if(restJob != null)
 				restJob.kill();
 			break;
-        case AIState.UsingSkill:
+		case AIState.checkingSkillRequirements:
+			//if(moveToTargetJob != null) moveToTargetJob.kill();
+			break;
+		
+        case AIState.fulfillingSkillConditions:
             if(usingSkillJob != null) 
 			{
 				usingSkillJob.kill();
 				Debug.Log("killing job");
 			}
+			activeSkill.ResetSkill();
 
-			selectedSkill.ResetSkill();
-			targetObject = null;
-			targetCharacterController = null;
-			fireObject = null;
-			aimAtTarget = false;
 			Debug.Log("exit using skill");
-			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, idleAnim);
             break;
-        case AIState.MovingTowardsTarget:
-            if(moveToTargetJob != null) moveToTargetJob.kill();
-			//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, idleAnim);
-            break;
-        case AIState.Searching:
-            if(searchTargetJob != null) searchTargetJob.kill();
-            break;
+		case AIState.executingSkill:
+			if(activeSkill.useSkillJob.running)
+				activeSkill.useSkillJob.kill();
+			break;
+		case AIState.taunting:
+			break;
+		case AIState.victory:
+			break;
         }
     }
 	
 	// Update is called once per frame
-	void Update () 
+	public override void Update () 
     {
+		base.Update();
+		if(state == AIState.fulfillingSkillConditions)
+		{
+			if(hasFulfilledSkillConditions())
+			{
+				aimAtTarget = false;
+				moveToTarget = false;
+			}
+			EnterAIState(AIState.executingSkill);
+		}
+		/*
 	    switch(state)
         {
-        case AIState.MovingTowardsTarget:
+        case AIState.fulfillingSkillConditions:
 			if(targetObject == null)
 			{
-				state = AIState.Searching;
+				//state = AIState.Searching;
 			}
 
             curMovementTimer -= Time.deltaTime;
@@ -140,181 +168,52 @@ public class JimFSM : SimpleFSM {
 
             if(curMovementTimer <= 0 && !TargetIsInSkillRange())
             {
-                state = AIState.SelectSkill;
+                state = AIState.selectingSkill;
             }
 
             if(TargetIsInSkillRange())
             {
                 //Debug.Log("in skill range!");
-                state = AIState.UsingSkill;
+                state = AIState.executingSkill;
             }
             else
             {
                 //rotation
                 //_transform.forward += () * rotationSpeed * Time.deltaTime;
 
-				Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _transform.position);
-				_transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
+				Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _myTransform.position);
+				_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
                 //move
 
-                Vector3 moveDirection = targetObject.position - _transform.position;
+				Vector3 moveDirection = targetObject.position - _myTransform.position;
                 moveDirection.y = 0;
 				Vector3 movementOffset = moveDirection.normalized * myStatus.curMovementSpeed * Time.deltaTime;
 				//movementOffset += Physics.gravity;
 				movementOffset += Physics.gravity;
-                _controller.Move(movementOffset);
+                //myMotor.Move(movementOffset);
                // _transform.position = Vector3.MoveTowards (_transform.position, targetObject.position, movementSpeed * Time.deltaTime);
             }
             break;
-		case AIState.UsingSkill:
+		case AIState.executingSkill:
 
-			if(selectedSkill.requiresTarget && targetObject == null)
+			if(activeSkill.targetRequirement > 0 && targetObject == null)
 			{
-				state = AIState.SelectSkill;
+				state = AIState.selectingSkill;
 			}
 
-			if(DistanceToTarget() < selectedSkill.skillMinRange)
+			if(DistanceToTargetCS() < activeSkill.skillRangeMin)
 			{
 				//Debug.Log("too close");
 				usingSkillJob.kill();
 			}
 
-			if(selectedSkill.requiresTargetLock || (selectedSkill.requiresLineOfSight && targetAngleDifference > selectedSkill.angleTolerance))
+			if(activeSkill.requiresTargetLock || (activeSkill.requiresLineOfSight && targetAngleDifference > activeSkill.angleTolerance))
 			{
 				AimAtTarget();
 			}
 			break;
         }
-
-		//update aim angle to target
-		if(targetObject != null)
-		{
-			Vector3 targetDir = Vector3.zero;
-			Vector3 forward = Vector3.zero;
-			if(fireObject != null)
-			{
-				forward = fireObject.forward;
-                targetDir = targetObject.position - fireObject.position;
-			}
-			else
-			{
-				forward = _transform.forward;
-				targetDir = targetObject.position - _transform.position;
-            }
-            forward.y = targetDir.y = 0;
-
-			targetAngleDifference = Vector3.Angle(targetDir, forward);
-		}
+*/
 	}
-
-	public void AimAtTarget()
-	{
-		if(targetObject != null)
-		{
-			if(fireObject != null)
-			{
-				Vector3 targetPos = targetObject.position;
-				if(targetCharacterController != null)
-				{
-					float scaledVal = Mathf.Clamp(DistanceToTarget()/15.0f, 0.0f, 1.0f);
-					targetPos += targetCharacterController.velocity*scaledVal ;
-				}
-
-				Vector3 fireObjectPos = fireObject.position;
-				targetPos.y = fireObjectPos.y = 0;
-				Quaternion newRotation = Quaternion.LookRotation(targetPos - fireObjectPos);
-				transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
-				//_transform.forward += (targetPos - fireObjectPos) * _characterStatus.rotationSpeed * Time.deltaTime;
-			}
-			else
-			{
-				Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _transform.position);
-				_transform.rotation  = Quaternion.Slerp(_transform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
-				//_transform.forward += (targetObject.position - _transform.position) * _characterStatus.rotationSpeed * Time.deltaTime;
-	        }
-		}
-    }
-    
-    public IEnumerator Rest()
-	{
-		yield return new WaitForSeconds(Random.Range (1,4));
-		state = AIState.SelectSkill;
-	}
-
-    public IEnumerator SearchForTarget()
-    {
-        Debug.Log("searching");
-        //GameObject[] alltargets;
-		alltargets = arena.players;
-		availableTargets.Clear();
-
-		for (int i = 0; i < alltargets.Count; i++) {
-			/*if(alltargets[i].CurrentHealth >0 && !availableTargets.Contains(alltargets[i]))
-	        {
-	            availableTargets.Add(alltargets[i]);
-	            Debug.Log("adding player");
-	        }*/
-			if(alltargets[i] != null && alltargets[i].curHealth > 0 )
-	        {
-	            //availableTargets.Remove(alltargets[i]);
-				availableTargets.Add(alltargets[i]);
-	            Debug.Log("add player");
-	        }
-        }
-        if(availableTargets.Count >0)
-        {
-            targetObject = availableTargets[Random.Range(0, availableTargets.Count)].transform;
-			targetCharacterController = targetObject.gameObject.GetComponent<CharacterController>();
-        }
-        else
-		{
-            targetObject = null;
-			targetCharacterController = null;
-		}
-
-        if(targetObject != null)
-        {
-			if(DistanceToTarget() < selectedSkill.skillMinRange)
-			{
-				if(availableTargets.Count > 1)
-					state = AIState.Searching;
-				else
-					state = AIState.SelectSkill;
-			}
-			else
-			{
-	            if(TargetIsInSkillRange())
-	                state = AIState.UsingSkill;
-	            else
-	            {
-	                Debug.Log("time to move");
-	                state = AIState.MovingTowardsTarget;
-	            }
-			}
-        }
-		else
-			state = AIState.Resting;
-
-		yield return null;
-    }
-
-    public bool TargetIsInSkillRange()
-    {
-        if(targetObject != null)
-        {
-            //Debug.Log(Vector3.Distance(_transform.position, targetObject.position));
-			if(DistanceToTarget() < selectedSkill.skillMaxRange)
-                return true;
-            else
-                return false;
-        }
-        else
-            return false;
-    }
-
-	public float DistanceToTarget()
-	{
-		float distance = Vector3.Distance(targetObject.position, _transform.position);
-		return distance;
-	}
+	
 }

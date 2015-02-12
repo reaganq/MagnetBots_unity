@@ -63,32 +63,26 @@ public class CharacterInputController : MonoBehaviour {
 
     void OnEnable()
     {
-        AttackButtonMessage.onPress += onPress;
-        AttackButtonMessage.onRelease += onRelease;
+        SkillButton.onPress += onPress;
+        SkillButton.onRelease += onRelease;
     }
     
     void OnDisable()
     {
-        AttackButtonMessage.onPress -= onPress;
-        AttackButtonMessage.onRelease -= onRelease;
+        SkillButton.onPress -= onPress;
+        SkillButton.onRelease -= onRelease;
     }
 
     public void onPress(int index)
     {
 		Debug.Log("pressed button: " + index);
-        if(index == -1)
-            actionManager.LeftAction(InputTrigger.OnPressDown);
-        else if(index == -2)
-            actionManager.RightAction(InputTrigger.OnPressDown);
+		actionManager.UseSkill(InputTrigger.OnPressDown, index);
     }
     
     public void onRelease(int index)
     {
 		Debug.Log("released button: " + index);
-        if(index == -1)
-            actionManager.LeftAction(InputTrigger.OnPressUp);
-        else if(index == -2)
-            actionManager.RightAction(InputTrigger.OnPressUp);
+		actionManager.UseSkill(InputTrigger.OnPressUp, index);
     }
 	
 	// Update is called once per frame
@@ -119,6 +113,15 @@ public class CharacterInputController : MonoBehaviour {
 	            direction += cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
 	        if(joystick.JoystickAxis.x < -0.1f)
 	            direction -= cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
+
+			if(Input.GetKey(KeyCode.W))
+				direction += forward;
+			if(Input.GetKey(KeyCode.S))
+				direction -= forward;
+			if(Input.GetKey(KeyCode.A))
+				direction -= cameraTransform.right;
+			if(Input.GetKey(KeyCode.D))
+				direction += cameraTransform.right;  
 	    }
 
 		if(direction.magnitude > 0)
@@ -167,7 +170,7 @@ public class CharacterInputController : MonoBehaviour {
 		}
     }*/
 
-    void FaceMovementDirection()
+    /*void FaceMovementDirection()
     {    
         Vector3 horizontalVelocity = character.velocity;
         horizontalVelocity.y = 0; 
@@ -175,6 +178,6 @@ public class CharacterInputController : MonoBehaviour {
         if ( horizontalVelocity.magnitude > 0.1 )
             _myTransform.forward = horizontalVelocity.normalized;
 
-    }
+    }*/
 }
 

@@ -36,7 +36,6 @@ public class ArenaManager : Zone {
 				SimpleFSM fsm = enemyUnit.GetComponent<SimpleFSM>();
 				enemyFSMs.Add(fsm);
 				fsm.arena = this;
-
 			}
 		}
 	}
