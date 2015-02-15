@@ -16,6 +16,24 @@ public class CharacterStatus : CharacterAttributes {
 	public List<Collider> hitboxes;
 	public Transform _myTransform;
 	public List<StatusEffect> statusEffects;
+	public List<StatusEffect> speedModifiers;
+	public float curMovementSpeed{
+		get{
+			if(!myPhotonView.isMine)
+				return curMovementSpeed;
+			else
+			{
+				float s = maxMovementSpeed;
+				for (int i = 0; i < speedModifiers.Count; i++) {
+					s += speedModifiers[i].statusEffect.primaryEffectValue;
+				}
+				return s;
+			}
+		}
+		set{
+			curMovementSpeed = value;
+		}
+	}
 	
 	public bool Invulnerable = false;
 	public bool canMove = true;
@@ -23,7 +41,7 @@ public class CharacterStatus : CharacterAttributes {
 	public virtual void Awake () 
 	{
 		curHealth = maxHealth;
-		curMovementSpeed = maxMovementSpeed;
+		//curMovementSpeed = maxMovementSpeed;
 		_myTransform = this.transform;
 		actionManager = GetComponent<ActionManager>();
 		myPhotonView = GetComponent<PhotonView>();
@@ -120,10 +138,10 @@ public class CharacterStatus : CharacterAttributes {
         }
     }
 
-    public virtual void ChangeMovementSpeed(float change)
+    /*public virtual void ChangeMovementSpeed(float change)
     {
         curMovementSpeed += change;
-    }
+    }*/
 	
     public virtual void Die()
     {
@@ -136,20 +154,35 @@ public class CharacterStatus : CharacterAttributes {
 
 	public void AddStatusEffect(StatusEffect effect)
 	{
-		statusEffects.Add(effect);
-		effect.StartEffect(this, statusEffects.Count - 1);
-    }
+		if(effect.statusEffect.effect == 1)
+		{
+			speedModifiers.Add(effect);
+			effect.StartEffect(this, speedModifiers.Count - 1);
+		}
+		else
+		{
+			statusEffects.Add(effect);
+			effect.StartEffect(this, statusEffects.Count - 1);
+		}
+	}
 
-	public void RemoveStatusEffectFromSkill(BaseSkill ownerSkill)
+	public void RemoveStatusEffect(BaseSkill ownerSkill)
 	{
 		for (int i = statusEffects.Count - 1; i > -1; i--) 
 		{
-			if(statusEffects[i].ownerSkill == ownerSkill && statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.timed)
+			if(statusEffects[i].ownerSkill == ownerSkill && statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.useDuration)
 			{
 				statusEffects[i].EndEffect();
 			}
 		}
-    }
+		for (int i = speedModifiers.Count - 1; i > -1; i--) 
+		{
+			if(speedModifiers[i].ownerSkill == ownerSkill && speedModifiers[i].statusEffect.effectFormat == SkillEffectFormat.useDuration)
+			{
+				speedModifiers[i].EndEffect();
+			}
+		}
+	}
 
 	public void RemoveStatusEffect(StatusEffect effect)
 	{
@@ -158,7 +191,12 @@ public class CharacterStatus : CharacterAttributes {
 			statusEffects.Remove(effect);
 			return;
 		}
-    }
+		if(speedModifiers.Contains(effect))
+		{
+			speedModifiers.Remove(effect);
+			return;
+		}
+	}
 
 	[RPC]
 	public void ReceiveHit(byte[] hit)

@@ -79,6 +79,7 @@ public class BaseSkill : MonoBehaviour {
 			if(skillDetectors[i].deactivationEvent == trigger)
 				skillDetectors[i].Deactivate();
 		}
+		ApplyStatusEffects(trigger);
 	}
 
 	public virtual void EnterState(SkillState state)
@@ -90,6 +91,7 @@ public class BaseSkill : MonoBehaviour {
 
 	public virtual void ResetSkill()
 	{
+		ownerStatus.RemoveStatusEffect(this);
 		isBusy = false;
 		ActivateSkill(false);
 		HitEnemies.Clear();
@@ -131,8 +133,13 @@ public class BaseSkill : MonoBehaviour {
         
 	#region apply status effects
 
+	public virtual void ApplyStatusEffects(SkillEventTrigger condition)
+	{
+		ApplyStatusEffects(condition, null, 0);
+	}
+
 	//give generic status effects to target
-	public virtual void ApplyStatusEffects(int condition, CharacterStatus target, int allyFlag)
+	public virtual void ApplyStatusEffects(SkillEventTrigger condition, CharacterStatus target, int allyFlag)
 	{
 		if(!ownerStatus.myPhotonView.isMine)
 			return;
@@ -146,7 +153,7 @@ public class BaseSkill : MonoBehaviour {
 				{
 					if(effect.effect == 5)
 					{
-						ownerStatus.motor.AddImpact(ownerTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
+						ownerStatus.AddImpact(ownerTransform.forward, effect.primaryEffectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
 					}
 					//attribute change
 					if(effect.effect == 3 || effect.effect == 1 || effect.effect == 6)
@@ -162,7 +169,7 @@ public class BaseSkill : MonoBehaviour {
 				{
 					if(effect.effect == 5)
 					{
-						target.AddImpact(target._myTransform.forward, effect.effectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
+						target.AddImpact(target._myTransform.forward, effect.primaryEffectValue, effect.secondaryEffectValue, effect.tertiaryEffectValue);
 					}
 					//attribute change
 					if(effect.effect == 3 || effect.effect == 1 || effect.effect == 6)

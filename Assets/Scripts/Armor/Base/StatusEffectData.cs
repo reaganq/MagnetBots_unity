@@ -7,17 +7,18 @@ using System.Collections.Generic;
 public class StatusEffectData{
 
 	public int ID;
+	//int value for enum status effect type
 	public int effect;
-    public float effectValue;
+    public float primaryEffectValue;
 	public float secondaryEffectValue;
 	public float tertiaryEffectValue;
-    public int effectType;
+
     public float effectDuration;
     public int numberOfProcs;
     public float procChance;
 	[SerializeField] 
 	public SkillEffectFormat effectFormat;
-    public int triggerCondition;
+	public SkillEventTrigger triggerCondition;
 	public bool affectAlly;
 	public bool affectEnemy;
 	public bool affectSelf;

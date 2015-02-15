@@ -1,38 +1,28 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Melee/LongDurationMelee.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Base/BaseSkill.cs">
     <Files>
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Range/BulletProjectile.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Managers/SocialManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/NPC/NPCArena.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ShopGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/Shop.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Base/BaseLootItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/NPCActivityButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/RPGNPC.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/NPCActivity.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Storage/IStorage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Detectors/TriggerCollider.cs" Line="1" Column="1" />
-      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/NetworkingPeer.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ItemInfoBoxGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/LongDurationMelee.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Melee/LongDurationMelee.cs" Line="5" Column="51" />
+      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="384" Column="4" />
+      <File FileName="Assets/Scripts/Armor/Base/BasePlayerSkill.cs" Line="104" Column="15" />
+      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="199" Column="47" />
+      <File FileName="Assets/Scripts/Armor/Base/StatusEffectData.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/Skills/StatusEffect.cs" Line="6" Column="25" />
+      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="56" Column="3" />
+      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="130" Column="6" />
+      <File FileName="Assets/Scripts/Character/CharacterAttributes.cs" Line="8" Column="26" />
+      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="22" Column="4" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="85" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Detectors/Detector.cs" Line="10" Column="15" />
+      <File FileName="Assets/Scripts/Armor/Detectors/TriggerCollider.cs" Line="22" Column="6" />
+      <File FileName="Assets/Scripts/Armor/Detectors/ParticleCollider.cs" Line="20" Column="3" />
+      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="37" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -50,11 +40,11 @@
             </Node>
             <Node name="Scripts" expanded="True">
               <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-                <Node name="Detectors" expanded="True" />
-                <Node name="Melee" expanded="True">
-                  <Node name="LongDurationMelee.cs" selected="True" />
+                <Node name="Base" expanded="True">
+                  <Node name="BaseSkill.cs" selected="True" />
                 </Node>
+                <Node name="Detectors" expanded="True" />
+                <Node name="Melee" expanded="True" />
                 <Node name="Range" expanded="True" />
               </Node>
               <Node name="Base" expanded="True" />
@@ -70,6 +60,7 @@
               <Node name="Minigames" expanded="True" />
               <Node name="NPC" expanded="True" />
               <Node name="Player" expanded="True" />
+              <Node name="Skills" expanded="True" />
               <Node name="Storage" expanded="True" />
             </Node>
           </Node>

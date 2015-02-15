@@ -5,8 +5,8 @@ public class CharacterAttributes: MonoBehaviour{
 
 	public float maxHealth;
 	public float curHealth;
+	//determined by the legs
 	public float maxMovementSpeed;
-	public float curMovementSpeed;
 	public float rotationSpeed;
 	public CharacterType characterType;
 }

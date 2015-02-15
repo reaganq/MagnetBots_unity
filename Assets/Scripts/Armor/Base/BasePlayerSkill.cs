@@ -15,10 +15,7 @@ public class BasePlayerSkill : BaseSkill {
 	public bool resetAfterUp;
 	public bool canUseWhileBusy;
 	//player can't move AT ALL while using this skill
-	public bool disableMovement;
-	public bool disableRotation;
 	//player has limited movement when using this skill. Think charge attacks
-	public bool restrictedMovement;
 	//public bool continuousUse;
 	public string skillButtonSpritePath;
 	public string skillButtonAtlasPath;

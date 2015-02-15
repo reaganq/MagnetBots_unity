@@ -30,12 +30,12 @@ public class PlayerCharacter : CharacterStatus {
 		DisplayInfoByZone();
 	}
 
-	public override void ChangeMovementSpeed(float change)
+	/*public override void ChangeMovementSpeed(float change)
 	{
 		base.ChangeMovementSpeed(change);
 		if(playerActionManager != null)
 		{
 			playerActionManager.myMotor.AnimationUpdate();
 		}
-	}
+	}*/
 }

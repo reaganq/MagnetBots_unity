@@ -41,6 +41,7 @@ public class StatusEffect : MonoBehaviour {
 	
 	public virtual void PauseEffect()
 	{
+		isPaused = true;
 	}
 
 }

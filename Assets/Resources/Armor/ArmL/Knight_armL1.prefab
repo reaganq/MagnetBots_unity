@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20954ef40219f4190b6d7bb3fe72529b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  skillID: 0
   ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
@@ -403,6 +403,7 @@ MonoBehaviour:
   skillName: Block
   skillType: 0
   disableMovement: 0
+  disableRotation: 0
   restrictedMovement: 0
   baseSkillAnimation:
     precastAnimation:
@@ -436,11 +437,20 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 0
-  damage: 0
-  skillStatusEffects: []
+  skillStatusEffects:
+  - ID: 0
+    effect: 1
+    primaryEffectValue: -5
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 1
+    triggerCondition: 2
+    affectAlly: 0
+    affectEnemy: 0
+    affectSelf: 1
   skillDetectors: []
   skillVFXs: []
   _skillState: 0

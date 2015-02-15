@@ -347,6 +347,7 @@ public class Avatar : MonoBehaviour {
 	[RPC]
     public void SpawnArmR(string objectpath)
     {
+		Debug.Log("spawn right arm");
         if(ArmRObjects.Count > 0)
         {
             for (int i = 0; i < myActionManager.armorSkills.Count; i++) {

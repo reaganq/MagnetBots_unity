@@ -30,6 +30,8 @@ public class TriggerCollider : Detector {
 
 			if(cs != ownerSkill.ownerStatus)
 			{
+				ownerSkill.hi
+
 				bool isFoe;
 				if(ownerSkill.ownerStatus.enemyCharacterType == cs.characterType)
 					isFoe = true;
