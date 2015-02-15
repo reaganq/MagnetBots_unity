@@ -81,7 +81,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
             //return false;
     }
 
-	public override IEnumerator PressDownSequence()
+	public override IEnumerator PressDownSequence(int randomNumber)
     {
 
         if(skillState == SkillState.ready || skillState == SkillState.followThrough)
@@ -136,7 +136,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
             return true;
     }
 
-    public override IEnumerator PressUpSequence()
+    public override IEnumerator PressUpSequence(int randomNumber)
     {
         while(skillState == SkillState.onUse)
         {

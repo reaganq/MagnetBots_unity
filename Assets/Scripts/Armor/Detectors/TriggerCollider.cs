@@ -20,6 +20,8 @@ public class TriggerCollider : Detector {
 
 	public void OnTriggerEnter(Collider other)
     {
+
+			return;
 		//Debug.Log("COLLISION" + other.gameObject.name);
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();
 		Vector3 hitPos = other.collider.ClosestPointOnBounds(ownerSkill.ownerTransform.position);
@@ -28,73 +30,36 @@ public class TriggerCollider : Detector {
 		{
 			CharacterStatus cs = hb.ownerCS;
 
-			if(cs != ownerSkill.ownerStatus)
+			if(cs == ownerSkill.ownerStatus || currentNumberOfTargets >= ownerSkill.targetLimit)
+				return;
+
+			/*int allyFlag;
+			if(ownerSkill.ownerStatus.enemyCharacterType == cs.characterType)
+				allyFlag = 2;
+			else
+				allyFlag = 1;
+				*/
+
+			/*if(isFoe)
 			{
-				ownerSkill.hi
+				if(!ownerSkill.HitEnemies.Contains(cs))
+				{
+					ownerSkill.HitEnemies.Add(cs);
+				//masterAISkill.HitTarget(hb, true);
+				}
+			}
+			else
+			{
+				if(!ownerSkill.HitAllies.Contains(cs))
+				{
+					ownerSkill.HitAllies.Add(cs);
+				}
+			}*/
 
-				bool isFoe;
-				if(ownerSkill.ownerStatus.enemyCharacterType == cs.characterType)
-					isFoe = true;
-				else
-					isFoe = false;
-
-				if(isFoe)
-				{
-					if(!ownerSkill.HitEnemies.Contains(cs))
-					{
-						ownerSkill.HitEnemies.Add(cs);
-					//masterAISkill.HitTarget(hb, true);
-					}
-				}
-				else
-				{
-					if(!ownerSkill.HitAllies.Contains(cs))
-					{
-						ownerSkill.HitAllies.Add(cs);
-					}
-				}
-			
-				/*if(masterAISkill != null)
-				{
-					if(!masterAISkill.HitEnemies.Contains(cs) && !masterAISkill.HitAllies.Contains(cs))
-					{
-						//determine if friend or foe
-						if(cs.characterType == masterAISkill.fsm.myStatus.enemyCharacterType)
-						{
-							masterAISkill.HitAllies.Add(cs);
-							masterAISkill.HitTarget(hb, true);
-						}
-						else
-						{
-							masterAISkill.HitEnemies.Add(cs);
-							masterAISkill.HitTarget(hb, false);
-							Debug.Log("ai hit player");
-							masterAISkill.fsm.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
-						}
-						//Debug.Log("I JUST HIT SOMETHING");
-					}
-				}
-				if(masterArmor != null)
-				{
-					if(!masterArmor.HitEnemies.Contains(cs) && !masterArmor.HitAllies.Contains(cs))
-                    {
-                        //determine if friend or foe
-						if(cs.characterType == masterArmor.owner.enemyCharacterType)
-						{
-                        	masterArmor.HitEnemies.Add(cs);
-                        	masterArmor.HitTarget(hb, false);
-							masterArmor.ownerManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
-						}
-						else
-						{
-							masterArmor.HitAllies.Add(cs);
-							masterArmor.HitTarget(hb, true);
-							masterArmor.ownerManager.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
-						}
-                        //Debug.Log("I JUST HIT SOMETHING");
-                    }
-                }*/
-            }
+			if(!ownerSkill.HitTargets.Contains(cs))
+			{
+				ownerSkill.HitTarget(cs, this.transform.position, cs._myTransform.position);
+			}
         }
     }
     

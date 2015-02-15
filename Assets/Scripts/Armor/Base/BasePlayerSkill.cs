@@ -19,6 +19,7 @@ public class BasePlayerSkill : BaseSkill {
 	//public bool continuousUse;
 	public string skillButtonSpritePath;
 	public string skillButtonAtlasPath;
+	public int upperRNGLimit = 0;
 
 	[HideInInspector]
 	public Avatar ownerAvatar;
@@ -69,13 +70,13 @@ public class BasePlayerSkill : BaseSkill {
 			return false;
 	}
 	
-	public virtual void PressDown()
+	public virtual void PressDown(int randomNumber)
 	{
 		if(pressDownJob != null)
 			pressDownJob.kill();
 		if(pressUpJob != null)
 			pressUpJob.kill();
-		pressDownJob = Job.make(PressDownSequence(), true);
+		pressDownJob = Job.make(PressDownSequence(randomNumber), true);
 		pressDownJob.jobComplete += (wasKilled) =>
 		{
 			if(resetAfterDown)
@@ -91,13 +92,13 @@ public class BasePlayerSkill : BaseSkill {
 			return false;
 	}
 	
-	public virtual void PressUp()
+	public virtual void PressUp(int randomNumber)
 	{
 		//if(pressDownJob != null)
 		//	pressDownJob.kill();
 		if(pressUpJob != null)
 			pressUpJob.kill();
-		pressUpJob = Job.make(PressUpSequence());
+		pressUpJob = Job.make(PressUpSequence(randomNumber));
 		pressUpJob.jobComplete += (wasKilled) =>
 		{
 			if(resetAfterUp)
@@ -106,13 +107,13 @@ public class BasePlayerSkill : BaseSkill {
 	}
 	
 	//main action sequence when attack button is pressed down
-	public virtual IEnumerator PressDownSequence()
+	public virtual IEnumerator PressDownSequence(int randomNumber)
 	{
 		yield return null;
 	}
 
 	//main action sequence when attack button is pressed up
-	public virtual IEnumerator PressUpSequence()
+	public virtual IEnumerator PressUpSequence(int randomNumber)
 	{
 		yield return null;
 	}

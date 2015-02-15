@@ -22,6 +22,7 @@ public class BaseSkill : MonoBehaviour {
 	public List<CharacterStatus> HitEnemies;
 	//all the allies hit during the usage of this skill
 	public List<CharacterStatus> HitAllies;
+	public List<CharacterStatus> HitTargets;
 
 	public bool isBusy = false;
 	public bool isActive = false;
@@ -33,7 +34,8 @@ public class BaseSkill : MonoBehaviour {
 	public bool disableRotation;
 	//player has limited movement when using this skill. Think charge attacks
 	public bool restrictedMovement;
-    
+	//can this skill affect the same target multiple times? true = no, false = yes
+	public bool limitDamageInstance = true;
 	//default skill animation set
 	public SkillAnimation baseSkillAnimation;
 	//max number of unique targets we can hit with each attack
@@ -67,13 +69,18 @@ public class BaseSkill : MonoBehaviour {
 
 	public void TriggerSkillEvents(SkillEventTrigger trigger)
 	{
+		bool isOwner = ownerManager.myPhotonView.isMine;
 		for (int i = 0; i < skillVFXs.Count; i++) {
+			if(!isOwner && skillVFXs[i].isLocal)
+				continue;
 			if(skillVFXs[i].activationEvent == trigger)
 				skillVFXs[i].Activate();
 			if(skillVFXs[i].deactivationEvent == trigger)
 				skillVFXs[i].Deactivate();
 		}
 		for (int i = 0; i < skillDetectors.Count; i++) {
+			if(!isOwner && skillVFXs[i].isLocal)
+				continue;
 			if(skillDetectors[i].activationEvent == trigger)
 				skillDetectors[i].Activate();
 			if(skillDetectors[i].deactivationEvent == trigger)
@@ -141,13 +148,15 @@ public class BaseSkill : MonoBehaviour {
 	//give generic status effects to target
 	public virtual void ApplyStatusEffects(SkillEventTrigger condition, CharacterStatus target, int allyFlag)
 	{
-		if(!ownerStatus.myPhotonView.isMine)
-			return;
-		
+		bool isOwner = ownerManager.myPhotonView.isMine;
 		foreach(StatusEffectData effect in skillStatusEffects)
 		{
 			if(effect.triggerCondition == condition)
 			{
+				if(!isOwner && effect.isLocal)
+				{
+					continue;
+				}
 				//myself
 				if(effect.affectSelf && allyFlag == 0)
 				{
@@ -225,41 +234,22 @@ public class BaseSkill : MonoBehaviour {
 		}
 	}
 
-	public virtual void HitTarget(int targetID, bool isAlly, Vector3 detectorPos, Vector3 targetPos)
+	public virtual void HitTarget(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
 		//HitInfo newHit = new HitInfo();
-		
-		/*if(!isAlly)
+		if(HitTargets.Contains(targetCS))
 		{
-			newHit.sourceName = owner.characterName;
-			newHit.damage = damage;
-			newHit.hitPosX = originPos.x;
-			newHit.hitPosY = originPos.y;
-			newHit.hitPosZ = originPos.z;
-			newHit.skillEffects = new List<StatusEffectData>();
-			for (int i = 0; i < skillStatusEffects.Count; i++) 
-			{
-				if (skillStatusEffects[i].affectEnemy) {
-					newHit.skillEffects.Add(skillStatusEffects[i]);
-				}
-			}
-			
-			//TODO apply self buffs from characterstatus
-			//TODO apply hitbox local buffs
-			BinaryFormatter b = new BinaryFormatter();
-			MemoryStream m = new MemoryStream();
-			b.Serialize(m, newHit);
-			
-			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
-			
-			//target.ReceiveHit(newHit);
-			//Debug.Log(finalhit.sourceName);
-			Debug.Log("hitenemy");
+			if(limitDamageInstance)
+				return;
 		}
 		else
+			HitTargets.Add(targetCS);
+
+		TriggerSkillEvents(SkillEventTrigger.onHit);
+		if(ownerManager.myPhotonView.isMine)
 		{
-			Debug.Log("hitally");
-		}*/
+
+		}
 	}
 
 	#endregion
@@ -321,6 +311,7 @@ public class SkillVFX
 	public GameObject obj;
 	public SkillEventTrigger activationEvent;
 	public SkillEventTrigger deactivationEvent;
+	public bool isLocal;
 
 	public void Activate()
 	{

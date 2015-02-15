@@ -49,7 +49,7 @@ public class NormalMelee : BasePlayerSkill {
     
     #endregion
 
-	public override IEnumerator PressDownSequence()
+	public override IEnumerator PressDownSequence(int randomNumber)
     {
 		if(disableMovement)
 		{
@@ -60,7 +60,9 @@ public class NormalMelee : BasePlayerSkill {
 		isBusy = true;
         skillState = SkillState.onUse;
 
-        int i = Random.Range(0, attackAnimations.Length);
+        if(randomNumber > attackAnimations.Length -1)
+			randomNumber = attackAnimations.Length -1;
+		int i = randomNumber;
         //Debug.Log("i = "+i);
         //ownerAnimation[attackAnimations[i].castAnimation.clip.name].time = 0;
 		ownerCAM.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);

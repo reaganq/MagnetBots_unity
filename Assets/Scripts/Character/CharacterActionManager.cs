@@ -121,14 +121,16 @@ public class CharacterActionManager : ActionManager {
 		{
 			if(armorSkills[skillIndex].CanPressDown())
 			{
-				myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex);
+				int rng = Random.Range(0, armorSkills[skillIndex].upperRNGLimit);
+				myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
 			}
 		}
 		else if(trigger == InputTrigger.OnPressUp)
 		{
 			if(armorSkills[skillIndex].CanPressUp())
 			{
-				myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex);
+				int rng = Random.Range(0, armorSkills[skillIndex].upperRNGLimit);
+				myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
 			}
 		}
 	}
@@ -309,15 +311,15 @@ public class CharacterActionManager : ActionManager {
 
 	#region rpc effect prefab functions
 	[RPC]
-	public void PressDownAction(int index)
+	public void PressDownAction(int index, int rng)
 	{
-		armorSkills[index].PressDown();
+		armorSkills[index].PressDown(rng);
 	}
 
 	[RPC]
-	public void PressUpAction(int index)
+	public void PressUpAction(int index, int rng)
 	{
-		armorSkills[index].PressUp();
+		armorSkills[index].PressUp(rng);
 	}
 
 	public void PlayOneShot(int index)

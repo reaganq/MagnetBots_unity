@@ -22,6 +22,7 @@ public class StatusEffectData{
 	public bool affectAlly;
 	public bool affectEnemy;
 	public bool affectSelf;
+	public bool isLocal;
 }
 
 //what does the skill affect

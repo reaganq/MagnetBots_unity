@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class LongDurationMelee : BasePlayerSkill {
 	
     // Update is called once per frame
-	public override IEnumerator PressDownSequence()
+	public override IEnumerator PressDownSequence(int randomNumber)
     {
         skillState = SkillState.precast;
 		isBusy = true;
@@ -25,7 +25,7 @@ public class LongDurationMelee : BasePlayerSkill {
 			return false;
 	}
 
-    public override IEnumerator PressUpSequence()
+    public override IEnumerator PressUpSequence(int randomNumber)
     {
         while(skillState == SkillState.precast)
         {

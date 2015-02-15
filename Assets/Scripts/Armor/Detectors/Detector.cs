@@ -10,6 +10,7 @@ public class Detector : MonoBehaviour {
 	public float currentNumberOfTargets;
 	public SkillEventTrigger activationEvent;
 	public SkillEventTrigger deactivationEvent;
+	public bool isLocal;
 
 	public virtual void IgnoreOwnCollisions(Collider ownerHitBox)
 	{
