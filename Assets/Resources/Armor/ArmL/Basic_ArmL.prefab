@@ -190,6 +190,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400024}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 9
   m_Name: Basic_ArmL
   m_TagString: Untagged
@@ -379,6 +380,81 @@ Transform:
   m_Children:
   - {fileID: 400022}
   m_Father: {fileID: 400024}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1cd97d0eb4e48beb9303e1d83f54b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillID: 0
+  ownerStatus: {fileID: 0}
+  ownerAnimation: {fileID: 0}
+  ownerTransform: {fileID: 0}
+  ownerManager: {fileID: 0}
+  HitTargets: []
+  isBusy: 0
+  isActive: 0
+  skillName: 
+  skillType: 0
+  disableMovement: 0
+  disableRotation: 0
+  restrictedMovement: 0
+  limitDamageInstance: 1
+  baseSkillAnimation:
+    precastAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    castAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    followThroughAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    loopAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    castTime: 0
+    followThroughTime: 0
+  targetLimit: Infinity
+  skillStatusEffects: []
+  skillDetectors: []
+  skillVFXs: []
+  _skillState: 0
+  ownerCAM: {fileID: 0}
+  equipmentSlotIndex: 0
+  hasSkill: 1
+  hasPressDownEvent: 0
+  hasPressUpEvent: 0
+  resetAfterDown: 0
+  resetAfterUp: 0
+  canUseWhileBusy: 0
+  skillButtonSpritePath: 
+  skillButtonAtlasPath: 
+  upperRNGLimit: 0
+  ownerAvatar: {fileID: 0}
+  isPressedDown: 0
+  isPressedUp: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,12 +469,14 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: c9a98af9db7aa4aafa2ede58a173517a, type: 2}
     animationLayer: 1
+    useWholeBody: 0
     useArmLBones: 1
     useArmRBones: 0
     useVerticalBones: 0
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: 8f8f847daa9104052abec0f1f7fe7086, type: 2}
     animationLayer: 1
+    useWholeBody: 0
     useArmLBones: 1
     useArmRBones: 0
     useVerticalBones: 0

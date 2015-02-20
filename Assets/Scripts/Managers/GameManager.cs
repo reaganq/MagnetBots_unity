@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour {
         if(level == 0)
         {
 			//StartCoroutine("LoadStandard");
-            GUIManager.Instance.DisplayIntroGUI();
+            GUIManager.Instance.EnterGUIState(UIState.login);
             GameHasStarted = false;
             GameIsPaused = true;
 

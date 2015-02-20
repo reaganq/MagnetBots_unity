@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: armL_split
+  serializedVersion: 4
+  m_AnimationType: 1
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: -2.98676896, y: -.120049134, z: 4.03573125e-07}
+        outSlope: {x: -2.98676896, y: -.120049134, z: 4.03573125e-07}
+        tangentMode: 1884633715
+      - time: .239999995
+        value: {x: -.716824532, y: -.0288117919, z: 9.68575478e-08}
+        inSlope: {x: 0, y: 0, z: 0}
+        outSlope: {x: 0, y: 0, z: 0}
+        tangentMode: 791830373
+      - time: .479999989
+        value: {x: 0, y: 0, z: 0}
+        inSlope: {x: 2.98676896, y: .120049134, z: -4.03573125e-07}
+        outSlope: {x: 2.98676896, y: .120049134, z: -4.03573125e-07}
+        tangentMode: 1987004511
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 25
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: .479999989
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: -2.98676896
+        outSlope: -2.98676896
+        tangentMode: 10
+      - time: .239999995
+        value: -.716824532
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .479999989
+        value: 0
+        inSlope: 2.98676896
+        outSlope: 2.98676896
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: -.120049134
+        outSlope: -.120049134
+        tangentMode: 10
+      - time: .239999995
+        value: -.0288117919
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .479999989
+        value: 0
+        inSlope: .120049134
+        outSlope: .120049134
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 0
+        inSlope: 4.03573125e-07
+        outSlope: 4.03573125e-07
+        tangentMode: 10
+      - time: .239999995
+        value: 9.68575478e-08
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 10
+      - time: .479999989
+        value: 0
+        inSlope: -4.03573125e-07
+        outSlope: -4.03573125e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_Events: []

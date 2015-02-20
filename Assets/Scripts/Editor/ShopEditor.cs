@@ -82,7 +82,8 @@ public class ShopEditor : BaseEditorWindow
 				s.SellCategories.Add(new ShopCategory());
 			}
 		}*/
-
+		ActivityUtils.DisplayActivityComponents(s, Data);
+		EditorUtils.Separator();
 		
 		//shop categories
 		/*foreach(ShopCategory category in s.Categories)

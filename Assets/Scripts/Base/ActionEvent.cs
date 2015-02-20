@@ -65,12 +65,20 @@ public class ActionEvent
 				rpgItem = Storage.LoadById<RPGArmor>(Item, new RPGArmor());
 				PlayerManager.Instance.Hero.ArmoryInventory.RemoveItem(rpgItem,ItemLevel, Amount);
 			}
-		
-
 			break;
 			//end conversation
 		case ActionEventType.EndConversation:
+			GUIManager.Instance.conversationGUI.EndConversation();
 			//BasicGUI.isConversationDisplayed = false;
+			break;
+		case ActionEventType.GoToParagraph:
+			GUIManager.Instance.conversationGUI.DisplayParagraphByID(Item);
+			break;
+		case ActionEventType.DisplayQuestInfo:
+			GUIManager.Instance.conversationGUI.DisplayQuestOutline();
+			break;
+		case ActionEventType.DisplayQuestStatus:
+			GUIManager.Instance.conversationGUI.DisplayQuestStatus();
 			break;
 			//remove worldobject
 		}
@@ -87,11 +95,13 @@ public enum ActionEventType
 	QuestFailed = 5,
 	RemoveWorldObject = 6,
 	QuestAlternateEnd = 7,
-	NoteDisplay = 8,
+	GoToParagraph = 8,
 	SpawnCreature = 9,
 	UseTeleport = 10,
 	DisplayQuestDetails = 11,
 	GiveQuestRewards = 12,
 	Continueconversation = 13,
 	OpenActivityGUI = 14,
+	DisplayQuestInfo = 15,
+	DisplayQuestStatus = 16
 }

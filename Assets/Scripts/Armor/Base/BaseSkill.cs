@@ -3,8 +3,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using PathologicalGames;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+//using System.IO;
+//using System.Runtime.Serialization.Formatters.Binary;
 
 public class BaseSkill : MonoBehaviour {
 
@@ -19,9 +19,6 @@ public class BaseSkill : MonoBehaviour {
 	[HideInInspector]
 	public ActionManager ownerManager;
 	//all the enemies hit during the usage of this skill
-	public List<CharacterStatus> HitEnemies;
-	//all the allies hit during the usage of this skill
-	public List<CharacterStatus> HitAllies;
 	public List<CharacterStatus> HitTargets;
 
 	public bool isBusy = false;
@@ -40,11 +37,15 @@ public class BaseSkill : MonoBehaviour {
 	public SkillAnimation baseSkillAnimation;
 	//max number of unique targets we can hit with each attack
 	public float targetLimit = Mathf.Infinity;
+	public int lowerRNGLimit = 0;
+	public int upperRNGLimit = 0;
 	
     /*** attribute ***/
 
     //public ArmorAttribute[] armorAttributes;
     public List<StatusEffectData> skillStatusEffects;
+	public List<StatusEffectData> outgoingEnemyStatusEffects;
+	public List<StatusEffectData>outgoingAllyStatusEffects;
 	public List<Detector> skillDetectors;
 	public List<SkillVFX> skillVFXs;
 
@@ -60,18 +61,29 @@ public class BaseSkill : MonoBehaviour {
 		}
 	}
 
+	public bool isOwner;
+
 	public void BasicSetup()
 	{
 		for (int i = 0; i < skillDetectors.Count; i++) {
 			skillDetectors[i].Initialise(this);
 		}
+		outgoingAllyStatusEffects.Clear();
+		outgoingEnemyStatusEffects.Clear();
+		for (int i = 0; i < skillStatusEffects.Count; i++) {
+			if(skillStatusEffects[i].affectAlly)
+				outgoingAllyStatusEffects.Add(skillStatusEffects[i]);
+			else if(skillStatusEffects[i].affectEnemy)
+				outgoingEnemyStatusEffects.Add(skillStatusEffects[i]);
+		}
+		isOwner = ownerManager.myPhotonView.isMine;
+		skillState = SkillState.ready;
 	}
 
 	public void TriggerSkillEvents(SkillEventTrigger trigger)
 	{
-		bool isOwner = ownerManager.myPhotonView.isMine;
 		for (int i = 0; i < skillVFXs.Count; i++) {
-			if(!isOwner && skillVFXs[i].isLocal)
+			if(!skillVFXs[i].isLocal || !isOwner && skillVFXs[i].isLocal)
 				continue;
 			if(skillVFXs[i].activationEvent == trigger)
 				skillVFXs[i].Activate();
@@ -79,18 +91,33 @@ public class BaseSkill : MonoBehaviour {
 				skillVFXs[i].Deactivate();
 		}
 		for (int i = 0; i < skillDetectors.Count; i++) {
-			if(!isOwner && skillVFXs[i].isLocal)
+			if(!skillDetectors[i].isLocal || !isOwner && skillDetectors[i].isLocal)
 				continue;
 			if(skillDetectors[i].activationEvent == trigger)
 				skillDetectors[i].Activate();
 			if(skillDetectors[i].deactivationEvent == trigger)
 				skillDetectors[i].Deactivate();
 		}
-		ApplyStatusEffects(trigger);
+		ApplySelfStatusEffects(trigger);
 	}
 
 	public virtual void EnterState(SkillState state)
 	{
+		switch(state)
+		{
+		case SkillState.ready:
+			TriggerSkillEvents(SkillEventTrigger.onReady);
+			break;
+		case SkillState.precast:
+			TriggerSkillEvents(SkillEventTrigger.onPreCast);
+			break;
+		case SkillState.onUse:
+			TriggerSkillEvents(SkillEventTrigger.onUse);
+			break;
+		case SkillState.followThrough:
+			TriggerSkillEvents(SkillEventTrigger.onFollowThrough);
+			break;
+		}
 	}
 	public virtual void ExitState(SkillState state)
 	{
@@ -101,8 +128,7 @@ public class BaseSkill : MonoBehaviour {
 		ownerStatus.RemoveStatusEffect(this);
 		isBusy = false;
 		ActivateSkill(false);
-		HitEnemies.Clear();
-		HitAllies.Clear();
+		HitTargets.Clear();
 		skillState = SkillState.ready;
 	}
 
@@ -129,7 +155,7 @@ public class BaseSkill : MonoBehaviour {
 		if(ownerManager.effectsPool.GetPrefabPool(prefab) == null)
 		{
 			PrefabPool prefabPool = new PrefabPool(prefab);;
-			prefabPool.preloadAmount = 3;
+			prefabPool.preloadAmount = 1;
 			prefabPool.preloadFrames = 5;
 			Debug.Log("here");
 			ownerManager.effectsPool.CreatePrefabPool(prefabPool);
@@ -140,7 +166,7 @@ public class BaseSkill : MonoBehaviour {
         
 	#region apply status effects
 
-	public virtual void ApplyStatusEffects(SkillEventTrigger condition)
+	public virtual void ApplySelfStatusEffects(SkillEventTrigger condition)
 	{
 		ApplyStatusEffects(condition, null, 0);
 	}
@@ -148,12 +174,11 @@ public class BaseSkill : MonoBehaviour {
 	//give generic status effects to target
 	public virtual void ApplyStatusEffects(SkillEventTrigger condition, CharacterStatus target, int allyFlag)
 	{
-		bool isOwner = ownerManager.myPhotonView.isMine;
 		foreach(StatusEffectData effect in skillStatusEffects)
 		{
 			if(effect.triggerCondition == condition)
 			{
-				if(!isOwner && effect.isLocal)
+				if(!effect.isLocal || !isOwner && effect.isLocal)
 				{
 					continue;
 				}
@@ -174,6 +199,7 @@ public class BaseSkill : MonoBehaviour {
 						Debug.Log("adding status effect to myself");
 					}
 				}
+				//currently this bit never gets used since we are passing through outgoing targeted status effects directly to targetCS;
 				else if(effect.affectAlly && allyFlag == 1 || effect.affectEnemy && allyFlag == 2)
 				{
 					if(effect.effect == 5)
@@ -197,7 +223,7 @@ public class BaseSkill : MonoBehaviour {
 
 	#region hitting targets
 
-	public virtual void HitTarget(HitBox target, bool isAlly)
+	/*public virtual void HitTarget(HitBox target, bool isAlly)
 	{
 		HitInfo newHit = new HitInfo();
 		
@@ -232,7 +258,7 @@ public class BaseSkill : MonoBehaviour {
 		{
 			Debug.Log("hitally");
 		}
-	}
+	}*/
 
 	public virtual void HitTarget(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
@@ -248,8 +274,13 @@ public class BaseSkill : MonoBehaviour {
 		TriggerSkillEvents(SkillEventTrigger.onHit);
 		if(ownerManager.myPhotonView.isMine)
 		{
-
+			ownerManager.DealDamage(targetCS.myPhotonView.viewID, targetCS.myPhotonView.ownerId, skillID, hitPos, targetPos);
+			//action manager deal damage
 		}
+	}
+
+	public virtual void ResolveHit(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
+	{
 	}
 
 	#endregion

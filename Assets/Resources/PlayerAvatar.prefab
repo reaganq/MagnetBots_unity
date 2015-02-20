@@ -137,6 +137,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100018
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400014}
+  m_Layer: 0
+  m_Name: HeadRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &100020
 GameObject:
   m_ObjectHideFlags: 1
@@ -311,6 +326,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400044}
   - 111: {fileID: 11100000}
+  - 114: {fileID: 11400018}
   m_Layer: 0
   m_Name: bones:Pelvis
   m_TagString: Untagged
@@ -519,6 +535,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400016}
+--- !u!4 &400014
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400048}
 --- !u!4 &400016
 Transform:
   m_ObjectHideFlags: 1
@@ -713,6 +740,7 @@ Transform:
   m_Children:
   - {fileID: 400022}
   - {fileID: 400010}
+  - {fileID: 400014}
   m_Father: {fileID: 400018}
 --- !u!4 &400050
 Transform:
@@ -894,7 +922,7 @@ MonoBehaviour:
   BodyRoot: {fileID: 0}
   ArmLRoot: {fileID: 400002}
   ArmRRoot: {fileID: 400004}
-  HeadRoot: {fileID: 400048}
+  HeadRoot: {fileID: 400014}
   FaceRoot: {fileID: 400026}
   LegsRoot: {fileID: 0}
   HeadObjects: []
@@ -1079,6 +1107,80 @@ MonoBehaviour:
   currentSpeed: 0
   actionManager: {fileID: 11400008}
   IsActive: 1
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017a42a7db6dc4dee99d490bb515cb19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animations:
+  - clip: {fileID: 7400000, guid: aa13abe538c5b49be8c0396ae89a528e, type: 2}
+    animationLayer: 5
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: 888885ba4b59f4fc2943c957b4246479, type: 2}
+    animationLayer: 6
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: e2b4efab3305647d0b16a7a5eb213d5c, type: 2}
+    animationLayer: 5
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: 2e654380380a8412a8de07360f76e663, type: 2}
+    animationLayer: 6
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: c458a0040ad7d47ceb8e90b47764952f, type: 2}
+    animationLayer: 5
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: 7f7b2f6538a964609bcf6c524308aacb, type: 2}
+    animationLayer: 6
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: f94a3428e895a4764a0d0f49c55f7de3, type: 2}
+    animationLayer: 5
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: 7b1f528cc27914a0b972f12e6f7a18b2, type: 2}
+    animationLayer: 6
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: 66b1c540550b24b03b739fe1158c1319, type: 2}
+    animationLayer: 5
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  - clip: {fileID: 7400000, guid: ec3925d88a52647c88fa1f16c408535e, type: 2}
+    animationLayer: 6
+    useWholeBody: 0
+    useArmLBones: 0
+    useArmRBones: 0
+    useVerticalBones: 0
+  playid: 0
+  autoPlay: 0
 --- !u!114 &11400026
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1093,7 +1195,6 @@ MonoBehaviour:
   maxHealth: 100
   curHealth: 0
   maxMovementSpeed: 16
-  curMovementSpeed: 7
   rotationSpeed: 11.5
   characterType: 0
   nameLabel: {fileID: 11400030}
@@ -1106,6 +1207,7 @@ MonoBehaviour:
   hitboxes: []
   _myTransform: {fileID: 0}
   statusEffects: []
+  speedModifiers: []
   Invulnerable: 0
   canMove: 1
   playerActionManager: {fileID: 0}

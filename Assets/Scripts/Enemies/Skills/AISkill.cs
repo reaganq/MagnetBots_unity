@@ -19,6 +19,7 @@ public class AISkill : BaseSkill {
 	//how likely we should use this attack
     public float weighting = 0f;
 	public List<AISkillUseCondition> UseConditions;
+	public bool fulfillConditionsBeforeUse;
 	public List<AISkillRequirements> UseRequirements;
 
 	//do we need a target for this skill?
@@ -77,13 +78,13 @@ public class AISkill : BaseSkill {
 
 	public void FulfillSkillConditions()
 	{
-		FulfillSkillConditionSequence();
+		StartFulfillSkillConditions();
 	}
 
-	public virtual void FulfillSkillConditionSequence()
+	public virtual void StartFulfillSkillConditions()
 	{
 		for (int i = 0; i < UseConditions.Count; i++) {
-			if(UseConditions[i].conditionType == AISkillUseConditionType.range)
+			if(UseConditions[i].conditionType == AISkillUseConditionType.rangeOfTarget)
 			{
 				ownerFSM.SetTargetDistance(UseConditions[i].targetValue1);
 			}
@@ -91,6 +92,10 @@ public class AISkill : BaseSkill {
 			{
 				ownerFSM.SetTargetAngle(UseConditions[i].targetValue1);
 			}
+			if(UseConditions[i].conditionType == AISkillUseConditionType.position)
+			{
+				ownerFSM.SetTargetPosition(ownerFSM.targetObject.position);
+            }
 		}
 		if(fireObject != null)
 			ownerFSM.fireObject = fireObject;
@@ -122,117 +127,9 @@ public class AISkill : BaseSkill {
 
 	public override void ResetSkill ()
 	{
-		base.ResetSkill ();
+		base.ResetSkill();
 		ownerFSM.moveToTarget = false;
 		ownerFSM.aimAtTarget = false;
-	}
-
-	/*public override void HitTarget(HitBox target, bool isAlly)
-	{
-		HitInfo newHit = new HitInfo();
-		
-		if(!isAlly)
-		{
-			newHit.sourceName = fsm.myStatus.characterName;
-			newHit.hitPosX = fsm._transform.position.x;
-			newHit.hitPosY = fsm._transform.position.y;
-			newHit.hitPosZ = fsm._transform.position.z;
-			newHit.skillEffects = new List<StatusEffectData>();
-			for (int i = 0; i < onHitSkillEffects.Count; i++) 
-			{
-				if (onHitSkillEffects[i].affectEnemy) {
-					newHit.skillEffects.Add(onHitSkillEffects[i]);
-				}
-			}
-			Debug.Log("no. of skill effects = " + newHit.skillEffects.Count);
-
-			//TODO apply self buffs from characterstatus
-			//TODO apply hitbox local buffs
-			BinaryFormatter b = new BinaryFormatter();
-			MemoryStream m = new MemoryStream();
-			b.Serialize(m, newHit);
-			
-			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
-			
-			//target.ReceiveHit(newHit);
-			//Debug.Log(finalhit.sourceName);
-			Debug.Log("hitenemy");
-		}
-		else
-		{
-			Debug.Log("hitally");
-		}
-		//hb.ReceiveHit(newHit);
-	}*/
-	/*
-	public virtual void HitTarget(HitBox target, bool isAlly, Vector3 originPos)
-	{
-		HitInfo newHit = new HitInfo();
-
-		if(!isAlly)
-		{
-			newHit.sourceName = fsm.myStatus.characterName;
-			//newHit.damage = damage;
-			newHit.hitPosX = originPos.x;
-			newHit.hitPosY = originPos.y;
-			newHit.hitPosZ = originPos.z;
-			newHit.skillEffects = new List<StatusEffectData>();
-			for (int i = 0; i < onHitSkillEffects.Count; i++) 
-			{
-				if (onHitSkillEffects[i].affectEnemy) {
-					newHit.skillEffects.Add(onHitSkillEffects[i]);
-				}
-			}
-			
-			//TODO apply self buffs from characterstatus
-			//TODO apply hitbox local buffs
-			BinaryFormatter b = new BinaryFormatter();
-			MemoryStream m = new MemoryStream();
-			b.Serialize(m, newHit);
-			
-			target.ownerCS.myPhotonView.RPC("ReceiveHit", PhotonTargets.All, m.GetBuffer());
-			
-			//target.ReceiveHit(newHit);
-			//Debug.Log(finalhit.sourceName);
-			Debug.Log("hitenemy");
-		}
-		else
-		{
-			Debug.Log("hitally");
-		}
-		//hb.ReceiveHit(newHit);
-	}*/
-
-	public void OverlapSphere(Vector3 location, float radius)
-	{
-		Collider[] hitColliders = Physics.OverlapSphere(location, radius);
-		for (int i = 0; i < hitColliders.Length; i++) 
-		{
-			HitBox hb = hitColliders[i].gameObject.GetComponent<HitBox>();
-			//ContactPoint contact = other.contacts[0];
-			if(hb != null)
-			{
-				CharacterStatus cs = hb.ownerCS;
-				if(cs != ownerFSM.myStatus)
-				{
-					if(!HitEnemies.Contains(cs) && !HitAllies.Contains(cs))
-					{
-						//determine if friend or foe
-						if(cs.characterType == CharacterType.AI)
-						{
-							HitAllies.Add(cs);
-							HitTarget(hb, true);
-						}
-						else
-						{
-							HitEnemies.Add(cs);
-							HitTarget(hb, false);
-							//masterAISkill.fsm.myPhotonView.RPC("SpawnParticle", PhotonTargets.All, hitDecal.name, hitPos);
-						}
-					}
-				}
-			}
-		}
 	}
 }
 
@@ -245,8 +142,9 @@ public class AISkillUseCondition
 
 public enum AISkillUseConditionType
 {
-	range,
+	rangeOfTarget,
 	direction,
+	position
 }
 
 public class AISkillRequirements

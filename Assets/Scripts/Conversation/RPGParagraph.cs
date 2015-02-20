@@ -16,9 +16,11 @@ public class RPGParagraph
 	public List<Condition> Conditions;
 	public List<LineText> LineTexts;
 	public List<ActionEvent> Actions;
-	public int nextParagraphID;
 	public float displayTimer;
+	public int ownerNPCID;
+	public bool isBaseParagraph;
 	public NextParagraphInteraction nextParagraphCondition;
+	public List<int> nextParagraphIDs;
 	
 	[XmlIgnore]
 	public int QuestID;
@@ -32,6 +34,8 @@ public class RPGParagraph
 		Actions = new List<ActionEvent>();
 		LineTexts = new List<LineText>();
 		Conditions = new List<Condition>();
+		nextParagraphIDs = new List<int>();
+		displayTimer = 0;
 		//CanEndParagraph = true;
 		//preffix = "PARAGRAPH";
 	}

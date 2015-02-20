@@ -67,9 +67,38 @@ public class WorldManager : Photon.MonoBehaviour {
 
 	#region arena logic
 
-	public void SpawnNewArena(NPCArena arena)
+	public void RequestArenaEntry(string arenaName, int enemyID, bool solo)
 	{
-
+		int newid = PhotonNetwork.AllocateViewID();
+		EnterArenaData data = new EnterArenaData();
+		data.EnemyID = enemyID;
+		data.NewViewID = newid;
+		Debug.Log(data.NewViewID);
+		
+		if(solo)
+		{
+			data.partyList.Add(PhotonNetwork.player.ID);
+			data.PartyLeaderID = PhotonNetwork.player.ID;
+		}
+		else
+		{
+			if(PlayerManager.Instance.partyMembers.Count == 0)
+			{
+				data.partyList.Add(PhotonNetwork.player.ID);
+				data.PartyLeaderID = PhotonNetwork.player.ID;
+			}
+			else if(PlayerManager.Instance.partyMembers.Count > 0)
+			{
+				data.partyList = PlayerManager.Instance.partyMembers;
+				data.PartyLeaderID = PhotonNetwork.player.ID;
+			}
+		}
+		
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+		
+		myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, arenaName, m.GetBuffer());
 	}
 
 	//from battle challenge initiator to Master
@@ -103,7 +132,6 @@ public class WorldManager : Photon.MonoBehaviour {
 
 		//change bool state of arenas across the board
 		Arenas[i].arenaStates[s] = true;
-
 
 		List<PhotonPlayer> pPlayers = new List<PhotonPlayer>();
 		for (int x = 0; x < arenaData.partyList.Count; x++) {
@@ -281,7 +309,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void UpdatePartyList(byte[] partyList)
 	{
-		PlayerManager.Instance.partyMembers.Clear();
+		PlayerManager.Instance._partyMembers.Clear();
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(partyList);
 		PlayerManager.Instance.partyMembers = (List<int>)b.Deserialize(m);
@@ -292,8 +320,19 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void SendPartyInvite(int partyLeaderID,PhotonMessageInfo info)
 	{
-		GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
-		Debug.Log("received party invite");
+		if(PlayerManager.Instance.isInParty())
+			myPhotonView.RPC("RejectPartyInvitation", info.sender);
+		else
+		{
+			GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
+			Debug.Log("received party invite");
+		}
+	}
+
+	[RPC]
+	public void RejectPartyInvite(PhotonMessageInfo info)
+	{
+		//display rejection notice from 
 	}
 	
 	//invitees reply back to prospective/party leader

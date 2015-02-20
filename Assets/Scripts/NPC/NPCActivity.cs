@@ -9,14 +9,16 @@ using System.IO;
 
 [Serializable]
 public class NPCActivity: BasicItem {
-	
+
 	public NPCActivityType activityType;
 	public int conversationID;
-	public int paragraphID;
 	public string npcIconAtlas;
 	public string npcIconSprite;
 	public string npcButtonText;
 	public List<Condition> Conditions;
+
+	[XmlIgnore]
+	public RPGConversation conversation;
 
 	public bool Validate()
 	{
@@ -26,6 +28,11 @@ public class NPCActivity: BasicItem {
 				return false;
 		}
 		return true;
+	}
+
+	public void LoadConversation()
+	{
+		conversation = Storage.LoadById<RPGConversation>(conversationID, new RPGConversation());
 	}
 }
 

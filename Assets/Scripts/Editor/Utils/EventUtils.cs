@@ -8,7 +8,7 @@ public class EventUtils
 	{
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Event type");
+		EditorGUILayout.PrefixLabel("Action type");
 		action.ActionType = (ActionEventType)EditorGUILayout.EnumPopup(action.ActionType, GUILayout.Width(150));
 		switch(action.ActionType)
 		{
@@ -54,7 +54,6 @@ public class EventUtils
 			}
 			action.Amount = EditorUtils.IntField(action.Amount, "Amount: ", 90, FieldTypeEnum.Middle);
 			break;
-			
 			//quest start
 		case ActionEventType.QuestStart:
 			
@@ -68,7 +67,9 @@ public class EventUtils
 
 		case ActionEventType.Continueconversation:
 			break;
-
+		case ActionEventType.GoToParagraph:
+			action.Item = EditorGUILayout.IntField( action.Item, GUILayout.Width(100));
+			break;
 		}
 	}
 }

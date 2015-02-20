@@ -7,16 +7,18 @@ public class MiniGameGUIController : BasicGUIController {
 	public UILabel miniGameName;
 	public UILabel description;
 	public UISprite portrait;
+	public NPCMinigame minigame;
 
-	public override void Enable ()
+	public void Enable (NPCMinigame mg)
 	{
-		miniGameName.text = PlayerManager.Instance.ActiveMinigame.Name;
-		GameObject Atlas = Resources.Load(PlayerManager.Instance.ActiveMinigame.AtlasName) as GameObject;
+		minigame = mg;
+		miniGameName.text = minigame.Name;
+		GameObject Atlas = Resources.Load(minigame.AtlasName) as GameObject;
 		portrait.atlas = Atlas.GetComponent<UIAtlas>();
-		portrait.spriteName = PlayerManager.Instance.ActiveMinigame.PortraitIcon;
+		portrait.spriteName = minigame.PortraitIcon;
 		panel.SetActive(true);
-		description.text = PlayerManager.Instance.ActiveMinigame.Description;
-		base.Enable ();
+		description.text = minigame.Description;
+		Enable();
 	}
 
 	public override void Disable (bool resetState)
@@ -27,6 +29,6 @@ public class MiniGameGUIController : BasicGUIController {
 
 	public void OnPlayButtonPressed()
 	{
-		PlayerManager.Instance.PlayMiniGame();
+		PlayerManager.Instance.PlayMiniGame(minigame);
 	}
 }

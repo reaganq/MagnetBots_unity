@@ -25,9 +25,9 @@ public class PlayerInformation  {
 	public PlayerProfile profile;
 
 	public int Coins;
-	public int Sparks;
 	public int Magnets;
-	public int BankMagnets;
+	public int CitizenPoints;
+	public int BankCoins;
 	public string ParseObjectId;
 	ParseObject playerData = new ParseObject("PlayerData");
 
@@ -68,7 +68,7 @@ public class PlayerInformation  {
 				}
         
         AddCurrency(1000,BuyCurrencyType.Coins);
-        AddCurrency(100,BuyCurrencyType.Sparks);
+        AddCurrency(100,BuyCurrencyType.Magnets);
 		AddCurrency(100, BuyCurrencyType.Magnets);
 
 		if(NetworkManager.Instance.usingParse)
@@ -85,13 +85,13 @@ public class PlayerInformation  {
         {
             Coins += amount;
         }
-        else if(currency == BuyCurrencyType.Sparks)
+        else if(currency == BuyCurrencyType.Magnets)
         {
-            Sparks += amount;
+            Magnets += amount;
         }
-		else if(currency == BuyCurrencyType.Magnets)
+		else if(currency == BuyCurrencyType.CitizenPoints)
 		{
-			Magnets += amount;
+			CitizenPoints += amount;
 		}
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 
@@ -105,19 +105,44 @@ public class PlayerInformation  {
         {
             Coins -= amount;
         }
-        else if(currency == BuyCurrencyType.Sparks)
+        else if(currency == BuyCurrencyType.Magnets)
         {
-            Sparks -= amount;
+            Magnets -= amount;
         }
-		else if(currency == BuyCurrencyType.Magnets)
+		else if(currency == BuyCurrencyType.CitizenPoints)
 		{
-			Magnets -= amount;
+			CitizenPoints -= amount;
 		}
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 		if(NetworkManager.Instance.usingParse)
 			UpdateWalletParseData();
     }
+
+	public void Withdraw(int amount)
+	{
+		BankCoins -= amount;
+		Coins += amount;
+		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
+		if(NetworkManager.Instance.usingParse)
+			UpdateWalletParseData();
+	}
  
+	public void Deposit(int amount)
+	{
+		BankCoins += amount;
+		Coins -= amount;
+		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
+		if(NetworkManager.Instance.usingParse)
+			UpdateWalletParseData();
+	}
+
+	public void CollectInterest(int amount)
+	{
+		BankCoins += amount;
+		if(NetworkManager.Instance.usingParse)
+			UpdateWalletParseData();
+	}
+
     public bool CanYouAfford(int price, BuyCurrencyType currency)
     {
         if(currency == BuyCurrencyType.Coins)
@@ -127,9 +152,9 @@ public class PlayerInformation  {
             else
                 return false;
         }
-        else if(currency == BuyCurrencyType.Sparks)
+        else if(currency == BuyCurrencyType.Magnets)
         {
-            if(Sparks >= price)
+            if(Magnets >= price)
                 return true;
             else
                 return false;
@@ -203,7 +228,7 @@ public class PlayerInformation  {
 			}
 			if(item.rpgItem.ID == 2)
 			{
-				AddCurrency(amount, BuyCurrencyType.Sparks);
+				AddCurrency(amount, BuyCurrencyType.Magnets);
 			}
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
@@ -237,7 +262,7 @@ public class PlayerInformation  {
 			}
 			if(item.rpgItem.ID == 2)
 			{
-				RemoveCurrency(amount, BuyCurrencyType.Sparks);
+				RemoveCurrency(amount, BuyCurrencyType.Magnets);
 			}
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
@@ -340,9 +365,10 @@ public class PlayerInformation  {
 		playerData["PlayerShopList"] = playerShopParseList;
 		playerData["JukeBoxList"] = jukeBoxList;
 		playerData["coins"] = Coins;
-		playerData["sparks"] = Sparks;
 		playerData["magnets"] = Magnets;
+		playerData["citizenpoints"] = CitizenPoints;
 		playerData["shopTill"] = shopTill;
+		playerData["bankcoins"] = BankCoins;
 		playerData.SaveAsync().ContinueWith( t =>
 		                                    {
 			if(t.IsCompleted)
@@ -366,8 +392,9 @@ public class PlayerInformation  {
 		}
 
 		playerData["coins"] = Coins;
-		playerData["sparks"] = Sparks;
 		playerData["magnets"] = Magnets;
+		playerData["citizenpoints"] = CitizenPoints;
+		playerData["bankcoins"] = BankCoins;
 		playerData.SaveAsync().ContinueWith( t =>
 		                                    {
 			if(t.IsCompleted)
@@ -441,9 +468,10 @@ public class PlayerInformation  {
 			InterpretParseInventoryList(playerShopInventory, player.Get<byte[]>("PlayerShopList"));
 			InterpretParseJukeBox(player.Get<byte[]>("JukeBoxList"));
 			Coins = player.Get<int>("coins");
-			Sparks = player.Get<int>("sparks");
 			Magnets = player.Get<int>("magnets");
+			CitizenPoints = player.Get<int>("citizenpoints");
 			shopTill = player.Get<int>("shopTill");
+			BankCoins = player.Get<int>("bankcoings");
 		}
 		
 		GUIManager.Instance.IntroGUI.StartGame();

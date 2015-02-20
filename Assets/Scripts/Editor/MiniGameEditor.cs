@@ -54,12 +54,27 @@ public class MiniGameEditor : BaseEditorWindow
 		s.PrefabDirectory = EditorUtils.TextField(s.PrefabDirectory, "Prefab Location");
 		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas");
 		s.PortraitIcon = EditorUtils.TextField(s.PortraitIcon, "portrait");
+		ActivityUtils.DisplayActivityComponents(s, Data);
 		EditorGUILayout.Separator();
+
+		/*for (int i = 0; i < s.conversationIDs.Count; i++) {
+			EditorGUILayout.BeginHorizontal();
+			s.conversationIDs[i] = EditorUtils.IntPopup(s.conversationIDs[i], Data.conversationEditor.items, "conversationID: " + i, 90, FieldTypeEnum.Middle);
+			if(GUILayout.Button("Remove conversation id", GUILayout.Width(400)))
+			{
+				s.conversationIDs.Remove(s.conversationIDs[i]);
+				break;
+			}
+			EditorGUILayout.EndHorizontal();
+		}
 		
-		
+		if(GUILayout.Button("Add Conversation ID", GUILayout.Width(400)))
+		{
+			s.conversationIDs.Add(1);
+		}*/
 		foreach(LootItem item in s.Loots)
 		{
-			
+			EditorGUILayout.BeginVertical(skin.box);
 			//DisplayShopItem(item);
 			DisplayLootItem( item );
 			if (GUILayout.Button("Delete", GUILayout.Width(200)))
@@ -68,6 +83,7 @@ public class MiniGameEditor : BaseEditorWindow
 				break;
 			}
 			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.EndVertical();
 		}
 
 		EditorGUILayout.Separator();

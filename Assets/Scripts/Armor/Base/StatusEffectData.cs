@@ -28,7 +28,7 @@ public class StatusEffectData{
 //what does the skill affect
 public enum StatusEffectType
 {
-	paralyse = 0,
+	dealDamage = 0,
 	movementSpeed = 1,
 	frozen = 2,
 	damage = 3,

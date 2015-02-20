@@ -1,72 +1,50 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/CharacterActionManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GUI/Controllers/BankGUIController.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Melee/LongDurationMelee.cs" Line="28" Column="65" />
-      <File FileName="Assets/Scripts/Base/Avatar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Base/BasePlayerSkill.cs" Line="135" Column="22" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="251" Column="4" />
-      <File FileName="Assets/Scripts/Armor/Base/StatusEffectData.cs" Line="25" Column="22" />
-      <File FileName="Assets/Scripts/Skills/StatusEffect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="56" Column="3" />
-      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="130" Column="6" />
-      <File FileName="Assets/Scripts/Character/CharacterAttributes.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="22" Column="4" />
-      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Detectors/Detector.cs" Line="13" Column="22" />
-      <File FileName="Assets/Scripts/Armor/Detectors/TriggerCollider.cs" Line="62" Column="5" />
-      <File FileName="Assets/Scripts/Armor/Detectors/ParticleCollider.cs" Line="10" Column="28" />
-      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="65" Column="9" />
-      <File FileName="Assets/Scripts/Armor/Detectors/InstantAOEDetector.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="315" Column="3" />
-      <File FileName="../../../../../Volumes/QuriousGame/Unity Files/MagnetBots_unity/Assets/Scripts/Armor/Melee/TriggerCollider.cs" Line="70" Column="20" />
-      <File FileName="../../../../../Volumes/QuriousGame/Unity Files/MagnetBots_unity/Assets/Scripts/Armor/Detectors/ParticleCollider.cs" Line="35" Column="33" />
-      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="133" Column="26" />
+      <File FileName="Assets/Scripts/Skills/RPGSkill.cs" Line="8" Column="2" />
+      <File FileName="Assets/Scripts/GUI/Controllers/TradeGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="88" Column="6" />
+      <File FileName="Assets/Scripts/GUI/Controllers/IntroGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/BankGUIController.cs" Line="63" Column="73" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="143" Column="28" />
+      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="13" Column="34" />
+      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="20" Column="17" />
+      <File FileName="Assets/Scripts/Item/RPGCurrency.cs" Line="15" Column="22" />
+      <File FileName="Assets/Scripts/Skills/RPGSkill.cs" Line="8" Column="2" />
+      <File FileName="Assets/NGUI/Scripts/UI/UISprite.cs" Line="322" Column="5" />
+      <File FileName="Assets/Scripts/GUI/Controllers/TeleporterGUIController.cs" Line="10" Column="2" />
+      <File FileName="Assets/Scripts/Item/RPGArmor.cs" Line="4" Column="26" />
+      <File FileName="Assets/Scripts/Base/GeneralData.cs" Line="3" Column="34" />
+      <File FileName="Assets/Scripts/Item/UsableItem.cs" Line="12" Column="36" />
+      <File FileName="Assets/Scripts/Base/BasicItem.cs" Line="4" Column="31" />
+      <File FileName="Assets/Scripts/Base/IItem.cs" Line="9" Column="2" />
+      <File FileName="Assets/Scripts/Editor/ArmorEditor.cs" Line="87" Column="3" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Photon Unity Networking" expanded="True">
-              <Node name="Plugins" expanded="True">
-                <Node name="PhotonNetwork" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="RPGKit" expanded="True">
-              <Node name="Resources" expanded="True">
-                <Node name="XML" expanded="True" />
+            <Node name="NGUI" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="UI" expanded="True" />
               </Node>
             </Node>
             <Node name="Scripts" expanded="True">
-              <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-                <Node name="Detectors" expanded="True" />
-                <Node name="Melee" expanded="True" />
-                <Node name="Range" expanded="True" />
-              </Node>
               <Node name="Base" expanded="True" />
-              <Node name="Character" expanded="True">
-                <Node name="CharacterActionManager.cs" selected="True" />
-              </Node>
-              <Node name="Conversation" expanded="True" />
-              <Node name="Enemies" expanded="True">
-                <Node name="Skills" expanded="True" />
-              </Node>
               <Node name="GUI" expanded="True">
-                <Node name="Controllers" expanded="True" />
+                <Node name="Controllers" expanded="True">
+                  <Node name="BankGUIController.cs" selected="True" />
+                </Node>
               </Node>
+              <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
-              <Node name="Minigames" expanded="True" />
               <Node name="NPC" expanded="True" />
               <Node name="Player" expanded="True" />
               <Node name="Skills" expanded="True" />
-              <Node name="Storage" expanded="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Editor" expanded="True" />
             <Node name="Scripts" expanded="True">
               <Node name="Editor" expanded="True" />
             </Node>

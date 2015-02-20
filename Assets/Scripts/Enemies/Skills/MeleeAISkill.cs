@@ -71,7 +71,7 @@ public class MeleeAISkill : AISkill {
         }*/
 		else
 		{
-			OverlapSphere(impactParticleSpawnPoint.position, impactRadius);
+			//OverlapSphere(impactParticleSpawnPoint.position, impactRadius);
 		}
         
 		if(attackAnimations[i].followThroughAnimation.clip == null)

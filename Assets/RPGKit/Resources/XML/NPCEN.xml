@@ -57,6 +57,10 @@
         <activityID>1</activityID>
         <activityType>Shop</activityType>
       </NPCActivityData>
+      <NPCActivityData>
+        <activityID>1</activityID>
+        <activityType>Quest</activityType>
+      </NPCActivityData>
     </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>

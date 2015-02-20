@@ -90,7 +90,7 @@ public class GUIUtils {
 		
 		
 		EditorGUILayout.BeginHorizontal();
-		if (GUILayout.Button("Add event", GUILayout.Width(90)))
+		if (GUILayout.Button("Add Action", GUILayout.Width(90)))
 		{
 			Events.Add(new ActionEvent());
 		}

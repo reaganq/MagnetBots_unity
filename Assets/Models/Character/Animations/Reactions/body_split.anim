@@ -1,0 +1,382 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: body_split
+  serializedVersion: 4
+  m_AnimationType: 1
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.0647871569, y: -2.22494168e-16, z: 4.75908406e-17}
+        inSlope: {x: -1.59268534, y: -.0703766868, z: -2.69905343e-07}
+        outSlope: {x: -1.59268534, y: -.0703766868, z: -2.69905343e-07}
+        tangentMode: -2
+      - time: .159999996
+        value: {x: -.319616795, y: -.0112602701, z: -4.31848548e-08}
+        inSlope: {x: -.796342671, y: -.0351883434, z: -1.34952643e-07}
+        outSlope: {x: -.796342671, y: -.0351883434, z: -1.34952643e-07}
+        tangentMode: 1702260552
+      - time: .239999995
+        value: {x: -.319616795, y: -.0112602701, z: -4.31848513e-08}
+        inSlope: {x: .796342611, y: .0351883434, z: 1.34952685e-07}
+        outSlope: {x: .796342611, y: .0351883434, z: 1.34952685e-07}
+        tangentMode: 796160869
+      - time: .400000006
+        value: {x: -.0647871569, y: -2.22494168e-16, z: 4.75908406e-17}
+        inSlope: {x: 1.59268522, y: .0703766868, z: 2.69905314e-07}
+        outSlope: {x: 1.59268522, y: .0703766868, z: 2.69905314e-07}
+        tangentMode: 847253520
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.06478706, y: 5.91974386e-17, z: -8.38050262e-18}
+        inSlope: {x: -1.45813882, y: -.0644314215, z: 2.17187335e-07}
+        outSlope: {x: -1.45813882, y: -.0644314215, z: 2.17187335e-07}
+        tangentMode: 4
+      - time: .159999996
+        value: {x: -.298089266, y: -.0103090275, z: 3.47499736e-08}
+        inSlope: {x: 0, y: -.031034112, z: 6.83737937e-08}
+        outSlope: {x: 0, y: -.031034112, z: 6.83737937e-08}
+        tangentMode: 3
+      - time: .239999995
+        value: {x: -.298089296, y: -.0101199718, z: 2.83147941e-08}
+        inSlope: {x: 0, y: .0328065082, z: -1.2870359e-07}
+        outSlope: {x: 0, y: .0328065082, z: -1.2870359e-07}
+        tangentMode: 7077968
+      - time: .400000006
+        value: {x: -.06478706, y: 5.91974386e-17, z: -8.38050262e-18}
+        inSlope: {x: 1.45813882, y: .063249819, z: -1.76967447e-07}
+        outSlope: {x: 1.45813882, y: .063249819, z: -1.76967447e-07}
+        tangentMode: 847253520
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.156516597, y: -.000862384972, z: 5.06854656e-17}
+        inSlope: {x: -.730145276, y: .111320153, z: 2.13780709e-07}
+        outSlope: {x: -.730145276, y: .111320153, z: 2.13780709e-07}
+        tangentMode: 19
+      - time: .159999996
+        value: {x: -.273339838, y: .0169488396, z: 3.42049127e-08}
+        inSlope: {x: -.229860619, y: .0556600764, z: 6.7301329e-08}
+        outSlope: {x: -.229860619, y: .0556600764, z: 6.7301329e-08}
+        tangentMode: 1098907648
+      - time: .239999995
+        value: {x: -.251705915, y: .0169488396, z: 2.78706693e-08}
+        inSlope: {x: .43267864, y: -.055660069, z: -1.26684853e-07}
+        outSlope: {x: .43267864, y: -.055660069, z: -1.26684853e-07}
+        tangentMode: 7274608
+      - time: .400000006
+        value: {x: -.156516597, y: -.000862384972, z: 5.06854656e-17}
+        inSlope: {x: .594933212, y: -.111320138, z: -1.74191669e-07}
+        outSlope: {x: .594933212, y: -.111320138, z: -1.74191669e-07}
+        tangentMode: 847253520
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 25
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: .400000006
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.0647871569
+        inSlope: -1.59268534
+        outSlope: -1.59268534
+        tangentMode: 10
+      - time: .159999996
+        value: -.319616795
+        inSlope: -.796342671
+        outSlope: -.796342671
+        tangentMode: 10
+      - time: .239999995
+        value: -.319616795
+        inSlope: .796342611
+        outSlope: .796342611
+        tangentMode: 10
+      - time: .400000006
+        value: -.0647871569
+        inSlope: 1.59268522
+        outSlope: 1.59268522
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -2.22494168e-16
+        inSlope: -.0703766868
+        outSlope: -.0703766868
+        tangentMode: 10
+      - time: .159999996
+        value: -.0112602701
+        inSlope: -.0351883434
+        outSlope: -.0351883434
+        tangentMode: 10
+      - time: .239999995
+        value: -.0112602701
+        inSlope: .0351883434
+        outSlope: .0351883434
+        tangentMode: 10
+      - time: .400000006
+        value: -2.22494168e-16
+        inSlope: .0703766868
+        outSlope: .0703766868
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 4.75908406e-17
+        inSlope: -2.69905343e-07
+        outSlope: -2.69905343e-07
+        tangentMode: 10
+      - time: .159999996
+        value: -4.31848548e-08
+        inSlope: -1.34952643e-07
+        outSlope: -1.34952643e-07
+        tangentMode: 10
+      - time: .239999995
+        value: -4.31848513e-08
+        inSlope: 1.34952685e-07
+        outSlope: 1.34952685e-07
+        tangentMode: 10
+      - time: .400000006
+        value: 4.75908406e-17
+        inSlope: 2.69905314e-07
+        outSlope: 2.69905314e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.06478706
+        inSlope: -1.45813882
+        outSlope: -1.45813882
+        tangentMode: 10
+      - time: .159999996
+        value: -.298089266
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: .239999995
+        value: -.298089296
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - time: .400000006
+        value: -.06478706
+        inSlope: 1.45813882
+        outSlope: 1.45813882
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 5.91974386e-17
+        inSlope: -.0644314215
+        outSlope: -.0644314215
+        tangentMode: 10
+      - time: .159999996
+        value: -.0103090275
+        inSlope: -.031034112
+        outSlope: -.031034112
+        tangentMode: 10
+      - time: .239999995
+        value: -.0101199718
+        inSlope: .0328065082
+        outSlope: .0328065082
+        tangentMode: 10
+      - time: .400000006
+        value: 5.91974386e-17
+        inSlope: .063249819
+        outSlope: .063249819
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -8.38050262e-18
+        inSlope: 2.17187335e-07
+        outSlope: 2.17187335e-07
+        tangentMode: 10
+      - time: .159999996
+        value: 3.47499736e-08
+        inSlope: 6.83737937e-08
+        outSlope: 6.83737937e-08
+        tangentMode: 10
+      - time: .239999995
+        value: 2.83147941e-08
+        inSlope: -1.2870359e-07
+        outSlope: -1.2870359e-07
+        tangentMode: 10
+      - time: .400000006
+        value: -8.38050262e-18
+        inSlope: -1.76967447e-07
+        outSlope: -1.76967447e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.156516597
+        inSlope: -.730145276
+        outSlope: -.730145276
+        tangentMode: 10
+      - time: .159999996
+        value: -.273339838
+        inSlope: -.229860619
+        outSlope: -.229860619
+        tangentMode: 10
+      - time: .239999995
+        value: -.251705915
+        inSlope: .43267864
+        outSlope: .43267864
+        tangentMode: 10
+      - time: .400000006
+        value: -.156516597
+        inSlope: .594933212
+        outSlope: .594933212
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.000862384972
+        inSlope: .111320153
+        outSlope: .111320153
+        tangentMode: 10
+      - time: .159999996
+        value: .0169488396
+        inSlope: .0556600764
+        outSlope: .0556600764
+        tangentMode: 10
+      - time: .239999995
+        value: .0169488396
+        inSlope: -.055660069
+        outSlope: -.055660069
+        tangentMode: 10
+      - time: .400000006
+        value: -.000862384972
+        inSlope: -.111320138
+        outSlope: -.111320138
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 5.06854656e-17
+        inSlope: 2.13780709e-07
+        outSlope: 2.13780709e-07
+        tangentMode: 10
+      - time: .159999996
+        value: 3.42049127e-08
+        inSlope: 6.7301329e-08
+        outSlope: 6.7301329e-08
+        tangentMode: 10
+      - time: .239999995
+        value: 2.78706693e-08
+        inSlope: -1.26684853e-07
+        outSlope: -1.26684853e-07
+        tangentMode: 10
+      - time: .400000006
+        value: 5.06854656e-17
+        inSlope: -1.74191669e-07
+        outSlope: -1.74191669e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_Events: []

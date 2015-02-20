@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BasePlayerSkill : BaseSkill {
 
@@ -19,7 +20,8 @@ public class BasePlayerSkill : BaseSkill {
 	//public bool continuousUse;
 	public string skillButtonSpritePath;
 	public string skillButtonAtlasPath;
-	public int upperRNGLimit = 0;
+
+	public float baseDamage;
 
 	[HideInInspector]
 	public Avatar ownerAvatar;
@@ -117,26 +119,7 @@ public class BasePlayerSkill : BaseSkill {
 	{
 		yield return null;
 	}
-
-	public override void EnterState(SkillState state)
-	{
-		switch(state)
-		{
-		case SkillState.ready:
-			TriggerSkillEvents(SkillEventTrigger.onReady);
-			break;
-		case SkillState.precast:
-			TriggerSkillEvents(SkillEventTrigger.onPreCast);
-			break;
-		case SkillState.onUse:
-			TriggerSkillEvents(SkillEventTrigger.onUse);
-			break;
-		case SkillState.followThrough:
-			TriggerSkillEvents(SkillEventTrigger.onFollowThrough);
-			break;
-		}
-	}
-
+	
 	public void SetupSkillButtons()
 	{
 		GUIManager.Instance.MainGUI.EnableActionButton(equipmentSlotIndex, skillID );
@@ -205,7 +188,7 @@ public class BasePlayerSkill : BaseSkill {
 		if(anim.loopAnimation.clip != null)
 			RemoveAnimation(anim.loopAnimation.clip);
 	}
-	
+
 	public void RemoveArmorAnimation(ArmorAnimation anim)
 	{
 		if(anim.clip != null)
@@ -230,4 +213,17 @@ public class BasePlayerSkill : BaseSkill {
 	}
 	
 	#endregion
+
+	public override void ResolveHit (CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
+	{
+		//redundant check
+		if(targetCS.myPhotonView.isMine)
+		{
+			List<StatusEffectData> outgoingSEs = new List<StatusEffectData>();
+			if(ownerStatus.enemyCharacterType == targetCS.characterType)
+				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingEnemyStatusEffects);
+			else
+				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingAllyStatusEffects);
+		}
+	}
 }

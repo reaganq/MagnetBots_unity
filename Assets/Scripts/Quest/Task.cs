@@ -59,5 +59,6 @@ public enum TaskTypeEnum
 	BringItem = 0,
 	KillEnemy = 1,
 	ReachPartOfConversation = 2,
-	VisitArea = 3
+	VisitArea = 3,
+	WaitForAccept = 4
 }

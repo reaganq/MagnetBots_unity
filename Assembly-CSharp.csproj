@@ -407,7 +407,7 @@
      <Compile Include="Assets\Scripts\Armor\Base\StatusEffectData.cs" />
      <Compile Include="Assets\Scripts\Armor\Detectors\Detector.cs" />
      <Compile Include="Assets\Scripts\Armor\Detectors\InstantAOEDetector.cs" />
-     <Compile Include="Assets\Scripts\Armor\Detectors\ParticleCollider.cs" />
+     <Compile Include="Assets\Scripts\Armor\Detectors\ProjectileCollider.cs" />
      <Compile Include="Assets\Scripts\Armor\Detectors\TriggerCollider.cs" />
      <Compile Include="Assets\Scripts\Armor\Melee\LongDurationMelee.cs" />
      <Compile Include="Assets\Scripts\Armor\Melee\NormalMelee.cs" />
@@ -415,7 +415,6 @@
      <Compile Include="Assets\Scripts\Armor\Range\BasePlayerRangedSkill.cs" />
      <Compile Include="Assets\Scripts\Armor\Range\BulletProjectile.cs" />
      <Compile Include="Assets\Scripts\Base\ActionEvent.cs" />
-     <Compile Include="Assets\Scripts\Base\Avatar.cs" />
      <Compile Include="Assets\Scripts\Base\BaseLootItem.cs" />
      <Compile Include="Assets\Scripts\Base\BasicInventory.cs" />
      <Compile Include="Assets\Scripts\Base\BasicItem.cs" />
@@ -423,11 +422,13 @@
      <Compile Include="Assets\Scripts\Base\GeneralData.cs" />
      <Compile Include="Assets\Scripts\Base\IItem.cs" />
      <Compile Include="Assets\Scripts\Base\PreffixSolver.cs" />
+     <Compile Include="Assets\Scripts\Base\RPGTown.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraOffsetMatrix.cs" />
      <Compile Include="Assets\Scripts\Camera\PlayerCamera.cs" />
      <Compile Include="Assets\Scripts\Camera\UI3DCamera.cs" />
      <Compile Include="Assets\Scripts\Character\AICharacter.cs" />
      <Compile Include="Assets\Scripts\Character\ActionManager.cs" />
+     <Compile Include="Assets\Scripts\Character\Avatar.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterActionManager.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterAttributes.cs" />
      <Compile Include="Assets\Scripts\Character\CharacterInputController.cs" />
@@ -436,6 +437,7 @@
      <Compile Include="Assets\Scripts\Character\NetworkCharacterMovement.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerCharacter.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerMotor.cs" />
+     <Compile Include="Assets\Scripts\Character\SkeletonAnimations.cs" />
      <Compile Include="Assets\Scripts\Cinematic\Cutscene.cs" />
      <Compile Include="Assets\Scripts\Conversation\LineText.cs" />
      <Compile Include="Assets\Scripts\Conversation\RPGConversation.cs" />
@@ -451,9 +453,11 @@
      <Compile Include="Assets\Scripts\GUI\ChatBox.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\AnvilGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ArenaGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\BankGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\BasicGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ButtonCustomMessage.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ChatGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\ConversationGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\GUIManager.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\HoverPopupGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\IntroGUIController.cs" />
@@ -471,6 +475,8 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\RewardsGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ShopGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\SkillButton.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\TeleporterGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\TradeGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\DragCollider.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemyCard.cs" />
      <Compile Include="Assets\Scripts\GUI\FriendBox.cs" />
@@ -537,6 +543,7 @@
      <Compile Include="Assets\Scripts\SaveLoad\Encryption.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\Entities\SaveContent.cs" />
      <Compile Include="Assets\Scripts\SaveLoad\SaveLoad.cs" />
+     <Compile Include="Assets\Scripts\Skills\RPGSkill.cs" />
      <Compile Include="Assets\Scripts\Skills\StatusEffect.cs" />
      <Compile Include="Assets\Scripts\Storage\IStorage.cs" />
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
@@ -733,6 +740,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\BumpSpec\T4M 3 TexturesBumpSpec.shader" />
      <None Include="Assets\Plugins\PathologicalGames\readme.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlurDX11.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\NPCQuestEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 6 Textures.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />

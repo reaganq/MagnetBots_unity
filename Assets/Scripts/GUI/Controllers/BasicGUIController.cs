@@ -19,9 +19,7 @@ public class BasicGUIController : MonoBehaviour {
 		{
 			if(Root != null)
 				Root.SetActive(true);
-
 		}
-
 	}
 
 	public virtual void Hide()

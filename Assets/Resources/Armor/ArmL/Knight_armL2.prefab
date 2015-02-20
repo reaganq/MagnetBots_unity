@@ -382,7 +382,7 @@ Transform:
   m_Father: {fileID: 400000}
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -391,94 +391,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20954ef40219f4190b6d7bb3fe72529b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  isPressedDown: 0
-  owner: {fileID: 0}
-  ownerManager: {fileID: 0}
+  skillID: 0
+  ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
-  armorState: 0
-  HitEnemies: []
-  HitAllies: []
+  ownerManager: {fileID: 0}
+  HitTargets: []
   isBusy: 0
+  isActive: 0
   skillName: 
   skillType: 0
   disableMovement: 0
+  disableRotation: 0
   restrictedMovement: 0
+  limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 0
-  damage: 0
-  armorAttributes: []
   skillStatusEffects: []
+  skillDetectors: []
+  skillVFXs: []
+  _skillState: 0
+  ownerCAM: {fileID: 0}
+  equipmentSlotIndex: 0
   hasSkill: 1
   hasPressDownEvent: 1
   hasPressUpEvent: 1
   resetAfterDown: 0
   resetAfterUp: 0
   canUseWhileBusy: 0
-  continuousUse: 0
-  equipmentSlotIndex: 0
-  myAvatar: {fileID: 0}
-  skillAnimation:
-    precastAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castAnimation:
-      clip: {fileID: 7400000, guid: 62c441a939bfa486fb06c073621aaeb6, type: 2}
-      animationLayer: 4
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    followThroughAnimation:
-      clip: {fileID: 7400000, guid: 45d5a835a9f144f27a1a8b09ed9bc042, type: 2}
-      animationLayer: 4
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    loopAnimation:
-      clip: {fileID: 7400000, guid: 9eabd2e51b3fe4fe69a224ee22bb243b, type: 2}
-      animationLayer: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castTime: 0
-    followThroughTime: 0
-  detectionMethod: 5
-  weaponLocation: {fileID: 0}
-  detectionRange: 0
-  canHitMultipleTargets: 0
+  skillButtonSpritePath: 
+  skillButtonAtlasPath: 
+  upperRNGLimit: 0
+  ownerAvatar: {fileID: 0}
+  isPressedDown: 0
+  isPressedUp: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -493,12 +469,14 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: a08a048f7c3f24e5fa95bebcc7ff10a6, type: 2}
     animationLayer: 1
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: 958bb461a21f246ffb118a64d63210a0, type: 2}
     animationLayer: 1
+    useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0

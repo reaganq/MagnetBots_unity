@@ -16,7 +16,6 @@ public class RPGCurrency : RPGItem {
 	{
 		Name = string.Empty;
 		preffix = "CURRENCY";
-		BuyCurrency = BuyCurrencyType.None;
 		BuyValue = 0;
 		Stackable = true;
 		SellValue = 0;

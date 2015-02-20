@@ -196,9 +196,12 @@
      <Compile Include="Assets\Scripts\Editor\MainWindowEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\MiniGameEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\NPCEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\NPCQuestEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\QuestEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ServiceEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ShopEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\TownEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\Utils\ActivityUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\BaseEditorWindow.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\ConditionUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\EditorUtils.cs" />
@@ -380,6 +383,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\BumpSpec\T4M 3 TexturesBumpSpec.shader" />
      <None Include="Assets\Plugins\PathologicalGames\readme.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlurDX11.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\NPCQuestEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 6 Textures.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
@@ -504,6 +508,8 @@
       <Project>{808A5F33-CFF1-4E19-FE26-74000AD54513}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript-firstpass.unityproj">
       <Project>{225DE004-BBE4-B6B1-D2AD-21F6C9ADB21F}</Project>      <Name>Assembly-UnityScript-firstpass</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{069BC169-F5CB-8D98-450E-FC28C89E7512}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-UnityScript.unityproj">
       <Project>{EA8E3C70-E0BF-FFC0-B205-5FE272DDFDE3}</Project>      <Name>Assembly-UnityScript</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">

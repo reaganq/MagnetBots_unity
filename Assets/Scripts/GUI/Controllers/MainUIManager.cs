@@ -4,8 +4,8 @@ using System.Collections;
 public class MainUIManager : BasicGUIController {
 
 	public UILabel coinsCounter = null;
-	public UILabel sparksCounter = null;
 	public UILabel magnetsCounter = null;
+	public UILabel citizenpointCounter = null;
 	public GameObject mainButton = null;
 	public GameObject actionButtonsRoot;
 	public GameObject sideTray;
@@ -25,7 +25,7 @@ public class MainUIManager : BasicGUIController {
 	public void UpdateCurrencyCount()
 	{
 		coinsCounter.text = PlayerManager.Instance.Hero.Coins.ToString();
-		sparksCounter.text = PlayerManager.Instance.Hero.Sparks.ToString();
+		magnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
 		//magnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
 	}
 

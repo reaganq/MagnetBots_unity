@@ -39,7 +39,9 @@ public class MainWindowEditor : EditorWindow
 	public NPCEditor npcEditor;
 	public MiniGameEditor minigameEditor;
 	public ServiceEditor serviceEditor;
+	public NPCQuestEditor npcQuestEditor;
 	public QuestEditor questEditor;
+	public TownEditor townEditor;
 	//public RaceEditor raceEditor;
 	//public ClassEditor classEditor;
 	//public GuildEditor guildEditor;
@@ -105,6 +107,10 @@ public class MainWindowEditor : EditorWindow
 		minigameEditor = new MiniGameEditor(Skin, this);
 
 		serviceEditor = new ServiceEditor(Skin, this);
+
+		npcQuestEditor = new NPCQuestEditor(Skin, this);
+
+		townEditor = new TownEditor(Skin, this);
 		
 		//spellShop = new SpellShopEditor(Skin, this);
 		
@@ -254,7 +260,8 @@ public class MainWindowEditor : EditorWindow
 		{
 			MainWindowType = MainWindowTypeEnum.Enemy;
 		}
-
+		GUILayout.EndHorizontal();
+		GUILayout.BeginHorizontal();
 		if (GUILayout.Button(currencyEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.Currency;
@@ -270,9 +277,19 @@ public class MainWindowEditor : EditorWindow
 			MainWindowType = MainWindowTypeEnum.Service;
 		}
 
+		if (GUILayout.Button(npcQuestEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.NPCQuest;
+		}
+
 		if (GUILayout.Button(questEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.Quest;
+		}
+
+		if (GUILayout.Button(townEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Town;
 		}
 		
 		/*if (GUILayout.Button(skillEditor.EditorName, GUILayout.Width(100)))
@@ -432,8 +449,14 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.Service:
 				serviceEditor.DisplayWindow(position);
 				break;
+			case MainWindowTypeEnum.NPCQuest:
+				npcQuestEditor.DisplayWindow(position);
+				break;
 			case MainWindowTypeEnum.Quest:
 				questEditor.DisplayWindow(position);
+				break;
+			case MainWindowTypeEnum.Town:
+				townEditor.DisplayWindow(position);
 				break;
 
             /*case MainWindowTypeEnum.QuestCategory:
@@ -473,6 +496,8 @@ public enum MainWindowTypeEnum
 	Spell,
 	SpellShop,
 	Teleport,
+	Town,
 	Weapon,
-	WorldObject
+	WorldObject,
+	NPCQuest
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfNPCQuest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <NPCQuest>
+    <ID>1</ID>
+    <Name>Lynne's Stocking Mission</Name>
+    <Description />
+    <SystemDescription />
+    <activityType>Quest</activityType>
+    <conversationID>3</conversationID>
+    <Conditions />
+    <questID>1</questID>
+  </NPCQuest>
+</ArrayOfNPCQuest>

@@ -51,8 +51,7 @@ public class ArenaEditor : BaseEditorWindow
 	{
 		NPCArena s = (NPCArena)currentItem;
 
-		EditorGUILayout.Separator();
-
+		ActivityUtils.DisplayActivityComponents(s, Data);
 		for (int i = 0; i < s.EnemyIDs.Count; i++) {
 
 			EditorGUILayout.Separator();

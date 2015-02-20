@@ -19,11 +19,12 @@ public class ConditionsUtils
 			}
 			EditorGUILayout.EndHorizontal();
 		}
-		
+		EditorGUILayout.BeginHorizontal();
 		if (GUILayout.Button("Add condition",GUILayout.Width(120)))
 		{
 			Conditions.Add(new Condition());
 		}
+		EditorGUILayout.EndHorizontal();
 	}
 	
 	private static void AddCondition(Condition condition, MainWindowEditor D)

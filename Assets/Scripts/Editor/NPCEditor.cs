@@ -53,6 +53,8 @@ public class NPCEditor : BaseEditorWindow
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("default conversation id");
 		s.defaultConversationID = EditorGUILayout.IntField(s.defaultConversationID, GUILayout.Width(100));
+		EditorGUILayout.PrefixLabel("speaker Prefab");
+		s.speakerPrefabPath = EditorGUILayout.TextField(s.speakerPrefabPath, GUILayout.Width(500));
 		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.Separator();
 

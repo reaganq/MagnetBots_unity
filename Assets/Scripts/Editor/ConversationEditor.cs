@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System;
 using System.Collections;
@@ -56,18 +56,18 @@ public class ConversationEditor : BaseEditorWindow {
 	{
 		RPGConversation s = (RPGConversation)currentItem;
 		EditorGUILayout.Separator();
+		ConditionsUtils.Conditions(s.conditions, Data);
 
-
-		for (int i = 0; i < s.ConversationParagraphs.Count; i++)
+		for (int i = 0; i < s.conversationParagraphs.Count; i++)
 		{
 			EditorGUILayout.BeginVertical(skin.box);
 			//EditorGUILayout.BeginHorizontal();
 
 			//EditorGUILayout.EndHorizontal();
-			AddParagraph(s.ConversationParagraphs[i], i);
+			AddParagraph(s.conversationParagraphs[i], i);
 			if (GUILayout.Button("Delete Paragraph", GUILayout.Width(400)))
 			{
-				s.ConversationParagraphs.Remove(s.ConversationParagraphs[i]);
+				s.conversationParagraphs.Remove(s.conversationParagraphs[i]);
 				break;
 			}
 			EditorGUILayout.EndVertical();
@@ -76,7 +76,7 @@ public class ConversationEditor : BaseEditorWindow {
 		if (GUILayout.Button("Add paragraph", GUILayout.Width(400)))
 		{
 			RPGParagraph p = new RPGParagraph();
-			s.ConversationParagraphs.Add(p);
+			s.conversationParagraphs.Add(p);
 		}
 		
 		currentItem = s;
@@ -86,6 +86,14 @@ public class ConversationEditor : BaseEditorWindow {
 	{
 		EditorUtils.Label("paragraph id: "+j);
 		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("base paragraph?");
+		s.isBaseParagraph = EditorGUILayout.Toggle(s.isBaseParagraph, GUILayout.Width(50));
+		EditorGUILayout.PrefixLabel("Display timer");
+		s.displayTimer = EditorGUILayout.FloatField(s.displayTimer, GUILayout.Width(100));
+		EditorGUILayout.PrefixLabel("owner NPC");
+		s.ownerNPCID = EditorUtils.IntPopup(s.ownerNPCID, Data.npcEditor.items, FieldTypeEnum.Middle);
+		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("NPC text");
 		s.ParagraphText = EditorGUILayout.TextArea(s.ParagraphText, GUILayout.Width(700));
 		EditorGUILayout.EndHorizontal();
@@ -93,6 +101,21 @@ public class ConversationEditor : BaseEditorWindow {
 		EditorGUILayout.PrefixLabel("Next Paragraph Interaction");
 		s.nextParagraphCondition = (NextParagraphInteraction)EditorGUILayout.EnumPopup(s.nextParagraphCondition, GUILayout.Width(300));
 		EditorGUILayout.EndHorizontal();
+		for (int i = 0; i < s.nextParagraphIDs.Count; i++) {
+			EditorGUILayout.BeginHorizontal();
+			s.nextParagraphIDs[i] = EditorGUILayout.IntField( s.nextParagraphIDs[i], GUILayout.Width(100));
+			if(GUILayout.Button("Remove", GUILayout.Width(200)))
+			{
+				s.nextParagraphIDs.Remove(s.nextParagraphIDs[i]);
+				break;
+			}
+			EditorGUILayout.EndHorizontal();
+		}
+		
+		if(GUILayout.Button("Add Next Paragraph ID", GUILayout.Width(300)))
+		{
+			s.nextParagraphIDs.Add(1);
+		}
 		GUIUtils.ConditionsEvents(s.Conditions, s.Actions, Data);
 
 		for (int i = 0; i < s.LineTexts.Count; i++) {
@@ -118,6 +141,7 @@ public class ConversationEditor : BaseEditorWindow {
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("reply text");
 		s.Text = EditorGUILayout.TextArea(s.Text, GUILayout.Width(700));
+		s.lineTextType = (LineTextType)EditorGUILayout.EnumPopup(s.lineTextType, GUILayout.Width(150));
 		EditorGUILayout.EndHorizontal();
 		GUIUtils.ConditionsEvents(s.Conditions, s.Events, Data);
 	}

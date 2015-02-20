@@ -8,9 +8,11 @@ using System.IO;
 using System;
 
 [XmlInclude(typeof(RPGParagraph))]
+[XmlInclude(typeof(Condition))]
 public class RPGConversation : BasicItem {
 
-	public List<RPGParagraph> ConversationParagraphs;
+	public List<RPGParagraph> conversationParagraphs;
+	public List<Condition> conditions;
 
 	[XmlIgnore]
 	public int activeParagraphID;
@@ -19,7 +21,8 @@ public class RPGConversation : BasicItem {
 
 	public RPGConversation()
 	{
-		ConversationParagraphs = new List<RPGParagraph>();
+		conversationParagraphs = new List<RPGParagraph>();
+		conditions = new List<Condition>();
 		preffix = "CONVERSATION";
 	}
 }

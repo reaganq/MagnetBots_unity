@@ -8,6 +8,9 @@ public class QuestLog
 	//finished quests
 	public List<RPGQuest> FinishedQuests;
 	public List<RPGQuest> CurrentQuests;
+
+	//ignore
+	public RPGQuest selectedQuest;
 	
 	public QuestLog()
 	{

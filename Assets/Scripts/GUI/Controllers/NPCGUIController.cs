@@ -15,8 +15,12 @@ public class NPCGUIController : BasicGUIController {
 	public List<NPCActivity> activities;
 
 	public NPCActivity activeActivity;
+	public ConversationGUIController conversationGUI;
+	public MiniGameGUIController minigameGUI;
 	public ShopGUIController shopGUI;
 	public ArenaGUIController arenaGUI;
+	public BankGUIController bankGUI;
+	public TeleporterGUIController teleporterGUI;
 	public NPCGUIState _state;
 	public NPCGUIState state
 	{
@@ -79,7 +83,7 @@ public class NPCGUIController : BasicGUIController {
 	{
 		state= NPCGUIState.nothing;
 		//base.Disable();
-		GUIManager.Instance.HideNPCConversationBubble();
+		//GUIManager.Instance.HideNPCConversationBubble();
 		base.Disable();
 	}
 
@@ -135,6 +139,7 @@ public class NPCGUIController : BasicGUIController {
 		Debug.Log("activity pressed" + index);
 		Debug.Log(activities[index].activityType.ToString() + activities[index].Name);
 		activeActivity = activities[index];
+		PlayerManager.Instance.activeActivity = activeActivity;
 		switch(activeActivity.activityType)
 		{
 		case NPCActivityType.Shop:
@@ -143,7 +148,14 @@ public class NPCGUIController : BasicGUIController {
 		case NPCActivityType.Arena:
 			DisplayArena((NPCArena)activeActivity);
 			break;
+		case NPCActivityType.Quest:
+			DisplayQuest((NPCQuest)activeActivity);
+			break;
+		case NPCActivityType.Minigame:
+			break;
 		}
+		if(activeActivity.conversation != null)
+			conversationGUI.DisplayConversation(activeActivity.conversation);
 		//load activity's conversation
 	}
     
@@ -207,6 +219,24 @@ public class NPCGUIController : BasicGUIController {
 		//activityLabel.text = PlayerManager.Instance.ActiveNPC.activity.Name;
 	}
 
+	public void DisplayTeleporter()
+	{
+		state = NPCGUIState.teleporter;
+		teleporterGUI.Enable();
+	}
+
+	public void DisplayQuest(NPCQuest newQuest)
+	{
+		state = NPCGUIState.quest;
+		PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest.quest;
+	}
+
+	public void DisplayMinigame(NPCMinigame newMinigame)
+	{
+		state = NPCGUIState.minigame;
+		minigameGUI.Enable(newMinigame);
+	}
+
 	public void DisplayShop(Shop newShop)
 	{
 		state = NPCGUIState.shop;
@@ -228,4 +258,6 @@ public enum NPCGUIState
 	quest,
 	arena,
 	bank,
+	minigame,
+	teleporter
 }

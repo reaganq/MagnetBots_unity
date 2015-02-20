@@ -63,21 +63,12 @@ public class NormalMelee : BasePlayerSkill {
         if(randomNumber > attackAnimations.Length -1)
 			randomNumber = attackAnimations.Length -1;
 		int i = randomNumber;
-        //Debug.Log("i = "+i);
-        //ownerAnimation[attackAnimations[i].castAnimation.clip.name].time = 0;
 		ownerCAM.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);
-        //characterAnimation.CrossFade(attackAnimations[i].clip.name, 0.05f);
-		//ownerManager.myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.05f);
 
         float totalTime = attackAnimations[i].castAnimation.clip.length;
         float castTime = attackAnimations[i].castTime * totalTime;
         float attackduration = (attackAnimations[i].followThroughTime * totalTime) - castTime;
         float followThroughTime = totalTime - attackduration - castTime;
-
-       /* Debug.Log(totalTime);
-        Debug.Log(castTime);
-        Debug.Log(attackduration);
-        Debug.Log(followThroughTime);*/
 
         yield return new WaitForSeconds(castTime);
 
@@ -86,15 +77,11 @@ public class NormalMelee : BasePlayerSkill {
         
 		if(disableMovement)
 			ownerCAM.EnableMovement();
-
-        //yield return new WaitForSeconds(followThroughTime*0.3f);
-        //characterAnimation.Blend(attackAnimations[i].clip.name, 0, followThroughTime*0.7f);
-		//ownerManager.myPhotonView.RPC("BlendAnimation", PhotonTargets.All, attackAnimations[i].precastAnimation.clip.name, (float)0.0f , (float)(followThroughTime*0.7f));
-		//ownerManager.FadeOutAnimation(attackAnimations[i].castAnimation.clip.name);
-
-        //yield return new WaitForSeconds(followThroughTime * 0.7f);
-
-        //ResetSkill();
-
     }
+
+	public override void HitTarget (CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
+	{
+		base.HitTarget (targetCS, hitPos, targetPos);
+		ownerCAM.SpawnParticle(hitDecal.name, hitPos, true);
+	}
 }

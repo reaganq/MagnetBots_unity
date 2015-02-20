@@ -77,10 +77,13 @@ public class ArmorEditor : BaseEditorWindow
         
         s.HasAbility = EditorGUILayout.Toggle(s.HasAbility, GUILayout.Width(300));
         
+		if(s.HasAbility)
+		{
         //s.AbilityIconPath = EditorUtils.TextField(s.AbilityIconPath, "ability icon path");
-        s.AbilityIconPath = EditorGUILayout.TextField(s.AbilityIconPath, GUILayout.Width(500));
-        
-        s.AbilityString = EditorGUILayout.TextField(s.AbilityString, GUILayout.Width(1000));
+        	s.AbilityIconPath = EditorGUILayout.TextField(s.AbilityIconPath, GUILayout.Width(500));
+			s.AbilityAtlasPath = EditorGUILayout.TextField(s.AbilityAtlasPath, GUILayout.Width(500));
+        	s.AbilityString = EditorGUILayout.TextField(s.AbilityString, GUILayout.Width(1000));
+		}
 		
 		ItemUtils.DisplayItemPart(s, Data);
 		

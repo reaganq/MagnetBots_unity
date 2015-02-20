@@ -10,15 +10,26 @@ using System.IO;
 [Serializable]
 public class NPCQuest : NPCActivity {
 
+	public int questID;
 
+	[XmlIgnore]
+	public RPGQuest quest{
+		get{
+			if(questID > 0)
+			{
+				return PlayerManager.Instance.data.GetQuestByID(questID);
+			}
+			else
+				return null;
+		}
+	}
 
 	public NPCQuest()
 	{
 		Name = string.Empty;
 		SystemDescription = string.Empty;
 		Description = string.Empty;
-		preffix = "QUEST";
+		preffix = "NPCQuest";
 		activityType = NPCActivityType.Quest;
 	}
-
 }

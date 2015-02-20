@@ -131,6 +131,15 @@ public class BaseEditorWindow
 		GUILayout.BeginArea(new Rect(5,250, position.width - 10, Screen.height - 280), skin.box);
 		scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 	}
+
+	/*public RPGConversation GetByConversationID(int id)
+	{
+		for (int i = 0; i < Data.conversationEditor.items.Count; i++) {
+			if(Data.conversationEditor.items[i].ID == id)
+				return (RPGConversation)Data.conversationEditor.items[i];
+				}
+		return null;
+	}*/
 	
 	private void Search()
 	{

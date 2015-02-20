@@ -12,9 +12,12 @@ public class Detector : MonoBehaviour {
 	public SkillEventTrigger deactivationEvent;
 	public bool isLocal;
 
-	public virtual void IgnoreOwnCollisions(Collider ownerHitBox)
+	public virtual void IgnoreOwnCollisions()
 	{
-		Physics.IgnoreCollision(collider, ownerHitBox);
+		for (int i = 0; i < ownerSkill.ownerStatus.hitboxes.Count; i++) 
+		{
+			Physics.IgnoreCollision(collider, ownerSkill.ownerStatus.hitboxes[i]);
+		}
 	}
 
 	public virtual void Activate()
@@ -33,6 +36,7 @@ public class Detector : MonoBehaviour {
 	{
 		ownerSkill = skill;
 		currentNumberOfTargets = 0;
+		IgnoreOwnCollisions();
 	}
 
 	public virtual void Reset()

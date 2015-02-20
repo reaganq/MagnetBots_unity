@@ -54,7 +54,7 @@ public class RangedAISkill : AISkill {
 		if(isSkillActive)
 		{
 			if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
-				ownerFSM.FireOneShot();
+				ownerFSM.FireOneShot(skillID);
 		}
 		if(requiresTargetLock)
 		{

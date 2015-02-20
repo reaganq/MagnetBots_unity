@@ -100,4 +100,15 @@ MonoBehaviour:
   - NetworkFireOneShot
   - NetworkPlayOneShot
   - NetworkUseActiveSkill
+  - NetworkSpawnParticle
+  - NetworkSpawnHead
+  - NetworkSpawnLegs
+  - NetworkSpawnArmL
+  - NetworkSpawnArmR
+  - NetworkSpawnBody
+  - NetworkDealPlayerDamage
+  - NetworkSpawnProjectile
+  - NetworkSpawnPlayerProjectile
+  - NetworkRest
+  - RejectPartyInvite
   DisableAutoOpenWizard: 0

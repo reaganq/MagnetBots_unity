@@ -5,6 +5,11 @@
     <Name>General Store</Name>
     <Description />
     <SystemDescription />
+    <activityType>Shop</activityType>
+    <conversationIDs>
+      <int>2</int>
+    </conversationIDs>
+    <Conditions />
     <Items>
       <ShopItem>
         <StackAmount>2</StackAmount>

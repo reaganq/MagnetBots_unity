@@ -14,6 +14,7 @@ public class LineText : IItem {
 	
 	public List<ActionEvent> Events;
 	public List<Condition> Conditions;
+	public LineTextType lineTextType;
 	
 	public LineText()
 	{
@@ -113,4 +114,11 @@ public class LineText : IItem {
 		}
 		return true;
 	}
+}
+
+[Serializable]
+public enum LineTextType
+{
+	affirmative,
+	negative
 }

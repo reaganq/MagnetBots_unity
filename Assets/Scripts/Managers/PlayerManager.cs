@@ -29,9 +29,9 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerInformation Hero;
     public NPC ActiveNPC;
-	public NPCMinigame ActiveMinigame;
+	public NPCActivity activeActivity;
+	//public NPCMinigame ActiveMinigame;
 	public GameObject ActiveMinigameObject;
-	public NPCArena SelectedArena;
 	public WorldManager ActiveWorld;
 	public Zone ActiveZone;
 	public ArenaManager ActiveArena;
@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
 
-	private List<int> _partyMembers = new List<int>();
+	public List<int> _partyMembers = new List<int>();
 
 	public List<int> partyMembers {
 		get {
@@ -60,6 +60,14 @@ public class PlayerManager : MonoBehaviour
 			GUIManager.Instance.MainGUI.UpdatePartyMembers();
 			Debug.Log("updated partymembers");
 		}
+	}
+
+	public bool isInParty()
+	{
+		if(partyMembers.Count > 1)
+			return true;
+		else
+			return false;
 	}
 
  //public static GeneralData Data;
@@ -231,11 +239,11 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
-	public void PlayMiniGame()
+	public void PlayMiniGame(NPCMinigame minigame)
 	{
 		avatarObject.SetActive(false);
 		ActiveZone.zoneObject.SetActive(false);
-		ActiveMinigameObject = Instantiate(Resources.Load(ActiveMinigame.PrefabDirectory) as GameObject) as GameObject;
+		ActiveMinigameObject = Instantiate(Resources.Load(minigame.PrefabDirectory) as GameObject) as GameObject;
 		activityState = PlayerActivityState.minigame;
 		GUIManager.Instance.HideAllUI();
 	}

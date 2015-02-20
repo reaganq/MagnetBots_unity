@@ -196,6 +196,15 @@ public class ActionManager : MonoBehaviour {
 	{
 		myAnimation.Blend(name, weight, length);
 	}
+
+	[RPC]
+	public void PlayQueuedAnimation(string clip, int mode)
+	{
+		if(mode == 0)
+			myAnimation.PlayQueued(clip, QueueMode.PlayNow);
+		else if (mode == 1)
+			myAnimation.PlayQueued(clip, QueueMode.CompleteOthers);
+	}
 	
 	[RPC]
 	public void NetworkFadeOutAnimation(string name)
@@ -216,4 +225,36 @@ public class ActionManager : MonoBehaviour {
 	}
 	
 	#endregion
+
+	public virtual void DealDamage(int targetViewID, int targetOwnerID, int skillID, Vector3 hitPos, Vector3 targetPos)
+	{
+	}
+	
+	public void SpawnParticle(string particleName, Vector3 pos, bool network)
+	{
+		if(network)
+		{
+			if(myPhotonView.isMine)
+				myPhotonView.RPC("NetworkSpawnParticle", PhotonTargets.All, particleName, pos);
+		}
+		else
+			NetworkSpawnParticle(particleName, pos);
+	}
+	
+	[RPC]
+	public void NetworkSpawnParticle(string particleName, Vector3 pos)
+	{
+		Transform particle = effectsPool.prefabs[particleName];
+		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
+		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
+	}
+	
+	
+	public void IgnoreCollisions(Collider collider)
+	{
+		for (int i = 0; i < myStatus.hitboxes.Count; i++) 
+		{
+			Physics.IgnoreCollision(collider, myStatus.hitboxes[i]);
+		}
+	}
 }

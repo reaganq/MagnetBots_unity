@@ -196,9 +196,12 @@
      <Compile Include="Assets\Scripts\Editor\MainWindowEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\MiniGameEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\NPCEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\NPCQuestEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\QuestEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ServiceEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ShopEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\TownEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\Utils\ActivityUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\BaseEditorWindow.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\ConditionUtils.cs" />
      <Compile Include="Assets\Scripts\Editor\Utils\EditorUtils.cs" />
@@ -380,6 +383,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\BumpSpec\T4M 3 TexturesBumpSpec.shader" />
      <None Include="Assets\Plugins\PathologicalGames\readme.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlurDX11.shader" />
+     <None Include="Assets\RPGKit\Resources\XML\NPCQuestEN.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 6 Textures.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\Demo\Assets\CFX_Demo_WaterWiggle.shader" />
@@ -508,6 +512,8 @@
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
       <Project>{808A5F33-CFF1-4E19-FE26-74000AD54513}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp-vs.csproj">
+      <Project>{069BC169-F5CB-8D98-450E-FC28C89E7512}</Project>      <Name>Assembly-CSharp-vs</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass-vs.csproj">
       <Project>{699C3200-F9CF-5986-22E9-5BFBDB278BD6}</Project>      <Name>Assembly-CSharp-Editor-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>

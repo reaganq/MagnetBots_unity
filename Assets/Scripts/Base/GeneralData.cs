@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class GeneralData: MonoBehaviour{
 
 	public static List<RPGQuest> quests;
+	public static List<RPGNPC> NPCs;
+	public static List<RPGTown> towns;
+	public static float interestRate = 0.1f;
 	public List<ItemCategoryData> itemCategories;
 	public int defaultHeadObj = 1;
 	public int defaultChestObj = 2;
@@ -19,7 +22,18 @@ public class GeneralData: MonoBehaviour{
 	public void Awake()
 	{
 		quests = Storage.Load<RPGQuest>(new RPGQuest());
+		NPCs = Storage.Load<RPGNPC>(new RPGNPC());
+		towns = Storage.Load<RPGTown>(new RPGTown());
 		Debug.Log(quests.Count + "quests");
+	}
+
+	public static RPGNPC GetNPCByID(int ID)
+	{
+		for (int i = 0; i < NPCs.Count; i++) {
+			if(NPCs[i].ID == ID)
+				return NPCs[i];
+		}
+		return null;
 	}
 
 	public RPGQuest GetQuestByID(int ID)
@@ -28,6 +42,15 @@ public class GeneralData: MonoBehaviour{
 			if(quests[i].ID == ID)
 				return quests[i];
 		}
+		return null;
+	}
+
+	public RPGTown GetTownByID(int ID)
+	{
+		for (int i = 0; i < towns.Count; i++) {
+			if(towns[i].ID == ID)
+				return towns[i];
+				}
 		return null;
 	}
 

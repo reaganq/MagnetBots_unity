@@ -312,6 +312,15 @@ public class UISprite : UIBasicSprite
 		return mSprite;
 	}
 
+	/*public void LoadAtlasSprite(string atlasName, string spriteName)
+	{
+		if(atlas.name != atlasName)
+		{
+			GameObject newAtlas = Resources.Load(") as GameObject;
+			portrait.atlas = Atlas.GetComponent<UIAtlas>();
+		}
+	}*/
+
 	/// <summary>
 	/// Set the atlas sprite directly.
 	/// </summary>

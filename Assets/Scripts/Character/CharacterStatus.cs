@@ -115,7 +115,13 @@ public class CharacterStatus : CharacterAttributes {
 	{
 		motor.AddImpact(dir, force, duration, acceleration);
     }
-	
+
+	public virtual void ReceiveHit(int perpetratorViewID, int perpetratorSkillID, List<StatusEffectData> incomingStatusEffects)
+	{
+		//process damage
+		//ReceiveDamage(damage);
+	}
+
     public void ReceiveDamage(float damage)
     {
 		if(curHealth >0)
@@ -170,14 +176,14 @@ public class CharacterStatus : CharacterAttributes {
 	{
 		for (int i = statusEffects.Count - 1; i > -1; i--) 
 		{
-			if(statusEffects[i].ownerSkill == ownerSkill && statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.useDuration)
+			if(statusEffects[i].ownerSkill == ownerSkill && (statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.useDuration || statusEffects[i].statusEffect.effectFormat == SkillEffectFormat.instant) )
 			{
 				statusEffects[i].EndEffect();
 			}
 		}
 		for (int i = speedModifiers.Count - 1; i > -1; i--) 
 		{
-			if(speedModifiers[i].ownerSkill == ownerSkill && speedModifiers[i].statusEffect.effectFormat == SkillEffectFormat.useDuration)
+				if(speedModifiers[i].ownerSkill == ownerSkill && (speedModifiers[i].statusEffect.effectFormat == SkillEffectFormat.useDuration || speedModifiers[i].statusEffect.effectFormat == SkillEffectFormat.instant))
 			{
 				speedModifiers[i].EndEffect();
 			}
@@ -198,7 +204,7 @@ public class CharacterStatus : CharacterAttributes {
 		}
 	}
 
-	[RPC]
+	/*[RPC]
 	public void ReceiveHit(byte[] hit)
 	{
 		HitInfo receivedHit = new HitInfo();
@@ -224,7 +230,7 @@ public class CharacterStatus : CharacterAttributes {
 			ReceiveDamage(receivedHit.damage);
 		}
 		//myPhotonView.RPC("ApplyReceivedHitEffects", PhotonTargets.All, 
-	}
+	}*/
 
 	//others
 	[RPC]

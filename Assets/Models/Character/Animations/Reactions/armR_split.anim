@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!74 &7400000
+AnimationClip:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: armR_split
+  serializedVersion: 4
+  m_AnimationType: 1
+  m_Compressed: 0
+  m_UseHighQualityCurve: 1
+  m_RotationCurves: []
+  m_CompressedRotationCurves: []
+  m_PositionCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: {x: -.0647871569, y: -2.22494168e-16, z: 4.75908406e-17}
+        inSlope: {x: -2.55702043, y: -.112988628, z: -8.30239003e-07}
+        outSlope: {x: -2.55702043, y: -.112988628, z: -8.30239003e-07}
+        tangentMode: 1884633715
+      - time: .239999995
+        value: {x: -.678472042, y: -.027117271, z: -1.99257357e-07}
+        inSlope: {x: .0144798756, y: .000639982522, z: -2.01438581e-08}
+        outSlope: {x: .0144798756, y: .000639982522, z: -2.01438581e-08}
+        tangentMode: 791830373
+      - time: .479999989
+        value: {x: -.0578368157, y: .000307192095, z: -9.66905489e-09}
+        inSlope: {x: 2.58598018, y: .114268593, z: 7.89951287e-07}
+        outSlope: {x: 2.58598018, y: .114268593, z: 7.89951287e-07}
+        tangentMode: 1987004511
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+  m_ScaleCurves: []
+  m_FloatCurves: []
+  m_PPtrCurves: []
+  m_SampleRate: 25
+  m_WrapMode: 0
+  m_Bounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_AnimationClipSettings:
+    serializedVersion: 2
+    m_StartTime: 0
+    m_StopTime: .479999989
+    m_OrientationOffsetY: 0
+    m_Level: 0
+    m_CycleOffset: 0
+    m_LoopTime: 0
+    m_LoopBlend: 0
+    m_LoopBlendOrientation: 0
+    m_LoopBlendPositionY: 0
+    m_LoopBlendPositionXZ: 0
+    m_KeepOriginalOrientation: 0
+    m_KeepOriginalPositionY: 1
+    m_KeepOriginalPositionXZ: 0
+    m_HeightFromFeet: 0
+    m_Mirror: 0
+  m_EditorCurves:
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -.0647871569
+        inSlope: -2.55702043
+        outSlope: -2.55702043
+        tangentMode: 10
+      - time: .239999995
+        value: -.678472042
+        inSlope: .0144798756
+        outSlope: .0144798756
+        tangentMode: 10
+      - time: .479999989
+        value: -.0578368157
+        inSlope: 2.58598018
+        outSlope: 2.58598018
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.x
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: -2.22494168e-16
+        inSlope: -.112988628
+        outSlope: -.112988628
+        tangentMode: 10
+      - time: .239999995
+        value: -.027117271
+        inSlope: .000639982522
+        outSlope: .000639982522
+        tangentMode: 10
+      - time: .479999989
+        value: .000307192095
+        inSlope: .114268593
+        outSlope: .114268593
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.y
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - time: 0
+        value: 4.75908406e-17
+        inSlope: -8.30239003e-07
+        outSlope: -8.30239003e-07
+        tangentMode: 10
+      - time: .239999995
+        value: -1.99257357e-07
+        inSlope: -2.01438581e-08
+        outSlope: -2.01438581e-08
+        tangentMode: 10
+      - time: .479999989
+        value: -9.66905489e-09
+        inSlope: 7.89951287e-07
+        outSlope: 7.89951287e-07
+        tangentMode: 10
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+    attribute: m_LocalPosition.z
+    path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+    classID: 4
+    script: {fileID: 0}
+  m_EulerEditorCurves: []
+  m_Events: []

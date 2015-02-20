@@ -87,6 +87,7 @@ public class RPGNPC : IItem
 	public List<NPCActivityData> activities;
 	public List<NPCActivityData> overrideActivities;
 	public int defaultConversationID;
+	public string speakerPrefabPath;
 	
 	public RPGNPC()
 	{
@@ -95,6 +96,7 @@ public class RPGNPC : IItem
 		Description = string.Empty;
 		activities = new List<NPCActivityData>();
 		overrideActivities = new List<NPCActivityData>();
+		speakerPrefabPath = "NPCs/Speakers/";
 	}
 }
 

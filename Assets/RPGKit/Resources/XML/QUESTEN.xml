@@ -2,21 +2,48 @@
 <ArrayOfRPGQuest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGQuest>
     <ID>1</ID>
-    <Name>Cooking Quest</Name>
-    <Description>Collect ingredients</Description>
+    <Name>Lynne's Stocking Mission</Name>
+    <Description />
     <SystemDescription />
     <QuestSteps>
       <QuestStep QLN="" BN="" SN="1">
         <IsLastStep>false</IsLastStep>
-        <Tasks>
-          <Task TT="KillEnemy" ATR="0" PT="ENEMY" TASKTARGET="1" CA="0" QLD="" />
-        </Tasks>
+        <Tasks />
+      </QuestStep>
+      <QuestStep QLN="" BN="" SN="2">
+        <IsLastStep>false</IsLastStep>
+        <Tasks />
       </QuestStep>
     </QuestSteps>
     <Repeatable>true</Repeatable>
+    <Timed>false</Timed>
+    <timeLimit>0</timeLimit>
     <Failed>false</Failed>
     <FinalQuestLog />
     <QuestCategoryID>0</QuestCategoryID>
     <Rewarded>false</Rewarded>
+    <endTime>0</endTime>
+  </RPGQuest>
+  <RPGQuest>
+    <ID>2</ID>
+    <Name>Training Tutorial</Name>
+    <Description />
+    <SystemDescription />
+    <QuestSteps>
+      <QuestStep QLN="Find Trainer Jim in town, he has some valuable tips for you!" BN="" SN="1">
+        <IsLastStep>false</IsLastStep>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="0" PT="ENEMY" TASKTARGET="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </QuestSteps>
+    <Repeatable>false</Repeatable>
+    <Timed>false</Timed>
+    <timeLimit>0</timeLimit>
+    <Failed>false</Failed>
+    <FinalQuestLog />
+    <QuestCategoryID>0</QuestCategoryID>
+    <Rewarded>false</Rewarded>
+    <endTime>0</endTime>
   </RPGQuest>
 </ArrayOfRPGQuest>

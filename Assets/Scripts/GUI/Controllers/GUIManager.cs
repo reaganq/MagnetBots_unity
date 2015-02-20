@@ -42,13 +42,13 @@ public class GUIManager : MonoBehaviour {
 	public RewardsGUIController rewardsGUI;
 	public ChatGUIController chatGUI;
 	public HoverPopupGUIController hoverPopupGUI;
-	public MainSpeechBubble mainNPCSpeechBubble;
 	public ItemInfoBoxGUIController itemInfoGUI;
 	public ProfileGUIController profileGUI;
+	public ConversationGUIController conversationGUI;
 	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;
-    
+	public List<BasicGUIController> allUIs = new List<BasicGUIController>();
 	//npc stuff
 	public RPGConversation activeConversation;
 	public NPCActivity activeActivity;
@@ -90,7 +90,14 @@ public class GUIManager : MonoBehaviour {
         }
 
         //Instance = this;
-        
+		allUIs.Clear();
+		BasicGUIController[] guis = GetComponentsInChildren<BasicGUIController>();
+		for (int i = 0; i < guis.Length; i++) {
+			allUIs.Add(guis[i]);
+				}
+
+		allUIs.Remove(MainGUI);
+		allUIs.Remove(chatGUI);
         DontDestroyOnLoad(this);
 		//Debug.Log(_uistate);
         //UICameraRoot = GameObject.FindGameObjectWithTag("UICamera").transform;
@@ -168,20 +175,11 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-    public void DisplayIntroGUI()
-    {
-		uiState = UIState.login;
-    }
+	public void EnterGUIState(UIState state)
+	{
+		uiState = state;
+	}
 
-    public void HideIntroGUI()
-    {
-        if(IsIntroGUIDisplayed)
-        {
-            //IntroGUI.SetActive(false);
-            IsIntroGUIDisplayed = false;
-        }
-    }
-	
     public void StartGame()
     {
 		uiState = UIState.main;
@@ -366,16 +364,6 @@ public class GUIManager : MonoBehaviour {
         else
             return true;
     }
-
-	public void DisplayNPCConversationhBubble(string text)
-	{
-		mainNPCSpeechBubble.DisplaySpeechBubble(text);
-	}
-
-	public void HideNPCConversationBubble()
-	{
-		mainNPCSpeechBubble.HideSpeechBubble();
-	}
 
 	public void DisplayItemDetails(InventoryItem item, InventoryGUIType type, BasicGUIController gui)
 	{

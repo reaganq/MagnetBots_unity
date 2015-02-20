@@ -155,7 +155,7 @@ public class ItemTileButton: UIDragDropItem
 			break;
 		}
 	}
-
+	
 	public void setDraggable(bool state)
 	{
 		draggable = state;

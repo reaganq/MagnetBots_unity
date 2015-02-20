@@ -46,7 +46,7 @@ public class NPC: MonoBehaviour
 			triggerCollider.enabled = false;
 			trigger.transform.localScale = startScale;
 		}
-		character = Storage.LoadById<RPGNPC>(ID, new RPGNPC());
+		character = GeneralData.GetNPCByID(ID);
 		foreach(NPCActivityData ad in character.activities)
 		{
 			if(ad.activityType == NPCActivityType.Minigame)

@@ -121,7 +121,7 @@ public class CharacterActionManager : ActionManager {
 		{
 			if(armorSkills[skillIndex].CanPressDown())
 			{
-				int rng = Random.Range(0, armorSkills[skillIndex].upperRNGLimit);
+				int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
 				myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
 			}
 		}
@@ -129,7 +129,7 @@ public class CharacterActionManager : ActionManager {
 		{
 			if(armorSkills[skillIndex].CanPressUp())
 			{
-				int rng = Random.Range(0, armorSkills[skillIndex].upperRNGLimit);
+				int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
 				myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
 			}
 		}
@@ -322,57 +322,58 @@ public class CharacterActionManager : ActionManager {
 		armorSkills[index].PressUp(rng);
 	}
 
+	public void SpawnProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int skillIndex, bool acrossNetwork)
+	{
+		if(acrossNetwork)
+		{
+			if(myPhotonView.isMine)
+				myPhotonView.RPC("NetworkSpawnPlayerProjectile", PhotonTargets.All, projectileName, pos, rot, speed, skillIndex);
+		}
+		else
+			NetworkSpawnPlayerProjectile(projectileName, pos, rot, speed, skillIndex);
+	}
+
+	[RPC]
+	public void NetworkSpawnPlayerProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int index)
+	{
+		Transform projectile = effectsPool.prefabs[projectileName];
+		Transform projectileInstance = effectsPool.Spawn(projectile, pos, rot, null);
+		//IgnoreCollisions(projectileInstance.collider);
+		if(projectileInstance.rigidbody != null)
+			projectileInstance.rigidbody.AddForce( _myTransform.forward * speed);
+		Detector src = projectileInstance.GetComponentInChildren<Detector>();
+		if(src != null)
+		{
+			src.Initialise(armorSkills[index]);
+        }
+	}
+
 	public void PlayOneShot(int index)
 	{
 		myPhotonView.RPC("NetworkPlayOneShot", PhotonTargets.All, index);
 	}
-
+	
 	[RPC]
 	public void NetworkPlayOneShot(int index)
 	{
 		armorSkills[index].FireOneShot();
-	}
-	
-	[RPC]
-	public void SpawnParticleEffect()
-	{
-
-	}
-
-	[RPC]
-	public void SpawnProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int index)
-	{
-		Transform projectile = effectsPool.prefabs[projectileName];
-		Transform projectileInstance = effectsPool.Spawn(projectile, pos, rot, null);
-		IgnoreCollisions(projectileInstance.collider);
-		if(projectileInstance.rigidbody != null)
-			projectileInstance.rigidbody.AddForce( _myTransform.forward * speed);
-		BulletProjectile src = projectileInstance.GetComponent<BulletProjectile>();
-		if(src != null)
-		{
-			src.masterArmor = armorSkills[index];
-			src.status = myStatus;
-			src.pool = effectsPool.poolName;
-        }
     }
 
-	[RPC]
-	public void SpawnParticle(string particleName, Vector3 pos)
+	public override void DealDamage(int targetViewID, int targetOwnerID, int skillID, Vector3 hitPos, Vector3 targetPos)
 	{
-		Transform particle = effectsPool.prefabs[particleName];
-		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
-		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
+		myPhotonView.RPC("NetworkDealPlayerDamage", PhotonPlayer.Find(targetOwnerID), targetViewID, skillID, hitPos, targetPos);
 	}
 
-    
-    public void IgnoreCollisions(Collider collider)
+	[RPC]
+	public void NetworkDealPlayerDamage(int targetViewID, int skillID, Vector3 hitPos, Vector3 targetPos)
 	{
-		List<Collider> cols = myStatus.hitboxes;
-		for (int i = 0; i < cols.Count; i++) 
+		//find targte CharacterStatus
+		CharacterStatus targetCS = PhotonView.Find(targetViewID).gameObject.GetComponent<CharacterStatus>();
+		if(targetCS != null)
 		{
-			Physics.IgnoreCollision(collider, cols[i]);
-        }
-    }
+			armorSkills[skillID].ResolveHit(targetCS, hitPos, targetPos);
+		}
+	}
     
     #endregion
 

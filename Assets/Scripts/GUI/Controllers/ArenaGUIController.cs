@@ -21,7 +21,6 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void Start()
 	{
-		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
 		for (int i = 0; i < EnemyCards.Count; i++) 
 		{
 			EnemyCardObjects.Add(EnemyCards[i].gameObject);
@@ -91,28 +90,7 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void LaunchArena(bool solo)
 	{
-		int newid = PhotonNetwork.AllocateViewID();
-		EnterArenaData data = new EnterArenaData();
-		data.EnemyID = activeArena.Enemies[selectedCardIndex].ID;
-		data.NewViewID = newid;
-		Debug.Log(data.NewViewID);
-
-		if(PlayerManager.Instance.partyMembers.Count == 0)
-		{
-			data.partyList.Add(PhotonNetwork.player.ID);
-			data.PartyLeaderID = PhotonNetwork.player.ID;
-		}
-		else if(PlayerManager.Instance.partyMembers.Count > 0)
-		{
-			data.partyList = PlayerManager.Instance.partyMembers;
-			data.PartyLeaderID = PhotonNetwork.player.ID;
-		}
-
-		BinaryFormatter b = new BinaryFormatter();
-		MemoryStream m = new MemoryStream();
-		b.Serialize(m, data);
-
-		PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, activeArena.Name, m.GetBuffer());
+		PlayerManager.Instance.ActiveWorld.RequestArenaEntry(activeArena.Name, activeArena.Enemies[selectedCardIndex].ID, solo);
 		//GUIManager.Instance.DisplayMainGUI();
 	}
 

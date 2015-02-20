@@ -9,87 +9,84 @@ public class JimFSM : SimpleFSM {
     public float maxMovementTimer;
     public float curMovementTimer;
 
-	public override void Start()
+	public override void Initialise()
 	{
-		base.Start();
-		state = AIState.preInitialised;
+		base.Initialise();
+
     }
-    
     public override void EnterState(AIState stateEntered)
     {
-		base.EnterState(stateEntered);
-        switch(stateEntered)
-        {
-		case AIState.preInitialised:
-			//restJob = Job.make(Rest(), true);
-			break;
-        case AIState.initialised:
-            //indicator.material.color = Color.green;
-            //searchTargetJob = new Job(SearchForTarget(), true);
-            break;
-        case AIState.ready:
-			restJob = Job.make(Rest());
-            /*indicator.material.color = Color.white;
-            if(skills.Length >0)
-            {
-                activeSkill = ChooseSkill();
-                Debug.Log("selected skill: "+activeSkill.skillName);
-                if(activeSkill.requiresTarget)
-                    state = AIState.Searching;
-                else
-                {
-                    state = AIState.UsingSkill;
-                }
-            }
-            else
-                state = AIState.Idling;*/
-            break;
-        case AIState.battleTaunts:
-            /*indicator.material.color = Color.blue;
-			myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, runningAnim.name);
-            curMovementTimer = maxMovementTimer;*/
-            break;
-        case AIState.selectingSkill:
-            /*indicator.material.color = Color.red;
-            usingSkillJob = Job.make(activeSkill.UseSkill(), true);
-            usingSkillJob.jobComplete += (waskilled) => 
-            {
-                if(!waskilled)
-                {
-                    state = AIState.Resting;
-                }
-				else
-				{
-					Debug.LogWarning("killing job");
-	
-					cancelSkillJob = Job.make(activeSkill.CancelSkill(), true);
-					cancelSkillJob.jobComplete += (killed) =>
+		if(myPhotonView.isMine)
+		{
+			base.EnterState(stateEntered);
+	        switch(stateEntered)
+	        {
+			case AIState.preInitialised:
+				//restJob = Job.make(Rest(), true);
+				break;
+	        case AIState.initialised:
+	            //indicator.material.color = Color.green;
+	            //searchTargetJob = new Job(SearchForTarget(), true);
+	            break;
+	        case AIState.ready:
+				Rest();
+	            /*indicator.material.color = Color.white;
+	            if(skills.Length >0)
+	            {
+	                activeSkill = ChooseSkill();
+	                Debug.Log("selected skill: "+activeSkill.skillName);
+	                if(activeSkill.requiresTarget)
+	                    state = AIState.Searching;
+	                else
+	                {
+	                    state = AIState.UsingSkill;
+	                }
+	            }
+	            else
+	                state = AIState.Idling;*/
+	            break;
+	        case AIState.battleTaunts:
+	            /*indicator.material.color = Color.blue;
+				myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, runningAnim.name);
+	            curMovementTimer = maxMovementTimer;*/
+	            break;
+	        case AIState.selectingSkill:
+	            /*indicator.material.color = Color.red;
+	            usingSkillJob = Job.make(activeSkill.UseSkill(), true);
+	            usingSkillJob.jobComplete += (waskilled) => 
+	            {
+	                if(!waskilled)
+	                {
+	                    state = AIState.Resting;
+	                }
+					else
 					{
-						if(state != AIState.Dead)
+						Debug.LogWarning("killing job");
+		
+						cancelSkillJob = Job.make(activeSkill.CancelSkill(), true);
+						cancelSkillJob.jobComplete += (killed) =>
 						{
-							state = AIState.SelectSkill;
-							Debug.LogWarning("selecting skill");
-						}
-					};
-				}
-            };*/
-			SelectSkill();
-            break;
-		case AIState.checkingSkillRequirements:
-			break;
-		case AIState.fulfillingSkillConditions:
-			activeSkill.FulfillSkillConditions();
-			break;
-		case AIState.executingSkill:
-			UseActiveSkill();
-			break;
-		case AIState.rest:
-			break;
-		case AIState.taunting:
-			break;
-		case AIState.victory:
-			break;
-        }
+							if(state != AIState.Dead)
+							{
+								state = AIState.SelectSkill;
+								Debug.LogWarning("selecting skill");
+							}
+						};
+					}
+	            };*/
+					SelectSkill();
+	            break;
+			case AIState.executingSkill:
+					UseActiveSkill();
+				break;
+			case AIState.rest:
+				break;
+			case AIState.taunting:
+				break;
+			case AIState.victory:
+				break;
+	        }
+		}
     }
 
     public override void ExitState(AIState stateExited)
@@ -115,20 +112,6 @@ public class JimFSM : SimpleFSM {
 			if(restJob != null)
 				restJob.kill();
 			break;
-		case AIState.checkingSkillRequirements:
-			//if(moveToTargetJob != null) moveToTargetJob.kill();
-			break;
-		
-        case AIState.fulfillingSkillConditions:
-            if(usingSkillJob != null) 
-			{
-				usingSkillJob.kill();
-				Debug.Log("killing job");
-			}
-			activeSkill.ResetSkill();
-
-			Debug.Log("exit using skill");
-            break;
 		case AIState.executingSkill:
 			if(activeSkill.useSkillJob.running)
 				activeSkill.useSkillJob.kill();
@@ -144,7 +127,7 @@ public class JimFSM : SimpleFSM {
 	public override void Update () 
     {
 		base.Update();
-		if(state == AIState.fulfillingSkillConditions)
+		/*if(state == AIState.fulfillingSkillConditions)
 		{
 			if(hasFulfilledSkillConditions())
 			{

@@ -2,38 +2,174 @@
 <ArrayOfRPGConversation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGConversation>
     <ID>1</ID>
-    <Name>Gym boss initial quest</Name>
-    <Description>Gym boss initial quest</Description>
+    <Name>Opening Speech</Name>
+    <Description>tesla opening remark</Description>
     <SystemDescription />
-    <ConversationParagraphs>
+    <conversationParagraphs />
+    <conditions />
+  </RPGConversation>
+  <RPGConversation>
+    <ID>2</ID>
+    <Name>LYNNE (shop) greeting</Name>
+    <Description />
+    <SystemDescription />
+    <conversationParagraphs />
+    <conditions />
+  </RPGConversation>
+  <RPGConversation>
+    <ID>3</ID>
+    <Name>LYNNE (Quest) Stocking Mission - START</Name>
+    <Description>the repeated gather quest from Lynne Starting Conversation</Description>
+    <SystemDescription />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>I'm looking for a couple of items. Can you help me out?</PT>
+        <Conditions>
+          <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestNotStarted" SI="0" />
+        </Conditions>
+        <LineTexts>
+          <LineText>
+            <Text>Sure thing!</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+              <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
+            </Events>
+            <Conditions />
+            <lineTextType>affirmative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+          <LineText>
+            <Text>Sorry not right now...</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
+            </Events>
+            <Conditions />
+            <lineTextType>negative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+        </LineTexts>
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="DisplayQuestInfo" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>WaitForPlayerReply</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Let me know when you change your mind. I'm always in need of a helper.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>6</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>You better get going! Time moves like clockwork you know.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>6</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Have you found everything I need? The shelves won't stock themselves!</PT>
+        <Conditions>
+          <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+        </Conditions>
+        <LineTexts>
+          <LineText>
+            <Text>Yes, all done!</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+              <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
+            </Events>
+            <Conditions>
+              <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestFinished" SI="0" />
+            </Conditions>
+            <lineTextType>affirmative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+          <LineText>
+            <Text>No, not yet...</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="5" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
+            </Events>
+            <Conditions />
+            <lineTextType>negative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+        </LineTexts>
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="DisplayQuestStatus" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>WaitForPlayerReply</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Nice Job! Here is your pay. I'll have another job ready for you soon</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="GiveQuestRewards" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>WaitForUIAction</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>6</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>What are you hanging around here for then? Hop to it!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>6</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
       <RPGParagraph>
         <PT />
         <Conditions />
         <LineTexts />
-        <Actions />
-        <nextParagraphID>0</nextParagraphID>
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="EndConversation" AM="0" TX="" />
+        </Actions>
         <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
         <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
       </RPGParagraph>
-    </ConversationParagraphs>
+    </conversationParagraphs>
+    <conditions />
   </RPGConversation>
   <RPGConversation>
-    <ID>2</ID>
-    <Name>General Store's shop greeting</Name>
+    <ID>4</ID>
+    <Name>Jim (Quest) Tutorial</Name>
     <Description />
     <SystemDescription />
-    <ConversationParagraphs>
-      <RPGParagraph>
-        <PT>Howdy, what do you fancy today?</PT>
-        <Conditions />
-        <LineTexts />
-        <Actions>
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
-        </Actions>
-        <nextParagraphID>0</nextParagraphID>
-        <displayTimer>0</displayTimer>
-        <nextParagraphCondition>Nothing</nextParagraphCondition>
-      </RPGParagraph>
-    </ConversationParagraphs>
+    <conversationParagraphs />
+    <conditions />
   </RPGConversation>
 </ArrayOfRPGConversation>

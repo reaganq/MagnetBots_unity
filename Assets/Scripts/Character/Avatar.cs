@@ -117,7 +117,8 @@ public class Avatar : MonoBehaviour {
 
 	public void LoadAllBodyParts(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
 	{
-		myPhotonView.RPC("NetworkInitialiseAvatar", PhotonTargets.All, characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
+		//myPhotonView.RPC("NetworkInitialiseAvatar", PhotonTargets.All, characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
+		NetworkInitialiseAvatar(characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
 	}
 
 	[RPC]
@@ -125,11 +126,11 @@ public class Avatar : MonoBehaviour {
 	{
 		SpawnFace(facePath);
 		if(!string.IsNullOrEmpty(headPath))
-			SpawnHead(headPath);
-		SpawnBody(bodyPath);
-		SpawnArmL(armLPath);
-		SpawnArmR(armRPath);
-		SpawnLegs(legsPath);
+			NetworkSpawnHead(headPath);
+		NetworkSpawnBody(bodyPath);
+		NetworkSpawnArmL(armLPath);
+		NetworkSpawnArmR(armRPath);
+		NetworkSpawnLegs(legsPath);
 		LoadBones();
 		myStatus.UpdateNameTag(characterName);
 		animationTarget.Play("Default_Idle");
@@ -140,23 +141,23 @@ public class Avatar : MonoBehaviour {
         switch(slot)
         {
             case EquipmentSlots.Head:
-			myPhotonView.RPC("SpawnHead", PhotonTargets.All, objectpath);
+			StartCoroutine(SpawnHead(objectpath));
             //SpawnHead(objectpath);
                 break;
             case EquipmentSlots.Body:
-			myPhotonView.RPC("SpawnBody", PhotonTargets.All, objectpath);
+			StartCoroutine(SpawnBody(objectpath));
             //SpawnBody(objectpath);
                 break;
             case EquipmentSlots.ArmL:
-			myPhotonView.RPC("SpawnArmL", PhotonTargets.All, objectpath);
+			StartCoroutine(SpawnArmL(objectpath));
             //SpawnArmL(objectpath);
                 break;
             case EquipmentSlots.ArmR:
-			myPhotonView.RPC("SpawnArmR", PhotonTargets.All, objectpath);
+			StartCoroutine(SpawnArmR(objectpath));
             //SpawnArmR(objectpath);
                 break;
             case EquipmentSlots.Legs:
-			myPhotonView.RPC("SpawnLegs", PhotonTargets.All, objectpath);
+			StartCoroutine(SpawnLegs(objectpath));
             //SpawnLegs(objectpath);
                 break;
             case EquipmentSlots.Face:
@@ -190,30 +191,48 @@ public class Avatar : MonoBehaviour {
         
         Destroy(temp);
     }
+	
+    public IEnumerator SpawnHead(string objectpath)
+    {
+		NetworkSpawnHead(objectpath);
+		animationTarget.Play("head_reaction");
+		animationTarget.Play("head_split");
+		yield return new WaitForSeconds(animationTarget["head_reaction"].length);
+		//yield return null;
+		myPhotonView.RPC("NetworkSpawnHead", PhotonTargets.Others, objectpath);
+    }
 
 	[RPC]
-    public void SpawnHead(string objectpath)
-    {
-        if(HeadObjects.Count > 0)
-        {
-
-            for (int i = 0; i < HeadObjects.Count; i++) {
-                Destroy(HeadObjects[i]); 
-            }
-            HeadObjects.Clear();
-        }
-        
-        GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;
-        temp.transform.parent = HeadRoot;
-        temp.transform.localPosition = Vector3.zero;
-        temp.transform.localRotation = Quaternion.Euler(-90, 90, 0);
-        HeadObjects.Add(temp);
-
-    }
+	public void NetworkSpawnHead(string objectPath)
+	{
+		if(HeadObjects.Count > 0)
+		{
+			
+			for (int i = 0; i < HeadObjects.Count; i++) {
+				Destroy(HeadObjects[i]); 
+			}
+			HeadObjects.Clear();
+		}
+		
+		GameObject temp = Instantiate(Resources.Load(objectPath) as GameObject) as GameObject;
+		temp.transform.parent = HeadRoot;
+		temp.transform.localPosition = Vector3.zero;
+		temp.transform.localRotation = Quaternion.Euler(-90, 90, 0);
+		HeadObjects.Add(temp);
+	}
    
 #region SpawnBody
+
+	public IEnumerator SpawnBody(string objectpath)
+	{
+		animationTarget.Play("body_reaction");
+		animationTarget.Play("body_split");
+		yield return new WaitForSeconds(animationTarget["body_reaction"].length * 0.5f);
+		myPhotonView.RPC("NetworkSpawnBody", PhotonTargets.All, objectpath);
+	}
+
 	[RPC]
-    public void SpawnBody(string objectpath)
+    public void NetworkSpawnBody(string objectpath)
     {        
         if(BodyObjects.Count > 0)
         {
@@ -287,169 +306,165 @@ public class Avatar : MonoBehaviour {
         return null;    
     }
 #endregion
-	[RPC]
-    public void SpawnArmL(string objectpath)
+
+    public IEnumerator SpawnArmL(string objectpath)
     {
-        if(ArmLObjects.Count > 0)
-        {
+		animationTarget.Play("armL_split");
+		animationTarget.Play("armL_reaction");
+		yield return new WaitForSeconds(animationTarget["armL_split"].length*0.5f);
+		myPhotonView.RPC("NetworkSpawnArmL", PhotonTargets.All, objectpath);
+    }
+
+	[RPC]
+	public void NetworkSpawnArmL(string objectpath)
+	{
+		if(ArmLObjects.Count > 0)
+		{
 			for (int i = 0; i < myActionManager.armorSkills.Count; i++) {
-				if(myActionManager.armorSkills[i].equipmentSlotIndex == 2)
+				if(myActionManager.armorSkills[i].equipmentSlotIndex == 0)
 				{
 					myActionManager.armorSkills[i].UnEquip();
 				}
 			}
-            if(myActionManager.armorAnimControllers[2] != null)
-            {
-                myActionManager.armorAnimControllers[2].RemoveAnimations();
-                myActionManager.armorAnimControllers[2] = null;
-            }
-            for (int i = 0; i < ArmLObjects.Count; i++) {
-                Destroy(ArmLObjects[i]);
-            }
-            ArmLObjects.Clear();
-        }
-        
-        GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;  
-        temp.transform.parent = ArmLRoot;
-        for (int i = 0; i < temp.transform.childCount; i++) {
-            if(temp.transform.GetChild(i).name == LShoulderRootName)
-            {
-                ArmLObjects.Add(temp.transform.GetChild(i).gameObject);
-                PositionArmL(temp.transform.GetChild(i));
-            }
-        }
+			if(myActionManager.armorAnimControllers[2] != null)
+			{
+				myActionManager.armorAnimControllers[2].RemoveAnimations();
+				myActionManager.armorAnimControllers[2] = null;
+			}
+			for (int i = 0; i < ArmLObjects.Count; i++) {
+				Destroy(ArmLObjects[i]);
+			}
+			ArmLObjects.Clear();
+		}
+		
+		GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;  
+		temp.transform.parent = ArmLRoot;
+		temp.transform.localPosition = Vector3.zero;
+		
+		GameObject arml = temp.transform.FindChild(LShoulderRootName).gameObject;
+		arml.transform.parent = ArmLRoot;
+		arml.transform.localPosition = Vector3.zero;
+		arml.transform.localRotation = Quaternion.identity;
+		arml.transform.parent = ArmLRoot.parent;
+
+		ArmLObjects.Add(temp);
+		ArmLObjects.Add(arml);
 		LoadBones();
 		BasePlayerSkill armLcontroller = temp.GetComponent<BasePlayerSkill>();
-        if(armLcontroller != null)
-        {
+		if(armLcontroller != null)
+		{
 			myActionManager.AddSkill(armLcontroller);
-        }
+		}
 		else
 			GUIManager.Instance.MainGUI.DisableActionButton(0);
-
-        PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
-        if(armLAnimController != null)
-        {
-            armLAnimController.TransferAnimations(animationTarget, this);
+		
+		PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
+		if(armLAnimController != null)
+		{
+			armLAnimController.TransferAnimations(animationTarget, this);
 			myActionManager.AddPassiveAnimation(armLAnimController, 2);
-        }
-        ArmLObjects.Add(temp);
-    }
-    
-    public void PositionArmL(Transform obj)
+		}
+	}
+
+    public IEnumerator SpawnArmR(string objectpath)
     {
-        obj.parent = ArmLRoot;
-        obj.localPosition = Vector3.zero;
-        obj.localRotation = Quaternion.identity;
-        obj.parent = ArmLRoot.parent;
+		animationTarget.Play("armR_split");
+		animationTarget.Play("armR_reaction");
+		yield return new WaitForSeconds(animationTarget["armR_split"].length*0.5f);
+		myPhotonView.RPC("NetworkSpawnArmR", PhotonTargets.All, objectpath);
     }
-    
+
 	[RPC]
-    public void SpawnArmR(string objectpath)
-    {
+	public void NetworkSpawnArmR(string objectpath)
+	{
 		Debug.Log("spawn right arm");
-        if(ArmRObjects.Count > 0)
-        {
-            for (int i = 0; i < myActionManager.armorSkills.Count; i++) {
-            	if(myActionManager.armorSkills[i].equipmentSlotIndex == 3)
+		if(ArmRObjects.Count > 0)
+		{
+			for (int i = 0; i < myActionManager.armorSkills.Count; i++) {
+				if(myActionManager.armorSkills[i].equipmentSlotIndex == 1)
 				{
 					myActionManager.armorSkills[i].UnEquip();
 				}
-            }
-            if(myActionManager.armorAnimControllers[3] != null)
-            {
-                myActionManager.armorAnimControllers[3].RemoveAnimations();
-                myActionManager.armorAnimControllers[3] = null;
-            }
-            for (int i = 0; i < ArmRObjects.Count; i++) {
-                Destroy(ArmRObjects[i]);
-            }
-            ArmRObjects.Clear();
-        }
-        
-        GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;  
-        temp.transform.parent = ArmRRoot;
-        for (int i = 0; i < temp.transform.childCount; i++) {
-            if(temp.transform.GetChild(i).name == RShoulderRootName)
-            {
-                ArmRObjects.Add(temp.transform.GetChild(i).gameObject);
-                PositionArmR(temp.transform.GetChild(i));
-            }
-        }
+			}
+			if(myActionManager.armorAnimControllers[3] != null)
+			{
+				myActionManager.armorAnimControllers[3].RemoveAnimations();
+				myActionManager.armorAnimControllers[3] = null;
+			}
+			for (int i = 0; i < ArmRObjects.Count; i++) {
+				Destroy(ArmRObjects[i]);
+			}
+			ArmRObjects.Clear();
+		}
+
+		GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;  
+		temp.transform.parent = ArmRRoot;
+		temp.transform.localPosition = Vector3.zero;
+		
+		GameObject armr = temp.transform.FindChild(RShoulderRootName).gameObject;
+		armr.transform.parent = ArmRRoot;
+		armr.transform.localPosition = Vector3.zero;
+		armr.transform.localRotation = Quaternion.identity;
+		armr.transform.parent = ArmRRoot.parent;
+			
+		ArmRObjects.Add(armr);
+		ArmRObjects.Add(temp);
 		LoadBones();
 		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
-        if(armRcontroller != null)
-        {
-            //armRcontroller.Initialise(myStatus, 3);
+		if(armRcontroller != null)
+		{
+			//armRcontroller.Initialise(myStatus, 3);
 			myActionManager.AddSkill(armRcontroller);
-            //Debug.Log("transfer animation");
-        }
+			//Debug.Log("transfer animation");
+		}
 		else
 			GUIManager.Instance.MainGUI.DisableActionButton(1);
-
-        PassiveArmorAnimationController armRAnimController = temp.GetComponent<PassiveArmorAnimationController>();
-        if(armRAnimController != null)
-        {
-            armRAnimController.TransferAnimations(animationTarget, this);
-            //animManager.
+		
+		PassiveArmorAnimationController armRAnimController = temp.GetComponent<PassiveArmorAnimationController>();
+		if(armRAnimController != null)
+		{
+			armRAnimController.TransferAnimations(animationTarget, this);
+			//animManager.
 			myActionManager.AddPassiveAnimation(armRAnimController, 3);
-        }
+		}
+	}
 
-        ArmRObjects.Add(temp);
-    }
-    
-    public void PositionArmR(Transform obj)
+    public IEnumerator SpawnLegs(string objectpath)
     {
-        obj.parent = ArmRRoot;
-        obj.localPosition = Vector3.zero;
-        obj.localRotation = Quaternion.identity;
-        obj.parent = ArmRRoot.parent;
+		animationTarget.Play("legs_reaction");
+		animationTarget.Play("legs_split");
+		yield return new WaitForSeconds(animationTarget["legs_reaction"].length * 0.5f);
+		myPhotonView.RPC("NetworkSpawnLegs", PhotonTargets.All, objectpath);
     }
+
 	[RPC]
-    public void SpawnLegs(string objectpath)
-    {
-        if(LegObjects.Count > 0)
-        {
-            for (int i = 0; i < LegObjects.Count ; i++) {
-                Destroy(LegObjects[i]);
-            }
-            LegObjects.Clear();
-        }
-        
-        GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;
-        temp.transform.parent = transform;
-        temp.transform.localPosition = Vector3.zero;
-
-        GameObject pelvis = temp.transform.FindChild(PelvisBone.name).gameObject;
-        pelvis.transform.parent = PelvisBone;
-        pelvis.transform.localPosition = Vector3.zero;
-        pelvis.transform.localRotation = Quaternion.identity;
-
-        GameObject legRoot = pelvis.transform.FindChild(LegsRootName).gameObject;
-        legRoot.transform.parent = PelvisBone;
+	public void NetworkSpawnLegs(string objectpath)
+	{
+		if(LegObjects.Count > 0)
+		{
+			for (int i = 0; i < LegObjects.Count ; i++) {
+				Destroy(LegObjects[i]);
+			}
+			LegObjects.Clear();
+		}
+		
+		GameObject temp = Instantiate(Resources.Load(objectpath) as GameObject) as GameObject;
+		temp.transform.parent = transform;
+		temp.transform.localPosition = Vector3.zero;
+		
+		GameObject pelvis = temp.transform.FindChild(PelvisBone.name).gameObject;
+		pelvis.transform.parent = PelvisBone;
+		pelvis.transform.localPosition = Vector3.zero;
+		pelvis.transform.localRotation = Quaternion.identity;
+		
+		GameObject legRoot = pelvis.transform.FindChild(LegsRootName).gameObject;
+		legRoot.transform.parent = PelvisBone;
 		LoadBones();
-
-        LegObjects.Add(pelvis);
-        LegObjects.Add(legRoot);
-        /*for (int i = 0; i < temp.transform.childCount ; i++) {
-            if(temp.transform.GetChild(i).name == PelvisBone.name)
-            {
-                LegObjects.Add(temp.transform.GetChild(i).gameObject);
-                temp.transform.GetChild(i).parent = PelvisBone;
-                temp.transform.GetChild(i).localPosition = Vector3.zero;
-                temp.transform.GetChild(i).localRotation = Quaternion.identity;
-
-                temp.transform.GetChild(i).GetChild(i).parent = PelvisBone;
-                //PositionLegs(temp.transform.GetChild(i).FindChild(LegsRootName).transform);
-                //Destroy(temp.transform.GetChild(i).gameObject);
-            }
-        }*/
-        LegObjects.Add(temp);
-        //Destroy(temp);
-        //PositionLegs(boneObj);
-        //Destroy(temp);
-        //animationController.UpdateAnimation();
-    }
+		
+		LegObjects.Add(pelvis);
+		LegObjects.Add(legRoot);
+		LegObjects.Add(temp);
+	}
     
     public void PositionLegs(Transform obj)
     {

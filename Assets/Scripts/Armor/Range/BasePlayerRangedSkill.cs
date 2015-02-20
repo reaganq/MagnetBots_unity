@@ -5,9 +5,9 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
     public ArmorAnimation recoilAnimation;
     public ArmorAnimation reloadAnimation;
-    public Transform bulletPrefab;
-    public Transform bulletLocation;
-	public Transform projectileCollisionDecal;
+    public Transform projectilePrefab;
+    public Transform projectileSpawnLocation;
+	public Transform hitDecal;
     public float bulletSpeed;
 
     public int currentAmmoCount = 0;
@@ -27,8 +27,8 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
     {
         base.Initialise(manager, index);
         currentAmmoCount = maxAmmoCount;
-		AddPrefabToPool(bulletPrefab);
-		AddPrefabToPool(projectileCollisionDecal);
+		AddPrefabToPool(projectilePrefab);
+		AddPrefabToPool(hitDecal);
     }
 
 	public override void TransferSkillAnimations()
@@ -171,7 +171,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
         currentAmmoCount --;
         fireSpeedTimer = fireSpeed;
         //GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
-		ownerCAM.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, skillID);
+		ownerCAM.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, projectilePrefab.name, projectileSpawnLocation.position, projectileSpawnLocation.rotation, bulletSpeed, skillID);
         skillState = SkillState.recoiling;
         //characterAnimation.Play(recoilAnimation.clip.name);
 		ownerCAM.PlayAnimation(recoilAnimation.clip.name, false);
