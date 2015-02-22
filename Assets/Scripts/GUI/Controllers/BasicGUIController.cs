@@ -4,6 +4,7 @@ using System.Collections;
 public class BasicGUIController : MonoBehaviour {
 
 	public UIPlayTween tween;
+	public UIPlayTween endTween;
 	public GameObject Root;
 	public bool isDisplayed;
 	public bool autoPlay;
@@ -25,16 +26,22 @@ public class BasicGUIController : MonoBehaviour {
 	public virtual void Hide()
 	{
 		isDisplayed = false;
-		if(tween != null && autoPlay)
+		if(endTween != null)
 		{
-			tween.Play(isDisplayed);
+			endTween.Play(true);
 		}
 		else
 		{
-			if(Root != null)
-				Root.SetActive(false);
+			if(tween != null && autoPlay)
+			{
+				tween.Play(isDisplayed);
+			}
+			else
+			{
+				if(Root != null)
+					Root.SetActive(false);
+			}
 		}
-
 	}
 
 	public virtual void Disable()

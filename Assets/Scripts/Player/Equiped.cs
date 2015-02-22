@@ -12,12 +12,6 @@ using System;
 //[XmlInclude(typeof(Condition))]
 public class Equiped : RPGItem {
   
-	public List<string> FBXName;
-	public int requiredMagneticLevel;
- //public int Durability;
- //public List<Condition> Conditions;
- //public List<Effect> WornEffects;
-
 }
 
 

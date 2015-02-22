@@ -17,7 +17,7 @@ public class QuestLog
 		CurrentQuests = new List<RPGQuest>();
 		FinishedQuests = new List<RPGQuest>();
 	}
-	
+
 	//quest step in progress
 	public bool IsQuestStepInProgress(int questId, int questStepNumber)
 	{
@@ -28,7 +28,6 @@ public class QuestLog
 		}
 		return false;
 	}
-	
 
 	// Returns true is quest is finished but not get reward from it (wasn't ended)
 	public bool IsQuestFinished(int questId)
@@ -107,7 +106,7 @@ public class QuestLog
 		if (!result)
 			return false;
 		quest.GiveReward();
-		if(!quest.Repeatable)
+		if(!quest.repeatable)
 			FinishedQuests.Add(quest);
 		
 		/*if (!quest.Repeatable)

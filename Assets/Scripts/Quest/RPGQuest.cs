@@ -12,28 +12,35 @@ using System;
 public class RPGQuest : BasicItem 
 {
 	//public List<Reward> Rewards;
-	public List<QuestStep> QuestSteps;
+	public List<QuestStep> questSteps;
 	//public List<AlternateEnd> AlternateEnds;
-	public bool Repeatable;
-	public bool Timed;
+	public bool repeatable;
+	public bool timed;
 	public float timeLimit;
-	public bool Failed;
-	//public int GuildID;
-	//public int GuildRank;
-	public string FinalQuestLog;
-	public int QuestCategoryID;
+	public string initialQuestLog;
+	public string finalQuestLog;
+	public bool randomLoot;
+	public List<LootItem> allLoots;
+	public QuestType questType;
+	public List<Task> allTasks;
+	//recorded in questlog
+
 	public bool Rewarded;
 
 	[XmlIgnore]
 	public float startTime;
 	public float endTime;
+	//public List<LootItem> determinedLoots;
 	
 	public RPGQuest()
 	{
 		//Rewards = new List<Reward>();
-		QuestSteps = new List<QuestStep>();
-		FinalQuestLog = string.Empty;
+		questSteps = new List<QuestStep>();
+		finalQuestLog = string.Empty;
 		preffix = "QUEST";
+		allLoots = new List<LootItem>();
+		//determinedLoots = new List<LootItem>();
+		allTasks = new List<Task>();
 		//AlternateEnds = new List<AlternateEnd>();
 	}
 	
@@ -41,7 +48,7 @@ public class RPGQuest : BasicItem
 	{
 		get
 		{
-			foreach(QuestStep questStep in QuestSteps)
+			foreach(QuestStep questStep in questSteps)
 			{
 				if (questStep.IsQuestStepFinished() == false)
 					return questStep;
@@ -68,7 +75,7 @@ public class RPGQuest : BasicItem
 		get
 		{
 			bool result = true;
-			foreach(QuestStep questStep in QuestSteps)
+			foreach(QuestStep questStep in questSteps)
 			{
 				if (!questStep.IsQuestStepFinished())
 					result = false;
@@ -79,7 +86,7 @@ public class RPGQuest : BasicItem
 
 	public bool HasFailed()
 	{
-		if(Timed && ((Time.realtimeSinceStartup - startTime) > timeLimit))
+		if(timed && ((Time.realtimeSinceStartup - startTime) > timeLimit))
 			return true;
 		return false;
 	}
@@ -174,5 +181,12 @@ public class RPGQuest : BasicItem
 			PreffixSolver.GiveItem(r.Preffix, r.ItemId, r.Amount);
 		}*/
 	}
+}
+
+public enum QuestType
+{
+	story,
+	worldEvent,
+	collection,
 }
 

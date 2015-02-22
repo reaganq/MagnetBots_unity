@@ -89,7 +89,6 @@ public class QuickInventoryGUIController : BasicGUIController {
 
 	public override void OnDragDrop(int index)
 	{
-		Debug.Log("dropped " + index); 
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
 			PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(displayedItemList[index]);

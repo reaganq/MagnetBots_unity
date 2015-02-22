@@ -14,7 +14,7 @@ public class QuestStep {
 	public string BioNote;
 	[XmlAttribute (AttributeName = "SN")]
 	public int StepNumber;
-	
+	public bool isMainStep;
 	public bool IsLastStep;
 	public List<Task> Tasks;
 	
@@ -48,6 +48,24 @@ public class QuestStep {
 					return true;
 			}
 			return result;
+		}
+	}
+
+	public void GenerateRandomTasks(List<Task> possibleTasks, int numberofTasks, int maxAmount)
+	{
+		Tasks.Clear();
+		List<int> taskIDs = new List<int>();
+		for (int i = 0; i < numberofTasks; i++) {
+			int id = UnityEngine.Random.Range(0, possibleTasks.Count);
+			do
+			{
+				id = UnityEngine.Random.Range(0, possibleTasks.Count);
+			}while(taskIDs.Contains(id));
+			if(id < possibleTasks.Count)
+			{
+				Tasks.Add(possibleTasks[id]);
+				Tasks[i].AmountToReach = UnityEngine.Random.Range(1, maxAmount);
+			}
 		}
 	}
 }

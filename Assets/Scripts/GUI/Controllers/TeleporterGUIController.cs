@@ -3,42 +3,61 @@ using System.Collections;
 
 public class TeleporterGUIController : BasicGUIController {
 
-	public GameObject[] townPortraitObjects;
-	public UILabel[] townLabels;
+	public UISprite[] townPortraitObjects;
+	public GameObject scrollView;
+	//public UILabel[] townLabels;
 	public GameObject detailsBox;
+	public GameObject detailPortraitBox;
 	public UILabel descriptionlabel;
+	public string naSpriteName;
+	public int selectedIndex;
+	public UIPlayTween portraitTweener;
+	public TweenPosition portraitPosTween;
 
 	public void Start()
 	{
 		for (int i = 0; i < townPortraitObjects.Length; i++) {
-			UISprite portrait = townPortraitObjects[i].GetComponent<UISprite>();
-			GameObject Atlas = Resources.Load(GeneralData.towns[i].atlasPath) as GameObject;
-			portrait.atlas = Atlas.GetComponent<UIAtlas>();
-			portrait.spriteName = GeneralData.towns[i].spriteName;
-			//portrait.LoadAtlasSprite(GeneralData.towns[i].atlasPath, GeneralData.towns[i].spriteName);
-			townLabels[i].text = GeneralData.towns[i].Name;
+			if(i + 1 > GeneralData.towns.Count)
+			{
+				townPortraitObjects[i].spriteName = naSpriteName;
+				townPortraitObjects[i].collider.enabled = false;
+			}
+			else
+			{
+				GameObject Atlas = Resources.Load(GeneralData.towns[i].atlasPath) as GameObject;
+				townPortraitObjects[i].atlas = Atlas.GetComponent<UIAtlas>();
+				townPortraitObjects[i].spriteName = GeneralData.towns[i].spriteName;
+				townPortraitObjects[i].collider.enabled = true;
+			}
 		}
 	}
 
 	public void OnTownButtonPressed(int index)
 	{
-		DisplayTownDetails(index);
-		detailsBox.SetActive(true);
+		selectedIndex = index;
+		//DisplayTownDetails();
+		//portraitPosTween.from = townPortraitObjects[selectedIndex].transform.position;
 	}
 
-	public void DisplayTownDetails(int index)
+	public void DisplayTownDetails()
 	{
-		descriptionlabel.text = GeneralData.towns[index].Description;
+		detailsBox.SetActive(true);
+		descriptionlabel.text = GeneralData.towns[selectedIndex].Description;
 	}
 
 	public void OnBackButtonPressed()
 	{
+
+	}
+
+	public void OnExitButtonPressed()
+	{
 		Disable();
 	}
 
-	public void OnTravelButtonPressed(int index)
+	public void OnTravelButtonPressed()
 	{
-		//travel to generaldata.towns[index].sceneID;
+		//travel to generaldata.towns[selectedIndex].sceneID;
 	}
 
 }

@@ -239,6 +239,17 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
+	public void PlayToy(string prefabPath)
+	{
+		//increase happiness;
+	}
+
+	public void EatFood(string prefabPath)
+	{
+		avatarActionManager.EatFood(prefabPath);
+		//increase energy;
+	}
+
 	public void PlayMiniGame(NPCMinigame minigame)
 	{
 		avatarObject.SetActive(false);

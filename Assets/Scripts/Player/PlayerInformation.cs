@@ -352,12 +352,14 @@ public class PlayerInformation  {
 		//byte[] depositBoxParseList = ParseInventoryList(DepositBox);
 		byte[] playerShopParseList = ParseInventoryList(playerShopInventory);
 		byte[] jukeBoxList = ParseJukeBoxList();
+		byte[] profile = ParsePlayerProfile();
 		//IList<object> mainInventoryParseList = ParseInventoryList(MainInventory);
 		//Debug.Log(mainInventoryParseList[0]);
 		//IList<Object> armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
 		//Debug.Log(armoryInventoryParseList.Count);
 	
 		playerData["username"] = ParseUser.CurrentUser.Username;
+		playerData["profile"] = profile;
 		playerData["NakedArmoryList"] = nakedArmoryParseList;
 		playerData["InventoryList"] = mainInventoryParseList;
 		playerData["ArmoryList"] = armoryInventoryParseList;
@@ -461,6 +463,7 @@ public class PlayerInformation  {
 		{
 			Debug.LogWarning("retrieved 1 player data profile");
 			//Debug.Log(player.Get<int>("magnets").ToString());
+			InterpretParseProfile(player.Get<byte[]>("profile"));
 			InterpretParseInventoryList(NakedArmoryInventory, player.Get<byte[]>("NakedArmoryList"));
 			InterpretParseInventoryList(MainInventory, player.Get<byte[]>("InventoryList"));
 			InterpretParseInventoryList(ArmoryInventory, player.Get<byte[]>("ArmoryList"));
@@ -471,10 +474,18 @@ public class PlayerInformation  {
 			Magnets = player.Get<int>("magnets");
 			CitizenPoints = player.Get<int>("citizenpoints");
 			shopTill = player.Get<int>("shopTill");
-			BankCoins = player.Get<int>("bankcoings");
+			BankCoins = player.Get<int>("bankcoins");
 		}
 		
 		GUIManager.Instance.IntroGUI.StartGame();
+	}
+
+	public byte[] ParsePlayerProfile()
+	{
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, profile);
+		return m.GetBuffer();
 	}
 
 	public byte[] ParseInventoryList(Inventory invent)
@@ -540,7 +551,14 @@ public class PlayerInformation  {
 		}
 	}
 
-	public void InterprestParseQuestLog()
+	public void InterpretParseProfile(byte[] data)
+	{
+		BinaryFormatter bb = new BinaryFormatter();
+		MemoryStream mm = new MemoryStream(data);
+		profile = (PlayerProfile)bb.Deserialize(mm);
+	}
+
+	public void InterpretParseQuestLog()
 	{
 	}
 

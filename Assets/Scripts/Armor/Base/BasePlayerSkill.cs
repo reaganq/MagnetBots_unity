@@ -175,6 +175,7 @@ public class BasePlayerSkill : BaseSkill {
 				}
 			}
 		}
+		yield return null;
 	}
 	
 	public void RemoveSkillAnimation(SkillAnimation anim)

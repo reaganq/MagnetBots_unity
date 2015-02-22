@@ -23,9 +23,11 @@ public class RPGItem : UsableItem
 		IsUpgradeable = false;
 		AtlasName = "Atlases/Item";
 		EquipmentSlotIndex = EquipmentSlots.None;
+		FBXName = new List<string>();
      //IconPath = "Icon/";
  	}
 
+	public List<string> FBXName;
 	public BuyCurrencyType BuyCurrency;
 	public bool Stackable;
 	public int BuyValue;
@@ -34,6 +36,10 @@ public class RPGItem : UsableItem
 
 	public virtual void Use()
 	{
+		if(ItemCategory == ItemType.Food)
+		{
+			PlayerManager.Instance.EatFood(FBXName[0]);
+		}
 		Debug.Log("using item: " + Name);
 	}
 }

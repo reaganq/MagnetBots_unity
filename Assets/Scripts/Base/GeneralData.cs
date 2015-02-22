@@ -25,6 +25,20 @@ public class GeneralData: MonoBehaviour{
 		NPCs = Storage.Load<RPGNPC>(new RPGNPC());
 		towns = Storage.Load<RPGTown>(new RPGTown());
 		Debug.Log(quests.Count + "quests");
+		LoadQuests();
+	}
+
+	public void LoadQuests()
+	{
+		for (int i = 0; i < quests.Count; i++) {
+			if(quests[i].questType == QuestType.collection)
+			{
+				for (int j = 0; j < quests[i].questSteps.Count; j++) {
+					if(quests[i].questSteps[j].isMainStep)
+						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,3,1);
+				}
+			}
+		}
 	}
 
 	public static RPGNPC GetNPCByID(int ID)

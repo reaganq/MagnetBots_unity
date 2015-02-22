@@ -421,6 +421,7 @@
      <Compile Include="Assets\Scripts\Base\Condition.cs" />
      <Compile Include="Assets\Scripts\Base\GeneralData.cs" />
      <Compile Include="Assets\Scripts\Base\IItem.cs" />
+     <Compile Include="Assets\Scripts\Base\PlayerAction.cs" />
      <Compile Include="Assets\Scripts\Base\PreffixSolver.cs" />
      <Compile Include="Assets\Scripts\Base\RPGTown.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraOffsetMatrix.cs" />

@@ -5,22 +5,31 @@
     <Name>Lynne's Stocking Mission</Name>
     <Description />
     <SystemDescription />
-    <QuestSteps>
-      <QuestStep QLN="" BN="" SN="1">
+    <questSteps>
+      <QuestStep QLN="Can you help me find the following items?" BN="" SN="1">
+        <isMainStep>true</isMainStep>
         <IsLastStep>false</IsLastStep>
         <Tasks />
       </QuestStep>
-      <QuestStep QLN="" BN="" SN="2">
-        <IsLastStep>false</IsLastStep>
-        <Tasks />
-      </QuestStep>
-    </QuestSteps>
-    <Repeatable>true</Repeatable>
-    <Timed>false</Timed>
+    </questSteps>
+    <repeatable>true</repeatable>
+    <timed>false</timed>
     <timeLimit>0</timeLimit>
-    <Failed>false</Failed>
-    <FinalQuestLog />
-    <QuestCategoryID>0</QuestCategoryID>
+    <initialQuestLog>Lynne needs some new stock for her shop! She will commission you to find them.</initialQuestLog>
+    <finalQuestLog />
+    <randomLoot>false</randomLoot>
+    <allLoots>
+      <LootItem>
+        <itemType>Currency</itemType>
+        <itemID />
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>0.5</dropRate>
+      </LootItem>
+    </allLoots>
+    <questType>collection</questType>
+    <allTasks />
     <Rewarded>false</Rewarded>
     <endTime>0</endTime>
   </RPGQuest>
@@ -29,20 +38,15 @@
     <Name>Training Tutorial</Name>
     <Description />
     <SystemDescription />
-    <QuestSteps>
-      <QuestStep QLN="Find Trainer Jim in town, he has some valuable tips for you!" BN="" SN="1">
-        <IsLastStep>false</IsLastStep>
-        <Tasks>
-          <Task TT="ReachPartOfConversation" ATR="0" PT="ENEMY" TASKTARGET="0" CA="0" QLD="" />
-        </Tasks>
-      </QuestStep>
-    </QuestSteps>
-    <Repeatable>false</Repeatable>
-    <Timed>false</Timed>
+    <questSteps />
+    <repeatable>false</repeatable>
+    <timed>false</timed>
     <timeLimit>0</timeLimit>
-    <Failed>false</Failed>
-    <FinalQuestLog />
-    <QuestCategoryID>0</QuestCategoryID>
+    <finalQuestLog />
+    <randomLoot>false</randomLoot>
+    <allLoots />
+    <questType>story</questType>
+    <allTasks />
     <Rewarded>false</Rewarded>
     <endTime>0</endTime>
   </RPGQuest>

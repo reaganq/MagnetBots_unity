@@ -283,30 +283,25 @@ public class CharacterActionManager : ActionManager {
 
     #endregion
 
-	#region rpc animation functions
-	/*[RPC]
-	public void PlayAnimation(string name)
+	#region food toy functions
+
+	public void EatFood(string prefabPath)
 	{
-		myAnimation.Play(name);
+
 	}
 
-	[RPC]
-	public void CrossFadeAnimation(string name)
+	public void NetworkEatFood(string prefabPath)
 	{
-		myAnimation.CrossFade(name);
+		if(!string.IsNullOrEmpty(prefabPath))
+		{
+			GameObject food = Instantiate(Resources.Load(prefabPath) as GameObject) as GameObject;
+			if(myPhotonView.isMine)
+			{
+				PlayerAction pa = food.GetComponent<PlayerAction>();
+			}
+		}
 	}
 
-	[RPC]
-	public void CrossFadeAnimation(string name, float timer)
-	{
-		myAnimation.CrossFade(name, timer);
-	}
-
-	[RPC]
-	public void BlendAnimation(string name, float target, float timer)
-	{
-		myAnimation.Blend(name, target, timer);
-	}*/
 	#endregion
 
 	#region rpc effect prefab functions
@@ -374,6 +369,8 @@ public class CharacterActionManager : ActionManager {
 			armorSkills[skillID].ResolveHit(targetCS, hitPos, targetPos);
 		}
 	}
+
+
     
     #endregion
 
