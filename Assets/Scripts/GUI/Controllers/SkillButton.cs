@@ -11,21 +11,23 @@ using UnityEngine;
 
 public class SkillButton : MonoBehaviour
 {
-    public delegate void OnClickEvent(int index);
+    public delegate void OnClickEvent(int index, int slot);
     public static event OnClickEvent onSingleClick;
     
-    public delegate void OnPressEvent(int index);
+    public delegate void OnPressEvent(int index, int slot);
     public static event OnPressEvent onPress;
     
-    public delegate void OnReleaseEvent(int index);
+    public delegate void OnReleaseEvent(int index, int slot);
     public static event OnReleaseEvent onRelease;
  
 	public int skillIndex;
+	public int slotIndex;
 	public UISprite skillIcon;
 	
-	public void SetupSkillButton(int index)
+	public void SetupSkillButton(int index, int slot)
 	{
 		skillIndex = index;
+		slotIndex = slot;
 	}
 
  //bool mStarted = false;
@@ -46,7 +48,7 @@ public class SkillButton : MonoBehaviour
             {
                 if(onPress != null)
                 {
-					onPress(skillIndex);
+					onPress(skillIndex, slotIndex);
                     //Debug.Log("press");
                 }
              
@@ -56,7 +58,7 @@ public class SkillButton : MonoBehaviour
             {
                 if(onRelease != null)
                 {
-					onRelease(skillIndex);
+					onRelease(skillIndex, slotIndex);
                     //Debug.Log("release");
                 }
             }
@@ -69,7 +71,7 @@ public class SkillButton : MonoBehaviour
         {
             if(onSingleClick != null)
             {
-				onSingleClick(skillIndex);
+				onSingleClick(skillIndex, slotIndex);
                 //Debug.Log("click");
             }
         }

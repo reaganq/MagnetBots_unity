@@ -85,6 +85,7 @@ public class EnemyEditor : BaseEditorWindow
 			
 			//DisplayShopItem(item);
 			DisplayLootItem( item );
+			EditorGUILayout.BeginHorizontal();
 			if (GUILayout.Button("Delete", GUILayout.Width(200)))
 			{
 				s.Loots.Remove(item);
@@ -213,5 +214,7 @@ public class EnemyEditor : BaseEditorWindow
 		item.maxQuantity = EditorGUILayout.IntField(item.maxQuantity, GUILayout.Width(90));
 		EditorGUILayout.PrefixLabel(" droprate: ");
 		item.dropRate = EditorGUILayout.FloatField(item.dropRate, GUILayout.Width(90));
+		EditorGUILayout.EndHorizontal();
+		ConditionsUtils.Conditions(item.Conditions, Data);
 	}
 }

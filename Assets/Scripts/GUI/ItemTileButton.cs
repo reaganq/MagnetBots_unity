@@ -22,6 +22,7 @@ public class ItemTileButton: UIDragDropItem
     public UILabel amountLabel;
 	public UILabel levelLabel;
 	public UISprite newItemGlow;
+	public UISprite tickIcon;
     public bool IsEquipped = false;
     
     public Color EquippedColor = Color.cyan;
@@ -46,7 +47,8 @@ public class ItemTileButton: UIDragDropItem
 		{
 			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
 			{
-				owner.OnItemTilePressed(index);
+				if(owner != null)
+					owner.OnItemTilePressed(index);
 				Debug.Log("PRESSED");
 			}
 		}
@@ -133,6 +135,24 @@ public class ItemTileButton: UIDragDropItem
 		selectBorder.enabled = false;
 	}
 
+	public void LoadQuestDisplayTile(InventoryItem item, bool isNewQuest)
+	{
+		LoadGeneric(item);
+		newItemGlow.enabled = false;
+		Debug.Log(isNewQuest);
+		if(!isNewQuest)
+		{
+			amountLabel.text = PlayerManager.Instance.Hero.GetItemAmount(item, false)+"/"+item.CurrentAmount;
+			if(PlayerManager.Instance.Hero.DoYouHaveThisItem(item, false))
+				tickIcon.enabled = true;
+			else
+				tickIcon.enabled = false;
+		}
+		else
+			tickIcon.enabled = false;
+		//check if i have enough
+	}
+
 	public void LoadItemTile(InventoryItem item, BasicGUIController newOwner, InventoryGUIType type, int i)
 	{
 		index = i;
@@ -144,10 +164,18 @@ public class ItemTileButton: UIDragDropItem
 		case InventoryGUIType.Inventory:
 			draggable = false;
 			newItemGlow.enabled = !item.isItemViewed;
+			if(item.IsItemEquipped)
+				tickIcon.enabled = true;
+			else
+				tickIcon.enabled = false;
 			break;
 		case InventoryGUIType.quickInventory:
 			draggable = true;
 			newItemGlow.enabled = false;
+			if(item.IsItemEquipped)
+				tickIcon.enabled = true;
+			else
+				tickIcon.enabled = false;
 			break;
 		case InventoryGUIType.Shop:
 			draggable = false;

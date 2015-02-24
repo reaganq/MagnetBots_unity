@@ -61,6 +61,8 @@ public class Condition
 			return state;
 			//quest not started
 		case ConditionTypeEnum.QuestNotStarted: 
+			Debug.Log("not started quest");
+			Debug.Log(!PlayerManager.Instance.Hero.questLog.IsQuestStarted(Convert.ToInt32(ItemToHave)));
 			return !PlayerManager.Instance.Hero.questLog.IsQuestStarted(Convert.ToInt32(ItemToHave));
 			//quest startet not finished (some of the tasks are not completed)
 		case ConditionTypeEnum.QuestInProgress: 

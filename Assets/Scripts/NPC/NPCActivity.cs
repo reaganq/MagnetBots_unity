@@ -32,7 +32,8 @@ public class NPCActivity: BasicItem {
 
 	public void LoadConversation()
 	{
-		conversation = Storage.LoadById<RPGConversation>(conversationID, new RPGConversation());
+		if(conversationID > 0)
+			conversation = Storage.LoadById<RPGConversation>(conversationID, new RPGConversation());
 	}
 }
 

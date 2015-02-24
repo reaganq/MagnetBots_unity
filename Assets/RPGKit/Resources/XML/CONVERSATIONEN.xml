@@ -49,7 +49,7 @@
           </LineText>
         </LineTexts>
         <Actions>
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="DisplayQuestInfo" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="DisplayQuestInfo" AM="0" TX="" />
         </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>5</ownerNPCID>
@@ -58,7 +58,7 @@
         <nextParagraphIDs />
       </RPGParagraph>
       <RPGParagraph>
-        <PT>Let me know when you change your mind. I'm always in need of a helper.</PT>
+        <PT>Let me know when you change your mind. I'm always in need of a helper!</PT>
         <Conditions />
         <LineTexts />
         <Actions />
@@ -71,14 +71,16 @@
         </nextParagraphIDs>
       </RPGParagraph>
       <RPGParagraph>
-        <PT>You better get going! Time moves like clockwork you know.</PT>
+        <PT>I knew you would be a great help!</PT>
         <Conditions />
         <LineTexts />
-        <Actions />
-        <displayTimer>5</displayTimer>
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="DisplayQuestConfirmation" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
         <ownerNPCID>5</ownerNPCID>
         <isBaseParagraph>false</isBaseParagraph>
-        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphCondition>WaitForUIAction</nextParagraphCondition>
         <nextParagraphIDs>
           <int>6</int>
         </nextParagraphIDs>
@@ -92,7 +94,6 @@
           <LineText>
             <Text>Yes, all done!</Text>
             <Events>
-              <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
               <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
             </Events>
             <Conditions>
@@ -112,7 +113,7 @@
           </LineText>
         </LineTexts>
         <Actions>
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="DisplayQuestStatus" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="DisplayQuestStatus" AM="0" TX="" />
         </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>5</ownerNPCID>
@@ -122,10 +123,23 @@
       </RPGParagraph>
       <RPGParagraph>
         <PT>Nice Job! Here is your pay. I'll have another job ready for you soon</PT>
-        <Conditions />
-        <LineTexts />
+        <Conditions>
+          <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestFinished" SI="0" />
+        </Conditions>
+        <LineTexts>
+          <LineText>
+            <Text>Done</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+            </Events>
+            <Conditions />
+            <lineTextType>negative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+        </LineTexts>
         <Actions>
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="GiveQuestRewards" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="GiveQuestRewards" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
         </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>5</ownerNPCID>

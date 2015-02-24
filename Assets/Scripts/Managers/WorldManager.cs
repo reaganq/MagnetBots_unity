@@ -65,6 +65,43 @@ public class WorldManager : Photon.MonoBehaviour {
 		
 	#endregion
 
+	public void SendPartyChallenge(int enemyID)
+	{
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
+				myPhotonView.RPC("ReceivePartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), enemyID);
+		}
+	}
+
+	[RPC]
+	public void ReceivePartyChallenge(int enemyID, PhotonMessageInfo info)
+	{
+		GUIManager.Instance.NotificationGUI.DisplayPartyChallenge(enemyID, info.sender);
+	}
+
+	public void PartyChallengeReply(PhotonPlayer challenger, bool accept)
+	{
+		myPhotonView.RPC("NetworkPartyChallengeReply", challenger, accept);
+	}
+
+	[RPC]
+	public void NetworkPartyChallengeReply(bool accept, PhotonMessageInfo info)
+	{
+		if(!accept)
+		{
+			for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+				if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
+					myPhotonView.RPC("CancelPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]));
+			}
+		}
+	}
+
+	[RPC]
+	public void CancelPartyChallenge()
+	{
+
+	}
+
 	#region arena logic
 
 	public void RequestArenaEntry(string arenaName, int enemyID, bool solo)
@@ -321,19 +358,26 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void SendPartyInvite(int partyLeaderID,PhotonMessageInfo info)
 	{
 		if(PlayerManager.Instance.isInParty())
-			myPhotonView.RPC("RejectPartyInvitation", info.sender);
+			myPhotonView.RPC("NetworkRejectPartyInvite", info.sender, PlayerManager.Instance.Hero.profile.name + " is already in a party");
 		else
 		{
 			GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
 			Debug.Log("received party invite");
 		}
 	}
+	
+	public void RejectPartyInvite(PhotonPlayer prospectivePartyLeader)
+	{
+		myPhotonView.RPC("NetworkRejectPartyInvite", prospectivePartyLeader, PlayerManager.Instance.Hero.profile.name + " has rejected your party invitation");
+	}
 
 	[RPC]
-	public void RejectPartyInvite(PhotonMessageInfo info)
+	public void NetworkRejectPartyInvite(string message, PhotonMessageInfo info)
 	{
 		//display rejection notice from 
+		GUIManager.Instance.NotificationGUI.DisplayMessageBox(message);
 	}
+
 	
 	//invitees reply back to prospective/party leader
 	[RPC]

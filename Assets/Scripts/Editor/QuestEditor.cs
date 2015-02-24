@@ -58,12 +58,34 @@ public class QuestEditor : BaseEditorWindow
 
 		
 		s.repeatable = EditorUtils.Toggle(s.repeatable, "Repeatable");
+		s.timed = EditorUtils.Toggle(s.timed, "timed");
+		if(s.timed)
+			s.timeLimit = EditorUtils.FloatField(s.timeLimit, "time limit");
 
 		s.initialQuestLog = EditorUtils.TextField(s.initialQuestLog, "Initial quest log");
 		
 		s.finalQuestLog = EditorUtils.TextField(s.finalQuestLog, "Final quest log");
 
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("quest type:");
 		s.questType = (QuestType)EditorGUILayout.EnumPopup(s.questType, GUILayout.Width(300));
+		EditorGUILayout.EndHorizontal();
+		if (GUILayout.Button("Add task", GUILayout.Width(400))) 
+		{
+			s.allTasks.Add(new Task());
+		}
+		
+		foreach(Task task in s.allTasks)
+		{
+			DisplayTask(task);
+			if (GUILayout.Button("Remove Task", GUILayout.Width(200)))
+			{
+				s.allTasks.Remove(task);
+				break;
+			}
+		}
+
+		ConditionsUtils.Conditions(s.Conditions, Data);
 		
 		/*if (GUILayout.Button("Add reward", GUILayout.Width(400)))
 		{
@@ -108,6 +130,7 @@ public class QuestEditor : BaseEditorWindow
 		foreach(LootItem item in s.allLoots)
 		{
 			DisplayLootItem( item );
+			EditorGUILayout.BeginHorizontal();
 			if (GUILayout.Button("Delete Loot", GUILayout.Width(200)))
 			{
 				s.allLoots.Remove(item);
@@ -135,63 +158,12 @@ public class QuestEditor : BaseEditorWindow
 		
 		foreach(Task task in questStep.Tasks)
 		{
-			EditorGUILayout.Separator();
-			EditorGUILayout.BeginVertical(skin.box);
-			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.PrefixLabel("Task type");
-			
-			task.TaskType = (TaskTypeEnum)EditorGUILayout.EnumPopup(task.TaskType, GUILayout.Width(300));
-			
-			switch(task.TaskType)
-			{
-			case TaskTypeEnum.BringItem:
-				task.PreffixTarget = (PreffixType)EditorGUILayout.EnumPopup(task.PreffixTarget, GUILayout.Width(200));
-				
-				switch(task.PreffixTarget)
-				{
-				case PreffixType.ITEM:
-					task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.itemEditor.items, "Item", 100, FieldTypeEnum.Middle);
-					break;
-				case PreffixType.ARMOR:
-					task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.armorEditor.items, "Armor", 100, FieldTypeEnum.Middle);
-					break;
-				}
-				task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
-				break;
-				
-			case TaskTypeEnum.KillEnemy:
-				task.PreffixTarget = PreffixType.ENEMY;
-				task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
-				task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.enemyEditor.items, "Enemy", 100, FieldTypeEnum.Middle);
-				
-				break;
-				
-			/*case TaskTypeEnum.ReachPartOfConversation:
-				task.PreffixTarget = PreffixType.PARAGRAPH;
-				task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.conversationEditor.items, "Paragraph", 100, FieldTypeEnum.Middle);
-				break;*/
-				
-
-			/*case TaskTypeEnum.VisitArea:
-				task.PreffixTarget = PreffixType.WORLDOBJECT;
-				task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.worldObjectEditor.items, "WO", 100, FieldTypeEnum.Middle);
-				break;*/
-			}
-			
-			EditorGUILayout.EndHorizontal();
-			
-			EditorGUILayout.Separator();
-			EditorGUILayout.BeginHorizontal();
-			
-			EditorGUILayout.PrefixLabel("Task quest log");
-			task.QuestLogDescription = EditorGUILayout.TextField(task.QuestLogDescription, GUILayout.Width(500));
-			EditorGUILayout.EndHorizontal();
+			DisplayTask(task);
 			if (GUILayout.Button("Remove Task", GUILayout.Width(200)))
 			{
 				questStep.Tasks.Remove(task);
 				break;
-            }
-            EditorGUILayout.EndVertical();
+			}
 		}
 		
 		EditorUtils.Separator();
@@ -222,5 +194,56 @@ public class QuestEditor : BaseEditorWindow
 		item.maxQuantity = EditorGUILayout.IntField(item.maxQuantity, GUILayout.Width(90));
 		EditorGUILayout.PrefixLabel(" droprate: ");
 		item.dropRate = EditorGUILayout.FloatField(item.dropRate, GUILayout.Width(90));
+		EditorGUILayout.EndHorizontal();
+		ConditionsUtils.Conditions(item.Conditions, Data);
+	}
+
+	public void DisplayTask(Task task)
+	{
+		EditorGUILayout.Separator();
+		EditorGUILayout.BeginVertical(skin.box);
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.PrefixLabel("Task type");
+		
+		task.TaskType = (TaskTypeEnum)EditorGUILayout.EnumPopup(task.TaskType, GUILayout.Width(100));
+		
+		switch(task.TaskType)
+		{
+		case TaskTypeEnum.BringItem:
+			task.PreffixTarget = (PreffixType)EditorGUILayout.EnumPopup(task.PreffixTarget, GUILayout.Width(200));
+			
+			switch(task.PreffixTarget)
+			{
+			case PreffixType.ITEM:
+				task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.itemEditor.items, "Item", 100, FieldTypeEnum.Middle);
+				break;
+			case PreffixType.ARMOR:
+				task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.armorEditor.items, "Armor", 100, FieldTypeEnum.Middle);
+				break;
+			}
+			EditorGUILayout.PrefixLabel("amount: ");
+			task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
+			EditorGUILayout.PrefixLabel("level: ");
+			task.Tasklevel = EditorGUILayout.IntField(task.Tasklevel, GUILayout.Width(100));
+			break;
+			
+		case TaskTypeEnum.KillEnemy:
+			task.PreffixTarget = PreffixType.ENEMY;
+			task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
+			task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.enemyEditor.items, "Enemy", 100, FieldTypeEnum.Middle);
+			
+			break;
+		}
+		
+		EditorGUILayout.EndHorizontal();
+		
+		EditorGUILayout.Separator();
+		EditorGUILayout.BeginHorizontal();
+		
+		EditorGUILayout.PrefixLabel("Task quest log");
+		task.QuestLogDescription = EditorGUILayout.TextField(task.QuestLogDescription, GUILayout.Width(500));
+		EditorGUILayout.EndHorizontal();
+
+		EditorGUILayout.EndVertical();
 	}
 }

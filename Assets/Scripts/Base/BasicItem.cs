@@ -10,6 +10,9 @@ public class BasicItem : IItem
 
     protected string preffix;
 
+	public string IconPath;
+	public string AtlasName;
+
     public string Preffix 
     {
         get

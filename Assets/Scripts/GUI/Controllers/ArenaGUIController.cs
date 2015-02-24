@@ -13,6 +13,7 @@ public class ArenaGUIController : BasicGUIController {
 	public GameObject ScrollView;
 	public UISprite DetailsPortrait;
 	public GameObject backButton;
+	public GameObject teamButton;
 	public List<RPGEnemy> enemies;
 	public NPCArena activeArena;
 	public UILabel partyListText;
@@ -65,6 +66,10 @@ public class ArenaGUIController : BasicGUIController {
 		UpdateDetailsBox();
 		selectedCardIndex = index;
 		ScrollView.SetActive(false);
+		if(PlayerManager.Instance.isInParty())
+			teamButton.SetActive(true);
+		else
+			teamButton.SetActive(false);
 	}
 
 	public void UpdateDetailsBox()
@@ -85,7 +90,8 @@ public class ArenaGUIController : BasicGUIController {
 	public void TeamChallenge()
 	{
 		Debug.Log("team challenge");
-		LaunchArena(false);
+		PlayerManager.Instance.ActiveWorld.SendPartyChallenge(activeArena.Enemies[selectedCardIndex].ID);
+		//LaunchArena(false);
 	}
 
 	public void LaunchArena(bool solo)

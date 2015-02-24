@@ -9,6 +9,7 @@ using System;
 
 [XmlInclude(typeof(Condition))]
 [XmlInclude(typeof(LineText))]
+[XmlInclude(typeof(ActionEvent))]
 public class RPGParagraph 
 {
 	[XmlElement (ElementName = "PT")]
@@ -88,7 +89,9 @@ public class RPGParagraph
 		foreach (Condition condition in Conditions)
 		{
 			if (condition.Validate() == false)
+			{
 				return false;
+			}
 		}
 		return true;
 	}

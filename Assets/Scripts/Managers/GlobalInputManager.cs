@@ -64,16 +64,16 @@ public class GlobalInputManager : MonoBehaviour {
 					if(isDown)
 					{	                   
 						if(UICamera.currentTouchID == -1)
-							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressDown, 0);
+							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressDown, 0, 0);
 						if(UICamera.currentTouchID == -2)
-							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressDown, 1);
+							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressDown, 1, 1);
 					}
 					else
 					{
 						if(UICamera.currentTouchID == -1)
-							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressUp, 0);
+							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressUp, 0, 0);
 						if(UICamera.currentTouchID == -2)
-							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressUp, 1);
+							PlayerManager.Instance.avatarActionManager.UseSkill(InputTrigger.OnPressUp, 1, 1);
 					}
 				}
 			}

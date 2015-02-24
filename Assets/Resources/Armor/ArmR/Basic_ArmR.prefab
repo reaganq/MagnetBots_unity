@@ -463,12 +463,17 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
   skillStatusEffects: []
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors: []
   skillVFXs: []
   _skillState: 0
+  isOwner: 0
   ownerCAM: {fileID: 0}
-  equipmentSlotIndex: 0
+  equipmentSlotIndex: 1
   hasSkill: 1
   hasPressDownEvent: 0
   hasPressUpEvent: 0
@@ -477,7 +482,7 @@ MonoBehaviour:
   canUseWhileBusy: 0
   skillButtonSpritePath: 
   skillButtonAtlasPath: 
-  upperRNGLimit: 0
+  baseDamage: 0
   ownerAvatar: {fileID: 0}
   isPressedDown: 0
   isPressedUp: 0

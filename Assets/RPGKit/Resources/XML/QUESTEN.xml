@@ -13,8 +13,8 @@
       </QuestStep>
     </questSteps>
     <repeatable>true</repeatable>
-    <timed>false</timed>
-    <timeLimit>0</timeLimit>
+    <timed>true</timed>
+    <timeLimit>3600</timeLimit>
     <initialQuestLog>Lynne needs some new stock for her shop! She will commission you to find them.</initialQuestLog>
     <finalQuestLog />
     <randomLoot>false</randomLoot>
@@ -26,10 +26,15 @@
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
         <dropRate>0.5</dropRate>
+        <Conditions />
       </LootItem>
     </allLoots>
     <questType>collection</questType>
-    <allTasks />
+    <allTasks>
+      <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="10" TL="1" CA="0" QLD="Please help Lynne find these items:" />
+      <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="6" TL="1" CA="0" QLD="" />
+    </allTasks>
+    <Conditions />
     <Rewarded>false</Rewarded>
     <endTime>0</endTime>
   </RPGQuest>
@@ -47,6 +52,7 @@
     <allLoots />
     <questType>story</questType>
     <allTasks />
+    <Conditions />
     <Rewarded>false</Rewarded>
     <endTime>0</endTime>
   </RPGQuest>

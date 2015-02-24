@@ -35,7 +35,7 @@ public class GeneralData: MonoBehaviour{
 			{
 				for (int j = 0; j < quests[i].questSteps.Count; j++) {
 					if(quests[i].questSteps[j].isMainStep)
-						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,3,1);
+						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,4),1);
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class GeneralData: MonoBehaviour{
 		return null;
 	}
 
-	public RPGQuest GetQuestByID(int ID)
+	public static RPGQuest GetQuestByID(int ID)
 	{
 		for (int i = 0; i < quests.Count; i++) {
 			if(quests[i].ID == ID)

@@ -8,17 +8,15 @@ using System.Xml.Serialization;
 using System.IO;
 
 [Serializable]
-public class RPGCurrency : RPGItem {
-
+public class RPGCurrency : BasicItem {
+	
 	public bool isPremium;
+
+	[XmlIgnore]
+	public int amount;
 
 	public RPGCurrency()
 	{
-		Name = string.Empty;
 		preffix = "CURRENCY";
-		BuyValue = 0;
-		Stackable = true;
-		SellValue = 0;
-		Rarity = RarityType.None;
 	}
 }

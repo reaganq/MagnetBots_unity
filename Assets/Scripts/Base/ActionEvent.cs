@@ -40,6 +40,7 @@ public class ActionEvent
 		{
 			//quest start
 		case ActionEventType.QuestStart:
+			Debug.Log("start quest action");
 			PlayerManager.Instance.Hero.questLog.StartQuest(Item);
 			break;
 			//quest end
@@ -75,10 +76,17 @@ public class ActionEvent
 			GUIManager.Instance.conversationGUI.DisplayParagraphByID(Item);
 			break;
 		case ActionEventType.DisplayQuestInfo:
-			GUIManager.Instance.conversationGUI.DisplayQuestOutline();
+			GUIManager.Instance.conversationGUI.DisplayQuestOutline(Item);
 			break;
 		case ActionEventType.DisplayQuestStatus:
-			GUIManager.Instance.conversationGUI.DisplayQuestStatus();
+			GUIManager.Instance.conversationGUI.DisplayQuestStatus(Item);
+			break;
+		case ActionEventType.DisplayQuestConfirmation:
+			GUIManager.Instance.conversationGUI.DisplayQuestconfirmation();
+			Debug.Log("confirmation");
+			break;
+		case ActionEventType.GiveQuestRewards:
+			GUIManager.Instance.conversationGUI.DisplayQuestRewards(Item);
 			break;
 			//remove worldobject
 		}
@@ -93,7 +101,7 @@ public enum ActionEventType
 	TakeItem = 3,
 	EndConversation = 4,
 	QuestFailed = 5,
-	RemoveWorldObject = 6,
+	HideQuestInfo = 6,
 	QuestAlternateEnd = 7,
 	GoToParagraph = 8,
 	SpawnCreature = 9,
@@ -103,5 +111,7 @@ public enum ActionEventType
 	Continueconversation = 13,
 	OpenActivityGUI = 14,
 	DisplayQuestInfo = 15,
-	DisplayQuestStatus = 16
+	DisplayQuestStatus = 16,
+	DisplayQuestConfirmation = 17,
+	DisplayQuestRewards = 18,
 }

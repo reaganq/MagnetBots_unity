@@ -97,6 +97,7 @@ public class RPGNPC : IItem
 		activities = new List<NPCActivityData>();
 		overrideActivities = new List<NPCActivityData>();
 		speakerPrefabPath = "NPCs/Speakers/";
+		defaultConversationID = 0;
 	}
 }
 

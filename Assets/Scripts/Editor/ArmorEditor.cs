@@ -59,20 +59,7 @@ public class ArmorEditor : BaseEditorWindow
 	protected override void EditPart()
 	{
 		RPGArmor s = (RPGArmor)currentItem;
-		
-		/*if (s.ID > 0 && !s.IsCopy && updateMode)
-		{
-			if (GUILayout.Button("Generater stronger versions", GUILayout.Width(400)))
-			{
-				generator = new ArmorGenerator();
-				generator.Calculate(s);
-				MenuMode = MenuModeEnum.ThirdWindow;		
-			}
-		}*/
-		
-		EditorUtils.Separator();
-
-        
+		        
         EditorGUILayout.PrefixLabel("has ability?");
         
         s.HasAbility = EditorGUILayout.Toggle(s.HasAbility, GUILayout.Width(300));
@@ -84,7 +71,51 @@ public class ArmorEditor : BaseEditorWindow
 			s.AbilityAtlasPath = EditorGUILayout.TextField(s.AbilityAtlasPath, GUILayout.Width(500));
         	s.AbilityString = EditorGUILayout.TextField(s.AbilityString, GUILayout.Width(1000));
 		}
-		
+
+		EditorGUILayout.PrefixLabel("max level: ");
+		s.maxLevel = EditorGUILayout.IntField(s.maxLevel, GUILayout.Width(100));
+
+		if(s.ItemCategory == ItemType.Armor)
+		{
+			foreach(ArmorStatsSet set in s.armorStatsSets)
+			{
+				EditorGUILayout.BeginVertical(skin.box);
+				EditorUtils.Label("armor stats: ");
+				foreach(ArmorStat stat in set.armorStats)
+				{
+					EditorGUILayout.BeginHorizontal();
+					stat.armorStatsValue = EditorGUILayout.IntField(stat.armorStatsValue, GUILayout.Width(100));
+					stat.armorStatsType = (ArmorStatsType)EditorGUILayout.EnumPopup(stat.armorStatsType, GUILayout.Width(300));
+					EditorGUILayout.EndHorizontal();
+
+					if (GUILayout.Button("Delete armor stat set", GUILayout.Width(150)))
+					{
+						set.armorStats.Remove(stat);
+						break;
+					}
+					EditorGUILayout.Separator();
+				}
+				if(GUILayout.Button("add armor stat", GUILayout.Width(150)))
+				{
+					set.armorStats.Add(new ArmorStat());
+				}
+				EditorGUILayout.Separator();
+				//DisplayShopItem(item);
+				if (GUILayout.Button("Delete armor stat set", GUILayout.Width(200)))
+				{
+					s.armorStatsSets.Remove(set);
+					break;
+				}
+				EditorGUILayout.EndVertical();
+			}
+
+			
+			if (GUILayout.Button("Add armor stat set", GUILayout.Width(200)))
+			{
+				s.armorStatsSets.Add(new ArmorStatsSet());
+			}
+		}
+
 		ItemUtils.DisplayItemPart(s, Data);
 		
 		ItemUtils.AddEquiped(s, Data);

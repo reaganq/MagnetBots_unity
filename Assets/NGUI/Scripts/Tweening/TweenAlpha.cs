@@ -97,6 +97,20 @@ public class TweenAlpha : UITweener
 		return comp;
 	}
 
+	/*static public TweenAlpha Begin (GameObject go, float duration,float fromAlpha, float alpha)
+	{
+		TweenAlpha comp = UITweener.Begin<TweenAlpha>(go, duration);
+		comp.from = comp.value;
+		comp.to = alpha;
+		
+		if (duration <= 0f)
+		{
+			comp.Sample(1f, true);
+			comp.enabled = false;
+		}
+		return comp;
+	}*/
+
 	public override void SetStartToCurrentValue () { from = value; }
 	public override void SetEndToCurrentValue () { to = value; }
 }

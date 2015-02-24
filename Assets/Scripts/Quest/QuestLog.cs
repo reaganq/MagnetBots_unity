@@ -8,6 +8,7 @@ public class QuestLog
 	//finished quests
 	public List<RPGQuest> FinishedQuests;
 	public List<RPGQuest> CurrentQuests;
+	public int questPoints;
 
 	//ignore
 	public RPGQuest selectedQuest;
@@ -16,6 +17,30 @@ public class QuestLog
 	{
 		CurrentQuests = new List<RPGQuest>();
 		FinishedQuests = new List<RPGQuest>();
+	}
+
+	public void AddQuestPoints(int amount)
+	{
+		questPoints += amount;
+	}
+
+	public RPGQuest LastAddedQuest()
+	{
+		if(CurrentQuests.Count < 1)
+			return null;
+		Debug.Log("found quest");
+		return CurrentQuests[CurrentQuests.Count -1];
+	}
+
+	public RPGQuest GetCurrentQuestByID(int questID)
+	{
+		for (int i = 0; i < CurrentQuests.Count; i++) {
+			if(CurrentQuests[i].ID == questID)
+			{
+				return CurrentQuests[i];
+			}
+				}
+		return null;
 	}
 
 	//quest step in progress
@@ -70,6 +95,7 @@ public class QuestLog
 	// Start new quest
 	public bool StartQuest(int questId)
 	{
+		Debug.Log("start quest");
 		if (IsQuestStarted(questId))
 			return false;
 
@@ -79,11 +105,12 @@ public class QuestLog
 		{
 			if (q.ID == questId)
 			{
+				Debug.Log("start time: "+q.startTime);
+				q.startTime = Time.realtimeSinceStartup;
 				CurrentQuests.Add(q);
 				result = true;
 			}
 		}
-		
 		return result;
 	}
 	
@@ -218,6 +245,12 @@ public class QuestLog
 	{
 		
 	}
+}
+
+public class ParseQuestLogData
+{
+	public List<int> finishedQuestIDs;
+	public List<int> currentQuestIDs;
 }
 
 

@@ -24,6 +24,7 @@ public class PlayerInformation  {
 
 	public PlayerProfile profile;
 
+
 	public int Coins;
 	public int Magnets;
 	public int CitizenPoints;
@@ -174,6 +175,30 @@ public class PlayerInformation  {
 	
 	#region inventory
 
+	public bool DoYouHaveThisItem(InventoryItem item, bool ignoreLevel)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			return ArmoryInventory.DoYouHaveThisItem(item, ignoreLevel);
+		}
+		else
+		{
+			return MainInventory.DoYouHaveThisItem(item, ignoreLevel);
+		}
+	}
+
+	public int GetItemAmount(InventoryItem item, bool ignoreLevel)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			return ArmoryInventory.GetItemAmount(item, ignoreLevel);
+		}
+		else
+		{
+			return MainInventory.GetItemAmount(item, ignoreLevel);
+		}
+	}
+
 	public bool DoYouHaveSpaceForThisItem(RPGItem item, int level, int amount)
 	{
 		if(item.ItemCategory == ItemType.Armor)
@@ -206,6 +231,28 @@ public class PlayerInformation  {
 		return false;
 	}
 
+	public void AddRPGCurrency(RPGCurrency currency)
+	{
+		switch(currency.ID)
+		{
+		case 1:
+			AddCurrency(currency.amount, BuyCurrencyType.Coins);
+			break;
+		case 2:
+			AddCurrency(currency.amount, BuyCurrencyType.Magnets);
+			break;
+		case 3:
+			AddCurrency(currency.amount, BuyCurrencyType.CitizenPoints);
+			break;
+		case 4:
+			questLog.AddQuestPoints(currency.amount);
+			break;
+		case 5:
+			break;
+		}
+
+	}
+
 	public void AddItem(InventoryItem item)
 	{
 		AddItem(item, item.CurrentAmount);
@@ -220,7 +267,7 @@ public class PlayerInformation  {
 			if(NetworkManager.Instance.usingParse)
 				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
-		else if(item.rpgItem.ItemCategory == ItemType.Currency)
+		/*else if(item.rpgItem.ItemCategory == ItemType.Currency)
 		{
 			if(item.rpgItem.ID == 1)
 			{
@@ -232,7 +279,7 @@ public class PlayerInformation  {
 			}
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
-		}
+		}*/
 		else
 		{
 			MainInventory.AddItem(item, amount);
@@ -482,6 +529,7 @@ public class PlayerInformation  {
 
 	public byte[] ParsePlayerProfile()
 	{
+		//populate ParsePlayerProfileData
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream();
 		b.Serialize(m, profile);

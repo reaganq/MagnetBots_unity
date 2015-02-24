@@ -9,9 +9,7 @@ using System.IO;
 
 [Serializable]
 public class NPCMinigame: NPCActivity {
-
-	public string AtlasName;
-	public string PortraitIcon;
+	
 	public string PrefabDirectory;
 	public List<LootItem> Loots;
 	

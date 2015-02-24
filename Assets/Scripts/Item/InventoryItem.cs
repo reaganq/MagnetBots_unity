@@ -26,6 +26,19 @@ public class InventoryItem : ItemInWorld {
 			   return false;
 		}
 	}
+
+	public void GenerateNewInventoryItem(RPGItem item, int lvl, int amount)
+	{
+		rpgItem = item;
+		UniqueItemId = rpgItem.UniqueId;
+		if(lvl > 0)
+			Level = lvl;
+		else
+			Level = 1;
+		CurrentAmount = amount;
+		isItemViewed = false;
+		IsItemEquipped = false;
+	}
 }
 
 [Serializable]

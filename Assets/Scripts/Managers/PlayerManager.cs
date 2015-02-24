@@ -50,7 +50,7 @@ public class PlayerManager : MonoBehaviour
 	public PhotonView avatarPhotonView;
 
 	public List<int> _partyMembers = new List<int>();
-
+	public List<bool> partyChallengeReplies = new List<bool>();
 	public List<int> partyMembers {
 		get {
 			return _partyMembers;
@@ -295,10 +295,23 @@ public class PlayerManager : MonoBehaviour
         avatarInput.enabled = false;
     }
 
+	public void GiveReward(LootItemList loots)
+	{
+		for (int i = 0; i < loots.items.Count; i++) {
+			Hero.AddItem(loots.items[i]);
+		}
+		for (int i = 0; i < loots.currencies.Count; i++) {
+			Hero.AddRPGCurrency(loots.currencies[i]);
+		}
+		for (int i = 0; i < loots.badges.Count; i++) {
+			Hero.AddRPGCurrency(loots.currencies[i]);
+		}
+	}
+
 	//party leader send to party members when they join
 	public void GiveRewards(List<LootItem> loots)
 	{
-		List<InventoryItem> lootItems = new List<InventoryItem>();
+		List<InventoryItem> lootItems = new List<InventoryItem>();     
 		for (int i = 0; i < loots.Count; i++) 
 		{
 			float chance = Random.Range(0.0f, 1.0f);
@@ -308,8 +321,8 @@ public class PlayerManager : MonoBehaviour
 				InventoryItem newItem = new InventoryItem();
 				if(loots[i].itemType == ItemType.Currency)
 				{
-					RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
-					newItem.rpgItem = currency;
+					//RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
+					//newItem.rpgItem = currency;
 				}
 				else if(loots[i].itemType == ItemType.Armor)
 				{
@@ -330,9 +343,6 @@ public class PlayerManager : MonoBehaviour
 		
 		Debug.Log("total loot items = " + lootItems.Count);
 		GUIManager.Instance.DisplayRewards(lootItems);
-		//GUIManager
-		
-		//guimanager display rewards;
 	}
 
 	public void GiveRewards(int magnets, List<LootItem> loots)
@@ -341,13 +351,13 @@ public class PlayerManager : MonoBehaviour
 
 		if(magnets > 0)
 		{
-			InventoryItem newItem = new InventoryItem();
+			/*InventoryItem newItem = new InventoryItem();
 			RPGCurrency currency = Storage.LoadById<RPGCurrency>(1, new RPGCurrency());
 			newItem.rpgItem = currency;
 			newItem.CurrentAmount = magnets;
 			newItem.UniqueItemId = newItem.rpgItem.UniqueId;
 			newItem.Level = 1;
-			lootItems.Add(newItem);
+			lootItems.Add(newItem);*/
 		}
 		for (int i = 0; i < loots.Count; i++) 
 		{
@@ -358,8 +368,8 @@ public class PlayerManager : MonoBehaviour
 				InventoryItem newItem = new InventoryItem();
 				if(loots[i].itemType == ItemType.Currency)
 				{
-					RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
-					newItem.rpgItem = currency;
+					//RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
+					//newItem.rpgItem = currency;
 				}
 				else if(loots[i].itemType == ItemType.Armor)
 				{

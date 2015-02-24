@@ -111,4 +111,8 @@ MonoBehaviour:
   - NetworkSpawnPlayerProjectile
   - NetworkRest
   - RejectPartyInvite
+  - CancelPartyChallenge
+  - NetworkPartyChallengeReply
+  - NetworkRejectPartyInvite
+  - ReceivePartyChallenge
   DisableAutoOpenWizard: 0

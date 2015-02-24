@@ -17,7 +17,7 @@ public class NPCQuest : NPCActivity {
 		get{
 			if(questID > 0)
 			{
-				return PlayerManager.Instance.data.GetQuestByID(questID);
+				return GeneralData.GetQuestByID(questID);
 			}
 			else
 				return null;

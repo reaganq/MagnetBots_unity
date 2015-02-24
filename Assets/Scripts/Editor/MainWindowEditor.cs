@@ -42,6 +42,7 @@ public class MainWindowEditor : EditorWindow
 	public NPCQuestEditor npcQuestEditor;
 	public QuestEditor questEditor;
 	public TownEditor townEditor;
+	public BadgeEditor badgeEditor;
 	//public RaceEditor raceEditor;
 	//public ClassEditor classEditor;
 	//public GuildEditor guildEditor;
@@ -111,6 +112,8 @@ public class MainWindowEditor : EditorWindow
 		npcQuestEditor = new NPCQuestEditor(Skin, this);
 
 		townEditor = new TownEditor(Skin, this);
+
+		badgeEditor = new BadgeEditor(Skin, this);
 		
 		//spellShop = new SpellShopEditor(Skin, this);
 		
@@ -291,7 +294,11 @@ public class MainWindowEditor : EditorWindow
 		{
 			MainWindowType = MainWindowTypeEnum.Town;
 		}
-		
+
+		if (GUILayout.Button(badgeEditor.EditorName, GUILayout.Width(100)))
+		{
+			MainWindowType = MainWindowTypeEnum.Badge;
+		}
 		/*if (GUILayout.Button(skillEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.Skill;
@@ -458,6 +465,9 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.Town:
 				townEditor.DisplayWindow(position);
 				break;
+			case MainWindowTypeEnum.Badge:
+				badgeEditor.DisplayWindow(position);
+				break;
 
             /*case MainWindowTypeEnum.QuestCategory:
                 questCategoryEditor.DisplayWindow(position);
@@ -473,6 +483,7 @@ public enum MainWindowTypeEnum
 	Service,
 	Armor,
 	Attribute,
+	Badge,
 	Class,
 	Container,
 	Conversation,

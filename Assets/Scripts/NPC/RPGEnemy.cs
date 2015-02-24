@@ -8,6 +8,7 @@ using System.IO;
 using System;
 
 [XmlInclude(typeof(LootItem))]
+[XmlInclude(typeof(ActionEvent))]
 public class RPGEnemy : IItem
 {
 	#region implementing interface IItem
@@ -85,6 +86,8 @@ public class RPGEnemy : IItem
 	public string PortraitAtlas;
 	public List<LootItem> Loots;
 	public List<string> PrefabPaths;
+	public List<ActionEvent> preFightActions;
+	public List<ActionEvent> postFightActions;
 	
 	public RPGEnemy()
 	{
@@ -95,27 +98,11 @@ public class RPGEnemy : IItem
 		SystemDescription = string.Empty;
 		Description = string.Empty;
 		PortraitAtlas = "Atlases/Enemy/EnemiesAtlas";
+		preFightActions = new List<ActionEvent>();
+		postFightActions = new List<ActionEvent>();
 	}
 }
 
-public class LootItem
-{
-	public ItemType itemType;
-	public List<int> itemID;
-	public int itemLevel;
-	public int minQuantity;
-	public int maxQuantity;
-	public float dropRate;
 
-	public LootItem()
-	{
-		itemType = ItemType.Currency;
-		itemID = new List<int>();
-		itemLevel = 1;
-		minQuantity = 1;
-		maxQuantity = 1;
-		dropRate = 0.5f;
-	}
-}
 
 

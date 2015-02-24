@@ -19,6 +19,9 @@ public class Task {
 	
 	[XmlAttribute (AttributeName = "TASKTARGET")]
 	public int TaskTarget;
+
+	[XmlAttribute (AttributeName = "TL")]
+	public int Tasklevel;
 	
 	[XmlAttribute (AttributeName = "CA")]
 	public int CurrentAmount;
@@ -38,7 +41,7 @@ public class Task {
 		switch(TaskType)
 		{
 		case TaskTypeEnum.KillEnemy:
-			if(CurrentAmount >= AmountToReach)
+			if(CurrentAmount >= AmountToReach)	
 				return true;
 			break;
 		case TaskTypeEnum.ReachPartOfConversation:

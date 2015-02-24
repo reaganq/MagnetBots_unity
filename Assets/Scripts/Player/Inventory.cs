@@ -366,7 +366,7 @@ public class Inventory  : BasicInventory
     
     public bool EquipItem(InventoryItem item)
     {
-        if (!item.IsItemEquippable)
+        if (!item.IsItemEquippable || item.IsItemEquipped)
             return false;
         if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)item.rpgItem, item.Level))
         {
@@ -378,6 +378,7 @@ public class Inventory  : BasicInventory
             return false;
     }
 
+	//used by parse
 	public bool EquipItem(string itemID, int level)
 	{
 		for (int i = 0; i < Items.Count; i++) 
@@ -406,6 +407,47 @@ public class Inventory  : BasicInventory
 			}
 		}
 		return true;
+	}
+
+	public bool DoYouHaveThisItem(InventoryItem item, bool ignoreLevel)
+	{
+		if(ignoreLevel)
+		{
+			for (int i = 0; i < Items.Count; i++) {
+				if(Items[i].UniqueItemId == item.UniqueItemId && Items[i].CurrentAmount >= item.CurrentAmount)
+					return true;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < Items.Count; i++) {
+				if(Items[i].UniqueItemId == item.UniqueItemId && Items[i].CurrentAmount >= item.CurrentAmount && Items[i].Level == item.Level)
+					return true;
+			}
+		}
+
+		return false;
+	}
+
+	public int GetItemAmount(InventoryItem itemToHave, bool ignoreLevel)
+	{
+		int amount = 0;
+		for (int i = 0; i < Items.Count; i++) {
+			if(ignoreLevel)
+			{
+				if(Items[i].UniqueItemId == itemToHave.UniqueItemId)
+					amount += Items[i].CurrentAmount;
+			}
+			else
+			{
+				if(Items[i].UniqueItemId == itemToHave.UniqueItemId && Items[i].Level == itemToHave.Level)
+				{
+					amount += Items[i].CurrentAmount;
+					return amount;
+				}
+			}
+		}
+		return amount;
 	}
 	
 }

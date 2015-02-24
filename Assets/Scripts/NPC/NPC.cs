@@ -89,6 +89,10 @@ public class NPC: MonoBehaviour
 			}
 		}
 
+		for (int i = 0; i < activities.Count; i++) {
+			activities[i].LoadConversation();
+				}
+
 		/*if(character.ArenaID > 0)
 		{
 			arena = Storage.LoadById<NPCArena>(character.ArenaID, new NPCArena());

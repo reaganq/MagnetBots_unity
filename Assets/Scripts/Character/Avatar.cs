@@ -353,6 +353,7 @@ public class Avatar : MonoBehaviour {
 		BasePlayerSkill armLcontroller = temp.GetComponent<BasePlayerSkill>();
 		if(armLcontroller != null)
 		{
+			armLcontroller.equipmentSlotIndex = 0;
 			myActionManager.AddSkill(armLcontroller);
 		}
 		else
@@ -412,6 +413,7 @@ public class Avatar : MonoBehaviour {
 		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
 		if(armRcontroller != null)
 		{
+			armRcontroller.equipmentSlotIndex = 1;
 			//armRcontroller.Initialise(myStatus, 3);
 			myActionManager.AddSkill(armRcontroller);
 			//Debug.Log("transfer animation");

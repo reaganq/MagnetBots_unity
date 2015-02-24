@@ -44,7 +44,7 @@ public class NPCGUIController : BasicGUIController {
 
 			break;
 		case NPCGUIState.activityButtons:
-			DisplayActivityButtons();
+			StartCoroutine( DisplayActivityButtons());
 			break;
 		}
 	}
@@ -87,11 +87,18 @@ public class NPCGUIController : BasicGUIController {
 		base.Disable();
 	}
 
-	public void DisplayActivityButtons()
+	public IEnumerator DisplayActivityButtons()
 	{
+		textLabel.alpha = 0;
 		textLabel.gameObject.SetActive(true);
 		textLabel.text = PlayerManager.Instance.ActiveNPC.character.Name;
-
+		TweenAlpha.Begin(textLabel.gameObject, 0.3f, 1.0f);
+		if(activities.Count>0)
+			activityButtonsParent.transform.localPosition = new Vector3(((activities.Count)*-0.5f*offset), 363, 0);
+		else
+			activityButtonsParent.transform.localPosition = new Vector3(0, 363, 0);
+		activityButtonsParent.SetActive(true);
+		confirmButton.SetActive(false);
 		//check npc for override conversations
 		int num = activities.Count - activityButtons.Count;
 		if(num >0)
@@ -100,26 +107,36 @@ public class NPCGUIController : BasicGUIController {
 				GameObject activitybutton = NGUITools.AddChild(activityButtonsParent, activityButtonPrefab);
 				NPCActivityButton nab = activitybutton.GetComponent<NPCActivityButton>();
 				activityButtons.Add(nab);
+				//activitybutton.SetActive(false);
 			}
 		}
 		for (int i = 0; i < activityButtons.Count; i++) {
-			if(i >= PlayerManager.Instance.ActiveNPC.activities.Count)
-				activityButtons[i].gameObject.SetActive(false);
-			else
+			activityButtons[i].gameObject.SetActive(false);
+				}
+
+		for (int i = 0; i < activityButtons.Count; i++) {
+			//if()
+			//	activityButtons[i].gameObject.SetActive(false);
+			if(i < PlayerManager.Instance.ActiveNPC.activities.Count)
 			{
 				activityButtons[i].gameObject.SetActive(true);
 				activityButtons[i].LoadActivityButton(activities[i], i);
-				activityButtons[i].transform.localPosition = new Vector3(i*offset, -50, 0);
+				activityButtons[i].transform.localPosition = new Vector3(i*offset, -70, 0);
+				TweenPosition.Begin(activityButtons[i].gameObject, 0.1f, new Vector3(i*offset, -50, 0));
+				TweenAlpha tweenA = TweenAlpha.Begin(activityButtons[i].gameObject, 0.1f, 1.0f);
+				tweenA.from = 0f;
+				yield return new WaitForSeconds(0.1f);
 			}
 		}
 		confirmButton.SetActive(true);
-		confirmButton.transform.localPosition = new Vector3(activities.Count*offset, -50, 0);
+		confirmButton.transform.localPosition = new Vector3(activities.Count*offset, -70, 0);
+		TweenPosition.Begin(confirmButton, 0.1f, new Vector3(activities.Count*offset, -50, 0));
+		TweenAlpha tween = TweenAlpha.Begin(confirmButton, 0.1f, 1.0f);
+		tween.from = 0f;
 		//numberOfButtons +=1;
-		if(activities.Count>0)
-			activityButtonsParent.transform.localPosition = new Vector3(((activities.Count)*-0.5f*offset), 363, 0);
-		else
-			activityButtonsParent.transform.localPosition = new Vector3(0, 363, 0);
-		activityButtonsParent.SetActive(true);
+		yield return null;
+
+
 	}
 
 	public void HideActivityButtons()
@@ -154,8 +171,8 @@ public class NPCGUIController : BasicGUIController {
 		case NPCActivityType.Minigame:
 			break;
 		}
-		if(activeActivity.conversation != null)
-			conversationGUI.DisplayConversation(activeActivity.conversation);
+		/*if(activeActivity.conversation != null)
+			conversationGUI.DisplayConversation(activeActivity.conversation);*/
 		//load activity's conversation
 	}
     
@@ -229,6 +246,7 @@ public class NPCGUIController : BasicGUIController {
 	{
 		state = NPCGUIState.quest;
 		PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest.quest;
+		conversationGUI.DisplayConversation(newQuest.conversation);
 	}
 
 	public void DisplayMinigame(NPCMinigame newMinigame)

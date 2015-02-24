@@ -34,7 +34,7 @@ public class GUIManager : MonoBehaviour {
 	public InventoryGUIController InventoryGUI;
     public QuickInventoryGUIController QuickInventoryGUI;
     public MainUIManager MainGUI;
-	public PartyGUIController PartyGUI;
+	public NotificationGUIController NotificationGUI;
     public PlayerShopGUIController PlayerShopGUI;
     public NPCGUIController NPCGUI;
     public IntroGUIController IntroGUI;
@@ -127,6 +127,7 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.main:
 			MainGUI.Enable();
+			chatGUI.Enable();
 			break;
 		case UIState.npc:
 			NPCGUI.Enable();
@@ -157,6 +158,7 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.main:
 			MainGUI.Disable();
+			chatGUI.Disable();
 			break;
 		case UIState.npc:
 			NPCGUI.Disable();
@@ -270,23 +272,23 @@ public class GUIManager : MonoBehaviour {
 
 	public void DisplayPartyNotification(PhotonPlayer player, int partyleaderID)
 	{
-		PartyGUI.DisplayNotificationBox(player, partyleaderID);
+		NotificationGUI.DisplayNotificationBox(player, partyleaderID);
 	}
 
 	public void HidePartyNotification()
 	{
-		PartyGUI.HideNotificationBox();
+		NotificationGUI.HideNotificationBox();
 	}
 
-	public void DisplayCharacterPopUp(GameObject character)
+	/*public void DisplayCharacterPopUp(GameObject character)
 	{
-		PartyGUI.DisplayHoverBox(character);
+		NotificationGUI.DisplayHoverBox(character);
 	}
 
 	public void HideCharacterPopUp()
 	{
-		PartyGUI.HideHoverBox();
-	}
+		NotificationGUI.HideHoverBox();
+	}*/
 
 	public void DisplayHoverPopup(CharacterStatus cs)
 	{

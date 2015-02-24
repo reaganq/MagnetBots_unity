@@ -59,7 +59,10 @@ public class EventUtils
 			
 			//quest failed
 		case ActionEventType.QuestFailed:
-			
+		case ActionEventType.DisplayQuestDetails:
+		case ActionEventType.DisplayQuestInfo:
+		case ActionEventType.DisplayQuestStatus:
+		case ActionEventType.GiveQuestRewards:
 			//quest end
 		case ActionEventType.QuestEnd:
 			action.Item = EditorUtils.IntPopup(action.Item, data.questEditor.items, "Quest", 90, FieldTypeEnum.Middle);

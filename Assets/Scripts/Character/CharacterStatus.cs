@@ -63,14 +63,14 @@ public class CharacterStatus : CharacterAttributes {
 
 	public void DisplayName(bool state)
 	{
-		if(nameLabel != null);
-		nameLabel.gameObject.SetActive(state);
+		if(nameLabel != null)
+			nameLabel.gameObject.SetActive(state);
 	}
 
 	public void DisplayHpBar(bool state)
 	{
-		if(hpBar != null);
-		hpBar.gameObject.SetActive(state);
+		if(hpBar != null)
+			hpBar.gameObject.SetActive(state);
 	}
 
 	public void HideInfo()

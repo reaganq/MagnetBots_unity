@@ -186,8 +186,10 @@
      <Compile Include="Assets\Photon Unity Networking\Editor\PhotonNetwork\Views\PhotonTransformViewEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ArenaEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ArmorEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\BadgeEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ConversationEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\CurrencyEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\DanceMoveEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\EnemyEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\Generator\ArmorGenerator.cs" />
      <Compile Include="Assets\Scripts\Editor\Generator\GeneratorConfig.cs" />
@@ -347,7 +349,7 @@
      <None Include="Assets\Resources\Atlases\Enemy\EnemiesUHD.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
-     <None Include="Assets\RPGKit\Resources\XML\EN.xml" />
+     <None Include="Assets\RPGKit\Resources\XML\CURRENCYEN.xml" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderYUV.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_RimOutline_BumpSpec_OneLight.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_BumpSpec_Rim_OneLight.shader" />
@@ -369,7 +371,6 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\Bump\T4M 2 TexturesBumped.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unified\T4M 2 TexturesUnified.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Luminance.shader" />
-     <None Include="Assets\RPGKit\Resources\XML\CURRENCYEN.xml" />
      <None Include="Assets\HUD Text\ReadMe - 1.6.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\6TexturesUnlit.shader" />

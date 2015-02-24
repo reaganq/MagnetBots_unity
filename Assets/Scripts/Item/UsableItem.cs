@@ -19,8 +19,7 @@ public class UsableItem : BasicItem
     public ItemType ItemCategory;
 // public UsageSkillType UsageSkill;
  //public float Recharge; 
- 	public string IconPath;
-    public string AtlasName;
+ 	
 	public EquipmentSlots EquipmentSlotIndex; 
 	public bool isLimitedUse;
 
@@ -69,7 +68,9 @@ public enum ItemType
 	UpgradeMaterials = 6,
 	Toys = 7,
 	Other = 8,
-	NakedArmor = 9
+	NakedArmor = 9,
+	Badge = 10,
+	DanceMove = 11,
 }
 
 public enum UsageSkillType

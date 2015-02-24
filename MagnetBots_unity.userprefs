@@ -1,60 +1,45 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/PlayerInformation.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Editor/Utils/GUIUtils.cs">
     <Files>
-      <File FileName="Assets/Scripts/Skills/RPGSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="41" Column="34" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGCurrency.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGArmor.cs" Line="24" Column="23" />
-      <File FileName="Assets/Scripts/Base/GeneralData.cs" Line="93" Column="1" />
-      <File FileName="Assets/Scripts/Item/UsableItem.cs" Line="13" Column="2" />
-      <File FileName="Assets/Scripts/Base/BasicItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Editor/ArmorEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Quest/QuestLog.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Quest/RPGQuest.cs" Line="178" Column="3" />
-      <File FileName="Assets/Scripts/NPC/RPGEnemy.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Quest/QuestStep.cs" Line="64" Column="11" />
-      <File FileName="Assets/Scripts/Quest/Task.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Editor/EnemyEditor.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="26" Column="3" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="30" Column="29" />
-      <File FileName="Assets/Scripts/Base/PlayerAction.cs" Line="12" Column="23" />
-      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="356" Column="4" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="300" Column="57" />
-      <File FileName="Assets/Scripts/Armor/Base/PassiveArmorAnimationController.cs" Line="92" Column="12" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Base/BasePlayerSkill.cs" Line="178" Column="21" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="91" Column="3" />
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="59" Column="2" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="561" Column="38" />
-      <File FileName="Assets/Scripts/Player/PlayerProfile.cs" Line="6" Column="1" />
+      <File FileName="Assets/Scripts/Editor/DanceMoveEditor.cs" Line="6" Column="48" />
+      <File FileName="Assets/Scripts/Player/PlayerProfile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/Jukebox.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/DanceMove.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Editor/DanceMoveEditor.cs" Line="5" Column="1" />
+      <File FileName="Assets/Scripts/Editor/CurrencyEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Editor/Utils/BaseEditorWindow.cs" Line="212" Column="27" />
+      <File FileName="Assets/Scripts/Editor/Utils/ItemUtils.cs" Line="181" Column="12" />
+      <File FileName="Assets/Scripts/Editor/Utils/GUIUtils.cs" Line="95" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-              </Node>
               <Node name="Base" expanded="True" />
               <Node name="Character" expanded="True" />
+              <Node name="Conversation" expanded="True" />
               <Node name="GUI" expanded="True">
                 <Node name="Controllers" expanded="True" />
               </Node>
               <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
+              <Node name="Minigames" expanded="True" />
               <Node name="NPC" expanded="True" />
-              <Node name="Player" expanded="True">
-                <Node name="PlayerInformation.cs" selected="True" />
-              </Node>
+              <Node name="Player" expanded="True" />
               <Node name="Quest" expanded="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="Editor" expanded="True" />
+              <Node name="Editor" expanded="True">
+                <Node name="Utils" expanded="True">
+                  <Node name="GUIUtils.cs" selected="True" />
+                </Node>
+              </Node>
             </Node>
           </Node>
         </State>

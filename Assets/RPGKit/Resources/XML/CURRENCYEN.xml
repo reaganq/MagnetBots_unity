@@ -2,40 +2,37 @@
 <ArrayOfRPGCurrency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGCurrency>
     <ID>1</ID>
-    <Name>Magnets</Name>
-    <Description>Basic Currency</Description>
+    <Name>Coins</Name>
+    <Description>basic currency</Description>
     <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>false</IsEquippable>
-    <IsUpgradeable>false</IsUpgradeable>
-    <ItemCategory>Currency</ItemCategory>
-    <IconPath>MagnetIcon</IconPath>
-    <AtlasName>Atlases/Main/InventoryAtlas</AtlasName>
-    <EquipmentSlotIndex>None</EquipmentSlotIndex>
-    <BuyCurrency>None</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>0</BuyValue>
-    <SellValue>0</SellValue>
-    <Rarity>None</Rarity>
     <isPremium>false</isPremium>
   </RPGCurrency>
   <RPGCurrency>
     <ID>2</ID>
-    <Name>Crystals</Name>
+    <Name>Magnets</Name>
     <Description>Premium currency</Description>
     <SystemDescription />
-    <IsUsable>false</IsUsable>
-    <IsEquippable>false</IsEquippable>
-    <IsUpgradeable>false</IsUpgradeable>
-    <ItemCategory>Currency</ItemCategory>
-    <IconPath>CrystalIcon</IconPath>
-    <AtlasName>Atlases/Main/InventoryAtlas</AtlasName>
-    <EquipmentSlotIndex>None</EquipmentSlotIndex>
-    <BuyCurrency>None</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>0</BuyValue>
-    <SellValue>0</SellValue>
-    <Rarity>None</Rarity>
     <isPremium>true</isPremium>
+  </RPGCurrency>
+  <RPGCurrency>
+    <ID>3</ID>
+    <Name>CitizenPoints</Name>
+    <Description>Karma</Description>
+    <SystemDescription />
+    <isPremium>false</isPremium>
+  </RPGCurrency>
+  <RPGCurrency>
+    <ID>4</ID>
+    <Name>QuestPoints</Name>
+    <Description>Quest rewards</Description>
+    <SystemDescription />
+    <isPremium>false</isPremium>
+  </RPGCurrency>
+  <RPGCurrency>
+    <ID>5</ID>
+    <Name>ExperiencePoints</Name>
+    <Description>leveling up</Description>
+    <SystemDescription />
+    <isPremium>false</isPremium>
   </RPGCurrency>
 </ArrayOfRPGCurrency>

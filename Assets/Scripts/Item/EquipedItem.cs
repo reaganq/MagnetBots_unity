@@ -20,4 +20,11 @@ public class EquipedItem
 			rpgArmor = Storage.LoadbyUniqueId<RPGArmor>(UniqueItemId, new RPGArmor());
 		}
 	}
+
+	public EquipedItem(string id, int lvl, RPGArmor armor)
+	{
+		UniqueItemId = id;
+		Level = lvl;
+		rpgArmor = armor;
+	}
 }

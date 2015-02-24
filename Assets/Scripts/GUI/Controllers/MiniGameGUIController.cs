@@ -15,7 +15,7 @@ public class MiniGameGUIController : BasicGUIController {
 		miniGameName.text = minigame.Name;
 		GameObject Atlas = Resources.Load(minigame.AtlasName) as GameObject;
 		portrait.atlas = Atlas.GetComponent<UIAtlas>();
-		portrait.spriteName = minigame.PortraitIcon;
+		portrait.spriteName = minigame.IconPath;
 		panel.SetActive(true);
 		description.text = minigame.Description;
 		Enable();

@@ -10,10 +10,3 @@ public class ShopItem : BaseLootItem
 {
 	
 }
-
-public enum ItemTypeEnum
-{
-	WEAPON = 0,
-	ITEM = 1,
-	ARMOR = 2
-}

@@ -5,14 +5,17 @@ public class TeleporterGUIController : BasicGUIController {
 
 	public UISprite[] townPortraitObjects;
 	public GameObject scrollView;
+	public GameObject scrollPanelRoot;
 	//public UILabel[] townLabels;
 	public GameObject detailsBox;
 	public GameObject detailPortraitBox;
+	public UISprite detailPortraitSprite;
 	public UILabel descriptionlabel;
 	public string naSpriteName;
 	public int selectedIndex;
 	public UIPlayTween portraitTweener;
 	public TweenPosition portraitPosTween;
+	public Transform portraitPosRef;
 
 	public void Start()
 	{
@@ -24,17 +27,24 @@ public class TeleporterGUIController : BasicGUIController {
 			}
 			else
 			{
-				GameObject Atlas = Resources.Load(GeneralData.towns[i].atlasPath) as GameObject;
-				townPortraitObjects[i].atlas = Atlas.GetComponent<UIAtlas>();
-				townPortraitObjects[i].spriteName = GeneralData.towns[i].spriteName;
-				townPortraitObjects[i].collider.enabled = true;
+				LoadTownAtlasSprite(townPortraitObjects[i], i);
 			}
 		}
+	}
+
+	public void LoadTownAtlasSprite(UISprite sprite, int index)
+	{
+		GameObject Atlas = Resources.Load(GeneralData.towns[index].atlasPath) as GameObject;
+		sprite.atlas = Atlas.GetComponent<UIAtlas>();
+		sprite.spriteName = GeneralData.towns[index].spriteName;
+		sprite.collider.enabled = true;
 	}
 
 	public void OnTownButtonPressed(int index)
 	{
 		selectedIndex = index;
+		LoadTownAtlasSprite(detailPortraitSprite, selectedIndex);
+
 		//DisplayTownDetails();
 		//portraitPosTween.from = townPortraitObjects[selectedIndex].transform.position;
 	}

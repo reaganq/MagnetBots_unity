@@ -53,7 +53,7 @@ public class MiniGameEditor : BaseEditorWindow
 		
 		s.PrefabDirectory = EditorUtils.TextField(s.PrefabDirectory, "Prefab Location");
 		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas");
-		s.PortraitIcon = EditorUtils.TextField(s.PortraitIcon, "portrait");
+		s.IconPath = EditorUtils.TextField(s.IconPath, "portrait");
 		ActivityUtils.DisplayActivityComponents(s, Data);
 		EditorGUILayout.Separator();
 

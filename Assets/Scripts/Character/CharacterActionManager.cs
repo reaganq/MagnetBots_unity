@@ -113,26 +113,40 @@ public class CharacterActionManager : ActionManager {
 
     #region action functions
 
-	public void UseSkill(InputTrigger trigger, int skillIndex)
+	public void UseSkill(InputTrigger trigger, int index, int slot)
 	{
 		if(isLocked())
 			return;
-		if(trigger == InputTrigger.OnPressDown)
+		int skillIndex = -1;
+		skillIndex = GetSkillByIDAndSlot(index, slot);
+		if(skillIndex >= 0)
 		{
-			if(armorSkills[skillIndex].CanPressDown())
+			if(trigger == InputTrigger.OnPressDown)
 			{
-				int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
-				myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
+				if(armorSkills[skillIndex].CanPressDown())
+				{
+					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
+					myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
+				}
+			}
+			else if(trigger == InputTrigger.OnPressUp)
+			{
+				if(armorSkills[skillIndex].CanPressUp())
+				{
+					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
+					myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
+				}
 			}
 		}
-		else if(trigger == InputTrigger.OnPressUp)
-		{
-			if(armorSkills[skillIndex].CanPressUp())
-			{
-				int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
-				myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
-			}
-		}
+	}
+
+	public int GetSkillByIDAndSlot(int id, int slot)
+	{
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].skillID == id && armorSkills[i].equipmentSlotIndex == slot)
+				return i;
+				}
+		return -1;
 	}
 
 	public void ResetActionState()
