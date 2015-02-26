@@ -364,19 +364,7 @@ public class Inventory  : BasicInventory
         return true;
     }
     
-    public bool EquipItem(InventoryItem item)
-    {
-        if (!item.IsItemEquippable || item.IsItemEquipped)
-            return false;
-        if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)item.rpgItem, item.Level))
-        {
-            item.IsItemEquipped = true;
-			item.isItemViewed = true;
-            return true;
-        }
-        else
-            return false;
-    }
+    
 
 	//used by parse
 	public bool EquipItem(string itemID, int level)
@@ -397,17 +385,7 @@ public class Inventory  : BasicInventory
 	}
     
     //TODO add in unequip functionality
-    public bool UnequipItem(string itemID, int level)
-    {
-        for (int i = 0; i < Items.Count; i++) 
-        {
-            if(Items[i].UniqueItemId == itemID && Items[i].Level == level)
-			{
-				Items[i].IsItemEquipped = false;
-			}
-		}
-		return true;
-	}
+    
 
 	public bool DoYouHaveThisItem(InventoryItem item, bool ignoreLevel)
 	{

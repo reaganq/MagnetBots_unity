@@ -10,7 +10,8 @@ using System.Reflection;
 
 public class PlayerInformation  {
 
-	public Inventory NakedArmoryInventory;
+	public string PlayerName;
+	public Inventory NakedArmorInventory;
     public Inventory MainInventory;
 	public Inventory ArmoryInventory;
 	public Inventory PlayerShop;
@@ -39,7 +40,7 @@ public class PlayerInformation  {
  
     public PlayerInformation()
     {
-		NakedArmoryInventory = new Inventory();
+		NakedArmorInventory = new Inventory();
         MainInventory = new Inventory();
 		ArmoryInventory = new Inventory();
 		jukeBox = new Jukebox();
@@ -51,7 +52,7 @@ public class PlayerInformation  {
     
     public void StartNewGame()
     {
-		profile.name = PlayerManager.Instance.data.GenerateRandomString(6);
+		SetPlayerName(GeneralData.GenerateRandomString(6));
 
         for (int i = 1; i < 20 ; i++) {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
@@ -64,21 +65,29 @@ public class PlayerInformation  {
 
 		PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
         
-		for (int i = 0; i < 5; i++) {
-			ArmoryInventory.EquipItem(NakedArmoryInventory.Items[i]);
-				}
-        
+       
         AddCurrency(1000,BuyCurrencyType.Coins);
         AddCurrency(100,BuyCurrencyType.Magnets);
 		AddCurrency(100, BuyCurrencyType.Magnets);
-
-		if(NetworkManager.Instance.usingParse)
-			SaveParseData();
-
+		EquipBaseNakedArmor();
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);
-				}
+		}
+		SaveParseData();
     }
+
+	public void SetPlayerName(string newName)
+	{
+		PlayerName = newName;
+		profile.name = PlayerName;
+	}
+
+	public void EquipBaseNakedArmor()
+	{
+		for (int i = 0; i < NakedArmorInventory.Items.Count; i++) {
+			EquipItem(NakedArmorInventory.Items[i]);
+		}
+	}
 
     public void AddCurrency(int amount, BuyCurrencyType currency)
     {
@@ -96,8 +105,7 @@ public class PlayerInformation  {
 		}
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 
-		if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+		UpdateWalletParseData();
     }
     
     public void RemoveCurrency(int amount, BuyCurrencyType currency)
@@ -115,8 +123,7 @@ public class PlayerInformation  {
 			CitizenPoints -= amount;
 		}
         GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-		if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+		UpdateWalletParseData();
     }
 
 	public void Withdraw(int amount)
@@ -124,8 +131,7 @@ public class PlayerInformation  {
 		BankCoins -= amount;
 		Coins += amount;
 		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-		if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+		UpdateWalletParseData();
 	}
  
 	public void Deposit(int amount)
@@ -133,15 +139,13 @@ public class PlayerInformation  {
 		BankCoins += amount;
 		Coins -= amount;
 		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-		if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+		UpdateWalletParseData();
 	}
 
 	public void CollectInterest(int amount)
 	{
 		BankCoins += amount;
-		if(NetworkManager.Instance.usingParse)
-			UpdateWalletParseData();
+		UpdateWalletParseData();
 	}
 
     public bool CanYouAfford(int price, BuyCurrencyType currency)
@@ -172,6 +176,42 @@ public class PlayerInformation  {
 		Debug.Log(jukeBox.danceMoves.Count);
 	}
 	#endregion
+
+	public bool EquipItem(InventoryItem item)
+	{
+		if (!item.IsItemEquippable || item.IsItemEquipped)
+			return false;
+		
+		if(PlayerManager.Instance.Hero.Equip.EquipItem((RPGArmor)item.rpgItem, item.Level))
+		{
+			item.IsItemEquipped = true;
+			item.isItemViewed = true;
+			return true;
+		}
+		else
+			return false;
+	}
+
+	public bool UnequipItem(string itemID, int level)
+	{
+		for (int i = 0; i < NakedArmorInventory.Items.Count; i++) 
+		{
+			if(NakedArmorInventory.Items[i].UniqueItemId == itemID && NakedArmorInventory.Items[i].Level == level)
+			{
+				NakedArmorInventory.Items[i].IsItemEquipped = false;
+				return true;
+			}
+		}
+		for (int i = 0; i < ArmoryInventory.Items.Count; i++) 
+		{
+			if(ArmoryInventory.Items[i].UniqueItemId == itemID && ArmoryInventory.Items[i].Level == level)
+			{
+				ArmoryInventory.Items[i].IsItemEquipped = false;
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	#region inventory
 
@@ -264,8 +304,7 @@ public class PlayerInformation  {
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		/*else if(item.rpgItem.ItemCategory == ItemType.Currency)
 		{
@@ -280,11 +319,27 @@ public class PlayerInformation  {
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
 		}*/
+		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
+		{
+			bool alreadyHasItemAtSameSlot = false;
+			for (int i = 0; i < NakedArmorInventory.Items.Count; i++) {
+				if(NakedArmorInventory.Items[i].rpgItem.EquipmentSlotIndex == item.rpgItem.EquipmentSlotIndex)
+				{
+					//TODO unequip already equipped cosmetics
+					//if(NakedArmorInventory.Items[i].IsItemEquipped);
+					NakedArmorInventory.Items[i] = item;
+					alreadyHasItemAtSameSlot = true;
+					break;
+				}
+			}
+			if(!alreadyHasItemAtSameSlot)
+				NakedArmorInventory.AddItem(item, amount);
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+		}
 		else
 		{
 			MainInventory.AddItem(item, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 
@@ -314,10 +369,14 @@ public class PlayerInformation  {
 			if(NetworkManager.Instance.usingParse)
 				UpdateWalletParseData();
 		}
+		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
+		{
+			NakedArmorInventory.RemoveItem(item, amount);
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+		}
 		else
 		{
 			MainInventory.RemoveItem(item, amount);
-			if(NetworkManager.Instance.usingParse)
 				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
@@ -337,9 +396,9 @@ public class PlayerInformation  {
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
-			NakedArmoryInventory.ReplaceNakedItem(item, level, 1);
+			NakedArmorInventory.ReplaceNakedItem(item, level, 1);
 			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmoryInventory));
+				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
@@ -364,9 +423,9 @@ public class PlayerInformation  {
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
-			NakedArmoryInventory.RemoveItem(item, level, amount);
+			NakedArmorInventory.RemoveItem(item, level, amount);
 			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmoryInventory));
+				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
@@ -392,8 +451,10 @@ public class PlayerInformation  {
 
 	public void SaveParseData()
 	{
+		if(!NetworkManager.Instance.usingParse)
+			return;
 		Debug.Log("saving parse data");
-		byte[] nakedArmoryParseList = ParseInventoryList(NakedArmoryInventory);
+		byte[] nakedArmoryParseList = ParseInventoryList(NakedArmorInventory);
 		byte[] mainInventoryParseList = ParseInventoryList(MainInventory);
 		byte[] armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
 		//byte[] depositBoxParseList = ParseInventoryList(DepositBox);
@@ -406,6 +467,7 @@ public class PlayerInformation  {
 		//Debug.Log(armoryInventoryParseList.Count);
 	
 		playerData["username"] = ParseUser.CurrentUser.Username;
+		playerData["playername"] = PlayerName;
 		playerData["profile"] = profile;
 		playerData["NakedArmoryList"] = nakedArmoryParseList;
 		playerData["InventoryList"] = mainInventoryParseList;
@@ -479,6 +541,23 @@ public class PlayerInformation  {
 	{
 	}
 
+	public void UpdateProfile()
+	{
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		{
+			Debug.LogWarning("no parse id");
+			return;
+		}
+		playerData["profile"] = ParsePlayerProfile();
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+			if(t.IsCompleted)
+				Debug.Log("truly updated profile");
+		}
+		);
+		Debug.Log("updating profile");
+	}
+
 	public void UpdateJukeBox()
 	{
 		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
@@ -511,7 +590,7 @@ public class PlayerInformation  {
 			Debug.LogWarning("retrieved 1 player data profile");
 			//Debug.Log(player.Get<int>("magnets").ToString());
 			InterpretParseProfile(player.Get<byte[]>("profile"));
-			InterpretParseInventoryList(NakedArmoryInventory, player.Get<byte[]>("NakedArmoryList"));
+			InterpretParseInventoryList(NakedArmorInventory, player.Get<byte[]>("NakedArmoryList"));
 			InterpretParseInventoryList(MainInventory, player.Get<byte[]>("InventoryList"));
 			InterpretParseInventoryList(ArmoryInventory, player.Get<byte[]>("ArmoryList"));
 			//InterpretParseInventoryList(DepositBox, player.Get<byte[]>("DepositBox"));
@@ -532,7 +611,8 @@ public class PlayerInformation  {
 		//populate ParsePlayerProfileData
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream();
-		b.Serialize(m, profile);
+		ParsePlayerProfileData p = new ParsePlayerProfileData(profile);
+		b.Serialize(m, p);
 		return m.GetBuffer();
 	}
 
@@ -601,9 +681,11 @@ public class PlayerInformation  {
 
 	public void InterpretParseProfile(byte[] data)
 	{
+		ParsePlayerProfileData p = new ParsePlayerProfileData();
 		BinaryFormatter bb = new BinaryFormatter();
 		MemoryStream mm = new MemoryStream(data);
-		profile = (PlayerProfile)bb.Deserialize(mm);
+		p = (ParsePlayerProfileData)bb.Deserialize(mm);
+		profile.UpdateProfileFromParse(p);
 	}
 
 	public void InterpretParseQuestLog()
@@ -619,7 +701,7 @@ public class PlayerInformation  {
 
 		for (int i = 0; i < items.Count; i++) {
 			jukeBox.AddDanceMove(items[i]);
-				}
+		}
 	}
 
 	#endregion

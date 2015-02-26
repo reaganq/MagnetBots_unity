@@ -10,9 +10,9 @@ public class MeleeAISkill : AISkill {
 	public Transform impactParticleSpawnPoint;
 	public float impactRadius;
 
-	public override void Start()
+	public override void InitialiseAISkill(CharacterStatus status, int skillIndex)
 	{
-		base.Start();
+		base.InitialiseAISkill(status, skillIndex);
 		/*if(weaponCollider != null)
 		{
 			TriggerCollider tc = weaponCollider.GetComponent<TriggerCollider>();

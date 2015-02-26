@@ -22,7 +22,27 @@ public class PlayerProfile{
 	//public int curDefenseExp;
 	public int energyState;
 
-	public List<RPGBadge> badges;
+	public List<EquipedItem> equippedItems = new List<EquipedItem>();
+	public List<RPGBadge> badges = new List<RPGBadge>();
+
+	public void UpdateProfileFromParse(ParsePlayerProfileData data)
+	{
+		name = data.name;
+		level = data.level;
+		exp = data.exp;
+		baseVitalityLevel = data.baseVitalityLevel;
+		baseStrengthLevel = data.baseStrengthLevel;
+		baseDefenseLevel = data.baseDefenseLevel;
+		energyState = data.energyState;
+		equippedItems.Clear();
+		badges.Clear();
+		for (int i = 0; i < data.equipItems.Count; i++) {
+			equippedItems.Add(new EquipedItem(data.equipItems[i].uniqueItemId, data.equipItems[i].level));
+		}
+		for (int i = 0; i < data.badgeIDs.Count; i++) {
+			badges.Add(Storage.LoadById<RPGBadge>(data.badgeIDs[i], new RPGBadge()));
+		}
+	}
 
 	public void AddExp(int amount)
 	{
@@ -68,6 +88,11 @@ public class PlayerProfile{
 		Debug.Log("vit: " + bonusVitalityLevel + " str: " + bonusStrengthLevel + " def: " + bonusDefenseLevel);
 		Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
 	}
+
+	public void UpdateEquippedItems(List<EquipedItem> items)
+	{
+		equippedItems = items;
+	}
 	//public List<Achievement> achievements;
 }
 
@@ -83,6 +108,31 @@ public class ParsePlayerProfileData{
 	public int baseDefenseLevel;
 	//public int curDefenseExp;
 	public int energyState;
+	public List<ParseEquippedItem> equipItems;
+	public List<int> badgeIDs;
+
+	public ParsePlayerProfileData()
+	{
+	}
+
+	public ParsePlayerProfileData(PlayerProfile profile)
+	{
+		name = profile.name;
+		level = profile.level;
+		exp = profile.exp;
+		baseVitalityLevel = profile.baseVitalityLevel;
+		baseStrengthLevel = profile.baseStrengthLevel;
+		baseDefenseLevel = profile.baseDefenseLevel;
+		energyState = profile.energyState;
+		equipItems = new List<ParseEquippedItem>();
+		for (int i = 0; i < profile.equippedItems.Count; i++) {
+			equipItems.Add(new ParseEquippedItem(profile.equippedItems[i]));
+		}
+		badgeIDs = new List<int>();
+		for (int i = 0; i < profile.badges.Count; i++) {
+			badgeIDs.Add(profile.badges[i].ID);
+		}
+	}
 }
 
 public enum PlayerEnergyState

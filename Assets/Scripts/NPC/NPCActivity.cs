@@ -46,4 +46,5 @@ public enum NPCActivityType
 	Arena = 4,
 	Default = 5,
 	Teleporter = 6,
+	Construction = 7
 }

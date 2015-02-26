@@ -12,8 +12,7 @@ public class MainWindowEditor : EditorWindow
 	
 	private List<BaseEditorWindow> FirstButtonRow;
 	private List<BaseEditorWindow> SecondButtonRow;
-	
-	//private Validate validate;
+
 	public bool isValidateDisplay;
 	
 	//windows
@@ -23,19 +22,10 @@ public class MainWindowEditor : EditorWindow
 	public ArmorEditor armorEditor;
 	public ArenaEditor arenaEditor;
 	public EnemyEditor enemyEditor;
-	//public EquipmentSlotEditor equipmentSlotEditor;
-	//public TeleportEditor teleportEditor;
 	public ConversationEditor conversationEditor;
 	public ShopEditor shopEditor;
 	public CurrencyEditor currencyEditor;
-	//public SpellEditor spellEditor;
-	//public EnemyEditor enemyEditor;
-	//public ContainerEditor containerEditor;
-	//public QuestEditor questEditor;
 	public ItemEditor itemEditor;
-	//public WorldObjectEditor worldObjectEditor;
-	//public SpellShopEditor spellShop;
-	//public WeaponEditor weaponEditor;
 	public NPCEditor npcEditor;
 	public MiniGameEditor minigameEditor;
 	public ServiceEditor serviceEditor;
@@ -43,13 +33,7 @@ public class MainWindowEditor : EditorWindow
 	public QuestEditor questEditor;
 	public TownEditor townEditor;
 	public BadgeEditor badgeEditor;
-	//public RaceEditor raceEditor;
-	//public ClassEditor classEditor;
-	//public GuildEditor guildEditor;
-	//public ReputationEditor reputationEditor;
-	//public SceneEditor sceneEditor;
-	//public SpawnPointEditor spawnEditor;
-    //public QuestCategoryEditor questCategoryEditor;
+	public ConstructionEditor constructionEditor;
 	
 	[MenuItem("Window/RPG")] 	
 	static void Init()
@@ -66,19 +50,7 @@ public class MainWindowEditor : EditorWindow
 		
 		//windows init
 		npcEditor = new NPCEditor(Skin, this);
-		
-		//weaponEditor = new WeaponEditor(Skin, this);
-		
-		//worldObjectEditor = new WorldObjectEditor(Skin, this);
-		
-		//questEditor = new QuestEditor(Skin, this);
-			
-		//itemCategory = new ItemCategoryEditor(Skin, this);
-		
-		//skillEditor = new SkillEditor(Skin, this);
-		
-		//attributeEditor = new AttributeEditor(Skin, this);
-		
+
 		armorEditor = new ArmorEditor(Skin, this);
 
 		arenaEditor = new ArenaEditor(Skin, this);
@@ -87,21 +59,11 @@ public class MainWindowEditor : EditorWindow
 
 		currencyEditor = new CurrencyEditor(Skin, this);
 		
-		//equipmentSlotEditor = new EquipmentSlotEditor(Skin, this);
-		
-		//teleportEditor = new TeleportEditor(Skin, this);
-		
 		conversationEditor = new ConversationEditor(Skin, this);
 		
 		shopEditor = new ShopEditor(Skin, this);
 
 		questEditor = new QuestEditor(Skin, this);
-		
-		//spellEditor = new SpellEditor(Skin, this);
-		
-		//enemyEditor = new EnemyEditor(Skin, this);
-		
-		//containerEditor = new ContainerEditor(Skin, this);
 		
 		itemEditor = new  ItemEditor(Skin, this);
 
@@ -115,23 +77,8 @@ public class MainWindowEditor : EditorWindow
 
 		badgeEditor = new BadgeEditor(Skin, this);
 		
-		//spellShop = new SpellShopEditor(Skin, this);
-		
-		//classEditor = new ClassEditor(Skin, this);
-		//
-		//raceEditor = new RaceEditor(Skin, this);
-		
-		//guildEditor = new GuildEditor(Skin, this);
-		
-		//reputationEditor = new ReputationEditor(Skin, this);
-		
-		//sceneEditor = new SceneEditor(Skin, this);
-		
-		//spawnEditor = new SpawnPointEditor(Skin, this);
+		constructionEditor = new ConstructionEditor(Skin, this);
 
-        //questCategoryEditor = new QuestCategoryEditor(Skin, this);
-		
-		//validate = new Validate();
 		loadWindows = false;
 	}
 	
@@ -147,13 +94,6 @@ public class MainWindowEditor : EditorWindow
 		{
 			InitWindows();
 		}
-		
-		/*if (GUILayout.Button("Validate", GUILayout.Width(200)))
-		{
-			InitWindows();
-			validate.ValidateXML(this);
-			isValidateDisplay = true;
-		}*/
 		GUILayout.EndHorizontal();
 		
 		
@@ -168,38 +108,6 @@ public class MainWindowEditor : EditorWindow
 		{
 			MainWindowType = MainWindowTypeEnum.Armor;
 		}
-		
-		/*if (GUILayout.Button(attributeEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Attribute;
-		}
-		
-		if (GUILayout.Button(classEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Class;
-		}
-		
-		if (GUILayout.Button(containerEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Container;
-		}
-		
-
-		
-		if (GUILayout.Button(enemyEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Enemy;
-		}
-		
-		if (GUILayout.Button(equipmentSlotEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.EquipmentSlot;
-		}
-		
-		if (GUILayout.Button(guildEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Guild;
-		}*/
 
 		if (GUILayout.Button(conversationEditor.EditorName, GUILayout.Width(100)))
 		{
@@ -211,43 +119,10 @@ public class MainWindowEditor : EditorWindow
 			MainWindowType = MainWindowTypeEnum.Item;
 		}
 		
-		/*if (GUILayout.Button(itemCategory.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.ItemCategory;
-		}*/
-		
 		if (GUILayout.Button(npcEditor.EditorName, GUILayout.Width(100)))
 		{
 			MainWindowType = MainWindowTypeEnum.NPC;
 		}
-
-        /*if (GUILayout.Button(questEditor.EditorName, GUILayout.Width(100)))
-        {
-            MainWindowType = MainWindowTypeEnum.Quest;
-        }
-		GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal();
-
-
-        if (GUILayout.Button(questCategoryEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.QuestCategory;
-		}
-		
-		if (GUILayout.Button(raceEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Race;
-		}
-		
-		if (GUILayout.Button(reputationEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Reputation;
-		}
-		
-		if (GUILayout.Button(sceneEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Scene;
-		}*/
 		
 		if (GUILayout.Button(shopEditor.EditorName, GUILayout.Width(100)))
 		{
@@ -299,130 +174,23 @@ public class MainWindowEditor : EditorWindow
 		{
 			MainWindowType = MainWindowTypeEnum.Badge;
 		}
-		/*if (GUILayout.Button(skillEditor.EditorName, GUILayout.Width(100)))
+
+		if (GUILayout.Button(constructionEditor.EditorName, GUILayout.Width(100)))
 		{
-			MainWindowType = MainWindowTypeEnum.Skill;
+			MainWindowType = MainWindowTypeEnum.Construction;
 		}
-		
-		if (GUILayout.Button(spawnEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.SpawnPoint;
-		}
-		
-		if (GUILayout.Button(spellEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Spell;
-		}
-		
-		if (GUILayout.Button(spellShop.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.SpellShop;
-		}
-		
-		if (GUILayout.Button(teleportEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Teleport;
-		}
-		
-		if (GUILayout.Button(weaponEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.Weapon;
-		}
-		
-		if (GUILayout.Button(worldObjectEditor.EditorName, GUILayout.Width(100)))
-		{
-			MainWindowType = MainWindowTypeEnum.WorldObject;
-		}*/
 		
 		GUILayout.EndHorizontal();
 		GUILayout.EndArea();
 		
-		/*if (isValidateDisplay)
-		{
-			validate.position = position;
-			validate.DisplayErrors();
-			return;
-		}*/
-		
 		switch(MainWindowType)
 		{
-			/*case MainWindowTypeEnum.Class:			
-				classEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Race:
-				raceEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Weapon:	
-				weaponEditor.DisplayWindow(position);
-				break;*/
-			
 			case MainWindowTypeEnum.NPC:	
 				npcEditor.DisplayWindow(position);
 				break;
-			
-			/*case MainWindowTypeEnum.WorldObject:	
-				worldObjectEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Quest:	
-				questEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Guild:	
-				guildEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Container:	
-				containerEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Enemy:	
-				enemyEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Spell:	
-				spellEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.ItemCategory:	
-				itemCategory.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Skill:
-				skillEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Attribute:
-				attributeEditor.DisplayWindow(position);
-				break;*/
-			
 			case MainWindowTypeEnum.Armor:
 				armorEditor.DisplayWindow(position);
 				break;
-			
-			/*case MainWindowTypeEnum.EquipmentSlot:
-				equipmentSlotEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Reputation:
-				reputationEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.Teleport:
-				teleportEditor.DisplayWindow(position);
-				break;
-			
-
-			
-			case MainWindowTypeEnum.Scene:
-				sceneEditor.DisplayWindow(position);
-				break;
-			
-			case MainWindowTypeEnum.SpawnPoint:
-				spawnEditor.DisplayWindow(position);
-				break;*/
 			case MainWindowTypeEnum.Conversation:
 				conversationEditor.DisplayWindow(position);
 				break;
@@ -430,11 +198,6 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.Shop:
 				shopEditor.DisplayWindow(position);
 				break;
-			
-			/*case MainWindowTypeEnum.SpellShop:
-				spellShop.DisplayWindow(position);
-				break;*/
-			
 			case MainWindowTypeEnum.Item:
 				itemEditor.DisplayWindow(position);
 				break;
@@ -468,10 +231,9 @@ public class MainWindowEditor : EditorWindow
 			case MainWindowTypeEnum.Badge:
 				badgeEditor.DisplayWindow(position);
 				break;
-
-            /*case MainWindowTypeEnum.QuestCategory:
-                questCategoryEditor.DisplayWindow(position);
-                break;*/
+			case MainWindowTypeEnum.Construction:
+				constructionEditor.DisplayWindow(position);
+				break;
 		}
 	}
 }
@@ -510,5 +272,6 @@ public enum MainWindowTypeEnum
 	Town,
 	Weapon,
 	WorldObject,
-	NPCQuest
+	NPCQuest,
+	Construction
 }

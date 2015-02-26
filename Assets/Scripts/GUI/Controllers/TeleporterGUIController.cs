@@ -34,9 +34,9 @@ public class TeleporterGUIController : BasicGUIController {
 
 	public void LoadTownAtlasSprite(UISprite sprite, int index)
 	{
-		GameObject Atlas = Resources.Load(GeneralData.towns[index].atlasPath) as GameObject;
+		GameObject Atlas = Resources.Load(GeneralData.towns[index].AtlasName) as GameObject;
 		sprite.atlas = Atlas.GetComponent<UIAtlas>();
-		sprite.spriteName = GeneralData.towns[index].spriteName;
+		sprite.spriteName = GeneralData.towns[index].IconPath;
 		sprite.collider.enabled = true;
 	}
 

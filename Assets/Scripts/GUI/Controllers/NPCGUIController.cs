@@ -168,6 +168,10 @@ public class NPCGUIController : BasicGUIController {
 		case NPCActivityType.Quest:
 			DisplayQuest((NPCQuest)activeActivity);
 			break;
+		case NPCActivityType.Construction:
+			DisplayConstruction((RPGConstruction)activeActivity);
+			break;
+
 		case NPCActivityType.Minigame:
 			break;
 		}
@@ -242,6 +246,11 @@ public class NPCGUIController : BasicGUIController {
 		teleporterGUI.Enable();
 	}
 
+	public void DisplayConstruction(RPGConstruction newConstruction)
+	{
+		state = NPCGUIState.construction;
+	}
+
 	public void DisplayQuest(NPCQuest newQuest)
 	{
 		state = NPCGUIState.quest;
@@ -277,5 +286,6 @@ public enum NPCGUIState
 	arena,
 	bank,
 	minigame,
-	teleporter
+	teleporter,
+	construction
 }

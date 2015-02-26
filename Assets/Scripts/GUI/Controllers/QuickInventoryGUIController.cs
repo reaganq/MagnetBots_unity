@@ -91,7 +91,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 	{
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
-			PlayerManager.Instance.Hero.ArmoryInventory.EquipItem(displayedItemList[index]);
+			PlayerManager.Instance.Hero.EquipItem(displayedItemList[index]);
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Food)
 		{
@@ -101,6 +101,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		{
 			PlayerManager.Instance.Hero.PlayToy(displayedItemList[index]);
 		}
+		RefreshInventoryIcons();
 	}
     
     /*public void UpdateInfoPanel()
@@ -166,31 +167,13 @@ public class QuickInventoryGUIController : BasicGUIController {
 		}
 		subcategoryButtons[index].SelectCategory();
 		displayedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
+		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
 		RefreshInventoryIcons();
     }
     
     public void RefreshInventoryIcons()
     {
-		int num = displayedItemList.Count - itemTiles.Count;
-		if(num>0)
-		{
-			for (int i = 0; i < num; i++) {
-				GameObject itemTile = NGUITools.AddChild(inventoryPanelRoot, itemTilePrefab);
-				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
-				itemTiles.Add(tileButton);
-			}
-		}
-		for (int i = 0; i < itemTiles.Count; i++) {
-			if(i>=displayedItemList.Count)
-			{
-				itemTiles[i].gameObject.SetActive(false);
-			}
-			else
-			{
-				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadItemTile(displayedItemList[i], this, inventoryType, i);
-			}
-		}
+		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
     }
 
 	public override void OnItemTilePressed(int index)
@@ -205,6 +188,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		OnDragDrop(currentSelectedItemIndex);
 		currentSelectedItemIndex = -1;
 		GUIManager.Instance.HideItemDetails();
+		Debug.LogError("FOUND THIS SHIT");
 	}
     
     /*public void RefreshSelection()

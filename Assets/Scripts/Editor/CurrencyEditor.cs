@@ -51,9 +51,7 @@ public class CurrencyEditor : BaseEditorWindow {
 	protected override void EditPart()
 	{
 		RPGCurrency s = (RPGCurrency)currentItem;
-		s.IconPath = EditorUtils.TextField(s.IconPath, "Icon name");
-		
-		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas name");
+
 		EditorGUILayout.PrefixLabel("Premium");
 		s.isPremium = EditorGUILayout.Toggle(s.isPremium ,GUILayout.Width(300));
 		//ItemUtils.DisplayItemPart(s, Data);

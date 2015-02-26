@@ -87,6 +87,11 @@ public class NPC: MonoBehaviour
 				teleporter.Name = "Teleporter";
 				activities.Add(teleporter);
 			}
+			else if(ad.activityType == NPCActivityType.Construction)
+			{
+				RPGConstruction construction = Storage.LoadById<RPGConstruction>(ad.activityID, new RPGConstruction());
+				activities.Add(construction);
+			}
 		}
 
 		for (int i = 0; i < activities.Count; i++) {

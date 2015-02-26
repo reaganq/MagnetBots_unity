@@ -16,6 +16,10 @@ public class PreffixSolver  {
             	RPGItem item = Storage.LoadById<RPGItem>(ID, new RPGItem());
             	PlayerManager.Instance.Hero.AddItem(item, level, amount);
 			break;
+		case PreffixType.NAKEDARMOR:
+			RPGArmor nakedArmor = Storage.LoadById<RPGArmor>(ID, new RPGArmor());
+			PlayerManager.Instance.Hero.AddItem(nakedArmor, level, amount);
+			break;
      	}
  	}
 

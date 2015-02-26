@@ -276,7 +276,7 @@ public class PlayerManager : MonoBehaviour
 
     void LoadCharacterParts()
     {
-		avatar.LoadAllBodyParts(Hero.profile.name,
+		avatar.LoadAllBodyParts(Hero.PlayerName,
 		                        Hero.Equip.EquippedFace.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedFace.Level, Hero.Equip.EquippedFace.rpgArmor.FBXName.Count) - 1], 
 		                        Hero.Equip.EquippedHead == null? null : Hero.Equip.EquippedHead.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedHead.Level, Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
 		                        Hero.Equip.EquippedBody.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedBody.Level, Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1],

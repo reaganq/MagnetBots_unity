@@ -23,11 +23,13 @@ public class ItemTileButton: UIDragDropItem
 	public UILabel levelLabel;
 	public UISprite newItemGlow;
 	public UISprite tickIcon;
-    public bool IsEquipped = false;
+    public bool canDisplayTick = false;
+	public bool canDisplayNew = false;
     
     public Color EquippedColor = Color.cyan;
     public Color SelectedColor = Color.white;
 	public UISprite mainSprite;
+	public InventoryItem referencedItem;
 
 	public bool draggable;
 	public InventoryGUIType itemTileType;
@@ -133,6 +135,21 @@ public class ItemTileButton: UIDragDropItem
 		amountLabel.text = item.CurrentAmount.ToString();
 		amountLabel.enabled = true;
 		selectBorder.enabled = false;
+		if(canDisplayNew)
+		{
+			newItemGlow.enabled = !item.isItemViewed;
+		}
+		else
+			newItemGlow.enabled = false;
+		if(canDisplayTick)
+		{
+			if(item.IsItemEquipped)
+				tickIcon.enabled = true;
+			else
+				tickIcon.enabled = false;
+		}
+		else 
+			tickIcon.enabled = false;
 	}
 
 	public void LoadQuestDisplayTile(InventoryItem item, bool isNewQuest)
@@ -157,31 +174,31 @@ public class ItemTileButton: UIDragDropItem
 	{
 		index = i;
 		owner = newOwner;
-		LoadGeneric(item);
-		itemTileType = type;
 		switch (type)
 		{
 		case InventoryGUIType.Inventory:
 			draggable = false;
-			newItemGlow.enabled = !item.isItemViewed;
-			if(item.IsItemEquipped)
-				tickIcon.enabled = true;
-			else
-				tickIcon.enabled = false;
+			canDisplayNew = true;
+			canDisplayTick = true;
 			break;
 		case InventoryGUIType.quickInventory:
 			draggable = true;
-			newItemGlow.enabled = false;
-			if(item.IsItemEquipped)
-				tickIcon.enabled = true;
-			else
-				tickIcon.enabled = false;
+			canDisplayNew = false;
+			canDisplayTick = true;
 			break;
 		case InventoryGUIType.Shop:
 			draggable = false;
-			newItemGlow.enabled = false;
+			canDisplayNew = false;
+			canDisplayTick = false;
+			break;
+		case InventoryGUIType.Other:
+			draggable = true;
+			canDisplayNew = false;
+			canDisplayTick = true;
 			break;
 		}
+		LoadGeneric(item);
+		itemTileType = type;
 	}
 	
 	public void setDraggable(bool state)

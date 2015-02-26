@@ -16,6 +16,24 @@ public class Equipment
 	public EquipedItem EquippedArmR;
 	public EquipedItem EquippedLegs;
 	public EquipedItem EquippedFace;
+
+	public List<EquipedItem> equippedItems
+	{
+		get
+		{
+			List<EquipedItem> allItems = new List<EquipedItem>();
+			allItems.Add(EquippedFace);
+			allItems.Add(EquippedHead);
+			allItems.Add(EquippedBody);
+			allItems.Add(EquippedArmL);
+			allItems.Add(EquippedArmR);
+			allItems.Add(EquippedLegs);
+			return allItems;
+		}
+	}
+
+	public delegate void OnEquipItem(string uniqueItemID, int itemLevel, int slotIndex);
+	public static event OnEquipItem onEquipItem;
     //public List<EquipedItem> Items;
  
  //[XmlIgnore]
@@ -276,14 +294,16 @@ public class Equipment
 				PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Legs);
 	            break;
 	    }
-        
+
+		//onEquipItem(e.UniqueItemId, e.Level, (int)e.rpgArmor.EquipmentSlotIndex);
+		PlayerManager.Instance.Hero.profile.UpdateEquippedItems(equippedItems);
      //Items.Add(equiped);
      return true;
  }
 
 	public void UnequipItem(EquipedItem item)
 	{
-		PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(item.UniqueItemId, item.Level);
+		PlayerManager.Instance.Hero.UnequipItem(item.UniqueItemId, item.Level);
 		if(item.rpgArmor.armorStatsSets.Count >0)
 		{
 			PlayerManager.Instance.Hero.profile.RemoveArmorStats(item.rpgArmor.armorStatsSets[Mathf.Min(item.rpgArmor.armorStatsSets.Count, item.Level)-1]);

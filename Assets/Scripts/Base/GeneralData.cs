@@ -17,7 +17,7 @@ public class GeneralData: MonoBehaviour{
 	public static string[] armRBones = new string[6] {"bones:R_Clavicle", "bones:R_Shoulder", "bones:R_ShoulderGuard", "bones:R_Elbow", "bones:R_Forearm", "bones:R_Hand"};
 	public static string[] armLBones = new string[6] {"bones:L_Clavicle", "bones:L_Shoulder", "bones:L_ShoulderGuard", "bones:L_Elbow", "bones:L_Forearm", "bones:L_Hand"};
 	public static string[] verticalBones = new string[2] {"bones:Spine_2", "bones:Neck_Horizontal"};
-	private string characters = "abcdefghijklmnopqrstuvwxyz";
+	public static string characters = "abcdefghijklmnopqrstuvwxyz";
 	// Use this for initialization
 	public void Awake()
 	{
@@ -77,7 +77,7 @@ public class GeneralData: MonoBehaviour{
 		return null;
 	}
 
-	public string GenerateRandomString(int l)
+	public static string GenerateRandomString(int l)
 	{
 		string name = "";
 		for (int i = 0; i < l; i++) 

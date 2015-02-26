@@ -469,6 +469,7 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\MiniGameGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\NPCGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\NotificationGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\OpeningCinematicGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\PlayerShopGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ProfileGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\QuestGUIController.cs" />
@@ -521,6 +522,7 @@
      <Compile Include="Assets\Scripts\NPC\NPCPOITrigger.cs" />
      <Compile Include="Assets\Scripts\NPC\NPCQuest.cs" />
      <Compile Include="Assets\Scripts\NPC\NPCService.cs" />
+     <Compile Include="Assets\Scripts\NPC\RPGConstruction.cs" />
      <Compile Include="Assets\Scripts\NPC\RPGEnemy.cs" />
      <Compile Include="Assets\Scripts\NPC\RPGNPC.cs" />
      <Compile Include="Assets\Scripts\NPC\Shop.cs" />

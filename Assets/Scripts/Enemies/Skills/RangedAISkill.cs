@@ -25,13 +25,18 @@ public class RangedAISkill : AISkill {
 	public float totalShotsFired = 0;
 
 	// Use this for initialization
-	public override void Start () {
-		base.Start();
+	public override void InitialiseAISkill(CharacterStatus status, int skillIndex)
+	{
+		base.InitialiseAISkill(status, skillIndex);
 		currentAmmoCount = maxAmmoCount;
-		ownerAnimation[recoilAnimation.clip.name].layer = 2;
 		AddPrefabToPool(bulletPrefab);
 		AddPrefabToPool(projectileCollisionDecal);
 		ResetSkill();
+	}
+
+	public override void SetupAnimations()
+	{
+		ownerAnimation[recoilAnimation.clip.name].layer = 2;
 	}
 	
 	// Update is called once per frame

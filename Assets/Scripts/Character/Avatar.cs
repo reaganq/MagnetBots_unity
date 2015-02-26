@@ -105,7 +105,7 @@ public class Avatar : MonoBehaviour {
 	public void NetworkRequestInitInfo(PhotonMessageInfo info)
 	{
 		myPhotonView.RPC("NetworkInitialiseAvatar", info.sender, 
-		                 PlayerManager.Instance.Hero.profile.name,
+		                 PlayerManager.Instance.Hero.PlayerName,
 		                 PlayerManager.Instance.Hero.Equip.EquippedFace.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedFace.Level, PlayerManager.Instance.Hero.Equip.EquippedFace.rpgArmor.FBXName.Count) - 1],
 		                 PlayerManager.Instance.Hero.Equip.EquippedHead == null? null : PlayerManager.Instance.Hero.Equip.EquippedHead.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedHead.Level, PlayerManager.Instance.Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
 		                 PlayerManager.Instance.Hero.Equip.EquippedBody.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedBody.Level, PlayerManager.Instance.Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1], 

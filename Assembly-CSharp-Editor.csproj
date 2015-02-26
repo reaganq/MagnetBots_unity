@@ -187,6 +187,7 @@
      <Compile Include="Assets\Scripts\Editor\ArenaEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ArmorEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\BadgeEditor.cs" />
+     <Compile Include="Assets\Scripts\Editor\ConstructionEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\ConversationEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\CurrencyEditor.cs" />
      <Compile Include="Assets\Scripts\Editor\DanceMoveEditor.cs" />

@@ -220,27 +220,7 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void RefreshInventoryIcons()
 	{
-		int num = selectedItemList.Count - itemTiles.Count;
-		if(num>0)
-		{
-			for (int i = 0; i < num; i++) {
-				GameObject itemTile = NGUITools.AddChild(gridPanelRoot, itemTilePrefab);
-				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
-				itemTiles.Add(tileButton);
-				tileButton.index = itemTiles.Count-1;
-			}
-		}
-		for (int i = 0; i < itemTiles.Count; i++) {
-			if(i>=selectedItemList.Count)
-			{
-				itemTiles[i].gameObject.SetActive(false);
-			}
-			else
-			{
-				itemTiles[i].gameObject.SetActive(true);
-				itemTiles[i].LoadItemTile(selectedItemList[i], this, inventoryType, i);
-			}
-		}
+		LoadItemTiles(selectedItemList, itemTiles, gridPanelRoot, itemTilePrefab, inventoryType);
 	}
 
 	public override void OnItemTilePressed(int index)
@@ -284,8 +264,6 @@ public enum InventoryGUIType
 	Shop,
 	Other,
 	Playershop,
-	Deposit,
-	Withdraw
 }
 
 public enum ItemCategories

@@ -21,10 +21,30 @@ public class EquipedItem
 		}
 	}
 
+	public EquipedItem(string id, int lvl)
+	{
+		UniqueItemId = id;
+		Level = lvl;
+		LoadItem();
+	}
+
 	public EquipedItem(string id, int lvl, RPGArmor armor)
 	{
 		UniqueItemId = id;
 		Level = lvl;
 		rpgArmor = armor;
+	}
+}
+
+[Serializable]
+public class ParseEquippedItem
+{
+	public string uniqueItemId;
+	public int level;
+
+	public ParseEquippedItem(EquipedItem item)
+	{
+		uniqueItemId = item.UniqueItemId;
+		level = item.Level;
 	}
 }

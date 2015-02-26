@@ -29,7 +29,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			ArenaManagers[i].ID = ArenaManagers.IndexOf(ArenaManagers[i]);
 		}
-		ArenaManagers.Clear();
+		//ArenaManagers.Clear();
 	}
 
 	#region register players
@@ -197,7 +197,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void AddPlayer(int zoneid, int id)
 	{
-		Debug.Log("adding player with id: "+id);
+		Debug.Log(zoneid + "adding player with id: "+id);
 		PhotonView view = PhotonView.Find(id);
 		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
 		//ArenaPlayer ap = new ArenaPlayer();
@@ -358,7 +358,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void SendPartyInvite(int partyLeaderID,PhotonMessageInfo info)
 	{
 		if(PlayerManager.Instance.isInParty())
-			myPhotonView.RPC("NetworkRejectPartyInvite", info.sender, PlayerManager.Instance.Hero.profile.name + " is already in a party");
+			myPhotonView.RPC("NetworkRejectPartyInvite", info.sender, PlayerManager.Instance.Hero.PlayerName + " is already in a party");
 		else
 		{
 			GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
@@ -368,7 +368,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	
 	public void RejectPartyInvite(PhotonPlayer prospectivePartyLeader)
 	{
-		myPhotonView.RPC("NetworkRejectPartyInvite", prospectivePartyLeader, PlayerManager.Instance.Hero.profile.name + " has rejected your party invitation");
+		myPhotonView.RPC("NetworkRejectPartyInvite", prospectivePartyLeader, PlayerManager.Instance.Hero.PlayerName + " has rejected your party invitation");
 	}
 
 	[RPC]

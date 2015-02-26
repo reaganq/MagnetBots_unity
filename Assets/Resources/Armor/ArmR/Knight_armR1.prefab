@@ -545,19 +545,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f62ef0419dc04e5190068e71e897eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
+  skillID: 0
   ownerStatus: {fileID: 0}
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
   ownerManager: {fileID: 0}
-  HitEnemies: []
-  HitAllies: []
+  HitTargets: []
   isBusy: 0
   isActive: 0
   skillName: Uber Slash
   skillType: 0
   disableMovement: 1
+  disableRotation: 0
   restrictedMovement: 0
+  limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
@@ -590,11 +591,11 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 0
-  damage: 10
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
   skillStatusEffects: []
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors:
   - {fileID: 11400004}
   skillVFXs:
@@ -602,7 +603,9 @@ MonoBehaviour:
     obj: {fileID: 0}
     activationEvent: 2
     deactivationEvent: 7
+    isLocal: 1
   _skillState: 0
+  isOwner: 0
   ownerCAM: {fileID: 0}
   equipmentSlotIndex: 1
   hasSkill: 1
@@ -613,6 +616,7 @@ MonoBehaviour:
   canUseWhileBusy: 0
   skillButtonSpritePath: 
   skillButtonAtlasPath: 
+  baseDamage: 0
   ownerAvatar: {fileID: 0}
   isPressedDown: 0
   isPressedUp: 0
@@ -695,6 +699,7 @@ MonoBehaviour:
   currentNumberOfTargets: 0
   activationEvent: 2
   deactivationEvent: 7
+  isLocal: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -712,6 +717,7 @@ MonoBehaviour:
   currentNumberOfTargets: 0
   activationEvent: 0
   deactivationEvent: 0
+  isLocal: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
