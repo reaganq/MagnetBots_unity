@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class OpeningCinematicGUIController : BasicGUIController {
 
 	public GameObject itemTilePrefab;
+	public GameObject setNameUIRoot;
+	public UIPlayTween setNameUITween;
 	public UIGrid gridPanel;
 	public GameObject inventoryGridRoot;
 	public int[] NakedArmorIDs = new int[] {1,2,3,4,5};
@@ -16,6 +18,11 @@ public class OpeningCinematicGUIController : BasicGUIController {
 	{
 		base.Enable();
 		LoadNakedArmors();
+	}
+
+	public void EnableSetNameUI()
+	{
+		setNameUITween.Play(true);
 	}
 
 	public void LoadNakedArmors()

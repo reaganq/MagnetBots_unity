@@ -122,10 +122,9 @@ public class GameManager : MonoBehaviour {
 		}
 		PlayerCamera.Instance.Reset();
 		PlayerManager.Instance.ChangeWorld();
-		PlayerManager.Instance.RefreshAvatar();
-		GUIManager.Instance.DisplayMainGUI();
+		//PlayerManager.Instance.RefreshAvatar();
+		//GUIManager.Instance.DisplayMainGUI();
 
-		
 		if(inputType == InputType.TouchInput)
 		{
 			joystick.enable = true;

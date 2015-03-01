@@ -31,6 +31,8 @@ public class GUIManager : MonoBehaviour {
 	public Camera uiCamera = null;
     public Transform UICameraRoot = null;
     
+	public UIPlayTween screenFlashTween;
+	public UISprite screenFlash;
 	public InventoryGUIController InventoryGUI;
     public QuickInventoryGUIController QuickInventoryGUI;
     public MainUIManager MainGUI;
@@ -45,6 +47,7 @@ public class GUIManager : MonoBehaviour {
 	public ItemInfoBoxGUIController itemInfoGUI;
 	public ProfileGUIController profileGUI;
 	public ConversationGUIController conversationGUI;
+	public OpeningCinematicGUIController nakedArmorGUI;
 	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;
@@ -192,10 +195,6 @@ public class GUIManager : MonoBehaviour {
     {
 		uiState = UIState.main;
     }
-    
-    public void HideMainGUI()
-    {
-    }
 
 	public void DisplayInventory()
 	{
@@ -317,7 +316,7 @@ public class GUIManager : MonoBehaviour {
 	public void DisplayRewards(List<InventoryItem> items)
 	{
 		rewardsGUI.items = items;
-		uiState = UIState.rewards;
+		//uiState = UIState.rewards;
 
 	}
 
@@ -329,7 +328,7 @@ public class GUIManager : MonoBehaviour {
 	public void DisplayItemDetails()
 	{
 	}
-	
+
     public void HideAllUI()
     {
 		uiState = UIState.idle;
@@ -392,5 +391,5 @@ public enum UIState
 	npc,
 	settings,
 	friends,
-	rewards
+	cinematic
 }

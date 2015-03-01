@@ -97,10 +97,10 @@ public class NetworkManager : MonoBehaviour {
 		{
 			Debug.Log("load level 1");
 			PhotonNetwork.LoadLevel(1);
-
 		}
 		else
 		{
+			//HACK get unity editor to run OnLevelWasLoaded on the first level
 			GameManager.Instance.OnLevelWasLoaded(Application.loadedLevel);
 		}
 		//PlayerManager.Instance.StartCoroutine("RefreshAvatar", 0);

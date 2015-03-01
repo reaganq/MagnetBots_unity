@@ -440,6 +440,7 @@
      <Compile Include="Assets\Scripts\Character\PlayerMotor.cs" />
      <Compile Include="Assets\Scripts\Character\SkeletonAnimations.cs" />
      <Compile Include="Assets\Scripts\Cinematic\Cutscene.cs" />
+     <Compile Include="Assets\Scripts\Cinematic\IntroCinematicSequence.cs" />
      <Compile Include="Assets\Scripts\Conversation\LineText.cs" />
      <Compile Include="Assets\Scripts\Conversation\RPGConversation.cs" />
      <Compile Include="Assets\Scripts\Conversation\RPGParagraph.cs" />

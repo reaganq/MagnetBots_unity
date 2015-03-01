@@ -7,7 +7,11 @@ public class Cutscene : MonoBehaviour {
 	public Animation cutsceneAnimation;
 	public GameObject[] cutsceneObjects;
 
-	public void Start()
+	public virtual void ProceedStep(int index)
+	{
+	}
+
+	public virtual void ProceedNextStep()
 	{
 	}
 

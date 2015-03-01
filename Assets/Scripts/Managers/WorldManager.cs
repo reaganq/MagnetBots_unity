@@ -6,7 +6,8 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 public class WorldManager : Photon.MonoBehaviour {
-	
+
+	public GameObject introCutscene;
 	public List<ArenaLists> Arenas;
 	public Zone DefaultZone;
 	public PhotonView myPhotonView;

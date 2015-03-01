@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
 	public ArenaManager ActiveArena;
 	public PlayerActivityState activityState;
 	public GeneralData data;
+	public Cutscene activeCutscene;
 
     public Transform SpawnPoint;
     public GameObject avatarPrefab;
@@ -168,6 +169,8 @@ public class PlayerManager : MonoBehaviour
 		SpawnPoint = ActiveZone.spawnPoint;
 		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
 		GameManager.Instance.GameIsPaused = false;
+		RefreshAvatar();
+		GUIManager.Instance.DisplayMainGUI();
 	}
 
 	/*public void ChangeZone(Zone newZone)

@@ -1,11 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/Equipment.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PlayerManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="98" Column="34" />
-      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="251" Column="36" />
-      <File FileName="Assets/Scripts/NPC/NPCActivity.cs" Line="33" Column="2" />
-      <File FileName="Assets/Scripts/Player/Equipment.cs" Line="298" Column="5" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/NPCActivity.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/Equipment.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Cinematic/IntroCinematicSequence.cs" Line="30" Column="36" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="199" Column="14" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="90" Column="10" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="173" Column="40" />
+      <File FileName="Assets/Scripts/Cinematic/Cutscene.cs" Line="14" Column="16" />
+      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="48" Column="2" />
+      <File FileName="Assets/Scripts/GUI/Controllers/OpeningCinematicGUIController.cs" Line="25" Column="29" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="100" Column="4" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="106" Column="22" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="10" Column="34" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -33,6 +44,7 @@
               </Node>
               <Node name="Base" expanded="True" />
               <Node name="Character" expanded="True" />
+              <Node name="Cinematic" expanded="True" />
               <Node name="Conversation" expanded="True" />
               <Node name="Enemies" expanded="True">
                 <Node name="Skills" expanded="True" />
@@ -41,12 +53,12 @@
                 <Node name="Controllers" expanded="True" />
               </Node>
               <Node name="Item" expanded="True" />
-              <Node name="Managers" expanded="True" />
+              <Node name="Managers" expanded="True">
+                <Node name="PlayerManager.cs" selected="True" />
+              </Node>
               <Node name="Minigames" expanded="True" />
               <Node name="NPC" expanded="True" />
-              <Node name="Player" expanded="True">
-                <Node name="Equipment.cs" selected="True" />
-              </Node>
+              <Node name="Player" expanded="True" />
               <Node name="Quest" expanded="True" />
               <Node name="Storage" expanded="True" />
             </Node>
