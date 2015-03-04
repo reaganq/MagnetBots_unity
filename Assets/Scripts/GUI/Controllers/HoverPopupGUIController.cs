@@ -105,7 +105,10 @@ public class HoverPopupGUIController : BasicGUIController {
 		if(target.gameObject.CompareTag("Player"))
 			DisplayPlayerPopup();
 		else if(target.gameObject.CompareTag("OtherPlayer"))
+		{
+			//TODO check if friend
 			DisplayFriendPopup();
+		}
 		timer = 0;
 		Enable();
 	}
@@ -218,6 +221,7 @@ public class HoverPopupGUIController : BasicGUIController {
 	
 	public void ViewProfile()
 	{
+		GUIManager.Instance.DisplayProfile(selectedCharacter.myPhotonView.owner);
 	}
 	
 	public void InviteToParty()

@@ -103,8 +103,10 @@ public class ConversationGUIController : BasicGUIController {
 		{
 			for (int i = 0; i < activeParagraph.nextParagraphIDs.Count; i++) {
 				if(activeConversation.conversationParagraphs[activeParagraph.nextParagraphIDs[i]].Validate())
+				{
 					DisplayParagraph(activeConversation.conversationParagraphs[activeParagraph.nextParagraphIDs[i]]);
-				return;
+					return;
+				}
 			}
 		}
 	}

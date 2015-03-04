@@ -1,0 +1,1022 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: Mercearia
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b4eb3a400afab046abb8471a9d746d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mMat: {fileID: 2100000, guid: ff7ab8d57882c4269ad2bbd822368176, type: 2}
+  mUVRect:
+    serializedVersion: 2
+    x: 0
+    y: -1
+    width: 2
+    height: 2
+  mFont:
+    mSize: 220
+    mBase: 184
+    mWidth: 1024
+    mHeight: 1024
+    mSpriteName: MagnetbotsFontipadhd
+    mSaved:
+    - index: 32
+      x: 38
+      y: 170
+      width: 0
+      height: 0
+      offsetX: 0
+      offsetY: 184
+      advance: 47
+      channel: 0
+      kerning: 
+    - index: 33
+      x: 2
+      y: 2
+      width: 38
+      height: 166
+      offsetX: 6
+      offsetY: 47
+      advance: 50
+      channel: 0
+      kerning: 
+    - index: 34
+      x: 184
+      y: 956
+      width: 80
+      height: 46
+      offsetX: 3
+      offsetY: 49
+      advance: 81
+      channel: 0
+      kerning: 
+    - index: 35
+      x: 822
+      y: 420
+      width: 94
+      height: 102
+      offsetX: 0
+      offsetY: 84
+      advance: 94
+      channel: 0
+      kerning: 
+    - index: 36
+      x: 818
+      y: 292
+      width: 80
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 90
+      channel: 0
+      kerning: 
+    - index: 37
+      x: 194
+      y: 2
+      width: 112
+      height: 154
+      offsetX: 5
+      offsetY: 36
+      advance: 117
+      channel: 0
+      kerning: 
+    - index: 38
+      x: 532
+      y: 2
+      width: 104
+      height: 136
+      offsetX: 0
+      offsetY: 50
+      advance: 105
+      channel: 0
+      kerning: 
+    - index: 39
+      x: 740
+      y: 530
+      width: 40
+      height: 46
+      offsetX: 4
+      offsetY: 56
+      advance: 44
+      channel: 0
+      kerning: 
+    - index: 40
+      x: 398
+      y: 2
+      width: 56
+      height: 152
+      offsetX: 2
+      offsetY: 61
+      advance: 60
+      channel: 0
+      kerning: 
+    - index: 41
+      x: 42
+      y: 812
+      width: 56
+      height: 152
+      offsetX: 2
+      offsetY: 61
+      advance: 57
+      channel: 0
+      kerning: 
+    - index: 42
+      x: 114
+      y: 938
+      width: 68
+      height: 64
+      offsetX: 1
+      offsetY: 27
+      advance: 66
+      channel: 0
+      kerning: 
+    - index: 43
+      x: 528
+      y: 420
+      width: 92
+      height: 108
+      offsetX: 7
+      offsetY: 69
+      advance: 99
+      channel: 0
+      kerning: 
+    - index: 44
+      x: 698
+      y: 530
+      width: 40
+      height: 46
+      offsetX: 2
+      offsetY: 155
+      advance: 47
+      channel: 0
+      kerning: 
+    - index: 45
+      x: 42
+      y: 992
+      width: 68
+      height: 24
+      offsetX: 0
+      offsetY: 125
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 46
+      x: 2
+      y: 806
+      width: 38
+      height: 36
+      offsetX: 0
+      offsetY: 150
+      advance: 47
+      channel: 0
+      kerning: 
+    - index: 47
+      x: 308
+      y: 2
+      width: 88
+      height: 152
+      offsetX: -2
+      offsetY: 59
+      advance: 89
+      channel: 0
+      kerning: 
+    - index: 48
+      x: 442
+      y: 420
+      width: 84
+      height: 120
+      offsetX: 0
+      offsetY: 66
+      advance: 87
+      channel: 0
+      kerning: 
+    - index: 49
+      x: 2
+      y: 568
+      width: 28
+      height: 124
+      offsetX: 0
+      offsetY: 62
+      advance: 32
+      channel: 0
+      kerning: 
+    - index: 50
+      x: 362
+      y: 420
+      width: 78
+      height: 124
+      offsetX: 0
+      offsetY: 62
+      advance: 81
+      channel: 0
+      kerning: 
+    - index: 51
+      x: 728
+      y: 292
+      width: 88
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 92
+      channel: 0
+      kerning: 
+    - index: 52
+      x: 632
+      y: 292
+      width: 94
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 96
+      channel: 0
+      kerning: 
+    - index: 53
+      x: 268
+      y: 292
+      width: 92
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 96
+      channel: 0
+      kerning: 
+    - index: 54
+      x: 546
+      y: 292
+      width: 84
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 88
+      channel: 0
+      kerning: 
+    - index: 55
+      x: 460
+      y: 292
+      width: 84
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 87
+      channel: 0
+      kerning: 
+    - index: 56
+      x: 900
+      y: 292
+      width: 86
+      height: 124
+      offsetX: 0
+      offsetY: 62
+      advance: 90
+      channel: 0
+      kerning: 
+    - index: 57
+      x: 268
+      y: 806
+      width: 80
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 83
+      channel: 0
+      kerning: 
+    - index: 58
+      x: 596
+      y: 774
+      width: 40
+      height: 88
+      offsetX: -1
+      offsetY: 98
+      advance: 47
+      channel: 0
+      kerning: 
+    - index: 59
+      x: 596
+      y: 864
+      width: 40
+      height: 86
+      offsetX: 0
+      offsetY: 115
+      advance: 47
+      channel: 0
+      kerning: 
+    - index: 60
+      x: 722
+      y: 420
+      width: 98
+      height: 104
+      offsetX: -1
+      offsetY: 75
+      advance: 99
+      channel: 0
+      kerning: 
+    - index: 61
+      x: 528
+      y: 530
+      width: 94
+      height: 62
+      offsetX: 0
+      offsetY: 95
+      advance: 96
+      channel: 0
+      kerning: 
+    - index: 62
+      x: 622
+      y: 420
+      width: 98
+      height: 104
+      offsetX: -1
+      offsetY: 75
+      advance: 99
+      channel: 0
+      kerning: 
+    - index: 63
+      x: 114
+      y: 2
+      width: 78
+      height: 156
+      offsetX: 1
+      offsetY: 55
+      advance: 80
+      channel: 0
+      kerning: 
+    - index: 64
+      x: 750
+      y: 594
+      width: 76
+      height: 86
+      offsetX: 2
+      offsetY: 100
+      advance: 80
+      channel: 0
+      kerning: 
+    - index: 65
+      x: 362
+      y: 292
+      width: 96
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 99
+      channel: 0
+      kerning: 
+    - index: 66
+      x: 268
+      y: 678
+      width: 84
+      height: 126
+      offsetX: 1
+      offsetY: 60
+      advance: 85
+      channel: 0
+      kerning: 
+    - index: 67
+      x: 268
+      y: 550
+      width: 64
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 66
+      channel: 0
+      kerning: 
+    - index: 68
+      x: 184
+      y: 824
+      width: 76
+      height: 130
+      offsetX: 0
+      offsetY: 56
+      advance: 79
+      channel: 0
+      kerning: 
+    - index: 69
+      x: 894
+      y: 160
+      width: 70
+      height: 128
+      offsetX: -4
+      offsetY: 58
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 70
+      x: 184
+      y: 294
+      width: 70
+      height: 132
+      offsetX: 0
+      offsetY: 54
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 71
+      x: 818
+      y: 160
+      width: 74
+      height: 128
+      offsetX: 0
+      offsetY: 59
+      advance: 78
+      channel: 0
+      kerning: 
+    - index: 72
+      x: 184
+      y: 692
+      width: 74
+      height: 130
+      offsetX: 0
+      offsetY: 59
+      advance: 81
+      channel: 0
+      kerning: 
+    - index: 73
+      x: 2
+      y: 314
+      width: 34
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 37
+      channel: 0
+      kerning: 
+    - index: 74
+      x: 114
+      y: 424
+      width: 56
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 59
+      channel: 0
+      kerning: 
+    - index: 75
+      x: 734
+      y: 160
+      width: 82
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 85
+      channel: 0
+      kerning: 
+    - index: 76
+      x: 114
+      y: 810
+      width: 54
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 58
+      channel: 0
+      kerning: 
+    - index: 77
+      x: 622
+      y: 160
+      width: 110
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 113
+      channel: 0
+      kerning: 
+    - index: 78
+      x: 536
+      y: 160
+      width: 84
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 87
+      channel: 0
+      kerning: 
+    - index: 79
+      x: 184
+      y: 560
+      width: 70
+      height: 130
+      offsetX: 0
+      offsetY: 56
+      advance: 74
+      channel: 0
+      kerning: 
+    - index: 80
+      x: 464
+      y: 160
+      width: 70
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 73
+      channel: 0
+      kerning: 
+    - index: 81
+      x: 456
+      y: 2
+      width: 74
+      height: 148
+      offsetX: -1
+      offsetY: 59
+      advance: 76
+      channel: 0
+      kerning: 
+    - index: 82
+      x: 184
+      y: 160
+      width: 82
+      height: 132
+      offsetX: 0
+      offsetY: 54
+      advance: 84
+      channel: 0
+      kerning: 
+    - index: 83
+      x: 638
+      y: 2
+      width: 68
+      height: 134
+      offsetX: 0
+      offsetY: 55
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 84
+      x: 114
+      y: 160
+      width: 68
+      height: 132
+      offsetX: 0
+      offsetY: 54
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 85
+      x: 184
+      y: 428
+      width: 70
+      height: 130
+      offsetX: 0
+      offsetY: 57
+      advance: 74
+      channel: 0
+      kerning: 
+    - index: 86
+      x: 382
+      y: 160
+      width: 80
+      height: 128
+      offsetX: 0
+      offsetY: 58
+      advance: 83
+      channel: 0
+      kerning: 
+    - index: 87
+      x: 268
+      y: 160
+      width: 112
+      height: 130
+      offsetX: 0
+      offsetY: 56
+      advance: 114
+      channel: 0
+      kerning: 
+    - index: 88
+      x: 868
+      y: 2
+      width: 86
+      height: 132
+      offsetX: 0
+      offsetY: 54
+      advance: 90
+      channel: 0
+      kerning: 
+    - index: 89
+      x: 788
+      y: 2
+      width: 78
+      height: 132
+      offsetX: 0
+      offsetY: 54
+      advance: 78
+      channel: 0
+      kerning: 
+    - index: 90
+      x: 708
+      y: 2
+      width: 78
+      height: 132
+      offsetX: 0
+      offsetY: 56
+      advance: 81
+      channel: 0
+      kerning: 
+    - index: 91
+      x: 42
+      y: 168
+      width: 70
+      height: 164
+      offsetX: 3
+      offsetY: 54
+      advance: 75
+      channel: 0
+      kerning: 
+    - index: 92
+      x: 362
+      y: 914
+      width: 74
+      height: 98
+      offsetX: 0
+      offsetY: 88
+      advance: 74
+      channel: 0
+      kerning: 
+    - index: 93
+      x: 42
+      y: 2
+      width: 70
+      height: 164
+      offsetX: 2
+      offsetY: 54
+      advance: 75
+      channel: 0
+      kerning: 
+    - index: 94
+      x: 782
+      y: 530
+      width: 42
+      height: 32
+      offsetX: 37
+      offsetY: 32
+      advance: 80
+      channel: 0
+      kerning: 
+    - index: 95
+      x: 42
+      y: 966
+      width: 68
+      height: 24
+      offsetX: 0
+      offsetY: 181
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 96
+      x: 2
+      y: 844
+      width: 30
+      height: 30
+      offsetX: 32
+      offsetY: 21
+      advance: 62
+      channel: 0
+      kerning: 
+    - index: 97
+      x: 596
+      y: 684
+      width: 60
+      height: 88
+      offsetX: 0
+      offsetY: 99
+      advance: 64
+      channel: 0
+      kerning: 
+    - index: 98
+      x: 114
+      y: 294
+      width: 62
+      height: 128
+      offsetX: 0
+      offsetY: 57
+      advance: 66
+      channel: 0
+      kerning: 
+    - index: 99
+      x: 442
+      y: 934
+      width: 54
+      height: 86
+      offsetX: 0
+      offsetY: 100
+      advance: 56
+      channel: 0
+      kerning: 
+    - index: 100
+      x: 114
+      y: 682
+      width: 62
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 67
+      channel: 0
+      kerning: 
+    - index: 101
+      x: 442
+      y: 842
+      width: 62
+      height: 90
+      offsetX: 0
+      offsetY: 96
+      advance: 65
+      channel: 0
+      kerning: 
+    - index: 102
+      x: 966
+      y: 160
+      width: 52
+      height: 124
+      offsetX: 0
+      offsetY: 62
+      advance: 56
+      channel: 0
+      kerning: 
+    - index: 103
+      x: 114
+      y: 554
+      width: 66
+      height: 126
+      offsetX: -1
+      offsetY: 95
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 104
+      x: 956
+      y: 2
+      width: 62
+      height: 128
+      offsetX: 0
+      offsetY: 59
+      advance: 64
+      channel: 0
+      kerning: 
+    - index: 105
+      x: 2
+      y: 694
+      width: 26
+      height: 110
+      offsetX: 0
+      offsetY: 76
+      advance: 30
+      channel: 0
+      kerning: 
+    - index: 106
+      x: 42
+      y: 334
+      width: 46
+      height: 160
+      offsetX: 0
+      offsetY: 58
+      advance: 51
+      channel: 0
+      kerning: 
+    - index: 107
+      x: 268
+      y: 422
+      width: 72
+      height: 126
+      offsetX: 0
+      offsetY: 60
+      advance: 70
+      channel: 0
+      kerning: 
+    - index: 108
+      x: 2
+      y: 442
+      width: 26
+      height: 124
+      offsetX: 0
+      offsetY: 62
+      advance: 30
+      channel: 0
+      kerning: 
+    - index: 109
+      x: 660
+      y: 594
+      width: 88
+      height: 88
+      offsetX: 0
+      offsetY: 98
+      advance: 90
+      channel: 0
+      kerning: 
+    - index: 110
+      x: 596
+      y: 594
+      width: 62
+      height: 88
+      offsetX: 0
+      offsetY: 98
+      advance: 67
+      channel: 0
+      kerning: 
+    - index: 111
+      x: 528
+      y: 864
+      width: 60
+      height: 88
+      offsetX: 0
+      offsetY: 98
+      advance: 63
+      channel: 0
+      kerning: 
+    - index: 112
+      x: 362
+      y: 546
+      width: 66
+      height: 122
+      offsetX: 1
+      offsetY: 96
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 113
+      x: 362
+      y: 792
+      width: 66
+      height: 120
+      offsetX: 2
+      offsetY: 100
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 114
+      x: 442
+      y: 656
+      width: 56
+      height: 92
+      offsetX: 0
+      offsetY: 94
+      advance: 58
+      channel: 0
+      kerning: 
+    - index: 115
+      x: 528
+      y: 774
+      width: 66
+      height: 88
+      offsetX: -2
+      offsetY: 98
+      advance: 68
+      channel: 0
+      kerning: 
+    - index: 116
+      x: 442
+      y: 542
+      width: 48
+      height: 112
+      offsetX: 0
+      offsetY: 74
+      advance: 52
+      channel: 0
+      kerning: 
+    - index: 117
+      x: 528
+      y: 684
+      width: 64
+      height: 88
+      offsetX: 0
+      offsetY: 98
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 118
+      x: 442
+      y: 750
+      width: 78
+      height: 90
+      offsetX: 0
+      offsetY: 98
+      advance: 78
+      channel: 0
+      kerning: 
+    - index: 119
+      x: 918
+      y: 420
+      width: 96
+      height: 88
+      offsetX: 0
+      offsetY: 100
+      advance: 99
+      channel: 0
+      kerning: 
+    - index: 120
+      x: 528
+      y: 594
+      width: 66
+      height: 88
+      offsetX: 0
+      offsetY: 98
+      advance: 69
+      channel: 0
+      kerning: 
+    - index: 121
+      x: 362
+      y: 670
+      width: 62
+      height: 120
+      offsetX: -1
+      offsetY: 97
+      advance: 65
+      channel: 0
+      kerning: 
+    - index: 122
+      x: 268
+      y: 934
+      width: 70
+      height: 86
+      offsetX: 0
+      offsetY: 100
+      advance: 74
+      channel: 0
+      kerning: 
+    - index: 123
+      x: 42
+      y: 654
+      width: 68
+      height: 156
+      offsetX: 0
+      offsetY: 58
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 124
+      x: 2
+      y: 170
+      width: 34
+      height: 142
+      offsetX: 0
+      offsetY: 44
+      advance: 37
+      channel: 0
+      kerning: 
+    - index: 125
+      x: 42
+      y: 496
+      width: 68
+      height: 156
+      offsetX: 2
+      offsetY: 59
+      advance: 71
+      channel: 0
+      kerning: 
+    - index: 126
+      x: 624
+      y: 530
+      width: 72
+      height: 44
+      offsetX: 3
+      offsetY: 95
+      advance: 78
+      channel: 0
+      kerning: 
+  mAtlas: {fileID: 0}
+  mReplacement: {fileID: 0}
+  mSymbols: []
+  mDynamicFont: {fileID: 0}
+  mDynamicFontSize: 16
+  mDynamicFontStyle: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

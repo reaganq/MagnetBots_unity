@@ -12,21 +12,22 @@ public class LoadScreenController : BasicGUIController {
 	{
 		base.Enable ();
 		rotationSpeed = 0;
+		StartCoroutine(Intro());
 	}
 
 	public void Update()
 	{
 		if(isDisplayed)
 		{
-			centralGear.Rotate(Time.deltaTime*rotationSpeed, 0,0);
+			centralGear.Rotate(0,0,Time.deltaTime*rotationSpeed);
 		}
 	}
 
 	public IEnumerator Intro()
 	{
-		Enable();
-		loadScreenAnimation.Play("loadingScreen_intro");
-		yield return new WaitForSeconds(loadScreenAnimation["loadingScreen_intro"].length);
+		loadScreenAnimation.Play("LoadingScreen");
+		yield return new WaitForSeconds(loadScreenAnimation["LoadingScreen"].length);
+		Disable();
 	}
 
 	public void DisplayLoadScreen()

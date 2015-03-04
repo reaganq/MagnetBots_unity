@@ -33,6 +33,7 @@ public class RPGItem : UsableItem
 	public int BuyValue;
 	public int SellValue;
 	public RarityType Rarity;
+	public int maxLevel;
 
 	public virtual void Use()
 	{

@@ -9,6 +9,7 @@ public class EquipedItem
 {
 	public string UniqueItemId;
 	public int Level;
+	public EquipmentSlots equipSlot;
 	[XmlIgnore]
 	public RPGArmor rpgArmor;
 
@@ -21,10 +22,11 @@ public class EquipedItem
 		}
 	}
 
-	public EquipedItem(string id, int lvl)
+	public EquipedItem(string id, int lvl, EquipmentSlots slot)
 	{
 		UniqueItemId = id;
 		Level = lvl;
+		equipSlot = slot;
 		LoadItem();
 	}
 
@@ -32,7 +34,16 @@ public class EquipedItem
 	{
 		UniqueItemId = id;
 		Level = lvl;
+		equipSlot = armor.EquipmentSlotIndex;
 		rpgArmor = armor;
+	}
+
+	public EquipedItem(ParseEquippedItem parseItem)
+	{
+		UniqueItemId = parseItem.uniqueItemId;
+		Level = parseItem.level;
+		equipSlot = (EquipmentSlots)parseItem.slotIndex;
+		LoadItem();
 	}
 }
 
@@ -41,10 +52,13 @@ public class ParseEquippedItem
 {
 	public string uniqueItemId;
 	public int level;
+	public int slotIndex;
 
 	public ParseEquippedItem(EquipedItem item)
 	{
+		Debug.Log(item.UniqueItemId);
 		uniqueItemId = item.UniqueItemId;
 		level = item.Level;
+		slotIndex = (int)item.equipSlot;
 	}
 }

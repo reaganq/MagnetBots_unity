@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGItem>
+    <IconPath>Icon/nuts_bolts_cereal</IconPath>
+    <AtlasName />
     <ID>1</ID>
     <Name>Nuts &amp; Bolts Cereal</Name>
     <Description>Michelin 3 Star meal in a box</Description>
@@ -9,16 +11,19 @@
     <IsEquippable>false</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>Food</ItemCategory>
-    <IconPath>Icon/nuts_bolts_cereal</IconPath>
-    <AtlasName />
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Worthless</Rarity>
+    <maxLevel>0</maxLevel>
   </RPGItem>
   <RPGItem>
+    <IconPath>NormalOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <ID>2</ID>
     <Name>Basic Quartz</Name>
     <Description />
@@ -27,16 +32,19 @@
     <IsEquippable>false</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>UpgradeMaterials</ItemCategory>
-    <IconPath>NormalOpal</IconPath>
-    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>50</BuyValue>
     <SellValue>10</SellValue>
     <Rarity>Common</Rarity>
+    <maxLevel>0</maxLevel>
   </RPGItem>
   <RPGItem>
+    <IconPath>GoldOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <ID>3</ID>
     <Name>Trina</Name>
     <Description />
@@ -45,13 +53,35 @@
     <IsEquippable>false</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>UpgradeMaterials</ItemCategory>
-    <IconPath>GoldOpal</IconPath>
-    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Legendary</Rarity>
+    <maxLevel>0</maxLevel>
+  </RPGItem>
+  <RPGItem>
+    <IconPath />
+    <AtlasName>Atlases/Item</AtlasName>
+    <ID>4</ID>
+    <Name>Disco Ball</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>true</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>Toys</ItemCategory>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>475</BuyValue>
+    <SellValue>475</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>0</maxLevel>
   </RPGItem>
 </ArrayOfRPGItem>

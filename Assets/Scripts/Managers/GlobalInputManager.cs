@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GlobalInputManager : MonoBehaviour {
@@ -45,7 +45,7 @@ public class GlobalInputManager : MonoBehaviour {
 							{
 								hit.collider.gameObject.SendMessage("ActivatePOI");
 							}
-							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.type == ZoneType.town)
+							else if(layermsk == characterLayerMask && PlayerManager.Instance.ActiveZone.zoneType == ZoneType.town)
 							{
 								CharacterStatus cs = hit.collider.gameObject.GetComponent<CharacterStatus>();
 								if(cs != null)

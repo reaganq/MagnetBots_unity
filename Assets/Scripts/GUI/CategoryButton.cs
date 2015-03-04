@@ -9,16 +9,16 @@ public class CategoryButton : MonoBehaviour {
 	public UILabel name;
 	public int index;
 	public int categoryLevel;
-	public Color selectedColor;
-	public Color unselectedColor;
-	public Color disabledColor = Color.black;
+	public string selectedSpriteName = "button_square_orange";
+	public string unselectedSpriteName = "button_square_black";
+	//public Color disabledColor = Color.black;
 	public GameObject newItemCountFlag;
 	public UILabel newItemCounter;
 	//0 is main category, 1 is sub etc
 
 	public void Start()
 	{
-		backgroundSprite.color = unselectedColor;
+		//backgroundSprite.color = unselectedSpriteName;
 	}
 
 	public void LoadCategoryButton(ItemCategoryData category, int i, int level)
@@ -59,12 +59,12 @@ public class CategoryButton : MonoBehaviour {
 	public void SelectCategory()
 	{
 		Debug.Log("selected" + index);
-		backgroundSprite.color = selectedColor;
+		backgroundSprite.spriteName = selectedSpriteName;
 	}
 
 	public void DeselectCategory()
 	{
 		Debug.Log("deselected" + index);
-		backgroundSprite.color = unselectedColor;
+		backgroundSprite.spriteName = unselectedSpriteName;
 	}
 }

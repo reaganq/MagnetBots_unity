@@ -1774,7 +1774,6 @@ MonoBehaviour:
   maxHealth: 0
   curHealth: 0
   maxMovementSpeed: 0
-  curMovementSpeed: 0
   rotationSpeed: 3
   characterType: 0
   nameLabel: {fileID: 0}
@@ -1787,6 +1786,7 @@ MonoBehaviour:
   hitboxes: []
   _myTransform: {fileID: 0}
   statusEffects: []
+  speedModifiers: []
   Invulnerable: 0
   canMove: 1
 --- !u!114 &11400002
@@ -1831,6 +1831,7 @@ MonoBehaviour:
   currentNumberOfTargets: 0
   activationEvent: 0
   deactivationEvent: 0
+  isLocal: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1895,8 +1896,7 @@ MonoBehaviour:
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
   ownerManager: {fileID: 0}
-  HitEnemies: []
-  HitAllies: []
+  HitTargets: []
   isBusy: 0
   isActive: 0
   skillName: Weights Gun
@@ -1904,6 +1904,7 @@ MonoBehaviour:
   disableMovement: 0
   disableRotation: 0
   restrictedMovement: 0
+  limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
@@ -1936,10 +1937,15 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
   skillStatusEffects: []
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors: []
   skillVFXs: []
   _skillState: 0
+  isOwner: 0
   fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
@@ -1949,8 +1955,12 @@ MonoBehaviour:
   skillUsageLimit: Infinity
   resetAfterUse: 0
   weighting: .5
-  targetRequirement: 0
-  skillRangeMax: 0
+  UseConditions: []
+  fulfillConditionsBeforeUse: 0
+  UseRequirements: []
+  patienceTimer: 0
+  targetRequirement: 1
+  skillRangeMax: 200
   skillRangeMin: 0
   ownerFSM: {fileID: 0}
   requiresTargetLock: 1
@@ -2001,8 +2011,7 @@ MonoBehaviour:
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
   ownerManager: {fileID: 0}
-  HitEnemies: []
-  HitAllies: []
+  HitTargets: []
   isBusy: 0
   isActive: 0
   skillName: Hammer Smack
@@ -2010,6 +2019,7 @@ MonoBehaviour:
   disableMovement: 0
   disableRotation: 0
   restrictedMovement: 0
+  limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
@@ -2042,10 +2052,15 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
   skillStatusEffects: []
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors: []
   skillVFXs: []
   _skillState: 0
+  isOwner: 0
   fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
@@ -2055,8 +2070,12 @@ MonoBehaviour:
   skillUsageLimit: Infinity
   resetAfterUse: 0
   weighting: .5
-  targetRequirement: 0
-  skillRangeMax: 0
+  UseConditions: []
+  fulfillConditionsBeforeUse: 0
+  UseRequirements: []
+  patienceTimer: 0
+  targetRequirement: 1
+  skillRangeMax: 200
   skillRangeMin: 0
   ownerFSM: {fileID: 0}
   requiresTargetLock: 0
@@ -2113,31 +2132,35 @@ MonoBehaviour:
   speechBubbleText: {fileID: 0}
   speechBubbleTween: {fileID: 0}
   effectsPool: {fileID: 0}
-  myStatus: {fileID: 0}
-  _myTransform: {fileID: 0}
-  myAnimation: {fileID: 0}
-  myPhotonView: {fileID: 0}
+  myStatus: {fileID: 11400000}
+  _myTransform: {fileID: 400026}
+  myAnimation: {fileID: 11100000}
+  myPhotonView: {fileID: 11400002}
   myMotor: {fileID: 0}
   runningAnimationSpeedMultiplier: 0
   currentRunningAnimationSpeed: 0
   myAvatar: {fileID: 0}
   alltargets: []
   availableTargets: []
-  targetAngleDifference: 0
   skills:
   - {fileID: 11400016}
   - {fileID: 11400014}
   - {fileID: 11400026}
   activeSkill: {fileID: 0}
   availableSkills: []
+  taunts: []
+  controller: {fileID: 14300000}
   targetObject: {fileID: 0}
   targetCharacterController: {fileID: 0}
   fireObject: {fileID: 0}
-  moveToTarget: 0
-  targetDistance: 0
   aimAtTarget: 0
+  moveToTargetRange: 0
+  targetDistance: 0
   targetAngle: 0
-  effectsPool: {fileID: 0}
+  trackTargetObject: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  canMove: 0
+  canRotate: 0
   idleAnim: {fileID: 7400000, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   runningAnim: {fileID: 7400018, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   deathAnim: {fileID: 7400020, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
@@ -2201,8 +2224,7 @@ MonoBehaviour:
   ownerAnimation: {fileID: 0}
   ownerTransform: {fileID: 0}
   ownerManager: {fileID: 0}
-  HitEnemies: []
-  HitAllies: []
+  HitTargets: []
   isBusy: 0
   isActive: 0
   skillName: HammerShock
@@ -2210,6 +2232,7 @@ MonoBehaviour:
   disableMovement: 0
   disableRotation: 0
   restrictedMovement: 0
+  limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
@@ -2242,10 +2265,15 @@ MonoBehaviour:
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
   skillStatusEffects: []
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors: []
   skillVFXs: []
   _skillState: 0
+  isOwner: 0
   fireObject: {fileID: 0}
   cooldown: 0
   maxAmmoCount: 0
@@ -2255,8 +2283,12 @@ MonoBehaviour:
   skillUsageLimit: Infinity
   resetAfterUse: 0
   weighting: .5
-  targetRequirement: 0
-  skillRangeMax: 0
+  UseConditions: []
+  fulfillConditionsBeforeUse: 0
+  UseRequirements: []
+  patienceTimer: 0
+  targetRequirement: 1
+  skillRangeMax: 200
   skillRangeMin: 0
   ownerFSM: {fileID: 0}
   requiresTargetLock: 0

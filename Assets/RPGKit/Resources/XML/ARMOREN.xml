@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGArmor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGArmor>
+    <IconPath>basic_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>1</ID>
     <Name>Average Head</Name>
     <Description>Pretty average</Description>
@@ -9,24 +11,26 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>NakedArmor</ItemCategory>
-    <IconPath>basic_head</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Face</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
+    <FBXName>
+      <string>Armor/Faces/Basic_Face</string>
+    </FBXName>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>false</Stackable>
     <BuyValue>10</BuyValue>
     <SellValue>4</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>
-      <string>Armor/Faces/Basic_Face</string>
-    </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
+    <IconPath>basic_body</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>2</ID>
     <Name>Plain Body</Name>
     <Description>Super plain</Description>
@@ -35,24 +39,26 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>NakedArmor</ItemCategory>
-    <IconPath>basic_body</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
+    <FBXName>
+      <string>Armor/Body/Basic_Body</string>
+    </FBXName>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>10</BuyValue>
     <SellValue>5</SellValue>
     <Rarity>Worthless</Rarity>
-    <FBXName>
-      <string>Armor/Body/Basic_Body</string>
-    </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
+    <IconPath>basic_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>3</ID>
     <Name>Basic Left Arm</Name>
     <Description>Your parents don't want you</Description>
@@ -61,24 +67,26 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>NakedArmor</ItemCategory>
-    <IconPath>basic_armL</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
+    <FBXName>
+      <string>Armor/ArmL/Basic_ArmL</string>
+    </FBXName>
+    <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>
-      <string>Armor/ArmL/Basic_ArmL</string>
-    </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>true</HasAbility>
+    <maxLevel>3</maxLevel>
+    <HasAbility>false</HasAbility>
     <AbilityString>Use this to shoot ata your enemies!</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
+    <IconPath>basic_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>4</ID>
     <Name>Basic Right Arm</Name>
     <Description>No one wants to be your friend</Description>
@@ -87,24 +95,26 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>NakedArmor</ItemCategory>
-    <IconPath>basic_armR</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
+    <FBXName>
+      <string>Armor/ArmR/Basic_ArmR</string>
+    </FBXName>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>12</BuyValue>
     <SellValue>6</SellValue>
     <Rarity>Rare</Rarity>
-    <FBXName>
-      <string>Armor/ArmR/Basic_ArmR</string>
-    </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Wield the power of the Thunder God</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
+    <IconPath>basic_legs</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>5</ID>
     <Name>Skinny Legs</Name>
     <Description>even hipsters think you're too underground</Description>
@@ -113,24 +123,26 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>NakedArmor</ItemCategory>
-    <IconPath>basic_legs</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
+    <FBXName>
+      <string>Armor/Legs/Basic_Legs</string>
+    </FBXName>
     <BuyCurrency>Magnets</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>0</BuyValue>
     <SellValue>0</SellValue>
     <Rarity>Common</Rarity>
-    <FBXName>
-      <string>Armor/Legs/Basic_Legs</string>
-    </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>6</ID>
     <Name>Helmet of the Holy Knight</Name>
     <Description>Such plummage, much wow</Description>
@@ -139,26 +151,53 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_head</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
     <FBXName>
       <string>Armor/Head/Knight_Head1</string>
       <string>Armor/Head/Knight_Head2</string>
       <string>Armor/Head/Knight_Head3</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString />
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>3</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>7</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_body</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>7</ID>
     <Name>Knight Pauldron</Name>
     <Description>Come at me bro!</Description>
@@ -167,26 +206,61 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_body</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Rare</Rarity>
     <FBXName>
       <string>Armor/Body/Knight_Body1</string>
       <string>Armor/Body/Knight_Body2</string>
       <string>Armor/Body/Knight_Body3</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>150</BuyValue>
+    <SellValue>150</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString />
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>vitality</armorStatsType>
+            <armorStatsValue>7</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>vitality</armorStatsType>
+            <armorStatsValue>9</armorStatsValue>
+          </ArmorStat>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>3</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>vitality</armorStatsType>
+            <armorStatsValue>12</armorStatsValue>
+          </ArmorStat>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>8</ID>
     <Name>Knight Left Arm</Name>
     <Description>awesome shield bro!</Description>
@@ -195,26 +269,53 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_armL</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
     <FBXName>
       <string>Armor/ArmL/Knight_armL1</string>
       <string>Armor/ArmL/Knight_armL2</string>
       <string>Armor/ArmL/Knight_armL3</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>300</BuyValue>
+    <SellValue>300</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to block damage!</AbilityString>
-    <AbilityIconPath>abilityicon_knight_armL</AbilityIconPath>
+    <AbilityIconPath>skillIcon_defend</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>8</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>12</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>9</ID>
     <Name>Excalibur</Name>
     <Description>Stick'em with the pointy end!</Description>
@@ -223,26 +324,53 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_armR</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>150</BuyValue>
-    <SellValue>75</SellValue>
-    <Rarity>Legendary</Rarity>
     <FBXName>
       <string>Armor/ArmR/Knight_ArmR1</string>
       <string>Armor/ArmR/Knight_ArmR2</string>
       <string>Armor/ArmR/Knight_ArmR3</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>300</BuyValue>
+    <SellValue>300</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this to destroy your foes</AbilityString>
-    <AbilityIconPath>abilityicon_knight_armR</AbilityIconPath>
+    <AbilityIconPath>skillIcon_melee</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>8</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>10</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>13</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_legs</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>10</ID>
     <Name>Robust knight legs</Name>
     <Description>strong but slow</Description>
@@ -251,26 +379,53 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_legs</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>10</BuyValue>
-    <SellValue>5</SellValue>
-    <Rarity>Common</Rarity>
     <FBXName>
       <string>Armor/Legs/Knight_Legs1</string>
       <string>Armor/Legs/Knight_Legs2</string>
       <string>Armor/Legs/Knight_Legs3</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>6</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>8</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>10</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>boxer_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>11</ID>
     <Name>Left Boxing Glove</Name>
     <Description />
@@ -279,24 +434,51 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>boxer_armL</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>20</BuyValue>
-    <SellValue>15</SellValue>
-    <Rarity>Rare</Rarity>
     <FBXName>
       <string>Armor/ArmL/Boxer_ArmL</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>false</HasAbility>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityIconPath>skillIcon_melee</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>3</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>7</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>boxer_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>12</ID>
     <Name>Boxer's Helmet</Name>
     <Description />
@@ -305,24 +487,51 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>boxer_head</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>50</BuyValue>
-    <SellValue>10</SellValue>
-    <Rarity>Rare</Rarity>
     <FBXName>
       <string>Armor/Head/Boxer_Head</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>80</BuyValue>
+    <SellValue>80</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>4</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>6</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>boxer_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>13</ID>
     <Name>Tyson's Right hand</Name>
     <Description>MIKE TYSON!!!!</Description>
@@ -331,24 +540,51 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>boxer_armR</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>100</BuyValue>
-    <SellValue>50</SellValue>
-    <Rarity>Epic</Rarity>
     <FBXName>
       <string>Armor/ArmR/Boxer_ArmR</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>false</HasAbility>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>250</BuyValue>
+    <SellValue>250</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityIconPath>skillIcon_melee</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>6</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>9</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>12</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>knight_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>14</ID>
     <Name>Gumball Gun</Name>
     <Description />
@@ -357,24 +593,35 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>knight_armR</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>100</BuyValue>
-    <SellValue>50</SellValue>
-    <Rarity>Common</Rarity>
     <FBXName>
       <string>Armor/ArmR/Gumball_armR</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>false</HasAbility>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>100</BuyValue>
+    <SellValue>100</SellValue>
+    <Rarity>Common</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityIconPath>skillIcon_range</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>2</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>chef_armR</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>15</ID>
     <Name>Egg Beater</Name>
     <Description />
@@ -383,24 +630,35 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>chef_armR</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>0</BuyValue>
-    <SellValue>0</SellValue>
-    <Rarity>Worthless</Rarity>
     <FBXName>
       <string>Armor/ArmR/Chef_ArmR</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>false</HasAbility>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>800</BuyValue>
+    <SellValue>800</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityIconPath>skillIcon_range</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>4</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>chef_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>16</ID>
     <Name>Chef's Hat</Name>
     <Description />
@@ -409,24 +667,35 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>chef_head</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>100</BuyValue>
-    <SellValue>50</SellValue>
-    <Rarity>Epic</Rarity>
     <FBXName>
       <string>Armor/Head/Chef_Head</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>500</BuyValue>
+    <SellValue>500</SellValue>
+    <Rarity>Epic</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>1</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>chef_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>17</ID>
     <Name>Spatula</Name>
     <Description />
@@ -435,24 +704,35 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>chef_armL</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>75</BuyValue>
-    <SellValue>40</SellValue>
-    <Rarity>Magic</Rarity>
     <FBXName>
       <string>Armor/ArmL/Chef_ArmL</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
-    <HasAbility>false</HasAbility>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1000</BuyValue>
+    <SellValue>1000</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
-    <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityIconPath>skillIcon_melee</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>6</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>chef_body</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>18</ID>
     <Name>Chef's Uniform</Name>
     <Description />
@@ -461,24 +741,35 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>chef_body</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>200</BuyValue>
-    <SellValue>100</SellValue>
-    <Rarity>Rare</Rarity>
     <FBXName>
       <string>Armor/Body/Chef_Body</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>500</BuyValue>
+    <SellValue>500</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>5</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
+    <IconPath>chef_legs</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>19</ID>
     <Name>Apron</Name>
     <Description />
@@ -487,21 +778,191 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <IconPath>chef_legs</IconPath>
-    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <BuyCurrency>Magnets</BuyCurrency>
-    <Stackable>true</Stackable>
-    <BuyValue>200</BuyValue>
-    <SellValue>100</SellValue>
-    <Rarity>Rare</Rarity>
     <FBXName>
       <string>Armor/Legs/Chef_Legs</string>
     </FBXName>
-    <requiredMagneticLevel>0</requiredMagneticLevel>
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>600</BuyValue>
+    <SellValue>600</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>0</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
+  </RPGArmor>
+  <RPGArmor>
+    <IconPath />
+    <AtlasName>Atlases/Armor/</AtlasName>
+    <ID>20</ID>
+    <Name>Samurai Helmet</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <EquipmentSlotIndex>Head</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1000</BuyValue>
+    <SellValue>1000</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>10</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
+  </RPGArmor>
+  <RPGArmor>
+    <IconPath />
+    <AtlasName>Atlases/Armor/</AtlasName>
+    <ID>21</ID>
+    <Name>Samurai Chestplate</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1500</BuyValue>
+    <SellValue>1500</SellValue>
+    <Rarity>Epic</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>21</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
+  </RPGArmor>
+  <RPGArmor>
+    <IconPath />
+    <AtlasName>Atlases/Armor/</AtlasName>
+    <ID>22</ID>
+    <Name>Shuriken Toss</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1500</BuyValue>
+    <SellValue>1500</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets />
+  </RPGArmor>
+  <RPGArmor>
+    <IconPath />
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <ID>23</ID>
+    <Name>Katana</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1250</BuyValue>
+    <SellValue>1250</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>true</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>strength</armorStatsType>
+            <armorStatsValue>15</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
+  </RPGArmor>
+  <RPGArmor>
+    <IconPath />
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
+    <ID>24</ID>
+    <Name>Swift Feet</Name>
+    <Description />
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>true</IsEquippable>
+    <IsUpgradeable>true</IsUpgradeable>
+    <ItemCategory>Armor</ItemCategory>
+    <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>800</BuyValue>
+    <SellValue>800</SellValue>
+    <Rarity>Rare</Rarity>
+    <maxLevel>3</maxLevel>
+    <HasAbility>false</HasAbility>
+    <AbilityString>Use this</AbilityString>
+    <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
+    <armorStatsSets>
+      <ArmorStatsSet>
+        <armorStats>
+          <ArmorStat>
+            <armorStatsType>defence</armorStatsType>
+            <armorStatsValue>12</armorStatsValue>
+          </ArmorStat>
+        </armorStats>
+      </ArmorStatsSet>
+    </armorStatsSets>
   </RPGArmor>
 </ArrayOfRPGArmor>

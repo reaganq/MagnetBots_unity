@@ -7,11 +7,14 @@ using PathologicalGames;
 
 public class AISkill : BaseSkill {
 
+	//root position of range object
 	public Transform fireObject;
+	//skill cooldown
 	public float cooldown;
 	public int maxAmmoCount;
 	public float fireSpeed;
 	public float damage;
+
 	public bool isLimitedUse;
 	public float skillUsageLimit = Mathf.Infinity;
 	private float usageCount;
@@ -21,12 +24,14 @@ public class AISkill : BaseSkill {
 	public List<AISkillUseCondition> UseConditions;
 	public bool fulfillConditionsBeforeUse;
 	public List<AISkillRequirements> UseRequirements;
+	public float patienceTimer;
 
-	//do we need a target for this skill?
+	//do we need a target for this skill? 0 = no target
     public int targetRequirement;
 	public float skillRangeMax;
 	public float skillRangeMin;
 
+	//base stuff
 	public SimpleFSM ownerFSM;
 	public bool requiresTargetLock;
 	public bool requiresLineOfSight;
@@ -55,11 +60,12 @@ public class AISkill : BaseSkill {
     {
     }
 
+	//check if can useskill
 	public virtual bool CanUseSkill()
 	{
 		if(usageCount > skillUsageLimit)
 			return false;
-		if(ownerFSM.NumTargetsInRange(skillRangeMax) < targetRequirement)
+		if(ownerFSM.NumTargetsInRange(skillRangeMin, skillRangeMax) < targetRequirement)
 		{
 			return false;
 		}
@@ -72,11 +78,11 @@ public class AISkill : BaseSkill {
 			{
 				return false;
 			}
-				}
+		}
 		return true;
 	}
 
-	public void FulfillSkillConditions()
+	public void FulfillSkillConditions(SkillEventTrigger skillEvent)
 	{
 		StartFulfillSkillConditions();
 	}
@@ -128,11 +134,10 @@ public class AISkill : BaseSkill {
 	public override void ResetSkill ()
 	{
 		base.ResetSkill();
-		ownerFSM.moveToTarget = false;
-		ownerFSM.aimAtTarget = false;
 	}
 }
 
+[System.Serializable]
 public class AISkillUseCondition
 {
 	public AISkillUseConditionType conditionType;
@@ -147,6 +152,7 @@ public enum AISkillUseConditionType
 	position
 }
 
+[System.Serializable]
 public class AISkillRequirements
 {
 	public AISkillRequirementType requirementType;

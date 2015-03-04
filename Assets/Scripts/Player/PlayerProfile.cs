@@ -8,6 +8,7 @@ public class PlayerProfile{
 	public string name;
 	public int level;
 	public int exp;
+	public int questPoints;
 	public int baseVitalityLevel;
 	public int bonusVitalityLevel;
 	public int totalVitalityLevel{get{return baseVitalityLevel+bonusVitalityLevel;}}
@@ -21,9 +22,17 @@ public class PlayerProfile{
 	public int totalDefenseLevel{get{return baseDefenseLevel+bonusDefenseLevel;}}
 	//public int curDefenseExp;
 	public int energyState;
+	public List<RPGBadge> badges;
 
-	public List<EquipedItem> equippedItems = new List<EquipedItem>();
-	public List<RPGBadge> badges = new List<RPGBadge>();
+	public PlayerProfile()
+	{
+		level = 1;
+		baseVitalityLevel = 10;
+		baseDefenseLevel = 10;
+		baseStrengthLevel = 10;
+		questPoints = 0;
+		badges = new List<RPGBadge>();
+	}
 
 	public void UpdateProfileFromParse(ParsePlayerProfileData data)
 	{
@@ -34,11 +43,7 @@ public class PlayerProfile{
 		baseStrengthLevel = data.baseStrengthLevel;
 		baseDefenseLevel = data.baseDefenseLevel;
 		energyState = data.energyState;
-		equippedItems.Clear();
 		badges.Clear();
-		for (int i = 0; i < data.equipItems.Count; i++) {
-			equippedItems.Add(new EquipedItem(data.equipItems[i].uniqueItemId, data.equipItems[i].level));
-		}
 		for (int i = 0; i < data.badgeIDs.Count; i++) {
 			badges.Add(Storage.LoadById<RPGBadge>(data.badgeIDs[i], new RPGBadge()));
 		}
@@ -89,9 +94,8 @@ public class PlayerProfile{
 		Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
 	}
 
-	public void UpdateEquippedItems(List<EquipedItem> items)
+	public void UpdateEquippedItems()
 	{
-		equippedItems = items;
 	}
 	//public List<Achievement> achievements;
 }
@@ -108,7 +112,7 @@ public class ParsePlayerProfileData{
 	public int baseDefenseLevel;
 	//public int curDefenseExp;
 	public int energyState;
-	public List<ParseEquippedItem> equipItems;
+	//public List<ParseEquippedItem> equipItems;
 	public List<int> badgeIDs;
 
 	public ParsePlayerProfileData()
@@ -124,14 +128,63 @@ public class ParsePlayerProfileData{
 		baseStrengthLevel = profile.baseStrengthLevel;
 		baseDefenseLevel = profile.baseDefenseLevel;
 		energyState = profile.energyState;
-		equipItems = new List<ParseEquippedItem>();
-		for (int i = 0; i < profile.equippedItems.Count; i++) {
-			equipItems.Add(new ParseEquippedItem(profile.equippedItems[i]));
-		}
 		badgeIDs = new List<int>();
 		for (int i = 0; i < profile.badges.Count; i++) {
 			badgeIDs.Add(profile.badges[i].ID);
 		}
+	}
+}
+
+[System.Serializable]
+public class PlayerProfileDisplayData
+{
+	public string name;
+	public List<ParseEquippedItem> equips;
+	public int baseHealth;
+	public int bonusHealth;
+	public int baseStrength;
+	public int bonusStrength;
+	public int baseDefense;
+	public int bonusDefense;
+	public List<int> badgeIDs;
+	public int questPoints;
+	public int citizenPoints;
+	public PlayerProfileDisplayData()
+	{
+		equips = new List<ParseEquippedItem>();
+		badgeIDs = new List<int>();
+	}
+
+	public void CreatePlayerProfileDisplayData()
+	{
+		name = PlayerManager.Instance.Hero.profile.name;
+		equips.Clear();
+		if(PlayerManager.Instance.Hero.Equip.EquippedFace != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedFace));
+		if(PlayerManager.Instance.Hero.Equip.EquippedHead != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedHead));
+		if(PlayerManager.Instance.Hero.Equip.EquippedBody != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedBody));
+		if(PlayerManager.Instance.Hero.Equip.EquippedArmL != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedArmL));
+		if(PlayerManager.Instance.Hero.Equip.EquippedArmR != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedArmR));
+		if(PlayerManager.Instance.Hero.Equip.EquippedLegs != null)
+			equips.Add(new ParseEquippedItem(PlayerManager.Instance.Hero.Equip.EquippedLegs));
+
+		Debug.Log("equips has: "+ equips.Count);
+		baseHealth = PlayerManager.Instance.Hero.profile.baseVitalityLevel;
+		baseStrength = PlayerManager.Instance.Hero.profile.baseStrengthLevel;
+		baseDefense = PlayerManager.Instance.Hero.profile.baseDefenseLevel;
+		bonusHealth = PlayerManager.Instance.Hero.profile.bonusVitalityLevel;
+		bonusDefense = PlayerManager.Instance.Hero.profile.bonusDefenseLevel;
+		bonusStrength = PlayerManager.Instance.Hero.profile.bonusStrengthLevel;
+		badgeIDs.Clear();
+		for (int i = 0; i < PlayerManager.Instance.Hero.profile.badges.Count; i++) {
+			badgeIDs.Add(PlayerManager.Instance.Hero.profile.badges[i].ID);
+		}
+		questPoints = PlayerManager.Instance.Hero.profile.questPoints;
+		citizenPoints = PlayerManager.Instance.Hero.CitizenPoints;
 	}
 }
 

@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 1fe20855105154bbb893b3dddf9f4f76
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: lightcone_0010
+    100004: lightcone_0011
+    100006: lightcone_0012
+    100008: lightcone_0013
+    100010: lightcone_0014
+    100012: lightcone_0015
+    100014: lightcone_004
+    100016: lightcone_005
+    100018: lightcone_006
+    100020: lightcone_007
+    100022: lightcone_008
+    100024: lightcone_009
+    100026: pSolid1
+    100028: polySurface5
+    100030: polySurface6
+    400000: //RootNode
+    400002: lightcone_0010
+    400004: lightcone_0011
+    400006: lightcone_0012
+    400008: lightcone_0013
+    400010: lightcone_0014
+    400012: lightcone_0015
+    400014: lightcone_004
+    400016: lightcone_005
+    400018: lightcone_006
+    400020: lightcone_007
+    400022: lightcone_008
+    400024: lightcone_009
+    400026: pSolid1
+    400028: polySurface5
+    400030: polySurface6
+    2300000: lightcone_0010
+    2300002: lightcone_0011
+    2300004: lightcone_0012
+    2300006: lightcone_0013
+    2300008: lightcone_0014
+    2300010: lightcone_0015
+    2300012: lightcone_004
+    2300014: lightcone_005
+    2300016: lightcone_006
+    2300018: lightcone_007
+    2300020: lightcone_008
+    2300022: lightcone_009
+    2300024: pSolid1
+    2300026: polySurface5
+    2300028: polySurface6
+    3300000: lightcone_0010
+    3300002: lightcone_0011
+    3300004: lightcone_0012
+    3300006: lightcone_0013
+    3300008: lightcone_0014
+    3300010: lightcone_0015
+    3300012: lightcone_004
+    3300014: lightcone_005
+    3300016: lightcone_006
+    3300018: lightcone_007
+    3300020: lightcone_008
+    3300022: lightcone_009
+    3300024: pSolid1
+    3300026: polySurface5
+    3300028: polySurface6
+    4300000: pSolid1
+    4300002: lightcone_0015
+    4300004: lightcone_0014
+    4300006: lightcone_0013
+    4300008: lightcone_0012
+    4300010: lightcone_0011
+    4300012: lightcone_0010
+    4300014: lightcone_009
+    4300016: lightcone_008
+    4300018: lightcone_006
+    4300020: lightcone_004
+    4300022: lightcone_005
+    4300024: lightcone_007
+    4300026: polySurface5
+    4300028: polySurface6
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

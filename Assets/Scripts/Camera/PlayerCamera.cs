@@ -74,7 +74,7 @@ public class PlayerCamera: MonoBehaviour {
 
 	void Start()
 	{
-		quickInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-1090/2048)*100) / 100;
+		quickInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-700/2048)*100) / 100;
 	}
     
 	void LateUpdate () {

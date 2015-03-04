@@ -12,5 +12,6 @@ public class RPGBadge : BasicItem {
 	public RPGBadge()
 	{
 		preffix = "BADGE";
+		AtlasName = "Atlases/Bades/";
 	}
 }

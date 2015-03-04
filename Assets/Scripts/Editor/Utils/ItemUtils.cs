@@ -50,7 +50,7 @@ public class ItemUtils {
 		
 		item.BuyValue = EditorUtils.IntField(item.BuyValue, "buy Value");
         item.SellValue = EditorUtils.IntField(item.SellValue, "sell value");
-		
+		item.BuyCurrency = (BuyCurrencyType)EditorGUILayout.EnumPopup(item.BuyCurrency, GUILayout.Width(300));
 		EditorGUILayout.Separator();
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.PrefixLabel("Rarity");

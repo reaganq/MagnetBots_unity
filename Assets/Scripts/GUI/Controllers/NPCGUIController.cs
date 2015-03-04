@@ -61,6 +61,9 @@ public class NPCGUIController : BasicGUIController {
 		case NPCGUIState.shop:
 			shopGUI.Disable();
 			break;
+		case NPCGUIState.arena:
+			arenaGUI.Disable();
+			break;
 		}
 	}
 

@@ -115,4 +115,14 @@ MonoBehaviour:
   - NetworkPartyChallengeReply
   - NetworkRejectPartyInvite
   - ReceivePartyChallenge
+  - NetworkAddPlayer
+  - NetworkBeginPreBattle
+  - NetworkRemovePlayer
+  - NetworkAISkillFireOneShot
+  - NetworkPlayTaunt
+  - NetworkUseActiveAISkill
+  - BeginBattle
+  - EnterArenaState
+  - NetworkRequestPlayerProfileData
+  - SendBackPlayerProfileData
   DisableAutoOpenWizard: 0

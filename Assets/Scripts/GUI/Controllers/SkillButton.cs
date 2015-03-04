@@ -28,6 +28,16 @@ public class SkillButton : MonoBehaviour
 	{
 		skillIndex = index;
 		slotIndex = slot;
+		if(slotIndex == 0)
+		{
+			if(!string.IsNullOrEmpty(PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.AbilityIconPath))
+				skillIcon.spriteName = PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.AbilityIconPath;
+		}
+		else if(slotIndex == 1)
+		{
+			if(!string.IsNullOrEmpty(PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.AbilityIconPath))
+				skillIcon.spriteName = PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.AbilityIconPath;
+		}
 	}
 
  //bool mStarted = false;

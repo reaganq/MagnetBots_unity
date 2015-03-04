@@ -166,7 +166,6 @@ public class BaseSkill : MonoBehaviour {
 			PrefabPool prefabPool = new PrefabPool(prefab);;
 			prefabPool.preloadAmount = 1;
 			prefabPool.preloadFrames = 5;
-			Debug.Log("here");
 			ownerManager.effectsPool.CreatePrefabPool(prefabPool);
 		}
 	}

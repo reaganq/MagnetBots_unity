@@ -4,23 +4,43 @@ using System.Collections.Generic;
 
 public class ArenaManager : Zone {
 
+	public bool isArenaActive;
     public Transform[] arenaSpawnPos;
     public Transform enemySpawnPos;
 	public RPGEnemy rpgEnemy;
 	public int ownerViewID;
 	public int ownerID;
     public List<SimpleFSM> enemyFSMs;
-	public PhotonView myPhotonView;
-	public int ID;
-	public List<CharacterStatus> players;
-	public List<int> playerIDs;
+	public int arenaID;
+	public ArenaState arenaState;
 	public List<PhotonPlayer> admittedPlayers;
 	//public List<ArenaPlayer> players;
 
 	public void Start()
 	{
 		myPhotonView = GetComponent<PhotonView>();
-		type = ZoneType.arena;
+		zoneType = ZoneType.arena;
+	}
+
+	public override void EnterZone ()
+	{
+		base.EnterZone ();
+		GUIManager.Instance.EnterGUIState(UIState.main);
+		//set guimanager to battlemode
+	}
+
+	public void PreloadArena(List<PhotonPlayer> admissionPlayers, int enemyID, int newOwnerID, int newViewID )
+	
+	{
+		arenaState = ArenaState.waitingForPlayersToLoad;
+		Debug.Log("preloading Arena data");
+		admittedPlayers = admissionPlayers;
+		rpgEnemy = Storage.LoadById<RPGEnemy>(enemyID, new RPGEnemy());
+		ownerViewID = newViewID;
+		ownerID = newOwnerID;
+		SpawnEnemyWave(0);
+
+		//instantiate enemy
 	}
 
 	public void SpawnEnemyWave(int index)
@@ -29,13 +49,12 @@ public class ArenaManager : Zone {
 		{
 			for (int i = 0; i < rpgEnemy.PrefabPaths.Count; i++) 
 			{
-				Debug.Log("spawning enemy wave" + index);
 				GameObject enemyUnit = Instantiate(Resources.Load(rpgEnemy.PrefabPaths[index]), enemySpawnPos.position, enemySpawnPos.rotation) as GameObject;
-				PhotonView nView = enemyUnit.GetComponent<PhotonView>();
-				nView.viewID = ownerViewID;
+				enemyUnit.transform.parent = zoneObject.transform;
 				SimpleFSM fsm = enemyUnit.GetComponent<SimpleFSM>();
 				enemyFSMs.Add(fsm);
-				fsm.arena = this;
+				fsm.Initialise(this, ownerViewID);
+				//fsm.arena = this;
 			}
 		}
 	}
@@ -48,54 +67,63 @@ public class ArenaManager : Zone {
 		}
 	}
 
-	//Master
-	/*[RPC]
-	public void Initialise(int enemyID, int id, int viewid)
-    {
-		myPhotonView.RPC("AddPlayer", PhotonTargets.All, id);
-
+	[RPC]
+	public override void NetworkAddPlayer(int csViewID, PhotonMessageInfo info)
+	{
+		base.NetworkAddPlayer(csViewID, info);
 		if(PhotonNetwork.isMasterClient)
 		{
-			if(enemyFSM != null)
-				return;
-
-			int index = enemies.IndexOf(name);
-			Debug.Log(index);
-			if(index >=0)
+			if(CheckIfAllPlayersArePresent())
 			{
-				GameObject newEnemy = PhotonNetwork.InstantiateSceneObject(enemyPrefabStrings[index], enemySpawnPos.position, enemySpawnPos.rotation, 0, null) as GameObject;
-				PhotonNetwork.RemoveRPCs(newEnemy.GetComponent<PhotonView>());
-				newEnemy.GetComponent<PhotonView>().RPC("SetupArena", PhotonTargets.AllBuffered, ID, viewid);
+				//start arena
+				BeginPreBattle();
 			}
 		}
-    }*/
+		//check if the last player has loaded
 
-	//target player
-	/*[RPC]
-	public void ChangeEnemyOwner()
+	}
+
+	public bool CheckIfAllPlayersArePresent()
 	{
-		if(PlayerManager.Instance.ActiveArena == this && enemyFSMs.Count > 0)
-		{
-			enemyFSMs[0].myPhotonView.RPC("ChangeOwner", PhotonTargets.AllBuffered, PhotonNetwork.AllocateViewID());
-			Debug.Log("change owner");
-		}
-	}*/
+		if(admittedPlayers.Count > playerIDs.Count)
+			return false;
+		return true;
+	}
 
-	//all
-
-
-
-
-	/*public void RefreshPlayerList(int id)
+	public void BeginPreBattle()
 	{
-		for (int i = 0; i < players.Count; i++) 
-		{
-			if(players[i] == null)
-				players.RemoveAt(i);
+		myPhotonView.RPC("EnterArenaState", PhotonTargets.All, (int)ArenaState.preBattle);
+		//chceck for quest messages
+		//if... else begin battle
+		myPhotonView.RPC("BeginBattle", PhotonTargets.All);
+
+	}
+
+	[RPC]
+	public void EnterArenaState(int stateID)
+	{
+		arenaState = (ArenaState)stateID;
+	}
+
+	[RPC]
+	public void BeginBattle()
+	{
+		StartCoroutine(StartBattleSequence());
+		//play countdown
+	}
+
+	public IEnumerator StartBattleSequence()
+	{
+		Debug.Log("ready");
+		yield return new WaitForSeconds(1);
+		Debug.Log("3,2,1");
+		yield return new WaitForSeconds(1);
+		Debug.Log("start!");
+		arenaState = ArenaState.battle;
+		for (int i = 0; i < enemyFSMs.Count; i++) {
+			enemyFSMs[i].StartBattle();
 		}
-	}*/
-
-
+	}
 
 	public void CleanUp()
 	{
@@ -132,7 +160,7 @@ public class ArenaManager : Zone {
 		if(PhotonNetwork.player.ID == ownerID)
 		{
 			for (int i = 0; i < players.Count; i++) {
-				PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GiveArenaRewards", players[i].myPhotonView.owner, ID);
+				PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GiveArenaRewards", players[i].myPhotonView.owner, arenaID);
 				Debug.Log("give rewards to: " + players[i].myPhotonView.ownerId);
 			}
 
@@ -143,5 +171,14 @@ public class ArenaManager : Zone {
 	{
 		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots);
 	}
+}
+
+public enum ArenaState
+{
+	inactive,
+	waitingForPlayersToLoad,
+	preBattle,
+	battle,
+	battleEnd
 }
 

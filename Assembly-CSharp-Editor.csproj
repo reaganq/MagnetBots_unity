@@ -291,6 +291,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\RadialBlur.shader" />
      <None Include="Assets\Resources\Atlases\Minigames\MinigameUHD.txt" />
+     <None Include="Assets\RPGKit\Resources\XML\BADGEEN.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\AlphaTest-Bumped.shader" />
@@ -307,6 +308,7 @@
      <None Include="Assets\T4M\Shaders\ShaderModel2\Bump\T4M 4 TexturesBumped.shader" />
      <None Include="Assets\RPGKit\Resources\XML\ARENAEN.xml" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_Basic_Rim_OneLight.shader" />
+     <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\MADFINGER-god-rays.shader" />
      <None Include="Assets\Sliding\-Read-Me-.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel3\Diffuse\T4M 2 Textures.shader" />
@@ -360,10 +362,12 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (SoftClip).shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (SoftClip).shader" />
      <None Include="Assets\JMO Assets\!JMO Assets Readme.txt" />
+     <None Include="Assets\Resources\Atlases\Badges\BadgesHD.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unified\T4M 4 TexturesUnified.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ChromaticAberrationShader.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\Alpha-Parallax.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored.shader" />
+     <None Include="Assets\Resources\Atlases\SkillIcons\SkillIconsUHD.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlobalFog.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Dynamic Font.shader" />
      <None Include="Assets\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
@@ -381,6 +385,7 @@
      <None Include="Assets\RPGKit\Resources\XML\ITEMEN.xml" />
      <None Include="Assets\ShurikenMagic\Shaders\Illumin-VertexLit.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\Alpha-Diffuse.shader" />
+     <None Include="Assets\Fonts\MagnetbotsFontipadhd.txt" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_Bump_Rim_OneLight.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\BumpSpec\T4M 3 TexturesBumpSpec.shader" />
      <None Include="Assets\Plugins\PathologicalGames\readme.txt" />

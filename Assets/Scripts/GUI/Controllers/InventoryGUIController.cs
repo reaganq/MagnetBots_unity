@@ -22,6 +22,7 @@ public class InventoryGUIController : BasicGUIController {
 	public ItemCategories selectedMainInventoryCategory;
 
 	//item details view
+	public GameObject backButton;
 	public InventoryItem selectedItem;
 	public GameObject itemDetailsPanel;
 	public float buttonsGap;
@@ -29,9 +30,22 @@ public class InventoryGUIController : BasicGUIController {
 	public Transform buttonsStartPos;
 	public GameObject EquipButton = null;
 	public GameObject DestroyButton = null;
+	public GameObject unequipButton;
+	public GameObject upgradeButton;
+	public GameObject useButton;
+	public GameObject tickIcon;
+	public UISprite currencyIcon;
+	public UILabel currencyLabel;
+	public UILabel quantityLabel;
+	public UISprite skillIcon;
+	public UILabel healthBonus;
+	public UILabel defenseBonus;
+	public UILabel attackBonus;
 	public UILabel nameLabel;
 	public UILabel descriptionLabel;
+	public UISprite descriptionBG;
 	public UISprite icon;
+	public UILabel rarityLabel;
 
 	private int newItemCount;
 
@@ -56,6 +70,7 @@ public class InventoryGUIController : BasicGUIController {
 	{
 		itemDetailsPanel.SetActive(false);
 		inventoryPanel.SetActive(true);
+		backButton.SetActive(false);
 		if(level == 0)
 		{
 			if(selectedCategoryIndex != index )
@@ -231,6 +246,7 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void DisplayItemDetails(int index)
 	{
+		backButton.SetActive(true);
 		itemDetailsPanel.SetActive(true);
 		selectedItem = selectedItemList[index];
 		nameLabel.text = selectedItem.rpgItem.Name;
@@ -238,22 +254,114 @@ public class InventoryGUIController : BasicGUIController {
 		GameObject atlas = Resources.Load(selectedItem.rpgItem.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = selectedItem.rpgItem.IconPath;
+		currencyLabel.text = selectedItem.rpgItem.SellValue.ToString();
+		if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.CitizenPoints)
+			currencyIcon.spriteName = GeneralData.citizenIconPath;
+		else if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.Magnets)
+			currencyIcon.spriteName = GeneralData.magnetIconPath;
+		else if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.Coins)
+			currencyIcon.spriteName = GeneralData.coinIconPath;
+		rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
+		rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
+		UpdateItemDetails();
+		if(selectedItem.IsItemEquippable)
+		{
+			RPGArmor armor = (RPGArmor)selectedItem.rpgItem;
+			defenseBonus.text = "+"+0;
+			attackBonus.text = "+"+0;
+			healthBonus.text = "+"+0;
+			defenseBonus.color = Color.white;
+			attackBonus.color = Color.white;
+			healthBonus.color = Color.white;
+			if(armor.armorStatsSets.Count > 0)
+			{
+				int statsLevel = (Mathf.Min(armor.armorStatsSets.Count, selectedItem.Level) -1);
+				for (int i = 0; i < armor.armorStatsSets[statsLevel].armorStats.Count; i++) {
+					if(armor.armorStatsSets[statsLevel].armorStats[i].armorStatsType == ArmorStatsType.defence)
+					{
+						defenseBonus.text = "+" + armor.armorStatsSets[statsLevel].armorStats[i].armorStatsValue;
+						defenseBonus.color = Color.green;
+					}
+					else if(armor.armorStatsSets[statsLevel].armorStats[i].armorStatsType == ArmorStatsType.strength)
+					{
+						attackBonus.text = "+" + armor.armorStatsSets[statsLevel].armorStats[i].armorStatsValue;
+						attackBonus.color = Color.green;
+					}
+					else if(armor.armorStatsSets[statsLevel].armorStats[i].armorStatsType == ArmorStatsType.vitality)
+					{
+						healthBonus.text = "+" + armor.armorStatsSets[statsLevel].armorStats[i].armorStatsValue;
+						healthBonus.color = Color.green;
+					}
+				}
+			}
+			if(armor.HasAbility)
+			{
+				skillIcon.spriteName = armor.AbilityIconPath;
+				skillIcon.enabled = true;
+			}
+			else
+				skillIcon.enabled=false;
+			//if armor has skillicon
+
+		}
+
+	}
+
+	public void UpdateItemDetails()
+	{
 		for (int i = 0; i < allButtons.Length; i++) {
 			allButtons[i].SetActive(false);
 		}
+		if(selectedItem.IsItemUpgradeable)
+			upgradeButton.SetActive(true);
+
 		if(selectedItem.IsItemEquippable)
 		{
-			EquipButton.SetActive(true);
-		}
-		DestroyButton.SetActive(true);
-		int count = 0;
-		for (int i = 0; i < allButtons.Length; i++) {
-			if(allButtons[i].activeSelf)
+			if(selectedItem.IsItemEquipped)
 			{
-				allButtons[i].transform.localPosition = new Vector3(buttonsStartPos.localPosition.x + count*buttonsGap, buttonsStartPos.localPosition.y, buttonsStartPos.localPosition.z);
-				count++;
+				//turn on unequip button
+				tickIcon.SetActive(true);
+				unequipButton.SetActive(true);
+			}
+			else
+			{
+
+				tickIcon.SetActive(false);
+				EquipButton.SetActive(true);
 			}
 		}
+		else if(selectedItem.IsItemUsable)
+		{
+			useButton.SetActive(true);
+		}
+		quantityLabel.text = selectedItem.CurrentAmount.ToString();
+	}
+
+	public void OnEquipButtonPressed()
+	{
+		PlayerManager.Instance.Hero.EquipItem(selectedItem);
+		UpdateItemDetails();
+		Debug.Log("equipped item");
+	}
+
+	public void OnUseButtonPressed()
+	{
+	}
+
+	public void OnUpgradeButtonPressed()
+	{
+	}
+
+	public void OnUnequipButtonPressed()
+	{
+	}
+
+	public void OnBackButtonPressed()
+	{
+		RefreshInventoryIcons();
+		itemDetailsPanel.SetActive(false);
+		inventoryPanel.SetActive(true);
+		backButton.SetActive(false);
 	}
 }
 

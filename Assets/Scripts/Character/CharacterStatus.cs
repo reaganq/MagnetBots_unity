@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -82,7 +82,7 @@ public class CharacterStatus : CharacterAttributes {
 	public void DisplayInfoByZone()
 	{
 		DisplayName(true);
-		if(PlayerManager.Instance.ActiveZone.type == ZoneType.arena)
+		if(PlayerManager.Instance.ActiveZone.zoneType == ZoneType.arena)
 		{
 			DisplayHpBar(true);
 		}

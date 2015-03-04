@@ -22,12 +22,13 @@ public class Equipment
 		get
 		{
 			List<EquipedItem> allItems = new List<EquipedItem>();
-			allItems.Add(EquippedFace);
-			allItems.Add(EquippedHead);
-			allItems.Add(EquippedBody);
-			allItems.Add(EquippedArmL);
-			allItems.Add(EquippedArmR);
-			allItems.Add(EquippedLegs);
+			//allItems.Add(EquippedFace);
+
+			if(EquippedHead != null) allItems.Add(EquippedHead);
+			if(EquippedBody != null) allItems.Add(EquippedBody);
+			if(EquippedArmL != null) allItems.Add(EquippedArmL);
+			if(EquippedArmR != null) allItems.Add(EquippedArmR);
+			if(EquippedLegs != null) allItems.Add(EquippedLegs);
 			return allItems;
 		}
 	}
@@ -296,7 +297,7 @@ public class Equipment
 	    }
 
 		//onEquipItem(e.UniqueItemId, e.Level, (int)e.rpgArmor.EquipmentSlotIndex);
-		PlayerManager.Instance.Hero.profile.UpdateEquippedItems(equippedItems);
+		//PlayerManager.Instance.Hero.profile.UpdateEquippedItems(equippedItems);
      //Items.Add(equiped);
      return true;
  }

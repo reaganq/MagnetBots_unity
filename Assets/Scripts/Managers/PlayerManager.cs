@@ -194,27 +194,32 @@ public class PlayerManager : MonoBehaviour
 
 	public void GoToArena(Zone newZone, int enemyID)
 	{
-		if(newZone != null)
+		StartCoroutine(GoToArenaSequence(newZone, enemyID));
+	}
+
+	public IEnumerator GoToArenaSequence(Zone newZone, int enemyID)
+	{
+		Debug.Log("go to new arena");
+		GUIManager.Instance.loadingGUI.Enable();
+		yield return new WaitForSeconds(1.5f);
+		//TODO display loading screen
+		Zone oldzone = ActiveZone;
+		oldzone.LeaveZone();
+		//	newZone.zoneObject.SetActive(true);
+		ActiveZone = newZone;
+		//newZone.EnterZone();
+		//SpawnPoint = ActiveZone.spawnPoint;
+		
+		//oldzone.zoneObject.SetActive(false);
+		ActiveZone.EnterZone();
+		avatarObject.transform.position = SpawnPoint.position;
+		if(ActiveZone.zoneType == ZoneType.arena)
 		{
-			Zone oldzone = ActiveZone;
-			newZone.zoneObject.SetActive(true);
-			ActiveZone = newZone;
-			SpawnPoint = ActiveZone.spawnPoint;
-			avatarObject.transform.position = SpawnPoint.position;
-			oldzone.zoneObject.SetActive(false);
 			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
 			if(ActiveArena == null)
 			{
-				
 				Debug.LogError("no bloody arena");
 			}
-			//int newid = PhotonNetwork.AllocateViewID();
-			ActiveWorld.myPhotonView.RPC("AddPlayer", PhotonTargets.AllBuffered, ActiveArena.ID, avatarPhotonView.viewID);
-			//TODO make the selected enemy dynamic
-			//ActiveArena.gameObject.GetComponent<PhotonView>().RPC("Initialise", PhotonTargets.MasterClient, enemyID, avatarPhotonView.viewID, newid);
-			//GUIManager.Instance.TurnOffAllOtherUI();
-			GUIManager.Instance.DisplayMainGUI();
-			//ResetNPC();
 			activityState = PlayerActivityState.arena;
 		}
 	}
@@ -224,11 +229,13 @@ public class PlayerManager : MonoBehaviour
 		if(newZone != null)
 		{
 			Zone oldzone = ActiveZone;
-			newZone.zoneObject.SetActive(true);
+			oldzone.LeaveZone();
+			//newZone.zoneObject.SetActive(true);
 			ActiveZone = newZone;
-			SpawnPoint = ActiveZone.spawnPoint;
+			ActiveZone.EnterZone();
+			//SpawnPoint = ActiveZone.spawnPoint;
 			avatarObject.transform.position = SpawnPoint.position;
-			oldzone.zoneObject.SetActive(false);
+			//oldzone.zoneObject.SetActive(false);
 
 			if(ActiveArena)
 			{
@@ -238,7 +245,7 @@ public class PlayerManager : MonoBehaviour
 			}
 
 			activityState = PlayerActivityState.idle;
-			GUIManager.Instance.DisplayMainGUI();
+			//GUIManager.Instance.DisplayMainGUI();
 		}
 	}
 

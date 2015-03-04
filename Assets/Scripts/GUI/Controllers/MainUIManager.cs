@@ -6,6 +6,7 @@ public class MainUIManager : BasicGUIController {
 	public UILabel coinsCounter = null;
 	public UILabel magnetsCounter = null;
 	public UILabel citizenpointCounter = null;
+	public GameObject currenciesRoot;
 	public GameObject mainButton = null;
 	public GameObject actionButtonsRoot;
 	public GameObject sideTray;
@@ -19,7 +20,6 @@ public class MainUIManager : BasicGUIController {
 	public bool isActionButtonsDisplayed = true;
 	public bool isSideTrayOpen = false;
 	public bool isPartyUIDisplayed = false;
-
 	public UISprite soundButton;
 
 	public void UpdateCurrencyCount()
@@ -65,6 +65,17 @@ public class MainUIManager : BasicGUIController {
 		sideTray.SetActive(false);
 		isActionButtonsDisplayed = true;
 		isSideTrayOpen = false;
+	}
+
+	public void EnterBattleMode(bool state)
+	{
+		mainButton.SetActive(!state);
+		currenciesRoot.SetActive(!state);
+	}
+
+	public void DisplayCurrencies(bool state)
+	{
+		currenciesRoot.SetActive(state);
 	}
 
 	public void DisplayActionButtons(bool state)
@@ -120,7 +131,7 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnProfileClick()
 	{
-		GUIManager.Instance.DisplayProfile(PlayerManager.Instance.Hero.profile);
+		GUIManager.Instance.DisplayProfile(PhotonNetwork.player);
 	}
 
 	#endregion

@@ -1,76 +1,30 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PlayerManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Character/Avatar.cs">
     <Files>
-      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/NPC/NPCActivity.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="314" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/EquipedItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerProfile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ProfileGUIController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Player/Equipment.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Cinematic/IntroCinematicSequence.cs" Line="30" Column="36" />
-      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="199" Column="14" />
-      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="90" Column="10" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="173" Column="40" />
-      <File FileName="Assets/Scripts/Cinematic/Cutscene.cs" Line="14" Column="16" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="48" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/OpeningCinematicGUIController.cs" Line="25" Column="29" />
-      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="100" Column="4" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="106" Column="22" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="10" Column="34" />
+      <File FileName="Assets/Scripts/Item/UsableItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="183" Column="53" />
+      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/PlayerShopGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGArmor.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="165" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="NGUI" expanded="True">
-              <Node name="Examples" expanded="True">
-                <Node name="Scripts" expanded="True">
-                  <Node name="Other" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="Scripts" expanded="True">
-                <Node name="Interaction" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="Photon Unity Networking" expanded="True">
-              <Node name="Plugins" expanded="True">
-                <Node name="PhotonNetwork" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="Scripts" expanded="True">
-              <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-                <Node name="Melee" expanded="True" />
-              </Node>
-              <Node name="Base" expanded="True" />
-              <Node name="Character" expanded="True" />
-              <Node name="Cinematic" expanded="True" />
-              <Node name="Conversation" expanded="True" />
-              <Node name="Enemies" expanded="True">
-                <Node name="Skills" expanded="True" />
-              </Node>
-              <Node name="GUI" expanded="True">
-                <Node name="Controllers" expanded="True" />
-              </Node>
-              <Node name="Item" expanded="True" />
-              <Node name="Managers" expanded="True">
-                <Node name="PlayerManager.cs" selected="True" />
-              </Node>
-              <Node name="Minigames" expanded="True" />
-              <Node name="NPC" expanded="True" />
-              <Node name="Player" expanded="True" />
-              <Node name="Quest" expanded="True" />
-              <Node name="Storage" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Editor" expanded="True">
-                <Node name="Utils" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />

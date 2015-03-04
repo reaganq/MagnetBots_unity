@@ -9,14 +9,13 @@ public class SimpleFSM : ActionManager {
     public List<CharacterStatus> alltargets;
 	//checks for all valid targets
     public List<CharacterStatus> availableTargets;
-
-	public Transform _myTransform;
-	
     public AISkill[] skills;
 	//the currently used skill
     public AISkill activeSkill;
 	//not all skills are available at all times
 	public List<AISkill> availableSkills;
+	public List<AITaunt> taunts;
+	public CharacterController controller;
 
 	public Job restJob;
     public Job searchTargetJob;
@@ -58,17 +57,21 @@ public class SimpleFSM : ActionManager {
 	public CharacterController targetCharacterController;
 	//position of gun if there is one
 	public Transform fireObject;
-
-	//should we move towards target?
-	public bool moveToTarget = false;
-	//how close should we get to the target?
-	public float targetDistance;
+	
 	//should we aim at the target?
-    public bool aimAtTarget = false;
+	public bool aimAtTarget = false;
+	public bool moveToTargetRange = false;
+	//how close should we get to the target?
+
+	public float targetDistance;
 	//how accurate should the aim be?
 	public float targetAngle;
-	public bool moveToPosition = false;
+
+	public bool trackTargetObject;
 	public Vector3 targetPosition;
+
+	public bool canMove = true;
+	public bool canRotate = true;
 
 	//base animations
     public AnimationClip idleAnim;
@@ -98,39 +101,83 @@ public class SimpleFSM : ActionManager {
 
 	public virtual void EnterState(AIState state)
 	{
-		if(state == AIState.death)
+		if(myPhotonView.isMine)
 		{
-		//if(cancelSkillJob != null) cancelSkillJob.kill();
-			PlayAnimation(deathAnim.name, true);
-			Debug.LogWarning("die");
-			arena.CheckDeathStatus();
+			switch(state)
+			{
+			case AIState.preInitialised:
+				break;
+			case AIState.initialised:
+				break;
+			case AIState.ready:
+				//check for any ready taunts
+				//if not, select skill
+				Invoke("ReadyUp", CheckTaunts(state));
+				break;
+			case AIState.selectingSkill:
+				Invoke("SelectSkill", CheckTaunts(state));
+				break;
+			case AIState.executingSkill:
+				Invoke("UseActiveAISkill", CheckTaunts(state));
+				break;
+			case AIState.rest:
+				Invoke("Rest", CheckTaunts(state));
+				break;
+			case AIState.victory:
+				//cancel current skill
+				break;
+			case AIState.death:
+				//die();
+				//cancel current skill
+				PlayAnimation(deathAnim.name, true);
+				Debug.LogWarning("die");
+				arena.CheckDeathStatus();
+				break;
+			}
 		}
 	}
 
 	public virtual void ExitState(AIState state)
 	{
+		switch(state)
+		{
+			//just instantiated
+		case AIState.preInitialised:
+			break;
+			//has owner arena and all intended targets
+		case AIState.initialised:
+			break;
+			//all players have loaded into arena
+		case AIState.ready:
+			break;
+			//play battle taunts
+		case AIState.battleTaunts:
+			break;
+		case AIState.selectingSkill:
+			SelectSkill();
+			break;
+		case AIState.rest:
+			if(restJob != null)
+				restJob.kill();
+			break;
+		case AIState.executingSkill:
+			if(activeSkill.useSkillJob.running)
+				activeSkill.useSkillJob.kill();
+			ResetPhysicalMovementStatus();
 
+			break;
+		case AIState.taunting:
+			break;
+		case AIState.victory:
+			break;
+		}
 	}
-
-    public enum AIState
-    {
-        preInitialised,
-		initialised,
-		ready,
-		battleTaunts,
-		selectingSkill,
-		checkingSkillRequirements,
-		fulfillingSkillConditions,
-		executingSkill,
-		rest,
-		taunting,
-		victory,
-		death
-    }
-
 	// setting up some skills, get to know its own components
-	public virtual void Initialise () {
+	public virtual void Initialise (ArenaManager ownerArena, int newViewId) {
 
+		arena = ownerArena;
+		myPhotonView = GetComponent<PhotonView>();
+		myPhotonView.viewID = newViewId;
 		_myTransform = transform;
 		MakeSpawnPool();
         //skillChances = new float[skills.Length];
@@ -152,44 +199,55 @@ public class SimpleFSM : ActionManager {
 			else
 				anim.layer = 1;
 		}
-		state = AIState.preInitialised;
+		state = AIState.initialised;
 
+	}
+
+	public void StartBattle()
+	{
+		EnterAIState(AIState.ready);
 	}
 
 	public virtual void Update()
 	{
-		if(targetObject != null)
+		if(!myPhotonView.isMine)
+			return;
+
+		if(trackTargetObject && targetObject != null)
 		{
-			if(moveToTarget)
-			{
-				MoveToTarget();
-			}
-			if(aimAtTarget)
-			{
+			targetPosition = targetObject.position;
+		}
+		if(canMove)
+		{
+			MoveToPosition();
+		}
+		else
+		{
+			if(canRotate)
 				AimAtTarget();
-			}
-			if(moveToPosition)
-			{
-				MoveToPosition();
-			}
 		}
 	}
 
-	public void MoveToTarget()
+	public override void EnableMovement()
 	{
-		Quaternion newRotation = Quaternion.LookRotation(targetObject.position - _myTransform.position);
-		_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
-		//move
-		
-		//Vector3 moveDirection = targetObject.position - _myTransform.position;
-		//moveDirection.y = 0;
-		//Vector3 movementOffset = moveDirection.normalized * myStatus.curMovementSpeed * Time.deltaTime;
-		//movementOffset += Physics.gravity;
-		//movementOffset += Physics.gravity;
-		//myMotor.Move(movementOffset);
-		_myTransform.position = Vector3.MoveTowards(_myTransform.position, targetObject.position, myStatus.curMovementSpeed * Time.deltaTime);
+		canMove = true;
 	}
-	
+
+	public override void DisableMovement()
+	{
+		canMove = false;
+	}
+
+	public void EnableRotation()
+	{
+		canRotate = false;
+	}
+
+	public void DisableRotation()
+	{
+		canRotate = false;
+	}
+
 	public void AimAtTarget()
 	{
 		if(targetObject != null)
@@ -225,38 +283,39 @@ public class SimpleFSM : ActionManager {
 		_myTransform.position = Vector3.MoveTowards(_myTransform.position, targetPosition, myStatus.curMovementSpeed * Time.deltaTime);
 	}
 
-	//load in owner arena and list of all intended targets
-	public void InitialiseAI()
+	public float CheckTaunts(AIState curState)
 	{
+		for (int i = 0; i < taunts.Count; i++) {
+			if(taunts[i].showState == curState)
+			{
+				float chance = Random.Range(0.0f, 1.0f);
+				if(chance < taunts[i].showChance)
+				{
+					PlayTaunt(i);
+					return taunts[i].duration;
+				}
+			}
+		}
+		return 0.0f;
+	}
+
+
+	public void PlayTaunt(int newTauntID)
+	{
+		myPhotonView.RPC("NetworkPlayTaunt", PhotonTargets.All, newTauntID);
 	}
 
 	[RPC]
-	public void NetworkInitialiseAI()
+	public void NetworkPlayTaunt(int newTauntID)
 	{
+		//play taunt animation
+		//show taunt message
 	}
 
-	public void StartBattle()
+	public void ReadyUp()
 	{
-	} 
-
-	[RPC]
-	public void NetworkStartBattle()
-	{
+		EnterAIState(AIState.selectingSkill);
 	}
-
-	//All
-	[RPC]
-	public void SetupArena(int id, int viewid)
-	{
-		myPhotonView = GetComponent<PhotonView>();
-		Debug.Log("VIEW ID: "+ myPhotonView.viewID);
-		InitViewID = myPhotonView.viewID;
-		arena = PlayerManager.Instance.ActiveWorld.ArenaManagers[id];
-		arena.enemyFSMs.Add(this);
-		myPhotonView.viewID = viewid;
-		ownerID = myPhotonView.ownerId;
-	}
-
 	//all
 	[RPC]
 	public void ChangeOwner(int viewid)
@@ -279,11 +338,11 @@ public class SimpleFSM : ActionManager {
 
 	public virtual void Rest()
 	{
-		myPhotonView.RPC("NetworkRest", PhotonTargets.All, 2);
+		myPhotonView.RPC("NetworkRest", PhotonTargets.All, 2.0f);
 	}
 
 	[RPC]
-	public void NetworkRest(float timer)
+	public virtual void NetworkRest(float timer)
 	{
 		StartCoroutine(Rest(timer));
 	}
@@ -396,11 +455,11 @@ public class SimpleFSM : ActionManager {
 		}
 	}
 
-	public int NumTargetsInRange(float distance)
+	public int NumTargetsInRange(float minDistance, float maxDistance)
 	{
 		int num = 0;
 		for (int i = 0; i < availableTargets.Count; i++) {
-			if(DistanceToTargetCS(availableTargets[i]) <= distance)
+			if(DistanceToTargetCS(availableTargets[i]) <= maxDistance && DistanceToTargetCS(availableTargets[i]) >= minDistance)
 				num ++;
         }
         return num;
@@ -410,7 +469,7 @@ public class SimpleFSM : ActionManager {
 
 	public void SetTargetDistance(float distance)
 	{
-		moveToTarget = true;
+		moveToTargetRange = true;
 		targetDistance = distance;
 	}
 
@@ -422,41 +481,38 @@ public class SimpleFSM : ActionManager {
 
 	public void SetTargetPosition(Vector3 targetPos)
 	{
-		moveToPosition = true;
 		targetPosition = targetPos;
 	}
 
 	public virtual bool hasFulfilledSkillConditions()
 	{
-		if(moveToTarget && distanceToTargetObject < targetDistance)
-			return false;
 		if(aimAtTarget && targetAngleDifference < targetAngle)
 			return false;
-		if(moveToPosition && (Vector3.Distance(_myTransform.position, targetPosition) > 1))
+		if(moveToTargetRange && (Vector3.Distance(_myTransform.position, targetPosition) > targetDistance))
 			return false;
 		return true;
 	}
 
 	#endregion
 	#region skill usage
-	public void UseActiveSkill()
+	public void UseActiveAISkill()
 	{
-		myPhotonView.RPC("NetworkUseActiveSkill", PhotonTargets.All, activeSkill.skillID);
+		myPhotonView.RPC("NetworkUseActiveAISkill", PhotonTargets.All, activeSkill.skillID);
 	}
 
 	[RPC]
-	public void NetworkUseActiveSkill(int index)
+	public void NetworkUseActiveAISkill(int index)
 	{
 		skills[index].UseSkill();
 	}
 	
-	public void FireOneShot(int skillIndex)
+	public void AISkillFireOneShot(int skillIndex)
 	{
 		myPhotonView.RPC("NetworkFireOneShot", PhotonTargets.All, skillIndex);
 	}
 
 	[RPC]
-	public void NetworkFireOneShot(int skillIndex)
+	public void NetworkAISkillFireOneShot(int skillIndex)
 	{
 		skills[skillIndex].FireOneShot();
 	}
@@ -504,9 +560,9 @@ public class SimpleFSM : ActionManager {
 			cancelSkillJob.kill();
 	}
 
-	public void EnterAIState(AIState state)
+	public void EnterAIState(AIState newState)
 	{
-		myPhotonView.RPC("NetworkEnterAIState", PhotonTargets.All, (int)state);
+		myPhotonView.RPC("NetworkEnterAIState", PhotonTargets.All, (int)newState);
 	}
 
 	[RPC]
@@ -520,4 +576,38 @@ public class SimpleFSM : ActionManager {
 		float distance = Vector3.Distance(cs.transform.position, _myTransform.position);
 		return distance;
 	}
+
+	public void ResetPhysicalMovementStatus()
+	{
+		aimAtTarget = false;
+		moveToTargetRange = false;
+		targetObject = null;
+		targetCharacterController = null;
+		canMove = false;
+		canRotate = false;
+	}
+}
+
+public enum AIState
+{
+	preInitialised,
+	initialised,
+	ready,
+	battleTaunts,
+	selectingSkill,
+	checkingSkillRequirements,
+	fulfillingSkillConditions,
+	executingSkill,
+	rest,
+	taunting,
+	victory,
+	death
+}
+
+[System.Serializable]
+public class AITaunt{
+	public AnimationClip tauntAnimation;
+	public float showChance;
+	public AIState showState;
+	public float duration;
 }

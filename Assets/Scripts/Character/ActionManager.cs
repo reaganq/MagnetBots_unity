@@ -29,6 +29,7 @@ public class ActionManager : MonoBehaviour {
 		myPhotonView = GetComponent<PhotonView>();
 		myAvatar = GetComponent<Avatar>();
 		myMotor = GetComponent<Motor>();
+		myStatus = GetComponent<CharacterStatus>();
 	}
 
 	public bool MakeSpawnPool()

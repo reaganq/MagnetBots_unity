@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class WorldManager : Photon.MonoBehaviour {
 
+	public List<Zone> allZones;
 	public GameObject introCutscene;
 	public List<ArenaLists> Arenas;
 	public Zone DefaultZone;
@@ -28,7 +29,7 @@ public class WorldManager : Photon.MonoBehaviour {
 
 		for (int i = 0; i < ArenaManagers.Count; i++) 
 		{
-			ArenaManagers[i].ID = ArenaManagers.IndexOf(ArenaManagers[i]);
+			ArenaManagers[i].arenaID = ArenaManagers.IndexOf(ArenaManagers[i]);
 		}
 		//ArenaManagers.Clear();
 	}
@@ -151,7 +152,7 @@ public class WorldManager : Photon.MonoBehaviour {
 				{
 					if(Arenas[i].arenaStates[s] == false)
 					{
-						myPhotonView.RPC("SetupArena", PhotonTargets.AllBuffered, i, s, data);
+						myPhotonView.RPC("SetupArena", PhotonTargets.All, i, s, data);
 						return;
 					}
 				}
@@ -160,6 +161,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	}
 
 	//all buffered
+	//load up the arena with relevant data and then load in all players
 	[RPC]
 	public void SetupArena(int i, int s, byte[] data)
 	{
@@ -176,21 +178,14 @@ public class WorldManager : Photon.MonoBehaviour {
 			pPlayers.Add(PhotonPlayer.Find(arenaData.partyList[x]));
 		}
 
-		//pass through full admitted party list to all arenas
-		Arenas[i].arenaInstances[s].admittedPlayers = pPlayers;
-
-		//load the correct enemy wave on all arenas
-		Arenas[i].arenaInstances[s].rpgEnemy = Storage.LoadById<RPGEnemy>(arenaData.EnemyID, new RPGEnemy());
-
-		Arenas[i].arenaInstances[s].ownerViewID = arenaData.NewViewID;
-		Arenas[i].arenaInstances[s].ownerID = arenaData.PartyLeaderID;
+		Arenas[i].arenaInstances[s].PreloadArena(pPlayers, arenaData.EnemyID, arenaData.PartyLeaderID, arenaData.NewViewID );
 
 		//instantiate the first enemy wave as scene objects TODO change scene object into custom loaded object
 		if(Arenas[i].arenaInstances[s].admittedPlayers.Contains(PhotonNetwork.player))
 		{
-
+			Debug.Log("telling player to go to arena");
 			PlayerManager.Instance.GoToArena(Arenas[i].arenaInstances[s], arenaData.EnemyID);
-			Arenas[i].arenaInstances[s].SpawnEnemyWave(0);
+			//Arenas[i].arenaInstances[s].SpawnEnemyWave(0);
 			//instantiate the enemy
 		}
 	}
@@ -198,7 +193,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void AddPlayer(int zoneid, int id)
 	{
-		Debug.Log(zoneid + "adding player with id: "+id);
+		/*Debug.Log(zoneid + "adding player with id: "+id);
 		PhotonView view = PhotonView.Find(id);
 		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
 		//ArenaPlayer ap = new ArenaPlayer();
@@ -206,7 +201,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		//ap.playerID = view.ownerId;
 		//players.Add(ap);
 		ArenaManagers[zoneid].players.Add(playerObject);
-		ArenaManagers[zoneid].playerIDs.Add(view.ownerId);
+		ArenaManagers[zoneid].playerIDs.Add(view.ownerId);*/
 	}
 	
 	public void EndSession(ArenaManager zone)
@@ -322,7 +317,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			for (int s = 0; s < Arenas[i].arenaInstances.Count; s++) 
 			{
-				if(Arenas[i].arenaInstances[s].ID == zoneid)
+				if(Arenas[i].arenaInstances[s].arenaID == zoneid)
 				{
 					Arenas[i].arenaStates[s] = false;
 					Arenas[i].arenaInstances[s].CleanUp();
@@ -338,6 +333,34 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void GiveArenaRewards( int zoneid )
 	{
 		ArenaManagers[zoneid].GiveRewards();
+	}
+
+	#endregion
+
+	#region profile logic
+
+	public void RequestPlayerProfileData(PhotonPlayer targetPlayer)
+	{
+		myPhotonView.RPC("NetworkRequestPlayerProfileData", targetPlayer);
+	}
+
+	[RPC]
+	public void NetworkRequestPlayerProfileData(PhotonMessageInfo info)
+	{
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		PlayerProfileDisplayData newData = new PlayerProfileDisplayData();
+		newData.CreatePlayerProfileDisplayData();
+		b.Serialize(m, newData);
+		myPhotonView.RPC("SendBackPlayerProfileData", info.sender, m.GetBuffer());
+	}
+
+	[RPC]
+	public void SendBackPlayerProfileData(byte[] profileData)
+	{
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream(profileData);
+		GUIManager.Instance.profileGUI.DisplayProfile((PlayerProfileDisplayData)b.Deserialize(m));
 	}
 
 	#endregion

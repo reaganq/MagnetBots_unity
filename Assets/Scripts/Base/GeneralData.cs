@@ -14,6 +14,9 @@ public class GeneralData: MonoBehaviour{
 	public int defaultArmLObj = 3;
 	public int defaultArmRObj = 4;
 	public int defaultLegsObj = 5;
+	public static string coinIconPath = "currency_coin";
+	public static string magnetIconPath = "currency_magnet";
+	public static string citizenIconPath = "currency_citizen";
 	public static string[] armRBones = new string[6] {"bones:R_Clavicle", "bones:R_Shoulder", "bones:R_ShoulderGuard", "bones:R_Elbow", "bones:R_Forearm", "bones:R_Hand"};
 	public static string[] armLBones = new string[6] {"bones:L_Clavicle", "bones:L_Shoulder", "bones:L_ShoulderGuard", "bones:L_Elbow", "bones:L_Forearm", "bones:L_Hand"};
 	public static string[] verticalBones = new string[2] {"bones:Spine_2", "bones:Neck_Horizontal"};

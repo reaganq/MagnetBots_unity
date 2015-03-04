@@ -15,7 +15,7 @@ public class RPGArmor : Equiped
     public string AbilityString;
     public string AbilityIconPath;
 	public string AbilityAtlasPath;
-	public int maxLevel;
+
 	public List<ArmorStatsSet> armorStatsSets;
 
  //public List<Effect> EffectsOnHit;
@@ -24,12 +24,12 @@ public class RPGArmor : Equiped
 	{
 		preffix = "ARMOR";
 		Name = string.Empty;
-		AbilityIconPath = "AbilityIcon/";
+		AbilityAtlasPath = "Atlases/SkillIcons/SkillIconsAtlas";
 		AbilityString = "Use this";
 		IsEquippable = true;
 		IsUsable = false;
 		IsUpgradeable = true;
-		AtlasName = "Atlases/Armor/";
+		AtlasName = "Atlases/Armor/ArmorAtlas";
 		Stackable = true;
 		maxLevel = 3;
 		armorStatsSets = new List<ArmorStatsSet>();

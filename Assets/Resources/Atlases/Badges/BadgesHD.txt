@@ -1,0 +1,44 @@
+{"frames": {
+
+"burger_bronze.png":
+{
+	"frame": {"x":704,"y":704,"w":700,"h":700},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":700},
+	"sourceSize": {"w":700,"h":700}
+},
+"burger_gold.png":
+{
+	"frame": {"x":704,"y":2,"w":700,"h":700},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":700},
+	"sourceSize": {"w":700,"h":700}
+},
+"burger_silver.png":
+{
+	"frame": {"x":2,"y":704,"w":700,"h":700},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":700},
+	"sourceSize": {"w":700,"h":700}
+},
+"punchbagbob.psd":
+{
+	"frame": {"x":2,"y":2,"w":700,"h":700},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":700,"h":700},
+	"sourceSize": {"w":700,"h":700}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "BadgesHD.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8bb9eb48e5abea6891832f865091291f$"
+}
+}

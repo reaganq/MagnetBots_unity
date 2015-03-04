@@ -12,22 +12,24 @@ using UnityEngine;
 [AddComponentMenu("NGUI/Interaction/Button Message")]
 public class ItemTileButton: UIDragDropItem
 {
+	public RarityColor[] rarityColors;
     public int index;
 	public BasicGUIController owner;
     public UISprite icon;
-    public UISprite selectBorder;
+    public UISprite tile;
 	public UISprite Cover;
 	public UISprite background;
 	public UISprite equippedIndicator;
     public UILabel amountLabel;
+	public GameObject quantityTag;
 	public UILabel levelLabel;
 	public UISprite newItemGlow;
 	public UISprite tickIcon;
     public bool canDisplayTick = false;
 	public bool canDisplayNew = false;
-    
-    public Color EquippedColor = Color.cyan;
-    public Color SelectedColor = Color.white;
+	public bool canDisplayQuantity = true;
+    //public Color EquippedColor = Color.cyan;
+    //public Color SelectedColor = Color.white;
 	public UISprite mainSprite;
 	public InventoryItem referencedItem;
 
@@ -104,15 +106,13 @@ public class ItemTileButton: UIDragDropItem
     public void Show()
     {
         icon.enabled = true;
-        amountLabel.enabled = true;
+        quantityTag.SetActive(true);
     }
     
     public void Hide()
     {
         icon.enabled = false;
-        amountLabel.enabled = false;
-        if(selectBorder.enabled)
-            selectBorder.enabled = false;
+		quantityTag.SetActive(false);
 		if(Cover != null && Cover.enabled)
 			Cover.enabled = false;
 		levelLabel.enabled = false;
@@ -132,9 +132,9 @@ public class ItemTileButton: UIDragDropItem
 			levelLabel.text = item.Level.ToString();
 			levelLabel.enabled = true;
 		}
-		amountLabel.text = item.CurrentAmount.ToString();
-		amountLabel.enabled = true;
-		selectBorder.enabled = false;
+		amountLabel.text = "x"+item.CurrentAmount.ToString();
+		quantityTag.SetActive(canDisplayQuantity);
+		LoadItemRarity(item.rpgItem);
 		if(canDisplayNew)
 		{
 			newItemGlow.enabled = !item.isItemViewed;
@@ -180,16 +180,19 @@ public class ItemTileButton: UIDragDropItem
 			draggable = false;
 			canDisplayNew = true;
 			canDisplayTick = true;
+			canDisplayQuantity = true;
 			break;
 		case InventoryGUIType.quickInventory:
 			draggable = true;
 			canDisplayNew = false;
 			canDisplayTick = true;
+			canDisplayQuantity = false;
 			break;
 		case InventoryGUIType.Shop:
 			draggable = false;
 			canDisplayNew = false;
 			canDisplayTick = false;
+			canDisplayQuantity = true;
 			break;
 		case InventoryGUIType.Other:
 			draggable = true;
@@ -199,6 +202,18 @@ public class ItemTileButton: UIDragDropItem
 		}
 		LoadGeneric(item);
 		itemTileType = type;
+	}
+
+	public void LoadItemRarity(RPGItem item)
+	{
+		for (int i = 0; i < rarityColors.Length; i++) {
+			if(rarityColors[i].rarity == item.Rarity)
+			{
+				tile.color = rarityColors[i].tintColor;
+				return;
+			}
+		}
+		tile.color = Color.white;
 	}
 	
 	public void setDraggable(bool state)
@@ -215,4 +230,15 @@ public class ItemTileButton: UIDragDropItem
     {
 		equippedIndicator.enabled = false;
     }
+
+	public void LoadBasicAmor(string uniqueID, int level)
+	{
+		RPGArmor item = Storage.LoadbyUniqueId<RPGArmor>(uniqueID, new RPGArmor());
+		GameObject atlas = Resources.Load(item.AtlasName) as GameObject;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = item.IconPath;
+		tickIcon.enabled = false;
+		quantityTag.SetActive(false);
+		LoadItemRarity(item);
+	}
 }

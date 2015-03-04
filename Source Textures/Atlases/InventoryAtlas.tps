@@ -146,34 +146,57 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>arrow.png</filename>
-            <filename>attackbutton.png</filename>
-            <filename>backButton.png</filename>
-            <filename>Button_Buy.png</filename>
-            <filename>Button_Destroy.png</filename>
-            <filename>Button_Equip.png</filename>
-            <filename>Button_Sell.png</filename>
-            <filename>Button_template.png</filename>
-            <filename>Button_Use.png</filename>
-            <filename>ClickToStart.png</filename>
-            <filename>divider.png</filename>
-            <filename>InventoryTab.png</filename>
-            <filename>ItemSelectBorder.png</filename>
-            <filename>ItemTileBG.png</filename>
-            <filename>MagnetBotsLogo.png</filename>
-            <filename>MagnetIcon.png</filename>
-            <filename>openinventorybutton.png</filename>
-            <filename>TextboxBG.png</filename>
-            <filename>tutorial.png</filename>
-            <filename>NPCTrigger.png</filename>
-            <filename>Button_Blank.png</filename>
-            <filename>NotificationIcon.png</filename>
-            <filename>CrystalIcon.png</filename>
-            <filename>MenuButton.png</filename>
-            <filename>currencybg.png</filename>
-            <filename>Tile.png</filename>
-            <filename>mutebutton.png</filename>
-            <filename>soundbutton.png</filename>
+            <filename>../new UI/backbutton_color_bevel.png</filename>
+            <filename>../new UI/backbutton_grey_flat.png</filename>
+            <filename>../new UI/Background1.png</filename>
+            <filename>../new UI/Background2.png</filename>
+            <filename>../new UI/border_curve_grey.png</filename>
+            <filename>../new UI/border_square_grey.png</filename>
+            <filename>../new UI/button_square_black.png</filename>
+            <filename>../new UI/button_standard_blue.png</filename>
+            <filename>../new UI/button_standard_green.png</filename>
+            <filename>../new UI/button_standard_grey.png</filename>
+            <filename>../new UI/button_standard_orange.png</filename>
+            <filename>../new UI/currency_citizen.png</filename>
+            <filename>../new UI/currency_coin.png</filename>
+            <filename>../new UI/currency_magnet.png</filename>
+            <filename>../new UI/exitButton_color_bevel.png</filename>
+            <filename>../new UI/exitButton_grey_flat.png</filename>
+            <filename>../new UI/header_bottom_decor.png</filename>
+            <filename>../new UI/header.png</filename>
+            <filename>../new UI/icon_defense.png</filename>
+            <filename>../new UI/icon_health.png</filename>
+            <filename>../new UI/icon_strength.png</filename>
+            <filename>../new UI/itemTile_BG.png</filename>
+            <filename>../new UI/itemTile_buyButton.png</filename>
+            <filename>../new UI/itemTile_noitem.png</filename>
+            <filename>../new UI/itemTile_star.png</filename>
+            <filename>../new UI/itemTile_tick.png</filename>
+            <filename>../new UI/longbutton_grey.png</filename>
+            <filename>../new UI/longbutton_yellow.png</filename>
+            <filename>../new UI/panel_indent1.png</filename>
+            <filename>../new UI/panel_indent2.png</filename>
+            <filename>../new UI/Panel_Repeating1.png</filename>
+            <filename>../new UI/border_corner_grey.png</filename>
+            <filename>../new UI/border_corner_alt.png</filename>
+            <filename>../new UI/border_corner_gold.png</filename>
+            <filename>../UI/MenuButton.png</filename>
+            <filename>../UI/Tile.png</filename>
+            <filename>../UI/arrow.png</filename>
+            <filename>../new UI/button_standard_black.png</filename>
+            <filename>../new UI/button_square_orange.png</filename>
+            <filename>../new UI/itemTile_quantitytag.png</filename>
+            <filename>../new UI/longbutton_orange.png</filename>
+            <filename>../new UI/border_curve_alt.png</filename>
+            <filename>../new UI/indent_grey_light.png</filename>
+            <filename>../new UI/itemTile.png</filename>
+            <filename>../UI/attackbutton.png</filename>
+            <filename>../new UI/border_square_alt.png</filename>
+            <filename>../new UI/trade.png</filename>
+            <filename>../new UI/items.png</filename>
+            <filename>../new UI/profile.png</filename>
+            <filename>../new UI/quest.png</filename>
+            <filename>../new UI/quest_icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

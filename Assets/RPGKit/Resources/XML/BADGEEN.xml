@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGBadge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGBadge>
+    <ID>1</ID>
+    <Name>Burger Bronze</Name>
+    <Description />
+    <SystemDescription />
+  </RPGBadge>
+</ArrayOfRPGBadge>

@@ -26,6 +26,7 @@ public class GUIManager : MonoBehaviour {
     }
 	
     //public static GUIManager Instance { get; private set; }
+	public RarityColor[] rarityColors;
 
     public Camera mainCamera = null;
 	public Camera uiCamera = null;
@@ -146,6 +147,10 @@ public class GUIManager : MonoBehaviour {
 		case UIState.quickInventory:
 			break;
 		case UIState.profile:
+			profileGUI.Enable();
+			break;
+		case UIState.battle:
+			MainGUI.Enable();
 			break;
 		}
 		if(IsUIBusy())
@@ -168,6 +173,9 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.loading:
 			break;
+		case UIState.profile:
+			profileGUI.Disable();
+			break;
 		case UIState.playerShop:
 			PlayerShopGUI.Disable();
 			break;
@@ -180,6 +188,15 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
+	public Color GetRarityColor(RarityType rarity)
+	{
+		for (int i = 0; i < rarityColors.Length; i++) {
+			if(rarityColors[i].rarity == rarity)
+				return rarityColors[i].tintColor;
+				}
+		return Color.white;
+	}
+
 	public void EnterGUIState(UIState state)
 	{
 		uiState = state;
@@ -187,44 +204,44 @@ public class GUIManager : MonoBehaviour {
 
     public void StartGame()
     {
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
         //DisplayMainGUI();
     }
     
     public void DisplayMainGUI()
     {
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
     }
 
 	public void DisplayInventory()
 	{
-		uiState = UIState.inventory;
+		EnterGUIState(UIState.inventory);
 	}
 
 	public void HideInventory()
 	{
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
 	}
 
 	public void DisplayQuest()
 	{
-		uiState = UIState.quest;
+		EnterGUIState(UIState.quest);
 	}
 
 	public void HideQuest()
 	{
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
 	}
     
     public void DisplayQuickInventory (ItemCategories category)
     {
-		uiState = UIState.quickInventory;
+		EnterGUIState(UIState.quickInventory);
 		QuickInventoryGUI.Enable(category);
     }
     
     public void HideQuickInventory ()
     {
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
     }
 
 	public void DisplayNPC()
@@ -235,7 +252,7 @@ public class GUIManager : MonoBehaviour {
     public void DisplayNPC(NPC npc)
     {
 		PlayerManager.Instance.ActiveNPC = npc;
-		uiState = UIState.npc;
+		EnterGUIState(UIState.npc);
         /*if(!IsNPCGUIDisplayed)
         {
             HideMainGUI();
@@ -246,20 +263,21 @@ public class GUIManager : MonoBehaviour {
         }*/
     }
 
-	public void DisplayProfile(PlayerProfile profile)
+	public void DisplayProfile(PhotonPlayer player)
 	{
-		profileGUI.Enable();
+		EnterGUIState(UIState.profile);
+		PlayerManager.Instance.ActiveWorld.RequestPlayerProfileData(player);
 	}
 
 	public void HideProfile()
 	{
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
 	}
     
     public void HideNPC()
     {
 		PlayerManager.Instance.ActiveNPC = null;
-		uiState = UIState.main;
+		EnterGUIState(UIState.main);
         /*if(IsNPCGUIDisplayed)
         {
             NPCGUI.SetActive(false);
@@ -301,16 +319,6 @@ public class GUIManager : MonoBehaviour {
 	{
 		if(hoverPopupGUI.isDisplayed)
 			hoverPopupGUI.Disable();
-	}
-    
-	public void DisplayLoadingScreen()
-	{
-		loadingGUI.gameObject.SetActive(true);
-	}
-
-	public void HideLoadingScreen()
-	{
-		loadingGUI.gameObject.SetActive(false);
 	}
 
 	public void DisplayRewards(List<InventoryItem> items)
@@ -391,5 +399,14 @@ public enum UIState
 	npc,
 	settings,
 	friends,
-	cinematic
+	cinematic,
+	battle
+}
+
+[System.Serializable]
+public class RarityColor
+{
+	public RarityType rarity;
+	public Color tintColor;
+
 }

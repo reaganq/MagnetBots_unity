@@ -15,10 +15,11 @@ public class QuickInventoryGUIController : BasicGUIController {
 	public List<CategoryButton> subcategoryButtons;
     public int currentSelectedSubcategory = 0;
     public int currentSelectedItemIndex = -1;
+	public UIScrollBar mainScrollBar;
    // public ItemTileButton[] ItemTiles = new ItemTileButton[10];
     //public ItemTileButton[] CategoryButtons;
     //public UISprite[] ItemSprites = new UISprite[10];
-    public GameObject infoPanel = null;
+    /*public GameObject infoPanel = null;
     
     public GameObject equipButton = null;
     public GameObject destroyButton = null;
@@ -27,7 +28,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 	public GameObject nextPageButton;
     
     public UILabel ItemNameLabel = null;
-    public UILabel ItemDescriptionLabel = null;
+    public UILabel ItemDescriptionLabel = null;*/
     //public UILabel ItemSkillDescriptionLabel = null;
     //public UISprite ItemSkillSprite = null;
     
@@ -169,6 +170,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		displayedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
 		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
 		RefreshInventoryIcons();
+		mainScrollBar.value = 0;
     }
     
     public void RefreshInventoryIcons()
@@ -176,20 +178,20 @@ public class QuickInventoryGUIController : BasicGUIController {
 		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
     }
 
-	public override void OnItemTilePressed(int index)
+	/*public override void OnItemTilePressed(int index)
 	{
 		GUIManager.Instance.DisplayItemDetails( displayedItemList[index], inventoryType, this);
 		Debug.Log("pressed down" + index);
 		currentSelectedItemIndex = index;
-	}
+	}*/
 
-	public override void ReceiveEquipButtonMessage ()
+	/*public override void ReceiveEquipButtonMessage ()
 	{
 		OnDragDrop(currentSelectedItemIndex);
 		currentSelectedItemIndex = -1;
 		GUIManager.Instance.HideItemDetails();
 		Debug.LogError("FOUND THIS SHIT");
-	}
+	}*/
     
     /*public void RefreshSelection()
     {
