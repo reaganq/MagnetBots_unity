@@ -6,6 +6,11 @@
     <Description />
     <SystemDescription />
     <activityType>Service</activityType>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>bank</npcIconSprite>
+    <npcButtonText>Bank</npcButtonText>
+    <Conditions />
   </NPCService>
   <NPCService>
     <ID>2</ID>
@@ -13,5 +18,8 @@
     <Description />
     <SystemDescription />
     <activityType>Service</activityType>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <Conditions />
   </NPCService>
 </ArrayOfNPCService>

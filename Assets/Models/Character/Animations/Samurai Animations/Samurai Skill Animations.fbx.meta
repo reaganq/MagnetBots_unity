@@ -1,0 +1,1199 @@
+fileFormatVersion: 2
+guid: e4dcb566c9138423399921a8e0b43ce3
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: armL
+    100002: armR
+    100004: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    100006: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    100008: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    100010: body
+    100012: bones:Chest
+    100014: bones:Eyes
+    100016: bones:Head
+    100018: bones:Head_Hover_a
+    100020: bones:Head_Hover_b
+    100022: bones:L_Ankle
+    100024: bones:L_Arm_Hover_a
+    100026: bones:L_Arm_Hover_b
+    100028: bones:L_Ball
+    100030: bones:L_Clavicle
+    100032: bones:L_Elbow
+    100034: bones:L_Eye
+    100036: bones:L_Eye_end
+    100038: bones:L_Forearm
+    100040: bones:L_Hand
+    100042: bones:L_IndexFinger
+    100044: bones:L_IndexFinger_end
+    100046: bones:L_Knee
+    100048: bones:L_SecondFinger
+    100050: bones:L_SecondFinger_End
+    100052: bones:L_Shoulder
+    100054: bones:L_ShoulderGuard
+    100056: bones:L_Thigh
+    100058: bones:L_Thumb
+    100060: bones:L_Thumb_End
+    100062: bones:L_Toe
+    100064: bones:LegsRoot
+    100066: bones:Neck_Horizontal
+    100068: bones:Neck_Vertical
+    100070: bones:Pelvis
+    100072: bones:R_Ankle
+    100074: bones:R_Arm_Hover_a
+    100076: bones:R_Arm_Hover_b
+    100078: bones:R_Ball
+    100080: bones:R_Clavicle
+    100082: bones:R_Elbow
+    100084: bones:R_Eye
+    100086: bones:R_Eye_End
+    100088: bones:R_Forearm
+    100090: bones:R_Hand
+    100092: bones:R_IndexFinger
+    100094: bones:R_IndexFinger_end
+    100096: bones:R_Knee
+    100098: bones:R_SecondFinger
+    100100: bones:R_SecondFinger_End
+    100102: bones:R_Shoulder
+    100104: bones:R_ShoulderGuard
+    100106: bones:R_Thigh
+    100108: bones:R_Thumb
+    100110: bones:R_Thumb_End
+    100112: bones:R_Toe
+    100114: bones:Spine_1
+    100116: bones:Spine_2
+    100118: bones:Upperbody_Hover_a
+    100120: bones:Upperbody_Hover_b
+    100122: footL
+    100124: footR
+    100126: helmet
+    100128: legL
+    100130: legR
+    100132: pelvis
+    100134: //RootNode
+    100136: shuriken
+    100138: thighL
+    100140: thighR
+    100142: upperArmL
+    100144: upperArmR
+    400000: armL
+    400002: armR
+    400004: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    400006: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    400008: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    400010: body
+    400012: bones:Chest
+    400014: bones:Eyes
+    400016: bones:Head
+    400018: bones:Head_Hover_a
+    400020: bones:Head_Hover_b
+    400022: bones:L_Ankle
+    400024: bones:L_Arm_Hover_a
+    400026: bones:L_Arm_Hover_b
+    400028: bones:L_Ball
+    400030: bones:L_Clavicle
+    400032: bones:L_Elbow
+    400034: bones:L_Eye
+    400036: bones:L_Eye_end
+    400038: bones:L_Forearm
+    400040: bones:L_Hand
+    400042: bones:L_IndexFinger
+    400044: bones:L_IndexFinger_end
+    400046: bones:L_Knee
+    400048: bones:L_SecondFinger
+    400050: bones:L_SecondFinger_End
+    400052: bones:L_Shoulder
+    400054: bones:L_ShoulderGuard
+    400056: bones:L_Thigh
+    400058: bones:L_Thumb
+    400060: bones:L_Thumb_End
+    400062: bones:L_Toe
+    400064: bones:LegsRoot
+    400066: bones:Neck_Horizontal
+    400068: bones:Neck_Vertical
+    400070: bones:Pelvis
+    400072: bones:R_Ankle
+    400074: bones:R_Arm_Hover_a
+    400076: bones:R_Arm_Hover_b
+    400078: bones:R_Ball
+    400080: bones:R_Clavicle
+    400082: bones:R_Elbow
+    400084: bones:R_Eye
+    400086: bones:R_Eye_End
+    400088: bones:R_Forearm
+    400090: bones:R_Hand
+    400092: bones:R_IndexFinger
+    400094: bones:R_IndexFinger_end
+    400096: bones:R_Knee
+    400098: bones:R_SecondFinger
+    400100: bones:R_SecondFinger_End
+    400102: bones:R_Shoulder
+    400104: bones:R_ShoulderGuard
+    400106: bones:R_Thigh
+    400108: bones:R_Thumb
+    400110: bones:R_Thumb_End
+    400112: bones:R_Toe
+    400114: bones:Spine_1
+    400116: bones:Spine_2
+    400118: bones:Upperbody_Hover_a
+    400120: bones:Upperbody_Hover_b
+    400122: footL
+    400124: footR
+    400126: helmet
+    400128: legL
+    400130: legR
+    400132: pelvis
+    400134: //RootNode
+    400136: shuriken
+    400138: thighL
+    400140: thighR
+    400142: upperArmL
+    400144: upperArmR
+    2300000: armL
+    2300002: armR
+    2300004: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    2300006: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    2300008: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    2300010: body
+    2300012: footL
+    2300014: footR
+    2300016: helmet
+    2300018: legL
+    2300020: legR
+    2300022: pelvis
+    2300024: shuriken
+    2300026: thighL
+    2300028: thighR
+    2300030: upperArmL
+    2300032: upperArmR
+    3300000: armL
+    3300002: armR
+    3300004: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    3300006: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    3300008: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    3300010: body
+    3300012: footL
+    3300014: footR
+    3300016: helmet
+    3300018: legL
+    3300020: legR
+    3300022: pelvis
+    3300024: shuriken
+    3300026: thighL
+    3300028: thighR
+    3300030: upperArmL
+    3300032: upperArmR
+    4300000: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    4300002: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    4300004: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    4300006: helmet
+    4300008: armL
+    4300010: shuriken
+    4300012: upperArmL
+    4300014: armR
+    4300016: upperArmR
+    4300018: body
+    4300020: footL
+    4300022: legL
+    4300024: thighL
+    4300026: footR
+    4300028: legR
+    4300030: thighR
+    4300032: pelvis
+    7400000: shuriken_precast
+    7400002: shuriken_shoot
+    7400004: shuriken_followthrough
+    7400006: Katana_attack
+    7400008: samurai_run_override
+    7400010: shuriken_precast //// bones:Pelvis
+    7400012: shuriken_shoot //// bones:Pelvis
+    7400014: shuriken_followthrough //// bones:Pelvis
+    7400016: Katana_attack //// bones:Pelvis
+    7400018: samurai_run_override //// bones:Pelvis
+    9500000: //RootNode
+    11100000: //RootNode
+    11100002: armL
+    11100004: armR
+    11100006: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+    11100008: BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+    11100010: BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+    11100012: body
+    11100014: bones:Chest
+    11100016: bones:Eyes
+    11100018: bones:Head
+    11100020: bones:Head_Hover_a
+    11100022: bones:Head_Hover_b
+    11100024: bones:L_Ankle
+    11100026: bones:L_Arm_Hover_a
+    11100028: bones:L_Arm_Hover_b
+    11100030: bones:L_Ball
+    11100032: bones:L_Clavicle
+    11100034: bones:L_Elbow
+    11100036: bones:L_Eye
+    11100038: bones:L_Eye_end
+    11100040: bones:L_Forearm
+    11100042: bones:L_Hand
+    11100044: bones:L_IndexFinger
+    11100046: bones:L_IndexFinger_end
+    11100048: bones:L_Knee
+    11100050: bones:L_SecondFinger
+    11100052: bones:L_SecondFinger_End
+    11100054: bones:L_Shoulder
+    11100056: bones:L_ShoulderGuard
+    11100058: bones:L_Thigh
+    11100060: bones:L_Thumb
+    11100062: bones:L_Thumb_End
+    11100064: bones:L_Toe
+    11100066: bones:LegsRoot
+    11100068: bones:Neck_Horizontal
+    11100070: bones:Neck_Vertical
+    11100072: bones:Pelvis
+    11100074: bones:R_Ankle
+    11100076: bones:R_Arm_Hover_a
+    11100078: bones:R_Arm_Hover_b
+    11100080: bones:R_Ball
+    11100082: bones:R_Clavicle
+    11100084: bones:R_Elbow
+    11100086: bones:R_Eye
+    11100088: bones:R_Eye_End
+    11100090: bones:R_Forearm
+    11100092: bones:R_Hand
+    11100094: bones:R_IndexFinger
+    11100096: bones:R_IndexFinger_end
+    11100098: bones:R_Knee
+    11100100: bones:R_SecondFinger
+    11100102: bones:R_SecondFinger_End
+    11100104: bones:R_Shoulder
+    11100106: bones:R_ShoulderGuard
+    11100108: bones:R_Thigh
+    11100110: bones:R_Thumb
+    11100112: bones:R_Thumb_End
+    11100114: bones:R_Toe
+    11100116: bones:Spine_1
+    11100118: bones:Spine_2
+    11100120: bones:Upperbody_Hover_a
+    11100122: bones:Upperbody_Hover_b
+    11100124: footL
+    11100126: footR
+    11100128: helmet
+    11100130: legL
+    11100132: legR
+    11100134: pelvis
+    11100136: shuriken
+    11100138: thighL
+    11100140: thighR
+    11100142: upperArmL
+    11100144: upperArmR
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: shuriken_precast
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 15
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/footL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/legL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/thighL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/footR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/legR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/thighR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/body
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/helmet
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL/shuriken
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/upperArmL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/armR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/upperArmR
+        weight: 1
+      - path: bones:Pelvis/pelvis
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: shuriken_shoot
+      takeName: Take 001
+      firstFrame: 15
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/footL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/legL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/thighL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/footR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/legR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/thighR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/body
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/helmet
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL/shuriken
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/upperArmL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/armR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/upperArmR
+        weight: 1
+      - path: bones:Pelvis/pelvis
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: shuriken_followthrough
+      takeName: Take 001
+      firstFrame: 22
+      lastFrame: 28
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/footL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/legL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/thighL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/footR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/legR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/thighR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/body
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/helmet
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL/shuriken
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/upperArmL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/armR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/upperArmR
+        weight: 1
+      - path: bones:Pelvis/pelvis
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Katana_attack
+      takeName: Take 001
+      firstFrame: 40
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/footL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/legL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/thighL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/footR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/legR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/thighR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/body
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/helmet
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL/shuriken
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/upperArmL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/armR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/upperArmR
+        weight: 1
+      - path: bones:Pelvis/pelvis
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: samurai_run_override
+      takeName: Take 001
+      firstFrame: 70
+      lastFrame: 92
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: bones:Pelvis
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/footL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/bones:L_Knee/legL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:L_Thigh/thighL
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/footR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/bones:R_Knee/legR
+        weight: 1
+      - path: bones:Pelvis/bones:LegsRoot/bones:R_Thigh/thighR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/body
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder3
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:pCylinder4
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/BasicRobot_template:robot_mesh_uv_norma_002l:polySurface81
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Head
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/helmet
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/armL/shuriken
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger/bones:L_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/upperArmL
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/armR
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
+        weight: 1
+      - path: bones:Pelvis/bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/upperArmR
+        weight: 1
+      - path: bones:Pelvis/pelvis
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  additionalBone: 0
+  userData: 

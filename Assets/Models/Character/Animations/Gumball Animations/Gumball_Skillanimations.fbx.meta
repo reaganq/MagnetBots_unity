@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 8eb08d322b95d4f9fa13b04beb3bcb41
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: bones:Chest
     100002: bones:Eyes
@@ -267,14 +267,14 @@ ModelImporter:
     11100136: bones:Upperbody_Hover_a
     11100138: bones:Upperbody_Hover_b
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
-    animationCompression: 0
+    animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -286,7 +286,7 @@ ModelImporter:
       takeName: Take 001
       firstFrame: 1
       lastFrame: 5
-      wrapMode: 0
+      wrapMode: 8
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
@@ -1114,7 +1114,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -1147,4 +1147,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
+  additionalBone: 0
   userData: 

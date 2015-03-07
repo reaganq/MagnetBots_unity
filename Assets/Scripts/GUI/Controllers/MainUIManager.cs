@@ -26,6 +26,7 @@ public class MainUIManager : BasicGUIController {
 	{
 		coinsCounter.text = PlayerManager.Instance.Hero.Coins.ToString();
 		magnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
+		citizenpointCounter.text = PlayerManager.Instance.Hero.CitizenPoints.ToString();
 		//magnetsCounter.text = PlayerManager.Instance.Hero.Magnets.ToString();
 	}
 

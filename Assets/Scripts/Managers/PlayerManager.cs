@@ -169,8 +169,16 @@ public class PlayerManager : MonoBehaviour
 		SpawnPoint = ActiveZone.spawnPoint;
 		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
 		GameManager.Instance.GameIsPaused = false;
-		RefreshAvatar();
-		GUIManager.Instance.DisplayMainGUI();
+		if(GameManager.Instance.newGame)
+		{
+			GameObject cutscene = Instantiate(Resources.Load("Cutscenes/IntroCinematic") as GameObject) as GameObject;
+			Debug.Log("load cutscene");
+		}
+		else
+		{
+			RefreshAvatar();
+			GUIManager.Instance.DisplayMainGUI();
+		} 
 	}
 
 	/*public void ChangeZone(Zone newZone)

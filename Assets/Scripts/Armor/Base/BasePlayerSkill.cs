@@ -9,7 +9,6 @@ public class BasePlayerSkill : BaseSkill {
 	public Job pressDownJob;
 	public Job pressUpJob;
 	public int equipmentSlotIndex;
-	public bool hasSkill = true;
 	public bool hasPressDownEvent;
 	public bool hasPressUpEvent;
 	public bool resetAfterDown;
@@ -18,8 +17,6 @@ public class BasePlayerSkill : BaseSkill {
 	//player can't move AT ALL while using this skill
 	//player has limited movement when using this skill. Think charge attacks
 	//public bool continuousUse;
-	public string skillButtonSpritePath;
-	public string skillButtonAtlasPath;
 
 	public float baseDamage;
 

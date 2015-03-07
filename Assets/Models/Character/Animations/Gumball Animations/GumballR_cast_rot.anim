@@ -23,7 +23,7 @@ AnimationClip:
         value: {x: -.444715828, y: .549752533, z: -.444715828, w: .549752533}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -39,7 +39,7 @@ AnimationClip:
         value: {x: .703195333, y: -.0742721409, z: -.0742721409, w: .703195333}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 1379562341
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a
@@ -55,7 +55,7 @@ AnimationClip:
         value: {x: 0, y: -0, z: -0, w: 1}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 146804752
+        tangentMode: 1214211169
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b
@@ -82,17 +82,17 @@ AnimationClip:
         value: {x: -6.02784975e-11, y: 6.02785183e-11, z: .707106829, w: .707106829}
         inSlope: {x: .198842704, y: -.198842704, z: -.00223740935, w: -.00223740935}
         outSlope: {x: .198842704, y: -.198842704, z: -.00223740935, w: -.00223740935}
-        tangentMode: 1651664240
+        tangentMode: 1702260552
       - time: .0799999982
         value: {x: .0508640595, y: -.0508640595, z: .705274999, w: .705274999}
         inSlope: {x: .872358799, y: -.872358799, z: -.0629141927, w: -.0629141927}
         outSlope: {x: .872358799, y: -.872358799, z: -.0629141927, w: -.0629141927}
-        tangentMode: 980641134
+        tangentMode: 201
       - time: .159999996
         value: {x: .101464607, y: -.101464607, z: .699789226, w: .699789226}
         inSlope: {x: .145481765, y: -.145481765, z: -.0189885572, w: -.0189885572}
         outSlope: {x: .145481765, y: -.145481765, z: -.0189885572, w: -.0189885572}
-        tangentMode: 1633645157
+        tangentMode: 1701736290
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2
@@ -103,12 +103,12 @@ AnimationClip:
         value: {x: -.460781455, y: .536358535, z: -.460781455, w: .536358535}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: -1114770497
       - time: .159999996
         value: {x: -.460781455, y: .536358535, z: -.460781455, w: .536358535}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 79
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest
@@ -119,12 +119,12 @@ AnimationClip:
         value: {x: 0, y: -0, z: -.0203191712, w: .99979353}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 79
       - time: .159999996
         value: {x: 0, y: -0, z: -.0203191712, w: .99979353}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1967587447
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a
@@ -140,7 +140,7 @@ AnimationClip:
         value: {x: .998354375, y: -.057346303, z: -3.51144829e-18, w: 6.11315722e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 749195284
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b
@@ -156,7 +156,7 @@ AnimationClip:
         value: {x: 0, y: -0, z: -.00204916741, w: .999997914}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 150984440
+        tangentMode: 1214211169
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical
@@ -177,7 +177,7 @@ AnimationClip:
         value: {x: -.143492624, y: 8.32667268e-16, z: -4.49640325e-15, w: .989651382}
         inSlope: {x: -.20574227, y: 5.29395592e-22, z: 0, w: -.026854137}
         outSlope: {x: -.20574227, y: 5.29395592e-22, z: 0, w: -.026854137}
-        tangentMode: 1701736290
+        tangentMode: 1801676110
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal
@@ -236,12 +236,12 @@ AnimationClip:
         value: {x: 5.58793634e-09, y: -.707106829, z: 5.58793634e-09, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1163879801
       - time: .159999996
         value: {x: 5.58793634e-09, y: -.707106829, z: 5.58793634e-09, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 748253616
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:R_Eye/bones:R_Eye_End
@@ -268,12 +268,12 @@ AnimationClip:
         value: {x: .707106829, y: 4.32978063e-17, z: .707106829, w: -4.32978063e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1163874874
       - time: .159999996
         value: {x: .707106829, y: 4.32978063e-17, z: .707106829, w: -4.32978063e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 1634562671
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye
@@ -300,12 +300,12 @@ AnimationClip:
         value: {x: 2.7929048e-16, y: 2.13424708e-16, z: 1.46879206e-16, w: 1}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1163874874
+        tangentMode: 1163873338
       - time: .159999996
         value: {x: 2.7929048e-16, y: 2.13424708e-16, z: 1.46879206e-16, w: 1}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1634562671
+        tangentMode: 1701736290
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Eyes/bones:L_Eye/bones:L_Eye_end/bones:Gumball_Gun:robot_mesh_uv_norma_002l:pCylinder3
@@ -316,12 +316,12 @@ AnimationClip:
         value: {x: -.5, y: .5, z: .5, w: .5}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1701736290
       - time: .159999996
         value: {x: -.5, y: .5, z: .5, w: .5}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1214211169
+        tangentMode: 1849777920
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Head_Hover_a/bones:Head_Hover_b/bones:Neck_Vertical/bones:Neck_Horizontal/bones:Gumball_Gun:robot_mesh_uv_norma_002l:polySurface81
@@ -332,12 +332,12 @@ AnimationClip:
         value: {x: .472510695, y: -.5260548, z: .448827595, w: .546400785}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1651664240
       - time: .159999996
         value: {x: .472510695, y: -.5260548, z: .448827595, w: .546400785}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 980641134
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle
@@ -348,12 +348,12 @@ AnimationClip:
         value: {x: -.557897985, y: .829909563, z: -8.49786995e-17, w: -1.66559053e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 0
       - time: .159999996
         value: {x: -.557897985, y: .829909563, z: -8.49786995e-17, w: -1.66559053e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 1278899045
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
@@ -396,12 +396,12 @@ AnimationClip:
         value: {x: -1.0726638e-14, y: .0569838025, z: -4.54053816e-06, w: .998375118}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 923491506
       - time: .159999996
         value: {x: -1.0726638e-14, y: .0569838025, z: -4.54053816e-06, w: .998375118}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 747158716
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow
@@ -412,12 +412,12 @@ AnimationClip:
         value: {x: 4.54340949e-07, y: .0122183356, z: 1.05553379e-08, w: .999925375}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: -1231529235
       - time: .159999996
         value: {x: 4.54340949e-07, y: .0122183356, z: 1.05553379e-08, w: .999925375}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 749194640
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand
@@ -428,12 +428,12 @@ AnimationClip:
         value: {x: -.00127688691, y: -.0183748901, z: .0693228245, w: .997424245}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 842356446
       - time: .159999996
         value: {x: -.00127688691, y: -.0183748901, z: .0693228245, w: .997424245}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 751795364
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_IndexFinger
@@ -476,12 +476,12 @@ AnimationClip:
         value: {x: -.0641710758, y: -.279072195, z: -.21471186, w: .933755636}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1869108063
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: -.0641710758, y: -.279072195, z: -.21471186, w: .933755636}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 179
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_Thumb/bones:L_Thumb_End
@@ -492,12 +492,12 @@ AnimationClip:
         value: {x: -.0157709662, y: -.220307454, z: .0696408153, w: .972813487}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1046381965
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: -.0157709662, y: -.220307454, z: .0696408153, w: .972813487}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 146804752
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger
@@ -508,12 +508,12 @@ AnimationClip:
         value: {x: .0127188638, y: .177669913, z: -.0702624321, w: .981496215}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: .0127188638, y: .177669913, z: -.0702624321, w: .981496215}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Hand/bones:L_SecondFinger/bones:L_SecondFinger_End
@@ -524,12 +524,12 @@ AnimationClip:
         value: {x: 6.55957194e-07, y: -.0128999865, z: -1.29166304e-08, w: .999916792}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 155505508
+        tangentMode: 1987004511
       - time: .159999996
         value: {x: 6.55957194e-07, y: -.0128999865, z: -1.29166304e-08, w: .999916792}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 151
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_Elbow/bones:L_Forearm
@@ -540,12 +540,12 @@ AnimationClip:
         value: {x: 5.10634834e-07, y: .0256030895, z: -4.59631929e-06, w: .999672174}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: 5.10634834e-07, y: .0256030895, z: -4.59631929e-06, w: .999672174}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1651664240
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a/bones:L_Arm_Hover_b/bones:L_Shoulder/bones:L_ShoulderGuard
@@ -556,12 +556,12 @@ AnimationClip:
         value: {x: -.472510695, y: .5260548, z: .448827595, w: .546400785}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 0
       - time: .159999996
         value: {x: -.472510695, y: .5260548, z: .448827595, w: .546400785}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle
@@ -572,12 +572,12 @@ AnimationClip:
         value: {x: -.55789566, y: .829911113, z: -1.66561419e-17, w: 8.49786532e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 275
+        tangentMode: -1089857393
       - time: .159999996
         value: {x: -.55789566, y: .829911113, z: -1.66561419e-17, w: 8.49786532e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: -1089857393
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a
@@ -588,12 +588,12 @@ AnimationClip:
         value: {x: -.539437234, y: .842025816, z: -1.85282088e-17, w: 8.45902158e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1066482609
       - time: .159999996
         value: {x: -.539437234, y: .842025816, z: -1.85282088e-17, w: 8.45902158e-17}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 1079804672
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b
@@ -619,12 +619,12 @@ AnimationClip:
         value: {x: .409759015, y: -.220846385, z: .55287534, w: .691124678}
         inSlope: {x: 2.52632761, y: -1.99976611, z: -.192963332, w: -1.68380225}
         outSlope: {x: 2.52632761, y: -1.99976611, z: -.192963332, w: -1.68380225}
-        tangentMode: 980641134
+        tangentMode: 1701736290
       - time: .159999996
         value: {x: .462071151, y: -.272128195, z: .552242637, w: .638329506}
         inSlope: {x: .471726596, y: -.472115129, z: .10686738, w: -.560667515}
         outSlope: {x: .471726596, y: -.472115129, z: .10686738, w: -.560667515}
-        tangentMode: 1633645157
+        tangentMode: 1600482921
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder
@@ -635,17 +635,17 @@ AnimationClip:
         value: {x: -.000419927121, y: .000419978227, z: .707085073, w: .707128227}
         inSlope: {x: -.167250529, y: -.153686628, z: .00317692757, w: -.0061057508}
         outSlope: {x: -.167250529, y: -.153686628, z: .00317692757, w: -.0061057508}
-        tangentMode: -1132435399
+        tangentMode: 1869108063
       - time: .0799999982
         value: {x: -.0466803052, y: -.0423272401, z: .706900299, w: .704500794}
         inSlope: {x: -.928674936, y: -.866650701, z: -.0396959484, w: -.0847958028}
         outSlope: {x: -.928674936, y: -.866650701, z: -.0396959484, w: -.0847958028}
-        tangentMode: 1033489395
+        tangentMode: 225
       - time: .159999996
         value: {x: -.127199024, y: -.118675999, z: .699301124, w: .693335712}
         inSlope: {x: -1.0009985, y: -.972249746, z: -.15514642, w: -.197615474}
         outSlope: {x: -1.0009985, y: -.972249746, z: -.15514642, w: -.197615474}
-        tangentMode: 1048910368
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow
@@ -656,12 +656,12 @@ AnimationClip:
         value: {x: -.0181041099, y: .018104136, z: .706875026, w: .706875026}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: -1102735314
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: -.0181041099, y: .018104136, z: .706875026, w: .706875026}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1037753673
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Forearm
@@ -672,12 +672,12 @@ AnimationClip:
         value: {x: -.0181040876, y: .0181041583, z: .706875026, w: .706875026}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1701736290
+        tangentMode: 0
       - time: .159999996
         value: {x: -.0181040876, y: .0181041583, z: .706875026, w: .706875026}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1852793391
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand
@@ -688,12 +688,12 @@ AnimationClip:
         value: {x: .00348194735, y: .0502896905, z: .0689859241, w: .996343195}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1869108063
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: .00348194735, y: .0502896905, z: .0689859241, w: .996343195}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 146804752
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger
@@ -704,12 +704,12 @@ AnimationClip:
         value: {x: -.00348201394, y: -.0502896905, z: -.0689859241, w: .996343195}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1032840648
       - time: .159999996
         value: {x: -.00348201394, y: -.0502896905, z: -.0689859241, w: .996343195}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 748912288
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_IndexFinger/bones:R_IndexFinger_end
@@ -720,12 +720,12 @@ AnimationClip:
         value: {x: .279070854, y: -.0641692951, z: .933757246, w: -.214707389}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1684955464
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: .279070854, y: -.0641692951, z: .933757246, w: -.214707389}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 150983484
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb
@@ -736,12 +736,12 @@ AnimationClip:
         value: {x: .279070824, y: -.0641693175, z: .933757246, w: .214707389}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: -1114814338
+        tangentMode: 1064241847
       - time: .159999996
         value: {x: .279070824, y: -.0641693175, z: .933757246, w: .214707389}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 155502692
+        tangentMode: 275
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_Thumb/bones:R_Thumb_End
@@ -752,12 +752,12 @@ AnimationClip:
         value: {x: -.0127189038, y: -.177669451, z: .0702624917, w: .981496334}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: -.0127189038, y: -.177669451, z: .0702624917, w: .981496334}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1065347716
+        tangentMode: 1986096195
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger
@@ -768,12 +768,12 @@ AnimationClip:
         value: {x: .0127188396, y: .177669451, z: -.0702624768, w: .981496334}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1684955464
+        tangentMode: 0
       - time: .159999996
         value: {x: .0127188396, y: .177669451, z: -.0702624768, w: .981496334}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 225
+        tangentMode: 443
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:R_Hand/bones:R_SecondFinger/bones:R_SecondFinger_End
@@ -805,7 +805,7 @@ AnimationClip:
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1749236224
+        tangentMode: 1986096128
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:Gumball_Gun:polySurface126
@@ -832,12 +832,12 @@ AnimationClip:
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1818321517
       - time: .159999996
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 748253616
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:Gumball_Gun:polySurface123
@@ -848,12 +848,12 @@ AnimationClip:
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 1869108063
       - time: .159999996
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 225
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:Gumball_Gun:polySurface122
@@ -864,12 +864,12 @@ AnimationClip:
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 746213848
       - time: .159999996
         value: {x: .997965097, y: -1.13858767e-09, z: 1.78201809e-08, w: .0637632608}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_Elbow/bones:Gumball_Gun:polySurface127
@@ -880,12 +880,12 @@ AnimationClip:
         value: {x: -.0256030764, y: 1.83363574e-10, z: .999672174, w: 4.69627202e-12}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: -1121508656
       - time: .159999996
         value: {x: -.0256030764, y: 1.83363574e-10, z: .999672174, w: 4.69627202e-12}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 746213848
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard
@@ -896,12 +896,12 @@ AnimationClip:
         value: {x: .706882358, y: -.706882358, z: .0178131778, w: -.0178131778}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 0
       - time: .159999996
         value: {x: .706882358, y: -.706882358, z: .0178131778, w: -.0178131778}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 459
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard/bones:Gumball_Gun:polySurface120
@@ -912,12 +912,12 @@ AnimationClip:
         value: {x: .706882358, y: -.706882358, z: .0178131778, w: -.0178131778}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 966301343
       - time: .159999996
         value: {x: .706882358, y: -.706882358, z: .0178131778, w: -.0178131778}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1986096195
+        tangentMode: 171
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:R_ShoulderGuard/bones:Gumball_Gun:polySurface121
@@ -928,12 +928,12 @@ AnimationClip:
         value: {x: .707106769, y: .707106769, z: .000291039207, w: .000291039207}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1600482921
       - time: .159999996
         value: {x: .707106769, y: .707106769, z: .000291039207, w: .000291039207}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1667327602
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:R_Clavicle/bones:R_Arm_Hover_a/bones:R_Arm_Hover_b/bones:R_Shoulder/bones:Gumball_Gun:polySurface128
@@ -949,7 +949,7 @@ AnimationClip:
         value: {x: .460781485, y: -.536358476, z: .460781485, w: .536358476}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 748253616
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:Gumball_Gun:polySurface104
@@ -960,12 +960,12 @@ AnimationClip:
         value: {x: -5.55111512e-17, y: 5.26119229e-17, z: 6.90827168e-17, w: 1}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1060439283
+        tangentMode: 1060435518
       - time: .159999996
         value: {x: -5.55111512e-17, y: 5.26119229e-17, z: 6.90827168e-17, w: 1}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1060439283
+        tangentMode: 1060435518
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Gumball_Gun:robot_mesh_uv_norma_002l:polySurface100
@@ -976,12 +976,12 @@ AnimationClip:
         value: {x: .444715858, y: -.549752474, z: .444715858, w: .549752474}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: .444715858, y: -.549752474, z: .444715858, w: .549752474}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1651664240
+        tangentMode: 1601466210
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot
@@ -992,12 +992,12 @@ AnimationClip:
         value: {x: -7.38507921e-09, y: -7.48289075e-09, z: .702439785, w: .711743176}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 146804752
+        tangentMode: -1535115264
       - time: .159999996
         value: {x: -7.38507921e-09, y: -7.48289075e-09, z: .702439785, w: .711743176}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: -1535115264
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:L_Thigh
@@ -1008,12 +1008,12 @@ AnimationClip:
         value: {x: -.662074983, y: -.0449105874, z: -.0408046842, w: .746977031}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 187
+        tangentMode: 0
       - time: .159999996
         value: {x: -.662074983, y: -.0449105874, z: -.0408046842, w: .746977031}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1702260552
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:L_Thigh/bones:L_Knee
@@ -1024,12 +1024,12 @@ AnimationClip:
         value: {x: .87315619, y: .48137176, z: -.0285510868, w: .0711642876}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1400466543
+        tangentMode: -1308770344
       - time: .159999996
         value: {x: .87315619, y: .48137176, z: -.0285510868, w: .0711642876}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 150222576
+        tangentMode: -1308770344
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle
@@ -1040,12 +1040,12 @@ AnimationClip:
         value: {x: .00570274703, y: .0159836579, z: -.335990012, w: .941712677}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1701736290
+        tangentMode: 0
       - time: .159999996
         value: {x: .00570274703, y: .0159836579, z: -.335990012, w: .941712677}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1749236339
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball
@@ -1056,12 +1056,12 @@ AnimationClip:
         value: {x: -0, y: -.707106829, z: 0, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 791830373
+        tangentMode: 1063225130
       - time: .159999996
         value: {x: -0, y: -.707106829, z: 0, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: -1231529235
+        tangentMode: 1063225130
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:L_Thigh/bones:L_Knee/bones:L_Ankle/bones:L_Ball/bones:L_Toe
@@ -1072,12 +1072,12 @@ AnimationClip:
         value: {x: .711743176, y: -.702439785, z: -6.96151123e-11, w: -6.87050625e-11}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 1702260552
       - time: .159999996
         value: {x: .711743176, y: -.702439785, z: -6.96151123e-11, w: -6.87050625e-11}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1701736290
+        tangentMode: 1601466210
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:R_Thigh
@@ -1088,12 +1088,12 @@ AnimationClip:
         value: {x: -.662074983, y: -.0449105874, z: -.0408046842, w: .746977031}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1852793391
+        tangentMode: 1868705637
       - time: .159999996
         value: {x: -.662074983, y: -.0449105874, z: -.0408046842, w: .746977031}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1868705650
+        tangentMode: 747158492
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:R_Thigh/bones:R_Knee
@@ -1109,7 +1109,7 @@ AnimationClip:
         value: {x: .87315619, y: .48137176, z: -.0285510868, w: .0711642876}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 0
+        tangentMode: 177
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle
@@ -1120,12 +1120,12 @@ AnimationClip:
         value: {x: .00570274703, y: .0159836579, z: -.335990012, w: .941712677}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1006546918
+        tangentMode: 0
       - time: .159999996
         value: {x: .00570274703, y: .0159836579, z: -.335990012, w: .941712677}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 980641134
+        tangentMode: 748253616
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball
@@ -1136,12 +1136,12 @@ AnimationClip:
         value: {x: 5.50939822e-16, y: -.707106829, z: 5.50939822e-16, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 1006546918
+        tangentMode: 743587856
       - time: .159999996
         value: {x: 5.50939822e-16, y: -.707106829, z: 5.50939822e-16, w: .707106829}
         inSlope: {x: 0, y: 0, z: 0, w: 0}
         outSlope: {x: 0, y: 0, z: 0, w: 0}
-        tangentMode: 151191432
+        tangentMode: 748253616
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:LegsRoot/bones:R_Thigh/bones:R_Knee/bones:R_Ankle/bones:R_Ball/bones:R_Toe
@@ -1154,12 +1154,12 @@ AnimationClip:
         value: {x: -2.88889485e-36, y: .00777243357, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 151187004
+        tangentMode: 1701080181
       - time: .159999996
         value: {x: -2.88889485e-36, y: .00777243357, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 234
+        tangentMode: 1766226021
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -1171,19 +1171,19 @@ AnimationClip:
         value: {x: 1, y: 1, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 1701736290
+        tangentMode: 796356450
       - time: .159999996
         value: {x: 1, y: 1, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 1633645157
+        tangentMode: 749199856
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
   m_FloatCurves: []
   m_PPtrCurves: []
   m_SampleRate: 60
-  m_WrapMode: 1
+  m_WrapMode: 8
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}

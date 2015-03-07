@@ -4,6 +4,7 @@ using System.Collections;
 public class NPCActivityButton : MonoBehaviour {
 
 	public UILabel textLabel;
+	public UISprite icon;
 	public int index;
 
 	public void LoadActivityButton(NPCActivity activity, int i)
@@ -26,7 +27,10 @@ public class NPCActivityButton : MonoBehaviour {
 			//display teleporter UI
 			break;
 		}
-		textLabel.text = activity.Name;
+		GameObject atlas = Resources.Load(activity.npcIconAtlas) as GameObject;
+		icon.atlas = atlas.GetComponent<UIAtlas>();
+		icon.spriteName = activity.npcIconSprite;
+		textLabel.text = activity.npcButtonText;
 		index = i;
 	}
 

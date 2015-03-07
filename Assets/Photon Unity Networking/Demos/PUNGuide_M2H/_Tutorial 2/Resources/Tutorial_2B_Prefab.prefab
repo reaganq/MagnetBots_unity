@@ -127,7 +127,7 @@ MonoBehaviour:
   ObservedComponents: []
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
-  instantiationId: 0
+  instantiationId: -1
   isRuntimeInstantiated: 0
 --- !u!1002 &11400001
 EditorExtensionImpl:

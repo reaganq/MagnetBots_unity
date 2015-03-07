@@ -17,10 +17,11 @@ public class CharacterStatus : CharacterAttributes {
 	public Transform _myTransform;
 	public List<StatusEffect> statusEffects;
 	public List<StatusEffect> speedModifiers;
+	public float clientCurMovementSpeed;
 	public float curMovementSpeed{
 		get{
 			if(!myPhotonView.isMine)
-				return curMovementSpeed;
+				return clientCurMovementSpeed;
 			else
 			{
 				float s = maxMovementSpeed;

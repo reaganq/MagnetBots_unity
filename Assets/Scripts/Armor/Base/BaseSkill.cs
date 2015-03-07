@@ -83,9 +83,8 @@ public class BaseSkill : MonoBehaviour {
 	public void TriggerSkillEvents(SkillEventTrigger trigger)
 	{
 		for (int i = 0; i < skillVFXs.Count; i++) {
-			if(!isOwner && skillVFXs[i].isLocal)
+			if(!isOwner && !skillVFXs[i].isLocal)
 			{
-				Debug.Log("catch local skill vfx");
 				continue;
 			}
 			if(skillVFXs[i].activationEvent == trigger)
@@ -94,14 +93,12 @@ public class BaseSkill : MonoBehaviour {
 				skillVFXs[i].Deactivate();
 		}
 		for (int i = 0; i < skillDetectors.Count; i++) {
-			if(!isOwner && skillDetectors[i].isLocal)
+			if(!isOwner && !skillDetectors[i].isLocal)
 			{
-				Debug.Log("catch");
 				continue;
 			}
 			if(skillDetectors[i].activationEvent == trigger)
 			{
-				Debug.Log("activate skill vfx");
 				skillDetectors[i].Activate();
 			}
 			if(skillDetectors[i].deactivationEvent == trigger)
@@ -139,6 +136,7 @@ public class BaseSkill : MonoBehaviour {
 		ActivateSkill(false);
 		HitTargets.Clear();
 		skillState = SkillState.ready;
+
 	}
 
 	public void ActivateSkill(bool state)
@@ -186,7 +184,7 @@ public class BaseSkill : MonoBehaviour {
 		{
 			if(effect.triggerCondition == condition)
 			{
-				if(!isOwner && effect.isLocal)
+				if(!isOwner && !effect.isLocal)
 				{
 					continue;
 				}

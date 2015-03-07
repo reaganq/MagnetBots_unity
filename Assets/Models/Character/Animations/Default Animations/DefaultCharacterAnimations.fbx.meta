@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: f94894a6587ec4c42858063567b481e8
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: Anim_HipsCtrl
     100002: Anim_RootCtrl
@@ -459,7 +459,7 @@ ModelImporter:
     materialName: 0
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 1
+    legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
     animationCompression: 1
@@ -583,4 +583,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 1
+  additionalBone: 0
   userData: 

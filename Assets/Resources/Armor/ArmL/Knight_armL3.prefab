@@ -382,7 +382,7 @@ Transform:
   m_Father: {fileID: 400000}
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
@@ -399,7 +399,7 @@ MonoBehaviour:
   HitTargets: []
   isBusy: 0
   isActive: 0
-  skillName: 
+  skillName: Block
   skillType: 0
   disableMovement: 0
   disableRotation: 0
@@ -407,12 +407,12 @@ MonoBehaviour:
   limitDamageInstance: 1
   baseSkillAnimation:
     precastAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400000, guid: 62c441a939bfa486fb06c073621aaeb6, type: 2}
+      animationLayer: 4
       useWholeBody: 0
-      useArmLBones: 0
+      useArmLBones: 1
       useArmRBones: 0
-      useVerticalBones: 0
+      useVerticalBones: 1
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
@@ -421,37 +421,56 @@ MonoBehaviour:
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400000, guid: 45d5a835a9f144f27a1a8b09ed9bc042, type: 2}
+      animationLayer: 4
       useWholeBody: 0
-      useArmLBones: 0
+      useArmLBones: 1
       useArmRBones: 0
-      useVerticalBones: 0
+      useVerticalBones: 1
     loopAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400000, guid: 9eabd2e51b3fe4fe69a224ee22bb243b, type: 2}
+      animationLayer: 4
       useWholeBody: 0
-      useArmLBones: 0
+      useArmLBones: 1
       useArmRBones: 0
-      useVerticalBones: 0
+      useVerticalBones: 1
     castTime: 0
     followThroughTime: 0
   targetLimit: Infinity
-  skillStatusEffects: []
+  lowerRNGLimit: 0
+  upperRNGLimit: 0
+  skillStatusEffects:
+  - ID: 0
+    effect: 1
+    primaryEffectValue: -5
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 1
+    triggerCondition: 2
+    affectAlly: 0
+    affectEnemy: 0
+    affectSelf: 1
+    isLocal: 0
+  outgoingEnemyStatusEffects: []
+  outgoingAllyStatusEffects: []
   skillDetectors: []
   skillVFXs: []
   _skillState: 0
+  isOwner: 0
   ownerCAM: {fileID: 0}
   equipmentSlotIndex: 0
   hasSkill: 1
   hasPressDownEvent: 1
   hasPressUpEvent: 1
   resetAfterDown: 0
-  resetAfterUp: 0
+  resetAfterUp: 1
   canUseWhileBusy: 0
   skillButtonSpritePath: 
   skillButtonAtlasPath: 
-  upperRNGLimit: 0
+  baseDamage: 0
   ownerAvatar: {fileID: 0}
   isPressedDown: 0
   isPressedUp: 0
@@ -470,14 +489,14 @@ MonoBehaviour:
     clip: {fileID: 7400000, guid: a08a048f7c3f24e5fa95bebcc7ff10a6, type: 2}
     animationLayer: 1
     useWholeBody: 0
-    useArmLBones: 0
+    useArmLBones: 1
     useArmRBones: 0
     useVerticalBones: 0
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: 958bb461a21f246ffb118a64d63210a0, type: 2}
     animationLayer: 1
     useWholeBody: 0
-    useArmLBones: 0
+    useArmLBones: 1
     useArmRBones: 0
     useVerticalBones: 0
   animationTarget: {fileID: 0}

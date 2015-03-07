@@ -101,7 +101,7 @@ public class IntroGUIController : MonoBehaviour {
     public void ActivateScene() {
         async.allowSceneActivation = true;
         GameManager.Instance.GameIsPaused = false;
-        GUIManager.Instance.StartGame();
+        //GUIManager.Instance.StartGame();
     }
 
 	public void Register()

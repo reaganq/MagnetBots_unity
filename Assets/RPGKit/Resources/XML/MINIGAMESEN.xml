@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfNPCMinigame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <NPCMinigame>
+    <AtlasName>Atlases/MiniGames/MinigamesAtlas</AtlasName>
     <ID>1</ID>
     <Name>Burger Memory</Name>
     <Description>Follow and copy the instructions to make the most epic burger of all time!</Description>
     <SystemDescription />
     <activityType>Minigame</activityType>
-    <AtlasName>Atlases/MiniGames/MinigamesAtlas</AtlasName>
-    <PortraitIcon>burgermemory</PortraitIcon>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite />
+    <npcButtonText>Burger Madness</npcButtonText>
+    <Conditions />
     <PrefabDirectory>MiniGames/BurgerMemory</PrefabDirectory>
     <Loots>
       <LootItem>
@@ -19,6 +23,8 @@
         <minQuantity>1</minQuantity>
         <maxQuantity>2</maxQuantity>
         <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
       </LootItem>
     </Loots>
   </NPCMinigame>

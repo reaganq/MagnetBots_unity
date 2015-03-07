@@ -995,9 +995,10 @@ MonoBehaviour:
   myAnimation: {fileID: 11100000}
   myPhotonView: {fileID: 11400014}
   myMotor: {fileID: 11400002}
+  _disableMovement: 0
   runningAnimationSpeedMultiplier: 1.60000002
   currentRunningAnimationSpeed: 1.60000002
-  myAvatar: {fileID: 0}
+  myAvatar: {fileID: 11400004}
   armorSkills: []
   armorAnimControllers:
   - {fileID: 0}
@@ -1006,7 +1007,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   playerMotor: {fileID: 11400002}
-  networkMovement: {fileID: 0}
+  networkMovement: {fileID: 11400016}
   _actionState: 0
   _movementState: 0
 --- !u!114 &11400010
@@ -1081,7 +1082,7 @@ MonoBehaviour:
   group: 0
   prefixBackup: -1
   observed: {fileID: 0}
-  synchronization: 3
+  synchronization: 1
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0
@@ -1106,6 +1107,7 @@ MonoBehaviour:
   myStatus: {fileID: 0}
   currentSpeed: 0
   actionManager: {fileID: 11400008}
+  disableMovement: 0
   IsActive: 1
 --- !u!114 &11400018
 MonoBehaviour:
@@ -1208,6 +1210,7 @@ MonoBehaviour:
   _myTransform: {fileID: 0}
   statusEffects: []
   speedModifiers: []
+  clientCurMovementSpeed: 0
   Invulnerable: 0
   canMove: 1
   playerActionManager: {fileID: 0}

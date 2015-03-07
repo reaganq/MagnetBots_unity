@@ -30,6 +30,12 @@ public class NPCActivity: BasicItem {
 		return true;
 	}
 
+	public NPCActivity()
+	{
+		Conditions = new List<Condition>();
+		npcIconAtlas = "Atlases/Icons/IconsAtlas";
+	}
+
 	public void LoadConversation()
 	{
 		if(conversationID > 0)

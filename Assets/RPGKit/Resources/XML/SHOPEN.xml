@@ -6,9 +6,10 @@
     <Description />
     <SystemDescription />
     <activityType>Shop</activityType>
-    <conversationIDs>
-      <int>2</int>
-    </conversationIDs>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>shop</npcIconSprite>
+    <npcButtonText>General Store</npcButtonText>
     <Conditions />
     <Items>
       <ShopItem>

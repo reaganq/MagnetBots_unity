@@ -120,7 +120,8 @@ public class ServiceEditor : BaseEditorWindow
 			}
 			EditorGUILayout.EndHorizontal();
 		}*/
-		
+		ActivityUtils.DisplayActivityComponents(s, Data);
 		currentItem = s;
+
 	}
 }

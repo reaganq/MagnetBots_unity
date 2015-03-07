@@ -592,7 +592,7 @@ MonoBehaviour:
     followThroughTime: 0
   targetLimit: Infinity
   lowerRNGLimit: 0
-  upperRNGLimit: 0
+  upperRNGLimit: 1
   skillStatusEffects: []
   outgoingEnemyStatusEffects: []
   outgoingAllyStatusEffects: []
@@ -608,14 +608,11 @@ MonoBehaviour:
   isOwner: 0
   ownerCAM: {fileID: 0}
   equipmentSlotIndex: 1
-  hasSkill: 1
   hasPressDownEvent: 1
   hasPressUpEvent: 0
   resetAfterDown: 1
   resetAfterUp: 0
   canUseWhileBusy: 0
-  skillButtonSpritePath: 
-  skillButtonAtlasPath: 
   baseDamage: 0
   ownerAvatar: {fileID: 0}
   isPressedDown: 0
@@ -700,6 +697,7 @@ MonoBehaviour:
   activationEvent: 2
   deactivationEvent: 7
   isLocal: 0
+  isProjectile: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -718,6 +716,7 @@ MonoBehaviour:
   activationEvent: 0
   deactivationEvent: 0
   isLocal: 0
+  isProjectile: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

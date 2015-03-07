@@ -407,8 +407,9 @@ public class Avatar : MonoBehaviour {
 		armr.transform.localRotation = Quaternion.identity;
 		armr.transform.parent = ArmRRoot.parent;
 			
-		ArmRObjects.Add(armr);
 		ArmRObjects.Add(temp);
+		ArmRObjects.Add(armr);
+
 		LoadBones();
 		BasePlayerSkill armRcontroller = temp.GetComponent<BasePlayerSkill>();
 		if(armRcontroller != null)

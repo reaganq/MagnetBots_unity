@@ -17,20 +17,20 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: {x: 0, y: 0, z: 0}
-        inSlope: {x: -2.98676896, y: -.120049134, z: 4.03573125e-07}
-        outSlope: {x: -2.98676896, y: -.120049134, z: 4.03573125e-07}
-        tangentMode: 1884633715
+        value: {x: -.06478706, y: 0, z: 0}
+        inSlope: {x: -2.7168231, y: -.120049134, z: 4.03573125e-07}
+        outSlope: {x: -2.7168231, y: -.120049134, z: 4.03573125e-07}
+        tangentMode: 8
       - time: .239999995
         value: {x: -.716824532, y: -.0288117919, z: 9.68575478e-08}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 791830373
+        tangentMode: 0
       - time: .479999989
-        value: {x: 0, y: 0, z: 0}
-        inSlope: {x: 2.98676896, y: .120049134, z: -4.03573125e-07}
-        outSlope: {x: 2.98676896, y: .120049134, z: -4.03573125e-07}
-        tangentMode: 1987004511
+        value: {x: -.06478706, y: 0, z: 0}
+        inSlope: {x: 2.7168231, y: .120049134, z: -4.03573125e-07}
+        outSlope: {x: 2.7168231, y: .120049134, z: -4.03573125e-07}
+        tangentMode: 4653151
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: bones:Upperbody_Hover_a/bones:Upperbody_Hover_b/bones:Spine_1/bones:Spine_2/bones:Chest/bones:L_Clavicle/bones:L_Arm_Hover_a
@@ -64,9 +64,9 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - time: 0
-        value: 0
-        inSlope: -2.98676896
-        outSlope: -2.98676896
+        value: -.06478706
+        inSlope: -2.7168231
+        outSlope: -2.7168231
         tangentMode: 10
       - time: .239999995
         value: -.716824532
@@ -74,9 +74,9 @@ AnimationClip:
         outSlope: 0
         tangentMode: 10
       - time: .479999989
-        value: 0
-        inSlope: 2.98676896
-        outSlope: 2.98676896
+        value: -.06478706
+        inSlope: 2.7168231
+        outSlope: 2.7168231
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2

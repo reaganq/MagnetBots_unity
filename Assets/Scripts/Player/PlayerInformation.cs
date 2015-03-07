@@ -24,8 +24,7 @@ public class PlayerInformation  {
 	public int shopTill;
 
 	public PlayerProfile profile;
-
-
+	
 	public int Coins;
 	public int Magnets;
 	public int CitizenPoints;
@@ -54,7 +53,7 @@ public class PlayerInformation  {
     {
 		SetPlayerName(GeneralData.GenerateRandomString(6));
 
-        for (int i = 1; i < 20 ; i++) {
+        for (int i = 1; i < 25 ; i++) {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
             //Debug.Log(i);
         }
@@ -66,9 +65,9 @@ public class PlayerInformation  {
 		PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
         
        
-        AddCurrency(1000,BuyCurrencyType.Coins);
+        AddCurrency(957,BuyCurrencyType.Coins);
         AddCurrency(100,BuyCurrencyType.Magnets);
-		AddCurrency(100, BuyCurrencyType.Magnets);
+		AddCurrency(100, BuyCurrencyType.CitizenPoints);
 		EquipBaseNakedArmor();
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);

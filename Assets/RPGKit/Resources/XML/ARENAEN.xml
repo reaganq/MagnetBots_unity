@@ -6,6 +6,11 @@
     <Description />
     <SystemDescription />
     <activityType>Minigame</activityType>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>gym</npcIconSprite>
+    <npcButtonText>Gym</npcButtonText>
+    <Conditions />
     <EnemyIDs>
       <int>1</int>
     </EnemyIDs>

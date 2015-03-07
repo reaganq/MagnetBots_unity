@@ -11,6 +11,7 @@ public class Detector : MonoBehaviour {
 	public SkillEventTrigger activationEvent;
 	public SkillEventTrigger deactivationEvent;
 	public bool isLocal;
+	public bool isProjectile = false;
 
 	public virtual void IgnoreOwnCollisions()
 	{
@@ -37,6 +38,8 @@ public class Detector : MonoBehaviour {
 		ownerSkill = skill;
 		currentNumberOfTargets = 0;
 		IgnoreOwnCollisions();
+		if(!isProjectile)
+			Deactivate();
 	}
 
 	public virtual void Reset()

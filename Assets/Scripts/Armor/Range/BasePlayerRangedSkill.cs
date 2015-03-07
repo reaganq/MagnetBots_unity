@@ -29,6 +29,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
         currentAmmoCount = maxAmmoCount;
 		AddPrefabToPool(projectilePrefab);
 		AddPrefabToPool(hitDecal);
+		fireSpeedTimer = 0;
     }
 
 	public override void TransferSkillAnimations()
@@ -63,72 +64,80 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
             isReloading = false;
         }
 
-        if(isActive)
+        if(isActive && isOwner)
         {
             if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
+			{
+				Debug.Log("update firing one shot" + fireSpeedTimer);
+				fireSpeedTimer += fireSpeed;	
+				Debug.Log("wtf");
 				ownerCAM.PlayOneShot(skillID);
-        }
+
+			}
+		}
     }
 
     public override bool CanPressDown()
     {
-        //if(armorState == ArmorState.ready || armorState == ArmorState.onUse || armorState == ArmorState.followThrough || )
         if(skillState == SkillState.precast)
             return false;
         else
             return true;
-        //else
-            //return false;
     }
 
 	public override IEnumerator PressDownSequence(int randomNumber)
     {
-
-        if(skillState == SkillState.ready || skillState == SkillState.followThrough)
-        {
-            skillState = SkillState.onUse;
-            //characterAnimation.CrossFade(castAnimation.clip.name, 0.05f);
-
-            //characterAnimation.Play(castAnimation.clip.name);
-
-			ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
-			//ownerCAM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, baseSkillAnimation.castAnimation.clip.name);
-			yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length);
-
-            //characterAnimation.Play(durationAnimation.clip.name);
-			ownerCAM.PlayAnimation(baseSkillAnimation.loopAnimation.clip.name, false);
-			//ownerCAM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, baseSkillAnimation.loopAnimation.clip.name);
-            ActivateSkill(true);
-            //FireOneShot();
-
-        }
-        else if(skillState == SkillState.onUse || skillState == SkillState.wait || skillState == SkillState.recoiling || skillState == SkillState.reloading)
-        {
-            ActivateSkill(true);
-            /*armorState = ArmorState.onUse;
-            //while(_skillActive)
-            //{
-                if(fireSpeedTimer <= 0 && !isReloading)
-                {
-                    armorState = ArmorState.onUse;
-                    FireOneShot();
-                }
-                //FireOneShot();
-                //armorState = ArmorState.onUse;
-                //Debug.Log("loop firing");
-            //}*/
-
-        }
-        else
-        {
-            Debug.Log("DOUBLE HIT" + skillState.ToString());
-            yield break;
-        }
+		if(disableMovement)
+		{
+			ownerCAM.DisableMovement();
+		}
+	    skillState = SkillState.precast;
+			ownerCAM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name, false);
+			yield return new WaitForSeconds(baseSkillAnimation.precastAnimation.clip.length);
+		shotsFired ++;
+		currentAmmoCount --;
+		fireSpeedTimer = fireSpeed;
+		skillState = SkillState.onUse;
+		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		Debug.Log("firing");
+		yield return new WaitForSeconds(baseSkillAnimation.castTime);
+		if(isOwner)
+			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, skillID, true);
+		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
+		skillState = SkillState.wait;
+		ActivateSkill(true);
     }
+
+	public override void FireOneShot()
+	{
+		StartCoroutine(FireOneShotSequence());
+	}
+	
+	public IEnumerator FireOneShotSequence()
+	{
+		yield return null;
+		while(skillState == SkillState.precast)
+		{
+			Debug.Log("waiting for precast");
+			yield return new WaitForEndOfFrame();
+		}
+		shotsFired ++;
+		currentAmmoCount --;
+		fireSpeedTimer = fireSpeed;
+		skillState = SkillState.onUse;
+		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		Debug.Log("firing");
+		yield return new WaitForSeconds(baseSkillAnimation.castTime);
+		if(isOwner)
+			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, skillID, true);
+		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
+		skillState = SkillState.wait;
+
+	}
 
     public override bool CanPressUp ()
     {
-        if(skillState == SkillState.ready)
+        if(skillState == SkillState.followThrough)
         {
             return false;
         }
@@ -138,52 +147,23 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
     public override IEnumerator PressUpSequence(int randomNumber)
     {
-        while(skillState == SkillState.onUse)
+        while(skillState == SkillState.onUse || skillState == SkillState.precast)
         {
             yield return new WaitForEndOfFrame();
         }
-        if(isPressedDown)
-        {
-            ActivateSkill(false);
-			//ownerManager.ResetActionState();
-            while(isReloading)
-            {
-                yield return new WaitForEndOfFrame();
-            }
 
-            skillState = SkillState.wait;
-            yield return new WaitForSeconds(1f);
+            ActivateSkill(false);
             skillState = SkillState.followThrough;
+		if(disableMovement)
+			ownerCAM.EnableMovement();
 			Debug.LogWarning("not here");
 			ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, false);
 			yield return new WaitForSeconds(baseSkillAnimation.followThroughAnimation.clip.length);
-        }
-        else 
-        {
-            ActivateSkill(false);
-            yield break;
-        }
     }
 
-    public override void FireOneShot()
-    {
-        shotsFired ++;
-        currentAmmoCount --;
-        fireSpeedTimer = fireSpeed;
-        //GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity) as GameObject;
-		ownerCAM.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, projectilePrefab.name, projectileSpawnLocation.position, projectileSpawnLocation.rotation, bulletSpeed, skillID);
-        skillState = SkillState.recoiling;
-        //characterAnimation.Play(recoilAnimation.clip.name);
-		ownerCAM.PlayAnimation(recoilAnimation.clip.name, false);
-		//ownerCAM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
-        if(currentAmmoCount <= 0)
-        {
-            cooldownTimer = cooldown + recoilAnimation.clip.length;
-            StartCoroutine(Reload(recoilAnimation.clip.length));
-        }
-    }
 
-    public IEnumerator Reload(float sec)
+
+    /*public IEnumerator Reload(float sec)
     {
         //Debug.Log("reloading");
         isReloading = true;
@@ -200,7 +180,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
         //Debug.Log("back to fire mode");
         currentAmmoCount = maxAmmoCount;
 
-    }
+    }*/
 
 
 

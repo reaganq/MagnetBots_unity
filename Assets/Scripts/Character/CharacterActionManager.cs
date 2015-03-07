@@ -9,6 +9,17 @@ public class CharacterActionManager : ActionManager {
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
 	public NetworkCharacterMovement networkMovement;
+	public override bool disableMovement{
+		get{
+			return _disableMovement;
+		}
+		set
+		{
+			base.disableMovement = value;
+			playerMotor.disableMovement = _disableMovement;
+			networkMovement.disableMovement = _disableMovement;
+		}
+	}
 
     public bool isLocked()
     {
@@ -127,6 +138,7 @@ public class CharacterActionManager : ActionManager {
 				{
 					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
 					myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
+					//PressDownAction(skillIndex, rng);
 				}
 			}
 			else if(trigger == InputTrigger.OnPressUp)
@@ -135,6 +147,7 @@ public class CharacterActionManager : ActionManager {
 				{
 					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
 					myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
+					//PressUpAction(skillIndex, rng);
 				}
 			}
 		}
@@ -239,6 +252,7 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.idle)
         {
+			Debug.LogWarning("animate to idle");
             myAnimation["Default_Idle"].time = 0;
 			myAnimation.CrossFade("Default_Idle");
 			for (int i = 0; i < armorAnimControllers.Length ; i++)
@@ -260,6 +274,7 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.moving)
         {
+			Debug.LogWarning("animate to running");
 			myAnimation["Default_Run"].time = 0;
 			myAnimation.CrossFade("Default_Run");
             for (int i = 0; i < armorAnimControllers.Length ; i++) 
@@ -331,25 +346,27 @@ public class CharacterActionManager : ActionManager {
 		armorSkills[index].PressUp(rng);
 	}
 
-	public void SpawnProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int skillIndex, bool acrossNetwork)
+	public void SpawnProjectile(string projectileName, Vector3 pos, Vector3 direction, float speed, int skillIndex, bool acrossNetwork)
 	{
+		Debug.Log("spawn projectil");
 		if(acrossNetwork)
 		{
 			if(myPhotonView.isMine)
-				myPhotonView.RPC("NetworkSpawnPlayerProjectile", PhotonTargets.All, projectileName, pos, rot, speed, skillIndex);
+				myPhotonView.RPC("NetworkSpawnPlayerProjectile", PhotonTargets.All, projectileName, pos, direction, speed, skillIndex);
 		}
 		else
-			NetworkSpawnPlayerProjectile(projectileName, pos, rot, speed, skillIndex);
+			NetworkSpawnPlayerProjectile(projectileName, pos, direction, speed, skillIndex);
 	}
 
 	[RPC]
-	public void NetworkSpawnPlayerProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, int index)
+	public void NetworkSpawnPlayerProjectile(string projectileName, Vector3 pos, Vector3 rot, float speed, int index)
 	{
 		Transform projectile = effectsPool.prefabs[projectileName];
-		Transform projectileInstance = effectsPool.Spawn(projectile, pos, rot, null);
+		Transform projectileInstance = effectsPool.Spawn(projectile, pos, Quaternion.identity, null);
 		//IgnoreCollisions(projectileInstance.collider);
+		projectileInstance.rotation = Quaternion.LookRotation(rot);
 		if(projectileInstance.rigidbody != null)
-			projectileInstance.rigidbody.AddForce( _myTransform.forward * speed);
+			projectileInstance.rigidbody.AddForce(rot * speed);
 		Detector src = projectileInstance.GetComponentInChildren<Detector>();
 		if(src != null)
 		{
@@ -365,6 +382,7 @@ public class CharacterActionManager : ActionManager {
 	[RPC]
 	public void NetworkPlayOneShot(int index)
 	{
+		Debug.Log("fire one shot");
 		armorSkills[index].FireOneShot();
     }
 
@@ -382,6 +400,11 @@ public class CharacterActionManager : ActionManager {
 		{
 			armorSkills[skillID].ResolveHit(targetCS, hitPos, targetPos);
 		}
+	}
+
+	public void ActivateSkillVFX(int skillID, int index)
+	{
+
 	}
 
 

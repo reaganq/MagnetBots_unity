@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>unity</string>
         <key>textureFileName</key>
-        <filename>../../Assets/Resources/ArmorUHD.png</filename>
+        <filename>../../Assets/Resources/Atlases/Armor/ArmorUHD.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../../Assets/Resources/ArmorUHD.txt</filename>
+        <filename>../../Assets/Resources/Atlases/Armor/ArmorUHD.txt</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -164,6 +164,11 @@
             <filename>knight_body.png</filename>
             <filename>knight_head.png</filename>
             <filename>knight_legs.png</filename>
+            <filename>samurai_armL.png</filename>
+            <filename>samurai_armR.png</filename>
+            <filename>samurai_body.png</filename>
+            <filename>samurai_head.png</filename>
+            <filename>samurai_legs.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

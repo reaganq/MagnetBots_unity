@@ -9,6 +9,9 @@ ModelImporter:
     3300000: //RootNode
     4300000: polySurface731
     4300002: hangar:polySurface731
+    4300004: polySurface11
+    4300006: polySurface28
+    4300008: polySurface19
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -60,6 +63,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   additionalBone: 0
   userData: 

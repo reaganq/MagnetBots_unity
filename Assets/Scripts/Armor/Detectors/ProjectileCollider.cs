@@ -7,7 +7,7 @@ public class ProjectileCollider : Detector {
 	public bool destroyOnCollision;
 	public GameObject hitDecal;
 
-	public bool isAlive = true;
+	//public bool isAlive = true;
 
 	public void OnSpawned() {
 		StartCoroutine(DeSpawn());
@@ -31,7 +31,10 @@ public class ProjectileCollider : Detector {
 		}
 		ownerSkill.ownerManager.SpawnParticle(hitDecal.name, contact.point, false);
 		if(destroyOnCollision)
+		{
+			Debug.Log(other.gameObject.name);
 			ownerSkill.ownerManager.effectsPool.Despawn(this.transform);
+		}
 	}
 	
 	private IEnumerator DeSpawn()

@@ -15,6 +15,7 @@ public class ItemTileButton: UIDragDropItem
 	public RarityColor[] rarityColors;
     public int index;
 	public BasicGUIController owner;
+	public GameObject[] gradeStars;
     public UISprite icon;
     public UISprite tile;
 	public UISprite Cover;
@@ -22,7 +23,7 @@ public class ItemTileButton: UIDragDropItem
 	public UISprite equippedIndicator;
     public UILabel amountLabel;
 	public GameObject quantityTag;
-	public UILabel levelLabel;
+
 	public UISprite newItemGlow;
 	public UISprite tickIcon;
     public bool canDisplayTick = false;
@@ -115,7 +116,6 @@ public class ItemTileButton: UIDragDropItem
 		quantityTag.SetActive(false);
 		if(Cover != null && Cover.enabled)
 			Cover.enabled = false;
-		levelLabel.enabled = false;
     }
 
 	public void LoadGeneric(InventoryItem item)
@@ -125,13 +125,6 @@ public class ItemTileButton: UIDragDropItem
 		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.rpgItem.IconPath;
-		if(!item.rpgItem.IsUpgradeable)
-			levelLabel.enabled = false;
-		else
-		{
-			levelLabel.text = item.Level.ToString();
-			levelLabel.enabled = true;
-		}
 		amountLabel.text = "x"+item.CurrentAmount.ToString();
 		quantityTag.SetActive(canDisplayQuantity);
 		LoadItemRarity(item.rpgItem);
@@ -150,6 +143,17 @@ public class ItemTileButton: UIDragDropItem
 		}
 		else 
 			tickIcon.enabled = false;
+		for (int i = 0; i < gradeStars.Length; i++) {
+			gradeStars[i].SetActive(false);
+		}
+		if(item.rpgItem.IsUpgradeable)
+		{
+			for (int i = 0; i < item.Level; i++) {
+				gradeStars[i].SetActive(true);
+			}
+		}
+
+
 	}
 
 	public void LoadQuestDisplayTile(InventoryItem item, bool isNewQuest)

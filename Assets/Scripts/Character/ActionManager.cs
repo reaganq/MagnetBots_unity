@@ -17,6 +17,16 @@ public class ActionManager : MonoBehaviour {
 	public Animation myAnimation;
 	public PhotonView myPhotonView;
 	public Motor myMotor;
+	public bool _disableMovement;
+	public virtual bool disableMovement
+	{
+		get{
+			return _disableMovement;
+		}
+		set{
+			_disableMovement = value;
+		}
+	}
 
 	//exclusive for player
 	public float runningAnimationSpeedMultiplier;
@@ -44,12 +54,12 @@ public class ActionManager : MonoBehaviour {
 	
 	public virtual void EnableMovement()
 	{
-		myMotor.disableMovement = false;
+		disableMovement = false;
 	}
 	
 	public virtual void DisableMovement()
 	{
-		myMotor.disableMovement = true;
+		disableMovement = true;
 	}
 
 	public virtual void UpdateRunningSpeed(float t)
@@ -249,8 +259,7 @@ public class ActionManager : MonoBehaviour {
 		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
 		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
 	}
-	
-	
+
 	public void IgnoreCollisions(Collider collider)
 	{
 		for (int i = 0; i < myStatus.hitboxes.Count; i++) 

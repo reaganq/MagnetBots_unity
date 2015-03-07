@@ -805,8 +805,8 @@
     </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
-    <IconPath />
-    <AtlasName>Atlases/Armor/</AtlasName>
+    <IconPath>samurai_head</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>20</ID>
     <Name>Samurai Helmet</Name>
     <Description />
@@ -817,7 +817,9 @@
     <ItemCategory>Armor</ItemCategory>
     <EquipmentSlotIndex>Head</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Armor/Head/Samurai_Head</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>1000</BuyValue>
@@ -839,8 +841,8 @@
     </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
-    <IconPath />
-    <AtlasName>Atlases/Armor/</AtlasName>
+    <IconPath>samurai_body</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>21</ID>
     <Name>Samurai Chestplate</Name>
     <Description />
@@ -849,9 +851,11 @@
     <IsEquippable>true</IsEquippable>
     <IsUpgradeable>true</IsUpgradeable>
     <ItemCategory>Armor</ItemCategory>
-    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <EquipmentSlotIndex>Body</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Armor/Body/Samurai_Body</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>1500</BuyValue>
@@ -873,8 +877,8 @@
     </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
-    <IconPath />
-    <AtlasName>Atlases/Armor/</AtlasName>
+    <IconPath>samurai_armL</IconPath>
+    <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>22</ID>
     <Name>Shuriken Toss</Name>
     <Description />
@@ -885,7 +889,9 @@
     <ItemCategory>Armor</ItemCategory>
     <EquipmentSlotIndex>ArmL</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Armor/ArmL/Samurai_ArmL1</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>1500</BuyValue>
@@ -894,11 +900,12 @@
     <maxLevel>3</maxLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>skillIcon_range</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
     <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
-    <IconPath />
+    <IconPath>samurai_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>23</ID>
     <Name>Katana</Name>
@@ -910,7 +917,9 @@
     <ItemCategory>Armor</ItemCategory>
     <EquipmentSlotIndex>ArmR</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Armor/ArmR/Samurai_ArmR1</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>1250</BuyValue>
@@ -919,6 +928,7 @@
     <maxLevel>3</maxLevel>
     <HasAbility>true</HasAbility>
     <AbilityString>Use this</AbilityString>
+    <AbilityIconPath>skillIcon_melee</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/SkillIconsAtlas</AbilityAtlasPath>
     <armorStatsSets>
       <ArmorStatsSet>
@@ -932,7 +942,7 @@
     </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
-    <IconPath />
+    <IconPath>samurai_legs</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>24</ID>
     <Name>Swift Feet</Name>
@@ -944,7 +954,9 @@
     <ItemCategory>Armor</ItemCategory>
     <EquipmentSlotIndex>Legs</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Armor/Legs/Samurai_Legs</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>800</BuyValue>

@@ -17,6 +17,7 @@ public class IntroCinematicSequence : Cutscene {
 	void Start () {
 
 		StartCoroutine(EnterPhaseOne());
+		GUIManager.Instance.IntroGUI.Disable();
 	}
 	
 	// Update is called once per frame

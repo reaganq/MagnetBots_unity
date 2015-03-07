@@ -41,8 +41,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 83726d958e24043f3a7a2b1c2eee16d0, type: 2}
   mSprites:
   - name: basic_armL
-    x: 346
-    y: 518
+    x: 174
+    y: 862
     width: 170
     height: 170
     borderLeft: 0
@@ -54,8 +54,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: basic_armR
-    x: 346
-    y: 346
+    x: 2
+    y: 862
     width: 170
     height: 170
     borderLeft: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: basic_body
     x: 690
-    y: 174
+    y: 862
     width: 170
     height: 170
     borderLeft: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: basic_head
     x: 518
-    y: 174
+    y: 776
     width: 170
     height: 170
     borderLeft: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: basic_legs
     x: 346
-    y: 174
+    y: 690
     width: 170
     height: 170
     borderLeft: 0
@@ -119,97 +119,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: boxer_armR
-    x: 174
-    y: 518
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: boxer_head
-    x: 174
-    y: 346
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: chef_armL
-    x: 174
-    y: 174
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: chef_armR
-    x: 690
-    y: 2
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: chef_body
-    x: 518
-    y: 2
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: chef_head
-    x: 346
-    y: 2
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: chef_legs
-    x: 174
-    y: 2
-    width: 170
-    height: 170
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: knight_armL
     x: 2
     y: 690
     width: 170
@@ -222,7 +131,59 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: knight_armR
+  - name: boxer_head
+    x: 690
+    y: 690
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: chef_armL
+    x: 518
+    y: 604
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: chef_armR
+    x: 346
+    y: 518
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: chef_body
+    x: 174
+    y: 518
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: chef_head
     x: 2
     y: 518
     width: 170
@@ -235,8 +196,34 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: knight_body
-    x: 2
+  - name: chef_legs
+    x: 690
+    y: 518
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: knight_armL
+    x: 518
+    y: 432
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: knight_armR
+    x: 690
     y: 346
     width: 170
     height: 170
@@ -248,8 +235,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: knight_body
+    x: 518
+    y: 260
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: knight_head
-    x: 2
+    x: 776
     y: 174
     width: 170
     height: 170
@@ -262,10 +262,75 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: knight_legs
-    x: 2
+    x: 776
     y: 2
     width: 170
     height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: samurai_armL
+    x: 260
+    y: 260
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: samurai_armR
+    x: 2
+    y: 260
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: samurai_body
+    x: 518
+    y: 2
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: samurai_head
+    x: 260
+    y: 2
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: samurai_legs
+    x: 2
+    y: 2
+    width: 256
+    height: 256
     borderLeft: 0
     borderRight: 0
     borderTop: 0

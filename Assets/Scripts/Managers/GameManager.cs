@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
     public bool GameIsPaused;
     public bool GameHasStarted;
 	public bool teststate;
+	public bool newGame;
 
     void Awake()
     {
@@ -120,8 +121,8 @@ public class GameManager : MonoBehaviour {
 			//Debug.Log("not connected");
 			yield return null;
 		}
-		PlayerCamera.Instance.Reset();
-		PlayerManager.Instance.ChangeWorld();
+
+
 		//PlayerManager.Instance.RefreshAvatar();
 		//GUIManager.Instance.DisplayMainGUI();
 
@@ -129,7 +130,9 @@ public class GameManager : MonoBehaviour {
 		{
 			joystick.enable = true;
 		}
+		PlayerManager.Instance.ChangeWorld();
 		yield return null;
+		PlayerCamera.Instance.Reset();
 	}
 
     public void LoadWorld(string name)

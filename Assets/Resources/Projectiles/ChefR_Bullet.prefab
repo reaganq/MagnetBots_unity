@@ -10,9 +10,9 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
   - 135: {fileID: 13500000}
+  - 114: {fileID: 11400000}
   m_Layer: 12
   m_Name: ChefR_Bullet
   m_TagString: Untagged
@@ -82,15 +82,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a016c381c4f4f259ac3107fffb1d79, type: 3}
+  m_Script: {fileID: 11500000, guid: 537ce6828e33d40ef8582de6a18c6420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterArmor: {fileID: 0}
-  masterAISkill: {fileID: 0}
-  timer: 1.5
-  status: {fileID: 0}
-  pool: 
-  hitDecal: {fileID: 19800002, guid: 6b7dda7a68c6748c4a2c35ea0146025d, type: 2}
+  collider: {fileID: 13500000}
+  ownerSkill: {fileID: 0}
+  isActive: 0
+  currentNumberOfTargets: 0
+  activationEvent: 8
+  deactivationEvent: 8
+  isLocal: 0
+  isProjectile: 1
+  lifeTime: 1.5
+  destroyOnCollision: 1
+  hitDecal: {fileID: 100002, guid: 6b7dda7a68c6748c4a2c35ea0146025d, type: 2}
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

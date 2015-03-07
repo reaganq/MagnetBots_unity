@@ -7,6 +7,9 @@
     <SystemDescription />
     <activityType>Quest</activityType>
     <conversationID>3</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>quest</npcIconSprite>
+    <npcButtonText>Task</npcButtonText>
     <Conditions />
     <questID>1</questID>
   </NPCQuest>
