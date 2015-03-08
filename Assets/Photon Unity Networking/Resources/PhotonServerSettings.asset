@@ -125,4 +125,5 @@ MonoBehaviour:
   - EnterArenaState
   - NetworkRequestPlayerProfileData
   - SendBackPlayerProfileData
+  - NetworkPlayQueuedAnimation
   DisableAutoOpenWizard: 0

@@ -65,14 +65,7 @@ public class NormalMelee : BasePlayerSkill {
 		int i = randomNumber;
 		ownerCAM.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);
 
-        float totalTime = attackAnimations[i].castAnimation.clip.length;
-        float castTime = attackAnimations[i].castTime * totalTime;
-        float attackduration = (attackAnimations[i].followThroughTime * totalTime) - castTime;
-        float followThroughTime = totalTime - attackduration - castTime;
-
-        yield return new WaitForSeconds(castTime);
-
-        yield return new WaitForSeconds(attackduration);
+		yield return new WaitForSeconds(attackAnimations[i].castAnimation.clip.length);
         skillState = SkillState.followThrough;
         
 		if(disableMovement)

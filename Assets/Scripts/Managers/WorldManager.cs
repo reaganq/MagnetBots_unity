@@ -36,34 +36,6 @@ public class WorldManager : Photon.MonoBehaviour {
 
 	#region register players
 
-
-	public void RegisterNewAvatar()
-	{
-		//local player adds him/herself to the world manager's master list of all players
-
-	}
-
-	[RPC]
-	public void NetworkRegisterNewAvatar(int id)
-	{
-		if(PhotonNetwork.isMasterClient)
-		{
-			allAvatars.Add(id);
-		}
-		else
-		{
-		}
-	}
-
-	[RPC]
-	public void NetworkUpdateAvatarList()
-	{
-	}
-	
-	public void RequestAvatarInfo()
-	{
-		//request initialise info for avatar of other players
-	}
 		
 	#endregion
 

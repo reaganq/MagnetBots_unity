@@ -8,22 +8,22 @@ using PathologicalGames;
 public class AISkill : BaseSkill {
 
 	//root position of range object
-	public Transform fireObject;
-	//skill cooldown
-	public float cooldown;
-	public int maxAmmoCount;
-	public float fireSpeed;
-	public float damage;
 
-	public bool isLimitedUse;
+
+	//how many times in total can this skill be used?
 	public float skillUsageLimit = Mathf.Infinity;
+	//how many times have we already used this skill this fight?
 	private float usageCount;
+
+	//reset values after use?
 	public bool resetAfterUse;
 	//how likely we should use this attack
     public float weighting = 0f;
 	public List<AISkillUseCondition> UseConditions;
 	public bool fulfillConditionsBeforeUse;
 	public List<AISkillRequirements> UseRequirements;
+
+	//how long we do try to fulfkill skill use requirements before giving up and selecting new skill?
 	public float patienceTimer;
 
 	//do we need a target for this skill? 0 = no target
@@ -58,7 +58,36 @@ public class AISkill : BaseSkill {
 	
     public virtual void SetupAnimations()
     {
+		TransferSkillAnimation(baseSkillAnimation);
     }
+
+	public void TransferSkillAnimation(SkillAnimation anim)
+	{
+		if(baseSkillAnimation.precastAnimation.clip != null)
+		{
+			AddAnimation(baseSkillAnimation.precastAnimation);
+		}
+		if(baseSkillAnimation.castAnimation.clip != null)
+		{
+			AddAnimation(baseSkillAnimation.castAnimation);
+		}
+		if(baseSkillAnimation.followThroughAnimation.clip != null)
+		{
+			AddAnimation(baseSkillAnimation.followThroughAnimation);
+		}
+		if(baseSkillAnimation.loopAnimation.clip != null)
+		{
+			AddAnimation(baseSkillAnimation.loopAnimation);
+		}
+	}
+
+	public void AddAnimation(ArmorAnimation anim)
+	{
+		ownerAnimation.AddClip(anim.clip, anim.clip.name);
+		if(anim.animationLayer < 2)
+			anim.animationLayer = 2;
+		ownerAnimation[anim.clip.name].layer = anim.animationLayer;
+	}
 
 	//check if can useskill
 	public virtual bool CanUseSkill()
@@ -82,13 +111,14 @@ public class AISkill : BaseSkill {
 		return true;
 	}
 
-	public void FulfillSkillConditions(SkillEventTrigger skillEvent)
+	public void FulfillSkillConditions()
 	{
 		StartFulfillSkillConditions();
 	}
 
 	public virtual void StartFulfillSkillConditions()
 	{
+		Debug.Log("start fulfilling conditions");
 		for (int i = 0; i < UseConditions.Count; i++) {
 			if(UseConditions[i].conditionType == AISkillUseConditionType.rangeOfTarget)
 			{
@@ -103,8 +133,6 @@ public class AISkill : BaseSkill {
 				ownerFSM.SetTargetPosition(ownerFSM.targetObject.position);
             }
 		}
-		if(fireObject != null)
-			ownerFSM.fireObject = fireObject;
 	}
 
 	public void UseSkill()
@@ -114,6 +142,7 @@ public class AISkill : BaseSkill {
 		{
 			if(resetAfterUse)
 				ResetSkill();
+			ownerFSM.EndSkill();
 		};
 	}
 

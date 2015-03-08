@@ -2,7 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class RangedAISkill : AISkill {
-	
+
+	public Transform fireObject;
+	//skill cooldown
+	public float cooldown;
+	public float fireSpeed;
+	public float damage;
+
     public ArmorAnimation recoilAnimation;
     public ArmorAnimation reloadAnimation;
 
@@ -21,14 +27,13 @@ public class RangedAISkill : AISkill {
 
 	public bool isSkillActive;
 	public float currentShotsFired;
-	public float currentAmmoCount = 0;
 	public float totalShotsFired = 0;
 
 	// Use this for initialization
 	public override void InitialiseAISkill(CharacterStatus status, int skillIndex)
 	{
 		base.InitialiseAISkill(status, skillIndex);
-		currentAmmoCount = maxAmmoCount;
+		//currentAmmoCount = maxAmmoCount;
 		AddPrefabToPool(bulletPrefab);
 		AddPrefabToPool(projectileCollisionDecal);
 		ResetSkill();
@@ -36,7 +41,8 @@ public class RangedAISkill : AISkill {
 
 	public override void SetupAnimations()
 	{
-		ownerAnimation[recoilAnimation.clip.name].layer = 2;
+		base.SetupAnimations();
+		AddAnimation(recoilAnimation);
 	}
 	
 	// Update is called once per frame
@@ -65,6 +71,13 @@ public class RangedAISkill : AISkill {
 		{
 			//if
 		}
+	}
+
+	public override void StartFulfillSkillConditions()
+	{
+		if(fireObject != null)
+			ownerFSM.fireObject = fireObject;
+		base.StartFulfillSkillConditions();
 	}
 
 	public override IEnumerator UseSkillSequence ()
@@ -114,7 +127,7 @@ public class RangedAISkill : AISkill {
 		//fire bullet
 		//Debug.Log("fire one shot");
 		totalShotsFired ++;
-		currentAmmoCount --;
+		//currentAmmoCount --;
 		currentShotsFired ++;
 		fireSpeedTimer = fireSpeed;
 		ownerFSM.myPhotonView.RPC("SpawnProjectile", PhotonTargets.All, bulletPrefab.name, bulletLocation.position, bulletLocation.rotation, bulletSpeed, ownerFSM.targetObject.transform.position, skillID);
@@ -142,10 +155,10 @@ public class RangedAISkill : AISkill {
 		//fsm.PlayAnimation(recoilAnimation.clip);
 		ownerFSM.myPhotonView.RPC("PlayAnimation", PhotonTargets.All, recoilAnimation.clip.name);
 
-		Invoke("CheckAmmo", recoilAnimation.clip.length);
+		//Invoke("CheckAmmo", recoilAnimation.clip.length);
 	}
 
-	public void CheckAmmo()
+	/*public void CheckAmmo()
 	{
 		if(currentAmmoCount <= 0)
 		{
@@ -157,14 +170,14 @@ public class RangedAISkill : AISkill {
 			if(currentShotsFired >= targetShotsPerSession)
 				StartCoroutine(CancelSkillSequence());
 		}
-	}
+	}*/
 	
 	/*public void ActivateSkill(bool state)
 	{
 		isSkillActive = state;
 	}*/
 	
-	public IEnumerator Reload(float sec)
+	/*public IEnumerator Reload(float sec)
 	{
 		//Debug.Log("reloading");
 		isReloading = true;
@@ -176,6 +189,6 @@ public class RangedAISkill : AISkill {
 		//Debug.Log("back to fire mode");
 		currentAmmoCount = maxAmmoCount;
 		
-	}
+	}*/
 	
 }

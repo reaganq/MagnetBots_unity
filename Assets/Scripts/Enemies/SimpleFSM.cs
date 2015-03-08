@@ -70,6 +70,7 @@ public class SimpleFSM : ActionManager {
 	public bool trackTargetObject;
 	public Vector3 targetPosition;
 
+	public bool isMoving = false;
 	public bool canMove = true;
 	public bool canRotate = true;
 
@@ -154,10 +155,10 @@ public class SimpleFSM : ActionManager {
 		case AIState.battleTaunts:
 			break;
 		case AIState.selectingSkill:
-			SelectSkill();
+			//SelectSkill();
 			break;
 		case AIState.rest:
-			if(restJob != null)
+			if(restJob != null && restJob.running)
 				restJob.kill();
 			break;
 		case AIState.executingSkill:
@@ -194,7 +195,7 @@ public class SimpleFSM : ActionManager {
 			}
 			else if(anim.name == deathAnim.name)
 			{
-				anim.layer = 3;
+				anim.layer = 5;
 			}
 			else
 				anim.layer = 1;
@@ -213,19 +214,29 @@ public class SimpleFSM : ActionManager {
 		if(!myPhotonView.isMine)
 			return;
 
-		if(trackTargetObject && targetObject != null)
-		{
-			targetPosition = targetObject.position;
+		if(state == AIState.executingSkill)
+			{
+			if(moveToTargetRange && targetObject != null)
+			{
+				targetPosition = targetObject.position;
+			}
+			if(canMove)
+			{
+				MoveToPosition();
+			}
+			else
+			{
+				if(canRotate)
+					AimAtTarget();
+			}
 		}
-		if(canMove)
+		Debug.Log(controller.velocity.magnitude);
+		if(controller.velocity.magnitude > 1)
 		{
-			MoveToPosition();
+			isMoving = true;
 		}
 		else
-		{
-			if(canRotate)
-				AimAtTarget();
-		}
+			isMoving = false;
 	}
 
 	public override void EnableMovement()
@@ -280,7 +291,10 @@ public class SimpleFSM : ActionManager {
 	{
 		Quaternion newRotation = Quaternion.LookRotation(targetPosition - _myTransform.position);
 		_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
-		_myTransform.position = Vector3.MoveTowards(_myTransform.position, targetPosition, myStatus.curMovementSpeed * Time.deltaTime);
+		//_myTransform.position = Vector3.MoveTowards(_myTransform.position, targetPosition, myStatus.curMovementSpeed * Time.deltaTime);
+
+		controller.Move((targetPosition - _myTransform.position).normalized * myStatus.curMovementSpeed * Time.deltaTime);
+			
 	}
 
 	public float CheckTaunts(AIState curState)
@@ -396,12 +410,13 @@ public class SimpleFSM : ActionManager {
 		activeSkill = ChooseSkill();
 		if(activeSkill != null)
 		{
+			Debug.Log("we have found a skill to use!");
 			myPhotonView.RPC("NetworkSelectSkill", PhotonTargets.Others, activeSkill.skillID);
 			if(activeSkill.targetLimit >0)
 			{
 				SelectTarget(activeSkill.skillRangeMin, activeSkill.skillRangeMax);
 			}
-			EnterState(AIState.executingSkill);
+			EnterAIState(AIState.executingSkill);
         }
         else
             EnterAIState(AIState.rest);
@@ -517,6 +532,12 @@ public class SimpleFSM : ActionManager {
 		skills[skillIndex].FireOneShot();
 	}
 
+	public void EndSkill()
+	{
+		if(myPhotonView.isMine && state == AIState.executingSkill)
+			EnterAIState(AIState.rest);
+	}
+
 	[RPC]
 	public void SpawnProjectile(string projectileName, Vector3 pos, Quaternion rot, float speed, Vector3 targetPos, int index)
 	{
@@ -569,6 +590,8 @@ public class SimpleFSM : ActionManager {
 	public void NetworkEnterAIState(int i)
 	{
 		state = (AIState)i;
+		//Debug.Log("entering state: " + state.ToString());
+		
 	}
 
 	public float DistanceToTargetCS(CharacterStatus cs)
@@ -583,8 +606,6 @@ public class SimpleFSM : ActionManager {
 		moveToTargetRange = false;
 		targetObject = null;
 		targetCharacterController = null;
-		canMove = false;
-		canRotate = false;
 	}
 }
 

@@ -1771,9 +1771,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876be54b75aa54eddb3643c6649dbff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 200
   curHealth: 0
-  maxMovementSpeed: 0
+  maxMovementSpeed: 10
   rotationSpeed: 3
   characterType: 0
   nameLabel: {fileID: 0}
@@ -1787,6 +1787,7 @@ MonoBehaviour:
   _myTransform: {fileID: 0}
   statusEffects: []
   speedModifiers: []
+  clientCurMovementSpeed: 0
   Invulnerable: 0
   canMove: 1
 --- !u!114 &11400002
@@ -1832,6 +1833,7 @@ MonoBehaviour:
   activationEvent: 0
   deactivationEvent: 0
   isLocal: 0
+  isProjectile: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1946,15 +1948,9 @@ MonoBehaviour:
   skillVFXs: []
   _skillState: 0
   isOwner: 0
-  fireObject: {fileID: 0}
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 1
-  damage: 0
-  isLimitedUse: 0
   skillUsageLimit: Infinity
   resetAfterUse: 0
-  weighting: .5
+  weighting: 0
   UseConditions: []
   fulfillConditionsBeforeUse: 0
   UseRequirements: []
@@ -1966,6 +1962,10 @@ MonoBehaviour:
   requiresTargetLock: 1
   requiresLineOfSight: 0
   angleTolerance: 20
+  fireObject: {fileID: 0}
+  cooldown: 0
+  fireSpeed: 1
+  damage: 0
   recoilAnimation:
     clip: {fileID: 7400004, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
     animationLayer: 1
@@ -1993,7 +1993,6 @@ MonoBehaviour:
   fireSpeedTimer: 0
   isSkillActive: 0
   currentShotsFired: 0
-  currentAmmoCount: 0
   totalShotsFired: 0
 --- !u!114 &11400016
 MonoBehaviour:
@@ -2016,7 +2015,7 @@ MonoBehaviour:
   isActive: 0
   skillName: Hammer Smack
   skillType: 0
-  disableMovement: 0
+  disableMovement: 1
   disableRotation: 0
   restrictedMovement: 0
   limitDamageInstance: 1
@@ -2029,7 +2028,7 @@ MonoBehaviour:
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
-      clip: {fileID: 0}
+      clip: {fileID: 7400016, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
       animationLayer: 0
       useWholeBody: 0
       useArmLBones: 0
@@ -2061,19 +2060,16 @@ MonoBehaviour:
   skillVFXs: []
   _skillState: 0
   isOwner: 0
-  fireObject: {fileID: 0}
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 0
-  damage: 0
-  isLimitedUse: 0
   skillUsageLimit: Infinity
-  resetAfterUse: 0
-  weighting: .5
-  UseConditions: []
-  fulfillConditionsBeforeUse: 0
+  resetAfterUse: 1
+  weighting: 1
+  UseConditions:
+  - conditionType: 0
+    targetValue1: 2
+    targetValue2: 0
+  fulfillConditionsBeforeUse: 1
   UseRequirements: []
-  patienceTimer: 0
+  patienceTimer: 20
   targetRequirement: 1
   skillRangeMax: 200
   skillRangeMin: 0
@@ -2081,42 +2077,7 @@ MonoBehaviour:
   requiresTargetLock: 0
   requiresLineOfSight: 0
   angleTolerance: 5
-  attackAnimations:
-  - precastAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    followThroughAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    loopAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castTime: .100000001
-    followThroughTime: .899999976
-  weaponCollider: {fileID: 100102}
   hitDecal: {fileID: 400000, guid: 9c4f0954744674d109754c8d266f53c3, type: 2}
-  impactParticles: {fileID: 0}
-  impactParticleSpawnPoint: {fileID: 0}
-  impactRadius: 0
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2137,6 +2098,7 @@ MonoBehaviour:
   myAnimation: {fileID: 11100000}
   myPhotonView: {fileID: 11400002}
   myMotor: {fileID: 0}
+  _disableMovement: 0
   runningAnimationSpeedMultiplier: 0
   currentRunningAnimationSpeed: 0
   myAvatar: {fileID: 0}
@@ -2159,8 +2121,9 @@ MonoBehaviour:
   targetAngle: 0
   trackTargetObject: 0
   targetPosition: {x: 0, y: 0, z: 0}
-  canMove: 0
-  canRotate: 0
+  isMoving: 0
+  canMove: 1
+  canRotate: 1
   idleAnim: {fileID: 7400000, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   runningAnim: {fileID: 7400018, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   deathAnim: {fileID: 7400020, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
@@ -2274,15 +2237,9 @@ MonoBehaviour:
   skillVFXs: []
   _skillState: 0
   isOwner: 0
-  fireObject: {fileID: 0}
-  cooldown: 0
-  maxAmmoCount: 0
-  fireSpeed: 0
-  damage: 0
-  isLimitedUse: 0
   skillUsageLimit: Infinity
   resetAfterUse: 0
-  weighting: .5
+  weighting: 0
   UseConditions: []
   fulfillConditionsBeforeUse: 0
   UseRequirements: []
@@ -2294,42 +2251,7 @@ MonoBehaviour:
   requiresTargetLock: 0
   requiresLineOfSight: 0
   angleTolerance: 5
-  attackAnimations:
-  - precastAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castAnimation:
-      clip: {fileID: 7400010, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    followThroughAnimation:
-      clip: {fileID: 7400014, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    loopAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castTime: 0
-    followThroughTime: 1
-  weaponCollider: {fileID: 0}
   hitDecal: {fileID: 0}
-  impactParticles: {fileID: 400012, guid: 8f0e2a831de6c4c01be5d13f69c9814c, type: 2}
-  impactParticleSpawnPoint: {fileID: 400094}
-  impactRadius: 2
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

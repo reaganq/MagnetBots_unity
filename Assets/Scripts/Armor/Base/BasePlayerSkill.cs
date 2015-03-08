@@ -212,12 +212,11 @@ public class BasePlayerSkill : BaseSkill {
 	
 	#endregion
 
-	public override void ResolveHit (CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
+	public override void ResolveHit(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
 		//redundant check
 		if(targetCS.myPhotonView.isMine)
 		{
-			List<StatusEffectData> outgoingSEs = new List<StatusEffectData>();
 			if(ownerStatus.enemyCharacterType == targetCS.characterType)
 				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingEnemyStatusEffects);
 			else

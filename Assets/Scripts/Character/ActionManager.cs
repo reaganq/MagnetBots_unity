@@ -76,7 +76,7 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.Play(name);
+			NetworkPlayAnimation(name);
 		}
 		else
 		{
@@ -94,7 +94,7 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.CrossFade(name);
+			NetworkCrossfadeAnimation(name);
 		}
 		else
 		{
@@ -112,7 +112,7 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.CrossFade(name, fadeTime);
+			NetworkCrossfadeAnimationWithTime(name, fadeTime);
 		}
 		else
 		{
@@ -130,7 +130,7 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.Blend(name, targetWeight, fadeLength);
+			NetworkBlendAnimation(name, targetWeight, fadeLength);
 		}
 		else
 		{
@@ -148,12 +148,25 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.Blend(name, 0, 0.2f);
+			NetworkFadeOutAnimation(name);
 		}
 		else
 		{
 			if(myPhotonView.isMine)
 				myPhotonView.RPC("NetworkFadeOutAnimation", PhotonTargets.All, name);
+		}
+	}
+
+	public void PlayQueuedAnimation(string clip, int mode, bool acrossNetwork)
+	{
+		if(!acrossNetwork)
+		{
+			NetworkPlayQueuedAnimation(clip, mode);
+		}
+		else
+		{
+			if(myPhotonView.isMine)
+				myPhotonView.RPC("NetworkPlayQueuedAnimation", PhotonTargets.All, clip, mode);
 		}
 	}
 	
@@ -207,9 +220,11 @@ public class ActionManager : MonoBehaviour {
 	{
 		myAnimation.Blend(name, weight, length);
 	}
+	
+
 
 	[RPC]
-	public void PlayQueuedAnimation(string clip, int mode)
+	public void NetworkPlayQueuedAnimation(string clip, int mode)
 	{
 		if(mode == 0)
 			myAnimation.PlayQueued(clip, QueueMode.PlayNow);
