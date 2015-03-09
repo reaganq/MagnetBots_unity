@@ -123,10 +123,8 @@ public class NPC: MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-			Debug.Log("wtf");
 			if(other.gameObject == PlayerManager.Instance.avatarObject)
 			{
-				Debug.Log("wtf2");
 				TweenScale.Begin(trigger, 0.2f, endScale);
 				triggerCollider.enabled = true;
             	//StartCoroutine("ShowNPC");

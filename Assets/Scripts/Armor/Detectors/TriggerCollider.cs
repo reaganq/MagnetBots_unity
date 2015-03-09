@@ -6,6 +6,8 @@ public class TriggerCollider : Detector {
 
 	public void OnTriggerEnter(Collider other)
     {
+		if(!isActive)
+			return;
 		if(currentNumberOfTargets >= ownerSkill.targetLimit)
 			return;
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();

@@ -84,6 +84,7 @@ public class SimpleFSM : ActionManager {
 	public ArenaManager arena;
 	public int ownerID;
 	public int InitViewID;
+	private Vector3 moveVector = Vector3.zero;
 
 	public AIState _state;
 	public AIState state
@@ -107,16 +108,22 @@ public class SimpleFSM : ActionManager {
 			switch(state)
 			{
 			case AIState.preInitialised:
+				myStatus.Invulnerable = true;
 				break;
 			case AIState.initialised:
 				break;
 			case AIState.ready:
+				for (int i = 0; i <skills.Length; i++) 
+				{
+					skills[i].InitialiseAISkill(myStatus, i);		
+				}
+				myStatus.Invulnerable = false;
 				//check for any ready taunts
 				//if not, select skill
 				Invoke("ReadyUp", CheckTaunts(state));
 				break;
 			case AIState.selectingSkill:
-				Invoke("SelectSkill", CheckTaunts(state));
+				//Invoke("SelectSkill", CheckTaunts(state));
 				break;
 			case AIState.executingSkill:
 				Invoke("UseActiveAISkill", CheckTaunts(state));
@@ -125,11 +132,17 @@ public class SimpleFSM : ActionManager {
 				Invoke("Rest", CheckTaunts(state));
 				break;
 			case AIState.victory:
-				//cancel current skill
+				if(restJob != null && restJob.running)
+					restJob.kill();
+
+				Debug.LogWarning("win");
+				//play win animation
 				break;
 			case AIState.death:
 				//die();
 				//cancel current skill
+				if(restJob != null && restJob.running)
+					restJob.kill();
 				PlayAnimation(deathAnim.name, true);
 				Debug.LogWarning("die");
 				arena.CheckDeathStatus();
@@ -162,10 +175,9 @@ public class SimpleFSM : ActionManager {
 				restJob.kill();
 			break;
 		case AIState.executingSkill:
-			if(activeSkill.useSkillJob.running)
+			if(activeSkill != null && activeSkill.useSkillJob.running)
 				activeSkill.useSkillJob.kill();
 			ResetPhysicalMovementStatus();
-
 			break;
 		case AIState.taunting:
 			break;
@@ -173,19 +185,25 @@ public class SimpleFSM : ActionManager {
 			break;
 		}
 	}
+
+	public override void Start ()
+	{
+		base.Start ();
+		state = AIState.preInitialised;
+	}
 	// setting up some skills, get to know its own components
 	public virtual void Initialise (ArenaManager ownerArena, int newViewId) {
 
+		Debug.LogWarning("initialising ai");
 		arena = ownerArena;
 		myPhotonView = GetComponent<PhotonView>();
 		myPhotonView.viewID = newViewId;
+		ownerID = myPhotonView.ownerId;
 		_myTransform = transform;
 		MakeSpawnPool();
+
         //skillChances = new float[skills.Length];
-		for (int i = 0; i <skills.Length; i++) 
-		{
-			skills[i].InitialiseAISkill(myStatus, i);		
-		}
+
 		
 		foreach(AnimationState anim in myAnimation)
 		{
@@ -197,10 +215,10 @@ public class SimpleFSM : ActionManager {
 			{
 				anim.layer = 5;
 			}
-			else
-				anim.layer = 1;
+			else if(anim.name == runningAnim.name)
+				anim.layer = 0;
 		}
-		state = AIState.initialised;
+		EnterAIState(AIState.initialised);
 
 	}
 
@@ -214,6 +232,7 @@ public class SimpleFSM : ActionManager {
 		if(!myPhotonView.isMine)
 			return;
 
+		moveVector = Vector3.zero;
 		if(state == AIState.executingSkill)
 			{
 			if(moveToTargetRange && targetObject != null)
@@ -230,13 +249,14 @@ public class SimpleFSM : ActionManager {
 					AimAtTarget();
 			}
 		}
-		Debug.Log(controller.velocity.magnitude);
-		if(controller.velocity.magnitude > 1)
+
+		controller.Move(moveVector * myStatus.curMovementSpeed * Time.deltaTime);
+		if(controller.velocity.magnitude > 0.2)
 		{
-			isMoving = true;
+			AnimateToRunning();
 		}
 		else
-			isMoving = false;
+			AnimateToIdle();
 	}
 
 	public override void EnableMovement()
@@ -292,9 +312,27 @@ public class SimpleFSM : ActionManager {
 		Quaternion newRotation = Quaternion.LookRotation(targetPosition - _myTransform.position);
 		_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
 		//_myTransform.position = Vector3.MoveTowards(_myTransform.position, targetPosition, myStatus.curMovementSpeed * Time.deltaTime);
-
-		controller.Move((targetPosition - _myTransform.position).normalized * myStatus.curMovementSpeed * Time.deltaTime);
+		moveVector += (targetPosition - _myTransform.position).normalized;
+		//controller.Move((targetPosition - _myTransform.position).normalized * myStatus.curMovementSpeed * Time.deltaTime);
 			
+	}
+
+	public void AnimateToIdle()
+	{
+		if(movementState != MovementState.idle)
+		{
+			CrossfadeAnimation(idleAnim.name, true);
+			movementState = MovementState.idle;
+		}
+	}
+
+	public void AnimateToRunning()
+	{
+		if(movementState != MovementState.moving)
+		{
+			CrossfadeAnimation(runningAnim.name, true);
+			movementState = MovementState.moving;
+		}
 	}
 
 	public float CheckTaunts(AIState curState)
@@ -352,24 +390,30 @@ public class SimpleFSM : ActionManager {
 
 	public virtual void Rest()
 	{
-		myPhotonView.RPC("NetworkRest", PhotonTargets.All, 2.0f);
+		restJob = Job.make(RestSequence(2.0f));
 	}
 
-	[RPC]
-	public virtual void NetworkRest(float timer)
-	{
-		StartCoroutine(Rest(timer));
-	}
-
-	public IEnumerator Rest(float timer)
+	public IEnumerator RestSequence(float timer)
 	{
 		yield return new WaitForSeconds(timer);
 		EnterAIState(AIState.selectingSkill);
 	}
 
+
+	public override void Die()
+	{
+		//play death animation
+		EnterAIState(AIState.death);
+	}
+
+	public void Win()
+	{
+		EnterAIState(AIState.victory);
+	}
+
 	public void RefreshPotentialTargets()
 	{
-		alltargets = arena.players;
+		alltargets = arena.playerCharacterStatuses;
 		availableTargets.Clear();
 		
 		for (int i = 0; i < alltargets.Count; i++) {
@@ -378,6 +422,22 @@ public class SimpleFSM : ActionManager {
 				availableTargets.Add(alltargets[i]);
 				Debug.Log("add player");
 			}
+		}
+	}
+
+	public override void DealDamage(int targetViewID, int targetOwnerID, int skillID, Vector3 hitPos, Vector3 targetPos)
+	{
+		myPhotonView.RPC("NetworkDealAIDamage", PhotonPlayer.Find(targetOwnerID), targetViewID, skillID, hitPos, targetPos);
+	}
+
+	[RPC]
+	public void NetworkDealAIDamage(int targetViewID, int skillID, Vector3 hitPos, Vector3 targetPos)
+	{
+		CharacterStatus targetCS = PhotonView.Find(targetViewID).gameObject.GetComponent<CharacterStatus>();
+		if(targetCS != null)
+		{
+			skills[skillID].ResolveHit(targetCS, hitPos, targetPos);
+
 		}
 	}
 

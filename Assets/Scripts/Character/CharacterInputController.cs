@@ -73,16 +73,16 @@ public class CharacterInputController : MonoBehaviour {
         SkillButton.onRelease -= onRelease;
     }
 
-    public void onPress(int index, int slot)
+    public void onPress(int slot)
     {
-		Debug.Log("pressed button: " + index);
-		actionManager.UseSkill(InputTrigger.OnPressDown, index, slot);
+		Debug.Log("pressed button: " );
+		actionManager.UseSkill(InputTrigger.OnPressDown, slot);
     }
     
-    public void onRelease(int index, int slot)
+    public void onRelease(int slot)
     {
-		Debug.Log("released button: " + index);
-		actionManager.UseSkill(InputTrigger.OnPressUp, index, slot);
+		Debug.Log("released button: ");
+		actionManager.UseSkill(InputTrigger.OnPressUp, slot);
     }
 	
 	// Update is called once per frame

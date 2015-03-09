@@ -33,7 +33,20 @@ public class PlayerManager : MonoBehaviour
 	//public NPCMinigame ActiveMinigame;
 	public GameObject ActiveMinigameObject;
 	public WorldManager ActiveWorld;
-	public Zone ActiveZone;
+	public Zone _activeZone;
+	public Zone ActiveZone
+	{
+		get{ return _activeZone; }
+		set{
+			if(_activeZone != null)
+				_activeZone.LeaveZone();
+			_activeZone = value;
+			_activeZone.EnterZone();
+			avatarStatus.DisplayInfoByZone();
+			GUIManager.Instance.DisplayMainGUI();
+		}
+		
+	}
 	public ArenaManager ActiveArena;
 	public PlayerActivityState activityState;
 	public GeneralData data;
@@ -165,8 +178,8 @@ public class PlayerManager : MonoBehaviour
 	public void ChangeWorld()
 	{
 		ActiveWorld = GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>();
-		ActiveZone = ActiveWorld.DefaultZone;
-		SpawnPoint = ActiveZone.spawnPoint;
+
+		SpawnPoint = ActiveWorld.DefaultZone.spawnPoint;
 		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
 		GameManager.Instance.GameIsPaused = false;
 		if(GameManager.Instance.newGame)
@@ -177,8 +190,9 @@ public class PlayerManager : MonoBehaviour
 		else
 		{
 			RefreshAvatar();
-			GUIManager.Instance.DisplayMainGUI();
+			ActiveZone = ActiveWorld.DefaultZone;
 		} 
+
 	}
 
 	/*public void ChangeZone(Zone newZone)
@@ -200,26 +214,17 @@ public class PlayerManager : MonoBehaviour
 		}
 	}*/
 
-	public void GoToArena(Zone newZone, int enemyID)
+	public void GoToZone(Zone newZone)
 	{
-		StartCoroutine(GoToArenaSequence(newZone, enemyID));
+		StartCoroutine(GotoZoneSequence(newZone));
 	}
 
-	public IEnumerator GoToArenaSequence(Zone newZone, int enemyID)
+	public IEnumerator GotoZoneSequence(Zone newZone)
 	{
 		Debug.Log("go to new arena");
 		GUIManager.Instance.loadingGUI.Enable();
 		yield return new WaitForSeconds(1.5f);
-		//TODO display loading screen
-		Zone oldzone = ActiveZone;
-		oldzone.LeaveZone();
-		//	newZone.zoneObject.SetActive(true);
 		ActiveZone = newZone;
-		//newZone.EnterZone();
-		//SpawnPoint = ActiveZone.spawnPoint;
-		
-		//oldzone.zoneObject.SetActive(false);
-		ActiveZone.EnterZone();
 		avatarObject.transform.position = SpawnPoint.position;
 		if(ActiveZone.zoneType == ZoneType.arena)
 		{
@@ -236,24 +241,9 @@ public class PlayerManager : MonoBehaviour
 	{
 		if(newZone != null)
 		{
-			Zone oldzone = ActiveZone;
-			oldzone.LeaveZone();
-			//newZone.zoneObject.SetActive(true);
 			ActiveZone = newZone;
-			ActiveZone.EnterZone();
-			//SpawnPoint = ActiveZone.spawnPoint;
 			avatarObject.transform.position = SpawnPoint.position;
-			//oldzone.zoneObject.SetActive(false);
-
-			if(ActiveArena)
-			{
-				ActiveWorld.EndSession(ActiveArena);
-				//ActiveArena.EndSession(avatarPhotonView.viewID);
-				ActiveArena = null;
-			}
-
 			activityState = PlayerActivityState.idle;
-			//GUIManager.Instance.DisplayMainGUI();
 		}
 	}
 

@@ -399,7 +399,7 @@ MonoBehaviour:
     useArmRBones: 1
     useVerticalBones: 0
   runningOverrideAnim:
-    clip: {fileID: 7400000, guid: 807b86ed799bb40af8419e4cc24f083e, type: 2}
+    clip: {fileID: 7400000, guid: 53f023c06b1db49aeb3e5d9ee0f28332, type: 2}
     animationLayer: 2
     useWholeBody: 0
     useArmLBones: 0
@@ -474,14 +474,11 @@ MonoBehaviour:
   isOwner: 0
   ownerCAM: {fileID: 0}
   equipmentSlotIndex: 1
-  hasSkill: 1
   hasPressDownEvent: 0
   hasPressUpEvent: 0
   resetAfterDown: 0
   resetAfterUp: 0
   canUseWhileBusy: 0
-  skillButtonSpritePath: 
-  skillButtonAtlasPath: 
   baseDamage: 0
   ownerAvatar: {fileID: 0}
   isPressedDown: 0

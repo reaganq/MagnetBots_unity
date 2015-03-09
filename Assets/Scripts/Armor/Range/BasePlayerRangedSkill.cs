@@ -70,16 +70,15 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 			{
 				Debug.Log("update firing one shot" + fireSpeedTimer);
 				fireSpeedTimer += fireSpeed;	
-				Debug.Log("wtf");
-				ownerCAM.PlayOneShot(skillID);
-
+				//ownerCAM.PlayOneShot(skillID);
+				FireOneShot();
 			}
 		}
     }
 
     public override bool CanPressDown()
     {
-        if(skillState == SkillState.precast)
+		if(skillState == SkillState.precast || skillState == SkillState.onUse || skillState == SkillState.followThrough || skillState == SkillState.wait)
             return false;
         else
             return true;
@@ -87,22 +86,25 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
 	public override IEnumerator PressDownSequence(int randomNumber)
     {
+		if(!isOwner)
+			yield break;
+
 		if(disableMovement)
 		{
 			ownerCAM.DisableMovement();
 		}
 	    skillState = SkillState.precast;
-			ownerCAM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name, false);
+			ownerCAM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name, true);
 			yield return new WaitForSeconds(baseSkillAnimation.precastAnimation.clip.length);
 		shotsFired ++;
 		currentAmmoCount --;
 		fireSpeedTimer = fireSpeed;
 		skillState = SkillState.onUse;
-		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, true);
 		Debug.Log("firing");
 		yield return new WaitForSeconds(baseSkillAnimation.castTime);
-		if(isOwner)
-			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, skillID, true);
+		//if(isOwner)
+			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, equipmentSlotIndex, true);
 		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
 		skillState = SkillState.wait;
 		ActivateSkill(true);
@@ -110,6 +112,9 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
 	public override void FireOneShot()
 	{
+		if(skillState == SkillState.followThrough)
+			return;
+		Debug.Log("firing");
 		StartCoroutine(FireOneShotSequence());
 	}
 	
@@ -125,39 +130,35 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		currentAmmoCount --;
 		fireSpeedTimer = fireSpeed;
 		skillState = SkillState.onUse;
-		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
-		Debug.Log("firing");
+		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, true);
+
 		yield return new WaitForSeconds(baseSkillAnimation.castTime);
-		if(isOwner)
-			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, skillID, true);
+		//if(isOwner)
+			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, equipmentSlotIndex, true);
 		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
 		skillState = SkillState.wait;
-
+		Debug.Log("finished firing");
 	}
 
     public override bool CanPressUp ()
     {
-        if(skillState == SkillState.followThrough)
-        {
-            return false;
-        }
-        else
             return true;
     }
 
     public override IEnumerator PressUpSequence(int randomNumber)
     {
-        while(skillState == SkillState.onUse || skillState == SkillState.precast)
-        {
-            yield return new WaitForEndOfFrame();
-        }
+		if(!isOwner)
+			yield break;
 
-            ActivateSkill(false);
+		ActivateSkill(false);
+        while(skillState == SkillState.onUse || skillState == SkillState.precast)
+        {	
+            yield return null;
+        }
             skillState = SkillState.followThrough;
 		if(disableMovement)
 			ownerCAM.EnableMovement();
-			Debug.LogWarning("not here");
-			ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, false);
+			ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, true);
 			yield return new WaitForSeconds(baseSkillAnimation.followThroughAnimation.clip.length);
     }
 

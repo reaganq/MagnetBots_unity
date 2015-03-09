@@ -126,4 +126,11 @@ MonoBehaviour:
   - NetworkRequestPlayerProfileData
   - SendBackPlayerProfileData
   - NetworkPlayQueuedAnimation
+  - NetworkDisplyInfoByZone
+  - NetworkDisplayInfoByZone
+  - NetworkCleanUp
+  - NetworkDie
+  - LoseScenario
+  - WinScenario
+  - NetworkDealAIDamage
   DisableAutoOpenWizard: 0

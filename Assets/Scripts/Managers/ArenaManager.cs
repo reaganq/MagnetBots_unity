@@ -85,7 +85,7 @@ public class ArenaManager : Zone {
 
 	public bool CheckIfAllPlayersArePresent()
 	{
-		if(admittedPlayers.Count > playerIDs.Count)
+		if(admittedPlayers.Count > photonPlayers.Count)
 			return false;
 		return true;
 	}
@@ -95,8 +95,9 @@ public class ArenaManager : Zone {
 		myPhotonView.RPC("EnterArenaState", PhotonTargets.All, (int)ArenaState.preBattle);
 		//chceck for quest messages
 		//if... else begin battle
-		myPhotonView.RPC("BeginBattle", PhotonTargets.All);
-
+		for (int i = 0; i < photonPlayers.Count; i++) {
+			myPhotonView.RPC("BeginBattle", photonPlayers[i] );
+		}
 	}
 
 	[RPC]
@@ -127,15 +128,13 @@ public class ArenaManager : Zone {
 
 	public void CleanUp()
 	{
-		Debug.Log("clean up");
-		/*int id = enemyFSM.InitViewID;
-		PhotonNetwork.RemoveRPCs(enemyFSM.myPhotonView);
-		enemyFSM.myPhotonView.RPC("RevertOwner", PhotonTargets.All);
+		myPhotonView.RPC("NetworkCleanUp", PhotonTargets.All);
+	}
 
-		PhotonNetwork.Destroy(enemyFSM.gameObject);
-		PhotonNetwork.UnAllocateViewID(id);
-
-		Debug.Log("end session arena");*/
+	[RPC]
+	public void NetworkCleanUp()
+	{
+		Debug.Log("clean up arena");
 		for (int i = 0; i < enemyFSMs.Count; i++) 
 		{
 			Destroy(enemyFSMs[i].gameObject);
@@ -143,33 +142,97 @@ public class ArenaManager : Zone {
 		rpgEnemy = null;
 		ownerID = 0;
 		ownerViewID = 0;
-		players.Clear();
-		playerIDs.Clear();
+		playerCharacterStatuses.Clear();
+		photonPlayers.Clear();
 		admittedPlayers.Clear();
 		enemyFSMs.Clear();
+		arenaState = ArenaState.inactive;
 	}
 
+	//owner of ai
 	public void CheckDeathStatus()
 	{
+		if(arenaState != ArenaState.battle)
+			return;
+
+		Debug.Log("checking death status of arena");
 		for (int i = 0; i < enemyFSMs.Count; i++) 
 		{
 			if(enemyFSMs[i].myStatus.isAlive())
 				return;
 		}
 
-		if(PhotonNetwork.player.ID == ownerID)
-		{
-			for (int i = 0; i < players.Count; i++) {
+		myPhotonView.RPC("EnterArenaState", PhotonTargets.All, (int)ArenaState.battleEnd);
+			/*for (int i = 0; i < players.Count; i++) {
 				PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("GiveArenaRewards", players[i].myPhotonView.owner, arenaID);
 				Debug.Log("give rewards to: " + players[i].myPhotonView.ownerId);
 			}
 
+		}*/
+		//play death conversation
+		for (int i = 0; i < photonPlayers.Count; i++) {
+			myPhotonView.RPC("WinScenario", photonPlayers[i]);
+				}
+	}
+
+	public void CheckPlayerDeathStatus()
+	{
+		if(arenaState != ArenaState.battle)
+			return;
+
+		for (int i = 0; i < playerCharacterStatuses.Count; i++) {
+			if(playerCharacterStatuses[i].isAlive())
+				return;
 		}
+
+		myPhotonView.RPC("EnterArenaState", PhotonTargets.All, (int)ArenaState.battleEnd);
+		for (int i = 0; i < photonPlayers.Count; i++) {
+			myPhotonView.RPC("LoseScenario", photonPlayers[i]);
+		}
+	}
+
+	[RPC]
+	public void WinScenario()
+	{
+		StartCoroutine(WinSequence());
+	}
+
+	public IEnumerator WinSequence()
+	{
+		Debug.LogError("WIN ARENA");
+		yield return null;
+	}
+
+	[RPC]
+	public void LoseScenario()
+	{
+		StartCoroutine(LoseSequence());
+		for (int i = 0; i < enemyFSMs.Count; i++) {
+			enemyFSMs[i].Win();
+		}
+	}
+
+	public IEnumerator LoseSequence()
+	{
+		Debug.LogError("LOSE ARENA");
+		yield return null;
 	}
 
 	public void GiveRewards()
 	{
 		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots);
+	}
+
+	[RPC]
+	public override void NetworkRemovePlayer(int csViewID, PhotonMessageInfo info)
+	{
+		base.NetworkRemovePlayer(csViewID, info);
+		Debug.Log("removed player " + csViewID + "from this arena");
+		if(PhotonNetwork.isMasterClient)
+		{
+			if(playerCharacterStatuses.Count <= 0)
+				CleanUp();
+		}
 	}
 }
 

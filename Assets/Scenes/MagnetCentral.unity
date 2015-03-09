@@ -1858,8 +1858,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 65109214}
   zoneType: 0
   zoneObject: {fileID: 587765907}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
   isArenaActive: 0
   arenaSpawnPos:
   - {fileID: 65109214}
@@ -24289,8 +24288,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1789615920}
   zoneType: 0
   zoneObject: {fileID: 232028299}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
 --- !u!114 &492589081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24750,7 +24748,7 @@ Transform:
   m_PrefabInternal: {fileID: 1098662807}
   m_GameObject: {fileID: 496692572}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.11132812, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1536789627}
@@ -35573,7 +35571,7 @@ Transform:
   m_PrefabInternal: {fileID: 1098662807}
   m_GameObject: {fileID: 670549047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.11132812, y: 0, z: .00146484375}
+  m_LocalPosition: {x: 0, y: 0, z: .00146484375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1394395914}
@@ -40960,7 +40958,7 @@ MonoBehaviour:
     npcButtonText: 
   ActiveMinigameObject: {fileID: 0}
   ActiveWorld: {fileID: 0}
-  ActiveZone: {fileID: 0}
+  _activeZone: {fileID: 0}
   ActiveArena: {fileID: 0}
   activityState: 0
   data: {fileID: 783192521}
@@ -51151,8 +51149,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 2138900006}
   zoneType: 0
   zoneObject: {fileID: 341843071}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
   isArenaActive: 0
   arenaSpawnPos:
   - {fileID: 2138900006}
@@ -51422,8 +51419,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1164261219}
   zoneType: 0
   zoneObject: {fileID: 219147715}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
   isArenaActive: 0
   arenaSpawnPos:
   - {fileID: 1164261219}
@@ -58452,11 +58448,11 @@ Prefab:
       objectReference: {fileID: 100002, guid: 81fb7ec5fa9b9463ea2cfe07135d01ee, type: 2}
     - target: {fileID: 400466, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.11132812
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400460, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.11132812
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100316, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
       propertyPath: m_IsActive
@@ -58605,6 +58601,22 @@ Prefab:
     - target: {fileID: 401456, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400266, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 400116, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 400980, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 401248, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 768
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 508488dacd55244f1aa29da077b025b8, type: 2}
@@ -63140,8 +63152,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1019122927}
   zoneType: 1
   zoneObject: {fileID: 1559808166}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
   isArenaActive: 0
   arenaSpawnPos:
   - {fileID: 1019122927}
@@ -80083,8 +80094,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 610548166}
   zoneType: 0
   zoneObject: {fileID: 727073556}
-  players: []
-  playerIDs: 
+  playerCharacterStatuses: []
   isArenaActive: 0
   arenaSpawnPos:
   - {fileID: 610548166}

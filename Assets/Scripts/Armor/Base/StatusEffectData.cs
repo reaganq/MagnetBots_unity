@@ -13,10 +13,11 @@ public class StatusEffectData{
 	public float secondaryEffectValue;
 	public float tertiaryEffectValue;
 
+	//DOT stuff
     public float effectDuration;
     public int numberOfProcs;
     public float procChance;
-	[SerializeField] 
+	
 	public SkillEffectFormat effectFormat;
 	public SkillEventTrigger triggerCondition;
 	public bool affectAlly;

@@ -61,7 +61,7 @@ public class CharacterActionManager : ActionManager {
 		//Debug.LogWarning(index);
         //armorSkills[index] = controller;
 		armorSkills.Add(skill);
-		skill.Initialise((PlayerCharacter)myStatus, armorSkills.IndexOf(skill));
+		skill.Initialise((PlayerCharacter)myStatus, skill.equipmentSlotIndex);
 		if(myPhotonView.isMine)
 		{
 			skill.SetupSkillButtons();
@@ -124,30 +124,34 @@ public class CharacterActionManager : ActionManager {
 
     #region action functions
 
-	public void UseSkill(InputTrigger trigger, int index, int slot)
+	public void UseSkill(InputTrigger trigger, int slot)
 	{
 		if(isLocked())
 			return;
-		int skillIndex = -1;
-		skillIndex = GetSkillByIDAndSlot(index, slot);
-		if(skillIndex >= 0)
-		{
-			if(trigger == InputTrigger.OnPressDown)
+		//int skillIndex = -1;
+		//skillIndex = GetSkillByIDAndSlot(index, slot);
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].equipmentSlotIndex == slot)
 			{
-				if(armorSkills[skillIndex].CanPressDown())
+				Debug.Log("found right armor slot skill");
+				if(trigger == InputTrigger.OnPressDown)
 				{
-					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
-					myPhotonView.RPC("PressDownAction", PhotonTargets.All, skillIndex, rng);
-					//PressDownAction(skillIndex, rng);
+					if(armorSkills[i].CanPressDown())
+					{
+						Debug.Log("can press down");
+						int rng = Random.Range(armorSkills[i].lowerRNGLimit, armorSkills[i].upperRNGLimit);
+						myPhotonView.RPC("PressDownAction", PhotonTargets.All, slot, rng);
+						//PressDownAction(skillIndex, rng);
+					}
 				}
-			}
-			else if(trigger == InputTrigger.OnPressUp)
-			{
-				if(armorSkills[skillIndex].CanPressUp())
+				else if(trigger == InputTrigger.OnPressUp)
 				{
-					int rng = Random.Range(armorSkills[skillIndex].lowerRNGLimit, armorSkills[skillIndex].upperRNGLimit);
-					myPhotonView.RPC("PressUpAction", PhotonTargets.All, skillIndex, rng);
-					//PressUpAction(skillIndex, rng);
+					if(armorSkills[i].CanPressUp())
+					{
+						int rng = Random.Range(armorSkills[i].lowerRNGLimit, armorSkills[i].upperRNGLimit);
+						myPhotonView.RPC("PressUpAction", PhotonTargets.All, slot, rng);
+						//PressUpAction(skillIndex, rng);
+					}
 				}
 			}
 		}
@@ -166,48 +170,6 @@ public class CharacterActionManager : ActionManager {
 	{
 		actionState = ActionState.idle;
 	}
-
-    #endregion
-
-    #region movement states
-
-    public MovementState _movementState;
-    public MovementState movementState
-    {
-        get{ return _movementState; }
-        set
-        {
-            ExitMovementState(_movementState);
-            _movementState = value;
-            EnterMovementState(_movementState);
-        }
-    }
-
-    public void EnterMovementState(MovementState state)
-    {
-        switch(state)
-        {
-        case MovementState.idle:
-            break;
-        case MovementState.locked:
-            break;
-        case MovementState.moving:
-            break;
-        }
-    }
-
-    public void ExitMovementState(MovementState state)
-    {
-        switch(state)
-        {
-        case MovementState.idle:
-            break;
-        case MovementState.locked:
-            break;
-        case MovementState.moving:
-            break;
-        }
-    }
 
     #endregion
 
@@ -252,7 +214,7 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.idle)
         {
-			Debug.LogWarning("animate to idle");
+			//Debug.LogWarning("animate to idle");
             myAnimation["Default_Idle"].time = 0;
 			myAnimation.CrossFade("Default_Idle");
 			for (int i = 0; i < armorAnimControllers.Length ; i++)
@@ -274,7 +236,7 @@ public class CharacterActionManager : ActionManager {
     {
         if(movementState != MovementState.moving)
         {
-			Debug.LogWarning("animate to running");
+			//Debug.LogWarning("animate to running");
 			myAnimation["Default_Run"].time = 0;
 			myAnimation.CrossFade("Default_Run");
             for (int i = 0; i < armorAnimControllers.Length ; i++) 
@@ -337,18 +299,24 @@ public class CharacterActionManager : ActionManager {
 	[RPC]
 	public void PressDownAction(int index, int rng)
 	{
-		armorSkills[index].PressDown(rng);
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].equipmentSlotIndex == index)
+				armorSkills[i].PressDown(rng);
+		}
 	}
 
 	[RPC]
 	public void PressUpAction(int index, int rng)
 	{
-		armorSkills[index].PressUp(rng);
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].equipmentSlotIndex == index)
+				armorSkills[i].PressUp(rng);
+		}
+
 	}
 
 	public void SpawnProjectile(string projectileName, Vector3 pos, Vector3 direction, float speed, int skillIndex, bool acrossNetwork)
 	{
-		Debug.Log("spawn projectil");
 		if(acrossNetwork)
 		{
 			if(myPhotonView.isMine)
@@ -370,7 +338,10 @@ public class CharacterActionManager : ActionManager {
 		Detector src = projectileInstance.GetComponentInChildren<Detector>();
 		if(src != null)
 		{
-			src.Initialise(armorSkills[index]);
+			for (int i = 0; i < armorSkills.Count; i++) {
+				if(armorSkills[i].equipmentSlotIndex == index)
+					src.Initialise(armorSkills[i]);
+			}
         }
 	}
 
@@ -382,8 +353,10 @@ public class CharacterActionManager : ActionManager {
 	[RPC]
 	public void NetworkPlayOneShot(int index)
 	{
-		Debug.Log("fire one shot");
-		armorSkills[index].FireOneShot();
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].equipmentSlotIndex == index)
+				armorSkills[i].FireOneShot();
+		}
     }
 
 	public override void DealDamage(int targetViewID, int targetOwnerID, int skillID, Vector3 hitPos, Vector3 targetPos)
@@ -395,10 +368,14 @@ public class CharacterActionManager : ActionManager {
 	public void NetworkDealPlayerDamage(int targetViewID, int skillID, Vector3 hitPos, Vector3 targetPos)
 	{
 		//find targte CharacterStatus
+		Debug.Log("dealing damage to ai");
 		CharacterStatus targetCS = PhotonView.Find(targetViewID).gameObject.GetComponent<CharacterStatus>();
 		if(targetCS != null)
 		{
-			armorSkills[skillID].ResolveHit(targetCS, hitPos, targetPos);
+			for (int i = 0; i < armorSkills.Count; i++) {
+				if(armorSkills[i].equipmentSlotIndex == skillID)
+					armorSkills[i].ResolveHit(targetCS, hitPos, targetPos);
+			}
 		}
 	}
 
@@ -406,9 +383,7 @@ public class CharacterActionManager : ActionManager {
 	{
 
 	}
-
-
-    
+	
     #endregion
 
 	public void OnDestroy()

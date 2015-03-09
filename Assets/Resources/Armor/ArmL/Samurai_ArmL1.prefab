@@ -523,7 +523,21 @@ MonoBehaviour:
   targetLimit: Infinity
   lowerRNGLimit: 0
   upperRNGLimit: 0
-  skillStatusEffects: []
+  skillStatusEffects:
+  - ID: 0
+    effect: 0
+    primaryEffectValue: 27
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 2
+    triggerCondition: 4
+    affectAlly: 0
+    affectEnemy: 1
+    affectSelf: 0
+    isLocal: 0
   outgoingEnemyStatusEffects: []
   outgoingAllyStatusEffects: []
   skillDetectors: []
@@ -566,7 +580,7 @@ MonoBehaviour:
   isReloading: 0
   cooldown: 0
   maxAmmoCount: 0
-  fireSpeed: .300000012
+  fireSpeed: .349999994
   damage: 10
 --- !u!114 &11400004
 MonoBehaviour:

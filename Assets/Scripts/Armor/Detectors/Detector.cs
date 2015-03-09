@@ -18,6 +18,7 @@ public class Detector : MonoBehaviour {
 		for (int i = 0; i < ownerSkill.ownerStatus.hitboxes.Count; i++) 
 		{
 			Physics.IgnoreCollision(collider, ownerSkill.ownerStatus.hitboxes[i]);
+			//Debug.Log("ignored collision: " + ownerSkill.ownerStatus.hitboxes[i].name);
 		}
 	}
 
@@ -38,12 +39,40 @@ public class Detector : MonoBehaviour {
 		ownerSkill = skill;
 		currentNumberOfTargets = 0;
 		IgnoreOwnCollisions();
+		//Invoke("IgnoreOwnCollisions", 2f);
 		if(!isProjectile)
-			Deactivate();
+		{
+
+			//myFunction = Deactivate;
+			//InvokeNextFrame(myFunction);
+		}
+		else
+			Activate();
 	}
 
 	public virtual void Reset()
 	{
 		currentNumberOfTargets = 0;
+	}
+
+	public delegate void Function();
+	Function myFunction;
+	
+	public void InvokeNextFrame(Function function)
+	{
+		try
+		{
+			StartCoroutine(_InvokeNextFrame(function));    
+		}
+		catch
+		{
+			Debug.Log ("Trying to invoke " + function.ToString() + " but it doesnt seem to exist");    
+		}            
+	}
+	
+	private IEnumerator _InvokeNextFrame(Function function)
+	{
+		yield return null;
+		function();
 	}
 }

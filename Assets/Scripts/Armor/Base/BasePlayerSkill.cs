@@ -8,6 +8,7 @@ public class BasePlayerSkill : BaseSkill {
 	public CharacterActionManager ownerCAM;
 	public Job pressDownJob;
 	public Job pressUpJob;
+
 	public int equipmentSlotIndex;
 	public bool hasPressDownEvent;
 	public bool hasPressUpEvent;
@@ -119,7 +120,7 @@ public class BasePlayerSkill : BaseSkill {
 	
 	public void SetupSkillButtons()
 	{
-		GUIManager.Instance.MainGUI.EnableActionButton(equipmentSlotIndex, skillID );
+		GUIManager.Instance.MainGUI.EnableActionButton(equipmentSlotIndex );
 	}
 
 	#region Animation Setup
@@ -211,16 +212,4 @@ public class BasePlayerSkill : BaseSkill {
 	}
 	
 	#endregion
-
-	public override void ResolveHit(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
-	{
-		//redundant check
-		if(targetCS.myPhotonView.isMine)
-		{
-			if(ownerStatus.enemyCharacterType == targetCS.characterType)
-				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingEnemyStatusEffects);
-			else
-				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingAllyStatusEffects);
-		}
-	}
 }

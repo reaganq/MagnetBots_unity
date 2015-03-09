@@ -45,6 +45,7 @@ public class AISkill : BaseSkill {
 	// Use this for initialization
 	public virtual void InitialiseAISkill(CharacterStatus status, int skillIndex)
     {
+		Debug.Log("initialising ai skill");
 		usageCount = 0;
 		ownerStatus = status;
 		ownerManager = status.actionManager;
@@ -142,7 +143,8 @@ public class AISkill : BaseSkill {
 		{
 			if(resetAfterUse)
 				ResetSkill();
-			ownerFSM.EndSkill();
+			if(!wasKilled)
+				ownerFSM.EndSkill();
 		};
 	}
 

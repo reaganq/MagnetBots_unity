@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 136: {fileID: 13600000}
   - 114: {fileID: 11400012}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -856,7 +856,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 674d3d898094c47759f9c3a89cc63f38, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 674d3d898094c47759f9c3a89cc63f38, type: 2}
-  - {fileID: 7400000, guid: b4ba90ea819884177944b33a5c368016, type: 2}
+  - {fileID: 7400000, guid: fb6919b038e0d468b94f532052b5fdcc, type: 2}
   - {fileID: 7400000, guid: b3ea374b454b844a099770629e3b1fb4, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
@@ -996,8 +996,9 @@ MonoBehaviour:
   myPhotonView: {fileID: 11400014}
   myMotor: {fileID: 11400002}
   _disableMovement: 0
-  runningAnimationSpeedMultiplier: 1.60000002
-  currentRunningAnimationSpeed: 1.60000002
+  movementState: 0
+  runningAnimationSpeedMultiplier: 1.25
+  currentRunningAnimationSpeed: 1.25
   myAvatar: {fileID: 11400004}
   armorSkills: []
   armorAnimControllers:
@@ -1009,7 +1010,6 @@ MonoBehaviour:
   playerMotor: {fileID: 11400002}
   networkMovement: {fileID: 11400016}
   _actionState: 0
-  _movementState: 0
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1216,6 +1216,7 @@ MonoBehaviour:
   playerActionManager: {fileID: 0}
   avatar: {fileID: 11400004}
   parentZone: {fileID: 0}
+  zoneViewID: 0
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1

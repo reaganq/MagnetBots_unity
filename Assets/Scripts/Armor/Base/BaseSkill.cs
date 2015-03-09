@@ -19,7 +19,7 @@ public class BaseSkill : MonoBehaviour {
 	[HideInInspector]
 	public ActionManager ownerManager;
 	//all the enemies hit during the usage of this skill
-	public List<CharacterStatus> HitTargets;
+	public List<CharacterStatus> HitTargets = new List<CharacterStatus>();
 
 	public bool isBusy = false;
 	public bool isActive = false;
@@ -39,6 +39,7 @@ public class BaseSkill : MonoBehaviour {
 	public float targetLimit = Mathf.Infinity;
 	public int lowerRNGLimit = 0;
 	public int upperRNGLimit = 0;
+	public Job fireOneShotJob;
 	
     /*** attribute ***/
 
@@ -159,6 +160,9 @@ public class BaseSkill : MonoBehaviour {
 	{
 		//if(characterManager.MakeSpawnPool())
 		//{
+		if(ownerManager.effectsPool != null)
+			ownerManager.MakeSpawnPool();
+
 		if(ownerManager.effectsPool.GetPrefabPool(prefab) == null)
 		{
 			PrefabPool prefabPool = new PrefabPool(prefab);;
@@ -269,17 +273,26 @@ public class BaseSkill : MonoBehaviour {
 	public virtual void HitTarget(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
 		//HitInfo newHit = new HitInfo();
+		Debug.Log("?????");
 		if(HitTargets.Contains(targetCS))
 		{
+			Debug.Log("????");
 			if(limitDamageInstance)
+			{
+				Debug.Log("??");
 				return;
+			}
 		}
 		else
+		{
+			Debug.Log("????");
 			HitTargets.Add(targetCS);
+		}
 
 		TriggerSkillEvents(SkillEventTrigger.onHit);
-		if(ownerManager.myPhotonView.isMine)
+		if(isOwner)
 		{
+			Debug.Log("???");
 			ownerManager.DealDamage(targetCS.myPhotonView.viewID, targetCS.myPhotonView.ownerId, skillID, hitPos, targetPos);
 			//action manager deal damage
 		}
@@ -287,6 +300,17 @@ public class BaseSkill : MonoBehaviour {
 
 	public virtual void ResolveHit(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
+		Debug.Log("resolving hit: " + outgoingEnemyStatusEffects.Count);
+		if(targetCS.myPhotonView.isMine)
+		{
+			if(ownerStatus.enemyCharacterType == targetCS.characterType)
+			{
+				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingEnemyStatusEffects);
+				Debug.Log(outgoingEnemyStatusEffects.Count);
+			}
+			else
+				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingAllyStatusEffects);
+		}
 	}
 
 	#endregion

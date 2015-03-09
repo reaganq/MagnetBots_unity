@@ -1186,8 +1186,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Gun_Cast
       takeName: Take 001
-      firstFrame: 100
-      lastFrame: 110
+      firstFrame: 68
+      lastFrame: 79
       wrapMode: 8
       orientationOffsetY: 0
       level: 0
@@ -1352,8 +1352,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Gun_Recoil
       takeName: Take 001
-      firstFrame: 111
-      lastFrame: 117
+      firstFrame: 79
+      lastFrame: 85
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -1684,8 +1684,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Gun_Followthrough
       takeName: Take 001
-      firstFrame: 120
-      lastFrame: 130
+      firstFrame: 88
+      lastFrame: 98
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2348,8 +2348,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Spin
       takeName: Take 001
-      firstFrame: 170
-      lastFrame: 195
+      firstFrame: 138
+      lastFrame: 163
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -2515,7 +2515,7 @@ ModelImporter:
       name: Jim_Running
       takeName: Take 001
       firstFrame: 30
-      lastFrame: 76
+      lastFrame: 55
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -2680,8 +2680,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Death
       takeName: Take 001
-      firstFrame: 280
-      lastFrame: 290
+      firstFrame: 325
+      lastFrame: 357
       wrapMode: 8
       orientationOffsetY: 0
       level: 0

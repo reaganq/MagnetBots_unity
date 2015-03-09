@@ -31,7 +31,6 @@ public class MeleeAISkill : AISkill {
 			ownerFSM.DisableMovement();
         }
 		skillState = SkillState.precast;
-        Debug.Log("using skill");
 		if(baseSkillAnimation.precastAnimation.clip != null)
 		{
 			ownerFSM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name);
@@ -40,7 +39,7 @@ public class MeleeAISkill : AISkill {
 
 		ActivateSkill(true);
 		skillState = SkillState.onUse;
-		ownerFSM.PlayQueuedAnimation(baseSkillAnimation.castAnimation.clip.name, 0, false);
+		ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
 
         yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length);
 

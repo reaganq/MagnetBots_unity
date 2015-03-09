@@ -16,6 +16,8 @@ public class ProjectileCollider : Detector {
 
 	public void OnCollisionEnter(Collision other)
 	{
+		if(!isActive)
+			return;
 		if(currentNumberOfTargets >= ownerSkill.targetLimit)
 			return;
 		
@@ -28,13 +30,20 @@ public class ProjectileCollider : Detector {
 				return;
 
 			ownerSkill.HitTarget(cs, contact.point, cs._myTransform.position);
+			Debug.Log("hit target with projectile");
 		}
 		ownerSkill.ownerManager.SpawnParticle(hitDecal.name, contact.point, false);
+		isActive = false;
 		if(destroyOnCollision)
 		{
-			Debug.Log(other.gameObject.name);
-			ownerSkill.ownerManager.effectsPool.Despawn(this.transform);
+			StartCoroutine(DeSpawnAfterOneframe());
 		}
+	}
+
+	private IEnumerator DeSpawnAfterOneframe()
+	{
+		yield return new WaitForEndOfFrame();
+		ownerSkill.ownerManager.effectsPool.Despawn(this.transform);
 	}
 	
 	private IEnumerator DeSpawn()

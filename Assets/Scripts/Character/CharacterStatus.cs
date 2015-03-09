@@ -80,16 +80,7 @@ public class CharacterStatus : CharacterAttributes {
 		DisplayHpBar(false);
 	}
 
-	public void DisplayInfoByZone()
-	{
-		DisplayName(true);
-		if(PlayerManager.Instance.ActiveZone.zoneType == ZoneType.arena)
-		{
-			DisplayHpBar(true);
-		}
-		else
-			DisplayHpBar(false);
-	}
+
 
 	public void UpdateHitBoxes()
 	{
@@ -112,15 +103,26 @@ public class CharacterStatus : CharacterAttributes {
 			return true;
 	}
 
-	public void AddImpact(Vector3 dir, float force, float duration, float acceleration)
+	public virtual void AddImpact(Vector3 dir, float force, float duration, float acceleration)
 	{
 		motor.AddImpact(dir, force, duration, acceleration);
     }
 
 	public virtual void ReceiveHit(int perpetratorViewID, int perpetratorSkillID, List<StatusEffectData> incomingStatusEffects)
 	{
+		if(!isAlive() || Invulnerable)
+			return;
 		//process damage
 		//ReceiveDamage(damage);
+		Debug.Log(perpetratorViewID +" " + perpetratorSkillID);
+		Debug.Log("receiving hit " + incomingStatusEffects.Count);
+		for (int i = 0; i < incomingStatusEffects.Count; i++) {
+			if(incomingStatusEffects[i].effect == 0)
+			{
+				Debug.Log("got a damage effect");
+				ReceiveDamage(incomingStatusEffects[i].primaryEffectValue);
+			}
+		}
 	}
 
     public void ReceiveDamage(float damage)
@@ -128,13 +130,35 @@ public class CharacterStatus : CharacterAttributes {
 		if(curHealth >0)
 		{
 			curHealth -= damage;
-			Debug.Log("currentHP: "+curHealth);
-			if(curHealth <= 0)
-	        {
-            	Die();
-	        }
+			Debug.LogWarning("currentHP: "+curHealth);
+			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth);
 		}
+		if(curHealth <= 0)
+		{
+			Die();
+		}
+
     }
+
+	[RPC]
+	public void NetworkSyncHealth(float newHealth)
+	{
+		curHealth = newHealth;
+		//update healthbar
+	}
+
+	public virtual void Die()
+	{
+		myPhotonView.RPC("NetworkDie", PhotonTargets.All);
+	}
+
+	[RPC]
+	public virtual void NetworkDie()
+	{
+		Debug.Log("died");
+		actionManager.Die();
+		//play death animation;
+	}
 
     public void Heal(int hp)
     {
@@ -150,14 +174,7 @@ public class CharacterStatus : CharacterAttributes {
         curMovementSpeed += change;
     }*/
 	
-    public virtual void Die()
-    {
-        Debug.Log("died");
-		if(GetComponent<PhotonView>().isMine)
-		{
-			PhotonNetwork.Destroy(this.gameObject);
-		}
-    }
+    
 
 	public void AddStatusEffect(StatusEffect effect)
 	{
@@ -234,22 +251,7 @@ public class CharacterStatus : CharacterAttributes {
 	}*/
 
 	//others
-	[RPC]
-	public void NetworkSyncHealth(float damage)
-	{
-		if(curHealth >0)
-		{
-			curHealth -= damage;
-			Debug.Log("currentHP: "+curHealth);
-			if(myPhotonView.isMine)
-			{
-				if(curHealth <= 0)
-				{
-					Die();
-				}
-			}
-		}
-	}
+
 }
 
 [System.Serializable]

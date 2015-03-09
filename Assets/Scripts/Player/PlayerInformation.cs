@@ -72,6 +72,9 @@ public class PlayerInformation  {
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);
 		}
+		//EquipItem(ArmoryInventory.Items[16]);
+		//EquipItem(ArmoryInventory.Items[15]);
+		//EquipItem(ArmoryInventory.Items[17]);
 		SaveParseData();
     }
 

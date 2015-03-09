@@ -93,10 +93,10 @@ public class MainUIManager : BasicGUIController {
 		}
 	}
 
-	public void EnableActionButton(int index, int skillID)
+	public void EnableActionButton(int index)
 	{
 		actionButtons[index].SetActive(true);
-		actionButtons[index].GetComponent<SkillButton>().SetupSkillButton(skillID, index);
+		actionButtons[index].GetComponent<SkillButton>().SetupSkillButton(index);
 	}
 
 	public void DisableActionButton(int index)

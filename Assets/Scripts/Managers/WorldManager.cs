@@ -156,7 +156,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		if(Arenas[i].arenaInstances[s].admittedPlayers.Contains(PhotonNetwork.player))
 		{
 			Debug.Log("telling player to go to arena");
-			PlayerManager.Instance.GoToArena(Arenas[i].arenaInstances[s], arenaData.EnemyID);
+			PlayerManager.Instance.GoToZone(Arenas[i].arenaInstances[s]);
 			//Arenas[i].arenaInstances[s].SpawnEnemyWave(0);
 			//instantiate the enemy
 		}
@@ -188,39 +188,29 @@ public class WorldManager : Photon.MonoBehaviour {
 	{
 		PhotonView view = PhotonView.Find(objectViewid);
 		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
-		ArenaManagers[zoneid].players.Remove(playerObject);
-		ArenaManagers[zoneid].playerIDs.Remove(view.ownerId);
+		ArenaManagers[zoneid].playerCharacterStatuses.Remove(playerObject);
+		ArenaManagers[zoneid].photonPlayers.Remove(view.owner);
 
 		if(PhotonNetwork.isMasterClient)
 		{
-			if(ArenaManagers[zoneid].players.Count == 0)
+			if(ArenaManagers[zoneid].playerCharacterStatuses.Count == 0)
 			{
 				Debug.Log("clear");
-				//PhotonView enemyView = enemy.GetComponent<PhotonView>();
-				/*if(enemyView.owner != null)
-				{
-					myPhotonView.RPC("ClearEnemies", enemyView.owner);
-				}
-				else*/
-				//myPhotonView.RPC("ClearEnemies", PhotonTargets.MasterClient);
-
 				myPhotonView.RPC("DecommissionArena", PhotonTargets.AllBuffered, zoneid);
-				//ClearEnemies();
 			}
 			else
 			{
 				if(ArenaManagers[zoneid].ownerID == view.ownerId)
 				{
 					Debug.Log("here alloc");
-					//PhotonNetwork.UnAllocateViewID(enemyView.viewID);
-					myPhotonView.RPC("ChangeEnemyOwner", PhotonPlayer.Find(ArenaManagers[zoneid].playerIDs[0]), zoneid);
+					//myPhotonView.RPC("ChangeEnemyOwner", PhotonPlayer.Find(ArenaManagers[zoneid].playerIDs[0]), zoneid);
 				}
 			}
 		}
 	}
 	
 	//all buffered
-	[RPC]
+	/*[RPC]
 	public void RemovePlayerAt(int zoneid, int id)
 	{
 		for (int i = 0; i < ArenaManagers[zoneid].playerIDs.Count; i++) 
@@ -253,7 +243,7 @@ public class WorldManager : Photon.MonoBehaviour {
 				}
 			}
 		}
-	}
+	}*/
 
 	//target player
 	[RPC]
@@ -473,9 +463,9 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			for (int j = 0; j < ArenaManagers.Count; j++) 
 			{
-				for (int i = 0; i < ArenaManagers[j].playerIDs.Count; i++) 
+				for (int i = 0; i < ArenaManagers[j].photonPlayers.Count; i++) 
 				{
-					if(ArenaManagers[j].playerIDs[i] == player.ID)
+					if(ArenaManagers[j].photonPlayers[i] == player)
 					{
 						Debug.Log("disconnecting player" + player);
 						//players.RemoveAt(i);

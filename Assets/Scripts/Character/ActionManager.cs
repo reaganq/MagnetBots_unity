@@ -18,6 +18,7 @@ public class ActionManager : MonoBehaviour {
 	public PhotonView myPhotonView;
 	public Motor myMotor;
 	public bool _disableMovement;
+	public MovementState movementState;
 	public virtual bool disableMovement
 	{
 		get{
@@ -63,6 +64,10 @@ public class ActionManager : MonoBehaviour {
 	}
 
 	public virtual void UpdateRunningSpeed(float t)
+	{
+	}
+
+	public virtual void Die()
 	{
 	}
 
@@ -273,13 +278,5 @@ public class ActionManager : MonoBehaviour {
 		Transform particle = effectsPool.prefabs[particleName];
 		ParticleSystem particleSys = particle.GetComponent<ParticleSystem>();
 		effectsPool.Spawn(particleSys, pos, Quaternion.identity, null);
-	}
-
-	public void IgnoreCollisions(Collider collider)
-	{
-		for (int i = 0; i < myStatus.hitboxes.Count; i++) 
-		{
-			Physics.IgnoreCollision(collider, myStatus.hitboxes[i]);
-		}
 	}
 }

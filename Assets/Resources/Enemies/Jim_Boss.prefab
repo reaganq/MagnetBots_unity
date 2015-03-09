@@ -352,7 +352,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400044}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: bones:L_Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,6 +909,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100116
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400116}
+  - 114: {fileID: 11400028}
+  - 65: {fileID: 6500010}
+  - 54: {fileID: 5400002}
+  m_Layer: 12
+  m_Name: Trigger collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1182,6 +1200,7 @@ Transform:
   m_LocalPosition: {x: -.556078196, y: 1.63603461e-16, z: 1.38777878e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400116}
   - {fileID: 400102}
   - {fileID: 400094}
   m_Father: {fileID: 400038}
@@ -1604,6 +1623,17 @@ Transform:
   - {fileID: 400112}
   - {fileID: 400110}
   m_Father: {fileID: 400078}
+--- !u!4 &400116
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_LocalRotation: {x: 2.66316135e-07, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400044}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -1675,6 +1705,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1735,6 +1780,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.50999999, y: 1, z: .870000005}
   m_Center: {x: .289999992, y: 0, z: 0}
+--- !u!65 &6500010
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 2.22000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!111 &11100000
 Animation:
   m_ObjectHideFlags: 1
@@ -1746,14 +1803,6 @@ Animation:
   m_Animation: {fileID: 7400000, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   m_Animations:
   - {fileID: 7400000, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400002, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400004, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400006, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400008, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400010, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400012, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400014, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
-  - {fileID: 7400016, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   - {fileID: 7400018, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   - {fileID: 7400020, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
   m_WrapMode: 0
@@ -1771,11 +1820,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876be54b75aa54eddb3643c6649dbff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 30
   curHealth: 0
   maxMovementSpeed: 10
   rotationSpeed: 3
-  characterType: 0
+  characterType: 1
   nameLabel: {fileID: 0}
   hpBar: {fileID: 0}
   characterName: 
@@ -2053,10 +2102,25 @@ MonoBehaviour:
   targetLimit: Infinity
   lowerRNGLimit: 0
   upperRNGLimit: 0
-  skillStatusEffects: []
+  skillStatusEffects:
+  - ID: 0
+    effect: 0
+    primaryEffectValue: 0
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 2
+    triggerCondition: 4
+    affectAlly: 0
+    affectEnemy: 1
+    affectSelf: 0
+    isLocal: 0
   outgoingEnemyStatusEffects: []
   outgoingAllyStatusEffects: []
-  skillDetectors: []
+  skillDetectors:
+  - {fileID: 11400028}
   skillVFXs: []
   _skillState: 0
   isOwner: 0
@@ -2099,6 +2163,7 @@ MonoBehaviour:
   myPhotonView: {fileID: 11400002}
   myMotor: {fileID: 0}
   _disableMovement: 0
+  movementState: 0
   runningAnimationSpeedMultiplier: 0
   currentRunningAnimationSpeed: 0
   myAvatar: {fileID: 0}
@@ -2252,6 +2317,25 @@ MonoBehaviour:
   requiresLineOfSight: 0
   angleTolerance: 5
   hitDecal: {fileID: 0}
+--- !u!114 &11400028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1427513be6b43548d7309a48be5135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collider: {fileID: 6500010}
+  ownerSkill: {fileID: 0}
+  isActive: 0
+  currentNumberOfTargets: 0
+  activationEvent: 2
+  deactivationEvent: 7
+  isLocal: 1
+  isProjectile: 0
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
