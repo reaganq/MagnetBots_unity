@@ -133,4 +133,6 @@ MonoBehaviour:
   - LoseScenario
   - WinScenario
   - NetworkDealAIDamage
+  - NetworkEatFood
+  - NetworkPlayToy
   DisableAutoOpenWizard: 0

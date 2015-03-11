@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DiscoBall_light
-  m_Shader: {fileID: 208, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 10722, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -17,14 +17,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 80fa37e2d27da46e492e383e1d2114d3, type: 3}
+          m_Texture: {fileID: 2800000, guid: b32a49d9c204f4f3db3cbf30fcab7792, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: a2daa9b606711a643808bebed4c59a0c, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -37,20 +37,36 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Cutoff
+        second: .321428567
+      data:
+        first:
           name: _InvFade
         second: 3
+      data:
+        first:
+          name: _Shininess
+        second: .699999988
       data:
         first:
           name: _Alpha
         second: 1
       data:
         first:
-          name: _FadeOutDistNear
+          name: _RimPower
+        second: 2.5
+      data:
+        first:
+          name: _EmissionLM
         second: 0
       data:
         first:
+          name: _FadeOutDistNear
+        second: 8
+      data:
+        first:
           name: _FadeOutDistFar
-        second: 10000
+        second: 10145
       data:
         first:
           name: _Multiplier
@@ -61,12 +77,24 @@ Material:
         second: 5
       data:
         first:
-          name: _EmissionLM
-        second: 0
+          name: _InnerColorPower
+        second: .5
+      data:
+        first:
+          name: _AlphaPower
+        second: 4
+      data:
+        first:
+          name: _AllPower
+        second: 1
     m_Colors:
       data:
         first:
           name: _Color
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _SpecColor
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
@@ -75,8 +103,20 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .683823526, g: .683823526, b: .683823526, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Emission
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _EmisColor
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: .5, g: .5, b: .5, a: .5}
+      data:
+        first:
+          name: _InnerColor
+        second: {r: .5, g: .5, b: .5, a: .5}

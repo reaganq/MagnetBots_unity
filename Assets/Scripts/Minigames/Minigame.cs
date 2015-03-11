@@ -15,7 +15,7 @@ public class Minigame : MonoBehaviour {
 
 	public virtual void EndGame()
 	{
-		PlayerManager.Instance.GiveRewards(score, npcMinigame.Loots);
+		//PlayerManager.Instance.GiveRewards(score, npcMinigame.Loots);
 	}
 
 }

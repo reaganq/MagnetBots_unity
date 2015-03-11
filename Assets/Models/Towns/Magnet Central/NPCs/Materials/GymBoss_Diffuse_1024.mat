@@ -9,7 +9,7 @@ Material:
   m_Name: GymBoss_Diffuse_1024
   m_Shader: {fileID: 4800000, guid: 1be380cd3d26b814d9c77ca434a0c943, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -30,17 +30,21 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Alpha
+        second: 1
+      data:
+        first:
           name: _RimPower
-        second: 8.64285755
+        second: 10
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .926470578, g: .891798377, b: .865160048, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SColor
-        second: {r: .297577828, g: .487450212, b: .632352948, a: 1}
+        second: {r: .08369378, g: .182314157, b: .264705896, a: 1}
       data:
         first:
           name: _TintColor
@@ -48,4 +52,4 @@ Material:
       data:
         first:
           name: _RimColor
-        second: {r: .882352948, g: .842799187, b: .772058845, a: .431372553}
+        second: {r: .40493381, g: .441176474, b: .178416967, a: .419607848}

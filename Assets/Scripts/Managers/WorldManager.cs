@@ -178,8 +178,27 @@ public class WorldManager : Photon.MonoBehaviour {
 	
 	public void EndSession(ArenaManager zone)
 	{
-		int id = ArenaManagers.IndexOf(zone);
-		myPhotonView.RPC("RemovePlayer", PhotonTargets.AllBuffered, id, PlayerManager.Instance.avatarPhotonView.viewID);
+		myPhotonView.RPC("DecommissionArena", PhotonTargets.All, zone.arenaID);
+	}
+
+	[RPC]
+	public void DecommissionArena(int zoneid)
+	{
+		//ArenaManager am = ArenaManagers[zoneid];
+		
+		for (int i = 0; i < Arenas.Count; i++) 
+		{
+			for (int s = 0; s < Arenas[i].arenaInstances.Count; s++) 
+			{
+				if(Arenas[i].arenaInstances[s].arenaID == zoneid)
+				{
+					Arenas[i].arenaStates[s] = false;
+					//Arenas[i].arenaInstances[s].CleanUp();
+					//Arenas[i].arenaStates[s] = false;
+					return;
+				}
+			}
+		}
 	}
 
 	//all buffered
@@ -270,25 +289,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	}
 
 	//all buffered
-	[RPC]
-	public void DecommissionArena(int zoneid)
-	{
-		//ArenaManager am = ArenaManagers[zoneid];
 
-		for (int i = 0; i < Arenas.Count; i++) 
-		{
-			for (int s = 0; s < Arenas[i].arenaInstances.Count; s++) 
-			{
-				if(Arenas[i].arenaInstances[s].arenaID == zoneid)
-				{
-					Arenas[i].arenaStates[s] = false;
-					Arenas[i].arenaInstances[s].CleanUp();
-					//Arenas[i].arenaStates[s] = false;
-					return;
-				}
-			}
-		}
-	}
 
 	//players within arena
 	[RPC]

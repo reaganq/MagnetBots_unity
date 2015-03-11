@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Tree texture
-  m_Shader: {fileID: 4800000, guid: f350d1dc5603b224084af095b085076a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -18,16 +18,20 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: 2633f487d67c8b941a0e7e5a7840d88d, type: 3}
-          m_Scale: {x: 5, y: 5}
+          m_Scale: {x: 4, y: 4}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 2800000, guid: 8af77daad29f8b34da56515f193158f9, type: 3}
+          m_Texture: {fileID: 2800000, guid: a2daa9b606711a643808bebed4c59a0c, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Alpha
+        second: 1
     m_Colors:
       data:
         first:
@@ -36,7 +40,7 @@ Material:
       data:
         first:
           name: _SColor
-        second: {r: .183823526, g: .560953379, b: 1, a: 1}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _TintColor

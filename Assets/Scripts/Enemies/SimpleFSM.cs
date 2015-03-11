@@ -639,6 +639,7 @@ public class SimpleFSM : ActionManager {
 			usingSkillJob.kill();
 		if(cancelSkillJob != null && cancelSkillJob.running)
 			cancelSkillJob.kill();
+		PoolManager.Pools.Destroy(effectsPool.poolName);
 	}
 
 	public void EnterAIState(AIState newState)
@@ -667,6 +668,7 @@ public class SimpleFSM : ActionManager {
 		targetObject = null;
 		targetCharacterController = null;
 	}
+
 }
 
 public enum AIState

@@ -8,6 +8,7 @@ public class CharacterStatus : CharacterAttributes {
 
 	public UILabel nameLabel;
 	public UISprite hpBar;
+	public OverheadUI HUD;
 	public string characterName;
     public Motor motor;
 	public ActionManager actionManager;
@@ -131,7 +132,7 @@ public class CharacterStatus : CharacterAttributes {
 		{
 			curHealth -= damage;
 			Debug.LogWarning("currentHP: "+curHealth);
-			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth);
+			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth, damage);
 		}
 		if(curHealth <= 0)
 		{
@@ -141,9 +142,11 @@ public class CharacterStatus : CharacterAttributes {
     }
 
 	[RPC]
-	public void NetworkSyncHealth(float newHealth)
+	public void NetworkSyncHealth(float newHealth, float damage)
 	{
 		curHealth = newHealth;
+		if(HUD != null)
+			HUD.DisplayHpMessage(-damage);
 		//update healthbar
 	}
 

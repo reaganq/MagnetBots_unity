@@ -8,6 +8,7 @@ public class ArmorAnimation{
 
     public AnimationClip clip;
     public int animationLayer;
+	public float speed = 1.0f;
 	public bool useWholeBody;
 	public bool useArmLBones;
 	public bool useArmRBones;

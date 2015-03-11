@@ -452,6 +452,7 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: c9a98af9db7aa4aafa2ede58a173517a, type: 2}
     animationLayer: 1
+    speed: 1
     useWholeBody: 0
     useArmLBones: 1
     useArmRBones: 0
@@ -459,6 +460,7 @@ MonoBehaviour:
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: 0122911abb1a549cd869e1432fb24b6a, type: 2}
     animationLayer: 1
+    speed: 1
     useWholeBody: 0
     useArmLBones: 1
     useArmRBones: 0
@@ -488,11 +490,12 @@ MonoBehaviour:
   disableMovement: 1
   disableRotation: 0
   restrictedMovement: 0
-  limitDamageInstance: 1
+  limitDamageInstance: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 7400000, guid: f99773e25afc54ba7a7d7624f87d8780, type: 2}
       animationLayer: 4
+      speed: 1
       useWholeBody: 1
       useArmLBones: 0
       useArmRBones: 0
@@ -500,6 +503,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 7400000, guid: db561460e4f464f94a0047d9d788f16f, type: 2}
       animationLayer: 5
+      speed: 1
       useWholeBody: 1
       useArmLBones: 0
       useArmRBones: 0
@@ -507,6 +511,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 7400000, guid: be67a3987745d4b529fb844b50ddf63a, type: 2}
       animationLayer: 4
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -514,6 +519,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 4
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -558,6 +564,7 @@ MonoBehaviour:
   recoilAnimation:
     clip: {fileID: 0}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
@@ -565,6 +572,7 @@ MonoBehaviour:
   reloadAnimation:
     clip: {fileID: 0}
     animationLayer: 0
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0

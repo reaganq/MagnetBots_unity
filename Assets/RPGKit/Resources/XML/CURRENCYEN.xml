@@ -35,4 +35,18 @@
     <SystemDescription />
     <isPremium>false</isPremium>
   </RPGCurrency>
+  <RPGCurrency>
+    <ID>6</ID>
+    <Name>Energy</Name>
+    <Description />
+    <SystemDescription />
+    <isPremium>false</isPremium>
+  </RPGCurrency>
+  <RPGCurrency>
+    <ID>7</ID>
+    <Name>Happiness</Name>
+    <Description />
+    <SystemDescription />
+    <isPremium>false</isPremium>
+  </RPGCurrency>
 </ArrayOfRPGCurrency>

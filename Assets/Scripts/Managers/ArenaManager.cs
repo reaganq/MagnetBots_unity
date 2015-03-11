@@ -129,6 +129,7 @@ public class ArenaManager : Zone {
 	public void CleanUp()
 	{
 		myPhotonView.RPC("NetworkCleanUp", PhotonTargets.All);
+		PlayerManager.Instance.ActiveWorld.EndSession(this);
 	}
 
 	[RPC]
@@ -201,6 +202,7 @@ public class ArenaManager : Zone {
 	{
 		Debug.LogError("WIN ARENA");
 		yield return null;
+		GiveRewards();
 	}
 
 	[RPC]
@@ -220,7 +222,7 @@ public class ArenaManager : Zone {
 
 	public void GiveRewards()
 	{
-		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots);
+		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots, 0);
 	}
 
 	[RPC]

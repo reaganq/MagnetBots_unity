@@ -143,6 +143,7 @@ public class BasePlayerSkill : BaseSkill {
 		{
 			ownerAnimation.AddClip(anim.clip, anim.clip.name);
 			ownerAnimation[anim.clip.name].layer = anim.animationLayer;
+			ownerAnimation[anim.clip.name].speed = anim.speed;
 			yield return null;
 			if(!anim.useWholeBody)
 			{

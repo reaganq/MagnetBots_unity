@@ -522,6 +522,7 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: ec5bda8689c9248e2b6a33ab17ff73a4, type: 2}
     animationLayer: 2
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
@@ -529,6 +530,7 @@ MonoBehaviour:
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: c1d23e33abd444065b22b68767ddef49, type: 2}
     animationLayer: 2
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
@@ -563,6 +565,7 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -570,6 +573,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -577,6 +581,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -584,6 +589,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -592,8 +598,22 @@ MonoBehaviour:
     followThroughTime: 0
   targetLimit: Infinity
   lowerRNGLimit: 0
-  upperRNGLimit: 1
-  skillStatusEffects: []
+  upperRNGLimit: 3
+  skillStatusEffects:
+  - ID: 0
+    effect: 0
+    primaryEffectValue: 14
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 2
+    triggerCondition: 4
+    affectAlly: 0
+    affectEnemy: 1
+    affectSelf: 0
+    isLocal: 0
   outgoingEnemyStatusEffects: []
   outgoingAllyStatusEffects: []
   skillDetectors:
@@ -621,20 +641,23 @@ MonoBehaviour:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
-      clip: {fileID: 7400000, guid: c3c253988f0054f8084411102a99436f, type: 2}
+      clip: {fileID: 7400000, guid: 76d759619fad642178518c9cf7ffb45f, type: 2}
       animationLayer: 4
-      useWholeBody: 0
-      useArmLBones: 1
-      useArmRBones: 1
-      useVerticalBones: 1
+      speed: 1
+      useWholeBody: 1
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -642,6 +665,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -651,20 +675,23 @@ MonoBehaviour:
   - precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
-      clip: {fileID: 7400000, guid: 44a2c376e75d94518aed3aeb983ee9bd, type: 2}
+      clip: {fileID: 7400000, guid: c9253a721c73b44ca90fa7948743b3de, type: 2}
       animationLayer: 4
-      useWholeBody: 0
-      useArmLBones: 1
-      useArmRBones: 1
-      useVerticalBones: 1
+      speed: 1.10000002
+      useWholeBody: 1
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -672,6 +699,41 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    castTime: .100000001
+    followThroughTime: .899999976
+  - precastAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      speed: 1
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    castAnimation:
+      clip: {fileID: 7400000, guid: f2d788fecd8184d329c5333764c959d1, type: 2}
+      animationLayer: 4
+      speed: 1.29999995
+      useWholeBody: 1
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    followThroughAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      speed: 1
+      useWholeBody: 0
+      useArmLBones: 0
+      useArmRBones: 0
+      useVerticalBones: 0
+    loopAnimation:
+      clip: {fileID: 0}
+      animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -692,7 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collider: {fileID: 6500000}
   ownerSkill: {fileID: 0}
-  isActive: 0
+  isActive: 1
   currentNumberOfTargets: 0
   activationEvent: 2
   deactivationEvent: 7

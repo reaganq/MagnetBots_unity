@@ -17,7 +17,7 @@ Shader "Toony Colors Pro/Normal/OneDirLight/BasicAlphaTransparent"
 	
 	SubShader
 	{
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+		Tags { "Queue"="Transparent" }
 		LOD 200
 		Blend One One//SrcAlpha OneMinusSrcAlpha
 		Pass {

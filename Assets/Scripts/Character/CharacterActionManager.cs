@@ -168,7 +168,8 @@ public class CharacterActionManager : ActionManager {
 
 	public void ResetActionState()
 	{
-		actionState = ActionState.idle;
+		if(myPhotonView.isMine)
+			actionState = ActionState.idle;
 	}
 
     #endregion
@@ -278,19 +279,45 @@ public class CharacterActionManager : ActionManager {
 
 	public void EatFood(string prefabPath)
 	{
-
+		myPhotonView.RPC("NetworkEatFood", PhotonTargets.All);
+		actionState = ActionState.specialAction;
 	}
 
+	[RPC]
 	public void NetworkEatFood(string prefabPath)
 	{
 		if(!string.IsNullOrEmpty(prefabPath))
 		{
 			GameObject food = Instantiate(Resources.Load(prefabPath) as GameObject) as GameObject;
-			if(myPhotonView.isMine)
-			{
-				PlayerAction pa = food.GetComponent<PlayerAction>();
-			}
+			food.transform.position = _myTransform.position;
+			PlayerAction pa = food.GetComponent<PlayerAction>();
+			pa.Enable(this);
 		}
+	}
+
+	public void PlayToy(string prefabPath)
+	{
+		myPhotonView.RPC("NetworkPlayToy", PhotonTargets.All);
+		actionState = ActionState.specialAction;
+	}
+
+	[RPC]
+	public void NetworkPlayToy(string prefabPath)
+	{
+		if(!string.IsNullOrEmpty(prefabPath))
+		{
+			GameObject toy = Instantiate(Resources.Load(prefabPath) as GameObject) as GameObject;
+			toy.transform.position = _myTransform.position;
+
+			PlayerAction pa = toy.GetComponent<PlayerAction>();
+			pa.Enable(this);
+		}
+	}
+
+	public void EarnStatusRewards(RPGCurrency currency, float amount)
+	{
+		//display rewards;
+		myStatus.HUD.DisplayStatusReward(currency, amount);
 	}
 
 	#endregion
@@ -389,7 +416,7 @@ public class CharacterActionManager : ActionManager {
 	public void OnDestroy()
 	{
 		Debug.Log("being destoyred");
-		//PoolManager.Pools.Destroy(effectsPool.poolName);
+		PoolManager.Pools.Destroy(effectsPool.poolName);
 	}
 }
 

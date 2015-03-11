@@ -9,7 +9,7 @@ Material:
   m_Name: Banker_Diffuse_1024
   m_Shader: {fileID: 4800000, guid: 1be380cd3d26b814d9c77ca434a0c943, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -30,6 +30,10 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Alpha
+        second: 1
+      data:
+        first:
           name: _RimPower
         second: 10
     m_Colors:
@@ -40,7 +44,7 @@ Material:
       data:
         first:
           name: _SColor
-        second: {r: .37305361, g: .56347394, b: .676470578, a: 1}
+        second: {r: .213884085, g: .370451987, b: .676470578, a: 1}
       data:
         first:
           name: _TintColor
@@ -48,4 +52,4 @@ Material:
       data:
         first:
           name: _RimColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .40493381, g: .441176474, b: .178416967, a: .419607848}

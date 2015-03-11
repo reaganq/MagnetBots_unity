@@ -7,9 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: TreeBranches
-  m_Shader: {fileID: 4800000, guid: f350d1dc5603b224084af095b085076a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -24,10 +24,14 @@ Material:
         first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 2800000, guid: 8af77daad29f8b34da56515f193158f9, type: 3}
+          m_Texture: {fileID: 2800000, guid: a2daa9b606711a643808bebed4c59a0c, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Alpha
+        second: 1
     m_Colors:
       data:
         first:
@@ -36,7 +40,7 @@ Material:
       data:
         first:
           name: _SColor
-        second: {r: .328719705, g: .362725168, b: .588235259, a: 1}
+        second: {r: 0, g: .344827443, b: .588235259, a: 1}
       data:
         first:
           name: _TintColor

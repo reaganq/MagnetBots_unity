@@ -9,7 +9,7 @@ Material:
   m_Name: Lab_Diffuse_1024
   m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -22,47 +22,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _BumpMap
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 2800000, guid: 8af77daad29f8b34da56515f193158f9, type: 3}
+          m_Texture: {fileID: 2800000, guid: a2daa9b606711a643808bebed4c59a0c, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
-          name: _Cutoff
-        second: .5
-      data:
-        first:
-          name: _Shininess
-        second: .078125
-      data:
-        first:
-          name: _RimPower
-        second: .5
-      data:
-        first:
-          name: _Outline
-        second: 0
-      data:
-        first:
           name: _Alpha
         second: 1
-      data:
-        first:
-          name: _RimMin
-        second: .400000006
-      data:
-        first:
-          name: _RimMax
-        second: .600000024
     m_Colors:
       data:
         first:
@@ -70,17 +39,9 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
-      data:
-        first:
           name: _SColor
-        second: {r: .33201775, g: .494326532, b: .654411793, a: 1}
+        second: {r: .240862891, g: .448805243, b: .595588207, a: 1}
       data:
         first:
-          name: _RimColor
-        second: {r: .800000012, g: .800000012, b: .800000012, a: .600000024}
-      data:
-        first:
-          name: _OutlineColor
+          name: _TintColor
         second: {r: 1, g: 1, b: 1, a: 1}

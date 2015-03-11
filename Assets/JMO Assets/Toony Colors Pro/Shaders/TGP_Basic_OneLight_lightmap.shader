@@ -16,7 +16,7 @@ Shader "Toony Colors Pro/Normal/OneDirLight/Basic_lightmap"
 	
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
+		Tags { "RenderType"="Opaque"}
 		LOD 200
 		
 		CGPROGRAM

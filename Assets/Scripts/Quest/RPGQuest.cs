@@ -74,54 +74,9 @@ public class RPGQuest : BasicItem
 		}
 	}
 
-	public LootItemList GiveQuestReward()
+	public void GiveQuestReward()
 	{
-		LootItemList lootItemList = new LootItemList();
-		int num = 0;
-		for (int i = 0; i < allLoots.Count; i++) { 
-			if(!allLoots[i].Validate())
-				continue;
-			float chance = UnityEngine.Random.Range(0.0f, 1.0f);
-			if(chance <= allLoots[i].dropRate)
-			{
-				int index = UnityEngine.Random.Range(0, allLoots[i].itemID.Count);
-				if(allLoots[i].itemType == ItemType.Currency)
-				{
-					RPGCurrency currency = Storage.LoadById<RPGCurrency>(allLoots[i].itemID[index], new RPGCurrency());
-					lootItemList.currencies.Add(currency);
-				}
-				else if(allLoots[i].itemType == ItemType.Badge)
-				{
-					RPGBadge badge = Storage.LoadById<RPGBadge>(allLoots[i].itemID[index], new RPGBadge());
-					lootItemList.badges.Add(badge);
-				}
-				else 
-				{
-					InventoryItem newItem = new InventoryItem();
-					if(allLoots[i].itemType == ItemType.Armor)
-					{
-						RPGArmor armor = Storage.LoadById<RPGArmor>(allLoots[i].itemID[index], new RPGArmor());
-						newItem.rpgItem = armor;
-					}
-					else
-					{
-						RPGItem item = Storage.LoadById<RPGItem>(allLoots[i].itemID[index], new RPGItem());
-						newItem.rpgItem = item;
-					}
-					newItem.CurrentAmount = UnityEngine.Random.Range(allLoots[i].minQuantity, allLoots[i].maxQuantity);
-					newItem.UniqueItemId = newItem.rpgItem.UniqueId;
-					newItem.Level = UnityEngine.Random.Range(1, allLoots[i].itemLevel);
-					lootItemList.items.Add(newItem);
-				}
-				if(!allLoots[i].definiteDrop)
-					num ++;
-			}
-			if(num >= maxNumberOfLoots)
-				break;
-		}
-
-		PlayerManager.Instance.GiveReward(lootItemList);
-		return lootItemList;
+		PlayerManager.Instance.GiveRewards(allLoots, maxNumberOfLoots);
 	}
 
 	/*public void GenerateLoot()

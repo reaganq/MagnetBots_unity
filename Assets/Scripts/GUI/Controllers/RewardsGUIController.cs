@@ -8,26 +8,30 @@ public class RewardsGUIController : BasicGUIController {
 	public string goldAtlasName;
 	public string gemIconPath;
 	public string gemAtlasName;
-	public List<InventoryItem> items;
-	public Transform root;
+	public Transform rewardsItemsRoot;
+	public Transform rewardsCurrenciesRoot;
 	public float offset;
-	public GameObject panel;
 	public ItemTileButton[] itemTiles;
+	public LootItemList allLoots;
+	public UIPlayTween badgesPanelTween;
+	public UIPlayTween rewardsPanelTween;
+	public UISprite badgeSprite;
 	
-	public  override void Enable()
+	public override void Enable()
 	{
-		panel.SetActive(true);
+		//panel.SetActive(true);
 		PopulateRewards();
 	}
 
-	public override void Disable()
+	public void Enable(LootItemList loots)
 	{
-		panel.SetActive(false);
+		allLoots = loots;
+		Enable();
 	}
 
 	public void PopulateRewards()
 	{
-		int index = 0;
+		/*int index = 0;
 		Debug.Log(items.Count);
 		for (int i = 0; i < itemTiles.Length; i++) 
 		{
@@ -43,12 +47,12 @@ public class RewardsGUIController : BasicGUIController {
 				itemTiles[i].gameObject.SetActive(false);
 			//rewardQuantityLabels
 		}
-		root.localPosition = new Vector3(((index -1)*offset*-0.5f), -50 ,0);
+		root.localPosition = new Vector3(((index -1)*offset*-0.5f), -50 ,0);*/
 	}
 
 	public void Continue()
 	{
-		GUIManager.Instance.HideRewards();
+		/*GUIManager.Instance.HideRewards();
 		for (int i = 0; i < items.Count; i++) {
 			PlayerManager.Instance.Hero.AddItem(items[i]);
 		}
@@ -60,6 +64,6 @@ public class RewardsGUIController : BasicGUIController {
 		else if(PlayerManager.Instance.activityState == PlayerActivityState.minigame)
 		{
 			PlayerManager.Instance.EndMiniGame();
-		}
+		}*/
 	}
 }

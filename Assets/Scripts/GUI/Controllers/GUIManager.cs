@@ -321,9 +321,10 @@ public class GUIManager : MonoBehaviour {
 			hoverPopupGUI.Disable();
 	}
 
-	public void DisplayRewards(List<InventoryItem> items)
+	public void DisplayRewards(LootItemList items)
 	{
-		rewardsGUI.items = items;
+		rewardsGUI.Enable(items);
+		//rewardsGUI.items = items;
 		//uiState = UIState.rewards;
 
 	}

@@ -53,6 +53,9 @@ public class QuickInventoryGUIController : BasicGUIController {
 			PlayerCamera.Instance.TransitionToQuickInventory();
 			subCategories = PlayerManager.Instance.data.GetSubcategories("Toys");
 		}
+		else if(selectedMainInventoryCategory == ItemCategories.Construction)
+		{
+		}
 		SetupSubCategories();
 		OnCategoryPressed(0, 1);
 		currentSelectedItemIndex = -1;

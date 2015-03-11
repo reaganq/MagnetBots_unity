@@ -19,6 +19,8 @@ ModelImporter:
     100026: pSolid1
     100028: polySurface5
     100030: polySurface6
+    100032: pCylinder14
+    100034: pCylinder15
     400000: //RootNode
     400002: lightcone_0010
     400004: lightcone_0011
@@ -35,6 +37,8 @@ ModelImporter:
     400026: pSolid1
     400028: polySurface5
     400030: polySurface6
+    400032: pCylinder14
+    400034: pCylinder15
     2300000: lightcone_0010
     2300002: lightcone_0011
     2300004: lightcone_0012
@@ -50,6 +54,8 @@ ModelImporter:
     2300024: pSolid1
     2300026: polySurface5
     2300028: polySurface6
+    2300030: pCylinder14
+    2300032: pCylinder15
     3300000: lightcone_0010
     3300002: lightcone_0011
     3300004: lightcone_0012
@@ -65,6 +71,8 @@ ModelImporter:
     3300024: pSolid1
     3300026: polySurface5
     3300028: polySurface6
+    3300030: pCylinder14
+    3300032: pCylinder15
     4300000: pSolid1
     4300002: lightcone_0015
     4300004: lightcone_0014
@@ -80,6 +88,8 @@ ModelImporter:
     4300024: lightcone_007
     4300026: polySurface5
     4300028: polySurface6
+    4300030: pCylinder14
+    4300032: pCylinder15
     9500000: //RootNode
     11100000: //RootNode
   materials:

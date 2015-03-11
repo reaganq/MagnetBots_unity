@@ -3,7 +3,6 @@ using System.Collections;
 using System;
 using Parse;
 
-
 public class IntroGUIController : MonoBehaviour {
 
     public UILabel loadingLabel;
@@ -135,7 +134,6 @@ public class IntroGUIController : MonoBehaviour {
 					PlayerManager.Instance.LoadGame();
 					loading = true;
 				}
-
 
 			}
 		}

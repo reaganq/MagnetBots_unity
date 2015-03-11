@@ -67,7 +67,7 @@ public class PlayerInformation  {
        
         AddCurrency(957,BuyCurrencyType.Coins);
         AddCurrency(100,BuyCurrencyType.Magnets);
-		AddCurrency(100, BuyCurrencyType.CitizenPoints);
+		AddCurrency(152, BuyCurrencyType.CitizenPoints);
 		EquipBaseNakedArmor();
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);
@@ -292,7 +292,10 @@ public class PlayerInformation  {
 		case 5:
 			break;
 		}
+	}
 
+	public void AddBadge(RPGBadge badge)
+	{
 	}
 
 	public void AddItem(InventoryItem item)

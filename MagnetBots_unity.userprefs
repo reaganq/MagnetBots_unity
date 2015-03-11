@@ -1,30 +1,40 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Detectors/ProjectileCollider.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="120" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="438" Column="4" />
-      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="111" Column="32" />
-      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="107" Column="148" />
-      <File FileName="Assets/Scripts/Base/PlayerAction.cs" Line="21" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="373" Column="23" />
-      <File FileName="Assets/Scripts/Armor/Base/BasePlayerSkill.cs" Line="123" Column="49" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="301" Column="32" />
-      <File FileName="Assets/Scripts/Character/CharacterInputController.cs" Line="79" Column="25" />
-      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="384" Column="39" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="96" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/SkillButton.cs" Line="83" Column="19" />
-      <File FileName="Assets/Scripts/Managers/GlobalInputManager.cs" Line="15" Column="42" />
-      <File FileName="Assets/Scripts/Armor/Detectors/ProjectileCollider.cs" Line="36" Column="3" />
-      <File FileName="Assets/Scripts/Armor/Detectors/Detector.cs" Line="50" Column="15" />
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="260" Column="32" />
-      <File FileName="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs" Line="33" Column="35" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="77" Column="5" />
+      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight.shader" Line="30" Column="61" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ConstructionGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/CategoryButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/GeneralData.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NPC/RPGConstruction.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Quest/Task.cs" Line="1" Column="1" />
+      <File FileName="Assets/JMO Assets/Toony Colors Pro/Shaders/TGP_Basic_OneLight_lightmap.shader" Line="19" Column="31" />
+      <File FileName="Assets/Scripts/Armor/Melee/NormalMelee.cs" Line="81" Column="48" />
+      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="273" Column="2" />
+      <File FileName="Assets/Scripts/Armor/Base/ArmorAnimation.cs" Line="7" Column="28" />
+      <File FileName="Assets/Scripts/Armor/Base/PassiveArmorAnimationController.cs" Line="48" Column="45" />
+      <File FileName="Assets/Scripts/Armor/Base/BasePlayerSkill.cs" Line="146" Column="54" />
+      <File FileName="Assets/Scripts/Armor/Detectors/TriggerCollider.cs" Line="22" Column="24" />
+      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="642" Column="51" />
+      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="70" Column="3" />
+      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="20" Column="31" />
+      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="425" Column="10" />
+      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
+            <Node name="JMO Assets" expanded="True">
+              <Node name="Toony Colors Pro" expanded="True">
+                <Node name="Shaders" expanded="True" />
+              </Node>
+            </Node>
             <Node name="Photon Unity Networking" expanded="True">
               <Node name="Plugins" expanded="True">
                 <Node name="PhotonNetwork" expanded="True" />
@@ -33,23 +43,48 @@
             <Node name="Scripts" expanded="True">
               <Node name="Armor" expanded="True">
                 <Node name="Base" expanded="True" />
-                <Node name="Detectors" expanded="True">
-                  <Node name="ProjectileCollider.cs" selected="True" />
-                </Node>
+                <Node name="Detectors" expanded="True" />
                 <Node name="Melee" expanded="True" />
-                <Node name="Range" expanded="True" />
+                <Node name="Range" expanded="True">
+                  <Node name="BasePlayerRangedSkill.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="Base" expanded="True" />
               <Node name="Character" expanded="True" />
+              <Node name="Cinematic" expanded="True" />
               <Node name="Enemies" expanded="True">
                 <Node name="Skills" expanded="True" />
               </Node>
               <Node name="GUI" expanded="True">
                 <Node name="Controllers" expanded="True" />
               </Node>
+              <Node name="Item" expanded="True" />
               <Node name="Managers" expanded="True" />
+              <Node name="Minigames" expanded="True" />
               <Node name="NPC" expanded="True" />
               <Node name="Player" expanded="True" />
+              <Node name="Quest" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Editor" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="JMO Assets" expanded="True">
+              <Node name="Toony Colors Pro" expanded="True">
+                <Node name="Shaders" expanded="True">
+                  <Node name="Fx" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="T4M" expanded="True">
+              <Node name="Shaders" expanded="True">
+                <Node name="ShaderModel2" expanded="True">
+                  <Node name="Unified" expanded="True" />
+                </Node>
+              </Node>
             </Node>
           </Node>
         </State>

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerCharacter : CharacterStatus {
 
 	public CharacterActionManager playerActionManager;
@@ -56,15 +57,18 @@ public class PlayerCharacter : CharacterStatus {
 			parentZone = newZone;
 
 		DisplayName(true);
-		if(parentZone.zoneType == ZoneType.arena)
+		if(parentZone != null)
 		{
-			DisplayHpBar(true);
+			if(parentZone.zoneType == ZoneType.arena)
+			{
+				DisplayHpBar(true);
+			}
+			else
+				DisplayHpBar(false);
 		}
-		else
-			DisplayHpBar(false);
 		Debug.Log("i now belong to new zoneid: " + parentZone.Name + zoneViewID);
 	}
-	
+
 	/*public override void ChangeMovementSpeed(float change)
 	{
 		base.ChangeMovementSpeed(change);

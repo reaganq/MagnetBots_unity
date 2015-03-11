@@ -379,6 +379,7 @@ public enum ItemCategories
 	Armors,
 	Food,
 	Toys,
+	Construction,
 	UpgradeMaterials,
 	None
 }

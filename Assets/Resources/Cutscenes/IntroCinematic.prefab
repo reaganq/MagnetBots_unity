@@ -2924,7 +2924,7 @@ Animation:
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_CullingType: 0
 --- !u!111 &11100002
 Animation:
   m_ObjectHideFlags: 1
@@ -2977,6 +2977,12 @@ MonoBehaviour:
   interiorCameraAnimation: {fileID: 0}
   townTrackingCamera: {fileID: 0}
   townTrackingCameraAnimation: {fileID: 0}
+  dummy: {fileID: 0}
+  face: 0
+  body: 0
+  armL: 0
+  armR: 0
+  legs: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

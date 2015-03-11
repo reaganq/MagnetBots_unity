@@ -13,6 +13,8 @@
         <minQuantity>50</minQuantity>
         <maxQuantity>100</maxQuantity>
         <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
       </LootItem>
       <LootItem>
         <itemType>Armor</itemType>
@@ -26,6 +28,8 @@
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
         <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
       </LootItem>
       <LootItem>
         <itemType>UpgradeMaterials</itemType>
@@ -36,11 +40,15 @@
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
         <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
       </LootItem>
     </Loots>
     <PrefabPaths>
       <string>Enemies/Jim_Boss</string>
     </PrefabPaths>
+    <preFightActions />
+    <postFightActions />
     <ID>1</ID>
     <Name>Jim</Name>
     <Description>Scariest gym teacher in the entire universe.</Description>

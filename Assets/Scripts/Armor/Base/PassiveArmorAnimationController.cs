@@ -45,6 +45,7 @@ public class PassiveArmorAnimationController : MonoBehaviour {
     {
         target.AddClip(anim.clip, anim.clip.name);
         target[anim.clip.name].layer = anim.animationLayer;
+		target[anim.clip.name].speed = anim.speed;
         //StartCoroutine(MixingTransforms( anim.addMixingTransforms, anim.removeMixingTransforms, anim.clip));
         yield return new WaitForEndOfFrame();
 

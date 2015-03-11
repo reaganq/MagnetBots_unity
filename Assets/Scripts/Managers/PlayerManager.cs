@@ -42,7 +42,8 @@ public class PlayerManager : MonoBehaviour
 				_activeZone.LeaveZone();
 			_activeZone = value;
 			_activeZone.EnterZone();
-			avatarStatus.DisplayInfoByZone();
+			if(avatarStatus != null)
+				avatarStatus.DisplayInfoByZone();
 			GUIManager.Instance.DisplayMainGUI();
 		}
 		
@@ -173,7 +174,15 @@ public class PlayerManager : MonoBehaviour
 
 		//TODO hacky party list refresh
 		_partyMembers.Clear();
+		Invoke("EquipStartupItems", 0.1f);
     }
+
+	public void EquipStartupItems()
+	{
+		Hero.EquipItem(Hero.ArmoryInventory.Items[15]);
+		Hero.EquipItem(Hero.ArmoryInventory.Items[16]);
+		Hero.EquipItem(Hero.ArmoryInventory.Items[17]);
+	}
 
 	public void ChangeWorld()
 	{
@@ -250,6 +259,8 @@ public class PlayerManager : MonoBehaviour
 	public void PlayToy(string prefabPath)
 	{
 		//increase happiness;
+		//spawn the toy prefab. toy has a self timer
+		//play correct animation
 	}
 
 	public void EatFood(string prefabPath)
@@ -302,102 +313,63 @@ public class PlayerManager : MonoBehaviour
     {
         avatarInput.enabled = false;
     }
-
-	public void GiveReward(LootItemList loots)
-	{
-		for (int i = 0; i < loots.items.Count; i++) {
-			Hero.AddItem(loots.items[i]);
-		}
-		for (int i = 0; i < loots.currencies.Count; i++) {
-			Hero.AddRPGCurrency(loots.currencies[i]);
-		}
-		for (int i = 0; i < loots.badges.Count; i++) {
-			Hero.AddRPGCurrency(loots.currencies[i]);
-		}
-	}
-
+	
 	//party leader send to party members when they join
-	public void GiveRewards(List<LootItem> loots)
+	public void GiveRewards(List<LootItem> allLoots, int maxNumberOfLoots)
 	{
-		List<InventoryItem> lootItems = new List<InventoryItem>();     
-		for (int i = 0; i < loots.Count; i++) 
-		{
-			float chance = Random.Range(0.0f, 1.0f);
-			if(chance <= loots[i].dropRate)
+		LootItemList lootItemList = new LootItemList();  
+		int num = 0;
+		for (int i = 0; i < allLoots.Count; i++) { 
+			if(!allLoots[i].Validate())
+				continue;
+			float chance = UnityEngine.Random.Range(0.0f, 1.0f);
+			if(chance <= allLoots[i].dropRate)
 			{
-				Debug.Log(loots[i].itemType.ToString() + i);
-				InventoryItem newItem = new InventoryItem();
-				if(loots[i].itemType == ItemType.Currency)
+				int index = UnityEngine.Random.Range(0, allLoots[i].itemID.Count);
+				if(allLoots[i].itemType == ItemType.Currency)
 				{
-					//RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
-					//newItem.rpgItem = currency;
+					RPGCurrency currency = Storage.LoadById<RPGCurrency>(allLoots[i].itemID[index], new RPGCurrency());
+					lootItemList.currencies.Add(currency);
 				}
-				else if(loots[i].itemType == ItemType.Armor)
+				else if(allLoots[i].itemType == ItemType.Badge)
 				{
-					RPGArmor armor = Storage.LoadById<RPGArmor>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGArmor());
-					newItem.rpgItem = armor;
+					RPGBadge badge = Storage.LoadById<RPGBadge>(allLoots[i].itemID[index], new RPGBadge());
+					lootItemList.badges.Add(badge);
 				}
-				else if(loots[i].itemType == ItemType.Normal || loots[i].itemType == ItemType.UpgradeMaterials)
+				else 
 				{
-					RPGItem item = Storage.LoadById<RPGItem>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGItem());
-					newItem.rpgItem = item;
+					InventoryItem newItem = new InventoryItem();
+					if(allLoots[i].itemType == ItemType.Armor)
+					{
+						RPGArmor armor = Storage.LoadById<RPGArmor>(allLoots[i].itemID[index], new RPGArmor());
+						newItem.rpgItem = armor;
+					}
+					else
+					{
+						RPGItem item = Storage.LoadById<RPGItem>(allLoots[i].itemID[index], new RPGItem());
+						newItem.rpgItem = item;
+					}
+					newItem.CurrentAmount = UnityEngine.Random.Range(allLoots[i].minQuantity, allLoots[i].maxQuantity);
+					newItem.UniqueItemId = newItem.rpgItem.UniqueId;
+					newItem.Level = UnityEngine.Random.Range(1, allLoots[i].itemLevel);
+					lootItemList.items.Add(newItem);
 				}
-				newItem.CurrentAmount = Random.Range(loots[i].minQuantity, loots[i].maxQuantity);
-				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
-				newItem.Level = Random.Range(1, loots[i].itemLevel);
-				lootItems.Add(newItem);
+				if(!allLoots[i].definiteDrop)
+					num ++;
 			}
+			if(maxNumberOfLoots > 0 && num >= maxNumberOfLoots)
+				break;
 		}
-		
-		Debug.Log("total loot items = " + lootItems.Count);
-		GUIManager.Instance.DisplayRewards(lootItems);
-	}
-
-	public void GiveRewards(int magnets, List<LootItem> loots)
-	{
-		List<InventoryItem> lootItems = new List<InventoryItem>();
-
-		if(magnets > 0)
-		{
-			/*InventoryItem newItem = new InventoryItem();
-			RPGCurrency currency = Storage.LoadById<RPGCurrency>(1, new RPGCurrency());
-			newItem.rpgItem = currency;
-			newItem.CurrentAmount = magnets;
-			newItem.UniqueItemId = newItem.rpgItem.UniqueId;
-			newItem.Level = 1;
-			lootItems.Add(newItem);*/
+		GUIManager.Instance.DisplayRewards(lootItemList);
+		for (int i = 0; i < lootItemList.items.Count; i++) {
+			Hero.AddItem(lootItemList.items[i]);
 		}
-		for (int i = 0; i < loots.Count; i++) 
-		{
-			float chance = Random.Range(0.0f, 1.0f);
-			if(chance <= loots[i].dropRate)
-			{
-				Debug.Log(loots[i].itemType.ToString() + i);
-				InventoryItem newItem = new InventoryItem();
-				if(loots[i].itemType == ItemType.Currency)
-				{
-					//RPGCurrency currency = Storage.LoadById<RPGCurrency>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGCurrency());
-					//newItem.rpgItem = currency;
-				}
-				else if(loots[i].itemType == ItemType.Armor)
-				{
-					RPGArmor armor = Storage.LoadById<RPGArmor>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGArmor());
-					newItem.rpgItem = armor;
-				}
-				else if(loots[i].itemType == ItemType.Normal || loots[i].itemType == ItemType.UpgradeMaterials)
-				{
-					RPGItem item = Storage.LoadById<RPGItem>(loots[i].itemID[Random.Range(0, loots[i].itemID.Count)], new RPGItem());
-					newItem.rpgItem = item;
-				}
-				newItem.CurrentAmount = Random.Range(loots[i].minQuantity, loots[i].maxQuantity);
-				newItem.UniqueItemId = newItem.rpgItem.UniqueId;
-				newItem.Level = Random.Range(1, loots[i].itemLevel);
-				lootItems.Add(newItem);
-			}
+		for (int i = 0; i < lootItemList.currencies.Count; i++) {
+			Hero.AddRPGCurrency(lootItemList.currencies[i]);
 		}
-		
-		Debug.Log("total loot items = " + lootItems.Count);
-		GUIManager.Instance.DisplayRewards(lootItems);
+		for (int i = 0; i < lootItemList.badges.Count; i++) {
+			Hero.AddBadge(lootItemList.badges[i]);
+		}
 	}
 }
 

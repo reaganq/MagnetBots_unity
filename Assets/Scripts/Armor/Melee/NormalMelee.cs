@@ -60,9 +60,11 @@ public class NormalMelee : BasePlayerSkill {
 		isBusy = true;
         skillState = SkillState.onUse;
 
+		Debug.Log(randomNumber);
         if(randomNumber > attackAnimations.Length -1)
 			randomNumber = attackAnimations.Length -1;
 		int i = randomNumber;
+		Debug.Log(i);
 		ownerCAM.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);
 
 		yield return new WaitForSeconds(attackAnimations[i].castAnimation.clip.length);
@@ -74,7 +76,8 @@ public class NormalMelee : BasePlayerSkill {
 
 	public override void HitTarget (CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
+		if(!HitTargets.Contains(targetCS))
+			ownerCAM.SpawnParticle(hitDecal.name, hitPos, true);
 		base.HitTarget (targetCS, hitPos, targetPos);
-		ownerCAM.SpawnParticle(hitDecal.name, hitPos, true);
 	}
 }
