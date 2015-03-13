@@ -135,4 +135,7 @@ MonoBehaviour:
   - NetworkDealAIDamage
   - NetworkEatFood
   - NetworkPlayToy
+  - NetworkUpdatePortrait
+  - NetworkUpdateArenaStateData
+  - RequestArenaStateDataFromMaster
   DisableAutoOpenWizard: 0

@@ -41,8 +41,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 654cb5ddff6b0426db0d516acdd96488, type: 2}
   mSprites:
   - name: arrow
-    x: 1142
-    y: 500
+    x: 1895
+    y: 359
     width: 75
     height: 117
     borderLeft: 0
@@ -54,8 +54,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: attackbutton
-    x: 404
-    y: 470
+    x: 367
+    y: 943
     width: 153
     height: 153
     borderLeft: 0
@@ -66,22 +66,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: backbutton_color_bevel
-    x: 1855
-    y: 1029
-    width: 189
-    height: 189
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: backbutton_grey_flat
-    x: 1855
-    y: 838
+    x: 572
+    y: 374
     width: 189
     height: 189
     borderLeft: 0
@@ -93,8 +80,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Background1
-    x: 1142
-    y: 408
+    x: 381
+    y: 470
     width: 90
     height: 90
     borderLeft: 45
@@ -107,7 +94,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: Background2
     x: 1903
-    y: 145
+    y: 2
     width: 134
     height: 134
     borderLeft: 80
@@ -119,62 +106,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: border_corner_alt
-    x: 2
-    y: 1342
+    x: 54
+    y: 1100
     width: 360
     height: 363
-    borderLeft: 150
-    borderRight: 150
-    borderTop: 150
-    borderBottom: 150
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: border_corner_gold
-    x: 367
-    y: 1105
-    width: 360
-    height: 363
-    borderLeft: 180
-    borderRight: 180
-    borderTop: 180
-    borderBottom: 180
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: border_corner_grey
-    x: 744
-    y: 786
-    width: 360
-    height: 363
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: border_curve_alt
-    x: 2
-    y: 1707
-    width: 338
-    height: 338
-    borderLeft: 150
-    borderRight: 150
-    borderTop: 150
-    borderBottom: 150
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: border_curve_grey
-    x: 404
-    y: 765
-    width: 338
-    height: 338
     borderLeft: 150
     borderRight: 150
     borderTop: 150
@@ -184,8 +119,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: border_square_alt
-    x: 763
-    y: 408
+    x: 381
+    y: 565
     width: 377
     height: 376
     borderLeft: 150
@@ -197,8 +132,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: border_square_grey
-    x: 1235
-    y: 289
+    x: 2
+    y: 470
     width: 377
     height: 376
     borderLeft: 160
@@ -210,8 +145,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_square_black
-    x: 1614
-    y: 541
+    x: 1246
+    y: 630
     width: 252
     height: 250
     borderLeft: 0
@@ -223,8 +158,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_square_orange
-    x: 1614
-    y: 289
+    x: 890
+    y: 1680
     width: 252
     height: 250
     borderLeft: 0
@@ -236,8 +171,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_standard_black
-    x: 1194
-    y: 1171
+    x: 951
+    y: 1023
     width: 363
     height: 250
     borderLeft: 180
@@ -249,8 +184,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_standard_blue
-    x: 1194
-    y: 919
+    x: 1530
+    y: 289
     width: 363
     height: 250
     borderLeft: 120
@@ -262,8 +197,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button_standard_green
-    x: 1198
-    y: 667
+    x: 1165
+    y: 289
     width: 363
     height: 250
     borderLeft: 180
@@ -274,37 +209,37 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: button_standard_grey
-    x: 2
-    y: 1090
-    width: 363
-    height: 250
-    borderLeft: 180
-    borderRight: 180
-    borderTop: 125
-    borderBottom: 125
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: button_standard_orange
     x: 2
-    y: 838
+    y: 848
     width: 363
     height: 250
-    borderLeft: 80
-    borderRight: 80
+    borderLeft: 90
+    borderRight: 90
     borderTop: 80
     borderBottom: 80
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: currency_buy_button
+    x: 1903
+    y: 138
+    width: 117
+    height: 116
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: currency_citizen
-    x: 1812
-    y: 1492
-    width: 198
-    height: 198
+    x: 1765
+    y: 1003
+    width: 200
+    height: 200
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -314,36 +249,36 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: currency_coin
-    x: 587
-    y: 1470
-    width: 198
-    height: 198
+    x: 1316
+    y: 1188
+    width: 200
+    height: 200
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: currency_field_bg
+    x: 1165
+    y: 541
+    width: 353
+    height: 87
+    borderLeft: 35
+    borderRight: 35
+    borderTop: 35
+    borderBottom: 35
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: currency_magnet
-    x: 559
-    y: 565
-    width: 198
-    height: 198
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: exitButton_color_bevel
-    x: 572
-    y: 374
-    width: 189
-    height: 189
+    x: 2
+    y: 1842
+    width: 200
+    height: 200
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -378,22 +313,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: header_bottom_decor
-    x: 763
-    y: 289
-    width: 470
-    height: 117
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: icon_defense
-    x: 1308
-    y: 1694
+    x: 1003
+    y: 657
     width: 241
     height: 269
     borderLeft: 0
@@ -405,8 +327,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icon_health
-    x: 1551
-    y: 1626
+    x: 760
+    y: 657
     width: 241
     height: 269
     borderLeft: 0
@@ -418,8 +340,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icon_strength
-    x: 1308
-    y: 1423
+    x: 708
+    y: 1072
     width: 241
     height: 269
     borderLeft: 0
@@ -430,24 +352,11 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: indent_grey_light
-    x: 1851
-    y: 1220
-    width: 175
-    height: 175
-    borderLeft: 60
-    borderRight: 60
-    borderTop: 60
-    borderBottom: 60
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: items
-    x: 986
-    y: 1692
-    width: 320
-    height: 304
+    x: 1500
+    y: 761
+    width: 234
+    height: 213
     borderLeft: 5
     borderRight: 0
     borderTop: 0
@@ -457,8 +366,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile
-    x: 1559
-    y: 1375
+    x: 982
+    y: 1275
     width: 251
     height: 249
     borderLeft: 0
@@ -470,8 +379,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile_BG
-    x: 1559
-    y: 1084
+    x: 690
+    y: 1389
     width: 290
     height: 289
     borderLeft: 0
@@ -483,8 +392,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile_buyButton
-    x: 1812
-    y: 1397
+    x: 914
+    y: 928
     width: 214
     height: 93
     borderLeft: 0
@@ -496,8 +405,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile_noitem
-    x: 1563
-    y: 793
+    x: 416
+    y: 1098
     width: 290
     height: 289
     borderLeft: 0
@@ -509,8 +418,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile_quantitytag
-    x: 1868
-    y: 384
+    x: 734
+    y: 943
     width: 178
     height: 98
     borderLeft: 0
@@ -522,8 +431,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: itemTile_star
-    x: 1142
-    y: 619
+    x: 473
+    y: 470
     width: 54
     height: 53
     borderLeft: 0
@@ -536,7 +445,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: itemTile_tick
     x: 1903
-    y: 281
+    y: 256
     width: 100
     height: 101
     borderLeft: 0
@@ -587,10 +496,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: MenuButton
-    x: 1903
-    y: 2
-    width: 135
-    height: 141
+    x: 372
+    y: 1465
+    width: 316
+    height: 296
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -599,35 +508,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: panel_indent1
-    x: 1868
-    y: 661
-    width: 175
-    height: 175
-    borderLeft: 40
-    borderRight: 40
-    borderTop: 40
-    borderBottom: 40
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: panel_indent2
-    x: 1868
-    y: 484
-    width: 175
-    height: 175
-    borderLeft: 40
-    borderRight: 40
-    borderTop: 40
-    borderBottom: 40
+  - name: MenuButton_active
+    x: 54
+    y: 1465
+    width: 316
+    height: 296
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
   - name: Panel_Repeating1
-    x: 1142
-    y: 674
+    x: 2
+    y: 1100
     width: 50
     height: 740
     borderLeft: 20
@@ -639,10 +535,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: profile
-    x: 664
-    y: 1692
-    width: 320
-    height: 304
+    x: 1736
+    y: 780
+    width: 226
+    height: 221
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -652,10 +548,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quest
-    x: 729
-    y: 1151
-    width: 320
-    height: 304
+    x: 1316
+    y: 976
+    width: 224
+    height: 210
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -665,8 +561,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quest_icon
-    x: 2
-    y: 470
+    x: 763
+    y: 289
     width: 400
     height: 366
     borderLeft: 0
@@ -677,9 +573,74 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: sidepanel_tab_gold
+    x: 547
+    y: 1763
+    width: 341
+    height: 276
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: sidepanel_tab_grey
+    x: 204
+    y: 1763
+    width: 341
+    height: 276
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: team_member_bg
+    x: 1770
+    y: 541
+    width: 238
+    height: 237
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: team_member_gloss
+    x: 522
+    y: 943
+    width: 210
+    height: 115
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: team_member_hpbar
+    x: 522
+    y: 1060
+    width: 198
+    height: 10
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: Tile
-    x: 364
-    y: 1470
+    x: 1542
+    y: 1003
     width: 221
     height: 219
     borderLeft: 50
@@ -691,10 +652,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: trade
-    x: 342
-    y: 1707
-    width: 320
-    height: 304
+    x: 1520
+    y: 541
+    width: 248
+    height: 218
     borderLeft: 0
     borderRight: 0
     borderTop: 0

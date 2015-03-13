@@ -76,8 +76,8 @@ public class PlayerProfile{
 			else if(set.armorStats[i].armorStatsType == ArmorStatsType.strength)
 				bonusStrengthLevel += set.armorStats[i].armorStatsValue;
 		}
-		Debug.Log("vit: " + bonusVitalityLevel + " str: " + bonusStrengthLevel + " def: " + bonusDefenseLevel);
-		Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
+		//Debug.Log("vit: " + bonusVitalityLevel + " str: " + bonusStrengthLevel + " def: " + bonusDefenseLevel);
+		//Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
 	}
 
 	public void RemoveArmorStats(ArmorStatsSet set)
@@ -90,8 +90,8 @@ public class PlayerProfile{
 			else if(set.armorStats[i].armorStatsType == ArmorStatsType.strength)
 				bonusStrengthLevel -= set.armorStats[i].armorStatsValue;
 		}
-		Debug.Log("vit: " + bonusVitalityLevel + " str: " + bonusStrengthLevel + " def: " + bonusDefenseLevel);
-		Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
+		//Debug.Log("vit: " + bonusVitalityLevel + " str: " + bonusStrengthLevel + " def: " + bonusDefenseLevel);
+		//Debug.Log("Tvit: " + totalVitalityLevel + " Tstr: " + totalStrengthLevel + " Tdef: " + totalDefenseLevel);
 	}
 
 	public void UpdateEquippedItems()

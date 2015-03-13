@@ -38,7 +38,7 @@ public class NetworkDebugging : MonoBehaviour {
 		}*/
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
 		{
-			GUILayout.Label(PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).ToString());
+			GUILayout.Label(PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID).ToString());
 		}
 
 		if(PlayerManager.Instance.partyMembers.Count >0)

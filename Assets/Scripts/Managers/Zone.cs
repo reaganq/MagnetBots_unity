@@ -17,7 +17,11 @@ public class Zone : Photon.MonoBehaviour {
 		zoneObject.SetActive(true);
 		PlayerManager.Instance.SpawnPoint = spawnPoint;
 		AddPlayer();
-
+		PlayerManager.Instance.avatarStatus.ResetHealth();
+		if(zoneType == ZoneType.arena)
+			GUIManager.Instance.MainGUI.EnterBattleMode(true);
+		else
+			GUIManager.Instance.MainGUI.EnterBattleMode(false);
 		//avatarObject.transform.position = SpawnPoint.position;
 		//move the player to spawnpoint
 	}
@@ -30,7 +34,7 @@ public class Zone : Photon.MonoBehaviour {
 
 	public void AddPlayer()
 	{
-		myPhotonView.RPC("NetworkAddPlayer", PhotonTargets.MasterClient, PlayerManager.Instance.avatarPhotonView.viewID);
+		myPhotonView.RPC("NetworkAddPlayer", PhotonTargets.All, PlayerManager.Instance.avatarPhotonView.viewID);
 	}
 
 	//master
@@ -40,14 +44,12 @@ public class Zone : Photon.MonoBehaviour {
 		PhotonView view = PhotonView.Find(csViewID);
 		CharacterStatus cs = view.GetComponent<CharacterStatus>();
 		playerCharacterStatuses.Add(cs);
-		Debug.Log(view.ownerId);
 		photonPlayers.Add(info.sender);
-		Debug.Log("base netwrok add player");
 	}
 
 	public void RemovePlayer()
 	{
-		myPhotonView.RPC("NetworkRemovePlayer", PhotonTargets.MasterClient, PlayerManager.Instance.avatarPhotonView.viewID);
+		myPhotonView.RPC("NetworkRemovePlayer", PhotonTargets.All, PlayerManager.Instance.avatarPhotonView.viewID);
 	}
 
 	[RPC]

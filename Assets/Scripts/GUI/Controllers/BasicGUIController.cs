@@ -86,6 +86,31 @@ public class BasicGUIController : MonoBehaviour {
 		Debug.Log("refresh item tiles");
 	}
 
+	public void LoadCurrencyTiles(List<RPGCurrency> itemList, List<CurrencyTilebutton> tiles, GameObject gridPanelRoot, GameObject tilePrefab)
+	{
+		int num = itemList.Count - tiles.Count;
+		if(num>0)
+		{
+			for (int i = 0; i < num; i++) {
+				GameObject itemTile = NGUITools.AddChild(gridPanelRoot, tilePrefab);
+				CurrencyTilebutton tileButton = itemTile.GetComponent<CurrencyTilebutton>();
+				tiles.Add(tileButton);
+			}
+		}
+		for (int i = 0; i < tiles.Count; i++) {
+			if(i>=itemList.Count)
+			{
+				tiles[i].gameObject.SetActive(false);
+			}
+			else
+			{
+				tiles[i].gameObject.SetActive(true);
+				tiles[i].Load(itemList[i]);
+			}
+		}
+		Debug.Log("refresh currency tiles");
+	}
+
 	public virtual void OnCategoryPressed(int index, int level)
 	{
 	}

@@ -159,6 +159,9 @@
             <filename>../popup icons/travel.png</filename>
             <filename>../popup icons/quickInventory_armor.png</filename>
             <filename>../popup icons/shop.png</filename>
+            <filename>../popup icons/quickInventory_addFriend.png</filename>
+            <filename>../popup icons/quickInventory_profile.png</filename>
+            <filename>../popup icons/quickInventory_teamInvite.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

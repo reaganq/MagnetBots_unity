@@ -72,6 +72,12 @@ public class ArmorEditor : BaseEditorWindow
         	s.AbilityString = EditorGUILayout.TextField(s.AbilityString, GUILayout.Width(1000));
 		}
 
+		if(s.EquipmentSlotIndex == EquipmentSlots.Head || s.EquipmentSlotIndex == EquipmentSlots.Face)
+		{
+			EditorGUILayout.PrefixLabel("portrait: ");
+			s.headPortraitPath = EditorGUILayout.TextField(s.headPortraitPath, GUILayout.Width(500));
+		}
+
 		EditorGUILayout.PrefixLabel("max level: ");
 		s.maxLevel = EditorGUILayout.IntField(s.maxLevel, GUILayout.Width(100));
 

@@ -856,7 +856,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
-  m_LocalRotation: {x: -.339458823, y: -8.12236394e-08, z: 4.31731717e-09, w: .940620959}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 2.11631775, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -881,7 +881,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
-  m_LocalRotation: {x: -.339458764, y: -8.12236394e-08, z: 4.3173225e-09, w: .940620959}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 1.82039583, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1139,7 +1139,7 @@ MonoBehaviour:
   _actionState: 0
 --- !u!114 &11400010
 MonoBehaviour:
-  m_ObjectHideFlags: 13
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
@@ -1228,60 +1228,70 @@ MonoBehaviour:
   animations:
   - clip: {fileID: 7400000, guid: aa13abe538c5b49be8c0396ae89a528e, type: 2}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: 888885ba4b59f4fc2943c957b4246479, type: 2}
     animationLayer: 6
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: e2b4efab3305647d0b16a7a5eb213d5c, type: 2}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: 2e654380380a8412a8de07360f76e663, type: 2}
     animationLayer: 6
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: c458a0040ad7d47ceb8e90b47764952f, type: 2}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: 7f7b2f6538a964609bcf6c524308aacb, type: 2}
     animationLayer: 6
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: f94a3428e895a4764a0d0f49c55f7de3, type: 2}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: 7b1f528cc27914a0b972f12e6f7a18b2, type: 2}
     animationLayer: 6
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: 66b1c540550b24b03b739fe1158c1319, type: 2}
     animationLayer: 5
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
     useVerticalBones: 0
   - clip: {fileID: 7400000, guid: ec3925d88a52647c88fa1f16c408535e, type: 2}
     animationLayer: 6
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
@@ -1360,8 +1370,8 @@ MonoBehaviour:
   mOverflow: 2
   mMaterial: {fileID: 0}
   mApplyGradient: 1
-  mGradientTop: {r: .102941155, g: .102941155, b: .102941155, a: 1}
-  mGradientBottom: {r: 1, g: .475862026, b: 0, a: 1}
+  mGradientTop: {r: 0, g: .433113366, b: .860294104, a: 1}
+  mGradientBottom: {r: 0, g: .141024336, b: .198529422, a: 1}
   mSpacingX: 0
   mSpacingY: 0
   mUseFloatSpacing: 0
@@ -1456,10 +1466,11 @@ MonoBehaviour:
   playerActionManager: {fileID: 0}
   avatar: {fileID: 11400004}
   parentZone: {fileID: 0}
+  headPortraitString: 
   zoneViewID: 0
 --- !u!114 &11400028
 MonoBehaviour:
-  m_ObjectHideFlags: 13
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
@@ -1477,7 +1488,7 @@ MonoBehaviour:
   vertical: 1
 --- !u!114 &11400030
 MonoBehaviour:
-  m_ObjectHideFlags: 13
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}

@@ -226,6 +226,17 @@ public class HoverPopupGUIController : BasicGUIController {
 	
 	public void InviteToParty()
 	{
+		if(PlayerManager.Instance.partyMembers.Count >= GeneralData.maxPartySize)
+			return;
+
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].viewID == selectedCharacter.myPhotonView.viewID)
+			{
+				Debug.Log("already in party");
+				return;
+			}
+		}
+
 		Debug.Log("invite to party");
 		if(PlayerManager.Instance.partyMembers.Count > 0)
 			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.partyMembers[0]);

@@ -15,7 +15,7 @@ public class RPGArmor : Equiped
     public string AbilityString;
     public string AbilityIconPath;
 	public string AbilityAtlasPath;
-
+	public string headPortraitPath;
 	public List<ArmorStatsSet> armorStatsSets;
 
  //public List<Effect> EffectsOnHit;

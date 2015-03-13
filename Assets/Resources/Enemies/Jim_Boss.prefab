@@ -2063,6 +2063,7 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2070,6 +2071,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2077,6 +2079,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2084,6 +2087,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2121,6 +2125,7 @@ MonoBehaviour:
   recoilAnimation:
     clip: {fileID: 7400004, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
     animationLayer: 1
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
@@ -2128,6 +2133,7 @@ MonoBehaviour:
   reloadAnimation:
     clip: {fileID: 0}
     animationLayer: 0
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 0
@@ -2175,6 +2181,7 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2182,6 +2189,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 7400016, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2189,6 +2197,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2196,6 +2205,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2208,7 +2218,7 @@ MonoBehaviour:
   skillStatusEffects:
   - ID: 0
     effect: 0
-    primaryEffectValue: 0
+    primaryEffectValue: 10
     secondaryEffectValue: 0
     tertiaryEffectValue: 0
     effectDuration: 0
@@ -2368,6 +2378,7 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2375,6 +2386,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2382,6 +2394,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2389,6 +2402,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -2606,7 +2620,7 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 29e07882b06a34ac988bbb04fc59e607, type: 2}
+  - {fileID: 2100000, guid: c14a36b2e584047ccaf720de613bbcac, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

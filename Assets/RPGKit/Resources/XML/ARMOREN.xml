@@ -26,6 +26,7 @@
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <headPortraitPath>headshot_default</headPortraitPath>
     <armorStatsSets />
   </RPGArmor>
   <RPGArmor>
@@ -168,6 +169,7 @@
     <AbilityString />
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <headPortraitPath>headshot_knight</headPortraitPath>
     <armorStatsSets>
       <ArmorStatsSet>
         <armorStats>
@@ -502,6 +504,7 @@
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <headPortraitPath>headshot_boxer</headPortraitPath>
     <armorStatsSets>
       <ArmorStatsSet>
         <armorStats>
@@ -682,6 +685,7 @@
     <AbilityString>Use this</AbilityString>
     <AbilityIconPath>AbilityIcon/</AbilityIconPath>
     <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <headPortraitPath>headshot_chef</headPortraitPath>
     <armorStatsSets>
       <ArmorStatsSet>
         <armorStats>
@@ -829,6 +833,7 @@
     <HasAbility>false</HasAbility>
     <AbilityString>Use this</AbilityString>
     <AbilityAtlasPath>Atlases/SkillIcons/</AbilityAtlasPath>
+    <headPortraitPath>headshot_samurai</headPortraitPath>
     <armorStatsSets>
       <ArmorStatsSet>
         <armorStats>

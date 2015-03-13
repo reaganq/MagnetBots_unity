@@ -11,6 +11,12 @@ public class DummyAvatar : MonoBehaviour {
 	public Transform HeadRoot;
 	public Transform FaceRoot;
 	public Transform LegsRoot;
+
+	public bool face;
+	public bool body;
+	public bool armL;
+	public bool armR;
+	public bool legs;
 	
 	public List<GameObject> HeadObjects;
 	public List<GameObject> BodyObjects;
@@ -23,6 +29,7 @@ public class DummyAvatar : MonoBehaviour {
 	private string RShoulderRootName = "bones:R_Arm_Hover_b";
 	private string LegsRootName = "bones:LegsRoot";
 	public Transform _myTransform;
+	public Animation animationTarget;
 
 	#region store bones
 	public Transform clavicleL;
@@ -90,28 +97,45 @@ public class DummyAvatar : MonoBehaviour {
 			//SpawnHead(objectpath);
 			break;
 		case EquipmentSlots.Body:
-			NetworkSpawnBody(objectpath);
-			//SpawnBody(objectpath);
+			//
+			if(!body)
+				StartCoroutine(SpawnBody(objectpath));
+			else
+				NetworkSpawnBody(objectpath);
 			break;
 		case EquipmentSlots.ArmL:
-			NetworkSpawnArmL(objectpath);
-			//SpawnArmL(objectpath);
+			//NetworkSpawnArmL(objectpath);
+			StartCoroutine(SpawnArmL(objectpath));
 			break;
 		case EquipmentSlots.ArmR:
-			NetworkSpawnArmR(objectpath);
-			//SpawnArmR(objectpath);
+			//NetworkSpawnArmR(objectpath);
+			StartCoroutine(SpawnArmR(objectpath));
 			break;
 		case EquipmentSlots.Legs:
-			NetworkSpawnLegs(objectpath);
+			//NetworkSpawnLegs(objectpath);
 			//SpawnLegs(objectpath);
+			if(!legs)
+				StartCoroutine(SpawnLegs(objectpath));
+			else
+				NetworkSpawnLegs(objectpath);
 			break;
 		case EquipmentSlots.Face:
-			SpawnFace(objectpath);
+			//SpawnFace(objectpath);
+			StartCoroutine(SpawnFace(objectpath));
 			break;
 		}
 	}
 
-	public void SpawnFace(string objectpath)
+	public IEnumerator SpawnFace(string objectpath)
+	{
+		NetworkSpawnFace(objectpath);
+		animationTarget.Play("head_reaction");
+		animationTarget.Play("head_split");
+		yield return new WaitForSeconds(animationTarget["head_reaction"].length);
+		//yield return null;
+	}
+
+	public void NetworkSpawnFace(string objectpath)
 	{
 		if(FaceObjects.Count > 0)
 		{
@@ -152,6 +176,14 @@ public class DummyAvatar : MonoBehaviour {
 		temp.transform.localPosition = Vector3.zero;
 		temp.transform.localRotation = Quaternion.Euler(-90, 90, 0);
 		HeadObjects.Add(temp);
+	}
+
+	public IEnumerator SpawnBody(string objectpath)
+	{
+		animationTarget.Play("body_reaction");
+		animationTarget.Play("body_split");
+		yield return new WaitForSeconds(animationTarget["body_reaction"].length * 0.5f);
+		NetworkSpawnBody(objectpath);
 	}
 
 	public void NetworkSpawnBody(string objectpath)
@@ -227,6 +259,14 @@ public class DummyAvatar : MonoBehaviour {
 		return null;    
 	}
 
+	public IEnumerator SpawnArmL(string objectpath)
+	{
+		animationTarget.Play("armL_split");
+		animationTarget.Play("armL_reaction");
+		yield return new WaitForSeconds(animationTarget["armL_split"].length*0.5f);
+		NetworkSpawnArmL(objectpath);
+	}
+
 	public void NetworkSpawnArmL(string objectpath)
 	{
 		if(ArmLObjects.Count > 0)
@@ -250,6 +290,14 @@ public class DummyAvatar : MonoBehaviour {
 		ArmLObjects.Add(temp);
 		ArmLObjects.Add(arml);
 		LoadBones();
+	}
+
+	public IEnumerator SpawnArmR(string objectpath)
+	{
+		animationTarget.Play("armR_split");
+		animationTarget.Play("armR_reaction");
+		yield return new WaitForSeconds(animationTarget["armR_split"].length*0.5f);
+		NetworkSpawnArmR(objectpath);
 	}
 
 	public void NetworkSpawnArmR(string objectpath)
@@ -276,6 +324,14 @@ public class DummyAvatar : MonoBehaviour {
 		ArmRObjects.Add(armr);
 		
 		LoadBones();
+	}
+
+	public IEnumerator SpawnLegs(string objectpath)
+	{
+		animationTarget.Play("legs_reaction");
+		animationTarget.Play("legs_split");
+		yield return new WaitForSeconds(animationTarget["legs_reaction"].length * 0.5f);
+		NetworkSpawnLegs(objectpath);
 	}
 
 	public void NetworkSpawnLegs(string objectpath)

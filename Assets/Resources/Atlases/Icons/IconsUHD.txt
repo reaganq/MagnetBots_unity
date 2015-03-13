@@ -2,7 +2,7 @@
 
 "bank.png":
 {
-	"frame": {"x":260,"y":1034,"w":256,"h":256},
+	"frame": {"x":2,"y":1386,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -10,7 +10,7 @@
 },
 "chat.png":
 {
-	"frame": {"x":518,"y":776,"w":256,"h":256},
+	"frame": {"x":518,"y":1034,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -18,7 +18,7 @@
 },
 "construction.png":
 {
-	"frame": {"x":2,"y":870,"w":256,"h":256},
+	"frame": {"x":2,"y":1128,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -26,7 +26,7 @@
 },
 "gym.png":
 {
-	"frame": {"x":260,"y":776,"w":256,"h":256},
+	"frame": {"x":260,"y":1034,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -42,7 +42,15 @@
 },
 "quest.png":
 {
-	"frame": {"x":518,"y":518,"w":256,"h":256},
+	"frame": {"x":518,"y":776,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+"quickInventory_addFriend.png":
+{
+	"frame": {"x":2,"y":870,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -50,7 +58,7 @@
 },
 "quickInventory_armor.png":
 {
-	"frame": {"x":2,"y":612,"w":256,"h":256},
+	"frame": {"x":260,"y":776,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -58,13 +66,29 @@
 },
 "quickInventory_dance.png":
 {
-	"frame": {"x":260,"y":518,"w":256,"h":256},
+	"frame": {"x":518,"y":518,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
 	"sourceSize": {"w":256,"h":256}
 },
 "quickInventory_food.png":
+{
+	"frame": {"x":2,"y":612,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+"quickInventory_profile.png":
+{
+	"frame": {"x":260,"y":518,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+"quickInventory_teamInvite.png":
 {
 	"frame": {"x":612,"y":260,"w":256,"h":256},
 	"rotated": false,
@@ -111,6 +135,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5768aa8301467a56fee944dca3019e8a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:1405bb41b7f4fd6872b4bcabb8abae67$"
 }
 }

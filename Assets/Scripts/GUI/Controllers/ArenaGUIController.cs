@@ -74,11 +74,11 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void UpdateDetailsBox()
 	{
-		partyListText.text = string.Empty;
+		/*partyListText.text = string.Empty;
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
 		{
 			partyListText.text += PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).name + "\n";
-		}
+		}*/
 	}
 
 	public void SoloChallenge()
@@ -113,6 +113,6 @@ public class EnterArenaData
 {
 	public int EnemyID;
 	public int NewViewID;
-	public List<int> partyList = new List<int>();
+	public List<PartyMemberData> partyList = new List<PartyMemberData>();
 	public int PartyLeaderID;
 }

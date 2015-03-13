@@ -41,8 +41,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 730d26a400a2a4e39996622f42c85fbd, type: 2}
   mSprites:
   - name: bank
-    x: 260
-    y: 1034
+    x: 2
+    y: 1386
     width: 256
     height: 256
     borderLeft: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: chat
     x: 518
-    y: 776
+    y: 1034
     width: 256
     height: 256
     borderLeft: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: construction
     x: 2
-    y: 870
+    y: 1128
     width: 256
     height: 256
     borderLeft: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: gym
     x: 260
-    y: 776
+    y: 1034
     width: 256
     height: 256
     borderLeft: 0
@@ -107,7 +107,20 @@ MonoBehaviour:
     paddingBottom: 0
   - name: quest
     x: 518
-    y: 518
+    y: 776
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: quickInventory_addFriend
+    x: 2
+    y: 870
     width: 256
     height: 256
     borderLeft: 0
@@ -119,8 +132,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_armor
-    x: 2
-    y: 612
+    x: 260
+    y: 776
     width: 256
     height: 256
     borderLeft: 0
@@ -132,7 +145,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_dance
-    x: 260
+    x: 518
     y: 518
     width: 256
     height: 256
@@ -145,6 +158,32 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_food
+    x: 2
+    y: 612
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: quickInventory_profile
+    x: 260
+    y: 518
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: quickInventory_teamInvite
     x: 612
     y: 260
     width: 256

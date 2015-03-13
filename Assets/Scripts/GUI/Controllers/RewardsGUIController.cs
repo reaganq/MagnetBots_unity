@@ -3,34 +3,130 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class RewardsGUIController : BasicGUIController {
-
-	public string goldIconPath;
-	public string goldAtlasName;
-	public string gemIconPath;
-	public string gemAtlasName;
-	public Transform rewardsItemsRoot;
-	public Transform rewardsCurrenciesRoot;
-	public float offset;
-	public ItemTileButton[] itemTiles;
-	public LootItemList allLoots;
-	public UIPlayTween badgesPanelTween;
-	public UIPlayTween rewardsPanelTween;
-	public UISprite badgeSprite;
 	
-	public override void Enable()
-	{
-		//panel.SetActive(true);
-		PopulateRewards();
-	}
+	public GameObject rewardsItemsRoot;
+	public GameObject rewardsCurrenciesRoot;
+	public float offset;
+	public List<ItemTileButton> victoryItemTiles;
+	public List<CurrencyTilebutton> currencyTiles;
+	public LootItemList allLoots;
+	public bool isArena;
+	public bool isMinigame;
+	public float score;
+	public UILabel scoreLabel;
+	public GameObject itemTilePrefab;
+	public GameObject currencyTilePrefab;
+	public UIPlayTween rewardPanelTween;
+	public GameObject badgeRewardObject;
+	public UISprite badgeSprite;
 
-	public void Enable(LootItemList loots)
+	public GameObject victoryRewardObject;
+	public GameObject minigameScoreObject;
+
+	public void DisplayArenaRewards(LootItemList loots)
 	{
 		allLoots = loots;
 		Enable();
+		DisplayRewards();
+		isArena = true;
+	}
+
+	public void DisplayMinigameRewards(LootItemList loots, float newScore)
+	{
+		allLoots = loots;
+		Enable();
+		DisplayRewards();
+		isMinigame = true;
+		score = newScore;
+	}
+
+	public bool DisplayBadge()
+	{
+		if(allLoots.badges.Count <= 0)
+			return false;
+		GameObject atlas = Resources.Load(allLoots.badges[0].AtlasName) as GameObject;
+		badgeSprite.atlas = atlas.GetComponent<UIAtlas>();
+		badgeSprite.spriteName = allLoots.badges[0].IconPath;
+		rewardPanelTween.tweenTarget = badgeRewardObject;
+		rewardPanelTween.Play(true);
+		return true;
+	}
+
+	public void HideBadge()
+	{
+		badgeRewardObject.SetActive(false);
+	}
+
+	public void DisplayRewards()
+	{
+		LoadItemTiles(allLoots.items, victoryItemTiles, rewardsItemsRoot, itemTilePrefab, InventoryGUIType.Reward);
+		LoadCurrencyTiles(allLoots.currencies, currencyTiles, rewardsCurrenciesRoot, currencyTilePrefab);
+		rewardPanelTween.tweenTarget = victoryRewardObject;
+		rewardPanelTween.Play(true);
+	}
+
+	public void HideRewards()
+	{
+		victoryRewardObject.SetActive(false);
+	}
+
+	public void DisplayMinigameResults()
+	{
+		scoreLabel.text = score.ToString();
+		rewardPanelTween.tweenTarget = minigameScoreObject;
+		rewardPanelTween.Play(true);
+	}
+
+	public void HideMinigameResults()
+	{
+		minigameScoreObject.SetActive(false);
+	}
+
+	public void OnContinueBadgePressed()
+	{
+		if(isArena)
+			EndArena();
+	}
+
+	public void OnContinueRewardsPressed()
+	{
+		if(DisplayBadge())
+		{
+			HideRewards();
+		}
+		else
+		{
+			if(isArena)
+			{
+				EndArena();
+				return;
+			}
+			if(isMinigame)
+			{
+				DisplayMinigameResults();
+				HideRewards();
+			}
+		}
+	}
+
+	public void OnContinueMinigamePressed()
+	{
+		EndMiniGame();
+	}
+
+	public void EndArena()
+	{
+		PlayerManager.Instance.LeaveArena();
+	}
+
+	public void EndMiniGame()
+	{
+		PlayerManager.Instance.EndMiniGame();
 	}
 
 	public void PopulateRewards()
 	{
+
 		/*int index = 0;
 		Debug.Log(items.Count);
 		for (int i = 0; i < itemTiles.Length; i++) 
@@ -65,5 +161,16 @@ public class RewardsGUIController : BasicGUIController {
 		{
 			PlayerManager.Instance.EndMiniGame();
 		}*/
+	}
+
+	public override void Disable ()
+	{
+		isArena = false;
+		score = 0;
+		isMinigame = false;
+		victoryRewardObject.SetActive(false);
+		minigameScoreObject.SetActive(false);
+		badgeRewardObject.SetActive(false);
+		base.Disable ();
 	}
 }

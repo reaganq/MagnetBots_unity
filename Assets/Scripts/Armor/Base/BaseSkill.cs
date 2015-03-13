@@ -273,26 +273,21 @@ public class BaseSkill : MonoBehaviour {
 	public virtual void HitTarget(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
 		//HitInfo newHit = new HitInfo();
-		Debug.Log("?????");
 		if(HitTargets.Contains(targetCS))
 		{
-			Debug.Log("????");
 			if(limitDamageInstance)
 			{
-				Debug.Log("??");
 				return;
 			}
 		}
 		else
 		{
-			Debug.Log("????");
 			HitTargets.Add(targetCS);
 		}
 
 		TriggerSkillEvents(SkillEventTrigger.onHit);
 		if(isOwner)
 		{
-			Debug.Log("???");
 			ownerManager.DealDamage(targetCS.myPhotonView.viewID, targetCS.myPhotonView.ownerId, skillID, hitPos, targetPos);
 			//action manager deal damage
 		}
@@ -300,13 +295,11 @@ public class BaseSkill : MonoBehaviour {
 
 	public virtual void ResolveHit(CharacterStatus targetCS, Vector3 hitPos, Vector3 targetPos)
 	{
-		Debug.Log("resolving hit: " + outgoingEnemyStatusEffects.Count);
 		if(targetCS.myPhotonView.isMine)
 		{
 			if(ownerStatus.enemyCharacterType == targetCS.characterType)
 			{
 				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingEnemyStatusEffects);
-				Debug.Log(outgoingEnemyStatusEffects.Count);
 			}
 			else
 				targetCS.ReceiveHit(PhotonNetwork.player.ID, skillID, outgoingAllyStatusEffects);

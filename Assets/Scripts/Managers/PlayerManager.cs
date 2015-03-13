@@ -38,16 +38,25 @@ public class PlayerManager : MonoBehaviour
 	{
 		get{ return _activeZone; }
 		set{
-			if(_activeZone != null)
-				_activeZone.LeaveZone();
-			_activeZone = value;
-			_activeZone.EnterZone();
-			if(avatarStatus != null)
-				avatarStatus.DisplayInfoByZone();
-			GUIManager.Instance.DisplayMainGUI();
+			if(value != _activeZone)
+			{
+				if(_activeZone != null)
+				{
+					_activeZone.LeaveZone();
+					if(_activeZone.zoneType == ZoneType.town)
+						cachedTownPosition = avatarActionManager._myTransform.position;
+				}
+
+				_activeZone = value;
+				_activeZone.EnterZone();
+				if(avatarStatus != null)
+					avatarStatus.DisplayInfoByZone();
+				GUIManager.Instance.DisplayMainGUI();
+			}
 		}
 		
 	}
+	public Vector3 cachedTownPosition;
 	public ArenaManager ActiveArena;
 	public PlayerActivityState activityState;
 	public GeneralData data;
@@ -64,9 +73,9 @@ public class PlayerManager : MonoBehaviour
 	public NetworkCharacterMovement avatarNetworkMovement;
 	public PhotonView avatarPhotonView;
 
-	public List<int> _partyMembers = new List<int>();
+	public List<PartyMemberData> _partyMembers = new List<PartyMemberData>();
 	public List<bool> partyChallengeReplies = new List<bool>();
-	public List<int> partyMembers {
+	public List<PartyMemberData> partyMembers {
 		get {
 			return _partyMembers;
 		}
@@ -234,7 +243,7 @@ public class PlayerManager : MonoBehaviour
 		GUIManager.Instance.loadingGUI.Enable();
 		yield return new WaitForSeconds(1.5f);
 		ActiveZone = newZone;
-		avatarObject.transform.position = SpawnPoint.position;
+
 		if(ActiveZone.zoneType == ZoneType.arena)
 		{
 			ActiveArena = ActiveZone.gameObject.GetComponent<ArenaManager>();
@@ -243,17 +252,18 @@ public class PlayerManager : MonoBehaviour
 				Debug.LogError("no bloody arena");
 			}
 			activityState = PlayerActivityState.arena;
+			avatarObject.transform.position = SpawnPoint.position;
+		}
+		else if(ActiveZone.zoneType == ZoneType.town)
+		{
+			activityState = PlayerActivityState.idle;
+			avatarObject.transform.position = cachedTownPosition;
 		}
 	}
 
-	public void LeaveArena(Zone newZone)
+	public void LeaveArena()
 	{
-		if(newZone != null)
-		{
-			ActiveZone = newZone;
-			avatarObject.transform.position = SpawnPoint.position;
-			activityState = PlayerActivityState.idle;
-		}
+		StartCoroutine(GotoZoneSequence(ActiveWorld.DefaultZone));
 	}
 
 	public void PlayToy(string prefabPath)
@@ -301,7 +311,8 @@ public class PlayerManager : MonoBehaviour
 		                        Hero.Equip.EquippedBody.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedBody.Level, Hero.Equip.EquippedBody.rpgArmor.FBXName.Count) - 1],
 		                        Hero.Equip.EquippedArmL.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedArmL.Level, Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1],
 		                        Hero.Equip.EquippedArmR.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedArmR.Level, Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1],
-		                        Hero.Equip.EquippedLegs.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedLegs.Level, Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1]);
+		                        Hero.Equip.EquippedLegs.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedLegs.Level, Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1],
+		                        Hero.Equip.EquippedHead == null? Hero.Equip.EquippedFace.rpgArmor.headPortraitPath : Hero.Equip.EquippedHead.rpgArmor.headPortraitPath);
     }
 	
     public void EnableAvatarInput()
@@ -315,7 +326,7 @@ public class PlayerManager : MonoBehaviour
     }
 	
 	//party leader send to party members when they join
-	public void GiveRewards(List<LootItem> allLoots, int maxNumberOfLoots)
+	public LootItemList GiveRewards(List<LootItem> allLoots, int maxNumberOfLoots)
 	{
 		LootItemList lootItemList = new LootItemList();  
 		int num = 0;
@@ -329,6 +340,7 @@ public class PlayerManager : MonoBehaviour
 				if(allLoots[i].itemType == ItemType.Currency)
 				{
 					RPGCurrency currency = Storage.LoadById<RPGCurrency>(allLoots[i].itemID[index], new RPGCurrency());
+					currency.amount = Random.Range(allLoots[i].minQuantity, allLoots[i].maxQuantity);
 					lootItemList.currencies.Add(currency);
 				}
 				else if(allLoots[i].itemType == ItemType.Badge)
@@ -360,7 +372,7 @@ public class PlayerManager : MonoBehaviour
 			if(maxNumberOfLoots > 0 && num >= maxNumberOfLoots)
 				break;
 		}
-		GUIManager.Instance.DisplayRewards(lootItemList);
+		GUIManager.Instance.DisplayArenaRewards(lootItemList);
 		for (int i = 0; i < lootItemList.items.Count; i++) {
 			Hero.AddItem(lootItemList.items[i]);
 		}
@@ -370,6 +382,9 @@ public class PlayerManager : MonoBehaviour
 		for (int i = 0; i < lootItemList.badges.Count; i++) {
 			Hero.AddBadge(lootItemList.badges[i]);
 		}
+
+		Debug.Log("gave rewards");
+		return lootItemList;
 	}
 }
 
@@ -379,6 +394,19 @@ public enum PlayerActivityState
 	minigame,
 	shop,
 	arena
+}
+
+[System.Serializable]
+public class PartyMemberData
+{
+	public int playerID;
+	public int viewID;
+
+	public PartyMemberData(int vID)
+	{
+		viewID = vID;
+		playerID = PhotonView.Find(viewID).ownerId;
+	}
 }
 
 public enum ContainerType

@@ -222,7 +222,8 @@ public class ArenaManager : Zone {
 
 	public void GiveRewards()
 	{
-		PlayerManager.Instance.GiveRewards(rpgEnemy.Loots, 0);
+		//if quest, give quest loot
+		GUIManager.Instance.DisplayArenaRewards(PlayerManager.Instance.GiveRewards(rpgEnemy.Loots, 0));
 	}
 
 	[RPC]

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class PlayerCharacter : CharacterStatus {
 
 	public CharacterActionManager playerActionManager;
 	public Avatar avatar;
 	public Zone parentZone;
+	public string headPortraitString = "headshot_default";
 	public int zoneViewID;
 
 	// Use this for initialization
@@ -30,6 +30,23 @@ public class PlayerCharacter : CharacterStatus {
 			//request parts
 		}
 
+	}
+
+	public void UpdatePortrait(string path)
+	{
+		myPhotonView.RPC("NetworkUpdatePortrait", PhotonTargets.All, path);
+	}
+
+	[RPC]
+	public void NetworkUpdatePortrait(string path)
+	{
+		headPortraitString = path;
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].viewID == myPhotonView.viewID)
+			{
+				GUIManager.Instance.MainGUI.UpdatePartyMembers();
+			}
+		}
 	}
 
 	[RPC]
@@ -66,7 +83,6 @@ public class PlayerCharacter : CharacterStatus {
 			else
 				DisplayHpBar(false);
 		}
-		Debug.Log("i now belong to new zoneid: " + parentZone.Name + zoneViewID);
 	}
 
 	/*public override void ChangeMovementSpeed(float change)

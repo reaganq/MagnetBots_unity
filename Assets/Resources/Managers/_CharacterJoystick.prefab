@@ -72,7 +72,7 @@ MonoBehaviour:
   swipeTolerance: .850000024
   minPinchLength: 0
   minTwistAngle: 1
-  enabledNGuiMode: 1
+  enabledNGuiMode: 0
   nGUILayers:
     serializedVersion: 2
     m_Bits: 256
@@ -103,7 +103,7 @@ MonoBehaviour:
   isJoyStickDisplayed: 0
   enable: 1
   isActivated: 1
-  showDebugRadius: 0
+  showDebugRadius: 1
   useFixedUpdate: 0
   isUseGuiLayout: 0
   dynamicJoystick: 1

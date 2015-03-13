@@ -482,6 +482,7 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\SkillButton.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\TeleporterGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\TradeGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\CurrencyTilebutton.cs" />
      <Compile Include="Assets\Scripts\GUI\DragCollider.cs" />
      <Compile Include="Assets\Scripts\GUI\EnemyCard.cs" />
      <Compile Include="Assets\Scripts\GUI\FriendBox.cs" />
@@ -490,6 +491,7 @@
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />
      <Compile Include="Assets\Scripts\GUI\NPCActivityButton.cs" />
      <Compile Include="Assets\Scripts\GUI\OverheadUI.cs" />
+     <Compile Include="Assets\Scripts\GUI\TeamMemberUI.cs" />
      <Compile Include="Assets\Scripts\GUI\UiButtonBase.cs" />
      <Compile Include="Assets\Scripts\Item\DanceMove.cs" />
      <Compile Include="Assets\Scripts\Item\EquipedItem.cs" />
@@ -782,6 +784,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CameraMotionBlur.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\DLAA.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_Bump_OneLight.shader" />
+     <None Include="Assets\Resources\Atlases\Portraits\PortraitsUHD.txt" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Spec_Rim_OneLight.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_OutlineCst_Basic_OneLight.shader" />

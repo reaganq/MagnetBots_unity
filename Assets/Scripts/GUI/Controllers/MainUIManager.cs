@@ -13,9 +13,11 @@ public class MainUIManager : BasicGUIController {
 
 	public GameObject[] actionButtons;
 
-	public GameObject[] PartyMemberCards;
+	public TeamMemberUI[] PartyMemberCards;
 	public GameObject QuitPartyButton;
-	public UILabel[] PartyMemberNames;
+	public Transform singlePartymemberLeaveButtonPos;
+	public Transform fullPartyMemberLeaveButtonPos;
+	//public UILabel[] PartyMemberNames;
 	
 	public bool isActionButtonsDisplayed = true;
 	public bool isSideTrayOpen = false;
@@ -146,22 +148,33 @@ public class MainUIManager : BasicGUIController {
 
 	public void UpdatePartyMembers()
 	{
+		int index = 0;
 
-		for (int i = 0; i < PartyMemberCards.Length; i++) 
-		{
-			if(i < PlayerManager.Instance.partyMembers.Count)
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID && index < PartyMemberCards.Length)
 			{
-				PartyMemberCards[i].SetActive(true);
-				PartyMemberNames[i].text = PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).ToString();
+				PartyMemberCards[index].Initialise(PlayerManager.Instance.partyMembers[i].viewID);
+				index ++;
 			}
-			else
-				PartyMemberCards[i].SetActive(false);
 		}
 
-		if(PlayerManager.Instance.partyMembers.Count > 1)
+		if(index < PartyMemberCards.Length)
+		{
+			for (int j = index; j < PartyMemberCards.Length; j++) 
+			{
+				PartyMemberCards[j].Deactivate();
+			}
+		}
+
+		if(index > 0)
 			QuitPartyButton.SetActive(true);
 		else
 			QuitPartyButton.SetActive(false);
+
+		if(index == 1)
+			QuitPartyButton.transform.position = singlePartymemberLeaveButtonPos.position;
+		else if(index == 2)
+			QuitPartyButton.transform.position = fullPartyMemberLeaveButtonPos.position;
 	}
 
 	#endregion

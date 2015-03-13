@@ -132,7 +132,7 @@ public class CharacterStatus : CharacterAttributes {
 		{
 			curHealth -= damage;
 			Debug.LogWarning("currentHP: "+curHealth);
-			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth, damage);
+			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth, damage, true);
 		}
 		if(curHealth <= 0)
 		{
@@ -141,11 +141,16 @@ public class CharacterStatus : CharacterAttributes {
 
     }
 
+	public void ResetHealth()
+	{
+		myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, maxHealth, 0.0f , false);
+	}
+
 	[RPC]
-	public void NetworkSyncHealth(float newHealth, float damage)
+	public void NetworkSyncHealth(float newHealth, float damage, bool displayMessage)
 	{
 		curHealth = newHealth;
-		if(HUD != null)
+		if(HUD != null && displayMessage)
 			HUD.DisplayHpMessage(-damage);
 		//update healthbar
 	}

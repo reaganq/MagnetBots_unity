@@ -112,17 +112,18 @@ public class Avatar : MonoBehaviour {
 		                 PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedArmL.Level, PlayerManager.Instance.Hero.Equip.EquippedArmL.rpgArmor.FBXName.Count) - 1], 
 		                 PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedArmR.Level, PlayerManager.Instance.Hero.Equip.EquippedArmR.rpgArmor.FBXName.Count) - 1], 
 		                 PlayerManager.Instance.Hero.Equip.EquippedLegs.rpgArmor.FBXName[Mathf.Min(PlayerManager.Instance.Hero.Equip.EquippedLegs.Level, PlayerManager.Instance.Hero.Equip.EquippedLegs.rpgArmor.FBXName.Count) - 1],
-		                 myStatus.zoneViewID
+		                 myStatus.zoneViewID,
+		                 myStatus.headPortraitString
 		                 );
 	}
 
-	public void LoadAllBodyParts(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	public void LoadAllBodyParts(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath, string portraitPath)
 	{
 		//myPhotonView.RPC("NetworkInitialiseAvatar", PhotonTargets.All, characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
-		InitialiseAvatar(characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath);
+		InitialiseAvatar(characterName, facePath, headPath, bodyPath, armLPath, armRPath, legsPath, portraitPath);
 	}
 
-	public void InitialiseAvatar(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath)
+	public void InitialiseAvatar(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath, string portraitPath)
 	{
 		SpawnFace(facePath);
 		if(!string.IsNullOrEmpty(headPath))
@@ -134,11 +135,12 @@ public class Avatar : MonoBehaviour {
 		LoadBones();
 		myStatus.UpdateNameTag(characterName);
 		animationTarget.Play("Default_Idle");
+		myStatus.headPortraitString = portraitPath;
 		//zone view id
 	}
 	
 	[RPC]
-	public void NetworkInitialiseAvatar(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath, int newZoneID)
+	public void NetworkInitialiseAvatar(string characterName, string facePath, string headPath, string bodyPath, string armLPath, string armRPath, string legsPath, int newZoneID, string portraitIconPath)
 	{
 		SpawnFace(facePath);
 		if(!string.IsNullOrEmpty(headPath))
@@ -151,6 +153,7 @@ public class Avatar : MonoBehaviour {
 		myStatus.UpdateNameTag(characterName);
 		animationTarget.Play("Default_Idle");
 		myStatus.NetworkDisplayInfoByZone(newZoneID);
+		myStatus.headPortraitString = portraitIconPath;
 		//zone view id
 	}
 

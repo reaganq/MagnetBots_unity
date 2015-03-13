@@ -31,6 +31,13 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			ArenaManagers[i].arenaID = ArenaManagers.IndexOf(ArenaManagers[i]);
 		}
+
+		if(!PhotonNetwork.isMasterClient)
+		{
+			myPhotonView.RPC("RequestArenaStateDataFromMaster", PhotonTargets.MasterClient);
+			Debug.Log("sent request data to master");
+		}
+		//request arena data
 		//ArenaManagers.Clear();
 	}
 
@@ -42,8 +49,8 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void SendPartyChallenge(int enemyID)
 	{
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
-			if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
-				myPhotonView.RPC("ReceivePartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), enemyID);
+			if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
+				myPhotonView.RPC("ReceivePartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID), enemyID);
 		}
 	}
 
@@ -64,8 +71,8 @@ public class WorldManager : Photon.MonoBehaviour {
 		if(!accept)
 		{
 			for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
-				if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
-					myPhotonView.RPC("CancelPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]));
+				if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
+					myPhotonView.RPC("CancelPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID));
 			}
 		}
 	}
@@ -78,6 +85,44 @@ public class WorldManager : Photon.MonoBehaviour {
 
 	#region arena logic
 
+	//new loader to master client
+	[RPC]
+	public void RequestArenaStateDataFromMaster(PhotonMessageInfo info)
+	{
+		List<ArenaStateData> data = new List<ArenaStateData>();
+		{
+			for (int i = 0; i < Arenas.Count; i++) {
+				data.Add(new ArenaStateData());
+				data[i].arenaName = Arenas[i].arenaName;
+				for (int j = 0; j < Arenas[i].arenaStates.Count; j++) {
+					data[i].arenaStates.Add(Arenas[i].arenaStates[j]);
+				}
+			}
+		}
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+
+		myPhotonView.RPC("NetworkUpdateArenaStateData", info.sender, m.GetBuffer());
+		Debug.Log("sent reply back to new loader");
+	}
+
+	[RPC]
+	public void NetworkUpdateArenaStateData(byte[] data)
+	{
+		List<ArenaStateData> arenaStateData = new List<ArenaStateData>();
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream(data);
+		arenaStateData = (List<ArenaStateData>)b.Deserialize(m);
+		Debug.Log("receiving updates from master about arenas");
+		Debug.Log(arenaStateData.Count);
+		for (int i = 0; i < arenaStateData.Count; i++) {
+			for (int j = 0; j < arenaStateData[i].arenaStates.Count; j++) {
+				Arenas[i].arenaStates[j] = arenaStateData[i].arenaStates[j];
+			}
+		}
+	}
+
 	public void RequestArenaEntry(string arenaName, int enemyID, bool solo)
 	{
 		int newid = PhotonNetwork.AllocateViewID();
@@ -88,14 +133,14 @@ public class WorldManager : Photon.MonoBehaviour {
 		
 		if(solo)
 		{
-			data.partyList.Add(PhotonNetwork.player.ID);
+			data.partyList.Add(new PartyMemberData(PlayerManager.Instance.avatarPhotonView.viewID));
 			data.PartyLeaderID = PhotonNetwork.player.ID;
 		}
 		else
 		{
 			if(PlayerManager.Instance.partyMembers.Count == 0)
 			{
-				data.partyList.Add(PhotonNetwork.player.ID);
+				data.partyList.Add(new PartyMemberData(PlayerManager.Instance.avatarPhotonView.viewID));
 				data.PartyLeaderID = PhotonNetwork.player.ID;
 			}
 			else if(PlayerManager.Instance.partyMembers.Count > 0)
@@ -147,7 +192,7 @@ public class WorldManager : Photon.MonoBehaviour {
 
 		List<PhotonPlayer> pPlayers = new List<PhotonPlayer>();
 		for (int x = 0; x < arenaData.partyList.Count; x++) {
-			pPlayers.Add(PhotonPlayer.Find(arenaData.partyList[x]));
+			pPlayers.Add(PhotonPlayer.Find(arenaData.partyList[x].playerID));
 		}
 
 		Arenas[i].arenaInstances[s].PreloadArena(pPlayers, arenaData.EnemyID, arenaData.PartyLeaderID, arenaData.NewViewID );
@@ -336,7 +381,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		PlayerManager.Instance._partyMembers.Clear();
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(partyList);
-		PlayerManager.Instance.partyMembers = (List<int>)b.Deserialize(m);
+		PlayerManager.Instance.partyMembers = (List<PartyMemberData>)b.Deserialize(m);
 		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
 	
@@ -368,27 +413,27 @@ public class WorldManager : Photon.MonoBehaviour {
 	
 	//invitees reply back to prospective/party leader
 	[RPC]
-	public void AcceptPartyInvite(PhotonMessageInfo info)
+	public void AcceptPartyInvite(int viewID, PhotonMessageInfo info)
 	{
 		//failsafe
 		if(PlayerManager.Instance.partyMembers.Count == 0)
 		{
-			PlayerManager.Instance.partyMembers.Add(PhotonNetwork.player.ID);
+			PlayerManager.Instance.partyMembers.Add(new PartyMemberData(PlayerManager.Instance.avatarPhotonView.viewID));
 		}
-		PlayerManager.Instance.partyMembers.Add(info.sender.ID);
+		PlayerManager.Instance.partyMembers.Add(new PartyMemberData(viewID));
 		UpdatePartyMemberList();
 	}
 
 	public void DisbandParty()
 	{
-		if(PlayerManager.Instance.partyMembers[0] == PhotonNetwork.player.ID)
+		if(PlayerManager.Instance.partyMembers[0].playerID == PhotonNetwork.player.ID)
 		{
 			//find next party leader
-			myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[1]));
+			myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[1].playerID));
 		}
 		else
 		{
-			myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[0]));
+			myPhotonView.RPC("QuitParty", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[0].playerID));
 		}
 		EndParty();
 	}
@@ -405,11 +450,19 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void QuitParty(PhotonMessageInfo info)
 	{
-		PlayerManager.Instance.partyMembers.Remove( info.sender.ID );
-		if(PlayerManager.Instance.partyMembers.Count <= 1)
-			EndParty();
-		else
-			UpdatePartyMemberList();
+		int index = -1;
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].playerID == info.sender.ID)
+				index = i;
+		}
+		if(index > -1)
+		{
+			PlayerManager.Instance.partyMembers.RemoveAt(index);
+			if(PlayerManager.Instance.partyMembers.Count <= 1)
+				EndParty();
+			else
+				UpdatePartyMemberList();
+		}
 	}
 
 	/*[RPC]
@@ -427,8 +480,8 @@ public class WorldManager : Photon.MonoBehaviour {
 		b.Serialize(m, PlayerManager.Instance.partyMembers);
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
 		{
-			if(PlayerManager.Instance.partyMembers[i] != PhotonNetwork.player.ID)
-				myPhotonView.RPC("UpdatePartyList", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]), m.GetBuffer());
+			if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
+				myPhotonView.RPC("UpdatePartyList", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID), m.GetBuffer());
 		}
 		GUIManager.Instance.MainGUI.UpdatePartyMembers();
 	}
@@ -446,10 +499,20 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void OnPhotonPlayerDisconnected(PhotonPlayer player)
 	{
 		Debug.LogError(player);
-		if(PlayerManager.Instance.partyMembers.Contains(player.ID))
+		bool isInMyParty = false;
+		int index = 0;
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].playerID == player.ID)
+			{
+				isInMyParty = true;
+				index = i;
+			}
+		}
+
+		if(isInMyParty)
 		{
-			PlayerManager.Instance.partyMembers.Remove(player.ID);
-			if(PlayerManager.Instance.partyMembers[0] == PhotonNetwork.player.ID)
+			PlayerManager.Instance.partyMembers.RemoveAt(index);
+			if(PlayerManager.Instance.partyMembers[0].playerID == PhotonNetwork.player.ID)
 			{
 				if(PlayerManager.Instance.partyMembers.Count <= 1)
 					EndParty();
@@ -502,4 +565,11 @@ public class ArenaLists
 	public List<bool> arenaStates;
 	public string arenaName;
 
+}
+
+[Serializable]
+public class ArenaStateData
+{
+	public string arenaName;
+	public List<bool> arenaStates = new List<bool>();
 }

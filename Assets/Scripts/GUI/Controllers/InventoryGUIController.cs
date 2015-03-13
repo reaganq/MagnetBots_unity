@@ -372,6 +372,7 @@ public enum InventoryGUIType
 	Shop,
 	Other,
 	Playershop,
+	Reward,
 }
 
 public enum ItemCategories

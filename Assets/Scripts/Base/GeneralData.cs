@@ -8,6 +8,7 @@ public class GeneralData: MonoBehaviour{
 	public static List<RPGNPC> NPCs;
 	public static List<RPGTown> towns;
 	public static float interestRate = 0.1f;
+	public static int maxPartySize = 3;
 	public List<ItemCategoryData> itemCategories;
 	public int defaultHeadObj = 1;
 	public int defaultChestObj = 2;

@@ -8,6 +8,7 @@ public class CharacterActionManager : ActionManager {
 	public List<BasePlayerSkill> armorSkills = new List<BasePlayerSkill>();
     public PassiveArmorAnimationController[] armorAnimControllers = new PassiveArmorAnimationController[5];
 	public PlayerMotor playerMotor;
+	public CharacterInputController input;
 	public NetworkCharacterMovement networkMovement;
 	public override bool disableMovement{
 		get{
@@ -42,6 +43,7 @@ public class CharacterActionManager : ActionManager {
     public override void Start () 
     {
         //animationTarget.Play("Default_Idle");
+		input = GetComponent<CharacterInputController>();
 		base.Start();
 		MakeSpawnPool();
 		myAnimation["Default_Idle"].layer = 0;
@@ -188,6 +190,7 @@ public class CharacterActionManager : ActionManager {
 
 	public void TransitionToQuickArmory()
 	{
+		DisableMovement();
 		RotateTo(PlayerCamera.Instance.quickArmoryPos);
 		DisableNetworking();
 		myStatus.DisplayName(false);
@@ -260,6 +263,7 @@ public class CharacterActionManager : ActionManager {
 	public override void DisableMovement()
 	{
 		base.DisableMovement();
+		input.hasWayPoint = false;
 		AnimateToIdle();
 	}
 

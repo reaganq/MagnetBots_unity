@@ -7,7 +7,7 @@ public class ArenaExit : MonoBehaviour {
     {
         if(other.gameObject == PlayerManager.Instance.avatarObject)
         {
-			PlayerManager.Instance.LeaveArena(PlayerManager.Instance.ActiveWorld.DefaultZone);
+			PlayerManager.Instance.LeaveArena();
             //GameManager.Instance.LoadWorld(targetSceneName);
         }
     }

@@ -146,23 +146,18 @@
         </struct>
         <key>fileList</key>
         <array>
-            <filename>../new UI/backbutton_color_bevel.png</filename>
             <filename>../new UI/backbutton_grey_flat.png</filename>
             <filename>../new UI/Background1.png</filename>
             <filename>../new UI/Background2.png</filename>
-            <filename>../new UI/border_curve_grey.png</filename>
             <filename>../new UI/border_square_grey.png</filename>
             <filename>../new UI/button_square_black.png</filename>
             <filename>../new UI/button_standard_blue.png</filename>
             <filename>../new UI/button_standard_green.png</filename>
-            <filename>../new UI/button_standard_grey.png</filename>
             <filename>../new UI/button_standard_orange.png</filename>
             <filename>../new UI/currency_citizen.png</filename>
             <filename>../new UI/currency_coin.png</filename>
             <filename>../new UI/currency_magnet.png</filename>
-            <filename>../new UI/exitButton_color_bevel.png</filename>
             <filename>../new UI/exitButton_grey_flat.png</filename>
-            <filename>../new UI/header_bottom_decor.png</filename>
             <filename>../new UI/header.png</filename>
             <filename>../new UI/icon_defense.png</filename>
             <filename>../new UI/icon_health.png</filename>
@@ -174,21 +169,14 @@
             <filename>../new UI/itemTile_tick.png</filename>
             <filename>../new UI/longbutton_grey.png</filename>
             <filename>../new UI/longbutton_yellow.png</filename>
-            <filename>../new UI/panel_indent1.png</filename>
-            <filename>../new UI/panel_indent2.png</filename>
             <filename>../new UI/Panel_Repeating1.png</filename>
-            <filename>../new UI/border_corner_grey.png</filename>
             <filename>../new UI/border_corner_alt.png</filename>
-            <filename>../new UI/border_corner_gold.png</filename>
-            <filename>../UI/MenuButton.png</filename>
             <filename>../UI/Tile.png</filename>
             <filename>../UI/arrow.png</filename>
             <filename>../new UI/button_standard_black.png</filename>
             <filename>../new UI/button_square_orange.png</filename>
             <filename>../new UI/itemTile_quantitytag.png</filename>
             <filename>../new UI/longbutton_orange.png</filename>
-            <filename>../new UI/border_curve_alt.png</filename>
-            <filename>../new UI/indent_grey_light.png</filename>
             <filename>../new UI/itemTile.png</filename>
             <filename>../UI/attackbutton.png</filename>
             <filename>../new UI/border_square_alt.png</filename>
@@ -197,6 +185,15 @@
             <filename>../new UI/profile.png</filename>
             <filename>../new UI/quest.png</filename>
             <filename>../new UI/quest_icon.png</filename>
+            <filename>../new UI/team_member_bg.png</filename>
+            <filename>../new UI/team_member_gloss.png</filename>
+            <filename>../new UI/team_member_hpbar.png</filename>
+            <filename>../new UI/currency_buy_button.png</filename>
+            <filename>../new UI/currency_field_bg.png</filename>
+            <filename>../new UI/MenuButton_active.png</filename>
+            <filename>../new UI/MenuButton.png</filename>
+            <filename>../new UI/sidepanel_tab_gold.png</filename>
+            <filename>../new UI/sidepanel_tab_grey.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

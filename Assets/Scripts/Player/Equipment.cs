@@ -252,7 +252,10 @@ public class Equipment
 					//PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedFace.UniqueItemId, EquippedFace.Level);
 				EquippedFace = e;
 				if(PlayerManager.Instance.avatar != null)
+			{
 					PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Face);
+				PlayerManager.Instance.avatarStatus.UpdatePortrait(EquippedFace.rpgArmor.headPortraitPath);
+			}
 				break;
 	        case EquipmentSlots.Head:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.Head))
@@ -260,7 +263,10 @@ public class Equipment
 	                //PlayerManager.Instance.Hero.ArmoryInventory.UnequipItem(EquippedHead.UniqueItemId, EquippedHead.Level);
 	            EquippedHead = e;
 	            if(PlayerManager.Instance.avatar != null)
+			{
 	                PlayerManager.Instance.avatar.EquipBodyPart(e.rpgArmor.FBXName[Mathf.Min(e.Level, e.rpgArmor.FBXName.Count) - 1], EquipmentSlots.Head);
+				PlayerManager.Instance.avatarStatus.UpdatePortrait(EquippedHead.rpgArmor.headPortraitPath);
+			}
 	            break;
 	        case EquipmentSlots.Body:
 	            if(IsEquipmentSlotUsed(EquipmentSlots.Body))

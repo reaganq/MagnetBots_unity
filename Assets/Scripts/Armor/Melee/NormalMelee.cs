@@ -60,11 +60,9 @@ public class NormalMelee : BasePlayerSkill {
 		isBusy = true;
         skillState = SkillState.onUse;
 
-		Debug.Log(randomNumber);
         if(randomNumber > attackAnimations.Length -1)
 			randomNumber = attackAnimations.Length -1;
 		int i = randomNumber;
-		Debug.Log(i);
 		ownerCAM.CrossfadeAnimation(attackAnimations[i].castAnimation.clip.name, 0.05f, false);
 
 		yield return new WaitForSeconds(attackAnimations[i].castAnimation.clip.length);

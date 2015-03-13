@@ -123,7 +123,7 @@ public class SimpleFSM : ActionManager {
 				Invoke("ReadyUp", CheckTaunts(state));
 				break;
 			case AIState.selectingSkill:
-				//Invoke("SelectSkill", CheckTaunts(state));
+				Invoke("SelectSkill", CheckTaunts(state));
 				break;
 			case AIState.executingSkill:
 				Invoke("UseActiveAISkill", CheckTaunts(state));

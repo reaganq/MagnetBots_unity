@@ -36,7 +36,7 @@ public class NotificationGUIController : BasicGUIController {
 		{
 			if(prospectivePartyLeader == null)
 				return;
-			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("AcceptPartyInvite", prospectivePartyLeader);
+			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("AcceptPartyInvite", prospectivePartyLeader, PlayerManager.Instance.avatarPhotonView.viewID);
 			prospectivePartyLeader = null;
 			HideNotificationBox();
 		}

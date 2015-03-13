@@ -185,6 +185,9 @@ public class GUIManager : MonoBehaviour {
 		case UIState.quickInventory:
 			QuickInventoryGUI.Disable();
 			break;
+		case UIState.reward:
+			rewardsGUI.Disable();
+			break;
 		}
 	}
 
@@ -321,12 +324,19 @@ public class GUIManager : MonoBehaviour {
 			hoverPopupGUI.Disable();
 	}
 
-	public void DisplayRewards(LootItemList items)
+	public void DisplayArenaRewards(LootItemList items)
 	{
-		rewardsGUI.Enable(items);
+		EnterGUIState(UIState.reward);
+		rewardsGUI.DisplayArenaRewards(items);
 		//rewardsGUI.items = items;
 		//uiState = UIState.rewards;
 
+	}
+
+	public void DisplayMinigameRewards(LootItemList items, float score)
+	{
+		EnterGUIState(UIState.reward);
+		rewardsGUI.DisplayMinigameRewards(items, score);
 	}
 
 	public void HideRewards()
@@ -401,7 +411,8 @@ public enum UIState
 	settings,
 	friends,
 	cinematic,
-	battle
+	battle,
+	reward,
 }
 
 [System.Serializable]

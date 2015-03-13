@@ -1,0 +1,52 @@
+{"frames": {
+
+"headshot_boxer.png":
+{
+	"frame": {"x":2,"y":550,"w":238,"h":272},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":238,"h":272},
+	"sourceSize": {"w":238,"h":272}
+},
+"headshot_chef.png":
+{
+	"frame": {"x":242,"y":276,"w":238,"h":272},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":238,"h":272},
+	"sourceSize": {"w":238,"h":272}
+},
+"headshot_default.png":
+{
+	"frame": {"x":2,"y":276,"w":238,"h":272},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":238,"h":272},
+	"sourceSize": {"w":238,"h":272}
+},
+"headshot_knight.png":
+{
+	"frame": {"x":242,"y":2,"w":238,"h":272},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":238,"h":272},
+	"sourceSize": {"w":238,"h":272}
+},
+"headshot_samurai.png":
+{
+	"frame": {"x":2,"y":2,"w":238,"h":272},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":238,"h":272},
+	"sourceSize": {"w":238,"h":272}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "PortraitsUHD.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a91194cc9e8241f17faa3a358ad1e272$"
+}
+}
