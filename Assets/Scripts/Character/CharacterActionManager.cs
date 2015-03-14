@@ -283,7 +283,7 @@ public class CharacterActionManager : ActionManager {
 
 	public void EatFood(string prefabPath)
 	{
-		myPhotonView.RPC("NetworkEatFood", PhotonTargets.All);
+		myPhotonView.RPC("NetworkEatFood", PhotonTargets.All, prefabPath);
 		actionState = ActionState.specialAction;
 	}
 
@@ -294,6 +294,7 @@ public class CharacterActionManager : ActionManager {
 		{
 			GameObject food = Instantiate(Resources.Load(prefabPath) as GameObject) as GameObject;
 			food.transform.position = _myTransform.position;
+			food.transform.rotation = _myTransform.rotation;
 			PlayerAction pa = food.GetComponent<PlayerAction>();
 			pa.Enable(this);
 		}
@@ -301,7 +302,7 @@ public class CharacterActionManager : ActionManager {
 
 	public void PlayToy(string prefabPath)
 	{
-		myPhotonView.RPC("NetworkPlayToy", PhotonTargets.All);
+		myPhotonView.RPC("NetworkPlayToy", PhotonTargets.All, prefabPath);
 		actionState = ActionState.specialAction;
 	}
 
@@ -310,9 +311,10 @@ public class CharacterActionManager : ActionManager {
 	{
 		if(!string.IsNullOrEmpty(prefabPath))
 		{
+			Debug.Log("playing with toy");
 			GameObject toy = Instantiate(Resources.Load(prefabPath) as GameObject) as GameObject;
 			toy.transform.position = _myTransform.position;
-
+			toy.transform.rotation = _myTransform.rotation;
 			PlayerAction pa = toy.GetComponent<PlayerAction>();
 			pa.Enable(this);
 		}

@@ -151,9 +151,9 @@ ModelImporter:
     400144: //RootNode
     4300000: bones:polySurface7
     7400000: Monologue 1
-    7400002: Monologue 2
-    7400004: Name Loop
-    7400006: Monologue 3
+    7400002: happyBuild
+    7400004: waitingLoop2
+    7400006: outro
     9500000: //RootNode
     11100000: //RootNode
     13700000: bones:polySurface7
@@ -345,7 +345,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Monologue 2
+      name: happyBuild
       takeName: Take 001
       firstFrame: 520
       lastFrame: 620
@@ -517,7 +517,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Name Loop
+      name: waitingLoop2
       takeName: Take 001
       firstFrame: 620
       lastFrame: 680
@@ -689,7 +689,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Monologue 3
+      name: outro
       takeName: Take 001
       firstFrame: 680
       lastFrame: 800

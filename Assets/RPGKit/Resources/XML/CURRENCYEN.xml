@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGCurrency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGCurrency>
+    <IconPath>currency_coin</IconPath>
     <ID>1</ID>
     <Name>Coins</Name>
     <Description>basic currency</Description>
@@ -8,6 +9,7 @@
     <isPremium>false</isPremium>
   </RPGCurrency>
   <RPGCurrency>
+    <IconPath>currency_magnet</IconPath>
     <ID>2</ID>
     <Name>Magnets</Name>
     <Description>Premium currency</Description>
@@ -15,6 +17,7 @@
     <isPremium>true</isPremium>
   </RPGCurrency>
   <RPGCurrency>
+    <IconPath>currency_citizen</IconPath>
     <ID>3</ID>
     <Name>CitizenPoints</Name>
     <Description>Karma</Description>
@@ -22,6 +25,7 @@
     <isPremium>false</isPremium>
   </RPGCurrency>
   <RPGCurrency>
+    <IconPath>quest_icon</IconPath>
     <ID>4</ID>
     <Name>QuestPoints</Name>
     <Description>Quest rewards</Description>

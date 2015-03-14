@@ -72,8 +72,10 @@ public class PlayerCharacter : CharacterStatus {
 		Zone newZone = zoneView.GetComponent<Zone>();
 		if(newZone != null)
 			parentZone = newZone;
-
-		DisplayName(true);
+		if(!myPhotonView.isMine)
+			DisplayName(true);
+		else
+			DisplayName(false);
 		if(parentZone != null)
 		{
 			if(parentZone.zoneType == ZoneType.arena)

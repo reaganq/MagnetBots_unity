@@ -5,7 +5,6 @@ public class PlayerAction : MonoBehaviour {
 
 	public ArmorAnimation actionAnimation;
 	public CharacterActionManager cam;
-	public Animation myAnimation;
 	public int rewardCurrencyID;
 	public float rewardAmount;
 	public float rewardWaitTime;
@@ -17,7 +16,7 @@ public class PlayerAction : MonoBehaviour {
 		if(actionAnimation.clip != null)
 		{
 			StartCoroutine(TransferAnimation(actionAnimation));
-			cam.PlayAnimation(actionAnimation.clip.name);
+			Debug.Log("transferring new animation");
 		}
 		StartCoroutine(MainActionSequence());
 	}
@@ -68,12 +67,24 @@ public class PlayerAction : MonoBehaviour {
 			GameObject obj = GameObject.Instantiate(externalObject, cam._myTransform.position, cam._myTransform.rotation) as GameObject;
 
 		}
-		if(myAnimation != null)
-			myAnimation.Play(actionAnimation.clip.name);
-		yield return new WaitForSeconds(actionAnimation.clip.length);
+		if(actionAnimation.clip != null)
+		{
+			Debug.Log("playing action animation");
+			cam.PlayAnimation(actionAnimation.clip.name, false);
+		}
+		yield return new WaitForSeconds(rewardWaitTime);
 		RPGCurrency currency = Storage.LoadById<RPGCurrency>(rewardCurrencyID, new RPGCurrency());
 		cam.EarnStatusRewards(currency, rewardAmount);
+
+		if(actionAnimation.clip != null)
+		{
+			while(cam.myAnimation.IsPlaying(actionAnimation.clip.name))
+			{
+				yield return null;
+			}
+			cam.myAnimation.RemoveClip(actionAnimation.clip.name);
+		}
 		cam.ResetActionState();
-		Destroy(this);
+		Destroy(gameObject);
 	}
 }

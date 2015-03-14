@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PathologicalGames;
 
 public class OverheadUI : MonoBehaviour {
 
@@ -12,9 +13,10 @@ public class OverheadUI : MonoBehaviour {
 	public GameObject statusRewardObject;
 	public UISprite statusRewardSprite;
 	public UILabel statusRewardLabel;
+	public BillboardConstraint billboard;
 	// Use this for initialization
 	void Start () {
-	
+		billboard.enabled = true;
 	}
 	
 	// Update is called once per frame
@@ -28,6 +30,7 @@ public class OverheadUI : MonoBehaviour {
 	}*/
 	public void DisplayStatusReward(RPGCurrency currency, float amount)
 	{
+		Debug.Log("displaying status rewards");
 		statusRewardLabel.text = "+"+amount;
 		statusRewardSprite.spriteName = currency.IconPath;
 		tween.tweenTarget = statusRewardObject;

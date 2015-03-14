@@ -24,10 +24,11 @@ public class OpeningCinematicGUIController : BasicGUIController {
 	public UIPlayTween setNameUITween;
 	public UIInput nameInput;
 
-	public override void Enable()
-	{
-		base.Enable();
+	public float quickSingleInventoryCameraRectOffset;
 
+	void Start()
+	{
+		quickSingleInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-390/2048)*100) / 100;
 	}
 
 	public void DisplaySubtitle(string text)
@@ -48,6 +49,8 @@ public class OpeningCinematicGUIController : BasicGUIController {
 
 	public void LoadNakedArmors()
 	{
+		StartCoroutine(MoveCamera(introCutscene.interiorCamera, 0.3f, quickSingleInventoryCameraRectOffset));
+		Debug.Log("load naked armor times!");
 		nakedArmorPanelTween.Play(true);
 		for (int i = 0; i < NakedArmorIDs.Length; i++) {
 			//load in naked armors
@@ -60,15 +63,34 @@ public class OpeningCinematicGUIController : BasicGUIController {
 		LoadItemTiles(NakedArmors, itemTiles, inventoryGridRoot, itemTilePrefab, inventoryType);
 	}
 
+	public IEnumerator MoveCamera(Camera targetCamera, float duration, float offset)
+	{
+		float startTime = Time.time;
+		float timer = 0;
+		Camera childCamera = targetCamera;
+		float origX = childCamera.rect.x;
+		while(Time.time < startTime + duration)
+		{
+			childCamera.rect = new Rect(Mathf.Lerp(origX, offset, timer), childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
+			timer += Time.deltaTime/duration;
+			yield return null;
+		}
+		childCamera.rect = new Rect(offset, childCamera.rect.y, childCamera.rect.width, childCamera.rect.height);
+		yield return null;
+	}
+
 	public void HideNakedArmors()
 	{
+		StartCoroutine(MoveCamera(introCutscene.interiorCamera, 0.3f, 0));
 		nakedArmorPanelTween.Play(false);
 	}
 
 	public override void OnDragDrop(int index)
 	{
 		PlayerManager.Instance.Hero.AddItem(NakedArmors[index]);
+		PlayerManager.Instance.Hero.EquipItem(NakedArmors[index]);
 		introCutscene.EquipNakedArmor(NakedArmors[index]);
+		LoadItemTiles(NakedArmors, itemTiles, inventoryGridRoot, itemTilePrefab, inventoryType);
 	}
 
 	public void DisplayAvatarConfirmation()

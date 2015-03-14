@@ -95,6 +95,8 @@ public class ItemUtils {
 		item.IsUsable = EditorGUILayout.Toggle(item.IsUsable ,GUILayout.Width(50));
 		EditorGUILayout.PrefixLabel("Equippable");
 		item.IsEquippable = EditorGUILayout.Toggle(item.IsEquippable ,GUILayout.Width(50));
+		EditorGUILayout.PrefixLabel("limited use?");
+		item.isLimitedUse = EditorGUILayout.Toggle(item.isLimitedUse ,GUILayout.Width(50));
 		EditorGUILayout.EndHorizontal();
 		if (item.IsUsable)
 		{

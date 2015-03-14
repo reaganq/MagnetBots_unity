@@ -99,11 +99,15 @@ public class QuickInventoryGUIController : BasicGUIController {
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Food)
 		{
-			PlayerManager.Instance.Hero.FeedPlayer(displayedItemList[index]);
+			if(PlayerManager.Instance.avatarActionManager.isBusy())
+				return;
+			PlayerManager.Instance.UseItem(displayedItemList[index]);
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Toys)
 		{
-			PlayerManager.Instance.Hero.PlayToy(displayedItemList[index]);
+			if(PlayerManager.Instance.avatarActionManager.isBusy())
+				return;
+			PlayerManager.Instance.UseItem(displayedItemList[index]);
 		}
 		RefreshInventoryIcons();
 	}
@@ -170,15 +174,16 @@ public class QuickInventoryGUIController : BasicGUIController {
  			currentSelectedSubcategory = index;
 		}
 		subcategoryButtons[index].SelectCategory();
-		displayedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
-		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
 		RefreshInventoryIcons();
 		mainScrollBar.value = 0;
     }
     
     public void RefreshInventoryIcons()
     {
+
+		displayedItemList = InventoryGUIController.RefreshItemListOfSubCategory(selectedMainInventoryCategory, currentSelectedSubcategory);
 		LoadItemTiles(displayedItemList, itemTiles, inventoryPanelRoot, itemTilePrefab, inventoryType);
+		gridPanel.Reposition();
     }
 
 	/*public override void OnItemTilePressed(int index)

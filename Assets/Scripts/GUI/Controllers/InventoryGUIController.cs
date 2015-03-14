@@ -34,6 +34,7 @@ public class InventoryGUIController : BasicGUIController {
 	public GameObject upgradeButton;
 	public GameObject useButton;
 	public GameObject tickIcon;
+	public GameObject armorStatsObject;
 	public UISprite currencyIcon;
 	public UILabel currencyLabel;
 	public UILabel quantityLabel;
@@ -264,7 +265,7 @@ public class InventoryGUIController : BasicGUIController {
 		rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
 		rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
 		UpdateItemDetails();
-		if(selectedItem.IsItemEquippable)
+		if(selectedItem.rpgItem.ItemCategory == ItemType.NakedArmor || selectedItem.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			RPGArmor armor = (RPGArmor)selectedItem.rpgItem;
 			defenseBonus.text = "+"+0;
@@ -273,8 +274,10 @@ public class InventoryGUIController : BasicGUIController {
 			defenseBonus.color = Color.white;
 			attackBonus.color = Color.white;
 			healthBonus.color = Color.white;
+			armorStatsObject.SetActive(true);
 			if(armor.armorStatsSets.Count > 0)
 			{
+
 				int statsLevel = (Mathf.Min(armor.armorStatsSets.Count, selectedItem.Level) -1);
 				for (int i = 0; i < armor.armorStatsSets[statsLevel].armorStats.Count; i++) {
 					if(armor.armorStatsSets[statsLevel].armorStats[i].armorStatsType == ArmorStatsType.defence)
@@ -304,7 +307,11 @@ public class InventoryGUIController : BasicGUIController {
 			//if armor has skillicon
 
 		}
-
+		else if(selectedItem.rpgItem.ItemCategory == ItemType.Food)
+		{
+			skillIcon.enabled = false;
+			armorStatsObject.SetActive(true);
+		}
 	}
 
 	public void UpdateItemDetails()
@@ -325,7 +332,6 @@ public class InventoryGUIController : BasicGUIController {
 			}
 			else
 			{
-
 				tickIcon.SetActive(false);
 				EquipButton.SetActive(true);
 			}

@@ -62,9 +62,9 @@ public class PlayerInformation  {
 			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 1);
 				}
 
-		PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
-        
-       
+		//PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 1, 1 , 5);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1 , 1);
         AddCurrency(957,BuyCurrencyType.Coins);
         AddCurrency(100,BuyCurrencyType.Magnets);
 		AddCurrency(152, BuyCurrencyType.CitizenPoints);
@@ -439,16 +439,6 @@ public class PlayerInformation  {
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
     }
-
-	public void FeedPlayer(InventoryItem item)
-	{
-		Debug.Log("feed " + item.rpgItem.Name);
-	}
-
-	public void PlayToy(InventoryItem item)
-	{
-		Debug.Log("playing with toy " + item.rpgItem.Name);
-	}
     
     #endregion
 

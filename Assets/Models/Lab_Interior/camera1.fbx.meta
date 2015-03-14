@@ -6,7 +6,7 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     7400000: Monologue 1
-    7400002: Monologue 2
+    7400002: buildFinish
     9500000: //RootNode
     11100000: //RootNode
   materials:
@@ -53,7 +53,7 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
     - serializedVersion: 16
-      name: Monologue 2
+      name: buildFinish
       takeName: Take 001
       firstFrame: 519
       lastFrame: 532

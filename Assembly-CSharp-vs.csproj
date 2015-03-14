@@ -518,6 +518,7 @@
      <Compile Include="Assets\Scripts\Minigames\Minigame.cs" />
      <Compile Include="Assets\Scripts\Minigames\NPCMinigame.cs" />
      <Compile Include="Assets\Scripts\Misc\DontDestroy.cs" />
+     <Compile Include="Assets\Scripts\Misc\LifeTime.cs" />
      <Compile Include="Assets\Scripts\Misc\PropertyVal.cs" />
      <Compile Include="Assets\Scripts\Misc\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\Misc\TrailerCameraControl.cs" />

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGItem>
-    <IconPath>Icon/nuts_bolts_cereal</IconPath>
-    <AtlasName />
+    <IconPath>food_cereal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <ID>1</ID>
     <Name>Nuts &amp; Bolts Cereal</Name>
     <Description>Michelin 3 Star meal in a box</Description>
@@ -12,13 +12,15 @@
     <IsUpgradeable>false</IsUpgradeable>
     <ItemCategory>Food</ItemCategory>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
-    <isLimitedUse>false</isLimitedUse>
-    <FBXName />
-    <BuyCurrency>Magnets</BuyCurrency>
+    <isLimitedUse>true</isLimitedUse>
+    <FBXName>
+      <string>Food/Cereal</string>
+    </FBXName>
+    <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
-    <BuyValue>0</BuyValue>
-    <SellValue>0</SellValue>
-    <Rarity>Worthless</Rarity>
+    <BuyValue>50</BuyValue>
+    <SellValue>30</SellValue>
+    <Rarity>Common</Rarity>
     <maxLevel>0</maxLevel>
   </RPGItem>
   <RPGItem>
@@ -64,8 +66,8 @@
     <maxLevel>0</maxLevel>
   </RPGItem>
   <RPGItem>
-    <IconPath />
-    <AtlasName>Atlases/Item</AtlasName>
+    <IconPath>NormalOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <ID>4</ID>
     <Name>Disco Ball</Name>
     <Description />
@@ -76,12 +78,35 @@
     <ItemCategory>Toys</ItemCategory>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Toys/Discoball</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>475</BuyValue>
     <SellValue>475</SellValue>
-    <Rarity>Common</Rarity>
+    <Rarity>Rare</Rarity>
+    <maxLevel>0</maxLevel>
+  </RPGItem>
+  <RPGItem>
+    <IconPath>GoldOpal</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
+    <ID>5</ID>
+    <Name>Ducky</Name>
+    <Description>Not as good as a bumblebee.</Description>
+    <SystemDescription />
+    <IsUsable>true</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>Toys</ItemCategory>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>false</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Coins</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>2000</BuyValue>
+    <SellValue>2000</SellValue>
+    <Rarity>Rare</Rarity>
     <maxLevel>0</maxLevel>
   </RPGItem>
 </ArrayOfRPGItem>

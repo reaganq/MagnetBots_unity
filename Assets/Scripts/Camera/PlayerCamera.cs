@@ -35,6 +35,7 @@ public class PlayerCamera: MonoBehaviour {
 	private Transform newTransform;
 
 	public float quickInventoryCameraRectOffset;
+	public float quickSingleInventoryCameraRectOffset;
     //private Vector3 offsetPosition;
     
     //public float rotationSpeed = 50;
@@ -75,6 +76,7 @@ public class PlayerCamera: MonoBehaviour {
 	void Start()
 	{
 		quickInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-700/2048)*100) / 100;
+		quickSingleInventoryCameraRectOffset = Mathf.Ceil(((GameManager.Instance.defaultAspectRatio/GameManager.Instance.nativeAspectRatio)*-390/2048)*100) / 100;
 	}
     
 	void LateUpdate () {
@@ -93,7 +95,7 @@ public class PlayerCamera: MonoBehaviour {
 	{
 		TransitionTo(defaultPos, 60, 0.3f, quickInventoryCameraRectOffset);
 	}
-
+	
 	public void TransitionToDefault()
 	{
 		TransitionTo(defaultPos, 60, 0.2f, 0);

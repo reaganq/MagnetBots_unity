@@ -139,7 +139,7 @@ public class PlayerManager : MonoBehaviour
     public void LoadAvatar()
     {
 		//SUPER HACK
-		if(NetworkManager.Instance.offlineMode)
+		if(NetworkManager.Instance.offlineMode && !GameManager.Instance.newGame)
 			StartNewGame();
 
 		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
@@ -210,7 +210,6 @@ public class PlayerManager : MonoBehaviour
 			RefreshAvatar();
 			ActiveZone = ActiveWorld.DefaultZone;
 		} 
-
 	}
 
 	/*public void ChangeZone(Zone newZone)
@@ -266,8 +265,23 @@ public class PlayerManager : MonoBehaviour
 		StartCoroutine(GotoZoneSequence(ActiveWorld.DefaultZone));
 	}
 
+	public void UseItem(InventoryItem item)
+	{
+		if(item.rpgItem.ItemCategory == ItemType.Food)
+		{
+			EatFood(item.rpgItem.FBXName[0]);
+		}
+		else if(item.rpgItem.ItemCategory == ItemType.Toys)
+		{
+			PlayToy(item.rpgItem.FBXName[0]);
+		}
+		if(item.rpgItem.isLimitedUse)
+			Hero.RemoveItem(item, 1);
+	}
+
 	public void PlayToy(string prefabPath)
 	{
+		avatarActionManager.PlayToy(prefabPath);
 		//increase happiness;
 		//spawn the toy prefab. toy has a self timer
 		//play correct animation

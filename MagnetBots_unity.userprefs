@@ -1,72 +1,60 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/PlayerManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Base/PlayerAction.cs">
     <Files>
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="54" Column="42" />
-      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="27" Column="17" />
-      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="24" Column="55" />
-      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="133" Column="24" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="297" Column="3" />
-      <File FileName="Assets/NGUI/Scripts/Internal/UIDrawCall.cs" Line="371" Column="1" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="210" Column="7" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="62" Column="31" />
-      <File FileName="Assets/Scripts/GUI/EnemyCard.cs" Line="25" Column="3" />
-      <File FileName="Assets/Scripts/GUI/Controllers/RewardsGUIController.cs" Line="173" Column="38" />
-      <File FileName="Assets/Scripts/Player/PlayerProfile.cs" Line="94" Column="5" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="281" Column="31" />
-      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="152" Column="23" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="24" Column="4" />
-      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="375" Column="9" />
-      <File FileName="Assets/Scripts/Arenas/ArenaExit.cs" Line="4" Column="41" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Minigames/Minigame.cs" Line="18" Column="5" />
-      <File FileName="Assets/Scripts/GUI/CurrencyTilebutton.cs" Line="9" Column="40" />
-      <File FileName="Assets/Scripts/Item/RPGCurrency.cs" Line="16" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="11" Column="39" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="183" Column="34" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="76" Column="36" />
-      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="58" Column="43" />
-      <File FileName="Assets/Scripts/Character/CharacterInputController.cs" Line="112" Column="44" />
-      <File FileName="Assets/Scripts/Character/Motor.cs" Line="15" Column="29" />
+      <File FileName="Assets/Scripts/Misc/LifeTime.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="67" Column="52" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="86" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Arenas/ArenaExit.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Minigames/Minigame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/CurrencyTilebutton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGCurrency.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="110" Column="34" />
+      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="284" Column="40" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/ItemInWorld.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/OverheadUI.cs" Line="19" Column="28" />
+      <File FileName="Assets/Scripts/Player/Inventory.cs" Line="233" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/OpeningCinematicGUIController.cs" Line="85" Column="36" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="46" Column="21" />
+      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="136" Column="3" />
+      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="136" Column="32" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="284" Column="30" />
+      <File FileName="Assets/Scripts/Cinematic/IntroCinematicSequence.cs" Line="134" Column="39" />
+      <File FileName="Assets/Plugins/PathologicalGames/UnityConstraints/BillboardConstraint.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Base/PlayerAction.cs" Line="83" Column="23" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="NGUI" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Internal" expanded="True" />
-              </Node>
-            </Node>
             <Node name="Photon Unity Networking" expanded="True">
               <Node name="Plugins" expanded="True">
                 <Node name="PhotonNetwork" expanded="True" />
               </Node>
             </Node>
             <Node name="Scripts" expanded="True">
-              <Node name="Arenas" expanded="True" />
-              <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-                <Node name="Melee" expanded="True" />
+              <Node name="Base" expanded="True">
+                <Node name="PlayerAction.cs" selected="True" />
               </Node>
-              <Node name="Base" expanded="True" />
+              <Node name="Camera" expanded="True" />
               <Node name="Character" expanded="True" />
               <Node name="Cinematic" expanded="True" />
-              <Node name="Enemies" expanded="True" />
               <Node name="GUI" expanded="True">
                 <Node name="Controllers" expanded="True" />
               </Node>
-              <Node name="Item" expanded="True" />
-              <Node name="Managers" expanded="True">
-                <Node name="PlayerManager.cs" selected="True" />
-              </Node>
-              <Node name="Minigames" expanded="True" />
+              <Node name="Managers" expanded="True" />
               <Node name="Player" expanded="True" />
             </Node>
           </Node>
-          <Node name="Assembly-CSharp-Editor" expanded="True">
-            <Node name="Scripts" expanded="True">
-              <Node name="Editor" expanded="True" />
+          <Node name="Assembly-CSharp-firstpass" expanded="True">
+            <Node name="Plugins" expanded="True">
+              <Node name="PathologicalGames" expanded="True">
+                <Node name="UnityConstraints" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

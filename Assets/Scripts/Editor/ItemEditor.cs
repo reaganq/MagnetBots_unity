@@ -72,6 +72,28 @@ public class ItemEditor : BaseEditorWindow
 		}*/
 		
 		ItemUtils.DisplayItemPart(s, Data);
+		EditorUtils.Separator();
+		
+		for (int i = 0; i < s.FBXName.Count; i++) {
+			
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.PrefixLabel(" FBX location ");
+			s.FBXName[i] = EditorUtils.TextField(s.FBXName[i], "fbxname");
+			//DisplayShopItem(item);
+			if (GUILayout.Button("Delete", GUILayout.Width(200)))
+			{
+				s.FBXName.Remove(s.FBXName[i]);
+			}
+			EditorGUILayout.EndHorizontal();
+			
+		}
+		
+		if (GUILayout.Button("Add fbx location", GUILayout.Width(200)))
+		{
+			s.FBXName.Add("Food/");
+		}
+		
+		EditorUtils.Separator();
 		
 		currentItem = s;
 	}

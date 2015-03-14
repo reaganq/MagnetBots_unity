@@ -40,4 +40,4 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .653979242, g: .678140998, b: .79411763, a: 1}
+        second: {r: .985294104, g: .985294104, b: .985294104, a: 1}
