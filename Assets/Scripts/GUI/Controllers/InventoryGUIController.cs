@@ -144,7 +144,7 @@ public class InventoryGUIController : BasicGUIController {
 					subcategoryButtons[i].LoadSubcategoryButton(PlayerManager.Instance.data.itemCategories[selectedCategoryIndex].subcategories[i], i, 1, newitemcount.Count);
 				}
 				else
-					subcategoryButtons[i].LoadCategoryButton(PlayerManager.Instance.data.itemCategories[selectedCategoryIndex].subcategories[i], i, 1);
+					subcategoryButtons[i].LoadSubcategoryButton(PlayerManager.Instance.data.itemCategories[selectedCategoryIndex].subcategories[i], i, 1, 0);
 			}
 		}
 	}

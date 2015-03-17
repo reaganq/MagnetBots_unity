@@ -37,7 +37,7 @@ public class MainUIManager : BasicGUIController {
 	{
 		if(GameManager.Instance.inputType == InputType.TouchInput)
 		{
-			GameManager.Instance.joystick.enable = true;
+			//GameManager.Instance.joystick.enable = true;
 		}
 		sideTray.SetActive(isSideTrayOpen);
 		DisplayActionButtons(isActionButtonsDisplayed);
@@ -52,7 +52,7 @@ public class MainUIManager : BasicGUIController {
 		sideTray.SetActive(false);
 		if(GameManager.Instance.inputType == InputType.TouchInput)
 		{
-			GameManager.Instance.joystick.enable = false;
+			//GameManager.Instance.joystick.enable = false;
 		}
 		PlayerManager.Instance.avatarActionManager.DisableMovement();
 

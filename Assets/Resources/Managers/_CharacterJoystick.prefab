@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42241010c6f9ddc46b78abdc21d505c5, type: 3}
   m_Name: 
@@ -103,9 +104,9 @@ MonoBehaviour:
   isJoyStickDisplayed: 0
   enable: 1
   isActivated: 1
-  showDebugRadius: 1
-  useFixedUpdate: 0
-  isUseGuiLayout: 0
+  showDebugRadius: 0
+  useFixedUpdate: 1
+  isUseGuiLayout: 1
   dynamicJoystick: 1
   area: 7
   joyAnchor: 7
@@ -150,7 +151,7 @@ MonoBehaviour:
   smoothing: {x: 8, y: 8}
   enableInertia: 0
   inertia: {x: 100, y: 100}
-  guiDepth: 0
+  guiDepth: 1
   showZone: 1
   showTouch: 1
   showDeadZone: 0

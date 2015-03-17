@@ -1,6 +1,11 @@
-// EasyTouch v2.0 (September 2012)
-// EasyTouch library is copyright (c) of Hedgehog Team
-// Please send feedback or bug reports to the.hedgehog.team@gmail.com
+/***********************************************
+				EasyTouch IV
+	Copyright © 2014-2015 The Hedgehog Team
+  http://www.blitz3dfr.com/teamtalk/index.php
+		
+	  The.Hedgehog.Team@gmail.com
+		
+**********************************************/
 using UnityEngine;
 using System.Collections;
 
@@ -26,11 +31,11 @@ public class EasyTouchInput{
 	#region Public methods
 	// Return the number of touch
 	public int TouchCount(){
-	
-		#if ((UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8 || UNITY_BLACKBERRY) && !UNITY_EDITOR) 
-			return getTouchCount(true);
+		
+		#if ((UNITY_ANDROID || UNITY_IPHONE || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR) 
+		return getTouchCount(true);
 		#else
-			return getTouchCount(false);
+		return getTouchCount(false);
 		#endif
 		
 	}
@@ -45,21 +50,31 @@ public class EasyTouchInput{
 		else{
 			if (Input.GetMouseButton(0) || Input.GetMouseButtonUp(0)){
 				count=1;
-				if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(EasyTouch.instance.twistKey)|| Input.GetKey(KeyCode.LeftControl) ||Input.GetKey(EasyTouch.instance.swipeKey ))
-					count=2;
-				if (Input.GetKeyUp(KeyCode.LeftAlt)|| Input.GetKeyUp(EasyTouch.instance.twistKey)|| Input.GetKeyUp(KeyCode.LeftControl)|| Input.GetKeyUp(EasyTouch.instance.swipeKey))
-					count=2;
+				if (EasyTouch.GetSecondeFingerSimulation()){
+					if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(EasyTouch.instance.twistKey)|| Input.GetKey(KeyCode.LeftControl) ||Input.GetKey(EasyTouch.instance.swipeKey ))
+						count=2;
+					if (Input.GetKeyUp(KeyCode.LeftAlt)|| Input.GetKeyUp(EasyTouch.instance.twistKey)|| Input.GetKeyUp(KeyCode.LeftControl)|| Input.GetKeyUp(EasyTouch.instance.swipeKey))
+						count=2;
+				}
+				if (count ==0){
+					complexCenter = Vector2.zero;
+					oldMousePosition[0] = new Vector2(-1,-1);
+					oldMousePosition[1] = new Vector2(-1,-1);
+				}
 			}		
+
 		}
-		
+
+
+
 		return count;
 	}
-		
+	
 	// return in Finger structure all informations on an touch
 	public Finger GetMouseTouch(int fingerIndex,Finger myFinger){
-		
+
 		Finger finger;
-		
+	
 		if (myFinger!=null){
 			finger = myFinger;
 		}
@@ -70,7 +85,6 @@ public class EasyTouchInput{
 		
 		
 		if (fingerIndex==1 && (Input.GetKeyUp(KeyCode.LeftAlt)|| Input.GetKeyUp(EasyTouch.instance.twistKey)|| Input.GetKeyUp(KeyCode.LeftControl)|| Input.GetKeyUp(EasyTouch.instance.swipeKey))){
-			
 			finger.fingerIndex = fingerIndex;
 			finger.position = oldFinger2Position; 
 			finger.deltaPosition = finger.position - oldFinger2Position;
@@ -80,7 +94,7 @@ public class EasyTouchInput{
 			
 			return finger;			
 		}
-			
+		
 		if (Input.GetMouseButton(0)){
 			
 			finger.fingerIndex = fingerIndex;
@@ -91,7 +105,7 @@ public class EasyTouchInput{
 			}
 			
 			if (Input.GetMouseButtonDown(0) || (fingerIndex==1 && (Input.GetKeyDown(KeyCode.LeftAlt)|| Input.GetKeyDown(EasyTouch.instance.twistKey)|| Input.GetKeyDown(KeyCode.LeftControl)|| Input.GetKeyDown(EasyTouch.instance.swipeKey)))){
-				
+
 				// Began						
 				finger.position = GetPointerPosition(fingerIndex);
 				finger.deltaPosition = Vector2.zero;
@@ -105,34 +119,34 @@ public class EasyTouchInput{
 				
 				if (fingerIndex==1){
 					oldFinger2Position = finger.position;
+					oldMousePosition[fingerIndex] = finger.position;
 				}
 				else{
 					oldMousePosition[fingerIndex] = finger.position;
 				}
-
+				
 				if (tapCount[fingerIndex]==1){
 					tapeTime[fingerIndex] = Time.realtimeSinceStartup;
 				}
-
+				
 				
 				return finger;
 			}	
-     
 
-       		finger.deltaPosition = finger.position - oldMousePosition[fingerIndex];
-       		
-       		finger.tapCount = tapCount[fingerIndex];
-       		finger.deltaTime = Time.realtimeSinceStartup-deltaTime[fingerIndex];
+			finger.deltaPosition = finger.position - oldMousePosition[fingerIndex];
+
+			finger.tapCount = tapCount[fingerIndex];
+			finger.deltaTime = Time.realtimeSinceStartup-deltaTime[fingerIndex];
 			if (finger.deltaPosition.sqrMagnitude <1){
 				finger.phase = TouchPhase.Stationary;
 			}
 			else{
 				finger.phase = TouchPhase.Moved;
 			}
-
+			
 			oldMousePosition[fingerIndex] = finger.position;
 			deltaTime[fingerIndex] = Time.realtimeSinceStartup;
-        			
+			
 			return finger;
 		}
 		
@@ -147,16 +161,15 @@ public class EasyTouchInput{
 			
 			return finger;
 		}
-			
-		
+
 		return null;
 	}
-
+	
 	// Get the position of the simulate second finger
 	public Vector2 GetSecondFingerPosition(){
-		
+
 		Vector2 pos = new Vector2(-1,-1);
-		
+
 		if ((Input.GetKey(KeyCode.LeftAlt)|| Input.GetKey(EasyTouch.instance.twistKey)) && (Input.GetKey(KeyCode.LeftControl)|| Input.GetKey(EasyTouch.instance.swipeKey))){
 			if (!bComplex){
 				bComplex=true;
@@ -165,12 +178,12 @@ public class EasyTouchInput{
 			pos = GetComplex2finger();
 			return pos;
 		}
-		else if (Input.GetKey(KeyCode.LeftAlt)|| Input.GetKey(EasyTouch.instance.twistKey) ){		
+		else if (Input.GetKey(KeyCode.LeftAlt)|| Input.GetKey(EasyTouch.instance.twistKey) ){	
 			pos =  GetPinchTwist2Finger();
 			bComplex = false;
 			return pos;
 		}else if (Input.GetKey(KeyCode.LeftControl)|| Input.GetKey(EasyTouch.instance.swipeKey) ){	
-
+			
 			pos =GetComplex2finger();
 			bComplex = false;
 			return pos;
@@ -183,7 +196,7 @@ public class EasyTouchInput{
 	#region Private methods
 	// Get the postion of simulate finger
 	private Vector2 GetPointerPosition(int index){
-	
+		
 		Vector2 pos;
 		
 		if (index==0){
@@ -197,10 +210,10 @@ public class EasyTouchInput{
 	}
 	
 	// Simulate for a twist or pinc
-	private Vector2 GetPinchTwist2Finger(){
-
-		Vector2 position;
+	private Vector2 GetPinchTwist2Finger(bool newSim=false){
 		
+		Vector2 position;
+
 		if (complexCenter==Vector2.zero){
 			position.x = (Screen.width/2.0f) - (Input.mousePosition.x - (Screen.width/2.0f)) ;
 			position.y = (Screen.height/2.0f) - (Input.mousePosition.y - (Screen.height/2.0f));
@@ -216,7 +229,7 @@ public class EasyTouchInput{
 	
 	// complexe Alt + Ctr
 	private Vector2 GetComplex2finger(){
-	
+		
 		Vector2 position;
 		
 		position.x = Input.mousePosition.x - deltaFingerPosition.x;

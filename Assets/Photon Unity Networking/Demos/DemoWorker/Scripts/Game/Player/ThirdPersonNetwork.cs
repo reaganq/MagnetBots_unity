@@ -3,12 +3,12 @@ using System.Collections;
 
 public class ThirdPersonNetwork : Photon.MonoBehaviour
 {
-    ThirdPersonCamera cameraScript;
+    PhotonThirdPersonCamera cameraScript;
     ThirdPersonController controllerScript;
 
     void Awake()
     {
-        cameraScript = GetComponent<ThirdPersonCamera>();
+        cameraScript = GetComponent<PhotonThirdPersonCamera>();
         controllerScript = GetComponent<ThirdPersonController>();
 
          if (photonView.isMine)

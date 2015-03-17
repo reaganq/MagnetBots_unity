@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 
     public InputType inputType;
     public GameObject characterJoyStick;
-    public EasyJoystick joystick;
+    //public EasyJoystick joystick;
 	public float defaultScreenHeight = 1536.0f;
 	public float defaultScreenWidth = 2048.0f;
 	public float defaultAspectRatio
@@ -67,11 +67,11 @@ public class GameManager : MonoBehaviour {
 		#if UNITY_IPHONE || UNITY_EDITOR || UNITY_STANDALONE
         inputType = InputType.TouchInput;
         characterJoyStick = Instantiate(Resources.Load("Managers/_CharacterJoystick")) as GameObject;
-        joystick = characterJoyStick.GetComponent<EasyJoystick>();
+        /*joystick = characterJoyStick.GetComponent<EasyJoystick>();
         joystick.showDebugRadius = false;
 
         joystick.enable = false;
-		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GUIManager.Instance.uiCamera;
+		characterJoyStick.GetComponent<EasyTouch>().nGUICameras[0] = GUIManager.Instance.uiCamera;*/
 
         #endif
 		#if UNITY_WEBPLAYER 
@@ -132,7 +132,7 @@ public class GameManager : MonoBehaviour {
 
 		if(inputType == InputType.TouchInput)
 		{
-			joystick.enable = true;
+			//joystick.enable = true;
 		}
 		PlayerManager.Instance.ChangeWorld();
 		yield return null;
@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour {
     {
         if(inputType == InputType.TouchInput)
         {
-            joystick.enable = false;
+            //joystick.enable = false;
         }
         //PlayerManager.Instance.DisableAvatarInput();
         Application.LoadLevel(name);
