@@ -1,50 +1,151 @@
-/***********************************************
-				EasyTouch IV
-	Copyright © 2014-2015 The Hedgehog Team
-  http://www.blitz3dfr.com/teamtalk/index.php
-		
-	  The.Hedgehog.Team@gmail.com
-		
-**********************************************/
+// EasyTouch 3 library is copyright (c) of Hedgehog Team
+// Please send feedback or bug reports to the.hedgehog.team@gmail.com
 
+/// <summary>
+/// Release notes:
+/// 
+/// Easy Touch V3.0.3 August 2013
+/// =============================
+/// 	* Add Window Phone 8 & BLACKBERRY support
+/// 	* FingerUp event no longer send when the touh is NGUI Panel
+/// 
+/// Easy Touch V3.0.2 August 2013
+/// =============================
+/// 	* Fixe XCode error with reserved area
+/// 
+/// 
+/// Easy Touch V3.0.1 April 2013
+/// =============================
+/// 	* Enable reserved area is on by default
+/// 
+/// Easy Touch V3.0 April 2013
+/// =============================
+/// 
+///		* EasyTouch new
+/// 	----------------
+/// 	- Add new static method SetCamera(Camera cam) : To set the current camera use by EasyTouch
+/// 	- Add new static method GetFingerPosition(int fingerIndex) : To get the position of a specific finger
+/// 	- Add new static method ResetTouch(int fingerIndex) : to reset the gesture
+/// 	- Add new static method AddReservedArea( Rect rec) : To add reserved area
+/// 	- Add new static method RemoveReservedArea(Rect rec) : To remove reserved area
+/// 	- New version of EasyJoystick
+/// 	- New extension EasyButton
+/// 	- The key simulation of the second finger are now configurable, and texture (especially to flash compilations because Ctrl & Alt are not recognized in this mode)
+/// 	- Add new option Enable reserved area that allow you to know if the current touch is hover a virtual controller or a reserved area
+/// 		=> Add new member to Gesture classe "isHoverReservedArea"
+/// 	- NGUI management 
+/// 
+/// 	* Gesture class news
+/// 	---------------------
+/// 	- Add member twoFingerDistance on Gesture class : The distance between two finger for a two finger gesture.
+/// 	- Add new method  NormalizedPosition in Gesture class that return the normalize position relative to screen resolution
+/// 	- Add new member isHoverReservedArea on Gesture classe : to know is a touch is hover a virtual controller or a reserved area
+/// 	- Add new parameter to GetTouchToWordlPoint(float z, bool worldZ=false) : WorldZ = true the Z parameter is not relative to the camera
+/// 
+/// 	* Improvement
+/// 	--------------
+///		- On_GUI is now not compil on mobile device.
+/// 	- Time.realtimeSinceStartup replace Time.time to calculate the gesture time.
+/// 	- Add new parameter to IsRectUnderTouch( Rect rect, bool guiRect=false)
+/// 			guiRect = false => origin is on lower left corner
+/// 			guiRect = true => origine is on upper left corner
+/// 	- Same change on method IsInRect on Gesture Class 
+/// 	- Better detection of very short and quick swipe
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix : After enabled EasyTouch with static method "SetEnabled" a random event was sent
+///     - Fix : Now the touch is reset if you start a swipe after a longtap without up your finger
+/// 
+/// V2.5 November 2012
+/// =============================
+/// 	* EasyJoystick
+/// 	--------------
+/// 	- First release of EasyJoystick
+/// 
+/// 	* EasyTouch class
+/// 	-----------------
+/// 	- Add static method IsRectUnderTouch : to get if a touch is in a rect.
+/// 
+///     * Inpsector
+/// 	------------
+///  	- New inspector style for pro & free skin
+/// 	- Add hierarchy icon to identify EasyTouch gameObject
+/// 
+///		* Gesture class
+/// 	-----------------
+/// 	- Add method IsInRect( Rect rect) that return true if the touch is in the rect.
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix 2 static methods that didn't properly reference the  EasyTouch instance
+/// 	-
+/// 
+/// V2.4 october 2012
+/// =============================
+/// 	* News
+/// 	--------------
+/// 	- Remove string comparisons by enumeration,  for better performance
+///
+/// V2.3 october 2012
+/// =============================
+/// 	* News
+/// 	--------------
+/// 	- Added support for the Unity Remote (tested on iPad & Nexus7) 
+/// 	Thank you to fulvio Massini for the support he has given us to implement this functionality
+/// 
+/// 
+/// V2.2 october 2012
+/// =============================
+/// 	* News
+/// 	--------------
+/// 	- Add new Static method  : GetCurrentPickedObject(int fingerIndex) taht return the current gameobject under touch
+/// 	  Look at CameController example.
+/// 
+/// 
+/// V2.1 september 2012
+/// =============================
+///		* Bug fixed
+///   		- On_TouchStart & On_TouchTap events and are no longer sent after the end of a two-fingers gesture
+//		
+/// V2.0 september 2012
+/// =============================
+/// 	* Bugs fixed
+/// 	------------
+/// 		- On_DragEnd2Fingers and On_SwipeEnd2Fingers messages  were sent to wrong during a drag or a swipe.
+/// 		- On_Cancel2Fingers is new sent to the picked object (if auto-select)
+/// 
+/// 	* News
+/// 	--------------
+/// 		- C# migration
+/// 		- Implementing delegate for sending messages. (Broadcast messages is retained with a parameter for javascript developpers)
+/// 		- Management of multiple layer for the auto selection
+/// 		- Management of fake singleton, in case you have more than  one EasyTouch per scene by error
+/// 		- Add custom inspector
+/// 		- Add Debug.LogError if no camera with flag MainCamera was found in the scene
+/// 
+/// 	* EasyTouch class
+/// 	-----------------
+/// 		- remove SetPickableLayer & GetPickableLayer static methods
+/// 		- Add static method GetTouchCount : to get the number of touches.
+/// 
+///		* Gesture class
+/// 	-----------------
+/// 		- Add method (GetScreenToWordlPoint( Camera cam,float z) that return the world coordinate position for a camera and z position
+/// 		- Add method (GetSwipeOrDragAngle()) that return the swipe or drag angle in degree
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
 /// This is the main class of Easytouch engine. 
 /// 
-/// For add Easy Touch to your scene
+/// For add Easy Touch to your scene, use the menu Hedgehog Team<br>
 /// It is a fake singleton, so you can simply access their settings via a script with all static methods or with the inspector.<br>
 /// </summary>
 public class EasyTouch : MonoBehaviour {
-
-	#region private classes
-	[System.Serializable]
-	private class DoubleTap{
-		public bool inDoubleTap = false;
-		public bool inWait = false;
-		public float time=0;
-		public int count=0;
-		public Finger finger;
-
-		public void Stop(){
-			inDoubleTap = false;
-			inWait = false;
-			time=0;
-			count=0;
-		}
-	}	
-
-	private class PickedObject{
-		public GameObject pickedObj;
-		public Camera pickedCamera;
-		public bool isGUI;
-	}
-	#endregion
-
+	
 	#region Delegate
 	public delegate void TouchCancelHandler(Gesture gesture);
 	public delegate void Cancel2FingersHandler(Gesture gesture);
@@ -75,17 +176,12 @@ public class EasyTouch : MonoBehaviour {
 	public delegate void PinchInHandler(Gesture gesture);
 	public delegate void PinchOutHandler(Gesture gesture);
 	public delegate void PinchEndHandler(Gesture gesture);
-	public delegate void PinchHandler(Gesture gesture);
 	public delegate void DragStart2FingersHandler(Gesture gesture);
 	public delegate void Drag2FingersHandler(Gesture gesture);
 	public delegate void DragEnd2FingersHandler(Gesture gesture);
 	public delegate void SwipeStart2FingersHandler(Gesture gesture);
 	public delegate void Swipe2FingersHandler(Gesture gesture);
 	public delegate void SwipeEnd2FingersHandler(Gesture gesture);
-	public delegate void EasyTouchIsReadyHandler();
-
-	public delegate void OverUIElementHandler( Gesture gesture);
-	public delegate void UIElementTouchUpHandler( Gesture gesture);
 	#endregion
 	
 	#region Events
@@ -194,11 +290,7 @@ public class EasyTouch : MonoBehaviour {
 	/// </summary>
 	public static event TwistEndHandler On_TwistEnd;
 	/// <summary>
-	/// Occurs as the pinch  gesture is active.
-	/// </summary>
-	public static event PinchHandler On_Pinch;
-	/// <summary>
-	/// Occurs as the pinch in gesture is active.
+	/// Occurs as the twist in gesture is active.
 	/// </summary>
 	public static event PinchInHandler On_PinchIn;
 	/// <summary>
@@ -233,24 +325,9 @@ public class EasyTouch : MonoBehaviour {
 	/// Like On_SwipeEnd but for a 2 fingers gesture.
 	/// </summary>
 	public static event SwipeEnd2FingersHandler On_SwipeEnd2Fingers;
-	/// <summary>
-	/// Occurs when  easy touch is ready.
-	/// </summary>
-	public static event EasyTouchIsReadyHandler On_EasyTouchIsReady;
-	/// <summary>
-	/// Occurs when current touch is over user interface element.
-	/// </summary>
-	public static event OverUIElementHandler On_OverUIElement;
-
-	public static event UIElementTouchUpHandler On_UIElementTouchUp;
 	#endregion
-
+	
 	#region Enumerations
-
-	public enum GesturePriority{ Tap, Slips};
-
-	public enum DoubleTapDetection { BySystem, ByTime}
-
 	public enum GestureType{ Tap, Drag, Swipe, None, LongTap, Pinch, Twist, Cancel, Acquisition };
 	/// <summary>
 	/// Represents the different directions for a swipe or drag gesture (Left, Right, Up, Down, Other)
@@ -259,235 +336,212 @@ public class EasyTouch : MonoBehaviour {
 	/// <br><br>
 	/// This enumeration is used on Gesture class
 	/// </summary>
-	public enum SwipeDirection{ None, Left, Right, Up, Down, UpLeft, UpRight, DownLeft, DownRight,Other};
-		
-	public enum TwoFingerPickMethod{ Finger, Average};
-
-	public enum EventName{ None,On_TouchStart,On_TouchDown,On_TouchUp,On_SimpleTap,On_DoubleTap,On_LongTapStart,On_LongTap,
+	public enum SwipeType{ None, Left, Right, Up, Down, Other};
+	
+	private enum EventName{ None,On_Cancel, On_Cancel2Fingers, On_TouchStart,On_TouchDown,On_TouchUp,On_SimpleTap,On_DoubleTap,On_LongTapStart,On_LongTap,
 	On_LongTapEnd,On_DragStart,On_Drag,On_DragEnd,On_SwipeStart,On_Swipe,On_SwipeEnd,On_TouchStart2Fingers,On_TouchDown2Fingers,On_TouchUp2Fingers,On_SimpleTap2Fingers,
-	On_DoubleTap2Fingers,On_LongTapStart2Fingers,On_LongTap2Fingers,On_LongTapEnd2Fingers,On_Twist,On_TwistEnd,On_Pinch,On_PinchIn,On_PinchOut,On_PinchEnd,On_DragStart2Fingers,
-		On_Drag2Fingers,On_DragEnd2Fingers,On_SwipeStart2Fingers,On_Swipe2Fingers,On_SwipeEnd2Fingers, On_EasyTouchIsReady ,On_Cancel, On_Cancel2Fingers,On_OverUIElement, On_UIElementTouchUp}
+	On_DoubleTap2Fingers,On_LongTapStart2Fingers,On_LongTap2Fingers,On_LongTapEnd2Fingers,On_Twist,On_TwistEnd,On_PinchIn,On_PinchOut,On_PinchEnd,On_DragStart2Fingers,
+	On_Drag2Fingers,On_DragEnd2Fingers,On_SwipeStart2Fingers,On_Swipe2Fingers,On_SwipeEnd2Fingers }
 	
 	#endregion
 	
 	#region Public members
-	public static EasyTouch instance;
+	public bool enable = true;				// Enables or disables Easy Touch
+	public bool enableRemote=false;			// Enables or disables Unity remote
+	public bool useBroadcastMessage = true; // For javascript developper
+	public GameObject receiverObject = null; // Other object that can receive messages.
+	public bool isExtension = false;		// Send message for extension
 	
-	public bool enable;				// Enables or disables Easy Touch
-	public bool enableRemote;			// Enables or disables Unity remote
-		
-	// General gesture properties
-	public GesturePriority gesturePriority; 
-	public float StationaryTolerance;// 
-	public float longTapTime ;			// The time required for the detection of a long tap.
-	public float swipeTolerance;		// Determines the accuracy of detecting a drag movement 0 => no precision 1=> high precision.
-	public float minPinchLength;			// The minimum length for a pinch detection.
-	public float minTwistAngle;			// The minimum angle for a twist detection.
-	public DoubleTapDetection doubleTapDetection;
-	public float doubleTapTime;
-
-	// Two finger gesture
-	public bool enable2FingersGesture; // Enables 2 fingers gesture.
-	public bool enableTwist;			// Enables or disables recognition of the twist
-	public bool enablePinch;			// Enables or disables recognition of the Pinch
-	public bool enable2FingersSwipe; 	// Enables or disables recognition of 2 fingers swipe
-	public TwoFingerPickMethod twoFingerPickMethod;
-
-	// Auto selection
-	public List<ECamera> touchCameras;	// The  cameras
-	public bool autoSelect;  							// Enables or disables auto select
-	public LayerMask pickableLayers3D;							// Layer detectable by default
-	public bool enable2D;								// Enables or disables auto select on 2D
-	public LayerMask pickableLayers2D;		
-	public bool autoUpdatePickedObject;
-
-	// Unity UI
-	//public EasyTouchRaycaster uiRaycaster;
-	public bool allowUIDetection;
-	public bool enableUIMode;
-	public bool autoUpdatePickedUI;
-
+	public bool enable2FingersGesture=true; // Enables 2 fingers gesture.
+	public bool enableTwist=true;			// Enables or disables recognition of the twist
+	public bool enablePinch=true;			// Enables or disables recognition of the Pinch
+	
+	public Camera easyTouchCamera;			// The main camera
+	public bool autoSelect = false;  		// Enables or disables auto select
+	public LayerMask pickableLayers;		// Layer detectable by default
+	
+	public float StationnaryTolerance=25f;	// 
+	public float longTapTime = 1f;			// The time required for the detection of a long tap.
+	public float swipeTolerance= 0.85f;		// Determines the accuracy of detecting a drag movement 0 => no precision 1=> high precision.
+	public float minPinchLength=0f;			// The minimum length for a pinch detection.
+	public float minTwistAngle =1f;			// The minimum angle for a twist detection.
+	
 	// NGUI
-	public bool enabledNGuiMode;	// True = no events are send when touch is hover an NGui panel
+	public bool enabledNGuiMode = false;	// True = no events are send when touch is hover an NGui panel
 	public LayerMask nGUILayers;
-	public List<Camera> nGUICameras;
-		
+	public List<Camera> nGUICameras = new List<Camera>();
+	private bool isStartHoverNGUI = false;
+	
+	// Extension (joystick and button)
+	public List<Rect> reservedAreas= new List<Rect>();
+	public bool enableReservedArea=true;
+	
 	// Second Finger
-	public bool enableSimulation;
-	public KeyCode twistKey;
-	public KeyCode swipeKey;
-
+	public KeyCode twistKey = KeyCode.LeftAlt;
+	public KeyCode swipeKey = KeyCode.LeftControl;
+	
 	// Inspector
-	public bool showGuiInspector = false;
-	public bool showSelectInspector = false;
-	public bool showGestureInspector = false;
-	public bool showTwoFingerInspector = false;
-	public bool showSecondFingerInspector = false;
+	public bool showGeneral = true;
+	public bool showSelect = true;
+	public bool showGesture = true;
+	public bool showTwoFinger = true;
+	public bool showSecondFinger = true;
 	#endregion
 	
-	#region Private members	
-	private EasyTouchInput input = new EasyTouchInput();
-	private Finger[] fingers=new Finger[100];					// The informations of the touch for finger 1.
+	#region Private members
+	public static EasyTouch instance;								// Fake singleton
+	
+	private EasyTouchInput input;
+	
+	private GestureType complexCurrentGesture = GestureType.None; 	// The current gesture 2 fingers
+	private GestureType oldGesture= GestureType.None;
+	
+	private float startTimeAction;									// The time of onset of action.
+	private Finger[] fingers=new Finger[10];						// The informations of the touch for finger 1.
+			
+	private GameObject pickObject2Finger;
+	private GameObject oldPickObject2Finger;
+	
+	
 	public Texture secondFingerTexture;							// The texture to display the simulation of the second finger.
-	private TwoFingerGesture twoFinger = new TwoFingerGesture();
+	
+	private Vector2 startPosition2Finger;							// Start position for two fingers gesture
+	private int twoFinger0;											// finger index
+	private int twoFinger1;											// finger index
+	private Vector2 oldStartPosition2Finger;
+	private float oldFingerDistance;
+	private bool twoFingerDragStart=false;
+	private bool twoFingerSwipeStart=false;
 	private int oldTouchCount=0;
-	private DoubleTap[] singleDoubleTap = new DoubleTap[100];
-	private Finger[] tmpArray = new Finger[100];
-	private PickedObject pickedObject = new PickedObject();
-
-	// Unity UI
-	private List<RaycastResult> uiRaycastResultCache= new List<RaycastResult>();
-	private PointerEventData uiPointerEventData;
-	private EventSystem uiEventSystem;
+	
+	
 	#endregion
 	
 	#region Constructor
 	public EasyTouch(){
-		enable = true;		
-
-		allowUIDetection = true;
-		enableUIMode = true;
-		autoUpdatePickedUI = false;
-
-		enabledNGuiMode = false;
-		nGUICameras = new List<Camera>();
-
-		autoSelect = true; 
-		touchCameras = new List<ECamera>();
-		pickableLayers3D = 1<<0;
-		enable2D = false;
-		pickableLayers2D = 1<<0;
-
-		gesturePriority = GesturePriority.Tap;
-		StationaryTolerance = 15;
-		longTapTime =1;
-		doubleTapDetection = DoubleTapDetection.BySystem;
-		doubleTapTime = 0.3f;
-		swipeTolerance = 0.85f;
-
+		enable = true;				
+		useBroadcastMessage = false;
 		enable2FingersGesture=true; 
-		twoFingerPickMethod = TwoFingerPickMethod.Finger;
-		enable2FingersSwipe = true;
-		enablePinch = true;
-		minPinchLength = 0.1f;
-		enableTwist = true;
-		minTwistAngle = 0.1f;
-
-		enableSimulation = true;
-		twistKey = KeyCode.LeftAlt;
-		swipeKey = KeyCode.LeftControl;
-
-		
+		enableTwist=true;			
+		enablePinch=true;			
+		autoSelect = false;  			
+		StationnaryTolerance=25f;		
+		longTapTime = 1f;			
+		swipeTolerance= 0.85f;		
+		minPinchLength=0f;			
+		minTwistAngle =1f;		
 	}
 	#endregion
 	
-	#region MonoBehaviour Callback
+	#region MonoBehaviour methods
+	void Awake(){
+		// Assing the fake singleton
+		if (EasyTouch.instance == null)
+			instance = this;		
+	}
+	
 	void OnEnable(){
 		if (Application.isPlaying && Application.isEditor){
 			InitEasyTouch();	
 		}
 	}
-
-	void Awake(){
-		InitEasyTouch();	
-	}
-
-	void Start(){
-
-		for (int i=0;i<100;i++){
-			singleDoubleTap[i] = new DoubleTap();
-		}
-		int index = touchCameras.FindIndex( 
-			delegate(ECamera c){
-				return c.camera == Camera.main;
-			}
-		);
 		
-		if (index<0)
-			touchCameras.Add(new ECamera(Camera.main,false));
-
-		// Fire ready event
-		if (On_EasyTouchIsReady!=null){
-			On_EasyTouchIsReady();	
-		}
+	void Start(){
+		InitEasyTouch();	
 	}
 	
 	void InitEasyTouch(){
-
+		input = new EasyTouchInput();
+		
 		// Assing the fake singleton
 		if (EasyTouch.instance == null)
 			instance = this;
-		
+			
+		// We search the main camera with the tag MainCamera.
+		// For automatic object selection.
+		if (easyTouchCamera == null){
+			easyTouchCamera = Camera.main;
+			
+			if (easyTouchCamera==null && autoSelect){
+				Debug.LogWarning("No camera with flag \"MainCam\" was found in the scene, please setup the camera");
+			}
+		}
+					
 		// The texture to display the simulation of the second finger.
-		#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WINRT && !UNITY_BLACKBERRY) || UNITY_EDITOR)
-			if (secondFingerTexture==null && enableSimulation){
+		#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WP8 && !UNITY_BLACKBERRY) || UNITY_EDITOR)
+			if (secondFingerTexture==null){
 				secondFingerTexture =Resources.Load("secondFinger") as Texture;
 			}
-		#endif	
+		#endif		
 	}
 	
 	// Display the simulation of the second finger
-	#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WINRT && !UNITY_BLACKBERRY) || UNITY_EDITOR)
+	#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WP8 && !UNITY_BLACKBERRY) || UNITY_EDITOR)
 	void OnGUI(){
-		if (enableSimulation && !enableRemote){
-			Vector2 finger = input.GetSecondFingerPosition();
-			if (finger!=new Vector2(-1,-1)){		
-				GUI.DrawTexture( new Rect(finger.x-16,Screen.height-finger.y-16,32,32),secondFingerTexture);
-			}
+		Vector2 finger = input.GetSecondFingerPosition();
+		if (finger!=new Vector2(-1,-1)){		
+			GUI.DrawTexture( new Rect(finger.x-16,Screen.height-finger.y-16,32,32),secondFingerTexture);
 		}
 	}
 	#endif
 	
 	void OnDrawGizmos(){
 	}
-
+	
+	
 	// Non comments.
 	void Update(){
 	
-
 		if (enable && EasyTouch.instance==this){
 		
 			int i;
 			
 			// How many finger do we have ?
 			int count = input.TouchCount();
-		
+			
 			// Reset after two finger gesture;
 			if (oldTouchCount==2 && count!=2 && count>0){
-				CreateGesture2Finger(EventName.On_Cancel2Fingers,Vector2.zero,Vector2.zero,Vector2.zero,0,SwipeDirection.None,0,Vector2.zero,0,0,0);
+				CreateGesture2Finger(EventName.On_Cancel2Fingers,Vector2.zero,Vector2.zero,Vector2.zero,0,SwipeType.None,0,Vector2.zero,0,0,0);
 			}
-
+			
 			// Get touches		
-			#if (((UNITY_ANDROID || UNITY_IPHONE || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR))
+			#if (((UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8 || UNITY_BLACKBERRY) && !UNITY_EDITOR))
 				UpdateTouches(true, count);
 			#else
-
 				UpdateTouches(false, count);
 			#endif				
 		
 			// two fingers gesture
-			twoFinger.oldPickedObject = twoFinger.pickedObject;
+			oldPickObject2Finger = pickObject2Finger;
 			if (enable2FingersGesture){
 				if (count==2){
 					TwoFinger();
 				}
+				else{
+					complexCurrentGesture = GestureType.None;
+					pickObject2Finger=null;
+					twoFingerSwipeStart = false;
+					twoFingerDragStart = false;
+				}
 			}
-
+			
 			// Other fingers gesture
-			for (i=0;i<100;i++){
+			for (i=0;i<10;i++){
 				if (fingers[i]!=null){
 					OneFinger(i);
 				}
 			}
-
+						
 			oldTouchCount = count;
 		}
 	}
 		
- 
 	void UpdateTouches(bool realTouch, int touchCount){
-		 
+			
+		Finger[] tmpArray = new Finger[10]; 
 		fingers.CopyTo( tmpArray,0);
+			
+		
 		
 		if (realTouch || enableRemote){
 			ResetTouches();
@@ -495,10 +549,11 @@ public class EasyTouch : MonoBehaviour {
 				Touch touch = Input.GetTouch(i);
 				
 				int t=0;
-				while (t < 100 && fingers[i]==null){	
+				while (t < 10 && fingers[i]==null){	
 					if (tmpArray[t] != null){
-						if ( tmpArray[t].fingerIndex == touch.fingerId){								
-							fingers[i] = tmpArray[t];
+						if ( tmpArray[t].fingerIndex == touch.fingerId){
+							
+							fingers[i] = tmpArray[t];		
 						}
 					}
 					t++;	
@@ -513,16 +568,10 @@ public class EasyTouch : MonoBehaviour {
 				else{
 					fingers[i].phase = touch.phase;
 				}
-
-				if ( fingers[i].phase!= TouchPhase.Began){
-					fingers[i].deltaPosition = touch.position - fingers[i].position;
-				}
-				else{
-					fingers[i].deltaPosition = Vector2.zero;
-				}
-
+				
+				//if (touch.phase != TouchPhase.Ended)
 				fingers[i].position = touch.position;
-				//fingers[i].deltaPosition = touch.deltaPosition;
+				fingers[i].deltaPosition = touch.deltaPosition;
 				fingers[i].tapCount = touch.tapCount;
 				fingers[i].deltaTime = touch.deltaTime;
 				
@@ -541,7 +590,7 @@ public class EasyTouch : MonoBehaviour {
 	}
 	
 	void ResetTouches(){
-		for (int i=0;i<100;i++){
+		for (int i=0;i<10;i++){
 			fingers[i] = null;
 		}	
 	}	
@@ -550,42 +599,27 @@ public class EasyTouch : MonoBehaviour {
 	#region One finger Private methods
 	private void OneFinger(int fingerIndex){
 
+		float timeSinceStartAction=0;
+		
 		// A tap starts ?
 		if ( fingers[fingerIndex].gesture==GestureType.None){
-
-			if (!singleDoubleTap[fingerIndex].inDoubleTap){
-				singleDoubleTap[fingerIndex].inDoubleTap = true;
-				singleDoubleTap[fingerIndex].time = 0;
-				singleDoubleTap[fingerIndex].count = 1;
-			}
-
-			fingers[fingerIndex].startTimeAction = Time.realtimeSinceStartup;
+			
+			startTimeAction = Time.realtimeSinceStartup;
+			
+			//fingers[fingerIndex].gesture=GestureType.Tap;
 			fingers[fingerIndex].gesture=GestureType.Acquisition;
 			fingers[fingerIndex].startPosition = fingers[fingerIndex].position;
 			
 			// do we touch a pickable gameobject ?
-			if (autoSelect){
-				if (GetPickedGameObject(fingers[fingerIndex])){
-					fingers[fingerIndex].pickedObject = pickedObject.pickedObj;
-					fingers[fingerIndex].isGuiCamera = pickedObject.isGUI;
-					fingers[fingerIndex].pickedCamera = pickedObject.pickedCamera;
-				}
-			}
-
-			// UnityGUI
-			if (allowUIDetection){
-				fingers[fingerIndex].isOverGui = IsScreenPositionOverUI(  fingers[fingerIndex].position );
-				fingers[fingerIndex].pickedUIElement = GetFirstUIElementFromCache();
-			}
-
+			if (autoSelect)
+				fingers[fingerIndex].pickedObject = GetPickeGameObject(fingers[fingerIndex].startPosition);
+				
 			// we notify a touch
-			CreateGesture(fingerIndex, EventName.On_TouchStart,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);
+			CreateGesture(fingerIndex, EventName.On_TouchStart,fingers[fingerIndex],0, SwipeType.None,0,Vector2.zero);
 		}
-
-		if (singleDoubleTap[fingerIndex].inDoubleTap) singleDoubleTap[fingerIndex].time += Time.deltaTime;
 		
 		// Calculates the time since the beginning of the action.
-		fingers[fingerIndex].actionTime =  Time.realtimeSinceStartup - fingers[fingerIndex].startTimeAction;
+		timeSinceStartAction =  Time.realtimeSinceStartup -startTimeAction;
 		
 		
 		// touch canceled?
@@ -595,38 +629,34 @@ public class EasyTouch : MonoBehaviour {
 		
 		if (fingers[fingerIndex].phase != TouchPhase.Ended && fingers[fingerIndex].phase != TouchPhase.Canceled){
 		
-			// Are we stationary  for a long tap
-			if (fingers[fingerIndex].phase == TouchPhase.Stationary  && 
-			    fingers[fingerIndex].actionTime >= longTapTime && fingers[fingerIndex].gesture == GestureType.Acquisition){
-
+			// Are we stationary ?
+			if (fingers[fingerIndex].phase == TouchPhase.Stationary && timeSinceStartAction >= longTapTime && fingers[fingerIndex].gesture == GestureType.Acquisition){
 				fingers[fingerIndex].gesture = GestureType.LongTap;				
-				CreateGesture(fingerIndex, EventName.On_LongTapStart,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);	
+				CreateGesture(fingerIndex, EventName.On_LongTapStart,fingers[fingerIndex],timeSinceStartAction, SwipeType.None,0,Vector2.zero);	
 			}
 			
 			// Let's move us?
-			if (( (fingers[fingerIndex].gesture == GestureType.Acquisition ||fingers[fingerIndex].gesture == GestureType.LongTap) && fingers[fingerIndex].phase == TouchPhase.Moved && gesturePriority == GesturePriority.Slips)
-				|| ((fingers[fingerIndex].gesture == GestureType.Acquisition ||fingers[fingerIndex].gesture == GestureType.LongTap) && (FingerInTolerance(fingers[fingerIndex])==false) && gesturePriority == GesturePriority.Tap ))
-			{
-
+			if ((fingers[fingerIndex].gesture == GestureType.Acquisition ||fingers[fingerIndex].gesture == GestureType.LongTap) && (FingerInTolerance(fingers[fingerIndex])==false) ){
+			
+			
 				//  long touch => cancel
 				if (fingers[fingerIndex].gesture == GestureType.LongTap){
 					fingers[fingerIndex].gesture = GestureType.Cancel;
-					CreateGesture(fingerIndex, EventName.On_LongTapEnd,fingers[fingerIndex],SwipeDirection.None,0,Vector2.zero);
+					CreateGesture(fingerIndex, EventName.On_LongTapEnd,fingers[fingerIndex],timeSinceStartAction,SwipeType.None,0,Vector2.zero);
 					// Init the touch to start
-					fingers[fingerIndex].gesture=GestureType.Acquisition;	
+					fingers[fingerIndex].gesture=GestureType.None;
+					
 				}
 				else{
-					fingers[fingerIndex].oldSwipeType = SwipeDirection.None;
 					// If an object is selected we drag
 					if (fingers[fingerIndex].pickedObject){
 						fingers[fingerIndex].gesture = GestureType.Drag;
-						CreateGesture(fingerIndex, EventName.On_DragStart,fingers[fingerIndex],SwipeDirection.None,0, Vector2.zero);
+						CreateGesture(fingerIndex, EventName.On_DragStart,fingers[fingerIndex],timeSinceStartAction,SwipeType.None,0, Vector2.zero);
 					}
-
 					// If not swipe
 					else{
 						fingers[fingerIndex].gesture = GestureType.Swipe;
-						CreateGesture(fingerIndex, EventName.On_SwipeStart,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);
+						CreateGesture(fingerIndex, EventName.On_SwipeStart,fingers[fingerIndex],timeSinceStartAction, SwipeType.None,0,Vector2.zero);
 					}
 				}
 			}
@@ -647,598 +677,344 @@ public class EasyTouch : MonoBehaviour {
 			}
 			
 			// Send gesture
-			SwipeDirection currentSwipe = SwipeDirection.None;
-			currentSwipe = GetSwipe(new Vector2(0,0),fingers[fingerIndex].deltaPosition);
+			SwipeType currentSwipe = SwipeType.None;
 			if (message!=EventName.None){
-
-				/* Break on direction change
-				if (currentSwipe!=fingers[fingerIndex].oldSwipeType && currentSwipe!= SwipeType.Other){
-					fingers[fingerIndex].gesture=GestureType.Acquisition;
-					CreateGesture(fingerIndex,  EventName.On_SwipeEnd,fingers[fingerIndex], fingers[fingerIndex].actionTime, GetSwipe(fingers[fingerIndex].startPosition, fingers[fingerIndex].position), (fingers[fingerIndex].position-fingers[fingerIndex].startPosition).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition); 
-				}*/
-
-				fingers[fingerIndex].oldSwipeType = currentSwipe;
-				CreateGesture(fingerIndex, message,fingers[fingerIndex], currentSwipe ,0,fingers[fingerIndex].deltaPosition);
+				currentSwipe = GetSwipe(new Vector2(0,0),fingers[fingerIndex].deltaPosition);
+				CreateGesture(fingerIndex, message,fingers[fingerIndex],timeSinceStartAction, currentSwipe ,0,fingers[fingerIndex].deltaPosition);
 			}
 			
 			// TouchDown
-			CreateGesture(fingerIndex, EventName.On_TouchDown,fingers[fingerIndex], currentSwipe,0,fingers[fingerIndex].deltaPosition);
+			CreateGesture(fingerIndex, EventName.On_TouchDown,fingers[fingerIndex],timeSinceStartAction, currentSwipe,0,fingers[fingerIndex].deltaPosition);
 		}
+		
 		else{
-
+			
+			bool realEnd = true;
+			
 			// End of the touch		
 			switch (fingers[fingerIndex].gesture){
 				// tap
 				case GestureType.Acquisition:
-					
-					if (doubleTapDetection == DoubleTapDetection.BySystem){
-						if (FingerInTolerance(fingers[fingerIndex])){
-							if (fingers[fingerIndex].tapCount<2){
-								CreateGesture( fingerIndex, EventName.On_SimpleTap,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);
-							}
-							else{
-								CreateGesture( fingerIndex, EventName.On_DoubleTap,fingers[fingerIndex],  SwipeDirection.None,0,Vector2.zero);
-							}
-							
-						}
-					}
-					else{
-						if (!singleDoubleTap[fingerIndex].inWait){
-							singleDoubleTap[fingerIndex].finger = fingers[fingerIndex];
-							StartCoroutine(SingleOrDouble(fingerIndex) );
+					if (FingerInTolerance(fingers[fingerIndex])){
+						if (fingers[fingerIndex].tapCount<2){
+							CreateGesture( fingerIndex, EventName.On_SimpleTap,fingers[fingerIndex], timeSinceStartAction, SwipeType.None,0,Vector2.zero);
 						}
 						else{
-							singleDoubleTap[fingerIndex].count++;
+							CreateGesture( fingerIndex, EventName.On_DoubleTap,fingers[fingerIndex], timeSinceStartAction, SwipeType.None,0,Vector2.zero);
+						}
+					
+					}
+					else{
+						SwipeType currentSwipe = GetSwipe(new Vector2(0,0),fingers[fingerIndex].deltaPosition);
+						if (fingers[fingerIndex].pickedObject){
+							CreateGesture(fingerIndex, EventName.On_DragStart,fingers[fingerIndex],timeSinceStartAction,SwipeType.None,0, Vector2.zero);
+							CreateGesture(fingerIndex, EventName.On_Drag,fingers[fingerIndex],timeSinceStartAction, currentSwipe ,0,fingers[fingerIndex].deltaPosition);
+							CreateGesture( fingerIndex, EventName.On_DragEnd,fingers[fingerIndex], timeSinceStartAction, GetSwipe(fingers[fingerIndex].startPosition,fingers[fingerIndex].position), (fingers[fingerIndex].startPosition-fingers[fingerIndex].position).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition);
+	
+						}
+						// If not swipe
+						else{
+							CreateGesture(fingerIndex, EventName.On_SwipeStart,fingers[fingerIndex],timeSinceStartAction, SwipeType.None,0,Vector2.zero);
+							CreateGesture(fingerIndex, EventName.On_Swipe,fingers[fingerIndex],timeSinceStartAction, currentSwipe ,0,fingers[fingerIndex].deltaPosition);
+						 	CreateGesture(fingerIndex,  EventName.On_SwipeEnd,fingers[fingerIndex], timeSinceStartAction, GetSwipe(fingers[fingerIndex].startPosition, fingers[fingerIndex].position), (fingers[fingerIndex].position-fingers[fingerIndex].startPosition).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition); 
+						
 						}
 					}
-	
 					break;
 				// long tap
 				case GestureType.LongTap:
-					CreateGesture( fingerIndex, EventName.On_LongTapEnd,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);
+					CreateGesture( fingerIndex, EventName.On_LongTapEnd,fingers[fingerIndex], timeSinceStartAction, SwipeType.None,0,Vector2.zero);
 					break;
 				// drag
 				case GestureType.Drag:
-					CreateGesture(fingerIndex,  EventName.On_DragEnd,fingers[fingerIndex], GetSwipe(fingers[fingerIndex].startPosition,fingers[fingerIndex].position), (fingers[fingerIndex].startPosition-fingers[fingerIndex].position).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition);
+					CreateGesture(fingerIndex,  EventName.On_DragEnd,fingers[fingerIndex], timeSinceStartAction, GetSwipe(fingers[fingerIndex].startPosition,fingers[fingerIndex].position), (fingers[fingerIndex].startPosition-fingers[fingerIndex].position).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition);
 					break;
 				// swipe
 				case GestureType.Swipe:
-					CreateGesture( fingerIndex, EventName.On_SwipeEnd,fingers[fingerIndex], GetSwipe(fingers[fingerIndex].startPosition, fingers[fingerIndex].position), (fingers[fingerIndex].position-fingers[fingerIndex].startPosition).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition); 
+				 	CreateGesture( fingerIndex, EventName.On_SwipeEnd,fingers[fingerIndex], timeSinceStartAction, GetSwipe(fingers[fingerIndex].startPosition, fingers[fingerIndex].position), (fingers[fingerIndex].position-fingers[fingerIndex].startPosition).magnitude,fingers[fingerIndex].position-fingers[fingerIndex].startPosition); 
 					break;
-
 				// cancel
 				case GestureType.Cancel:
-					CreateGesture(fingerIndex, EventName.On_Cancel,fingers[fingerIndex],SwipeDirection.None,0,Vector2.zero);
+					CreateGesture(fingerIndex, EventName.On_Cancel,fingers[fingerIndex],0,SwipeType.None,0,Vector2.zero);
 					break;
-
 			}
 				
-			CreateGesture( fingerIndex, EventName.On_TouchUp,fingers[fingerIndex], SwipeDirection.None,0,Vector2.zero);
-			fingers[fingerIndex]=null;		
-
+			if (realEnd){
+				CreateGesture( fingerIndex, EventName.On_TouchUp,fingers[fingerIndex], timeSinceStartAction, SwipeType.None,0,Vector2.zero);
+				fingers[fingerIndex]=null;		
+			}
 		}
 	
 	}
-
-	IEnumerator SingleOrDouble(int fingerIndex){
-		singleDoubleTap[fingerIndex].inWait = true;
-		float time2Wait = doubleTapTime-singleDoubleTap[fingerIndex].finger.actionTime;
-		if (time2Wait<0) time2Wait =0;
-		yield return new WaitForSeconds(time2Wait);
-
-
-		if (singleDoubleTap[fingerIndex].count <2){
-			CreateGesture( fingerIndex, EventName.On_SimpleTap,singleDoubleTap[fingerIndex].finger, SwipeDirection.None,0,Vector2.zero);
+	
+	private void CreateGesture(int touchIndex,EventName message,Finger finger,float actionTime, SwipeType swipe, float swipeLength, Vector2 swipeVector){
+			
+		if (message == EventName.On_TouchStart || message == EventName.On_TouchUp){
+			isStartHoverNGUI = IsTouchHoverNGui(touchIndex);
 		}
-		else{
-			CreateGesture( fingerIndex, EventName.On_DoubleTap,singleDoubleTap[fingerIndex].finger, SwipeDirection.None,0,Vector2.zero);
-		}
+		
+		
+		//if (message == EventName.On_Cancel || message == EventName.On_TouchUp){
+		//	isStartHoverNGUI = false;	
+		//}
+		
+		if (!isStartHoverNGUI){
+			//Creating the structure with the required information
+			Gesture gesture = new Gesture();
+			
+			gesture.fingerIndex = finger.fingerIndex;
+			gesture.touchCount = finger.touchCount;
+			gesture.startPosition = finger.startPosition;	
+			gesture.position = finger.position;
+			gesture.deltaPosition = finger.deltaPosition;
+				
+			gesture.actionTime = actionTime;
+			gesture.deltaTime = finger.deltaTime;
+			
+			gesture.swipe = swipe;
+			gesture.swipeLength = swipeLength;
+			gesture.swipeVector = swipeVector;
+			
+			gesture.deltaPinch = 0;
+			gesture.twistAngle = 0;
+			gesture.pickObject = finger.pickedObject;
+			gesture.otherReceiver = receiverObject;
 
-		//fingers[fingerIndex]=null;
-		singleDoubleTap[fingerIndex].Stop();
-		StopCoroutine( "SingleOrDouble");
+			gesture.isHoverReservedArea = IsTouchHoverVirtualControll( touchIndex);	
+			
+			
+			if (useBroadcastMessage){
+				SendGesture(message,gesture);
+			}
+			if (!useBroadcastMessage || isExtension){
+				RaiseEvent(message, gesture);
+			}
+		}
+		
 	}
 
-	private void CreateGesture(int touchIndex,EventName message,Finger finger, SwipeDirection swipe, float swipeLength, Vector2 swipeVector){
-
-		bool firingEvent = true;
-
-		if (autoUpdatePickedUI && allowUIDetection){
-			finger.isOverGui = IsScreenPositionOverUI( finger.position );
-			finger.pickedUIElement = GetFirstUIElementFromCache();
-		}
-
-		// NGui
-		if (enabledNGuiMode  && message == EventName.On_TouchStart){
-			finger.isOverGui = finger.isOverGui || IsTouchOverNGui(finger.position);
-		}
-
-		// firing event ?
-		if ((enableUIMode || enabledNGuiMode)){
-			firingEvent = !finger.isOverGui;
-		}
-
-		// The new gesture
-		Gesture gesture = finger.GetGesture();
-
-		// Auto update picked object
-		if (autoUpdatePickedObject && autoSelect){
-			if (message != EventName.On_Drag && message != EventName.On_DragEnd && message != EventName.On_DragStart){
-				if (GetPickedGameObject(finger)){
-					gesture.pickedObject = pickedObject.pickedObj;
-					gesture.pickedCamera = pickedObject.pickedCamera;
-					gesture.isGuiCamera = pickedObject.isGUI;
-				}
-				else{
-					gesture.pickedObject = null;
-					gesture.pickedCamera = null;
-					gesture.isGuiCamera = false;
-				}
+	private void SendGesture(EventName message, Gesture gesture){
+		
+		
+		if (useBroadcastMessage){
+			// Sent to user GameObject
+			if (receiverObject!=null){
+				if (receiverObject != gesture.pickObject){
+					receiverObject.SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver );
+				}	
 			}
-		}
-
-		gesture.swipe = swipe;
-		gesture.swipeLength = swipeLength;
-		gesture.swipeVector = swipeVector;
-
-		gesture.deltaPinch = 0;
-		gesture.twistAngle = 0;
-
-		/*
-		#if (UNITY_ANDROID && !UNITY_EDITOR)
-		if (gesture.deltaTime!=0){
-			Debug.Log("ok");
-			gesture.deltaPosition  *= Time.deltaTime / gesture.deltaTime;
-		}
-		#endif*/
-
-		// Firing event
-		if ( firingEvent){
-			RaiseEvent(message, gesture);
-		}
-		else if (finger.isOverGui){
-			if (message == EventName.On_TouchUp){
-				RaiseEvent(EventName.On_UIElementTouchUp, gesture);
+			
+			// Sent to the  GameObject who is selected
+			if ( gesture.pickObject){
+				gesture.pickObject.SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver );
 			}
+			// sent to gameobject
 			else{
-				RaiseEvent(EventName.On_OverUIElement, gesture);
+		    	SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver);
 			}
 		}
-
-	}	
+	}
 	#endregion
-
+	
 	#region Two finger private methods
 	private void TwoFinger(){
-
+	
+		float timeSinceStartAction=0;
 		bool move=false;
-				
+		Vector2 position = Vector2.zero;
+		Vector2 deltaPosition = Vector2.zero;
+		float fingerDistance = 0;
+			
 		// A touch starts
-		if ( twoFinger.currentGesture==GestureType.None){
-
-			if (!singleDoubleTap[99].inDoubleTap){
-				singleDoubleTap[99].inDoubleTap = true;
-				singleDoubleTap[99].time = 0;
-				singleDoubleTap[99].count = 1;
-			}
-
-			twoFinger.finger0 = GetTwoFinger(-1);
-			twoFinger.finger1 = GetTwoFinger(twoFinger.finger0);
+		if ( complexCurrentGesture==GestureType.None){
+			twoFinger0 = GetTwoFinger(-1);
+			twoFinger1 = GetTwoFinger(twoFinger0);
 			
-			twoFinger.startTimeAction = Time.realtimeSinceStartup;
-			twoFinger.currentGesture=GestureType.Acquisition;			
-
-			fingers[twoFinger.finger0].startPosition = fingers[twoFinger.finger0].position;
-			fingers[twoFinger.finger1].startPosition = fingers[twoFinger.finger1].position;
-
-			fingers[twoFinger.finger0].oldPosition = fingers[twoFinger.finger0].position;
-			fingers[twoFinger.finger1].oldPosition = fingers[twoFinger.finger1].position;
+			startTimeAction = Time.realtimeSinceStartup;
+			complexCurrentGesture=GestureType.Tap;
 			
+			fingers[twoFinger0].complexStartPosition = fingers[twoFinger0].position;
+			fingers[twoFinger1].complexStartPosition = fingers[twoFinger1].position;
 			
-			twoFinger.oldFingerDistance = Mathf.Abs( Vector2.Distance(fingers[twoFinger.finger0].position, fingers[twoFinger.finger1].position));
-			twoFinger.startPosition = new Vector2((fingers[twoFinger.finger0].position.x+fingers[twoFinger.finger1].position.x)/2, (fingers[twoFinger.finger0].position.y+fingers[twoFinger.finger1].position.y)/2);
-			twoFinger.position = twoFinger.startPosition;
-			twoFinger.oldStartPosition = twoFinger.startPosition;
-			twoFinger.deltaPosition = Vector2.zero;
+			fingers[twoFinger0].oldPosition = fingers[twoFinger0].position;
+			fingers[twoFinger1].oldPosition = fingers[twoFinger1].position;
+			
+		
+			oldFingerDistance = Mathf.Abs( Vector2.Distance(fingers[twoFinger0].position, fingers[twoFinger1].position));
+			startPosition2Finger = new Vector2((fingers[twoFinger0].position.x+fingers[twoFinger1].position.x)/2, (fingers[twoFinger0].position.y+fingers[twoFinger1].position.y)/2);
+			deltaPosition = Vector2.zero;
 			
 			// do we touch a pickable gameobject ?
 			if (autoSelect){
-				if (GetTwoFingerPickedObject()){
-					twoFinger.pickedObject = pickedObject.pickedObj;
-					twoFinger.pickedCamera = pickedObject.pickedCamera;
-					twoFinger.isGuiCamera = pickedObject.isGUI;
-				}
-				else{
-					twoFinger.ClearPickedObjectData();
+				pickObject2Finger = GetPickeGameObject(fingers[twoFinger0].complexStartPosition);
+				if (pickObject2Finger!= GetPickeGameObject(fingers[twoFinger1].complexStartPosition)){
+					pickObject2Finger =null;
 				}
 			}
-
-			// UnityGUI
-			if (allowUIDetection){
-				if (GetTwoFingerPickedUIElement()){
-					twoFinger.pickedUIElement = pickedObject.pickedObj;
-					twoFinger.isOverGui = true;
-				}
-				else{
-					twoFinger.ClearPickedUIData();
-				}
-			}
-
+			
 			// we notify the touch
-			CreateGesture2Finger(EventName.On_TouchStart2Fingers,twoFinger.startPosition,twoFinger.startPosition,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.oldFingerDistance);				
+			CreateGesture2Finger(EventName.On_TouchStart2Fingers,startPosition2Finger,startPosition2Finger,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,oldFingerDistance);				
 		}
-
-		if (singleDoubleTap[99].inDoubleTap) singleDoubleTap[99].time += Time.deltaTime;
-
+		
+			
 		// Calculates the time since the beginning of the action.
-		twoFinger.timeSinceStartAction =  Time.realtimeSinceStartup -twoFinger.startTimeAction;
+		timeSinceStartAction =  Time.realtimeSinceStartup -startTimeAction;
 		
 		// Position & deltaPosition
-		twoFinger.position = new  Vector2((fingers[twoFinger.finger0].position.x+fingers[twoFinger.finger1].position.x)/2, (fingers[twoFinger.finger0].position.y+fingers[twoFinger.finger1].position.y)/2);
-		twoFinger.deltaPosition = twoFinger.position - twoFinger.oldStartPosition;
-		twoFinger.fingerDistance = Mathf.Abs(Vector2.Distance(fingers[twoFinger.finger0].position, fingers[twoFinger.finger1].position));
+		position = new  Vector2((fingers[twoFinger0].position.x+fingers[twoFinger1].position.x)/2, (fingers[twoFinger0].position.y+fingers[twoFinger1].position.y)/2);
+		deltaPosition = position - oldStartPosition2Finger;
+		fingerDistance = Mathf.Abs(Vector2.Distance(fingers[twoFinger0].position, fingers[twoFinger1].position));
 		
 		// Cancel
-		if (fingers[twoFinger.finger0].phase == TouchPhase.Canceled ||fingers[twoFinger.finger1].phase == TouchPhase.Canceled){
-			twoFinger.currentGesture = GestureType.Cancel;
+		if (fingers[twoFinger0].phase == TouchPhase.Canceled ||fingers[twoFinger1].phase == TouchPhase.Canceled){
+			complexCurrentGesture = GestureType.Cancel;
 		}
-
+		
 		// Let's go
-		if (fingers[twoFinger.finger0].phase != TouchPhase.Ended && fingers[twoFinger.finger1].phase != TouchPhase.Ended && twoFinger.currentGesture != GestureType.Cancel){
-
-
+		if (fingers[twoFinger0].phase != TouchPhase.Ended && fingers[twoFinger1].phase != TouchPhase.Ended && complexCurrentGesture != GestureType.Cancel ){
+			
 			// Are we stationary ?
-			if (twoFinger.currentGesture == GestureType.Acquisition && twoFinger.timeSinceStartAction >= longTapTime && FingerInTolerance(fingers[twoFinger.finger0]) && FingerInTolerance(fingers[twoFinger.finger1])){	
-				twoFinger.currentGesture = GestureType.LongTap;				
+			if (complexCurrentGesture == GestureType.Tap && timeSinceStartAction >= longTapTime && FingerInTolerance(fingers[twoFinger0]) && FingerInTolerance(fingers[twoFinger1])){	
+				complexCurrentGesture = GestureType.LongTap;				
 				// we notify the beginning of a longtouch
-				CreateGesture2Finger(EventName.On_LongTapStart2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);				
+				CreateGesture2Finger(EventName.On_LongTapStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);				
 			}	
 			
 			// Let's move us ?
-			if ( ((FingerInTolerance(fingers[twoFinger.finger0])==false || FingerInTolerance(fingers[twoFinger.finger1])==false) && gesturePriority == GesturePriority.Tap ) 
-			|| ((fingers[twoFinger.finger0].phase == TouchPhase.Moved || fingers[twoFinger.finger1].phase == TouchPhase.Moved) && gesturePriority == GesturePriority.Slips) ) {
+			//if (FingerInTolerance(fingers[twoFinger0])==false ||FingerInTolerance(fingers[twoFinger1])==false){
 				move=true;
-			}
-
+			//}
+	 		
 			// we move
-			if (move && twoFinger.currentGesture != GestureType.Tap){
-
-				#region drag & swipe
-				if (enable2FingersSwipe){
-					float dot = Vector2.Dot(fingers[twoFinger.finger0].deltaPosition.normalized, fingers[twoFinger.finger1].deltaPosition.normalized);
-
-
-
-					if (dot>0 ){
-
-						if (twoFinger.oldGesture == GestureType.LongTap){
-							CreateStateEnd2Fingers(twoFinger.currentGesture,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction,false,twoFinger.fingerDistance);
-							twoFinger.startTimeAction = Time.realtimeSinceStartup;
-						}
-
-						if (twoFinger.pickedObject && !twoFinger.dragStart){
-
-							twoFinger.currentGesture = GestureType.Drag;
-
-							CreateGesture2Finger(EventName.On_DragStart2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);	
-							twoFinger.dragStart = true; 
-						}
-						else if (!twoFinger.pickedObject && !twoFinger.swipeStart){
-
-							twoFinger.currentGesture = GestureType.Swipe;
-
-							CreateGesture2Finger(EventName.On_SwipeStart2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);
-							twoFinger.swipeStart=true;
-						}
-
-					} 
-					else{
-						if (dot<0){
-							twoFinger.dragStart=false; 
-							twoFinger.swipeStart=false;
-						}
-					}
-
-					//
-					if (twoFinger.dragStart){
-						CreateGesture2Finger(EventName.On_Drag2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.oldStartPosition,twoFinger.position),0,twoFinger.deltaPosition,0,0,twoFinger.fingerDistance);
+			if (move){
+						
+				float dot = Vector2.Dot(fingers[twoFinger0].deltaPosition.normalized, fingers[twoFinger1].deltaPosition.normalized);
+																																															
+				// Pinch
+				if (enablePinch && fingerDistance != oldFingerDistance ){
+					// Pinch
+					if (Mathf.Abs( fingerDistance-oldFingerDistance)>=minPinchLength){
+						complexCurrentGesture = GestureType.Pinch;				
 					}
 					
-					if (twoFinger.swipeStart){
-						CreateGesture2Finger(EventName.On_Swipe2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.oldStartPosition,twoFinger.position),0,twoFinger.deltaPosition,0,0,twoFinger.fingerDistance);
+					// update pinch
+					if (complexCurrentGesture == GestureType.Pinch){	
+						//complexCurrentGesture = GestureType.Acquisition;				
+						if (fingerDistance<oldFingerDistance){
+							
+							// Send end message
+							if (oldGesture != GestureType.Pinch){
+								CreateStateEnd2Fingers(oldGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance); 
+								startTimeAction = Time.realtimeSinceStartup;
+							}
+							
+							// Send pinch
+							CreateGesture2Finger(EventName.On_PinchIn,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(fingers[twoFinger0].complexStartPosition,fingers[twoFinger0].position),0,Vector2.zero,0,Mathf.Abs(fingerDistance-oldFingerDistance),fingerDistance);
+							complexCurrentGesture = GestureType.Pinch;
+	
+						}
+						else if (fingerDistance>oldFingerDistance){
+							// Send end message
+							if (oldGesture != GestureType.Pinch){
+								CreateStateEnd2Fingers(oldGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+								startTimeAction = Time.realtimeSinceStartup;
+							}
+							
+							// Send pinch
+							CreateGesture2Finger(EventName.On_PinchOut,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(fingers[twoFinger0].complexStartPosition,fingers[twoFinger0].position),0,Vector2.zero,0,Mathf.Abs(fingerDistance-oldFingerDistance),fingerDistance);
+							complexCurrentGesture = GestureType.Pinch;
+						}	
 					}
-
 				}
-				#endregion
-
-				Vector2 currentDistance = fingers[twoFinger.finger0].position - fingers[twoFinger.finger1].position;
-				Vector2 previousDistance = fingers[twoFinger.finger0].oldPosition - fingers[twoFinger.finger1].oldPosition ;
-				float currentDelta = currentDistance.magnitude - previousDistance.magnitude;
-
-				#region Pinch
-				if (enablePinch){
-
-					if ((Mathf.Abs(currentDelta)>= minPinchLength && twoFinger.currentGesture != GestureType.Pinch) || twoFinger.currentGesture== GestureType.Pinch ){
-
-
-						if (currentDelta !=0 && twoFinger.oldGesture == GestureType.LongTap){
-							CreateStateEnd2Fingers(twoFinger.currentGesture,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction,false,twoFinger.fingerDistance);
-							twoFinger.startTimeAction = Time.realtimeSinceStartup;
-						}
-
-						twoFinger.currentGesture = GestureType.Pinch;
-
-						if (currentDelta>0){
-							CreateGesture2Finger(EventName.On_PinchOut,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.startPosition,twoFinger.position),0,Vector2.zero,0,Mathf.Abs(twoFinger.fingerDistance-twoFinger.oldFingerDistance),twoFinger.fingerDistance);
-						}
-
-						if (currentDelta<0){
-							CreateGesture2Finger(EventName.On_PinchIn,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.startPosition,twoFinger.position),0,Vector2.zero,0,Mathf.Abs(twoFinger.fingerDistance-twoFinger.oldFingerDistance),twoFinger.fingerDistance);
-						}
-
-						if (currentDelta<0 || currentDelta>0){
-							CreateGesture2Finger(EventName.On_Pinch,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.startPosition,twoFinger.position),0,Vector2.zero,0,currentDelta,twoFinger.fingerDistance);
-						}
-					}
-
-				}
-				#endregion
-
-				#region Twist
+					
+				// Twist
 				if (enableTwist){
-
-
-					float twistAngle = Vector2.Angle( previousDistance, currentDistance );
-
-					if (previousDistance == currentDistance)
-						twistAngle =0;
-
-			
-					if ( Mathf.Abs(twistAngle)>=minTwistAngle && (twoFinger.currentGesture != GestureType.Twist ) || twoFinger.currentGesture== GestureType.Twist ){
-
-						if ( twoFinger.oldGesture == GestureType.LongTap){
-							CreateStateEnd2Fingers(twoFinger.currentGesture,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction,false,twoFinger.fingerDistance);
-							twoFinger.startTimeAction = Time.realtimeSinceStartup;
+	
+					if (Mathf.Abs(TwistAngle())>minTwistAngle){
+					
+						// Send end message
+						if (complexCurrentGesture != GestureType.Twist){
+							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+							startTimeAction = Time.realtimeSinceStartup;
 						}
-
-						twoFinger.currentGesture = GestureType.Twist;
-								
-						if (twistAngle!=0){
-							twistAngle *= Mathf.Sign( Vector3.Cross( previousDistance,  currentDistance).z);
-						}
-
-						CreateGesture2Finger(EventName.On_Twist,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,twistAngle,0,twoFinger.fingerDistance);
+						complexCurrentGesture = GestureType.Twist;
 					}
-
-				}			
-				#endregion
-
-
-
+							
+					// Update Twist
+					if (complexCurrentGesture == GestureType.Twist){
+						CreateGesture2Finger(EventName.On_Twist,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,TwistAngle(),0,fingerDistance);
+					}
+	
+					fingers[twoFinger0].oldPosition = fingers[twoFinger0].position;
+					fingers[twoFinger1].oldPosition = fingers[twoFinger1].position;
+				}
+		
+				// Drag
+				if (dot>0 ){
+					if (pickObject2Finger && !twoFingerDragStart){
+						// Send end message
+						if (complexCurrentGesture != GestureType.Tap){
+							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+							startTimeAction = Time.realtimeSinceStartup;
+						}
+						//
+						CreateGesture2Finger(EventName.On_DragStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);	
+						twoFingerDragStart = true; 
+					}
+					else if (!pickObject2Finger && !twoFingerSwipeStart ) {
+						// Send end message
+						if (complexCurrentGesture!= GestureType.Tap){
+							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+							startTimeAction = Time.realtimeSinceStartup;
+						}
+						//
+						
+						CreateGesture2Finger(EventName.On_SwipeStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+						twoFingerSwipeStart=true;
+					}
+				} 
+				else{
+					if (dot<0){
+						twoFingerDragStart=false; 
+						twoFingerSwipeStart=false;
+					}
+				}
+			
+				//
+				if (twoFingerDragStart){
+					CreateGesture2Finger(EventName.On_Drag2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
+				}
+				
+				if (twoFingerSwipeStart){
+					CreateGesture2Finger(EventName.On_Swipe2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
+				}
+								
 			}
 			else{
-
 				// Long tap update
-				if (twoFinger.currentGesture == GestureType.LongTap){
-					CreateGesture2Finger(EventName.On_LongTap2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);
+		 		if (complexCurrentGesture == GestureType.LongTap){
+					CreateGesture2Finger(EventName.On_LongTap2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
 				}
 			}
-
-			CreateGesture2Finger(EventName.On_TouchDown2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction, GetSwipe(twoFinger.oldStartPosition,twoFinger.position),0,twoFinger.deltaPosition,0,0,twoFinger.fingerDistance);
-
-			fingers[twoFinger.finger0].oldPosition = fingers[twoFinger.finger0].position;
-			fingers[twoFinger.finger1].oldPosition = fingers[twoFinger.finger1].position;
-
-			twoFinger.oldFingerDistance = twoFinger.fingerDistance;
-			twoFinger.oldStartPosition = twoFinger.position;
-			twoFinger.oldGesture = twoFinger.currentGesture;
+	
+			CreateGesture2Finger(EventName.On_TouchDown2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
+		
+			
+			oldFingerDistance = fingerDistance;
+			oldStartPosition2Finger = position;
+			oldGesture = complexCurrentGesture;
 		}
 		else{			
-
-			if (twoFinger.currentGesture != GestureType.Acquisition && twoFinger.currentGesture!= GestureType.Tap){
-				CreateStateEnd2Fingers(twoFinger.currentGesture,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction,true,twoFinger.fingerDistance);
-				twoFinger.currentGesture = GestureType.None;
-				twoFinger.pickedObject=null;
-				twoFinger.swipeStart = false;
-				twoFinger.dragStart = false;
-			}
-			else{
-				twoFinger.currentGesture = GestureType.Tap;
-				CreateStateEnd2Fingers(twoFinger.currentGesture,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,twoFinger.timeSinceStartAction,true,twoFinger.fingerDistance);
-			}
-
+			CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,true,fingerDistance);
+			complexCurrentGesture = GestureType.None;
+			pickObject2Finger=null;
+			twoFingerSwipeStart = false;
+			twoFingerDragStart = false;
 		}	
-
-		
-
-	}
-	
-	private void CreateStateEnd2Fingers(GestureType gesture, Vector2 startPosition, Vector2 position, Vector2 deltaPosition,float time, bool realEnd,float fingerDistance){
-
-
-		switch (gesture){
-			// Tap
-		case GestureType.Tap:
-		case GestureType.Acquisition:
-
-			if (doubleTapDetection == DoubleTapDetection.BySystem){
-
-				if (fingers[twoFinger.finger0].tapCount<2 && fingers[twoFinger.finger1].tapCount<2){
-					CreateGesture2Finger(EventName.On_SimpleTap2Fingers,startPosition,position,deltaPosition,
-					                     time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);				
-				}
-				else{
-					CreateGesture2Finger(EventName.On_DoubleTap2Fingers,startPosition,position,deltaPosition,
-					                     time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);
-				}
-				twoFinger.currentGesture = GestureType.None;
-				twoFinger.pickedObject=null;
-				twoFinger.swipeStart = false;
-				twoFinger.dragStart = false;
-				singleDoubleTap[99].Stop();
-				StopCoroutine( "SingleOrDouble2Fingers");
-
-			}
-			else{
-				if (!singleDoubleTap[99].inWait){
-					StartCoroutine("SingleOrDouble2Fingers" );
-				}
-				else{
-					singleDoubleTap[99].count++;
-				}
-			}
-			break;
-			
-			// Long tap
-		case GestureType.LongTap:
-			CreateGesture2Finger(EventName.On_LongTapEnd2Fingers,startPosition,position,deltaPosition,
-			                     time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);
-			break;
-			
-			// Pinch 
-		case GestureType.Pinch:
-			CreateGesture2Finger(EventName.On_PinchEnd,startPosition,position,deltaPosition,
-			                     time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);
-			break;
-			
-			// twist
-		case GestureType.Twist:
-			CreateGesture2Finger(EventName.On_TwistEnd,startPosition,position,deltaPosition,
-			                     time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);
-			break;	
-		}
-		
-		if (realEnd){
-			// Drag
-			if ( twoFinger.dragStart){
-				CreateGesture2Finger(EventName.On_DragEnd2Fingers,startPosition,position,deltaPosition,
-				                     time, GetSwipe( startPosition, position),( position-startPosition).magnitude,position-startPosition,0,0,fingerDistance);
-			};
-			
-			// Swipe
-			if ( twoFinger.swipeStart){
-				CreateGesture2Finger(EventName.On_SwipeEnd2Fingers,startPosition,position,deltaPosition,
-				                     time, GetSwipe( startPosition, position),( position-startPosition).magnitude,position-startPosition,0,0,fingerDistance);
-			}
-			
-			CreateGesture2Finger(EventName.On_TouchUp2Fingers,startPosition,position,deltaPosition,time, SwipeDirection.None,0,Vector2.zero,0,0,fingerDistance);
-		}
-	}
-
-	IEnumerator SingleOrDouble2Fingers(){
-		singleDoubleTap[99].inWait = true;
-
-		yield return new WaitForSeconds(doubleTapTime);
-
-		if (singleDoubleTap[99].count <2){
-
-			CreateGesture2Finger(EventName.On_SimpleTap2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,
-			                     twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);
-
-		}
-		else{
-			CreateGesture2Finger(EventName.On_DoubleTap2Fingers,twoFinger.startPosition,twoFinger.position,twoFinger.deltaPosition,
-			                     twoFinger.timeSinceStartAction, SwipeDirection.None,0,Vector2.zero,0,0,twoFinger.fingerDistance);
-		}
-
-		twoFinger.currentGesture = GestureType.None;
-		twoFinger.pickedObject=null;
-		twoFinger.swipeStart = false;
-		twoFinger.dragStart = false;
-		singleDoubleTap[99].Stop();
-		StopCoroutine( "SingleOrDouble2Fingers");
-	}
-
-	private void  CreateGesture2Finger(EventName message,Vector2 startPosition,Vector2 position,Vector2 deltaPosition,
-	                                   float actionTime, SwipeDirection swipe, float swipeLength,Vector2 swipeVector,float twist,float pinch, float twoDistance){
-
-		bool firingEvent = true;
-		Gesture gesture = new Gesture();
-		gesture.isOverGui = false;
-
-		// NGui
-		if (enabledNGuiMode && message == EventName.On_TouchStart2Fingers){
-			gesture.isOverGui = gesture.isOverGui || ( IsTouchOverNGui(twoFinger.position) && IsTouchOverNGui(twoFinger.position));
-		}
-
-		gesture.touchCount=2;
-		gesture.fingerIndex=-1;
-		gesture.startPosition = startPosition;	
-		gesture.position = position;
-		gesture.deltaPosition = deltaPosition;
-		
-		gesture.actionTime = actionTime;
-		gesture.deltaTime=Time.deltaTime;
-		
-		gesture.swipe = swipe;
-		gesture.swipeLength = swipeLength;
-		gesture.swipeVector = swipeVector;
-		
-		gesture.deltaPinch = pinch;
-		gesture.twistAngle = twist;
-		gesture.twoFingerDistance = twoDistance;
-
-		gesture.pickedObject = twoFinger.pickedObject;
-		gesture.pickedCamera = twoFinger.pickedCamera;
-		gesture.isGuiCamera= twoFinger.isGuiCamera;
-
-		if (autoUpdatePickedObject){
-			if (message != EventName.On_Drag && message != EventName.On_DragEnd && message != EventName.On_Twist && message != EventName.On_TwistEnd && message != EventName.On_Pinch && message != EventName.On_PinchEnd
-			 && message != EventName.On_PinchIn && message != EventName.On_PinchOut){
-
-				if (GetTwoFingerPickedObject()){
-					gesture.pickedObject = pickedObject.pickedObj;
-					gesture.pickedCamera = pickedObject.pickedCamera;
-					gesture.isGuiCamera= pickedObject.isGUI;
-				}
-				else{
-					twoFinger.ClearPickedObjectData();
-				}
-			}
-		}
-
-		gesture.pickedUIElement = twoFinger.pickedUIElement;
-		gesture.isOverGui = twoFinger.isOverGui;
-
-
-		if (allowUIDetection && autoUpdatePickedUI){
-			if (message != EventName.On_Drag && message != EventName.On_DragEnd && message != EventName.On_Twist && message != EventName.On_TwistEnd && message != EventName.On_Pinch && message != EventName.On_PinchEnd
-			    && message != EventName.On_PinchIn && message != EventName.On_PinchOut){
-				if (message == EventName.On_SimpleTap2Fingers)
-
-				if (GetTwoFingerPickedUIElement()){
-					gesture.pickedUIElement = pickedObject.pickedObj;
-					gesture.isOverGui = true;
-				}
-				else{
-					twoFinger.ClearPickedUIData();
-				}
-			}
-		}
-
-
-
-		// Firing event ?
-		if ((enableUIMode || (enabledNGuiMode && allowUIDetection) ) ){
-			firingEvent = !gesture.isOverGui;
-		}
-
-		// Firing event
-		if ( firingEvent){
-			RaiseEvent(message, gesture);
-		}
-		else if (gesture.isOverGui){
-			if (message == EventName.On_TouchUp2Fingers){
-				RaiseEvent(EventName.On_UIElementTouchUp, gesture);
-			}
-			else{
-				RaiseEvent(EventName.On_OverUIElement, gesture);
-			}
-		}
 	}
 
 	private int GetTwoFinger( int index){
-		
+	
 		int i=index+1;
 		bool find=false;
 		
@@ -1255,66 +1031,131 @@ public class EasyTouch : MonoBehaviour {
 		return i;
 	}
 
-	private bool GetTwoFingerPickedObject(){
-
-		bool returnValue = false;
-
-		if (twoFingerPickMethod == TwoFingerPickMethod.Finger){
-			if (GetPickedGameObject(fingers[twoFinger.finger0],false)){
-				GameObject tmp = pickedObject.pickedObj;
-				if (GetPickedGameObject(fingers[twoFinger.finger1],false)){
-					if (tmp == pickedObject.pickedObj){
-						returnValue = true;
-					}
+	private void CreateStateEnd2Fingers(GestureType gesture, Vector2 startPosition, Vector2 position, Vector2 deltaPosition,float time, bool realEnd,float fingerDistance){
+	
+		switch (gesture){
+			// Tap
+			case GestureType.Tap:
+				
+				if (fingers[twoFinger0].tapCount<2 && fingers[twoFinger1].tapCount<2){
+					CreateGesture2Finger(EventName.On_SimpleTap2Fingers,startPosition,position,deltaPosition,
+					time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);				
 				}
-			}
+				else{
+					CreateGesture2Finger(EventName.On_DoubleTap2Fingers,startPosition,position,deltaPosition,
+					time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+				}
+			break;
+		
+			// Long tap
+			case GestureType.LongTap:
+				CreateGesture2Finger(EventName.On_LongTapEnd2Fingers,startPosition,position,deltaPosition,
+				time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+				break;
+		
+			// Pinch 
+			case GestureType.Pinch:
+				CreateGesture2Finger(EventName.On_PinchEnd,startPosition,position,deltaPosition,
+				time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+				break;
+		
+			// twist
+			case GestureType.Twist:
+				CreateGesture2Finger(EventName.On_TwistEnd,startPosition,position,deltaPosition,
+				time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+				break;	
 		}
-
-		else{
-			if (GetPickedGameObject(fingers[twoFinger.finger0],true)){
-				returnValue = true;
+		
+		if (realEnd){
+			// Drag
+			if ( twoFingerDragStart){
+				CreateGesture2Finger(EventName.On_DragEnd2Fingers,startPosition,position,deltaPosition,
+				time, GetSwipe( startPosition, position),( position-startPosition).magnitude,position-startPosition,0,0,fingerDistance);
+			};
+				
+			// Swipe
+			if ( twoFingerSwipeStart){
+				CreateGesture2Finger(EventName.On_SwipeEnd2Fingers,startPosition,position,deltaPosition,
+				time, GetSwipe( startPosition, position),( position-startPosition).magnitude,position-startPosition,0,0,fingerDistance);
 			}
+					
+			CreateGesture2Finger(EventName.On_TouchUp2Fingers,startPosition,position,deltaPosition,time, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
 		}
-
-		return returnValue;
 	}
 
-	private bool GetTwoFingerPickedUIElement(){
+	private void  CreateGesture2Finger(EventName message,Vector2 startPosition,Vector2 position,Vector2 deltaPosition,
+	float actionTime, SwipeType swipe, float swipeLength,Vector2 swipeVector,float twist,float pinch, float twoDistance){
 
-		bool returnValue = false;
-
-		if (fingers[twoFinger.finger0] == null){
-			return false;
+		if (message == EventName.On_TouchStart2Fingers){
+			isStartHoverNGUI = IsTouchHoverNGui(twoFinger1) & IsTouchHoverNGui(twoFinger0);
 		}
-
-		if (twoFingerPickMethod == TwoFingerPickMethod.Finger){
-			if (IsScreenPositionOverUI( fingers[twoFinger.finger0].position )){
-				GameObject tmp = GetFirstUIElementFromCache();
-
-				if (IsScreenPositionOverUI( fingers[twoFinger.finger1].position )){
-					GameObject tmp2 = GetFirstUIElementFromCache();
-
-					if (tmp2 == tmp || tmp2.transform.IsChildOf( tmp.transform) || tmp.transform.IsChildOf( tmp2.transform)){
-						pickedObject.pickedObj = tmp;
-						pickedObject.isGUI = true;
-						returnValue = true;
-					}
-				}
+				
+		if (!isStartHoverNGUI){
+			//Creating the structure with the required information
+			Gesture gesture = new Gesture();
+			
+			gesture.touchCount=2;
+			gesture.fingerIndex=-1;
+			gesture.startPosition = startPosition;	
+			gesture.position = position;
+			gesture.deltaPosition = deltaPosition;
+				
+			gesture.actionTime = actionTime;
+			
+			if (fingers[twoFinger0]!=null)
+				gesture.deltaTime = fingers[twoFinger0].deltaTime;
+			else if (fingers[twoFinger1]!=null)
+				gesture.deltaTime = fingers[twoFinger1].deltaTime;
+			else
+				gesture.deltaTime=0;
+			
+			gesture.swipe = swipe;
+			gesture.swipeLength = swipeLength;
+			gesture.swipeVector = swipeVector;
+			
+			gesture.deltaPinch = pinch;
+			gesture.twistAngle = twist;
+			gesture.twoFingerDistance = twoDistance;
+				
+			
+			if (message!= EventName.On_Cancel2Fingers){
+				gesture.pickObject = pickObject2Finger;
+			}
+			else {
+				gesture.pickObject = oldPickObject2Finger;	
+			}
+			
+			gesture.otherReceiver = receiverObject;
+			
+			if (useBroadcastMessage){
+				SendGesture2Finger(message,gesture );
+			}
+			else{
+				RaiseEvent(message, gesture);
 			}
 		}
-		else{
-			if (IsScreenPositionOverUI( twoFinger.position )){
-				pickedObject.pickedObj = GetFirstUIElementFromCache();
-				pickedObject.isGUI = true;
-				returnValue = true;
-			}
-		}
-
-		return returnValue;
 	}
 
+	private void SendGesture2Finger(EventName message, Gesture gesture){
+		
+		// Sent to user GameObject
+		if (receiverObject!=null){
+			if (receiverObject != gesture.pickObject){	
+				receiverObject.SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver );
+			}	
+		}
+		
+		// Sent to the  GameObject who is selected
+		if ( gesture.pickObject!=null){
+			gesture.pickObject.SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver );
+		}
+		// sent to gameobject
+		else{
+	    	SendMessage(message.ToString(), gesture,SendMessageOptions.DontRequireReceiver);
+		}
+	}
 	#endregion
-
+	
 	#region General private methods
 	private void RaiseEvent(EventName evnt, Gesture gesture){
 				
@@ -1423,10 +1264,6 @@ public class EasyTouch : MonoBehaviour {
 				if (On_TwistEnd!=null)
 					On_TwistEnd(gesture);
 				break;
-			case EventName.On_Pinch:
-				if (On_Pinch!=null)
-					On_Pinch(gesture);
-				break;
 			case EventName.On_PinchIn:
 				if (On_PinchIn!=null)
 					On_PinchIn(gesture);
@@ -1463,109 +1300,55 @@ public class EasyTouch : MonoBehaviour {
 				if (On_SwipeEnd2Fingers!=null)
 					On_SwipeEnd2Fingers(gesture);
 				break;
-			case EventName.On_OverUIElement:
-				if (On_OverUIElement!=null){
-					On_OverUIElement(gesture);
-				}
-				break;
-			case EventName.On_UIElementTouchUp:
-				if (On_UIElementTouchUp!=null){
-					On_UIElementTouchUp( gesture);
-				}
-				break;
 		}
 	}
-
-	private bool GetPickedGameObject(Finger finger, bool isTowFinger=false){
-
-		if (finger == null){
-			return false;
-		}
-
-		pickedObject.isGUI = false;
-		pickedObject.pickedObj = null;
-		pickedObject.pickedCamera = null;
 		
-		if (touchCameras.Count>0){
-			for (int i=0;i<touchCameras.Count;i++){
-				if (touchCameras[i].camera!=null && touchCameras[i].camera.enabled){
-
-					Vector2 pos=Vector2.zero;
-					if (!isTowFinger){
-						pos = finger.position;
-					}
-					else{
-						pos = twoFinger.position;
-					}
-
-			        Ray ray = touchCameras[i].camera.ScreenPointToRay( pos );
-			        RaycastHit hit;
-
-					if (enable2D){
-
-						LayerMask mask2d = pickableLayers2D;
-						RaycastHit2D[] hit2D = new RaycastHit2D[1];
-						if (Physics2D.GetRayIntersectionNonAlloc( ray,hit2D,float.PositiveInfinity,mask2d)>0){
-							pickedObject.pickedCamera = touchCameras[i].camera;
-							pickedObject.isGUI = touchCameras[i].guiCamera;
-							pickedObject.pickedObj = hit2D[0].collider.gameObject;
-							return true;
-						}
-					}
-
-					LayerMask mask = pickableLayers3D;
-						
-			        if( Physics.Raycast( ray, out hit,float.MaxValue,mask ) ){
-						pickedObject.pickedCamera = touchCameras[i].camera;
-						pickedObject.isGUI = touchCameras[i].guiCamera;
-						pickedObject.pickedObj = hit.collider.gameObject;
-			            return true;
-					}
-				}
+	private GameObject GetPickeGameObject(Vector2 screenPos){
+	
+		if (easyTouchCamera!=null){
+	        Ray ray = easyTouchCamera.ScreenPointToRay( screenPos );
+	        RaycastHit hit;
+			
+			LayerMask mask = pickableLayers;
+				
+	        if( Physics.Raycast( ray, out hit,float.MaxValue,mask ) ){
+	            return hit.collider.gameObject;
 			}
 		}
 		else{
 			Debug.LogWarning("No camera is assigned to EasyTouch");	
 		}
-        return false;     
-	}
-
-
-	private SwipeDirection GetSwipe(Vector2 start, Vector2 end){
 		
+        return null;
+	        
+	}
+		
+	private SwipeType GetSwipe(Vector2 start, Vector2 end){
+	
 		Vector2 linear;
 		linear = (end - start).normalized;
-
-		if ( Vector2.Dot( linear, Vector2.up) >= swipeTolerance)
-			return SwipeDirection.Up;
-
-		if ( Vector2.Dot( linear, -Vector2.up) >= swipeTolerance)
-			return SwipeDirection.Down;
-
-		if ( Vector2.Dot( linear,  Vector2.right) >= swipeTolerance)
-			return SwipeDirection.Right;
-
-		if ( Vector2.Dot( linear,  -Vector2.right) >= swipeTolerance)
-			return SwipeDirection.Left;
-
-		if ( Vector2.Dot( linear, new Vector2(0.5f,0.5f).normalized) >= swipeTolerance)
-			return SwipeDirection.UpRight;
-
-		if ( Vector2.Dot( linear, new Vector2(0.5f,-0.5f).normalized) >= swipeTolerance)
-			return SwipeDirection.DownRight;
-			
-		if ( Vector2.Dot( linear, new Vector2(-0.5f,0.5f).normalized) >= swipeTolerance)
-			return SwipeDirection.UpLeft;
-
-		if ( Vector2.Dot( linear, new Vector2(-0.5f,-0.5f).normalized) >= swipeTolerance)
-			return SwipeDirection.DownLeft;
-
-		return SwipeDirection.Other;			
+		
+		if (Mathf.Abs(linear.y)>Mathf.Abs(linear.x)){
+			if ( Vector2.Dot( linear, Vector2.up) >= swipeTolerance)
+				return SwipeType.Up;
+				
+			if ( Vector2.Dot( linear, -Vector2.up) >= swipeTolerance)
+				return SwipeType.Down;		
+		}
+		else{
+			if ( Vector2.Dot( linear, Vector2.right) >= swipeTolerance)
+				return SwipeType.Right;
+		
+			if ( Vector2.Dot( linear, -Vector2.right) >= swipeTolerance)
+				return SwipeType.Left;
+		}					
+		
+		return SwipeType.Other;			
 	}
 
 	private bool FingerInTolerance(Finger finger ){
-
-		if ((finger.position-finger.startPosition).sqrMagnitude <= (StationaryTolerance*StationaryTolerance)){
+	
+		if ((finger.position-finger.startPosition).sqrMagnitude <= (StationnaryTolerance*StationnaryTolerance)){
 			return true;
 		}
 		else{
@@ -1573,7 +1356,23 @@ public class EasyTouch : MonoBehaviour {
 		}
 	}
 
-	private bool IsTouchOverNGui(Vector2 position, bool isTwoFingers=false){
+	private float DeltaAngle(Vector2 start, Vector2 end){
+	
+		var tmp = (start.x * end.y)-(start.y*end.x);
+		return Mathf.Atan2(tmp,Vector2.Dot( start,end));
+		
+	}
+
+	private float TwistAngle(){
+	
+		Vector2 dir = (fingers[twoFinger0].position-fingers[twoFinger1].position);
+		Vector2 refDir =(fingers[twoFinger0].oldPosition - fingers[twoFinger1].oldPosition);
+		float angle =  Mathf.Rad2Deg * DeltaAngle(refDir,dir);
+		
+		return angle;
+	}
+	
+	private bool IsTouchHoverNGui(int touchIndex){
 		
 		bool returnValue = false;
 		
@@ -1584,25 +1383,36 @@ public class EasyTouch : MonoBehaviour {
 								
 			int i=0;
 			while (!returnValue && i<nGUICameras.Count){
-				Vector2 pos = Vector2.zero;
-				if (!isTwoFingers){
-					pos = position;//fingers[touchIndex].position;
-				}
-				else{
-					pos = twoFinger.position;
-				}
-				Ray ray = nGUICameras[i].ScreenPointToRay( pos );
+				Ray ray = nGUICameras[i].ScreenPointToRay( fingers[touchIndex].position );
 
 				returnValue =  Physics.Raycast( ray, out hit,float.MaxValue,mask );
 				i++;
 			}
 
 		}
-
+		
 		return returnValue;
 	
 	}
+	
+	private bool IsTouchHoverVirtualControll(int touchIndex){
+		
+		bool returnValue = false;
+		
+		if (enableReservedArea){
+			int i=0;
 
+			while (!returnValue && i< reservedAreas.Count){	
+				Rect rectTest = VirtualScreen.GetRealRect(reservedAreas[i]);
+				rectTest = new Rect( rectTest.x,Screen.height-rectTest.y-rectTest.height,rectTest.width,rectTest.height);
+				returnValue = rectTest.Contains( fingers[touchIndex].position);
+				i++;
+			}			
+		}
+		
+		return returnValue;
+	}
+	
 	private Finger GetFinger(int finderId){
 		int t=0;
 		
@@ -1620,394 +1430,388 @@ public class EasyTouch : MonoBehaviour {
 		return fing;
 	}
 	#endregion
-
-	#region Unity UI
-	private bool IsScreenPositionOverUI( Vector2 position){
-
-		uiEventSystem = EventSystem.current;
-		if (uiEventSystem != null){
-
-			uiPointerEventData = new PointerEventData( uiEventSystem);
-			uiPointerEventData.position = position;
-
-			uiEventSystem.RaycastAll( uiPointerEventData, uiRaycastResultCache);
-			if (uiRaycastResultCache.Count>0){
-				return true;
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-
-	private GameObject GetFirstUIElementFromCache(){
-
-		if (uiRaycastResultCache.Count>0){
-			return uiRaycastResultCache[0].gameObject;
-		}
-		else{
-			return null;
-		}
-	}
-	                                               
-	private GameObject GetFirstUIElement( Vector2 position){
-
-		if (IsScreenPositionOverUI( position)){
-			return GetFirstUIElementFromCache();
-		}
-		else{
-			return null;
-		}
-	}
-	#endregion
-
-	#region Static Method
-	// Unity UI compatibility
-	public static bool IsFingerOverUIElement( int fingerIndex){
-		if (EasyTouch.instance!=null){
-			Finger finger = EasyTouch.instance.GetFinger(fingerIndex);
-			if (finger != null){
-				return EasyTouch.instance.IsScreenPositionOverUI( finger.position);
-			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-	public static GameObject GetCurrentPickedUIElement( int fingerIndex){
-		if (EasyTouch.instance!=null){
-			Finger finger = EasyTouch.instance.GetFinger(fingerIndex);
-			if (finger != null){
-				return EasyTouch.instance.GetFirstUIElement( finger.position);
-			}
-			else{
-				return null;
-			}
-		}
-		else{
-			return null;
-		}
-	}
-
-	public static GameObject GetCurrentPickedObject(int fingerIndex){
-
-		if (EasyTouch.instance!=null){
-			Finger finger = EasyTouch.instance.GetFinger(fingerIndex);
-
-			if (finger!=null && EasyTouch.instance.GetPickedGameObject(finger)){
-				return EasyTouch.instance.pickedObject.pickedObj;
-			}
-			else{
-				return null;
-			}
-		}
-		else{
-			return null;
-		}
-		
-	}
-
-	public static int GetTouchCount(){
-		if (EasyTouch.instance){
-			return EasyTouch.instance.input.TouchCount();
-		}
-		else{
-			return 0;
-		}
-	}
-
-	public static void ResetTouch(int fingerIndex){
-		if (EasyTouch.instance)
-			EasyTouch.instance.GetFinger(fingerIndex).gesture=GestureType.None;
-	}
 	
-
+	#region public static methods
+	/// <summary>
+	/// Enables or disables Easy Touch.
+	/// </summary>
+	/// <param name='enable'>
+	/// true = enable<br>
+	/// false = disable
+	/// </param>
 	public static void SetEnabled( bool enable){
 		EasyTouch.instance.enable = enable;
 		if (enable){
 			EasyTouch.instance.ResetTouches();	
 		}
 	}
+	
+	/// <summary>
+	/// Return if EasyTouch is enabled or disabled.
+	/// </summary>
+	/// <returns>
+	/// True = Enabled<br>
+	/// False = Disabled
+	/// </returns>
 	public static bool GetEnabled(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enable;
-		else
-			return false;
-	}
-
-
-	public static void SetUICompatibily(bool value){
-		if (EasyTouch.instance != null){
-			EasyTouch.instance.enableUIMode = value;
-		}
-	}
-	public static bool GetUIComptability(){
-		if (EasyTouch.instance != null){
-			return EasyTouch.instance.enableUIMode;
-		}
-		else{
-			return false;
-		}
+		return EasyTouch.instance.enable;
 	}
 	
-	public static void SetAutoUpdateUI(bool value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.autoUpdatePickedUI = value;
-	}
-	public static bool GetAutoUpdateUI(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.autoUpdatePickedUI;
-		else
-			return false;
-	}
-	
-	public static void SetNGUICompatibility(bool value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.enabledNGuiMode = value;
-	}
-	public static bool GetNGUICompatibility(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enabledNGuiMode;
-		else
-			return false;
+	/// <summary>
+	/// Return the current touches count.
+	/// </summary>
+	/// <returns>
+	/// int
+	/// </returns>
+	public static int GetTouchCount(){
+		return EasyTouch.instance.input.TouchCount();
 	}
 	
-
-	public static void SetEnableAutoSelect( bool value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.autoSelect = value;
-	}
-	public static bool GetEnableAutoSelect(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.autoSelect;
-		else
-			return false;
-	}
-
-	public static void SetAutoUpdatePickedObject(bool value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.autoUpdatePickedObject = value;
-	}
-	public static bool GetAutoUpdatePickedObject(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.autoUpdatePickedObject;
-		else
-			return false;
-	}
-
-	public static void Set3DPickableLayer(LayerMask mask){
-		if (EasyTouch.instance)
-			EasyTouch.instance.pickableLayers3D = mask;	
-	}
-	public static LayerMask Get3DPickableLayer(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.pickableLayers3D;	
-		else
-			return LayerMask.GetMask("Default");
-	}
-
-	public static void AddCamera(Camera cam,bool guiCam=false){
-		if (EasyTouch.instance)
-			EasyTouch.instance.touchCameras.Add(new ECamera(cam,guiCam));
-	}
-	public static void RemoveCamera( Camera cam){
-		if (EasyTouch.instance){
-
-			int result = EasyTouch.instance.touchCameras.FindIndex(
-				delegate( ECamera c){
-				return c.camera == cam;
-			}
-			);
-
-			if (result>-1){
-				EasyTouch.instance.touchCameras[result]=null;
-				EasyTouch.instance.touchCameras.RemoveAt( result);
-
-			}
-
-		}
-
-	}
-
-	public static Camera GetCamera(int index=0){
-		if (EasyTouch.instance){
-			if (index< EasyTouch.instance.touchCameras.Count){
-				return EasyTouch.instance.touchCameras[index].camera;	
-			}
-			else{
-				return null;	
-			}
-		}
-		else{
-			return null;
-		}
-	}
-
-	public static void SetEnable2DCollider(bool value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.enable2D = value;
-	}
-	public static bool GetEnable2DCollider(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enable2D;
-		else
-			return false;
-	}
-
-	public static void Set2DPickableLayer(LayerMask mask){
-		if (EasyTouch.instance)
-			EasyTouch.instance.pickableLayers2D = mask;	
-	}
-	public static LayerMask Get2DPickableLayer(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.pickableLayers2D;	
-		else
-			return LayerMask.GetMask("Default");
-	}
-
-
-	public static void SetGesturePriority( GesturePriority value){
-		if (EasyTouch.instance)
-			EasyTouch.instance.gesturePriority = value;
-	}
-	public static GesturePriority GetGesturePriority(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.gesturePriority;
-		else
-			return GesturePriority.Tap;
-	}
-
-	public static void SetStationaryTolerance(float tolerance){
-		if (EasyTouch.instance)
-			EasyTouch.instance.StationaryTolerance = tolerance;
-	}
-	public static float GetStationaryTolerance(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.StationaryTolerance;
-		else
-			return -1;
+	/// <summary>
+	/// Sets the camera uses by EasyTouch to linePick for auto-selection.
+	/// </summary>
+	/// <param name='cam'>
+	/// The camera
+	/// </param>
+	public static void SetCamera(Camera cam){
+		EasyTouch.instance.easyTouchCamera = cam;
 	}
 	
-	public static void SetLongTapTime(float time){
-		if (EasyTouch.instance)
-			EasyTouch.instance.longTapTime = time;
-	}
-	public static float GetlongTapTime(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.longTapTime;
-		else
-			return -1;
-	}
-
-	public static void SetDoubleTapTime(float time){
-		if (EasyTouch.instance)
-			EasyTouch.instance.doubleTapTime = time;
-	}
-	public static float GetDoubleTapTime(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.doubleTapTime;
-		else
-			return -1;
-	}
-
-	public static void SetSwipeTolerance( float tolerance){
-		if (EasyTouch.instance)
-			EasyTouch.instance.swipeTolerance = tolerance;
-	}
-	public static float GetSwipeTolerance(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.swipeTolerance;
-		else
-			return -1;
+	/// <summary>
+	/// Return the camera used by EasyTouch for the auto-selection.
+	/// </summary>
+	/// <returns>
+	/// The camera
+	/// </returns
+	/// >
+	public static Camera GetCamera(){
+		return EasyTouch.instance.easyTouchCamera;	
 	}
 	
-
+	/// <summary>
+	/// Enables or disables the recognize of 2 fingers gesture.
+	/// </summary>
+	/// <param name='enable'>
+	/// true = enabled<br>
+	/// false = disabled
+	/// </param>
 	public static void SetEnable2FingersGesture( bool enable){
-		if (EasyTouch.instance)
-			EasyTouch.instance.enable2FingersGesture = enable;
+		EasyTouch.instance.enable2FingersGesture = enable;
 	}
+	
+	/// <summary>
+	/// Return if 2 fingers gesture is enabled or disabled
+	/// </summary>
+	/// <returns>
+	/// true = enabled<br>
+	/// false = disabled
+	/// </returns>
 	public static bool GetEnable2FingersGesture(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enable2FingersGesture;
-		else
-			return false;
+		return EasyTouch.instance.enable2FingersGesture;
 	}
-
-	public static void SetTwoFingerPickMethod( EasyTouch.TwoFingerPickMethod pickMethod){
-		if (EasyTouch.instance)
-			EasyTouch.instance.twoFingerPickMethod = pickMethod;
-	}
-
-	public static EasyTouch.TwoFingerPickMethod GetTwoFingerPickMethod(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.twoFingerPickMethod;
-		else
-			return EasyTouch.TwoFingerPickMethod.Finger;
-	}
-
-	public static void SetEnablePinch( bool enable){
-		if (EasyTouch.instance)
-			EasyTouch.instance.enablePinch = enable;
-	}
-	public static bool GetEnablePinch(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enablePinch;
-		else
-			return false;
-	}
-
-	public static void SetMinPinchLength(float length){
-		if (EasyTouch.instance)
-			EasyTouch.instance.minPinchLength=length;
-	}
-	public static float GetMinPinchLength(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.minPinchLength;
-		else
-			return -1;
-	}
-
+	
+	/// <summary>
+	/// Enables or disables the recognize of twist gesture
+	/// </summary>
+	/// <param name='enable'>
+	/// true = enabled<br>
+	/// false = disabled
+	/// </param>
 	public static void SetEnableTwist( bool enable){
-		if (EasyTouch.instance)
-			EasyTouch.instance.enableTwist = enable;
+		EasyTouch.instance.enableTwist = enable;
 	}
+	
+	/// <summary>
+	/// Return if 2 twist gesture is enabled or disabled
+	/// </summary>
+	/// <returns>
+	/// true = enabled
+	/// false = disables
+	/// </returns>
 	public static bool GetEnableTwist(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.enableTwist;
-		else
-			return false;
+		return EasyTouch.instance.enableTwist;
 	}
-
-	public static void SetMinTwistAngle(float angle){
-		if (EasyTouch.instance)
-			EasyTouch.instance.minTwistAngle = angle;
+	
+	/// <summary>
+	/// Enables or disables the recognize of pinch gesture
+	/// </summary>
+	/// <param name='enable'>
+	/// true = enabled
+	/// false = disables
+	/// </param>
+	public static void SetEnablePinch( bool enable){
+		EasyTouch.instance.enablePinch = enable;
 	}
-	public static float GetMinTwistAngle(){
-		if (EasyTouch.instance)
-			return EasyTouch.instance.minTwistAngle;
-		else 
-			return -1;
+	
+	/// <summary>
+	/// Return if 2 pinch gesture is enabled or disabled
+	/// </summary>
+	/// <returns>
+	/// true = enabled
+	/// false = disables
+	/// </returns>
+	public static bool GetEnablePinch(){
+		return EasyTouch.instance.enablePinch;
 	}
-
-	public static bool GetSecondeFingerSimulation(){
+	
+	/// <summary>
+	/// Enables or disables auto select.
+	/// </summary>
+	/// <param name='enable'>
+	/// true = enabled
+	/// false = disables
+	/// </param>
+	public static void SetEnableAutoSelect( bool enable){
+		EasyTouch.instance.autoSelect = enable;
+	}
+	
+	/// <summary>
+	/// Return if auto select is enabled or disabled
+	/// </summary>
+	/// <returns>
+	/// true = enabled
+	/// false = disables
+	/// </returns>
+	public static bool GetEnableAutoSelect(){
+		return EasyTouch.instance.autoSelect;
+	}
+	
+	/// <summary>
+	/// Sets the other receiver for EasyTouch event.
+	/// </summary>
+	/// <param name='receiver'>
+	/// GameObject.
+	/// </param>
+	public static void SetOtherReceiverObject( GameObject receiver){
+		EasyTouch.instance.receiverObject = receiver;
+	}
+	
+	/// <summary>
+	/// Return the other event receiver.
+	/// </summary>
+	/// <returns>
+	/// GameObject
+	/// </returns>
+	public static GameObject GetOtherReceiverObject(){
+		return EasyTouch.instance.receiverObject;
+	}
 		
-		if (EasyTouch.instance != null){
-			return EasyTouch.instance.enableSimulation;
+	/// <summary>
+	/// Sets the stationnary tolerance.
+	/// </summary>
+	/// <param name='tolerance'>
+	/// float Tolerance.
+	/// </param>
+	public static void SetStationnaryTolerance(float tolerance){
+		EasyTouch.instance.StationnaryTolerance = tolerance;
+	}
+	
+	/// <summary>
+	/// Return the stationnary tolerance.
+	/// </summary>
+	/// <returns>
+	/// Float
+	/// </returns>
+	public static float GetStationnaryTolerance(){
+		return EasyTouch.instance.StationnaryTolerance;
+	}
+	
+	/// <summary>
+	/// Set the long tap time in second
+	/// </summary>
+	/// <param name='time'>
+	/// Float
+	/// </param>
+	public static void SetlongTapTime(float time){
+		EasyTouch.instance.longTapTime = time;
+	}
+	
+	/// <summary>
+	///  Return the longs the tap time.
+	/// </summary>
+	/// <returns>
+	/// Float.
+	/// </returns>
+	public static float GetlongTapTime(){
+		return EasyTouch.instance.longTapTime;
+	}
+	
+	/// <summary>
+	/// Sets the swipe tolerance.
+	/// </summary>
+	/// <param name='tolerance'>
+	/// Float
+	/// </param>
+	public static void SetSwipeTolerance( float tolerance){
+		EasyTouch.instance.swipeTolerance = tolerance;
+	}
+	
+	/// <summary>
+	/// Return the swipe tolerance.
+	/// </summary>
+	/// <returns>
+	/// Float.
+	/// </returns>
+	public static float GetSwipeTolerance(){
+		return EasyTouch.instance.swipeTolerance;
+	}
+	
+	/// <summary>
+	/// Sets the minimum length of the pinch.
+	/// </summary>
+	/// <param name='length'>
+	/// Float.
+	/// </param>
+	public static void SetMinPinchLength(float length){
+		EasyTouch.instance.minPinchLength=length;
+	}
+	
+	/// <summary>
+	/// Return the minimum length of the pinch.
+	/// </summary>
+	/// <returns>
+	/// Float
+	/// </returns>
+	public static float GetMinPinchLength(){
+		return EasyTouch.instance.minPinchLength;
+	}
+	
+	/// <summary>
+	/// Sets the minimum twist angle.
+	/// </summary>
+	/// <param name='angle'>
+	/// Float
+	/// </param>
+	public static void SetMinTwistAngle(float angle){
+		EasyTouch.instance.minTwistAngle = angle;
+	}
+	
+	/// <summary>
+	/// Gets the minimum twist angle.
+	/// </summary>
+	/// <returns>
+	/// Float
+	/// </returns>
+	public static float GetMinTwistAngle(){
+		return EasyTouch.instance.minTwistAngle;
+	}
+	
+	/// <summary>
+	/// Gets the current picked object under a specific touch
+	/// </summary>
+	/// <returns>
+	/// The current picked object.
+	/// </returns>
+	/// <param name='fingerIndex'>
+	/// Finger index.
+	/// </param>
+	public static GameObject GetCurrentPickedObject(int fingerIndex){
+		return EasyTouch.instance.GetPickeGameObject(EasyTouch.instance.GetFinger(fingerIndex).position);
+	}
+	
+	/// <summary>
+	/// Determines if a touch is under a specified rect guiRect.
+	/// </summary>
+	/// <returns>
+	/// <c>true</c> True; otherwise, <c>false</c>.
+	/// </returns>
+	/// <param name='rect'>
+	/// The Rect <c>true</c> rect.
+	/// </param>
+	/// <param name='guiRect'>
+	/// Determines if the rect is on GUI coordinate
+	/// </param>
+	public static bool IsRectUnderTouch( Rect rect, bool guiRect=false){
+		
+		bool find=false;
+		
+		for (int i=0;i<10;i++){
+			if ( EasyTouch.instance.fingers[i]!=null){
+				if (guiRect){
+					rect = new Rect( rect.x,Screen.height-rect.y-rect.height,rect.width,rect.height);	
+				}
+				find = rect.Contains(  EasyTouch.instance.fingers[i].position);
+				break;
+			}
+		}
+		
+		return find;
+	}
+	
+	/// <summary>
+	/// Gets the a specific finger position.
+	/// </summary>
+	/// <returns>
+	/// The finger position.
+	/// </returns>
+	/// <param name='fingerIndex'>
+	/// Finger index.
+	/// </param>
+	public static Vector2 GetFingerPosition(int fingerIndex){
+	
+		if (EasyTouch.instance.fingers[fingerIndex]!=null){
+			return EasyTouch.instance.GetFinger(fingerIndex).position;
 		}
 		else{
-			return false;
+			return Vector2.zero;	
 		}
 	}
-	public static void SetSecondFingerSimulation(bool value){
-		if (EasyTouch.instance != null){
-			EasyTouch.instance.enableSimulation = value;
-		}
+	
+	
+	/// <summary>
+	/// Return if Reserved Area is enable or disable
+	/// </summary>
+	/// <returns>
+	/// true = enable
+	/// false = disable
+	/// </returns>
+	public static bool GetIsReservedArea(){
+		return EasyTouch.instance.enableReservedArea;	
+	}
+	
+	/// <summary>
+	/// Sets if Reserved Area is enable or disable
+	/// </summary>
+	/// <param name='enable'>
+	/// Enable.
+	/// </param>
+	public static void SetIsReservedArea(bool enable){
+		EasyTouch.instance.enableReservedArea = enable;	
+	}
+	
+	/// <summary>
+	/// Adds a reserved area.
+	/// </summary>
+	/// <param name='rec'>
+	/// Rec.
+	/// </param>
+	public static void AddReservedArea( Rect rec){
+		if (EasyTouch.instance)
+			EasyTouch.instance.reservedAreas.Add( rec);
+	}
+	
+	/// <summary>
+	/// Removes a reserved area.
+	/// </summary>
+	/// <param name='rec'>
+	/// Rec.
+	/// </param>
+	public static void RemoveReservedArea(Rect rec){
+		if (EasyTouch.instance)
+			EasyTouch.instance.reservedAreas.Remove( rec);
+	}
+	
+	/// <summary>
+	/// Resets a specific touch.
+	/// </summary>
+	/// <param name='fingerIndex'>
+	/// Finger index.
+	/// </param>
+	public static void ResetTouch(int fingerIndex){
+		if (EasyTouch.instance)
+			EasyTouch.instance.GetFinger(fingerIndex).gesture=GestureType.None;
 	}
 	#endregion
+	
+	
 }

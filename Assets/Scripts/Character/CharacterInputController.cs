@@ -14,7 +14,7 @@ public class CharacterInputController : MonoBehaviour {
     public CharacterStatus characterStatus = null;
     
     //touch joy stick 
-    //public EasyJoystick joystick = null;
+    public EasyJoystick joystick = null;
     
     public Transform cameraTransform = null;
     //public UICamera uiCamera;
@@ -56,7 +56,7 @@ public class CharacterInputController : MonoBehaviour {
         
         else if(inputType == InputType.TouchInput)
         {
-            //joystick = GameManager.Instance.joystick;
+            joystick = GameManager.Instance.joystick;
         }
         cameraTransform = PlayerCamera.Instance.childTransform;
 	}
@@ -103,7 +103,7 @@ public class CharacterInputController : MonoBehaviour {
 
 	    else if(inputType == InputType.TouchInput)
 	    {
-	        /*if(joystick.JoystickAxis.y > 0.1f)
+	        if(joystick.JoystickAxis.y > 0.1f)
 	            direction += forward * Mathf.Abs(joystick.JoystickAxis.y);
 	        if(joystick.JoystickAxis.y < -0.1f)
 	            direction -= forward * Mathf.Abs(joystick.JoystickAxis.y);
@@ -111,7 +111,7 @@ public class CharacterInputController : MonoBehaviour {
 	            direction += cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
 	        if(joystick.JoystickAxis.x < -0.1f)
 	            direction -= cameraTransform.right* Mathf.Abs(joystick.JoystickAxis.x);
-			*/
+
 			if(Input.GetKey(KeyCode.W))
 				direction += forward;
 			if(Input.GetKey(KeyCode.S))
