@@ -128,6 +128,9 @@ public class CharacterStatus : CharacterAttributes {
 
     public void ReceiveDamage(float damage)
     {
+		if(curHealth < 0)
+			return;
+
 		if(curHealth >0)
 		{
 			curHealth -= damage;
@@ -144,8 +147,9 @@ public class CharacterStatus : CharacterAttributes {
 	public void ResetHealth()
 	{
 		myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, maxHealth, 0.0f , false);
+		actionManager.StopAnimation("Default_Death", true);
 	}
-
+	
 	[RPC]
 	public void NetworkSyncHealth(float newHealth, float damage, bool displayMessage)
 	{

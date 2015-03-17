@@ -71,7 +71,8 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 				Debug.Log("update firing one shot" + fireSpeedTimer);
 				fireSpeedTimer += fireSpeed;	
 				//ownerCAM.PlayOneShot(skillID);
-				FireOneShot();
+				if(isBusy)
+					FireOneShot();
 			}
 		}
     }
@@ -93,6 +94,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		{
 			ownerCAM.DisableMovement();
 		}
+		isBusy = true;
 	    skillState = SkillState.precast;
 			ownerCAM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name, true);
 			yield return new WaitForSeconds(baseSkillAnimation.precastAnimation.clip.length);
@@ -136,13 +138,14 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		//if(isOwner)
 			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, equipmentSlotIndex, true);
 		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
-		skillState = SkillState.wait;
+		if(skillState != SkillState.followThrough)
+			skillState = SkillState.wait;
 		Debug.Log("finished firing");
 	}
 
     public override bool CanPressUp ()
     {
-            return true;
+        return true;
     }
 
     public override IEnumerator PressUpSequence(int randomNumber)
@@ -153,13 +156,14 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		ActivateSkill(false);
         while(skillState == SkillState.onUse || skillState == SkillState.precast)
         {	
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
-            skillState = SkillState.followThrough;
+		yield return new WaitForEndOfFrame();
+        skillState = SkillState.followThrough;
 		if(disableMovement)
 			ownerCAM.EnableMovement();
-			ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, true);
-			yield return new WaitForSeconds(baseSkillAnimation.followThroughAnimation.clip.length);
+		ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, true);
+		yield return new WaitForSeconds(baseSkillAnimation.followThroughAnimation.clip.length);
     }
 
 

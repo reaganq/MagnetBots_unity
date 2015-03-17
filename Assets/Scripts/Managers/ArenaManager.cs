@@ -25,7 +25,6 @@ public class ArenaManager : Zone {
 	public override void EnterZone ()
 	{
 		base.EnterZone ();
-		GUIManager.Instance.EnterGUIState(UIState.main);
 		//set guimanager to battlemode
 	}
 
@@ -186,11 +185,14 @@ public class ArenaManager : Zone {
 				return;
 		}
 
+		Debug.Log("all dead");
 		myPhotonView.RPC("EnterArenaState", PhotonTargets.All, (int)ArenaState.battleEnd);
 		for (int i = 0; i < photonPlayers.Count; i++) {
 			myPhotonView.RPC("LoseScenario", photonPlayers[i]);
 		}
 	}
+
+
 
 	[RPC]
 	public void WinScenario()
@@ -218,6 +220,7 @@ public class ArenaManager : Zone {
 	{
 		Debug.LogError("LOSE ARENA");
 		yield return null;
+		GUIManager.Instance.DisplayArenaFailure();
 	}
 
 	public void GiveRewards()
@@ -233,10 +236,42 @@ public class ArenaManager : Zone {
 		Debug.Log("removed player " + csViewID + "from this arena");
 		if(PhotonNetwork.isMasterClient)
 		{
+			for (int i = 0; i < playerCharacterStatuses.Count; i++) {
+				if(playerCharacterStatuses[i] == null)
+				{
+					Debug.Log("found null cs");
+					playerCharacterStatuses.RemoveAt(i);
+					break;
+				}
+			}
 			if(playerCharacterStatuses.Count <= 0)
 				CleanUp();
 		}
 	}
+
+	public override void OnPhotonPlayerDisconnected(PhotonPlayer player)
+	{
+		if(photonPlayerIDs.Contains(player.ID))
+		{
+			base.OnPhotonPlayerDisconnected(player);
+			if(PhotonNetwork.isMasterClient)
+			{
+				Debug.Log("shutting down this arena because of disconnect");
+				if(arenaState == ArenaState.battle || arenaState == ArenaState.preBattle)
+				{
+				for (int i = 0; i < photonPlayers.Count; i++) {
+					myPhotonView.RPC("LoseScenario", photonPlayers[i]);
+				}
+				}
+			}
+		}
+	}
+
+	/*[RPC]
+	public void NetworkForceEnd()
+	{
+		
+	}*/
 }
 
 public enum ArenaState

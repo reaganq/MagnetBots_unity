@@ -138,4 +138,9 @@ MonoBehaviour:
   - NetworkUpdatePortrait
   - NetworkUpdateArenaStateData
   - RequestArenaStateDataFromMaster
+  - NetworkCancelPartyChallenge
+  - NetworkStartPartyChallenge
+  - NetworkAnimateToIdle
+  - NetworkAnimateToRunning
+  - Die
   DisableAutoOpenWizard: 0

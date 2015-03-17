@@ -12,7 +12,7 @@
     <npcButtonText>Gym</npcButtonText>
     <Conditions />
     <EnemyIDs>
-      <int>1</int>
+      <int>2</int>
     </EnemyIDs>
   </NPCArena>
 </ArrayOfNPCArena>

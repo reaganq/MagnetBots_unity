@@ -394,6 +394,7 @@ MonoBehaviour:
   idleOverrideAnim:
     clip: {fileID: 7400000, guid: b54ae3463171540b3bb0c504abdea695, type: 2}
     animationLayer: 2
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
@@ -401,6 +402,7 @@ MonoBehaviour:
   runningOverrideAnim:
     clip: {fileID: 7400000, guid: 53f023c06b1db49aeb3e5d9ee0f28332, type: 2}
     animationLayer: 2
+    speed: 1
     useWholeBody: 0
     useArmLBones: 0
     useArmRBones: 1
@@ -435,6 +437,7 @@ MonoBehaviour:
     precastAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -442,6 +445,7 @@ MonoBehaviour:
     castAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -449,6 +453,7 @@ MonoBehaviour:
     followThroughAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -456,6 +461,7 @@ MonoBehaviour:
     loopAnimation:
       clip: {fileID: 0}
       animationLayer: 0
+      speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
@@ -495,7 +501,7 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ede2de04ce9584de48509b7c3271ea25, type: 2}
+  - {fileID: 2100000, guid: 1f946b46213e244e7bb913b0d16232b9, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -103,6 +103,15 @@ public class SimpleFSM : ActionManager {
 
 	public virtual void EnterState(AIState state)
 	{
+		if(state == AIState.ready)
+		{
+			for (int i = 0; i <skills.Length; i++) 
+			{
+				skills[i].InitialiseAISkill(myStatus, i);		
+			}
+			myStatus.Invulnerable = false;
+		}
+
 		if(myPhotonView.isMine)
 		{
 			switch(state)
@@ -113,13 +122,6 @@ public class SimpleFSM : ActionManager {
 			case AIState.initialised:
 				break;
 			case AIState.ready:
-				for (int i = 0; i <skills.Length; i++) 
-				{
-					skills[i].InitialiseAISkill(myStatus, i);		
-				}
-				myStatus.Invulnerable = false;
-				//check for any ready taunts
-				//if not, select skill
 				Invoke("ReadyUp", CheckTaunts(state));
 				break;
 			case AIState.selectingSkill:
@@ -153,36 +155,39 @@ public class SimpleFSM : ActionManager {
 
 	public virtual void ExitState(AIState state)
 	{
-		switch(state)
+		if(myPhotonView.isMine)
 		{
-			//just instantiated
-		case AIState.preInitialised:
-			break;
-			//has owner arena and all intended targets
-		case AIState.initialised:
-			break;
-			//all players have loaded into arena
-		case AIState.ready:
-			break;
-			//play battle taunts
-		case AIState.battleTaunts:
-			break;
-		case AIState.selectingSkill:
-			//SelectSkill();
-			break;
-		case AIState.rest:
-			if(restJob != null && restJob.running)
-				restJob.kill();
-			break;
-		case AIState.executingSkill:
-			if(activeSkill != null && activeSkill.useSkillJob.running)
-				activeSkill.useSkillJob.kill();
-			ResetPhysicalMovementStatus();
-			break;
-		case AIState.taunting:
-			break;
-		case AIState.victory:
-			break;
+			switch(state)
+			{
+				//just instantiated
+			case AIState.preInitialised:
+				break;
+				//has owner arena and all intended targets
+			case AIState.initialised:
+				break;
+				//all players have loaded into arena
+			case AIState.ready:
+				break;
+				//play battle taunts
+			case AIState.battleTaunts:
+				break;
+			case AIState.selectingSkill:
+				//SelectSkill();
+				break;
+			case AIState.rest:
+				if(restJob != null && restJob.running)
+					restJob.kill();
+				break;
+			case AIState.executingSkill:
+				if(activeSkill != null && activeSkill.useSkillJob.running)
+					activeSkill.useSkillJob.kill();
+				ResetPhysicalMovementStatus();
+				break;
+			case AIState.taunting:
+				break;
+			case AIState.victory:
+				break;
+			}
 		}
 	}
 
@@ -250,6 +255,7 @@ public class SimpleFSM : ActionManager {
 			}
 		}
 
+		moveVector += Physics.gravity;
 		controller.Move(moveVector * myStatus.curMovementSpeed * Time.deltaTime);
 		if(controller.velocity.magnitude > 0.2)
 		{
@@ -583,7 +589,7 @@ public class SimpleFSM : ActionManager {
 	
 	public void AISkillFireOneShot(int skillIndex)
 	{
-		myPhotonView.RPC("NetworkFireOneShot", PhotonTargets.All, skillIndex);
+		myPhotonView.RPC("NetworkAISkillFireOneShot", PhotonTargets.All, skillIndex);
 	}
 
 	[RPC]

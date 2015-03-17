@@ -79,7 +79,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: punchbagbob.psd
+  - name: punchbagbob
     x: 2
     y: 2
     width: 700

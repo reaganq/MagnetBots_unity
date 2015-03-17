@@ -22,6 +22,18 @@ public class RewardsGUIController : BasicGUIController {
 
 	public GameObject victoryRewardObject;
 	public GameObject minigameScoreObject;
+	public GameObject failureObject;
+
+	public void DisplayArenaFailure()
+	{
+		rewardPanelTween.tweenTarget = failureObject;
+		rewardPanelTween.Play(true);
+	}
+
+	public void OnFailureContinuePressed()
+	{
+		EndArena();
+	}
 
 	public void DisplayArenaRewards(LootItemList loots)
 	{
@@ -171,6 +183,7 @@ public class RewardsGUIController : BasicGUIController {
 		victoryRewardObject.SetActive(false);
 		minigameScoreObject.SetActive(false);
 		badgeRewardObject.SetActive(false);
+		failureObject.SetActive(false);
 		base.Disable ();
 	}
 }

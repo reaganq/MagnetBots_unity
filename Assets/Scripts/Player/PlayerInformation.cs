@@ -82,6 +82,7 @@ public class PlayerInformation  {
 	{
 		PlayerName = newName;
 		profile.name = PlayerName;
+		PhotonNetwork.playerName = PlayerName;
 	}
 
 	public void EquipBaseNakedArmor()

@@ -4,12 +4,7 @@ using System.Collections.Generic;
 using PathologicalGames;
 
 public class ActionManager : MonoBehaviour {
-
-	//ui shit
-	public GameObject speechBubble;
-	public UILabel speechBubbleText;
-	public UIPlayTween speechBubbleTween;
-
+	
 	//common usage
 	public SpawnPool effectsPool;
 	public CharacterStatus myStatus;
@@ -179,7 +174,8 @@ public class ActionManager : MonoBehaviour {
 	{
 		if(!acrossNetwork)
 		{
-			myAnimation.Stop(name);
+			if(myAnimation.IsPlaying(name))
+				myAnimation.Stop(name);
 		}
 		else
 		{
@@ -192,14 +188,14 @@ public class ActionManager : MonoBehaviour {
 	public void NetworkTalk(string text)
 	{
 		CancelInvoke("HideSpeechBubble");
-		speechBubbleText.text = text;
-		speechBubbleTween.Play(true);
+		//speechBubbleText.text = text;
+		//speechBubbleTween.Play(true);
 		Invoke("HideSpeechBubble", 3);
 	}
 
 	public void HideSpeechBubble()
 	{
-		speechBubbleTween.Play(false);
+		//speechBubbleTween.Play(false);
 	}
 	
 	[RPC]
@@ -246,7 +242,8 @@ public class ActionManager : MonoBehaviour {
 	[RPC]
 	public void NetworkStopAnimation(string name)
 	{
-		myAnimation.Stop(name);
+		if(myAnimation.IsPlaying(name))
+			myAnimation.Stop(name);
 	}
 	
 	[RPC]

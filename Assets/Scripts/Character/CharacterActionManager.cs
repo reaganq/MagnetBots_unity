@@ -48,6 +48,7 @@ public class CharacterActionManager : ActionManager {
 		MakeSpawnPool();
 		myAnimation["Default_Idle"].layer = 0;
 		myAnimation["Default_Run"].layer = 0;
+		myAnimation["Default_Death"].layer = 7;
 		//myPhotonView.RPC("CrossFadeAnimation", PhotonTargets.All, "Default_Idle");
 		//Debug.LogWarning("FADING IDLE");
 		//CrossfadeAnimation("Default_Idle", false);
@@ -126,27 +127,31 @@ public class CharacterActionManager : ActionManager {
 
     #region action functions
 
+	public override void Die ()
+	{
+		CrossfadeAnimation("Default_Death", true);
+	}
+
+	//HACK the problem is that skill IDs are different because of different item spawn order for clients. Reverted to hacky slot index usage. 
 	public void UseSkill(InputTrigger trigger, int slot)
 	{
-		if(isLocked())
+		if(isLocked() || !myStatus.isAlive())
 			return;
 		//int skillIndex = -1;
 		//skillIndex = GetSkillByIDAndSlot(index, slot);
 		for (int i = 0; i < armorSkills.Count; i++) {
 			if(armorSkills[i].equipmentSlotIndex == slot)
 			{
-				Debug.Log("found right armor slot skill");
 				if(trigger == InputTrigger.OnPressDown)
 				{
-					if(armorSkills[i].CanPressDown())
+					if(armorSkills[i].CanPressDown() && !isOtherSkillBusy(slot))
 					{
-						Debug.Log("can press down");
 						int rng = Random.Range(armorSkills[i].lowerRNGLimit, armorSkills[i].upperRNGLimit);
 						myPhotonView.RPC("PressDownAction", PhotonTargets.All, slot, rng);
 						//PressDownAction(skillIndex, rng);
 					}
 				}
-				else if(trigger == InputTrigger.OnPressUp)
+				else if(trigger == InputTrigger.OnPressUp && !isOtherSkillBusy(slot))
 				{
 					if(armorSkills[i].CanPressUp())
 					{
@@ -157,6 +162,15 @@ public class CharacterActionManager : ActionManager {
 				}
 			}
 		}
+	}
+
+	public bool isOtherSkillBusy(int slotIndex)
+	{
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].equipmentSlotIndex != slotIndex && armorSkills[i].isBusy)
+				return true;
+		}
+		return false;
 	}
 
 	public int GetSkillByIDAndSlot(int id, int slot)
@@ -219,41 +233,54 @@ public class CharacterActionManager : ActionManager {
         if(movementState != MovementState.idle)
         {
 			//Debug.LogWarning("animate to idle");
-            myAnimation["Default_Idle"].time = 0;
-			myAnimation.CrossFade("Default_Idle");
-			for (int i = 0; i < armorAnimControllers.Length ; i++)
-            {
-                if(armorAnimControllers[i] != null )
-                {
-                    if(armorAnimControllers[i].idleOverrideAnim.clip != null)
-                    {
-						myAnimation[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
-						myAnimation.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
-                    }
-                }
-            }
+			myPhotonView.RPC("NetworkAnimateToIdle", PhotonTargets.All);
             movementState = MovementState.idle;
         }
     }
+
+	[RPC]
+	public void NetworkAnimateToIdle()
+	{
+		myAnimation["Default_Idle"].time = 0;
+		CrossfadeAnimation("Default_Idle", false);
+		for (int i = 0; i < armorAnimControllers.Length ; i++)
+		{
+			if(armorAnimControllers[i] != null )
+			{
+				if(armorAnimControllers[i].idleOverrideAnim.clip != null)
+				{
+					myAnimation[armorAnimControllers[i].idleOverrideAnim.clip.name].time = 0;
+					myAnimation.CrossFade(armorAnimControllers[i].idleOverrideAnim.clip.name);
+				}
+			}
+		}
+	}
     
     public void AnimateToRunning()
     {
         if(movementState != MovementState.moving)
         {
 			//Debug.LogWarning("animate to running");
-			myAnimation["Default_Run"].time = 0;
-			myAnimation.CrossFade("Default_Run");
-            for (int i = 0; i < armorAnimControllers.Length ; i++) 
-            {
-                if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
-                {
-					myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].time = 0;
-					myAnimation.CrossFade(armorAnimControllers[i].runningOverrideAnim.clip.name);
-                }
-            }
+			myPhotonView.RPC("NetworkAnimateToRunning", PhotonTargets.All);
             movementState = MovementState.moving;
         }
     }
+
+	[RPC]
+	public void NetworkAnimateToRunning()
+	{
+		myAnimation["Default_Run"].time = 0;
+		//myAnimation.CrossFade("Default_Run");
+		CrossfadeAnimation("Default_Run", false);
+		for (int i = 0; i < armorAnimControllers.Length ; i++) 
+		{
+			if(armorAnimControllers[i] != null && armorAnimControllers[i].runningOverrideAnim.clip != null)
+			{
+				myAnimation[armorAnimControllers[i].runningOverrideAnim.clip.name].time = 0;
+				myAnimation.CrossFade(armorAnimControllers[i].runningOverrideAnim.clip.name);
+			}
+		}
+	}
 
 	public override void EnableMovement()
 	{

@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using Parse;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class IntroGUIController : MonoBehaviour {
 
@@ -35,6 +36,12 @@ public class IntroGUIController : MonoBehaviour {
 		panel.SetActive(false);
 	}
 
+	public void OnJoinedLobby()
+	{
+		Debug.Log("lobby joined");
+		OnStartPressed();
+	}
+
 	public void OnStartPressed()
 	{
 		if(!PhotonNetwork.insideLobby)
@@ -49,6 +56,7 @@ public class IntroGUIController : MonoBehaviour {
 		}
 	}
 
+	//int world id
     public void StartGame()
     {
 		loadingLabel.text = "loading";
@@ -84,7 +92,8 @@ public class IntroGUIController : MonoBehaviour {
 		//startButton.SetActive(false);
 		//loadingLabel.SetActive(true);
 		//NetworkManager.Instance.Connect();
-		PhotonNetwork.JoinRandomRoom();
+		Hashtable worldID = new Hashtable() {{"world", GameManager.Instance.targetLevel.ToString()}};
+		PhotonNetwork.JoinRandomRoom(worldID, 0);
 		//yield return null;
 		/*while(!NetworkManager.Instance.isConnectedToServer)
 		{

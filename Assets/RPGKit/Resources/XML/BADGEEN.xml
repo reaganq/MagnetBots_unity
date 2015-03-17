@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGBadge xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGBadge>
+    <IconPath>punchbagbob</IconPath>
+    <AtlasName>Atlases/Badges/BadgesAtlas</AtlasName>
     <ID>1</ID>
-    <Name>Burger Bronze</Name>
-    <Description />
+    <Name>Punchbag Bob</Name>
+    <Description>You've defeated Punchbag Bob!</Description>
     <SystemDescription />
   </RPGBadge>
 </ArrayOfRPGBadge>

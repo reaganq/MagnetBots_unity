@@ -1043,6 +1043,7 @@ Animation:
   - {fileID: 7400000, guid: 674d3d898094c47759f9c3a89cc63f38, type: 2}
   - {fileID: 7400000, guid: fb6919b038e0d468b94f532052b5fdcc, type: 2}
   - {fileID: 7400000, guid: b3ea374b454b844a099770629e3b1fb4, type: 2}
+  - {fileID: 7400000, guid: 6fe93aafa6292452a9807a0a7a971176, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -1171,9 +1172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11e6d11b0bfea4b0c83651e2c4d6f74f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speechBubble: {fileID: 0}
-  speechBubbleText: {fileID: 0}
-  speechBubbleTween: {fileID: 0}
   effectsPool: {fileID: 0}
   myStatus: {fileID: 11400026}
   _myTransform: {fileID: 400278}
@@ -1193,7 +1191,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   playerMotor: {fileID: 11400002}
-  input: {fileID: 0}
+  input: {fileID: 11400006}
   networkMovement: {fileID: 11400016}
   _actionState: 0
 --- !u!114 &11400010

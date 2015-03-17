@@ -8,6 +8,11 @@ public class NotificationGUIController : BasicGUIController {
 	public UILabel notificationMessage;
 	public PhotonPlayer prospectivePartyLeader;
 
+	public GameObject messageBoxConfirmButton;
+	public GameObject partyChallengeAcceptButton;
+	public UILabel partyChallengeAcceptButtonLabel;
+	public GameObject partyChallengeRejectButton;
+
 	public GameObject partyChallenge;
 	public UILabel partyChallengeMessage;
 	public UILabel enemyLabel;
@@ -29,8 +34,28 @@ public class NotificationGUIController : BasicGUIController {
 	{
 		notificationMessage.text = name + "would like to form a party with you!";
 	}
+
+	public void DisplayMessageBox(string message)
+	{
+		messageBoxLabel.text = message;
+		notificationTween.tweenTarget = messageBox;
+		state = NotificationUIState.message;
+		notificationTween.Play(true);
+	}
 	
-	public void OnConfirm()
+	public void HideMessageBox()
+	{
+		notificationTween.tweenTarget = messageBox;
+		notificationTween.Play(false);
+		state = NotificationUIState.none;
+	}
+
+	public void OnMessageConfirm()
+	{
+		HideMessageBox();
+	}
+
+	public void OnAccept()
 	{
 		if(state == NotificationUIState.teamInvite)
 		{
@@ -42,8 +67,11 @@ public class NotificationGUIController : BasicGUIController {
 		}
 		else if(state == NotificationUIState.teamChallenge)
 		{
-
+			PlayerManager.Instance.ActiveWorld.PartyChallengeReply(challenger, true);
+			DisplayPartyWaiting();
 		}
+		else if(state == NotificationUIState.cancelTeamChallenge)
+			HidePartyChallenge();
 	}
 
 	public void OnReject()
@@ -56,44 +84,21 @@ public class NotificationGUIController : BasicGUIController {
 			prospectivePartyLeader = null;
 			HideNotificationBox();
 		}
-	}
-
-	public void DisplayPartyWaiting()
-	{
-		notificationTween.tweenTarget = partyChallengeWait;
-		notificationTween.Play(true);
-		state = NotificationUIState.teamChallengeWait;
-	}
-
-	public void HidePartyWaiting()
-	{
-		partyChallengeWait.SetActive(false);
-		state = NotificationUIState.none;
-	}
-
-	public void DisplayPartyChallenge(int enemyID, PhotonPlayer c)
-	{
-		challenger = c;
-		notificationTween.tweenTarget = partyChallenge;
-		notificationTween.Play(true);
-		state = NotificationUIState.teamChallenge;
-		RPGEnemy enemy = Storage.LoadById<RPGEnemy>(enemyID, new RPGEnemy());
-		partyChallengeMessage.text = challenger.name;
-		enemyLabel.text = enemy.Name;
-	}
-
-	public void CancelPartyChallenge(PhotonPlayer c)
-	{
-		if(challenger == c && state == NotificationUIState.teamChallenge)
+		else if(state == NotificationUIState.teamChallenge || state == NotificationUIState.teamChallengeWait)
+		{
+			PlayerManager.Instance.ActiveWorld.PartyChallengeReply(challenger, false);
+			HidePartyChallenge();
+		}
+		else if(state == NotificationUIState.cancelTeamChallenge)
 		{
 			HidePartyChallenge();
 		}
-	}
-
-	public void HidePartyChallenge()
-	{
-		partyChallenge.SetActive(false);
-		state = NotificationUIState.none;
+		else if(state == NotificationUIState.challengerWait)
+		{
+			PlayerManager.Instance.ActiveWorld.CancelPartyChallenge();
+		}
+		else if(state == NotificationUIState.teamChallengeLoading)
+			HidePartyChallenge();
 	}
 
 	public void DisplayNotificationBox(PhotonPlayer player, int partyLeaderID)
@@ -104,26 +109,82 @@ public class NotificationGUIController : BasicGUIController {
 		notificationTween.Play(true);
 		prospectivePartyLeader = PhotonPlayer.Find(partyLeaderID);
 	}
-
+	
 	public void HideNotificationBox()
 	{
 		notificationBox.SetActive(false);
 		state = NotificationUIState.none;
 	}
 
-	public void DisplayMessageBox(string message)
+	public void DisplayPartyChallenge(int enemyID, PhotonPlayer c)
 	{
-		messageBoxLabel.text = message;
-		notificationTween.tweenTarget = messageBox;
-		state = NotificationUIState.message;
+		challenger = c;
+		notificationTween.tweenTarget = partyChallenge;
 		notificationTween.Play(true);
+		state = NotificationUIState.teamChallenge;
+		RPGEnemy enemy = Storage.LoadById<RPGEnemy>(enemyID, new RPGEnemy());
+		partyChallengeMessage.text = challenger.name + " wants your help to defeat: " + enemy.Name;
+		partyChallengeAcceptButton.SetActive(true);
+		partyChallengeRejectButton.SetActive(true);
+		partyChallengeAcceptButtonLabel.text = "Accept";
+
 	}
 
-	public void HideMessageBox()
+	public void HidePartyChallenge()
 	{
-		messageBox.SetActive(false);
+		notificationTween.tweenTarget = partyChallenge;
+		notificationTween.Play(false);
 		state = NotificationUIState.none;
 	}
+
+	public void DisplayPartyWaiting()
+	{
+		//notificationTween.tweenTarget = partyChallengeWait;
+		//notificationTween.Play(true);
+		partyChallenge.SetActive(true);
+		partyChallengeMessage.text = "Waiting for your team to respond.";
+		state = NotificationUIState.teamChallengeWait;
+		partyChallengeAcceptButton.SetActive(false);
+		partyChallengeRejectButton.SetActive(true);
+	}
+
+	public void DisplayChallengerPartyWaiting()
+	{
+		notificationTween.tweenTarget = partyChallenge;
+		partyChallengeMessage.text = "Waiting for your team to respond.";
+		notificationTween.Play(true);
+		state = NotificationUIState.challengerWait;
+		partyChallengeAcceptButton.SetActive(false);
+		partyChallengeRejectButton.SetActive(true);
+	}
+
+	public void StartTeamChallenge()
+	{
+		partyChallengeMessage.text = "Entering the battle arena!";
+		state = NotificationUIState.teamChallengeLoading;
+	}
+
+	public void CancelPartyChallenge()
+	{
+		if(state == NotificationUIState.teamChallengeWait || state == NotificationUIState.teamChallenge || state == NotificationUIState.challengerWait)
+		{
+			state = NotificationUIState.cancelTeamChallenge;
+			partyChallenge.SetActive(true);
+			partyChallengeMessage.text = "Battle arena challenge has been cancelled";
+			partyChallengeAcceptButtonLabel.text = "Confirm";
+			partyChallengeAcceptButton.SetActive(true);
+			partyChallengeRejectButton.SetActive(false);
+			//rejectbutton.setactive(false);
+		}
+	}
+
+	public void LeaveZone()
+	{
+		partyChallenge.SetActive(false);
+		OnReject();
+	}
+
+
 
 	/*public void OnAddToFriends()
 	{
@@ -164,5 +225,8 @@ public enum NotificationUIState
 	teamInvite,
 	teamChallenge,
 	teamChallengeWait,
+	cancelTeamChallenge,
+	challengerWait,
+	teamChallengeLoading,
 	message
 }

@@ -20,6 +20,7 @@ public class SkillButton : MonoBehaviour
     public delegate void OnReleaseEvent( int slot);
     public static event OnReleaseEvent onRelease;
  
+	public bool isbuttonPressed;
 	public int skillIndex;
 	public int slotIndex;
 	public UISprite skillIcon;
@@ -49,10 +50,11 @@ public class SkillButton : MonoBehaviour
 
  //void OnEnable () { if (mStarted && mHighlighted) OnHover(UICamera.IsHighlighted(gameObject)); }
 
- void OnPress (bool isPressed)
+ public void OnPress (bool isPressed)
  {
      if (enabled)
      {
+			isbuttonPressed = isPressed;
             if (isPressed)
             {
                 if(onPress != null)

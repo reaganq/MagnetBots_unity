@@ -17,7 +17,8 @@ public class MeleeAISkill : AISkill {
 	// Use this for initialization
 	public override IEnumerator UseSkillSequence ()
     {
-
+		if(!isOwner)
+			yield break;
 		if(fulfillConditionsBeforeUse)
 		{
 			StartFulfillSkillConditions();
@@ -37,10 +38,10 @@ public class MeleeAISkill : AISkill {
 			yield return new WaitForSeconds(baseSkillAnimation.precastAnimation.clip.length);
 		}
 
-		ActivateSkill(true);
-		skillState = SkillState.onUse;
-		ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
 
+		//skillState = SkillState.onUse;
+		//ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		ownerFSM.AISkillFireOneShot(skillID);
         yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length);
 
 		skillState = SkillState.followThrough;
@@ -49,4 +50,11 @@ public class MeleeAISkill : AISkill {
 			ownerFSM.EnableMovement();
         }
     }
+
+	public override void FireOneShot ()
+	{
+		ActivateSkill(true);
+		skillState = SkillState.onUse;
+		ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+	}
 }

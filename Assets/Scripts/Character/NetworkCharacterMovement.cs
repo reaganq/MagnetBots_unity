@@ -62,12 +62,12 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 				t = Mathf.Clamp( Mathf.Abs( myStatus.curMovementSpeed / myStatus.maxMovementSpeed ), 0, myStatus.maxMovementSpeed );
 
 				actionManager.UpdateRunningSpeed(t);
-				actionManager.AnimateToRunning();
+				//actionManager.AnimateToRunning();
 			}
 			else
 			{
 				//if(animationManager.myState == 
-				actionManager.AnimateToIdle();
+				//actionManager.AnimateToIdle();
 			}
 		}
 	}
@@ -92,7 +92,7 @@ public class NetworkCharacterMovement : Photon.MonoBehaviour {
 				myStatus.clientCurMovementSpeed = (float)stream.ReceiveNext();
 
 				latestCorrectPos = realPosition;                 // save this to move towards it in FixedUpdate()
-				onUpdatePos = transform.localPosition;  // we interpolate from here to latestCorrectPos
+				onUpdatePos = _transform.localPosition;  // we interpolate from here to latestCorrectPos
 				fraction = 0;  
 			}
 		}

@@ -1,59 +1,36 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Base/PlayerAction.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC/NPC.cs">
     <Files>
-      <File FileName="Assets/Scripts/Misc/LifeTime.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="67" Column="52" />
-      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="86" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Arenas/ArenaExit.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Minigames/Minigame.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/CurrencyTilebutton.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGCurrency.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="110" Column="34" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="284" Column="40" />
-      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/ItemInWorld.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/OverheadUI.cs" Line="19" Column="28" />
-      <File FileName="Assets/Scripts/Player/Inventory.cs" Line="233" Column="1" />
-      <File FileName="Assets/Scripts/GUI/Controllers/OpeningCinematicGUIController.cs" Line="85" Column="36" />
-      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="46" Column="21" />
-      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="136" Column="3" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="136" Column="32" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="284" Column="30" />
-      <File FileName="Assets/Scripts/Cinematic/IntroCinematicSequence.cs" Line="134" Column="39" />
-      <File FileName="Assets/Plugins/PathologicalGames/UnityConstraints/BillboardConstraint.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Base/PlayerAction.cs" Line="83" Column="23" />
+      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="238" Column="11" />
+      <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/TeamMemberUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="29" Column="3" />
+      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="57" Column="13" />
+      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="54" Column="30" />
+      <File FileName="Assets/Scripts/Character/PlayerMotor.cs" Line="76" Column="37" />
+      <File FileName="Assets/Scripts/GUI/Controllers/RewardsGUIController.cs" Line="186" Column="34" />
+      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="246" Column="5" />
+      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="84" Column="4" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="93" Column="2" />
+      <File FileName="Assets/Scripts/Enemies/JimFSM.cs" Line="5" Column="32" />
+      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="164" Column="53" />
+      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="65" Column="2" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="74" Column="4" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="117" Column="59" />
+      <File FileName="Assets/Scripts/GUI/Controllers/NotificationGUIController.cs" Line="101" Column="25" />
+      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/NetworkingPeer.cs" Line="2869" Column="10" />
+      <File FileName="Assets/Scripts/Enemies/NetworkAIMovement.cs" Line="37" Column="41" />
+      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="107" Column="3" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="44" Column="4" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Photon Unity Networking" expanded="True">
-              <Node name="Plugins" expanded="True">
-                <Node name="PhotonNetwork" expanded="True" />
-              </Node>
-            </Node>
             <Node name="Scripts" expanded="True">
-              <Node name="Base" expanded="True">
-                <Node name="PlayerAction.cs" selected="True" />
-              </Node>
-              <Node name="Camera" expanded="True" />
-              <Node name="Character" expanded="True" />
-              <Node name="Cinematic" expanded="True" />
-              <Node name="GUI" expanded="True">
-                <Node name="Controllers" expanded="True" />
-              </Node>
-              <Node name="Managers" expanded="True" />
-              <Node name="Player" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-firstpass" expanded="True">
-            <Node name="Plugins" expanded="True">
-              <Node name="PathologicalGames" expanded="True">
-                <Node name="UnityConstraints" expanded="True" />
+              <Node name="NPC" expanded="True">
+                <Node name="NPC.cs" selected="True" />
               </Node>
             </Node>
           </Node>

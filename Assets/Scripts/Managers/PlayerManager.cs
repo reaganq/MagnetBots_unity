@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Parse;
 
-
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
@@ -54,7 +53,6 @@ public class PlayerManager : MonoBehaviour
 				GUIManager.Instance.DisplayMainGUI();
 			}
 		}
-		
 	}
 	public Vector3 cachedTownPosition;
 	public ArenaManager ActiveArena;
@@ -85,6 +83,22 @@ public class PlayerManager : MonoBehaviour
 			Debug.Log("updated partymembers");
 		}
 	}
+	public bool haveAllTeamReplies()
+	{
+		if(partyChallengeReplies.Count == partyMembers.Count)
+			return true;
+		else
+			return false;
+	}
+	public bool shouldStartPartyChallenge()
+	{
+		for (int i = 0; i < partyChallengeReplies.Count; i++) {
+			if(partyChallengeReplies[i] == false)
+				return false;
+				}
+		return true;
+	}
+	public bool startedPartyChallenge;
 
 	public bool isInParty()
 	{

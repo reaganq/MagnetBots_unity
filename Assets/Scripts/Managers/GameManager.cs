@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour {
     public bool GameHasStarted;
 	public bool teststate;
 	public bool newGame;
+	public int targetLevel = 1;
 
     void Awake()
     {
@@ -88,7 +89,10 @@ public class GameManager : MonoBehaviour {
     void Start()
     {
 		if(Application.loadedLevel == 0)
+		{
         	OnLevelWasLoaded(Application.loadedLevel);
+			Debug.Log("started level: " + Application.loadedLevel);
+		}
     }
 
     public void OnLevelWasLoaded(int level)

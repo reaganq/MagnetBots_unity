@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Parse;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class NetworkManager : MonoBehaviour {
 
@@ -83,12 +84,15 @@ public class NetworkManager : MonoBehaviour {
 	void OnPhotonRandomJoinFailed() 
 	{
 		Debug.Log("join room failed");
-		PhotonNetwork.CreateRoom( null);
+		string[] roomPropsInLobby = {"world"};
+		Hashtable worldID = new Hashtable() {{"world", GameManager.Instance.targetLevel.ToString()}};
+		PhotonNetwork.CreateRoom( null, true, true, 0, worldID, roomPropsInLobby);
 	}
 
 	void OnJoinedRoom()
 	{
 		//PhotonNetwork.load
+		//retrieve room properties to figure out which world to load
 		isConnectedToServer = true;
 		Debug.Log("OnJoinedRoom");
 		//PhotonNetwork.LoadLevel(1);
@@ -96,7 +100,7 @@ public class NetworkManager : MonoBehaviour {
 		if(!offlineMode)
 		{
 			Debug.Log("load level 1");
-			PhotonNetwork.LoadLevel(1);
+			PhotonNetwork.LoadLevel(GameManager.Instance.targetLevel);
 		}
 		else
 		{

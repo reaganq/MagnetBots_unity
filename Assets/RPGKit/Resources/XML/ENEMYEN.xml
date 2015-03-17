@@ -5,6 +5,60 @@
     <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
     <Loots>
       <LootItem>
+        <itemType>Badge</itemType>
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>1</int>
+          <int>4</int>
+          <int>5</int>
+          <int>2</int>
+        </itemID>
+        <itemLevel>2</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>UpgradeMaterials</itemType>
+        <itemID>
+          <int>2</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+    </Loots>
+    <PrefabPaths>
+      <string>Enemies/Punchbag_Bob</string>
+    </PrefabPaths>
+    <preFightActions />
+    <postFightActions />
+    <ID>1</ID>
+    <Name>Punchbag Bob</Name>
+    <Description>A true pacifist</Description>
+    <SystemDescription />
+  </RPGEnemy>
+  <RPGEnemy>
+    <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
+    <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
+    <Loots>
+      <LootItem>
         <itemType>Currency</itemType>
         <itemID>
           <int>1</int>
@@ -49,7 +103,7 @@
     </PrefabPaths>
     <preFightActions />
     <postFightActions />
-    <ID>1</ID>
+    <ID>2</ID>
     <Name>Jim</Name>
     <Description>Scariest gym teacher in the entire universe.</Description>
     <SystemDescription />

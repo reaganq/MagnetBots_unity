@@ -75,13 +75,11 @@ public class CharacterInputController : MonoBehaviour {
 
     public void onPress(int slot)
     {
-		Debug.Log("pressed button: " );
 		actionManager.UseSkill(InputTrigger.OnPressDown, slot);
     }
     
     public void onRelease(int slot)
     {
-		Debug.Log("released button: ");
 		actionManager.UseSkill(InputTrigger.OnPressUp, slot);
     }
 	

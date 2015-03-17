@@ -48,16 +48,21 @@ public class WorldManager : Photon.MonoBehaviour {
 
 	public void SendPartyChallenge(int enemyID)
 	{
+		PlayerManager.Instance.partyChallengeReplies.Clear();
+		PlayerManager.Instance.partyChallengeReplies.Add(true);
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
 			if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
 				myPhotonView.RPC("ReceivePartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID), enemyID);
 		}
+		PlayerManager.Instance.startedPartyChallenge = true;
+		GUIManager.Instance.NotificationGUI.DisplayChallengerPartyWaiting();
 	}
 
 	[RPC]
 	public void ReceivePartyChallenge(int enemyID, PhotonMessageInfo info)
 	{
 		GUIManager.Instance.NotificationGUI.DisplayPartyChallenge(enemyID, info.sender);
+		PlayerManager.Instance.startedPartyChallenge = true;
 	}
 
 	public void PartyChallengeReply(PhotonPlayer challenger, bool accept)
@@ -65,22 +70,52 @@ public class WorldManager : Photon.MonoBehaviour {
 		myPhotonView.RPC("NetworkPartyChallengeReply", challenger, accept);
 	}
 
+	//challenger
 	[RPC]
 	public void NetworkPartyChallengeReply(bool accept, PhotonMessageInfo info)
 	{
 		if(!accept)
+			CancelPartyChallenge();
+
+		PlayerManager.Instance.partyChallengeReplies.Add(accept);
+		if(!PlayerManager.Instance.haveAllTeamReplies())
+			return;
+		if(PlayerManager.Instance.shouldStartPartyChallenge())
 		{
-			for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
-				if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
-					myPhotonView.RPC("CancelPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID));
-			}
+			Debug.Log("we should start this challenge");
+			StartPartyChallenge();
+		}
+	}
+
+	public void StartPartyChallenge()
+	{
+		GUIManager.Instance.NPCGUI.arenaGUI.LaunchArena(false);
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			myPhotonView.RPC("NetworkStartPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID));
 		}
 	}
 
 	[RPC]
+	public void NetworkStartPartyChallenge()
+	{
+		GUIManager.Instance.NotificationGUI.StartTeamChallenge();
+		PlayerManager.Instance.startedPartyChallenge = false;
+	}
+
 	public void CancelPartyChallenge()
 	{
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) {
+			if(PlayerManager.Instance.partyMembers[i].playerID != PhotonNetwork.player.ID)
+				myPhotonView.RPC("NetworkCancelPartyChallenge", PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i].playerID));	
+		}
+		NetworkCancelPartyChallenge();
+	}
 
+	[RPC]
+	public void NetworkCancelPartyChallenge()
+	{
+		GUIManager.Instance.NotificationGUI.CancelPartyChallenge();
+		PlayerManager.Instance.startedPartyChallenge = false;
 	}
 
 	#region arena logic
@@ -415,6 +450,10 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void AcceptPartyInvite(int viewID, PhotonMessageInfo info)
 	{
+		if(PlayerManager.Instance.partyMembers.Count >= GeneralData.maxPartySize)
+		{
+			return;
+		}
 		//failsafe
 		if(PlayerManager.Instance.partyMembers.Count == 0)
 		{
@@ -520,10 +559,12 @@ public class WorldManager : Photon.MonoBehaviour {
 				{
 					UpdatePartyMemberList();
 				}
+				if(PlayerManager.Instance.startedPartyChallenge)
+					CancelPartyChallenge();
 			}
 		}
 
-		if(PhotonNetwork.isMasterClient)
+		/*if(PhotonNetwork.isMasterClient)
 		{
 			for (int j = 0; j < ArenaManagers.Count; j++) 
 			{
@@ -538,7 +579,7 @@ public class WorldManager : Photon.MonoBehaviour {
 					}
 				}
 			}
-		}
+		}*/
 	}
 
 	/*public void CheckArenasForDisconnects(int id)

@@ -12,6 +12,7 @@ public class MainUIManager : BasicGUIController {
 	public GameObject sideTray;
 
 	public GameObject[] actionButtons;
+	public SkillButton[] actionButtonScripts;
 
 	public TeamMemberUI[] PartyMemberCards;
 	public GameObject QuitPartyButton;
@@ -54,7 +55,12 @@ public class MainUIManager : BasicGUIController {
 			GameManager.Instance.joystick.enable = false;
 		}
 		PlayerManager.Instance.avatarActionManager.DisableMovement();
+
 		base.Disable();
+		for (int i = 0; i < actionButtonScripts.Length; i++) {
+			if(actionButtonScripts[i].isbuttonPressed)
+				actionButtonScripts[i].OnPress(false);
+		}
 	}
 
 	public override void Hide ()
@@ -98,7 +104,7 @@ public class MainUIManager : BasicGUIController {
 	public void EnableActionButton(int index)
 	{
 		actionButtons[index].SetActive(true);
-		actionButtons[index].GetComponent<SkillButton>().SetupSkillButton(index);
+		actionButtonScripts[index].SetupSkillButton(index);
 	}
 
 	public void DisableActionButton(int index)

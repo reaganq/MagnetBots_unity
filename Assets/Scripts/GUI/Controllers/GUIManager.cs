@@ -330,7 +330,12 @@ public class GUIManager : MonoBehaviour {
 		rewardsGUI.DisplayArenaRewards(items);
 		//rewardsGUI.items = items;
 		//uiState = UIState.rewards;
+	}
 
+	public void DisplayArenaFailure()
+	{
+		EnterGUIState(UIState.reward);
+		rewardsGUI.DisplayArenaFailure();
 	}
 
 	public void DisplayMinigameRewards(LootItemList items, float score)

@@ -20,16 +20,12 @@ public class PlayerCharacter : CharacterStatus {
 		if(myPhotonView.isMine)
 		{
 			this.tag = "Player";
-			//StartCoroutine( RequestInfo());
 		}
 		else
 		{
 			this.tag = "OtherPlayer";
 			avatar.RequestInitInfo();
-			//request name
-			//request parts
 		}
-
 	}
 
 	public void UpdatePortrait(string path)
@@ -50,9 +46,10 @@ public class PlayerCharacter : CharacterStatus {
 	}
 
 	[RPC]
-	public override void NetworkDie ()
+	public override void Die()
 	{
-		base.NetworkDie ();
+		//base.NetworkDie ();
+		base.Die();
 		if(PlayerManager.Instance.ActiveArena != null)
 		{
 			PlayerManager.Instance.ActiveArena.CheckPlayerDeathStatus();

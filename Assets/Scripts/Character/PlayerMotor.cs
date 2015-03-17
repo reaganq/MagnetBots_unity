@@ -25,16 +25,17 @@ public class PlayerMotor : Motor {
 
         if(!GameManager.Instance.GameIsPaused)
         {
-			if(!disableMovement)
+			if( myActionManager.myStatus.isAlive())
 			{
-	            UpdateFunction();
-	            AnimationUpdate();
-
+				if(!disableMovement)
+				{
+		            UpdateFunction();
+		            AnimationUpdate();
+				}
 			}
 			if(characterVelocity == Vector3.zero && rotationTarget != Vector3.zero)
 				ManualRotate();
         }
-        
 	}
 
 	public override void LateUpdate()

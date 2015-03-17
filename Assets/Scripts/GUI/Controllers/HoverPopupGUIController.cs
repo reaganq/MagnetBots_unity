@@ -239,7 +239,7 @@ public class HoverPopupGUIController : BasicGUIController {
 
 		Debug.Log("invite to party");
 		if(PlayerManager.Instance.partyMembers.Count > 0)
-			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.partyMembers[0]);
+			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.partyMembers[0].playerID);
 		else if(PlayerManager.Instance.partyMembers.Count == 0)
 			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PhotonNetwork.player.ID);
 		Disable();
