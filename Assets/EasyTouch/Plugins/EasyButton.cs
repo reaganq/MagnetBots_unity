@@ -5,6 +5,16 @@ using System.Collections;
 
 /// <summary>
 /// Release notes:
+/// EasyButton V1.3 October 2013
+/// =============================
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix debug area
+/// 
+/// EasyButton V1.2 Septembre 2013
+/// =============================
+/// 	* Fixe On_ButtonUp event that didn't allow you to use joystick in the same time
+/// 
 /// EasyButton V1.1 August 2013
 /// =============================
 /// 	* Fixe On_ButtonUp event that didn't allow you to use joystick in the same time
@@ -86,6 +96,7 @@ public class EasyButton : MonoBehaviour {
 	public bool isActivated = true;
 	
 	public bool showDebugArea=true;
+	public bool selected=false;
 	
 	/// <summary>
 	/// Disable this lets you skip the GUI layout phase.
@@ -292,7 +303,9 @@ public class EasyButton : MonoBehaviour {
 		EasyTouch.On_TouchUp -= On_TouchUp;	
 		
 		if (Application.isPlaying){
-			EasyTouch.RemoveReservedArea( buttonRect);
+			if (EasyTouch.instance != null){
+				EasyTouch.instance.reservedVirtualAreas.Remove( buttonRect);
+			}
 		}		
 	}
 
@@ -302,7 +315,9 @@ public class EasyButton : MonoBehaviour {
 		EasyTouch.On_TouchUp -= On_TouchUp;	
 		
 		if (Application.isPlaying){
-			EasyTouch.RemoveReservedArea( buttonRect);
+			if (EasyTouch.instance != null){
+				EasyTouch.instance.reservedVirtualAreas.Remove( buttonRect);
+			}
 		}
 	}
 
@@ -332,7 +347,7 @@ public class EasyButton : MonoBehaviour {
 						currentTexture = normalTexture;
 					}
 					
-					if (showDebugArea && Application.isEditor){
+					if (showDebugArea && Application.isEditor && selected && !Application.isPlaying){
 						GUI.Box( buttonRect,"");				
 					}
 				
@@ -341,14 +356,15 @@ public class EasyButton : MonoBehaviour {
 						if (isActivated){
 							GUI.color = currentColor;	
 							if (Application.isPlaying){
-								EasyTouch.RemoveReservedArea( buttonRect);
-								EasyTouch.AddReservedArea( buttonRect);
+								EasyTouch.instance.reservedVirtualAreas.Remove( buttonRect);
+								EasyTouch.instance.reservedVirtualAreas.Add( buttonRect);
+								
 							}							
 						}
 						else{
 							GUI.color = new Color(currentColor.r,currentColor.g,currentColor.b,0.2f);
 							if (Application.isPlaying){
-								EasyTouch.RemoveReservedArea( buttonRect);
+								EasyTouch.instance.reservedVirtualAreas.Remove( buttonRect);
 							}
 						}
 						GUI.DrawTexture( buttonRect,currentTexture);
@@ -358,13 +374,22 @@ public class EasyButton : MonoBehaviour {
 			}
 		}
 		else{
-			EasyTouch.RemoveReservedArea( buttonRect);	
+			if (Application.isPlaying){
+				EasyTouch.instance.reservedVirtualAreas.Remove( buttonRect);
+			}
 		}
 	}
 	
 	void Update(){
 	
 		if (buttonState == ButtonState.Up){
+			buttonState = ButtonState.None;	
+		}
+
+		if (EasyTouch.GetTouchCount()==0){
+			buttonFingerIndex=-1;
+			currentTexture = normalTexture;
+			currentColor = buttonNormalColor;
 			buttonState = ButtonState.None;	
 		}
 	}
@@ -538,8 +563,10 @@ public class EasyButton : MonoBehaviour {
 	
 	void On_TouchUp (Gesture gesture){
 		
+		
+		
 		if (gesture.fingerIndex == 	buttonFingerIndex){
-			if ((EasyTouch.IsRectUnderTouch( VirtualScreen.GetRealRect(buttonRect),true) || (isSwipeOut && buttonState == ButtonState.Press))  && enable && isActivated){
+			if ((gesture.IsInRect(VirtualScreen.GetRealRect(buttonRect),true) || (isSwipeOut && buttonState == ButtonState.Press))  && enable && isActivated){
 				RaiseEvent(MessageName.On_ButtonUp);
 			}
 			buttonState = ButtonState.Up;

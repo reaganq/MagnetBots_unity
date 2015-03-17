@@ -18,7 +18,7 @@ public class Detector : MonoBehaviour {
 		for (int i = 0; i < ownerSkill.ownerStatus.hitboxes.Count; i++) 
 		{
 			Physics.IgnoreCollision(collider, ownerSkill.ownerStatus.hitboxes[i]);
-			Debug.Log("ignored collision: " + ownerSkill.ownerStatus.hitboxes[i].name);
+			//Debug.Log("ignored collision: " + ownerSkill.ownerStatus.hitboxes[i].name);
 		}
 	}
 

@@ -21,6 +21,8 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 	public float fireSpeed;
 	public float damage;
 
+	public Job fireOneShotJob;
+
 	// Use this for initialization
     #region setup and unequip
     public override void Initialise(PlayerCharacter manager, int index)
@@ -66,7 +68,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
         if(isActive && isOwner)
         {
-            if(fireSpeedTimer <= 0 && cooldownTimer <= 0)
+            if(fireSpeedTimer <= 0 && cooldownTimer <= 0 && skillState == SkillState.wait)
 			{
 				Debug.Log("update firing one shot" + fireSpeedTimer);
 				fireSpeedTimer += fireSpeed;	
@@ -79,7 +81,7 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 
     public override bool CanPressDown()
     {
-		if(skillState == SkillState.precast || skillState == SkillState.onUse || skillState == SkillState.followThrough || skillState == SkillState.wait)
+		if(isBusy)
             return false;
         else
             return true;
@@ -103,13 +105,18 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		fireSpeedTimer = fireSpeed;
 		skillState = SkillState.onUse;
 		ownerCAM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, true);
-		Debug.Log("firing");
+		Debug.Log("firing1");
 		yield return new WaitForSeconds(baseSkillAnimation.castTime);
 		//if(isOwner)
 			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, equipmentSlotIndex, true);
 		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
-		skillState = SkillState.wait;
-		ActivateSkill(true);
+		if(skillState == SkillState.onUse)
+		{
+			Debug.Log("pressed up before we finished pressed down");
+			skillState = SkillState.wait;
+			ActivateSkill(true);
+		}
+
     }
 
 	public override void FireOneShot()
@@ -117,9 +124,9 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		if(skillState == SkillState.followThrough)
 			return;
 		Debug.Log("firing");
-		StartCoroutine(FireOneShotSequence());
+		Job.make(FireOneShotSequence());
 	}
-	
+
 	public IEnumerator FireOneShotSequence()
 	{
 		yield return null;
@@ -138,13 +145,15 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
 		//if(isOwner)
 			ownerCAM.SpawnProjectile(projectilePrefab.name, projectileSpawnLocation.position, ownerCAM._myTransform.forward, bulletSpeed, equipmentSlotIndex, true);
 		yield return new WaitForSeconds(baseSkillAnimation.castAnimation.clip.length - baseSkillAnimation.castTime);
-		if(skillState != SkillState.followThrough)
+		if(skillState == SkillState.onUse)
 			skillState = SkillState.wait;
 		Debug.Log("finished firing");
 	}
 
     public override bool CanPressUp ()
     {
+		if(pressUpJob != null && pressUpJob.running)
+			return false;
         return true;
     }
 
@@ -152,14 +161,17 @@ public class BasePlayerRangedSkill : BasePlayerSkill {
     {
 		if(!isOwner)
 			yield break;
-
+		Debug.Log("PRESSED UP");
 		ActivateSkill(false);
         while(skillState == SkillState.onUse || skillState == SkillState.precast)
         {	
             yield return new WaitForEndOfFrame();
         }
+		Debug.Log("finished onuse and Precast");
 		yield return new WaitForEndOfFrame();
         skillState = SkillState.followThrough;
+		Debug.Log("followthrough");
+		ActivateSkill(false);
 		if(disableMovement)
 			ownerCAM.EnableMovement();
 		ownerCAM.CrossfadeAnimation(baseSkillAnimation.followThroughAnimation.clip.name, true);

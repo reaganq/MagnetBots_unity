@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using Parse;
 
 public class PlayerManager : MonoBehaviour
@@ -289,8 +290,11 @@ public class PlayerManager : MonoBehaviour
 		{
 			PlayToy(item.rpgItem.FBXName[0]);
 		}
-		if(item.rpgItem.isLimitedUse)
-			Hero.RemoveItem(item, 1);
+		if (item.rpgItem.isLimitedUse) 
+		{
+			Debug.Log("removing 1 of this item");
+			Hero.RemoveItem (item, 1);
+		}
 	}
 
 	public void PlayToy(string prefabPath)
@@ -368,7 +372,7 @@ public class PlayerManager : MonoBehaviour
 				if(allLoots[i].itemType == ItemType.Currency)
 				{
 					RPGCurrency currency = Storage.LoadById<RPGCurrency>(allLoots[i].itemID[index], new RPGCurrency());
-					currency.amount = Random.Range(allLoots[i].minQuantity, allLoots[i].maxQuantity);
+					currency.amount = UnityEngine.Random.Range(allLoots[i].minQuantity, allLoots[i].maxQuantity);
 					lootItemList.currencies.Add(currency);
 				}
 				else if(allLoots[i].itemType == ItemType.Badge)
@@ -424,17 +428,11 @@ public enum PlayerActivityState
 	arena
 }
 
-[System.Serializable]
+[Serializable]
 public class PartyMemberData
 {
 	public int playerID;
 	public int viewID;
-
-	public PartyMemberData(int vID)
-	{
-		viewID = vID;
-		playerID = PhotonView.Find(viewID).ownerId;
-	}
 }
 
 public enum ContainerType

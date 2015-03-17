@@ -4,17 +4,17 @@ using System.Collections;
 
 public class GUIEasyTouchMenu : Editor {
 
-	[MenuItem ("Hedgehog Team/EasyTouch/Add EasyTouch for C#")]
+	[MenuItem ("Tools/Hedgehog Team/EasyTouch/Add EasyTouch for C#")]
 	static void  AddEasyTouch4C(){
 		GUIEasyTouchMenu.AddEasyTouch(true);
 	}
 
-	[MenuItem ("Hedgehog Team/EasyTouch/Add EasyTouch for javascript")]
+	[MenuItem ("Tools/Hedgehog Team/EasyTouch/Add EasyTouch for javascript")]
 	static void  AddEasyTouch4Java(){
 		GUIEasyTouchMenu.AddEasyTouch(false);
 	}
 	
-	[MenuItem ("Hedgehog Team/EasyTouch/Extensions/Adding a new joystick")]
+	[MenuItem ("Tools/Hedgehog Team/EasyTouch/Extensions/Adding a new joystick")]
 	static void  AddJoystick(){
 		
 		EasyTouch  easyt =(EasyTouch) GameObject.FindObjectOfType(typeof(EasyTouch));
@@ -31,7 +31,7 @@ public class GUIEasyTouchMenu : Editor {
 		 Selection.activeGameObject = joy;
 	}
 	
-	[MenuItem ("Hedgehog Team/EasyTouch/Extensions/Adding a new button")]
+	[MenuItem ("Tools/Hedgehog Team/EasyTouch/Extensions/Adding a new button")]
 	static void  AddButton(){
 		
 		EasyTouch  easyt =(EasyTouch) GameObject.FindObjectOfType(typeof(EasyTouch));

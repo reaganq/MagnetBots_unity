@@ -25,7 +25,7 @@ public class PlayerMotor : Motor {
 
         if(!GameManager.Instance.GameIsPaused)
         {
-			if( myActionManager.myStatus.isAlive())
+			if( myActionManager.myStatus.isAlive() && myActionManager.actionState != ActionState.specialAction)
 			{
 				if(!disableMovement)
 				{

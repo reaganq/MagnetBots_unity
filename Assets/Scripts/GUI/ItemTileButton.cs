@@ -84,6 +84,7 @@ public class ItemTileButton: UIDragDropItem
 					owner.OnDragDrop(index);
 					// Destroy this icon as it's no longer needed
 					NGUITools.Destroy(gameObject);
+					Debug.Log("DESTROYING DRAGGED ITEM TILE");
 					return;
 				}
 			}

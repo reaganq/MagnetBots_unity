@@ -2,7 +2,106 @@
 // Please send feedback or bug reports to the.hedgehog.team@gmail.com
 
 /// <summary>
+/// TO DO:
+/// - Parametrage du commportement du touchup avec NGUI
+/// 
 /// Release notes:
+/// EasyTouch V3.1.10 November 2014
+/// =================================
+/// 	* Bugs fixed
+/// 	-----------
+/// 	Fixe Joystick dynamic resizing & positionning
+/// 
+/// EasyTouch V3.1.9 October 2014
+/// =================================
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix sticking dynamic joystick when you touch GUI panel with a second finger.
+/// 
+/// EasyTouch V3.1.8 August 2014
+/// =================================
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix bug on GetCurrentPickedObject that take startposition instead of the current position
+/// 
+/// 
+/// EasyTouch V3.1.7 June 2014
+/// =================================
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix debug resevedarea on EasyButton
+/// 	- Fix error on event On_Cancel2Fingers that only occured on real device without crash 
+/// 
+/// EasyTouch V3.1.5 January 2014
+/// =================================
+/// 	* New
+/// 	----------------------
+/// 	- UNITY_WP8 plateform is replace by UNITY_WNRT
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fixe random stiking joystick && Fixe stiking joystick when a touch_up occur on NGUI layer
+/// 	- Disabled cameras are no longer take into account for auto-selection
+///		 
+/// EasyTouch V3.1.4 January 2014
+/// =================================
+/// 	* New
+/// 	----------------------
+/// 	- Add 2d collider support
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	Fixe gravity on character controler
+/// 	Fixe stiking joystick after a load level
+/// 
+/// 
+/// EasyTouch V3.1.3 November 2013
+/// =============================
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix sticking dynamic joystick if your finger swipe over a button
+/// 
+/// Easy Touch V3.1.2 October 2013
+/// ==============================
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fixe NullReferenceException: when you used two gesture with reserved area
+/// 
+/// 
+/// Easy Touch V3.1.1 October 2013
+/// ==============================
+///		* New
+/// 	-----------------
+/// 	- Add SetManual(Vector2 movement), to control the joystick
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Picked camera is correctly assign for a two fingers gesture
+/// 	- Fixe debug area for joystick and button
+/// 
+/// Easy Touch V3.1.0 October 2013
+/// ==============================
+///		* EasyTouch new
+/// 	----------------
+/// 	- Add multi camera support. Self-selection is done in the order of cameras, and stops if an object is detected. Usefull for your own gui
+/// 	- Add new statics methods to setup and get the pickableLayer mask
+/// 	- Management of reserved areas is divided into two methods :
+/// 		- AddReservedArea & RemoveReservedArea => for rect origin on bottom left
+/// 		- AddReservedGuiArea & RemoveReservedGuiArea => for rect origin on top left (gui)
+/// 	- Add a new event On_EasyTouchIsReady, it occur when EasyTouch is ready.
+/// 
+/// 	* Gesture class news
+/// 	---------------------
+/// 	- Add new member pickCamera : The camera of the object self-selection
+/// 	- Add new member isGuiCamera : Is that the camera is Flag GUI
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fixe On_LongTap2Fingers : It happened only once
+/// 	
 /// 
 /// Easy Touch V3.0.3 August 2013
 /// =============================
@@ -182,6 +281,7 @@ public class EasyTouch : MonoBehaviour {
 	public delegate void SwipeStart2FingersHandler(Gesture gesture);
 	public delegate void Swipe2FingersHandler(Gesture gesture);
 	public delegate void SwipeEnd2FingersHandler(Gesture gesture);
+	public delegate void EasyTouchIsReadyHandler();
 	#endregion
 	
 	#region Events
@@ -325,6 +425,10 @@ public class EasyTouch : MonoBehaviour {
 	/// Like On_SwipeEnd but for a 2 fingers gesture.
 	/// </summary>
 	public static event SwipeEnd2FingersHandler On_SwipeEnd2Fingers;
+	/// <summary>
+	/// Occurs when  easy touch is ready.
+	/// </summary>
+	public static event EasyTouchIsReadyHandler On_EasyTouchIsReady;
 	#endregion
 	
 	#region Enumerations
@@ -337,15 +441,17 @@ public class EasyTouch : MonoBehaviour {
 	/// This enumeration is used on Gesture class
 	/// </summary>
 	public enum SwipeType{ None, Left, Right, Up, Down, Other};
-	
+		
 	private enum EventName{ None,On_Cancel, On_Cancel2Fingers, On_TouchStart,On_TouchDown,On_TouchUp,On_SimpleTap,On_DoubleTap,On_LongTapStart,On_LongTap,
 	On_LongTapEnd,On_DragStart,On_Drag,On_DragEnd,On_SwipeStart,On_Swipe,On_SwipeEnd,On_TouchStart2Fingers,On_TouchDown2Fingers,On_TouchUp2Fingers,On_SimpleTap2Fingers,
 	On_DoubleTap2Fingers,On_LongTapStart2Fingers,On_LongTap2Fingers,On_LongTapEnd2Fingers,On_Twist,On_TwistEnd,On_PinchIn,On_PinchOut,On_PinchEnd,On_DragStart2Fingers,
-	On_Drag2Fingers,On_DragEnd2Fingers,On_SwipeStart2Fingers,On_Swipe2Fingers,On_SwipeEnd2Fingers }
+	On_Drag2Fingers,On_DragEnd2Fingers,On_SwipeStart2Fingers,On_Swipe2Fingers,On_SwipeEnd2Fingers, On_EasyTouchIsReady }
 	
 	#endregion
 	
 	#region Public members
+	public static EasyTouch instance;
+	
 	public bool enable = true;				// Enables or disables Easy Touch
 	public bool enableRemote=false;			// Enables or disables Unity remote
 	public bool useBroadcastMessage = true; // For javascript developper
@@ -356,10 +462,13 @@ public class EasyTouch : MonoBehaviour {
 	public bool enableTwist=true;			// Enables or disables recognition of the twist
 	public bool enablePinch=true;			// Enables or disables recognition of the Pinch
 	
-	public Camera easyTouchCamera;			// The main camera
+	
+	public List<ECamera> touchCameras = new List<ECamera>();	// The  cameras
 	public bool autoSelect = false;  		// Enables or disables auto select
 	public LayerMask pickableLayers;		// Layer detectable by default
-	
+	public bool enable2D = false;
+	public LayerMask pickableLayers2D;
+		
 	public float StationnaryTolerance=25f;	// 
 	public float longTapTime = 1f;			// The time required for the detection of a long tap.
 	public float swipeTolerance= 0.85f;		// Determines the accuracy of detecting a drag movement 0 => no precision 1=> high precision.
@@ -374,8 +483,11 @@ public class EasyTouch : MonoBehaviour {
 	
 	// Extension (joystick and button)
 	public List<Rect> reservedAreas= new List<Rect>();
+	public List<Rect> reservedVirtualAreas= new List<Rect>();
+	public List<Rect> reservedGuiAreas= new List<Rect>();
 	public bool enableReservedArea=true;
 	
+
 	// Second Finger
 	public KeyCode twistKey = KeyCode.LeftAlt;
 	public KeyCode swipeKey = KeyCode.LeftControl;
@@ -388,21 +500,18 @@ public class EasyTouch : MonoBehaviour {
 	public bool showSecondFinger = true;
 	#endregion
 	
-	#region Private members
-	public static EasyTouch instance;								// Fake singleton
-	
+	#region Private members	
 	private EasyTouchInput input;
 	
 	private GestureType complexCurrentGesture = GestureType.None; 	// The current gesture 2 fingers
 	private GestureType oldGesture= GestureType.None;
 	
 	private float startTimeAction;									// The time of onset of action.
-	private Finger[] fingers=new Finger[10];						// The informations of the touch for finger 1.
+	private Finger[] fingers=new Finger[100];						// The informations of the touch for finger 1.
 			
 	private GameObject pickObject2Finger;
 	private GameObject oldPickObject2Finger;
-	
-	
+		
 	public Texture secondFingerTexture;							// The texture to display the simulation of the second finger.
 	
 	private Vector2 startPosition2Finger;							// Start position for two fingers gesture
@@ -434,12 +543,6 @@ public class EasyTouch : MonoBehaviour {
 	#endregion
 	
 	#region MonoBehaviour methods
-	void Awake(){
-		// Assing the fake singleton
-		if (EasyTouch.instance == null)
-			instance = this;		
-	}
-	
 	void OnEnable(){
 		if (Application.isPlaying && Application.isEditor){
 			InitEasyTouch();	
@@ -447,36 +550,38 @@ public class EasyTouch : MonoBehaviour {
 	}
 		
 	void Start(){
+		
+		int index = touchCameras.FindIndex( 
+			delegate(ECamera c){
+				return c.camera == Camera.main;
+			}
+		);
+		
+		if (index<0)
+			touchCameras.Add(new ECamera(Camera.main,false));
+		//}
 		InitEasyTouch();	
+		
+		RaiseReadyEvent();
 	}
 	
 	void InitEasyTouch(){
 		input = new EasyTouchInput();
-		
+			
 		// Assing the fake singleton
 		if (EasyTouch.instance == null)
 			instance = this;
-			
-		// We search the main camera with the tag MainCamera.
-		// For automatic object selection.
-		if (easyTouchCamera == null){
-			easyTouchCamera = Camera.main;
-			
-			if (easyTouchCamera==null && autoSelect){
-				Debug.LogWarning("No camera with flag \"MainCam\" was found in the scene, please setup the camera");
-			}
-		}
-					
+		
 		// The texture to display the simulation of the second finger.
-		#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WP8 && !UNITY_BLACKBERRY) || UNITY_EDITOR)
+		#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WINRT && !UNITY_BLACKBERRY) || UNITY_EDITOR)
 			if (secondFingerTexture==null){
 				secondFingerTexture =Resources.Load("secondFinger") as Texture;
 			}
-		#endif		
+		#endif	
 	}
 	
 	// Display the simulation of the second finger
-	#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WP8 && !UNITY_BLACKBERRY) || UNITY_EDITOR)
+	#if ((!UNITY_ANDROID && !UNITY_IPHONE && !UNITY_WINRT && !UNITY_BLACKBERRY) || UNITY_EDITOR)
 	void OnGUI(){
 		Vector2 finger = input.GetSecondFingerPosition();
 		if (finger!=new Vector2(-1,-1)){		
@@ -505,7 +610,7 @@ public class EasyTouch : MonoBehaviour {
 			}
 			
 			// Get touches		
-			#if (((UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8 || UNITY_BLACKBERRY) && !UNITY_EDITOR))
+			#if (((UNITY_ANDROID || UNITY_IPHONE || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR))
 				UpdateTouches(true, count);
 			#else
 				UpdateTouches(false, count);
@@ -538,7 +643,7 @@ public class EasyTouch : MonoBehaviour {
 		
 	void UpdateTouches(bool realTouch, int touchCount){
 			
-		Finger[] tmpArray = new Finger[10]; 
+		Finger[] tmpArray = new Finger[100]; 
 		fingers.CopyTo( tmpArray,0);
 			
 		
@@ -590,7 +695,7 @@ public class EasyTouch : MonoBehaviour {
 	}
 	
 	void ResetTouches(){
-		for (int i=0;i<10;i++){
+		for (int i=0;i<100;i++){
 			fingers[i] = null;
 		}	
 	}	
@@ -611,9 +716,11 @@ public class EasyTouch : MonoBehaviour {
 			fingers[fingerIndex].startPosition = fingers[fingerIndex].position;
 			
 			// do we touch a pickable gameobject ?
-			if (autoSelect)
-				fingers[fingerIndex].pickedObject = GetPickeGameObject(fingers[fingerIndex].startPosition);
-				
+			if (autoSelect){
+				//fingers[fingerIndex].pickedObject = GetPickeGameObject(fingers[fingerIndex].startPosition);
+				GetPickeGameObject(ref fingers[fingerIndex]);
+			}
+			
 			// we notify a touch
 			CreateGesture(fingerIndex, EventName.On_TouchStart,fingers[fingerIndex],0, SwipeType.None,0,Vector2.zero);
 		}
@@ -749,14 +856,15 @@ public class EasyTouch : MonoBehaviour {
 	
 	private void CreateGesture(int touchIndex,EventName message,Finger finger,float actionTime, SwipeType swipe, float swipeLength, Vector2 swipeVector){
 			
+		// 3.1.5
 		if (message == EventName.On_TouchStart || message == EventName.On_TouchUp){
 			isStartHoverNGUI = IsTouchHoverNGui(touchIndex);
+
 		}
-		
-		
-		//if (message == EventName.On_Cancel || message == EventName.On_TouchUp){
-		//	isStartHoverNGUI = false;	
-		//}
+
+		if (message == EventName.On_Cancel || message == EventName.On_TouchUp){
+			isStartHoverNGUI = false;	
+		}
 		
 		if (!isStartHoverNGUI){
 			//Creating the structure with the required information
@@ -780,8 +888,10 @@ public class EasyTouch : MonoBehaviour {
 			gesture.pickObject = finger.pickedObject;
 			gesture.otherReceiver = receiverObject;
 
-			gesture.isHoverReservedArea = IsTouchHoverVirtualControll( touchIndex);	
+			gesture.isHoverReservedArea = IsTouchReservedArea( touchIndex);	
 			
+			gesture.pickCamera = finger.pickedCamera;
+			gesture.isGuiCamera = finger.isGuiCamera;
 			
 			if (useBroadcastMessage){
 				SendGesture(message,gesture);
@@ -790,6 +900,8 @@ public class EasyTouch : MonoBehaviour {
 				RaiseEvent(message, gesture);
 			}
 		}
+
+		isStartHoverNGUI = false;
 		
 	}
 
@@ -824,7 +936,7 @@ public class EasyTouch : MonoBehaviour {
 		Vector2 position = Vector2.zero;
 		Vector2 deltaPosition = Vector2.zero;
 		float fingerDistance = 0;
-			
+		
 		// A touch starts
 		if ( complexCurrentGesture==GestureType.None){
 			twoFinger0 = GetTwoFinger(-1);
@@ -846,10 +958,32 @@ public class EasyTouch : MonoBehaviour {
 			
 			// do we touch a pickable gameobject ?
 			if (autoSelect){
-				pickObject2Finger = GetPickeGameObject(fingers[twoFinger0].complexStartPosition);
-				if (pickObject2Finger!= GetPickeGameObject(fingers[twoFinger1].complexStartPosition)){
+				
+				if (GetPickeGameObject(ref fingers[twoFinger0],true)){
+					
+					GetPickeGameObject(ref fingers[twoFinger1],true);
+					
+					if (fingers[twoFinger0].pickedObject != fingers[twoFinger1].pickedObject){
+						pickObject2Finger =null;
+						fingers[twoFinger0].pickedObject = null;
+						fingers[twoFinger1].pickedObject = null;
+						fingers[twoFinger0].isGuiCamera = false;
+						fingers[twoFinger1].isGuiCamera = false;
+						fingers[twoFinger0].pickedCamera = null;
+						fingers[twoFinger1].pickedCamera = null;
+						
+					}
+					else{
+						
+						pickObject2Finger = fingers[twoFinger0].pickedObject;
+					}
+				}
+				else{
 					pickObject2Finger =null;
 				}
+				//if (pickObject2Finger!= GetPickeGameObject(fingers[twoFinger1].complexStartPosition)){
+				//	pickObject2Finger =null;
+				//}
 			}
 			
 			// we notify the touch
@@ -881,15 +1015,55 @@ public class EasyTouch : MonoBehaviour {
 			}	
 			
 			// Let's move us ?
-			//if (FingerInTolerance(fingers[twoFinger0])==false ||FingerInTolerance(fingers[twoFinger1])==false){
+			if (FingerInTolerance(fingers[twoFinger0])==false ||FingerInTolerance(fingers[twoFinger1])==false){
 				move=true;
-			//}
+			}
 	 		
 			// we move
 			if (move){
 						
 				float dot = Vector2.Dot(fingers[twoFinger0].deltaPosition.normalized, fingers[twoFinger1].deltaPosition.normalized);
-																																															
+					
+				// Drag
+				if (dot>0 ){
+					if (pickObject2Finger && !twoFingerDragStart){
+						// Send end message
+						if (complexCurrentGesture != GestureType.Tap){
+							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+							startTimeAction = Time.realtimeSinceStartup;
+						}
+						//
+						CreateGesture2Finger(EventName.On_DragStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);	
+						twoFingerDragStart = true; 
+					}
+					else if (!pickObject2Finger && !twoFingerSwipeStart ) {
+						// Send end message
+						if (complexCurrentGesture!= GestureType.Tap){
+							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
+							startTimeAction = Time.realtimeSinceStartup;
+						}
+						//
+						
+						CreateGesture2Finger(EventName.On_SwipeStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
+						twoFingerSwipeStart=true;
+					}
+				} 
+				else{
+					if (dot<0){
+						twoFingerDragStart=false; 
+						twoFingerSwipeStart=false;
+					}
+				}
+				
+				//
+				if (twoFingerDragStart){
+					CreateGesture2Finger(EventName.On_Drag2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
+				}
+				
+				if (twoFingerSwipeStart){
+					CreateGesture2Finger(EventName.On_Swipe2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
+				}
+
 				// Pinch
 				if (enablePinch && fingerDistance != oldFingerDistance ){
 					// Pinch
@@ -930,7 +1104,7 @@ public class EasyTouch : MonoBehaviour {
 				// Twist
 				if (enableTwist){
 	
-					if (Mathf.Abs(TwistAngle())>minTwistAngle){
+						if (Mathf.Abs(TwistAngle())>0){
 					
 						// Send end message
 						if (complexCurrentGesture != GestureType.Twist){
@@ -949,45 +1123,7 @@ public class EasyTouch : MonoBehaviour {
 					fingers[twoFinger1].oldPosition = fingers[twoFinger1].position;
 				}
 		
-				// Drag
-				if (dot>0 ){
-					if (pickObject2Finger && !twoFingerDragStart){
-						// Send end message
-						if (complexCurrentGesture != GestureType.Tap){
-							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
-							startTimeAction = Time.realtimeSinceStartup;
-						}
-						//
-						CreateGesture2Finger(EventName.On_DragStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);	
-						twoFingerDragStart = true; 
-					}
-					else if (!pickObject2Finger && !twoFingerSwipeStart ) {
-						// Send end message
-						if (complexCurrentGesture!= GestureType.Tap){
-							CreateStateEnd2Fingers(complexCurrentGesture,startPosition2Finger,position,deltaPosition,timeSinceStartAction,false,fingerDistance);
-							startTimeAction = Time.realtimeSinceStartup;
-						}
-						//
-						
-						CreateGesture2Finger(EventName.On_SwipeStart2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, SwipeType.None,0,Vector2.zero,0,0,fingerDistance);
-						twoFingerSwipeStart=true;
-					}
-				} 
-				else{
-					if (dot<0){
-						twoFingerDragStart=false; 
-						twoFingerSwipeStart=false;
-					}
-				}
-			
-				//
-				if (twoFingerDragStart){
-					CreateGesture2Finger(EventName.On_Drag2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
-				}
-				
-				if (twoFingerSwipeStart){
-					CreateGesture2Finger(EventName.On_Swipe2Fingers,startPosition2Finger,position,deltaPosition,timeSinceStartAction, GetSwipe(oldStartPosition2Finger,position),0,deltaPosition,0,0,fingerDistance);
-				}
+				// Befor drag & swipe here
 								
 			}
 			else{
@@ -1087,7 +1223,7 @@ public class EasyTouch : MonoBehaviour {
 	float actionTime, SwipeType swipe, float swipeLength,Vector2 swipeVector,float twist,float pinch, float twoDistance){
 
 		if (message == EventName.On_TouchStart2Fingers){
-			isStartHoverNGUI = IsTouchHoverNGui(twoFinger1) & IsTouchHoverNGui(twoFinger0);
+			isStartHoverNGUI = IsTouchHoverNGui(twoFinger1) && IsTouchHoverNGui(twoFinger0);
 		}
 				
 		if (!isStartHoverNGUI){
@@ -1116,6 +1252,15 @@ public class EasyTouch : MonoBehaviour {
 			gesture.deltaPinch = pinch;
 			gesture.twistAngle = twist;
 			gesture.twoFingerDistance = twoDistance;
+			
+			if (fingers[twoFinger0] != null){
+				gesture.pickCamera = fingers[twoFinger0].pickedCamera;
+				gesture.isGuiCamera = fingers[twoFinger0].isGuiCamera;
+			}
+			else if (fingers[twoFinger1] != null){
+				gesture.pickCamera = fingers[twoFinger1].pickedCamera;
+				gesture.isGuiCamera = fingers[twoFinger1].isGuiCamera;				
+			}
 				
 			
 			if (message!= EventName.On_Cancel2Fingers){
@@ -1126,6 +1271,15 @@ public class EasyTouch : MonoBehaviour {
 			}
 			
 			gesture.otherReceiver = receiverObject;
+			if (fingers[twoFinger0] != null){
+				gesture.isHoverReservedArea = IsTouchReservedArea( fingers[twoFinger0].fingerIndex);
+			}
+			if (fingers[twoFinger1] != null){
+				gesture.isHoverReservedArea = gesture.isHoverReservedArea || IsTouchReservedArea( fingers[twoFinger1].fingerIndex);	
+			}
+			
+			
+			
 			
 			if (useBroadcastMessage){
 				SendGesture2Finger(message,gesture );
@@ -1133,6 +1287,8 @@ public class EasyTouch : MonoBehaviour {
 			else{
 				RaiseEvent(message, gesture);
 			}
+
+			isStartHoverNGUI = false;
 		}
 	}
 
@@ -1157,6 +1313,19 @@ public class EasyTouch : MonoBehaviour {
 	#endregion
 	
 	#region General private methods
+	private void RaiseReadyEvent(){
+		if (useBroadcastMessage){
+			if (receiverObject!=null){
+				gameObject.SendMessage("On_EasyTouchIsReady", SendMessageOptions.DontRequireReceiver );
+			}
+		}
+		else{
+			if (On_EasyTouchIsReady!=null){
+				On_EasyTouchIsReady();	
+			}			
+		}
+	}
+	
 	private void RaiseEvent(EventName evnt, Gesture gesture){
 				
 		switch(evnt){
@@ -1302,26 +1471,57 @@ public class EasyTouch : MonoBehaviour {
 				break;
 		}
 	}
-		
-	private GameObject GetPickeGameObject(Vector2 screenPos){
+
+	private bool GetPickeGameObject(ref Finger finger, bool twoFinger=false){
 	
-		if (easyTouchCamera!=null){
-	        Ray ray = easyTouchCamera.ScreenPointToRay( screenPos );
-	        RaycastHit hit;
-			
-			LayerMask mask = pickableLayers;
-				
-	        if( Physics.Raycast( ray, out hit,float.MaxValue,mask ) ){
-	            return hit.collider.gameObject;
+		finger.isGuiCamera = false;
+		finger.pickedCamera = null;
+		finger.pickedObject = null;
+		
+		if (touchCameras.Count>0){
+			for (int i=0;i<touchCameras.Count;i++){
+				if (touchCameras[i].camera!=null && touchCameras[i].camera.enabled){
+
+					Vector2 pos=Vector2.zero;
+					if (!twoFinger){
+						pos = finger.position;
+					}
+					else{
+						pos = finger.complexStartPosition;
+					}
+			        Ray ray = touchCameras[i].camera.ScreenPointToRay( pos );
+			        RaycastHit hit;
+
+					if (enable2D){
+						LayerMask mask2d = pickableLayers2D;
+						RaycastHit2D[] hit2D = new RaycastHit2D[1];
+						if (Physics2D.GetRayIntersectionNonAlloc( ray,hit2D,float.PositiveInfinity,mask2d)>0){
+							finger.pickedCamera = touchCameras[i].camera;
+							finger.isGuiCamera = touchCameras[i].guiCamera;
+							finger.pickedObject = hit2D[0].collider.gameObject;
+							return true;
+						}
+					}
+
+					LayerMask mask = pickableLayers;
+						
+			        if( Physics.Raycast( ray, out hit,float.MaxValue,mask ) ){
+						finger.pickedCamera = touchCameras[i].camera;
+						finger.isGuiCamera = touchCameras[i].guiCamera;
+						finger.pickedObject = hit.collider.gameObject;
+			            return true;
+					}
+				}
 			}
 		}
 		else{
 			Debug.LogWarning("No camera is assigned to EasyTouch");	
 		}
 		
-        return null;
+        return false;
 	        
 	}
+	
 		
 	private SwipeType GetSwipe(Vector2 start, Vector2 end){
 	
@@ -1386,28 +1586,42 @@ public class EasyTouch : MonoBehaviour {
 				Ray ray = nGUICameras[i].ScreenPointToRay( fingers[touchIndex].position );
 
 				returnValue =  Physics.Raycast( ray, out hit,float.MaxValue,mask );
+				//returnValue = returnValue && hit.transform.parent != null;
 				i++;
 			}
 
 		}
-		
+
+//		Debug.Log( returnValue );
 		return returnValue;
 	
 	}
 	
-	private bool IsTouchHoverVirtualControll(int touchIndex){
+	private bool IsTouchReservedArea(int touchIndex){
 		
 		bool returnValue = false;
 		
-		if (enableReservedArea){
+		if (enableReservedArea && fingers[touchIndex]!=null){
 			int i=0;
-
+			Rect rectTest = new Rect(0,0,0,0);
 			while (!returnValue && i< reservedAreas.Count){	
-				Rect rectTest = VirtualScreen.GetRealRect(reservedAreas[i]);
+				returnValue = reservedAreas[i].Contains( fingers[touchIndex].position);
+				i++;
+			}		
+			i=0;
+			while (!returnValue && i< reservedGuiAreas.Count){	
+				rectTest = new Rect( reservedGuiAreas[i].x,Screen.height-reservedGuiAreas[i].y-reservedGuiAreas[i].height,reservedGuiAreas[i].width,reservedGuiAreas[i].height);
+				returnValue = rectTest.Contains( fingers[touchIndex].position);
+				i++;				
+			}			
+			i=0;
+			while (!returnValue && i< reservedVirtualAreas.Count){	
+				rectTest = VirtualScreen.GetRealRect(reservedVirtualAreas[i]);
 				rectTest = new Rect( rectTest.x,Screen.height-rectTest.y-rectTest.height,rectTest.width,rectTest.height);
 				returnValue = rectTest.Contains( fingers[touchIndex].position);
-				i++;
-			}			
+				
+				i++;				
+			}
 		}
 		
 		return returnValue;
@@ -1464,7 +1678,12 @@ public class EasyTouch : MonoBehaviour {
 	/// int
 	/// </returns>
 	public static int GetTouchCount(){
-		return EasyTouch.instance.input.TouchCount();
+		if (EasyTouch.instance!=null){
+			return EasyTouch.instance.input.TouchCount();
+		}
+		else{
+			return 0;
+		}
 	}
 	
 	/// <summary>
@@ -1473,8 +1692,8 @@ public class EasyTouch : MonoBehaviour {
 	/// <param name='cam'>
 	/// The camera
 	/// </param>
-	public static void SetCamera(Camera cam){
-		EasyTouch.instance.easyTouchCamera = cam;
+	public static void SetCamera(Camera cam,bool guiCam=false){
+		EasyTouch.instance.touchCameras.Add(new ECamera(cam,guiCam));
 	}
 	
 	/// <summary>
@@ -1484,8 +1703,13 @@ public class EasyTouch : MonoBehaviour {
 	/// The camera
 	/// </returns
 	/// >
-	public static Camera GetCamera(){
-		return EasyTouch.instance.easyTouchCamera;	
+	public static Camera GetCamera(int index=0){
+		if (index< EasyTouch.instance.touchCameras.Count){
+			return EasyTouch.instance.touchCameras[index].camera;	
+		}
+		else{
+			return null;	
+		}
 	}
 	
 	/// <summary>
@@ -1706,7 +1930,15 @@ public class EasyTouch : MonoBehaviour {
 	/// Finger index.
 	/// </param>
 	public static GameObject GetCurrentPickedObject(int fingerIndex){
-		return EasyTouch.instance.GetPickeGameObject(EasyTouch.instance.GetFinger(fingerIndex).position);
+		
+		Finger finger = EasyTouch.instance.GetFinger(fingerIndex);
+		if (EasyTouch.instance.GetPickeGameObject(ref finger)){
+			return finger.pickedObject;
+		}
+		else{
+			return null;
+		}
+		
 	}
 	
 	/// <summary>
@@ -1726,12 +1958,15 @@ public class EasyTouch : MonoBehaviour {
 		bool find=false;
 		
 		for (int i=0;i<10;i++){
+		
 			if ( EasyTouch.instance.fingers[i]!=null){
 				if (guiRect){
 					rect = new Rect( rect.x,Screen.height-rect.y-rect.height,rect.width,rect.height);	
 				}
 				find = rect.Contains(  EasyTouch.instance.fingers[i].position);
-				break;
+				if (find)
+					break;
+
 			}
 		}
 		
@@ -1766,7 +2001,10 @@ public class EasyTouch : MonoBehaviour {
 	/// false = disable
 	/// </returns>
 	public static bool GetIsReservedArea(){
-		return EasyTouch.instance.enableReservedArea;	
+		if (EasyTouch.instance)
+			return EasyTouch.instance.enableReservedArea;	
+		else
+			return false;
 	}
 	
 	/// <summary>
@@ -1786,8 +2024,17 @@ public class EasyTouch : MonoBehaviour {
 	/// Rec.
 	/// </param>
 	public static void AddReservedArea( Rect rec){
-		if (EasyTouch.instance)
+		if (EasyTouch.instance){
 			EasyTouch.instance.reservedAreas.Add( rec);
+			
+		}
+	}
+	
+	public static void AddReservedGuiArea( Rect rec){
+		if (EasyTouch.instance){
+			EasyTouch.instance.reservedGuiAreas.Add( rec);
+			
+		}
 	}
 	
 	/// <summary>
@@ -1801,6 +2048,11 @@ public class EasyTouch : MonoBehaviour {
 			EasyTouch.instance.reservedAreas.Remove( rec);
 	}
 	
+	public static void RemoveReservedGuiArea(Rect rec){
+		if (EasyTouch.instance)
+			EasyTouch.instance.reservedGuiAreas.Remove( rec);
+	}
+	
 	/// <summary>
 	/// Resets a specific touch.
 	/// </summary>
@@ -1811,7 +2063,27 @@ public class EasyTouch : MonoBehaviour {
 		if (EasyTouch.instance)
 			EasyTouch.instance.GetFinger(fingerIndex).gesture=GestureType.None;
 	}
+	
+	/// <summary>
+	/// Sets the pickable layer.
+	/// </summary>
+	/// <param name='mask'>
+	/// Mask.
+	/// </param>
+	public static void SetPickableLayer(LayerMask mask){
+		if (EasyTouch.instance)
+			EasyTouch.instance.pickableLayers = mask;	
+	}
+	
+	/// <summary>
+	/// Gets the pickable layer.
+	/// </summary>
+	/// <returns>
+	/// The pickable layer.
+	/// </returns>
+	public static LayerMask GetPickableLayer(){
+		return EasyTouch.instance.pickableLayers;	
+	}
 	#endregion
-	
-	
+		
 }

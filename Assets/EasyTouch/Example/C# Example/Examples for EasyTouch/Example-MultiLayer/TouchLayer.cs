@@ -24,8 +24,8 @@ public class TouchLayer : MonoBehaviour {
 
 	void Start () {
 		textMesh =(TextMesh)GameObject.Find("TouchOnLayer").transform.gameObject.GetComponent("TextMesh");
-		EasyTouch.AddReservedArea( rect1 );
-		EasyTouch.AddReservedArea( rect2 );
+		EasyTouch.AddReservedGuiArea( rect1 );
+		EasyTouch.AddReservedGuiArea( rect2 );
 	}
 	
 	void OnGUI(){
@@ -39,7 +39,13 @@ public class TouchLayer : MonoBehaviour {
 		// Verification that the action on the object
 		if (gesture.pickObject !=null && !gesture.isHoverReservedArea){
 			gesture.pickObject.renderer.material.color = new Color( Random.Range(0.0f,1.0f),  Random.Range(0.0f,1.0f), Random.Range(0.0f,1.0f));
-			textMesh.text = "Touch a sphere on layer :" + LayerMask.LayerToName( gesture.pickObject.layer);
+			
+			if (gesture.pickCamera == null){
+				textMesh.text = "Touch on layer :" + LayerMask.LayerToName( gesture.pickObject.layer);
+			}
+			else{
+				textMesh.text = "Touch on layer :" + LayerMask.LayerToName( gesture.pickObject.layer) + " / Camera : " + gesture.pickCamera.name;
+			}
 		}
 		else{
 			if (gesture.isHoverReservedArea){

@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class Swipe : MonoBehaviour {
-
+	
 	private TextMesh textMesh;
 	private GameObject trail;
 	
@@ -52,6 +52,9 @@ public class Swipe : MonoBehaviour {
 			// the world coordinate from touch for z=5
 			Vector3 position = gesture.GetTouchToWordlPoint(5);
 			trail.transform.position = position;
+
+
+
 		}
 	}
 	

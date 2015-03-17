@@ -22,6 +22,11 @@ public class MovingJoystick{
 	public Vector2 joystickValue;
 	
 	/// <summary>
+	/// The index of the finger for the joystick
+	/// </summary>
+	public int fingerIndex;
+	
+	/// <summary>
 	/// Axis2s the angle.
 	/// </summary>
 	/// <returns>

@@ -1,4 +1,4 @@
-// EasyTouch v2.0 (September 2012)
+// EasyTouch v3.0 (October 2013)
 // EasyTouch library is copyright (c) of Hedgehog Team
 // Please send feedback or bug reports to the.hedgehog.team@gmail.com
 using UnityEngine;
@@ -65,7 +65,15 @@ public class Gesture{
 	/// <summary>
 	/// The current picked gameObject under the touch that raise the event.
 	/// </summary>
-	public GameObject pickObject;		
+	public GameObject pickObject;	
+	/// <summary>
+	/// The pick camera.
+	/// </summary>
+	public Camera pickCamera;
+	/// <summary>
+	/// Is that the camera is Flage GUI
+	/// </summary>
+	public bool isGuiCamera;
 	/// <summary>
 	/// Other receiver of the event.
 	/// </summary>
@@ -74,6 +82,9 @@ public class Gesture{
 	/// The is hover controller.
 	/// </summary>
 	public bool isHoverReservedArea;
+	
+	
+	
 	/// <summary>
 	/// Transforms touch position into world space, or the center position between the two touches for a two fingers gesture.
 	/// </summary>
@@ -86,13 +97,14 @@ public class Gesture{
 	/// <param name='worldZ'>
 	/// true = r
 	/// </param>
+	/// 
 	public Vector3 GetTouchToWordlPoint(float z, bool worldZ=false){
 		
 		if (!worldZ){
-			return  EasyTouch.GetCamera().ScreenToWorldPoint( new Vector3( position.x, position.y,z));	
+			return  Camera.main.ScreenToWorldPoint( new Vector3( position.x, position.y,z));	
 		}
 		else{
-			return  EasyTouch.GetCamera().ScreenToWorldPoint( new Vector3( position.x, position.y,z-EasyTouch.GetCamera().transform.position.z));	
+			return  Camera.main.ScreenToWorldPoint( new Vector3( position.x, position.y,z-Camera.main.transform.position.z));	
 		}
 	}
 	/// <summary>

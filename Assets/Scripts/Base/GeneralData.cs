@@ -72,7 +72,7 @@ public class GeneralData: MonoBehaviour{
 		return null;
 	}
 
-	public List<ItemCategoryData> GetSubcategories(string category)
+	public List<ItemSubcategoryData> GetSubcategories(string category)
 	{
 		for (int i = 0; i < itemCategories.Count; i++) {
 			if(itemCategories[i].name == category)
@@ -98,5 +98,13 @@ public class ItemCategoryData
 {
 	public string name;
 	public string iconName;
-	public List<ItemCategoryData> subcategories;
+	public List<ItemSubcategoryData> subcategories;
 }
+
+[System.Serializable]
+public class ItemSubcategoryData
+{
+	public string name;
+	public string iconName;
+}
+

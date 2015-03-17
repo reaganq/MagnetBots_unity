@@ -27,7 +27,7 @@ public class EasyTouchInput{
 	// Return the number of touch
 	public int TouchCount(){
 	
-		#if ((UNITY_ANDROID || UNITY_IPHONE || UNITY_WP8 || UNITY_BLACKBERRY) && !UNITY_EDITOR) 
+		#if ((UNITY_ANDROID || UNITY_IPHONE || UNITY_WINRT || UNITY_BLACKBERRY) && !UNITY_EDITOR) 
 			return getTouchCount(true);
 		#else
 			return getTouchCount(false);

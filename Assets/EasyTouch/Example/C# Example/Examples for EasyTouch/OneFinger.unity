@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &179541917
 GameObject:
@@ -101,6 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!114 &179541919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,11 +122,15 @@ MonoBehaviour:
   enable2FingersGesture: 1
   enableTwist: 1
   enablePinch: 1
-  easyTouchCamera: {fileID: 0}
+  touchCameras: []
   autoSelect: 1
   pickableLayers:
     serializedVersion: 2
     m_Bits: 256
+  enable2D: 0
+  pickableLayers2D:
+    serializedVersion: 2
+    m_Bits: 0
   StationnaryTolerance: 25
   longTapTime: 1
   swipeTolerance: .850000024
@@ -136,6 +142,8 @@ MonoBehaviour:
     m_Bits: 0
   nGUICameras: []
   reservedAreas: []
+  reservedVirtualAreas: []
+  reservedGuiAreas: []
   enableReservedArea: 1
   twistKey: 308
   swipeKey: 306
@@ -172,6 +180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!108 &222234848
 Light:
   m_ObjectHideFlags: 0
@@ -235,6 +244,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1184347761}
+  m_RootOrder: 0
 --- !u!23 &491703874
 Renderer:
   m_ObjectHideFlags: 0
@@ -253,9 +263,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &491703875
 TextMesh:
   serializedVersion: 3
@@ -308,6 +317,7 @@ Transform:
   m_Children:
   - {fileID: 1793349278}
   m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!23 &850023353
 Renderer:
   m_ObjectHideFlags: 0
@@ -326,9 +336,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &850023354
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -387,6 +396,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 2134837230}
+  m_RootOrder: 0
 --- !u!23 &871378550
 Renderer:
   m_ObjectHideFlags: 0
@@ -405,9 +415,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &871378551
 TextMesh:
   serializedVersion: 3
@@ -457,6 +466,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1502154661}
+  m_RootOrder: 0
 --- !u!23 &1072771346
 Renderer:
   m_ObjectHideFlags: 0
@@ -475,9 +485,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &1072771347
 TextMesh:
   serializedVersion: 3
@@ -529,6 +538,7 @@ Transform:
   m_Children:
   - {fileID: 491703873}
   m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!23 &1184347762
 Renderer:
   m_ObjectHideFlags: 0
@@ -547,9 +557,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &1184347763
 TextMesh:
   serializedVersion: 3
@@ -610,6 +619,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1794558859}
+  m_RootOrder: 0
 --- !u!23 &1481104176
 Renderer:
   m_ObjectHideFlags: 0
@@ -628,9 +638,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &1481104177
 TextMesh:
   serializedVersion: 3
@@ -683,6 +692,7 @@ Transform:
   m_Children:
   - {fileID: 1072771345}
   m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!23 &1502154662
 Renderer:
   m_ObjectHideFlags: 0
@@ -701,9 +711,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1502154663
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -765,6 +774,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!20 &1757207696
 Camera:
   m_ObjectHideFlags: 0
@@ -792,8 +802,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!81 &1757207697
 AudioListener:
   m_ObjectHideFlags: 0
@@ -855,6 +868,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!23 &1763588970
 Renderer:
   m_ObjectHideFlags: 0
@@ -873,9 +887,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1763588971
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -924,6 +937,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 850023352}
+  m_RootOrder: 0
 --- !u!23 &1793349279
 Renderer:
   m_ObjectHideFlags: 0
@@ -942,9 +956,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &1793349280
 TextMesh:
   serializedVersion: 3
@@ -997,6 +1010,7 @@ Transform:
   m_Children:
   - {fileID: 1481104175}
   m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!23 &1794558860
 Renderer:
   m_ObjectHideFlags: 0
@@ -1015,9 +1029,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1794558861
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1079,6 +1092,7 @@ Transform:
   m_Children:
   - {fileID: 2070468138}
   m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!23 &1836165544
 Renderer:
   m_ObjectHideFlags: 0
@@ -1097,9 +1111,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1836165545
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1158,6 +1171,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1836165543}
+  m_RootOrder: 0
 --- !u!23 &2070468139
 Renderer:
   m_ObjectHideFlags: 0
@@ -1176,9 +1190,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!102 &2070468140
 TextMesh:
   serializedVersion: 3
@@ -1231,6 +1244,7 @@ Transform:
   m_Children:
   - {fileID: 871378549}
   m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!23 &2134837231
 Renderer:
   m_ObjectHideFlags: 0
@@ -1249,9 +1263,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &2134837232
 MeshFilter:
   m_ObjectHideFlags: 0

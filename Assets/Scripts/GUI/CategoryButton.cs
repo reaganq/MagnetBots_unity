@@ -30,7 +30,7 @@ public class CategoryButton : MonoBehaviour {
 		if(newItemCountFlag != null) newItemCountFlag.SetActive(false);
 	}
 
-	public void LoadSubcategoryButton(ItemCategoryData category, int i, int level, int newItemCount)
+	public void LoadSubcategoryButton(ItemSubcategoryData category, int i, int level, int newItemCount)
 	{
 		if(iconSprite != null) iconSprite.spriteName = category.iconName;
 		if(name != null) name.text = category.name;

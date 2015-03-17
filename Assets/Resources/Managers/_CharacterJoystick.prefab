@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -62,9 +63,13 @@ MonoBehaviour:
   enable2FingersGesture: 1
   enableTwist: 1
   enablePinch: 1
-  easyTouchCamera: {fileID: 0}
+  touchCameras: []
   autoSelect: 0
   pickableLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  enable2D: 0
+  pickableLayers2D:
     serializedVersion: 2
     m_Bits: 0
   StationnaryTolerance: 25
@@ -72,13 +77,15 @@ MonoBehaviour:
   swipeTolerance: .850000024
   minPinchLength: 0
   minTwistAngle: 1
-  enabledNGuiMode: 0
+  enabledNGuiMode: 1
   nGUILayers:
     serializedVersion: 2
     m_Bits: 256
   nGUICameras:
   - {fileID: 0}
   reservedAreas: []
+  reservedVirtualAreas: []
+  reservedGuiAreas: []
   enableReservedArea: 1
   twistKey: 308
   swipeKey: 306
@@ -99,13 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb67c6dcb4e4d74eb7aed04254e4089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTouchStarted: 0
-  isJoyStickDisplayed: 0
   enable: 1
+  visible: 1
   isActivated: 1
-  showDebugRadius: 1
+  showDebugRadius: 0
+  selected: 0
   useFixedUpdate: 0
-  isUseGuiLayout: 0
+  isUseGuiLayout: 1
   dynamicJoystick: 1
   area: 7
   joyAnchor: 7

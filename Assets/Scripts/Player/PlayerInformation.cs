@@ -32,11 +32,6 @@ public class PlayerInformation  {
 	public string ParseObjectId;
 	ParseObject playerData = new ParseObject("PlayerData");
 
-	public void Awake()
-	{
-		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes");
-	}
- 
     public PlayerInformation()
     {
 		NakedArmorInventory = new Inventory();
@@ -378,11 +373,13 @@ public class PlayerInformation  {
 		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.RemoveItem(item, amount);
-			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			if(NetworkManager.Instance.usingParse)
+				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, amount);
+			if(NetworkManager.Instance.usingParse)
 				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
@@ -447,8 +444,11 @@ public class PlayerInformation  {
 
 	public void SaveParseData()
 	{
-		if(!NetworkManager.Instance.usingParse)
+		Debug.Log("enter saving parse data");
+		if (!NetworkManager.Instance.usingParse) {
+			Debug.Log("return from saving parse data");
 			return;
+				}
 		Debug.Log("saving parse data");
 		byte[] nakedArmoryParseList = ParseInventoryList(NakedArmorInventory);
 		byte[] mainInventoryParseList = ParseInventoryList(MainInventory);

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Reflection;
+using System;
 
 public class GameManager : MonoBehaviour {
  
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake()
     {
+		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes"); 
 		GameIsPaused = true;
 		GameHasStarted = false;
 		teststate = false;

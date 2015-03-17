@@ -10,7 +10,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 	public InventoryGUIType inventoryType = InventoryGUIType.quickInventory;
 	public List<ItemTileButton> itemTiles;
     public ItemCategories selectedMainInventoryCategory = ItemCategories.None;
-	public List<ItemCategoryData> subCategories;
+	public List<ItemSubcategoryData> subCategories;
 	public List<InventoryItem> displayedItemList;
 	public List<CategoryButton> subcategoryButtons;
     public int currentSelectedSubcategory = 0;
@@ -71,7 +71,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 			else
 			{
 				subcategoryButtons[i].gameObject.SetActive(true);
-				subcategoryButtons[i].LoadCategoryButton(subCategories[i], i, 1);
+				subcategoryButtons[i].LoadSubcategoryButton(subCategories[i], i, 1, 0);
 			}
 		}
 	}

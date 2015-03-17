@@ -30,12 +30,12 @@ public class GUIEasyJoystickInspector : Editor{
 			EditorUtility.SetDirty(t);
 		}
 		
-		t.showDebugRadius = true;
+		t.selected = true;
 	}
 	
 	void OnDisable(){
 		EasyJoystick t = (EasyJoystick)target;
-		t.showDebugRadius = false;
+		t.selected = false;
 		
 	}
 	
@@ -44,21 +44,30 @@ public class GUIEasyJoystickInspector : Editor{
 		EasyJoystick t = (EasyJoystick)target;
 				
 		// Joystick Properties
-		t.showProperties = HTEditorToolKit.DrawTitleFoldOut( t.showProperties,"Joystick properties");
+		HTGUILayout.FoldOut( ref t.showProperties,"Joystick properties",false);
 		if (t.showProperties){
 			
 			EditorGUILayout.BeginVertical(paddingStyle1);
 				
 			t.name = EditorGUILayout.TextField("Joystick name",t.name);
+			if (t.enable) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.enable = EditorGUILayout.Toggle("Enable joystick",t.enable);
+			if (t.isActivated) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.isActivated = EditorGUILayout.Toggle("Activated",t.isActivated);
+			if (t.visible) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
+			t.visible = EditorGUILayout.Toggle("Visible",t.visible);
+			if (t.showDebugRadius) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.showDebugRadius = EditorGUILayout.Toggle("Show debug area",t.showDebugRadius);
-
-			HTEditorToolKit.DrawSeparatorLine(paddingStyle1.padding.left);
+			GUI.backgroundColor = Color.white;
+			
+			HTGUILayout.DrawSeparatorLine(paddingStyle1.padding.left);
 			EditorGUILayout.Separator();
 			
+			if (t.useFixedUpdate) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.useFixedUpdate = EditorGUILayout.Toggle("Use fixed update",t.useFixedUpdate);
+			if (t.isUseGuiLayout) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.isUseGuiLayout = EditorGUILayout.Toggle("Use GUI Layout",t.isUseGuiLayout);
+			GUI.backgroundColor = Color.white;
 			if (!t.isUseGuiLayout){
 				EditorGUILayout.HelpBox("This lets you skip the GUI layout phase (Increase GUI performance). It can only be used if you do not use GUI.Window and GUILayout inside of this OnGUI call.",MessageType.Warning);	
 			}
@@ -66,48 +75,63 @@ public class GUIEasyJoystickInspector : Editor{
 
 		}
 		
-		t.showPosition = HTEditorToolKit.DrawTitleFoldOut( t.showPosition,"Joystick position & size");
+		HTGUILayout.FoldOut( ref t.showPosition,"Joystick position & size",false);
 		if (t.showPosition){
 			
 			// Dynamic joystick
+			if (t.DynamicJoystick) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.DynamicJoystick = EditorGUILayout.Toggle("Dynamic joystick",t.DynamicJoystick);
+			GUI.backgroundColor = Color.white;
 			if (t.DynamicJoystick){
+				GUI.backgroundColor = Color.cyan;
 				t.area = (EasyJoystick.DynamicArea) EditorGUILayout.EnumPopup("Free area",t.area);
+				GUI.backgroundColor = Color.white;
 			}
 			else{	
+				GUI.backgroundColor = Color.cyan;
 				t.JoyAnchor = (EasyJoystick.JoystickAnchor)EditorGUILayout.EnumPopup("Anchor",t.JoyAnchor);
+				GUI.backgroundColor = Color.white;
 				t.JoystickPositionOffset = EditorGUILayout.Vector2Field("Offset",t.JoystickPositionOffset);	
 			}
 			
-			HTEditorToolKit.DrawSeparatorLine(paddingStyle1.padding.left);
+			HTGUILayout.DrawSeparatorLine(paddingStyle1.padding.left);
 			EditorGUILayout.Separator();
 			
 			t.ZoneRadius = EditorGUILayout.FloatField("Area radius",t.ZoneRadius);
 			t.TouchSize = EditorGUILayout.FloatField("Touch radius",t.TouchSize);	
+			if (t.RestrictArea) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.RestrictArea = EditorGUILayout.Toggle("    Restrict to area",t.RestrictArea);
-			t.resetFingerExit = EditorGUILayout.Toggle("    Reset  finger exit",t.resetFingerExit);			
+			if (t.resetFingerExit) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
+			t.resetFingerExit = EditorGUILayout.Toggle("    Reset  finger exit",t.resetFingerExit);		
+			GUI.backgroundColor = Color.white;
 			t.deadZone =  EditorGUILayout.FloatField("Dead zone radius",t.deadZone);
 
 		}
 			
 		// Joystick axes properties
-		t.showInteraction =HTEditorToolKit.DrawTitleFoldOut( t.showInteraction,"Joystick axes properties & events");
+		HTGUILayout.FoldOut( ref t.showInteraction,"Joystick axes properties & events",false);
 		if (t.showInteraction){
 			
 			EditorGUILayout.BeginVertical(paddingStyle1);
 			
 			// Interaction
+			GUI.backgroundColor = Color.cyan;
 			t.Interaction = (EasyJoystick.InteractionType)EditorGUILayout.EnumPopup("Interaction type",t.Interaction);
+			GUI.backgroundColor = Color.white;
 			
 			if (t.Interaction == EasyJoystick.InteractionType.EventNotification || t.Interaction == EasyJoystick.InteractionType.DirectAndEvent){
+				if (t.useBroadcast) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 				t.useBroadcast = EditorGUILayout.Toggle("Broadcast messages",t.useBroadcast); 
+				GUI.backgroundColor = Color.white;
 				if (t.useBroadcast){
 					t.receiverGameObject =(GameObject) EditorGUILayout.ObjectField("    Receiver gameobject",t.receiverGameObject,typeof(GameObject),true);
+					GUI.backgroundColor = Color.cyan;
 					t.messageMode =(EasyJoystick.Broadcast) EditorGUILayout.EnumPopup("    Sending mode",t.messageMode);
+					GUI.backgroundColor = Color.white;
 				}
 			}
 			
-			HTEditorToolKit.DrawSeparatorLine(paddingStyle1.padding.left);
+			HTGUILayout.DrawSeparatorLine(paddingStyle1.padding.left);
 			
 			// X axis
 			GUI.color = new Color(255f/255f,69f/255f,40f/255f);
@@ -116,8 +140,10 @@ public class GUIEasyJoystickInspector : Editor{
 			if (t.enableXaxis){
 				
 				EditorGUILayout.BeginVertical(paddingStyle1);
-				t.speed.x = EditorGUILayout.FloatField("Speed",t.speed.x);	
+				t.speed.x = EditorGUILayout.FloatField("Speed",t.speed.x);
+				if (t.inverseXAxis) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 				t.inverseXAxis = EditorGUILayout.Toggle("Inverse axis",t.inverseXAxis);
+				GUI.backgroundColor = Color.white;
 				EditorGUILayout.Separator();
 
 				if (t.Interaction == EasyJoystick.InteractionType.Direct || t.Interaction == EasyJoystick.InteractionType.DirectAndEvent){
@@ -131,7 +157,9 @@ public class GUIEasyJoystickInspector : Editor{
 						else{
 							t.xAxisGravity=0;	
 						}
+						GUI.backgroundColor = Color.cyan;
 						t.XTI = (EasyJoystick.PropertiesInfluenced)EditorGUILayout.EnumPopup("Influenced",t.XTI);
+						GUI.backgroundColor = Color.white;
 						
 						switch( t.xAI){
 						case EasyJoystick.AxisInfluenced.X:
@@ -144,8 +172,9 @@ public class GUIEasyJoystickInspector : Editor{
 							GUI.color = new Color(63f/255f,131f/255f,245f/255f);
 							break;
 						}
-							
+						GUI.backgroundColor = Color.cyan;	
 						t.xAI = (EasyJoystick.AxisInfluenced)EditorGUILayout.EnumPopup("Axis influenced",t.xAI);
+						GUI.backgroundColor = Color.white;
 						GUI.color = Color.white;
 						
 						EditorGUILayout.Separator();
@@ -154,7 +183,9 @@ public class GUIEasyJoystickInspector : Editor{
 						
 						if (t.XTI == EasyJoystick.PropertiesInfluenced.RotateLocal){
 							// auto stab
+							if (t.enableXAutoStab) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 							t.enableXAutoStab = EditorGUILayout.Toggle( "AutoStab",t.enableXAutoStab);
+							GUI.backgroundColor = Color.white;
 							if (t.enableXAutoStab){
 								EditorGUILayout.BeginVertical(paddingStyle1);
 								t.ThresholdX = EditorGUILayout.FloatField("Threshold ", t.ThresholdX);
@@ -165,7 +196,9 @@ public class GUIEasyJoystickInspector : Editor{
 							EditorGUILayout.Separator();
 							
 							// Clamp
+							if (t.enableXClamp) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 							t.enableXClamp = EditorGUILayout.Toggle("Clamp rotation",t.enableXClamp);
+							GUI.backgroundColor = Color.white;
 							if (t.enableXClamp){
 								EditorGUILayout.BeginVertical(paddingStyle1);
 								t.clampXMax = EditorGUILayout.FloatField("Max angle value",t.clampXMax);	
@@ -180,16 +213,19 @@ public class GUIEasyJoystickInspector : Editor{
 			}
 			EditorGUILayout.EndToggleGroup();
 			
-			HTEditorToolKit.DrawSeparatorLine(paddingStyle1.padding.left);
+			HTGUILayout.DrawSeparatorLine(paddingStyle1.padding.left);
 			
 			// Y axis
 			GUI.color = Color.green;
 			t.enableYaxis = EditorGUILayout.BeginToggleGroup("Enable Y axis",t.enableYaxis);
 			GUI.color = Color.white;
 			if (t.enableYaxis){
+
 				EditorGUILayout.BeginVertical(paddingStyle1);
 				t.speed.y = EditorGUILayout.FloatField("Speed",t.speed.y);	
+				if (t.inverseYAxis) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 				t.inverseYAxis = EditorGUILayout.Toggle("Inverse axis",t.inverseYAxis);
+				GUI.backgroundColor = Color.white;
 				EditorGUILayout.Separator();	
 				
 				if (t.Interaction == EasyJoystick.InteractionType.Direct || t.Interaction == EasyJoystick.InteractionType.DirectAndEvent){
@@ -203,8 +239,9 @@ public class GUIEasyJoystickInspector : Editor{
 						else{
 							t.yAxisGravity=0;	
 						}
+						GUI.backgroundColor = Color.cyan;
 						t.YTI = (EasyJoystick.PropertiesInfluenced)EditorGUILayout.EnumPopup("Influenced",t.YTI);
-						
+						GUI.backgroundColor = Color.white;
 						switch( t.yAI){
 						case EasyJoystick.AxisInfluenced.X:
 							GUI.color = new Color(255f/255f,69f/255f,40f/255f);
@@ -215,17 +252,21 @@ public class GUIEasyJoystickInspector : Editor{
 						case EasyJoystick.AxisInfluenced.Z:
 							GUI.color = new Color(63f/255f,131f/255f,245f/255f);
 							break;
-						}						
+						}		
+						GUI.backgroundColor = Color.cyan;
 						t.yAI = (EasyJoystick.AxisInfluenced)EditorGUILayout.EnumPopup("Axis influenced",t.yAI);
-						GUI.color = Color.white;
+						GUI.backgroundColor = Color.white;
 						
+						GUI.color = Color.white;
 						EditorGUILayout.Separator();
 						
 						
 						
 						if (t.YTI == EasyJoystick.PropertiesInfluenced.RotateLocal){
 							// auto stab
+							if (t.enableYAutoStab) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 							t.enableYAutoStab = EditorGUILayout.Toggle( "AutoStab",t.enableYAutoStab);
+							GUI.backgroundColor = Color.white;
 							if (t.enableYAutoStab){
 								EditorGUILayout.BeginVertical(paddingStyle1);
 								t.ThresholdY = EditorGUILayout.FloatField("Threshold ", t.ThresholdY);
@@ -236,7 +277,9 @@ public class GUIEasyJoystickInspector : Editor{
 							EditorGUILayout.Separator();
 							
 							// Clamp
+							if (t.enableYClamp) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 							t.enableYClamp = EditorGUILayout.Toggle("Clamp rotation",t.enableYClamp);
+							GUI.backgroundColor = Color.white;
 							if (t.enableYClamp){
 								EditorGUILayout.BeginVertical(paddingStyle1);
 								t.clampYMax = EditorGUILayout.FloatField("Max angle value",t.clampYMax);
@@ -251,11 +294,13 @@ public class GUIEasyJoystickInspector : Editor{
 			}
 			EditorGUILayout.EndToggleGroup();
 
-			HTEditorToolKit.DrawSeparatorLine(paddingStyle1.padding.left);
+			HTGUILayout.DrawSeparatorLine(paddingStyle1.padding.left);
 			EditorGUILayout.Separator();
 			
 			// Smoothing return
+			if (t.enableSmoothing) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.enableSmoothing = EditorGUILayout.BeginToggleGroup("Smoothing return",t.enableSmoothing);
+			GUI.backgroundColor = Color.white;
 			if (t.enableSmoothing){
 				EditorGUILayout.BeginVertical(paddingStyle1);
 				t.Smoothing = EditorGUILayout.Vector2Field( "Smoothing",t.Smoothing);
@@ -263,7 +308,9 @@ public class GUIEasyJoystickInspector : Editor{
 			}
 			EditorGUILayout.EndToggleGroup();
 			
+			if (t.enableInertia) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.enableInertia = EditorGUILayout.BeginToggleGroup("Enable inertia",t.enableInertia);
+			GUI.backgroundColor = Color.white;
 			if (t.enableInertia){
 				EditorGUILayout.BeginVertical(paddingStyle1);
 				t.Inertia = EditorGUILayout.Vector2Field( "Inertia",t.Inertia);
@@ -275,28 +322,34 @@ public class GUIEasyJoystickInspector : Editor{
 		}
 		
 		// Joystick Texture 
-		t.showAppearance = HTEditorToolKit.DrawTitleFoldOut( t.showAppearance,"Joystick textures");
+		HTGUILayout.FoldOut(ref t.showAppearance,"Joystick textures",false);
 		if (t.showAppearance){
 			EditorGUILayout.BeginVertical(paddingStyle1);
 			
 			t.guiDepth = EditorGUILayout.IntField("Gui depth",t.guiDepth);
 			EditorGUILayout.Separator();
 			
+			if (t.showZone) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.showZone = EditorGUILayout.Toggle("Show area",t.showZone);
+			GUI.backgroundColor = Color.white;
 			if (t.showZone){ 
 				t.areaColor = EditorGUILayout.ColorField( "Color",t.areaColor);
 				t.areaTexture = (Texture)EditorGUILayout.ObjectField("Area texture",t.areaTexture,typeof(Texture),true);
 			}
 			EditorGUILayout.Separator();
 			
+			if (t.showTouch) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.showTouch = EditorGUILayout.Toggle("Show touch",t.showTouch);
+			GUI.backgroundColor = Color.white;
 			if (t.showTouch){
 				t.touchColor = EditorGUILayout.ColorField("Color",t.touchColor);
 				t.touchTexture = (Texture)EditorGUILayout.ObjectField("Area texture",t.touchTexture,typeof(Texture),true);
 			}
 			EditorGUILayout.Separator();
 			
+			if (t.showDeadZone) GUI.backgroundColor = Color.green; else GUI.backgroundColor = Color.red;
 			t.showDeadZone = EditorGUILayout.Toggle("Show dead",t.showDeadZone);
+			GUI.backgroundColor = Color.white;
 			if (t.showDeadZone){
 				t.deadTexture = (Texture)EditorGUILayout.ObjectField("Dead zone texture",t.deadTexture,typeof(Texture),true);
 			}

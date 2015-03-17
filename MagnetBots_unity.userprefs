@@ -1,37 +1,44 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC/NPC.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs">
     <Files>
-      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="238" Column="11" />
+      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ArenaGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/JobManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/SocialManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/SfxManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerProfile.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Item/RPGBadge.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/GUI/Controllers/HoverPopupGUIController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/GUI/TeamMemberUI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="29" Column="3" />
-      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="57" Column="13" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="54" Column="30" />
-      <File FileName="Assets/Scripts/Character/PlayerMotor.cs" Line="76" Column="37" />
-      <File FileName="Assets/Scripts/GUI/Controllers/RewardsGUIController.cs" Line="186" Column="34" />
-      <File FileName="Assets/Scripts/Managers/ArenaManager.cs" Line="246" Column="5" />
-      <File FileName="Assets/Scripts/Managers/Zone.cs" Line="84" Column="4" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="93" Column="2" />
-      <File FileName="Assets/Scripts/Enemies/JimFSM.cs" Line="5" Column="32" />
-      <File FileName="Assets/Scripts/Character/CharacterStatus.cs" Line="164" Column="53" />
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="65" Column="2" />
-      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="74" Column="4" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="117" Column="59" />
-      <File FileName="Assets/Scripts/GUI/Controllers/NotificationGUIController.cs" Line="101" Column="25" />
-      <File FileName="Assets/Photon Unity Networking/Plugins/PhotonNetwork/NetworkingPeer.cs" Line="2869" Column="10" />
-      <File FileName="Assets/Scripts/Enemies/NetworkAIMovement.cs" Line="37" Column="41" />
-      <File FileName="Assets/Scripts/Character/NetworkCharacterMovement.cs" Line="107" Column="3" />
-      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="44" Column="4" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="129" Column="2" />
+      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="143" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
-              <Node name="NPC" expanded="True">
-                <Node name="NPC.cs" selected="True" />
+              <Node name="Armor" expanded="True">
+                <Node name="Base" expanded="True" />
+                <Node name="Range" expanded="True">
+                  <Node name="BasePlayerRangedSkill.cs" selected="True" />
+                </Node>
               </Node>
+              <Node name="Enemies" expanded="True">
+                <Node name="Skills" expanded="True" />
+              </Node>
+              <Node name="GUI" expanded="True">
+                <Node name="Controllers" expanded="True" />
+              </Node>
+              <Node name="Item" expanded="True" />
+              <Node name="Managers" expanded="True" />
+              <Node name="Player" expanded="True" />
             </Node>
           </Node>
         </State>

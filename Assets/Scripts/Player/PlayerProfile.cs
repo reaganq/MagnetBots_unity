@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
-[System.Serializable]
+[Serializable]
 public class PlayerProfile{
 
 	public string name;

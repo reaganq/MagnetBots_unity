@@ -40,10 +40,7 @@ public class JoystickEvent : MonoBehaviour {
 			else if (Mathf.Abs(move.joystickAxis.y)>=0.5){
 				animation.CrossFade("run");	
 			}
-            
-            Debug.Log(move.joystickAxis);
 		}
 	}
-	
-	
+
 }

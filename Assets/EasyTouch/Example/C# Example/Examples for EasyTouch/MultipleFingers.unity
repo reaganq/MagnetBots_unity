@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &144687201
 GameObject:
@@ -101,6 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!114 &144687203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +141,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!114 &149635466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,11 +161,15 @@ MonoBehaviour:
   enable2FingersGesture: 1
   enableTwist: 1
   enablePinch: 1
-  easyTouchCamera: {fileID: 0}
+  touchCameras: []
   autoSelect: 1
   pickableLayers:
     serializedVersion: 2
     m_Bits: 256
+  enable2D: 0
+  pickableLayers2D:
+    serializedVersion: 2
+    m_Bits: 0
   StationnaryTolerance: 25
   longTapTime: 1
   swipeTolerance: .850000024
@@ -174,6 +181,8 @@ MonoBehaviour:
     m_Bits: 0
   nGUICameras: []
   reservedAreas: []
+  reservedVirtualAreas: []
+  reservedGuiAreas: []
   enableReservedArea: 0
   twistKey: 308
   swipeKey: 306
@@ -211,6 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!23 &282356734
 Renderer:
   m_ObjectHideFlags: 0
@@ -229,9 +239,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &282356735
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -269,6 +278,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!20 &425934006
 Camera:
   m_ObjectHideFlags: 0
@@ -296,8 +306,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!81 &425934007
 AudioListener:
   m_ObjectHideFlags: 0
@@ -346,6 +359,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!108 &545395877
 Light:
   m_ObjectHideFlags: 0
@@ -409,6 +423,7 @@ Transform:
   m_LocalScale: {x: 0, y: 12.8299999, z: .270000011}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!65 &569601167
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -460,6 +475,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!114 &1819781205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +515,7 @@ Transform:
   m_LocalScale: {x: 0, y: 12.7399998, z: .360000014}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!65 &2093507353
 BoxCollider:
   m_ObjectHideFlags: 0

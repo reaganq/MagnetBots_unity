@@ -5,6 +5,47 @@ using System.Collections;
 
 /// <summary>
 /// Release notes:
+/// EasyJoystick V2.3.5 November 2014
+/// =============================
+/// 	* Bug fixed
+/// 	-----------
+/// 	Fixe Joystick dynamic resizing & positionning
+/// 
+/// EasyJoystick V2.3.4 May 2014
+/// =============================
+/// 	* Bug fixed
+/// 	-----------
+/// 	Fixe Joystick init when dynamic with restricted
+/// 
+/// EasyJoystick V2.3.3 January 2014
+/// =============================
+/// 	* Bug fixed
+/// 	-----------
+/// 	Fixe random stiking joystick
+/// 
+/// EasyJoystick V2.3.2 January 2014
+/// =============================
+/// 	* Bug fixed
+/// 	-----------
+/// 	Fixe gravity on character controler
+/// 	Fixe stiking joystick after a load level
+/// 
+/// EasyJoystick V2.3.1 October 2013
+/// =============================
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix sticking dynamic joystick if your finger swipe over a button
+/// 
+/// EasyJoystick V2.3 October 2013
+/// =============================
+///		* New
+/// 	-----------------
+/// 	- Add SetManual(Vector2 movement), to control the joystick
+/// 
+/// 	* Bugs fixed
+/// 	------------
+/// 	- Fix debug area
+/// 
 /// EasyJoystick V2.2 Mai 2013
 /// =============================
 /// 	* Dynamic joystick no longer show when there are hover reserved area
@@ -61,10 +102,7 @@ public class EasyJoystick : MonoBehaviour {
 	public delegate void JoystickDoubleTapHandler(MovingJoystick move);
 	public delegate void JoystickTouchUpHandler(MovingJoystick move);
 	#endregion
-
-	public bool isTouchStarted;
-	public bool isJoyStickDisplayed;
-
+	
 	#region Event
 	/// <summary>
 	/// Occurs the joystick starts move.
@@ -180,7 +218,9 @@ public class EasyJoystick : MonoBehaviour {
 	/// Enable or disable the joystick.
 	/// </summary>
 	public bool enable = true;
-
+	
+	public bool visible = true;
+	
 	/// <summary>
 	/// Activacte or deactivate the joystick
 	/// </summary>
@@ -190,6 +230,7 @@ public class EasyJoystick : MonoBehaviour {
 	/// The show debug radius area
 	/// </summary>
 	public bool showDebugRadius=false;
+	public bool selected = false;
 		
 	/// <summary>
 	/// Use fixed update.
@@ -218,18 +259,18 @@ public class EasyJoystick : MonoBehaviour {
 			return this.dynamicJoystick;
 		}
 		set {
-			if (!Application.isPlaying){
-			joystickIndex=-1;
-			
-			dynamicJoystick = value;
-			if (dynamicJoystick){
-				virtualJoystick=false;
-			}
-			else{
-				virtualJoystick=true;
-				joystickCenter = joystickPositionOffset;
-			}	
-			}
+			//if (!Application.isPlaying){
+				joystickIndex=-1;
+				
+				dynamicJoystick = value;
+				if (dynamicJoystick){
+					virtualJoystick=false;
+				}
+				else{
+					virtualJoystick=true;
+					joystickCenter = joystickPositionOffset;
+				}	
+			//}
 		}
 	}
 	
@@ -265,6 +306,7 @@ public class EasyJoystick : MonoBehaviour {
 		set {
 			
 			joystickPositionOffset = value;
+			joystickCenter = joystickPositionOffset;
 			ComputeJoystickAnchor(joyAnchor);
 		}
 	}	
@@ -764,6 +806,10 @@ public class EasyJoystick : MonoBehaviour {
 	#endregion
 	
 	#region Monobehaviour methods
+	void OnLevelWasLoaded(){
+		joystickIndex=-1;
+	}
+
 	void OnEnable(){
 		EasyTouch.On_TouchStart += On_TouchStart;
 		EasyTouch.On_TouchUp += On_TouchUp;
@@ -780,7 +826,9 @@ public class EasyJoystick : MonoBehaviour {
 		EasyTouch.On_DoubleTap -= On_DoubleTap;	
 		
 		if (Application.isPlaying){
-			EasyTouch.RemoveReservedArea( areaRect );
+			if (EasyTouch.instance!=null){
+				EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+			}
 		}
 	}
 		
@@ -792,7 +840,9 @@ public class EasyJoystick : MonoBehaviour {
 		EasyTouch.On_DoubleTap -= On_DoubleTap;	
 		
 		if (Application.isPlaying){
-			EasyTouch.RemoveReservedArea( areaRect);
+			if (EasyTouch.instance!=null){
+				EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+			}
 		}
 	}		
 			
@@ -810,6 +860,8 @@ public class EasyJoystick : MonoBehaviour {
 
 		startXLocalAngle = GetStartAutoStabAngle( xAxisTransform, xAI);
 		startYLocalAngle = GetStartAutoStabAngle( yAxisTransform, yAI);	
+
+		RestrictArea = restrictArea;
 	}
 	
 	void Update(){
@@ -827,7 +879,14 @@ public class EasyJoystick : MonoBehaviour {
 	void UpdateJoystick(){
 		
 		if (Application.isPlaying){
-			
+
+			if (EasyTouch.GetTouchCount()==0){
+				joystickIndex=-1;
+				if (dynamicJoystick){
+					virtualJoystick=false;
+				}
+			}
+
 			if (isActivated){
 				
 				if ((joystickIndex==-1) || (joystickAxis == Vector2.zero && joystickIndex>-1)){
@@ -925,10 +984,10 @@ public class EasyJoystick : MonoBehaviour {
 	
 	void OnGUI(){
 							
-		if ((enable && joystickValue.sqrMagnitude > 0 && !isJoyStickDisplayed) || (enable && isTouchStarted && isJoyStickDisplayed)){
+		if (enable && visible){
 	
 			GUI.depth = guiDepth;
-			isJoyStickDisplayed = true;
+			
 			useGUILayout = isUseGuiLayout;
 			
 			if (dynamicJoystick && Application.isEditor && !Application.isPlaying){
@@ -970,27 +1029,30 @@ public class EasyJoystick : MonoBehaviour {
 			
 			VirtualScreen.SetGuiScaleMatrix();
 			
-			
+			ComputeJoystickAnchor( joyAnchor);
 			
 			// area zone
 			if ((showZone && areaTexture!=null && !dynamicJoystick) || (showZone && dynamicJoystick && virtualJoystick && areaTexture!=null) 
-				|| (dynamicJoystick && Application.isEditor && !Application.isPlaying)){
+				|| (dynamicJoystick  &&  Application.isEditor && !Application.isPlaying)){
 				if (isActivated){
+					
+					
 					GUI.color = areaColor;
 					
 					if (Application.isPlaying && !dynamicJoystick){
-						EasyTouch.RemoveReservedArea( areaRect );
-						EasyTouch.AddReservedArea( areaRect );
+						EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+						EasyTouch.instance.reservedVirtualAreas.Add( areaRect );
 					}
 				}
 				else{
 					GUI.color = new Color(areaColor.r,areaColor.g,areaColor.b,0.2f);	
 					if (Application.isPlaying && !dynamicJoystick){
-						EasyTouch.RemoveReservedArea( areaRect );	
+						EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+
 					}
 				}		
 				
-				if (showDebugRadius && Application.isEditor){
+				if (showDebugRadius && Application.isEditor && selected && !Application.isPlaying){
 					GUI.Box( areaRect,"");				
 				}
 				
@@ -1019,8 +1081,9 @@ public class EasyJoystick : MonoBehaviour {
 			GUI.color = Color.white;
 		}
 		else{
-			EasyTouch.RemoveReservedArea( areaRect );	
-			isJoyStickDisplayed = false;
+			if (Application.isPlaying){
+				EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+			}
 		}
 	}
 	
@@ -1036,6 +1099,7 @@ public class EasyJoystick : MonoBehaviour {
 		move.joystickName = gameObject.name;
 		move.joystickAxis = joystickAxis;
 		move.joystickValue = joystickValue;
+		move.fingerIndex= joystickIndex;
 		move.joystick = this;
 		
 		//
@@ -1131,14 +1195,17 @@ public class EasyJoystick : MonoBehaviour {
 	}
 	
 	void UpdateGravity(){
-		// Gravity
-		if (xAxisCharacterController!=null && xAxisGravity>0){
-			xAxisCharacterController.Move( Vector3.down*xAxisGravity*Time.deltaTime);	
+
+		if (joystickAxis == Vector2.zero){
+			// Gravity
+			if (xAxisCharacterController!=null && xAxisGravity>0 ){
+				xAxisCharacterController.Move( Vector3.down*xAxisGravity*Time.deltaTime);	
+			}
+				
+			if (yAxisCharacterController!=null && yAxisGravity>0 ){
+				yAxisCharacterController.Move( Vector3.down*yAxisGravity*Time.deltaTime);
+			}	
 		}
-			
-		if (yAxisCharacterController!=null && yAxisGravity>0){
-			yAxisCharacterController.Move( Vector3.down*yAxisGravity*Time.deltaTime);
-		}		
 	}
 	
 	Vector3 GetInfluencedAxis(AxisInfluenced axisInfluenced){
@@ -1182,7 +1249,9 @@ public class EasyJoystick : MonoBehaviour {
 					axisTransform.Translate(axis * sensibility * Time.deltaTime,Space.World);
 				}
 				else{
-					charact.Move( axis * sensibility * Time.deltaTime );
+					Vector3 direction = new Vector3(axis.x,axis.y,axis.z);
+					direction.y = -(yAxisGravity + xAxisGravity);
+					charact.Move( direction * sensibility * Time.deltaTime );
 				}
 				break;
 			
@@ -1191,8 +1260,9 @@ public class EasyJoystick : MonoBehaviour {
 					axisTransform.Translate(axis * sensibility * Time.deltaTime,Space.Self);
 				}
 				else{
-					
-					charact.Move( charact.transform.TransformDirection(axis) * sensibility * Time.deltaTime );
+					Vector3 direction = charact.transform.TransformDirection(axis) * sensibility;
+					direction.y = -(yAxisGravity+ xAxisGravity);
+					charact.Move( direction * Time.deltaTime );
 				}
 				break;	
 			
@@ -1387,12 +1457,14 @@ public class EasyJoystick : MonoBehaviour {
 	#region EasyTouch events
 	// Touch start
 	void On_TouchStart(Gesture gesture){
-					
+		
+		if (!visible)
+			return;
+		
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
-
+			
+			
 			if (isActivated){
-				//Debug.Log("touch started");
-				isTouchStarted = true;
 				if (!dynamicJoystick){
 				
 					Vector2 center = new Vector2( (anchorPosition.x+joystickCenter.x) * VirtualScreen.xRatio , (VirtualScreen.height-anchorPosition.y - joystickCenter.y) * VirtualScreen.yRatio);
@@ -1477,6 +1549,9 @@ public class EasyJoystick : MonoBehaviour {
 	
 	// Simple tap
 	void On_SimpleTap(Gesture gesture){
+		if (!visible)
+			return;
+		
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 			if (isActivated){
 				if (gesture.fingerIndex == joystickIndex){
@@ -1488,6 +1563,9 @@ public class EasyJoystick : MonoBehaviour {
 	
 	// Double tap
 	void On_DoubleTap(Gesture gesture){
+		if (!visible)
+			return;
+		
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 			if (isActivated){
 				if (gesture.fingerIndex == joystickIndex){
@@ -1500,6 +1578,9 @@ public class EasyJoystick : MonoBehaviour {
 	// Joystick move
 	void On_TouchDown(Gesture gesture){
 		
+		if (!visible)
+			return;
+
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 			
 			if (isActivated){
@@ -1535,23 +1616,50 @@ public class EasyJoystick : MonoBehaviour {
 	
 	// Touch end
 	void On_TouchUp( Gesture gesture){
-		
-		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
-			if (isActivated){
-				//Debug.Log("touch ended");
-				isTouchStarted = false;
-				if (gesture.fingerIndex == joystickIndex){
+		if (!visible)
+			return;	
+
+		if (gesture.fingerIndex == joystickIndex){
+			joystickIndex=-1;
+			if (dynamicJoystick){
+				
+				virtualJoystick=false;	
+			}
+			CreateEvent(MessageName.On_JoystickTouchUp);
+		}
+
+	}
+
+	#endregion
+
+	#region Public Method
+	public void On_Manual(Vector2 movement)
+	{
+		if (isActivated)
+		{
+			if (movement != Vector2.zero)
+			{
+				if (!virtualJoystick)
+				{
+					virtualJoystick = true;
+					CreateEvent(MessageName.On_JoystickTouchStart);
+				}
+				
+				joystickIndex = 0;
+				joystickTouch.x = movement.x * (areaRect.width / 2);
+				joystickTouch.y = movement.y * (areaRect.height / 2);
+			}
+			else
+			{
+				if (virtualJoystick)
+				{
+					virtualJoystick = false;
 					joystickIndex=-1;
-					if (dynamicJoystick){
-						
-						virtualJoystick=false;	
-					}
 					CreateEvent(MessageName.On_JoystickTouchUp);
 				}
 			}
 		}
 	}
-
 	#endregion
 	
 }

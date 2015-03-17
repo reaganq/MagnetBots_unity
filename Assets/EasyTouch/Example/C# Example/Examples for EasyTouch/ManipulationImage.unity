@@ -73,6 +73,7 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
+    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &105435738
 GameObject:
@@ -103,6 +104,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!23 &105435740
 Renderer:
   m_ObjectHideFlags: 0
@@ -121,9 +123,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &105435741
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!114 &225298669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +213,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!108 &513113218
 Light:
   m_ObjectHideFlags: 0
@@ -273,6 +276,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!114 &533513225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,11 +296,15 @@ MonoBehaviour:
   enable2FingersGesture: 1
   enableTwist: 1
   enablePinch: 1
-  easyTouchCamera: {fileID: 0}
+  touchCameras: []
   autoSelect: 1
   pickableLayers:
     serializedVersion: 2
     m_Bits: 256
+  enable2D: 0
+  pickableLayers2D:
+    serializedVersion: 2
+    m_Bits: 0
   StationnaryTolerance: 25
   longTapTime: 1
   swipeTolerance: .850000024
@@ -308,6 +316,8 @@ MonoBehaviour:
     m_Bits: 0
   nGUICameras: []
   reservedAreas: []
+  reservedVirtualAreas: []
+  reservedGuiAreas: []
   enableReservedArea: 0
   twistKey: 308
   swipeKey: 306
@@ -344,6 +354,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!114 &635407428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +394,7 @@ Transform:
   m_LocalScale: {x: 1.10000002, y: 0, z: 1.10000002}
   m_Children: []
   m_Father: {fileID: 1643787422}
+  m_RootOrder: 0
 --- !u!23 &1054807615
 Renderer:
   m_ObjectHideFlags: 0
@@ -401,9 +413,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1054807616
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -439,6 +450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1822086452}
+  m_RootOrder: 0
 --- !u!23 &1282005134
 Renderer:
   m_ObjectHideFlags: 0
@@ -457,9 +469,8 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 0
   m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!33 &1282005135
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -497,6 +508,7 @@ Transform:
   - {fileID: 1054807614}
   - {fileID: 1822086452}
   m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!65 &1643787423
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -547,6 +559,7 @@ Transform:
   m_Children:
   - {fileID: 1282005133}
   m_Father: {fileID: 1643787422}
+  m_RootOrder: 1
 --- !u!1 &1998433089
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +590,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!20 &1998433091
 Camera:
   m_ObjectHideFlags: 0
@@ -604,8 +618,11 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 0
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!81 &1998433092
 AudioListener:
   m_ObjectHideFlags: 0

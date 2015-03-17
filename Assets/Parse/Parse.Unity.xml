@@ -524,7 +524,7 @@
              ParseAnalytics.TrackEventAsync("signup", dims);
              </code>
             
-             There is a default limit of 4 dimensions per event tracked.
+             There is a default limit of 8 dimensions per event tracked.
              </summary>
              <param name="name">The name of the custom event to report to ParseClient
              as having happened.</param>
@@ -550,7 +550,7 @@
              ParseAnalytics.TrackEventAsync("signup", dims);
              </code>
             
-             There is a default limit of 4 dimensions per event tracked.
+             There is a default limit of 8 dimensions per event tracked.
              </summary>
              <param name="name">The name of the custom event to report to ParseClient
              as having happened.</param>
@@ -706,6 +706,63 @@
             <param name="cancellationToken">The cancellation token.</param>
             <returns>The result of the cloud call.</returns>
         </member>
+        <member name="T:Parse.ParseConfig">
+            <summary>
+            The ParseConfig is a representation of the remote configuration object,
+            that enables you to add things like feature gating, a/b testing or simple "Message of the day".
+            </summary>
+        </member>
+        <member name="M:Parse.ParseConfig.GetAsync">
+            <summary>
+            Retrieves the ParseConfig asynchronously from the server.
+            </summary>
+            <returns>ParseConfig object that was fetched</returns>
+        </member>
+        <member name="M:Parse.ParseConfig.GetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Retrieves the ParseConfig asynchronously from the server.
+            </summary>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>ParseConfig object that was fetched</returns>
+        </member>
+        <member name="M:Parse.ParseConfig.Get``1(System.String)">
+            <summary>
+            Gets a value for the key of a particular type.
+            </summary>
+            <typeparam name="T">The type to convert the value to. Supported types are
+            ParseObject and its descendents, Parse types such as ParseRelation and ParseGeopoint,
+            primitive types,IList&lt;T&gt;, IDictionary&lt;string, T&gt; and strings.</typeparam>
+            <param name="key">The key of the element to get.</param>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">The property is retrieved
+            and <paramref name="key"/> is not found.</exception>
+            <exception cref="T:System.FormatException">The property under this <paramref name="key"/>
+            key was found, but of a different type.</exception>
+        </member>
+        <member name="M:Parse.ParseConfig.TryGetValue``1(System.String,``0@)">
+            <summary>
+            Populates result with the value for the key, if possible.
+            </summary>
+            <typeparam name="T">The desired type for the value.</typeparam>
+            <param name="key">The key to retrieve a value for.</param>
+            <param name="result">The value for the given key, converted to the
+            requested type, or null if unsuccessful.</param>
+            <returns>true if the lookup and conversion succeeded, otherwise false.</returns>
+        </member>
+        <member name="P:Parse.ParseConfig.CurrentConfig">
+            <summary>
+            Gets the latest fetched ParseConfig.
+            </summary>
+            <returns>ParseConfig object</returns>
+        </member>
+        <member name="P:Parse.ParseConfig.Item(System.String)">
+            <summary>
+            Gets a value on the config.
+            </summary>
+            <param name="key">The key for the parameter.</param>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">The property is
+            retrieved and <paramref name="key"/> is not found.</exception>
+            <returns>The value for the key.</returns>
+        </member>
         <member name="T:Parse.ParseException">
             <summary>
             Exceptions that may occur when sending requests to Parse.
@@ -730,8 +787,8 @@
         <member name="F:Parse.ParseException.ErrorCode.InternalServerError">
             <summary>
             Error code indicating that something has gone wrong with the server.
-            If you get this error code, it is Parse's fault. Email
-            feedback@parse.com to criticize us.
+            If you get this error code, it is Parse's fault. Please report the bug to
+            https://parse.com/help.
             </summary>
         </member>
         <member name="F:Parse.ParseException.ErrorCode.ConnectionFailed">
@@ -873,6 +930,26 @@
         <member name="F:Parse.ParseException.ErrorCode.ScriptFailed">
             <summary>
             Error code indicating that a Cloud Code script failed.
+            </summary>
+        </member>
+        <member name="F:Parse.ParseException.ErrorCode.ValidationFailed">
+            <summary>
+            Error code indicating that a Cloud Code validation failed.
+            </summary>
+        </member>
+        <member name="F:Parse.ParseException.ErrorCode.FileDeleteFailed">
+            <summary>
+            Error code indicating that deleting a file failed.
+            </summary>
+        </member>
+        <member name="F:Parse.ParseException.ErrorCode.RequestLimitExceeded">
+            <summary>
+            Error code indicating that the application has exceeded its request limit.
+            </summary>
+        </member>
+        <member name="F:Parse.ParseException.ErrorCode.InvalidEventName">
+            <summary>
+            Error code indicating that the provided event name is invalid.
             </summary>
         </member>
         <member name="F:Parse.ParseException.ErrorCode.UsernameMissing">
@@ -1146,7 +1223,7 @@
             </code>
             </example>
         </member>
-        <member name="M:Parse.ParseFile.#ctor(System.String,System.Byte[])">
+        <member name="M:Parse.ParseFile.#ctor(System.String,System.Byte[],System.String)">
             <summary>
             Creates a new file from a byte array and a name.
             </summary>
@@ -1154,8 +1231,10 @@
             must begin with an alphanumeric character, and consist of alphanumeric
             characters, periods, spaces, underscores, or dashes.</param>
             <param name="data">The file's data.</param>
+            <param name="mimeType">To specify the content-type used when uploading the
+            file, provide this parameter.</param>
         </member>
-        <member name="M:Parse.ParseFile.#ctor(System.String,System.IO.Stream)">
+        <member name="M:Parse.ParseFile.#ctor(System.String,System.IO.Stream,System.String)">
             <summary>
             Creates a new file from a stream and a name.
             </summary>
@@ -1163,6 +1242,8 @@
             must begin with an alphanumeric character, and consist of alphanumeric
             characters, periods, spaces, underscores, or dashes.</param>
             <param name="data">The file's data.</param>
+            <param name="mimeType">To specify the content-type used when uploading the
+            file, provide this parameter.</param>
         </member>
         <member name="M:Parse.ParseFile.SaveAsync">
             <summary>
@@ -1203,6 +1284,13 @@
             <summary>
             Gets the name of the file.  Before save is called, this is the filename given by
             the user.  After save is called, that name gets prefixed with a unique identifier.
+            </summary>
+        </member>
+        <member name="P:Parse.ParseFile.MimeType">
+            <summary>
+            Gets the MIME type of the file.  This is either passed in to the constructor or
+            inferred from the file extension.  "unknown/unknown" will be used if neither is 
+            available.
             </summary>
         </member>
         <member name="P:Parse.ParseFile.Url">
@@ -1856,7 +1944,7 @@
              </code>
              </example>
         </member>
-        <member name="M:Parse.ParseQuery`1.#ctor(Parse.ParseQuery{`0},System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Parse.ParseQuery`1.#ctor(Parse.ParseQuery{`0},System.Collections.Generic.IDictionary{System.String,System.Object},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Private constructor for composition of queries.  A source query is required,
             but the remaining values can be null if they won't be changed in this
@@ -1923,8 +2011,17 @@
         </member>
         <member name="M:Parse.ParseQuery`1.Include(System.String)">
             <summary>
-            Include nested ParseObjects for the provided key.  You can use dot notation
+            Include nested ParseObjects for the provided key. You can use dot notation
             to specify which fields in the included objects should also be fetched.
+            </summary>
+            <param name="key">The key that should be included.</param>
+            <returns>A new query with the additional constraint.</returns>
+        </member>
+        <member name="M:Parse.ParseQuery`1.Select(System.String)">
+            <summary>
+            Restrict the fields of returned ParseObjects to only include the provided key.
+            If this is called multiple times, then all of the keys specified in each of
+            the calls will be included.
             </summary>
             <param name="key">The key that should be included.</param>
             <returns>A new query with the additional constraint.</returns>
@@ -2103,8 +2200,18 @@
             to match a value for a key in the results of another ParseQuery.
             </summary>
             <param name="key">The key whose value is being checked.</param>
-            <param name="keyInQuery">The key in the objects from the subquery in which to look.</param>
-            <param name="query"></param>
+            <param name="keyInQuery">The key in the objects from the subquery to look in.</param>
+            <param name="query">The subquery to run</param>
+            <returns>A new query with the additional constraint.</returns>
+        </member>
+        <member name="M:Parse.ParseQuery`1.WhereDoesNotMatchesKeyInQuery``1(System.String,System.String,Parse.ParseQuery{``0})">
+            <summary>
+            Adds a constraint to the query that requires a particular key's value
+            does not match any value for a key in the results of another ParseQuery.
+            </summary>
+            <param name="key">The key whose value is being checked.</param>
+            <param name="keyInQuery">The key in the objects from the subquery to look in.</param>
+            <param name="query">The subquery to run</param>
             <returns>A new query with the additional constraint.</returns>
         </member>
         <member name="M:Parse.ParseQuery`1.WhereMatchesQuery``1(System.String,Parse.ParseQuery{``0})">
@@ -2232,7 +2339,7 @@
             Constructs a ParseObject whose id is already known by fetching data
             from the server.
             </summary>
-            <param name="objectId">ObjectId of the PArseObject to fetch.</param>
+            <param name="objectId">ObjectId of the ParseObject to fetch.</param>
             <returns>The ParseObject for the given objectId.</returns>
         </member>
         <member name="M:Parse.ParseQuery`1.GetAsync(System.String,System.Threading.CancellationToken)">
@@ -2240,7 +2347,7 @@
             Constructs a ParseObject whose id is already known by fetching data
             from the server.
             </summary>
-            <param name="objectId">ObjectId of the PArseObject to fetch.</param>
+            <param name="objectId">ObjectId of the ParseObject to fetch.</param>
             <param name="cancellationToken">The cancellation token.</param>
             <returns>The ParseObject for the given objectId.</returns>
         </member>
@@ -2504,6 +2611,7 @@
             on the PlatformHooks class, these types will be AOT-compiled.
             </summary>
         </member>
+        <!-- Badly formed XML comment ignored for member "M:Parse.PlatformHooks.GenerateWWWInstance(System.String,System.Byte[],System.Collections.Hashtable)" -->
         <member name="M:Parse.PlatformHooks.RegisterNetworkRequest(UnityEngine.WWW,System.Action{UnityEngine.WWW})">
             <summary>
             Registers a callback for network requests, running the callback on the main thread until

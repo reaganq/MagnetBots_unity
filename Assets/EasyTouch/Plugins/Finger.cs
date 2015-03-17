@@ -20,4 +20,6 @@ public class Finger{
 	public TouchPhase phase;			// Describes the phase of the touch.
 	public  EasyTouch.GestureType gesture;			
 	public GameObject pickedObject;
+	public Camera pickedCamera;
+	public bool isGuiCamera;
 }
