@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfNPCMinigame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <NPCMinigame>
+    <IconPath>burgermemory</IconPath>
     <AtlasName>Atlases/MiniGames/MinigamesAtlas</AtlasName>
     <ID>1</ID>
     <Name>Burger Memory</Name>
@@ -9,7 +10,7 @@
     <activityType>Minigame</activityType>
     <conversationID>0</conversationID>
     <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
-    <npcIconSprite />
+    <npcIconSprite>burger</npcIconSprite>
     <npcButtonText>Burger Madness</npcButtonText>
     <Conditions />
     <PrefabDirectory>MiniGames/BurgerMemory</PrefabDirectory>

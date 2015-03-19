@@ -6,24 +6,47 @@ public class EnemyCard : MonoBehaviour {
 
 	public ArenaGUIController controller;
 	public int cardIndex;
-	public UILabel name;
-	public UILabel description;
 	public UISprite portrait;
+	public Collider collider;
+	public GameObject lockIcon;
+	public TweenScale scaleDown;
+	public TweenScale scaleUp;
 
-	public void LoadEnemy(string n, string atlas, string sprite, string d, int index)
+	public void LoadEnemy(string atlas, string sprite, int index, bool isAvailable)
 	{
 		Debug.Log("load enemy card");
-		name.text = n;
-		description.text = d;
 		GameObject Atlas = Resources.Load(atlas) as GameObject;
 		portrait.atlas = Atlas.GetComponent<UIAtlas>();
 		portrait.spriteName = sprite;
 		cardIndex = index;
+		if(isAvailable)
+		{
+			collider.enabled = true;
+			lockIcon.SetActive(false);
+		}
+		else
+		{
+			collider.enabled = false;
+			lockIcon.SetActive(true);
+		}
 	}
 
 	public void OnChallengeButtonPressed()
 	{
 		controller.DisplayDetailsBox(cardIndex);
+	}
+
+	public void ScaleDown()
+	{
+			//if(scaleDown != null)
+			//	scaleDown.Play(true);
+	}
+
+	public void ScaleUP()
+	{
+		//	if(scaleUp != null)
+		//		scaleUp.Play(true);
+		
 	}
 
 }

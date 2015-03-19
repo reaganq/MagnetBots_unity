@@ -162,6 +162,14 @@
             <filename>../popup icons/quickInventory_addFriend.png</filename>
             <filename>../popup icons/quickInventory_profile.png</filename>
             <filename>../popup icons/quickInventory_teamInvite.png</filename>
+            <filename>../new UI/1.png</filename>
+            <filename>../new UI/2.png</filename>
+            <filename>../new UI/3.png</filename>
+            <filename>../new UI/start.png</filename>
+            <filename>../new UI/reward_gear.png</filename>
+            <filename>../new UI/reward_glow.png</filename>
+            <filename>../new UI/lock.png</filename>
+            <filename>../popup icons/burger.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

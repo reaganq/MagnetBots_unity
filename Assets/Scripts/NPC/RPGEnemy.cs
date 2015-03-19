@@ -84,6 +84,7 @@ public class RPGEnemy : IItem
 	
 	public string PortraitIcon;
 	public string PortraitAtlas;
+	public bool isAvailable;
 	public List<LootItem> Loots;
 	public List<string> PrefabPaths;
 	public List<ActionEvent> preFightActions;

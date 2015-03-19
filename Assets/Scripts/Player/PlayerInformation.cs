@@ -14,13 +14,13 @@ public class PlayerInformation  {
 	public Inventory NakedArmorInventory;
     public Inventory MainInventory;
 	public Inventory ArmoryInventory;
-	public Inventory PlayerShop;
 	//public Inventory DepositBox;
     public Equipment Equip;
 	public QuestLog questLog;
 	public Jukebox jukeBox;
 		
 	public Inventory playerShopInventory;
+
 	public int shopTill;
 
 	public PlayerProfile profile;
@@ -162,6 +162,13 @@ public class PlayerInformation  {
             else
                 return false;
         }
+		else if(currency == BuyCurrencyType.CitizenPoints)
+		{
+			if(CitizenPoints >= price)
+				return true;
+			else
+				return false;
+		}
         
         else
             return false;
@@ -210,7 +217,39 @@ public class PlayerInformation  {
 		}
 		return false;
 	}
-	
+
+	#region player shop
+
+	public void UpdatePlayerShop()
+	{
+		PlayerManager.Instance.avatarStatus.UpdateShopItems();
+		if(NetworkManager.Instance.usingParse)
+			UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
+	}
+
+	public void UnstockItem(InventoryItem item, int amount)
+	{
+		playerShopInventory.RemoveItem(item, amount);
+		AddItem(item, amount);
+		UpdatePlayerShop();
+	}
+
+	public void StockItem(InventoryItem item, int amount)
+	{
+		RemoveItem(item, amount);
+		playerShopInventory.AddItem(item, amount);
+		UpdatePlayerShop();
+
+	}
+
+	public void SoldItem(string uniqueItemId, int level, int amount)
+	{
+		playerShopInventory.RemoveItemByUniqueID(uniqueItemId, level, amount);
+		UpdatePlayerShop();
+	}
+
+	#endregion
+
 	#region inventory
 
 	public bool DoYouHaveThisItem(InventoryItem item, bool ignoreLevel)

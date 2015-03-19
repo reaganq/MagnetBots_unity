@@ -22,7 +22,7 @@
         <key>dataFormat</key>
         <string>unity</string>
         <key>textureFileName</key>
-        <filename>../../Assets/UI/EnemiesUHD.png</filename>
+        <filename>../../Assets/Resources/Atlases/Enemy/EnemiesUHD.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>ditherType</key>
@@ -111,7 +111,7 @@
             <enum type="AndEngine::MagFilter">MagLinear</enum>
         </struct>
         <key>dataFileName</key>
-        <filename>../../Assets/UI/EnemiesUHD.txt</filename>
+        <filename>../../Assets/Resources/Atlases/Enemy/EnemiesUHD.txt</filename>
         <key>mainExtension</key>
         <string></string>
         <key>forceIdenticalLayout</key>
@@ -147,6 +147,7 @@
         <key>fileList</key>
         <array>
             <filename>MagnetCentral_Gym_Jim.png</filename>
+            <filename>MagnetCentral_Gym_Punchbagbob.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

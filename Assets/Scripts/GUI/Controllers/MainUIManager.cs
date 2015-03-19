@@ -136,6 +136,7 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnShopWizardClick()
 	{
+		GUIManager.Instance.DisplayPlayerShop();
 	}
 
 	public void OnProfileClick()

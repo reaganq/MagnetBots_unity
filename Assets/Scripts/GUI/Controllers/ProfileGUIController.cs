@@ -52,7 +52,7 @@ public class ProfileGUIController : BasicGUIController {
 			else if(profile.equips[i].slotIndex == 5)
 				headTile.LoadBasicAmor(profile.equips[i].uniqueItemId, profile.equips[i].level);
 		}
-		questPointsLabel.text = profile.questPoints.ToString();
+		//questPointsLabel.text = profile.questPoints.ToString();
 		citizenPointsLabel.text = profile.citizenPoints.ToString();
 		healthLabel.text = profile.baseHealth.ToString() + " + " +profile.bonusHealth.ToString();
 		attackLabel.text = profile.baseStrength.ToString() + " + " +profile.bonusStrength.ToString();

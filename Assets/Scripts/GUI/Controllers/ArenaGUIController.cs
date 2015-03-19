@@ -12,11 +12,10 @@ public class ArenaGUIController : BasicGUIController {
 	public GameObject DetailsBox;
 	public GameObject ScrollView;
 	public UISprite DetailsPortrait;
+	public UILabel DetailsLabel;
 	public GameObject backButton;
-	public GameObject teamButton;
 	public List<RPGEnemy> enemies;
 	public NPCArena activeArena;
-	public UILabel partyListText;
 	
 	public int selectedCardIndex;
 
@@ -43,10 +42,11 @@ public class ArenaGUIController : BasicGUIController {
 			if(i < activeArena.Enemies.Count)
 			{
 				EnemyCardObjects[i].SetActive(true);
-				EnemyCards[i].LoadEnemy(activeArena.Enemies[i].Name, activeArena.Enemies[i].PortraitAtlas, activeArena.Enemies[i].PortraitIcon, activeArena.Enemies[i].Description, i);
+				EnemyCards[i].LoadEnemy(activeArena.Enemies[i].PortraitAtlas, activeArena.Enemies[i].PortraitIcon, i, activeArena.Enemies[i].isAvailable);
 			}
 			else
 			{
+				//display locked instead
 				EnemyCardObjects[i].SetActive(false);
 			}
 
@@ -63,35 +63,31 @@ public class ArenaGUIController : BasicGUIController {
 	{
 		//enemycardobjects[index]. move to the left side
 		DetailsBox.SetActive(true);
-		UpdateDetailsBox();
 		selectedCardIndex = index;
+		UpdateDetailsBox();
+
 		ScrollView.SetActive(false);
-		if(PlayerManager.Instance.isInParty())
-			teamButton.SetActive(true);
-		else
-			teamButton.SetActive(false);
 	}
 
 	public void UpdateDetailsBox()
 	{
+		DetailsPortrait.spriteName = activeArena.Enemies[selectedCardIndex].PortraitIcon;
+		DetailsLabel.text = activeArena.Enemies[selectedCardIndex].Description;
 		/*partyListText.text = string.Empty;
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
 		{
 			partyListText.text += PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).name + "\n";
 		}*/
+
 	}
 
-	public void SoloChallenge()
+	public void Challenge()
 	{
 		Debug.Log("solo challenge");
-		LaunchArena(true);
-	}
-
-	public void TeamChallenge()
-	{
-		Debug.Log("team challenge");
-		PlayerManager.Instance.ActiveWorld.SendPartyChallenge(activeArena.Enemies[selectedCardIndex].ID);
-		//LaunchArena(false);
+		if(!PlayerManager.Instance.isInParty())
+			LaunchArena(true);
+		else
+			PlayerManager.Instance.ActiveWorld.SendPartyChallenge(activeArena.Enemies[selectedCardIndex].ID);
 	}
 
 	public void LaunchArena(bool solo)
@@ -102,8 +98,15 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void OnBackButtonPressed()
 	{
-		Disable();
-		GUIManager.Instance.DisplayNPC();
+		selectedCardIndex = -1;
+		DetailsBox.SetActive(false);
+		ScrollView.SetActive(true);
+	}
+
+	public void OnExitButtonPressed()
+	{
+		//Disable();
+		GUIManager.Instance.NPCGUI.HideShop();
 	}
 
 }

@@ -126,7 +126,7 @@ public class ItemTileButton: UIDragDropItem
 		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.rpgItem.IconPath;
-		amountLabel.text = "x"+item.CurrentAmount.ToString();
+		amountLabel.text = item.CurrentAmount.ToString();
 		quantityTag.SetActive(canDisplayQuantity);
 		LoadItemRarity(item.rpgItem);
 		if(canDisplayNew)

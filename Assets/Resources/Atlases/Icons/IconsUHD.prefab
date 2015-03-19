@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,9 +41,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 730d26a400a2a4e39996622f42c85fbd, type: 2}
   mSprites:
-  - name: bank
+  - name: 1
+    x: 518
+    y: 1315
+    width: 177
+    height: 621
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 2
     x: 2
-    y: 1386
+    y: 933
+    width: 408
+    height: 617
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: 3
+    x: 504
+    y: 431
+    width: 462
+    height: 624
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: bank
+    x: 1444
+    y: 1228
     width: 256
     height: 256
     borderLeft: 0
@@ -53,9 +93,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: burger
+    x: 2
+    y: 1810
+    width: 200
+    height: 209
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: chat
-    x: 518
-    y: 1034
+    x: 1186
+    y: 1176
     width: 256
     height: 256
     borderLeft: 0
@@ -67,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: construction
-    x: 2
-    y: 1128
+    x: 928
+    y: 1176
     width: 256
     height: 256
     borderLeft: 0
@@ -80,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: gym
-    x: 260
-    y: 1034
+    x: 1742
+    y: 970
     width: 256
     height: 256
     borderLeft: 0
@@ -92,8 +145,21 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: lock
+    x: 1652
+    y: 354
+    width: 310
+    height: 356
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: popup_circle
-    x: 2
+    x: 1652
     y: 2
     width: 350
     height: 350
@@ -106,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quest
-    x: 518
-    y: 776
+    x: 1484
+    y: 970
     width: 256
     height: 256
     borderLeft: 0
@@ -119,8 +185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_addFriend
-    x: 2
-    y: 870
+    x: 1226
+    y: 918
     width: 256
     height: 256
     borderLeft: 0
@@ -132,8 +198,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_armor
-    x: 260
-    y: 776
+    x: 968
+    y: 918
     width: 256
     height: 256
     borderLeft: 0
@@ -145,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_dance
-    x: 518
-    y: 518
+    x: 1742
+    y: 712
     width: 256
     height: 256
     borderLeft: 0
@@ -158,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_food
-    x: 2
-    y: 612
+    x: 1484
+    y: 712
     width: 256
     height: 256
     borderLeft: 0
@@ -171,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_profile
-    x: 260
-    y: 518
+    x: 1226
+    y: 660
     width: 256
     height: 256
     borderLeft: 0
@@ -184,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_teamInvite
-    x: 612
-    y: 260
+    x: 968
+    y: 660
     width: 256
     height: 256
     borderLeft: 0
@@ -197,10 +263,36 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_toys
-    x: 2
-    y: 354
+    x: 670
+    y: 1057
     width: 256
     height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: reward_gear
+    x: 993
+    y: 2
+    width: 657
+    height: 656
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: reward_glow
+    x: 2
+    y: 431
+    width: 500
+    height: 500
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -210,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: shop
-    x: 354
-    y: 260
+    x: 412
+    y: 1057
     width: 256
     height: 256
     borderLeft: 0
@@ -222,9 +314,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: timer
-    x: 612
+  - name: start
+    x: 2
     y: 2
+    width: 989
+    height: 427
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: timer
+    x: 260
+    y: 1552
     width: 256
     height: 256
     borderLeft: 0
@@ -236,8 +341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: travel
-    x: 354
-    y: 2
+    x: 2
+    y: 1552
     width: 256
     height: 256
     borderLeft: 0

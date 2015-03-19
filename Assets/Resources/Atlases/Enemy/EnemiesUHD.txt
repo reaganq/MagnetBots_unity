@@ -2,19 +2,27 @@
 
 "MagnetCentral_Gym_Jim.png":
 {
-	"frame": {"x":2,"y":2,"w":250,"h":250},
+	"frame": {"x":2,"y":792,"w":580,"h":788},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":250,"h":250},
-	"sourceSize": {"w":250,"h":250}
+	"spriteSourceSize": {"x":0,"y":0,"w":580,"h":788},
+	"sourceSize": {"w":580,"h":788}
+},
+"MagnetCentral_Gym_Punchbagbob.png":
+{
+	"frame": {"x":2,"y":2,"w":580,"h":788},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":580,"h":788},
+	"sourceSize": {"w":580,"h":788}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
 	"version": "1.0",
 	"image": "EnemiesUHD.png",
 	"format": "RGBA8888",
-	"size": {"w":256,"h":256},
+	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7c9469552a4fbceb04f0323ee06bad83$"
+	"smartupdate": "$TexturePacker:SmartUpdate:8cf67864514ef3e7b3d74e318dc2a361$"
 }
 }

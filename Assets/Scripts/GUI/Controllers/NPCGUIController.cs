@@ -227,6 +227,11 @@ public class NPCGUIController : BasicGUIController {
 		arenaGUI.Enable(newArena);
 	}
 
+	public void HideArena()
+	{
+
+	}
+
     public void SetupArenaButton()
     {
 		//Debug.Log(PlayerManager.Instance.ActiveNPC.arena.Name);

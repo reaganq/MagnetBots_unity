@@ -40,6 +40,7 @@
     <isPremium>false</isPremium>
   </RPGCurrency>
   <RPGCurrency>
+    <IconPath>icon_energy</IconPath>
     <ID>6</ID>
     <Name>Energy</Name>
     <Description />
@@ -47,6 +48,7 @@
     <isPremium>false</isPremium>
   </RPGCurrency>
   <RPGCurrency>
+    <IconPath>icon_happy</IconPath>
     <ID>7</ID>
     <Name>Happiness</Name>
     <Description />

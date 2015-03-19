@@ -147,9 +147,6 @@
         <key>fileList</key>
         <array>
             <filename>../new UI/backbutton_grey_flat.png</filename>
-            <filename>../new UI/Background1.png</filename>
-            <filename>../new UI/Background2.png</filename>
-            <filename>../new UI/border_square_grey.png</filename>
             <filename>../new UI/button_square_black.png</filename>
             <filename>../new UI/button_standard_blue.png</filename>
             <filename>../new UI/button_standard_green.png</filename>
@@ -164,22 +161,17 @@
             <filename>../new UI/icon_strength.png</filename>
             <filename>../new UI/itemTile_BG.png</filename>
             <filename>../new UI/itemTile_buyButton.png</filename>
-            <filename>../new UI/itemTile_noitem.png</filename>
             <filename>../new UI/itemTile_star.png</filename>
             <filename>../new UI/itemTile_tick.png</filename>
             <filename>../new UI/longbutton_grey.png</filename>
             <filename>../new UI/longbutton_yellow.png</filename>
-            <filename>../new UI/Panel_Repeating1.png</filename>
-            <filename>../new UI/border_corner_alt.png</filename>
             <filename>../UI/Tile.png</filename>
             <filename>../UI/arrow.png</filename>
             <filename>../new UI/button_standard_black.png</filename>
             <filename>../new UI/button_square_orange.png</filename>
             <filename>../new UI/itemTile_quantitytag.png</filename>
             <filename>../new UI/longbutton_orange.png</filename>
-            <filename>../new UI/itemTile.png</filename>
             <filename>../UI/attackbutton.png</filename>
-            <filename>../new UI/border_square_alt.png</filename>
             <filename>../new UI/trade.png</filename>
             <filename>../new UI/items.png</filename>
             <filename>../new UI/profile.png</filename>
@@ -194,6 +186,39 @@
             <filename>../new UI/MenuButton.png</filename>
             <filename>../new UI/sidepanel_tab_gold.png</filename>
             <filename>../new UI/sidepanel_tab_grey.png</filename>
+            <filename>../new UI/border.png</filename>
+            <filename>../new UI/border_square_yellowgrey.png</filename>
+            <filename>../new UI/panel_indent1.png</filename>
+            <filename>../new UI/panel_side_aqua.png</filename>
+            <filename>../new UI/panel_white.png</filename>
+            <filename>../new UI/panel_aqua.png</filename>
+            <filename>../new UI/panel_aquashadow.png</filename>
+            <filename>../new UI/panel_darkaqua.png</filename>
+            <filename>../new UI/panel_darkgrey.png</filename>
+            <filename>../new UI/panel_grey.png</filename>
+            <filename>../new UI/itemtile_plus.png</filename>
+            <filename>../new UI/itemtile_border.png</filename>
+            <filename>../new UI/hexagon.png</filename>
+            <filename>../new UI/header_block.png</filename>
+            <filename>../new UI/header_mid.png</filename>
+            <filename>../new UI/fullscreen_border.png</filename>
+            <filename>../new UI/divider_gold.png</filename>
+            <filename>../new UI/circle_glow.png</filename>
+            <filename>../new UI/speechbubble.png</filename>
+            <filename>../new UI/speechbubble2.png</filename>
+            <filename>../new UI/box_inshadow.png</filename>
+            <filename>../new UI/box.png</filename>
+            <filename>../new UI/box_shadow.png</filename>
+            <filename>../new UI/panel_indent2.png</filename>
+            <filename>../new UI/healthbar_bg.png</filename>
+            <filename>../new UI/healthbar_fill.png</filename>
+            <filename>../new UI/progress_bar_border.png</filename>
+            <filename>../new UI/progress_bar.png</filename>
+            <filename>../new UI/icon_energy.png</filename>
+            <filename>../new UI/loading gear.png</filename>
+            <filename>../new UI/icon_happy.png</filename>
+            <filename>../new UI/page_panel.png</filename>
+            <filename>../new UI/star.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -157,7 +157,6 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\SSAA.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\RadialBlur.shader" />
-     <None Include="Assets\Resources\Atlases\Minigames\MinigameUHD.txt" />
      <None Include="Assets\RPGKit\Resources\XML\BADGEEN.xml" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldDX11.shader" />
@@ -339,6 +338,7 @@
      <None Include="Assets\Lightmapping Extended\readme.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\ShurikenMagic\Shaders\SM_2sided_transparent.shader" />
+     <None Include="Assets\Resources\Atlases\Minigame\MinigamesUHD.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\Resources\Atlases\Item\ItemUHD.txt" />
      <None Include="Assets\Lightmapping Extended\Shaders\Alpha-Bumped.shader" />
@@ -347,6 +347,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_OneLight_lightmap.shader" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Toon\T4M 4 Textures Toon.shader" />
+     <None Include="Assets\UI\EnemiesUHD.txt" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Unlit\2TexturesUnlit.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />

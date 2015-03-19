@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
 <ArrayOfRPGEnemy xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGEnemy>
-    <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
+    <PortraitIcon>MagnetCentral_Gym_Punchbagbob</PortraitIcon>
     <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
+    <isAvailable>true</isAvailable>
     <Loots>
       <LootItem>
         <itemType>Badge</itemType>
@@ -57,6 +58,7 @@
   <RPGEnemy>
     <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
     <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
+    <isAvailable>true</isAvailable>
     <Loots>
       <LootItem>
         <itemType>Currency</itemType>

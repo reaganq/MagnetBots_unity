@@ -1,0 +1,20 @@
+{"frames": {
+
+"burgermemory.png":
+{
+	"frame": {"x":2,"y":2,"w":572,"h":610},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":572,"h":610},
+	"sourceSize": {"w":572,"h":610}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "MinigameUHD.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4b7f9e9af96b1be26d461febaf94fdb4$"
+}
+}

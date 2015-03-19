@@ -57,6 +57,7 @@ public class EnemyEditor : BaseEditorWindow
 
 		s.PortraitIcon = EditorUtils.TextField(s.PortraitIcon, "Portrait Icon name");
 		s.PortraitAtlas = EditorUtils.TextField(s.PortraitAtlas, "Portrait Atlas name");
+		s.isAvailable = EditorUtils.Toggle(s.isAvailable, "available?");
 		EditorGUILayout.Separator();
 		for (int i = 0; i < s.PrefabPaths.Count; i++) 
 		{

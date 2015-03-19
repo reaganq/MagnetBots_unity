@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class PlayerCharacter : CharacterStatus {
 
@@ -8,13 +11,13 @@ public class PlayerCharacter : CharacterStatus {
 	public Zone parentZone;
 	public string headPortraitString = "headshot_default";
 	public int zoneViewID;
-
+	public List<ParseInventoryItem> shopItems;
 	// Use this for initialization
 	public override void Awake () {
 		base.Awake();
 		characterType = CharacterType.Playable;
 		enemyCharacterType = CharacterType.AI;
-
+		shopItems = new List<ParseInventoryItem>();
 		playerActionManager = GetComponent<CharacterActionManager>();
 
 		if(myPhotonView.isMine)
@@ -26,6 +29,22 @@ public class PlayerCharacter : CharacterStatus {
 			this.tag = "OtherPlayer";
 			avatar.RequestInitInfo();
 		}
+	}
+
+	public void UpdateShopItems()
+	{
+		myPhotonView.RPC("NetworkUpdateShopItems", PhotonTargets.All, PlayerManager.Instance.Hero.ParseInventoryList(PlayerManager.Instance.Hero.playerShopInventory));
+	}
+
+	[RPC]
+	public void NetworkUpdateShopItems(byte[] shopItemdsData)
+	{
+		shopItems.Clear();
+		BinaryFormatter bb = new BinaryFormatter();
+		MemoryStream mm = new MemoryStream(shopItemdsData);
+		shopItems = (List<ParseInventoryItem>)bb.Deserialize(mm);
+		if(myPhotonView.isMine && GUIManager.Instance.ShopGUI.playerShopKeeper == myPhotonView.owner)
+			GUIManager.Instance.ShopGUI.UpdatePlayerShopitemList(shopItems);
 	}
 
 	public void UpdatePortrait(string path)

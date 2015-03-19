@@ -78,7 +78,7 @@ public class ChatGUIController : BasicGUIController {
 		string text = NGUIText.StripSymbols(chatInput.value);
 		if(!string.IsNullOrEmpty(text))
 		{
-			SocialManager.Instance.SubmitChatMessage(PhotonNetwork.playerName, text, Time.time, messagePanelState);
+			SocialManager.Instance.SubmitChatMessage(PlayerManager.Instance.Hero.PlayerName, text, Time.time, messagePanelState);
 			//tell chat manager to add text;
 		}
 	}

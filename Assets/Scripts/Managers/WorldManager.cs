@@ -62,8 +62,18 @@ public class WorldManager : Photon.MonoBehaviour {
 		//ArenaManagers.Clear();
 	}
 
-	#region register players
+	#region player shop
 
+	public void BuyItemFromPlayer(string uniqueItemId, int level, int amount, PhotonPlayer targetPlayer)
+	{
+		myPhotonView.RPC("NetworkBuItemFromPlayer", targetPlayer, uniqueItemId, level, amount);
+	}
+
+	[RPC]
+	public void NetworkBuyItemFromPlayer(string uniqueItemId, int level, int amount)
+	{
+		PlayerManager.Instance.Hero.SoldItem(uniqueItemId, level, amount);
+	}
 		
 	#endregion
 

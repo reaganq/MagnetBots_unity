@@ -106,6 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb67c6dcb4e4d74eb7aed04254e4089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTouchStarted: 0
+  isJoyStickDisplayed: 0
   enable: 1
   visible: 1
   isActivated: 1

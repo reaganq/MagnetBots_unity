@@ -86,6 +86,48 @@ public class BasicGUIController : MonoBehaviour {
 		Debug.Log("refresh item tiles");
 	}
 
+	public virtual void LoadShopItemTiles(List<InventoryItem> itemList, List<ShopItemTileButton> tiles, GameObject gridPanelRoot, GameObject tilePrefab, InventoryGUIType inventType)
+	{
+		if(inventType == InventoryGUIType.Shop)
+		{
+			int num = itemList.Count - tiles.Count;
+			if(num>0)
+			{
+				for (int i = 0; i < num; i++) {
+					GameObject itemTile = NGUITools.AddChild(gridPanelRoot, tilePrefab);
+					ShopItemTileButton tileButton = itemTile.GetComponent<ShopItemTileButton>();
+					tiles.Add(tileButton);
+				}
+			}
+			for (int i = 0; i < tiles.Count; i++) {
+				if(i>=itemList.Count)
+				{
+					tiles[i].gameObject.SetActive(false);
+				}
+				else
+				{
+					tiles[i].gameObject.SetActive(true);
+					tiles[i].LoadShopItemTile(itemList[i], this, inventType, i);
+				}
+			}
+		}
+		else if(inventType == InventoryGUIType.Playershop)
+		{
+			for (int i = 0; i < tiles.Count; i++) {
+				if(i>=itemList.Count)
+				{
+					tiles[i].LoadBlank();
+				}
+				else
+				{
+					//tiles[i].gameObject.SetActive(true);
+					tiles[i].LoadShopItemTile(itemList[i], this, inventType, i);
+				}
+			}
+		}
+		Debug.Log("refresh item tiles");
+	}
+
 	public void LoadCurrencyTiles(List<RPGCurrency> itemList, List<CurrencyTilebutton> tiles, GameObject gridPanelRoot, GameObject tilePrefab)
 	{
 		int num = itemList.Count - tiles.Count;
@@ -131,7 +173,7 @@ public class BasicGUIController : MonoBehaviour {
 	{
 	}
 
-	public virtual void ReceiveDestroyButtonMessage()
+	public virtual void ReceiveDestroyButtonMessage(int index)
 	{
 	}
 

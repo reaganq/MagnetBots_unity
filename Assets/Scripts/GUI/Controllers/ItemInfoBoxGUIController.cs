@@ -69,7 +69,7 @@ public class ItemInfoBoxGUIController : BasicGUIController {
 
 	public void OnDestroyButtonPressed()
 	{
-		activeGUIController.ReceiveDestroyButtonMessage();
+		activeGUIController.ReceiveDestroyButtonMessage(1);
 	}
 
 	public void OnDepositButtonPressed()

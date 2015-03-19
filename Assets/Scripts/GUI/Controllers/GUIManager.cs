@@ -39,6 +39,7 @@ public class GUIManager : MonoBehaviour {
     public MainUIManager MainGUI;
 	public NotificationGUIController NotificationGUI;
     public PlayerShopGUIController PlayerShopGUI;
+	public ShopGUIController ShopGUI;
     public NPCGUIController NPCGUI;
     public IntroGUIController IntroGUI;
 	public LoadScreenController loadingGUI;
@@ -222,6 +223,16 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public void HideInventory()
+	{
+		EnterGUIState(UIState.main);
+	}
+
+	public void DisplayPlayerShop()
+	{
+		EnterGUIState(UIState.playerShop);
+	}
+
+	public void HidPlayerShop()
 	{
 		EnterGUIState(UIState.main);
 	}

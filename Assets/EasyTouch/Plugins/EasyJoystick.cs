@@ -102,6 +102,10 @@ public class EasyJoystick : MonoBehaviour {
 	public delegate void JoystickDoubleTapHandler(MovingJoystick move);
 	public delegate void JoystickTouchUpHandler(MovingJoystick move);
 	#endregion
+
+	public bool isTouchStarted;
+	public bool isJoyStickDisplayed;
+
 	
 	#region Event
 	/// <summary>
@@ -984,10 +988,10 @@ public class EasyJoystick : MonoBehaviour {
 	
 	void OnGUI(){
 							
-		if (enable && visible){
+		if ((enable && visible && joystickValue.sqrMagnitude > 0 && !isJoyStickDisplayed) || (enable && visible && isTouchStarted && isJoyStickDisplayed)){
 	
 			GUI.depth = guiDepth;
-			
+			isJoyStickDisplayed = true;
 			useGUILayout = isUseGuiLayout;
 			
 			if (dynamicJoystick && Application.isEditor && !Application.isPlaying){
@@ -1083,6 +1087,7 @@ public class EasyJoystick : MonoBehaviour {
 		else{
 			if (Application.isPlaying){
 				EasyTouch.instance.reservedVirtualAreas.Remove( areaRect);
+				isJoyStickDisplayed = false;
 			}
 		}
 	}
@@ -1463,8 +1468,9 @@ public class EasyJoystick : MonoBehaviour {
 		
 		if ((!gesture.isHoverReservedArea && dynamicJoystick) || !dynamicJoystick){
 			
-			
+
 			if (isActivated){
+				isTouchStarted = true;
 				if (!dynamicJoystick){
 				
 					Vector2 center = new Vector2( (anchorPosition.x+joystickCenter.x) * VirtualScreen.xRatio , (VirtualScreen.height-anchorPosition.y - joystickCenter.y) * VirtualScreen.yRatio);
@@ -1618,9 +1624,10 @@ public class EasyJoystick : MonoBehaviour {
 	void On_TouchUp( Gesture gesture){
 		if (!visible)
 			return;	
-
+		isTouchStarted = false;
 		if (gesture.fingerIndex == joystickIndex){
 			joystickIndex=-1;
+
 			if (dynamicJoystick){
 				
 				virtualJoystick=false;	

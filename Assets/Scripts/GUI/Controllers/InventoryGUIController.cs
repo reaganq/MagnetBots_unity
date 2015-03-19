@@ -32,6 +32,10 @@ public class InventoryGUIController : BasicGUIController {
 	public GameObject DestroyButton = null;
 	public GameObject unequipButton;
 	public GameObject upgradeButton;
+	public GameObject stockButton;
+	public GameObject stockQuantityObject;
+	public UILabel stockQuantityLabel;
+	public int currentQuantity;
 	public GameObject useButton;
 	public GameObject tickIcon;
 	public GameObject armorStatsObject;
@@ -47,6 +51,15 @@ public class InventoryGUIController : BasicGUIController {
 	public UISprite descriptionBG;
 	public UISprite icon;
 	public UILabel rarityLabel;
+	public GameObject rightDetails;
+	public GameObject rightUpgradeDetails;
+
+	//Upgrade Item View
+	public GameObject upgradeDoor;
+	public GameObject upgradeDoorCog;
+	public GameObject successPage;
+	public GameObject failurePage;
+
 
 	private int newItemCount;
 
@@ -264,6 +277,7 @@ public class InventoryGUIController : BasicGUIController {
 			currencyIcon.spriteName = GeneralData.coinIconPath;
 		rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
 		rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
+		quantityLabel.text = selectedItem.CurrentAmount.ToString();
 		UpdateItemDetails();
 		if(selectedItem.rpgItem.ItemCategory == ItemType.NakedArmor || selectedItem.rpgItem.ItemCategory == ItemType.Armor)
 		{
@@ -319,28 +333,72 @@ public class InventoryGUIController : BasicGUIController {
 		for (int i = 0; i < allButtons.Length; i++) {
 			allButtons[i].SetActive(false);
 		}
-		if(selectedItem.IsItemUpgradeable)
-			upgradeButton.SetActive(true);
+		if(GUIManager.Instance.uiState == UIState.inventory)
+		{
+			stockQuantityObject.SetActive(false);
+
+			if(selectedItem.IsItemUpgradeable)
+				upgradeButton.SetActive(true);
+
+			if(selectedItem.IsItemEquippable)
+			{
+				if(selectedItem.IsItemEquipped)
+				{
+					unequipButton.SetActive(true);
+				}
+				else
+				{
+					EquipButton.SetActive(true);
+				}
+			}
+			else if(selectedItem.IsItemUsable)
+			{
+				useButton.SetActive(true);
+			}
+
+		}
+		else if(GUIManager.Instance.uiState == UIState.playerShop)
+		{
+			for (int i = 0; i < allButtons.Length; i++) {
+				allButtons[i].SetActive(false);
+			}
+			stockButton.SetActive(true);
+			stockQuantityObject.SetActive(true);
+		}
 
 		if(selectedItem.IsItemEquippable)
 		{
 			if(selectedItem.IsItemEquipped)
 			{
-				//turn on unequip button
 				tickIcon.SetActive(true);
-				unequipButton.SetActive(true);
 			}
 			else
 			{
 				tickIcon.SetActive(false);
-				EquipButton.SetActive(true);
 			}
 		}
-		else if(selectedItem.IsItemUsable)
-		{
-			useButton.SetActive(true);
-		}
-		quantityLabel.text = selectedItem.CurrentAmount.ToString();
+	}
+
+	public void IncreaseQuantity()
+	{
+		int maxNumber = selectedItem.CurrentAmount;
+		if(selectedItem.IsItemEquipped)
+			maxNumber --;
+		if(maxNumber > currentQuantity)
+			currentQuantity ++;
+		UpdateQuantityLabel();
+	}
+
+	public void DecreaseQuantity()
+	{
+		if(currentQuantity > 1)
+			currentQuantity --;
+		UpdateQuantityLabel();
+	}
+
+	public void UpdateQuantityLabel()
+	{
+		quantityLabel.text = currentQuantity.ToString();
 	}
 
 	public void OnEquipButtonPressed()
@@ -356,10 +414,19 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void OnUpgradeButtonPressed()
 	{
+		rightDetails.SetActive(false);
+		rightUpgradeDetails.SetActive(true);
+
 	}
 
 	public void OnUnequipButtonPressed()
 	{
+	}
+
+	public void OnStockButtonPressed()
+	{
+		PlayerManager.Instance.Hero.StockItem(selectedItem, currentQuantity);
+		UpdateItemDetails();
 	}
 
 	public void OnBackButtonPressed()

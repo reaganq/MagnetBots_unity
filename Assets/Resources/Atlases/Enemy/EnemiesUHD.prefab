@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,9 +43,22 @@ MonoBehaviour:
   mSprites:
   - name: MagnetCentral_Gym_Jim
     x: 2
+    y: 792
+    width: 580
+    height: 788
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: MagnetCentral_Gym_Punchbagbob
+    x: 2
     y: 2
-    width: 250
-    height: 250
+    width: 580
+    height: 788
     borderLeft: 0
     borderRight: 0
     borderTop: 0

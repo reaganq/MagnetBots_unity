@@ -13,11 +13,11 @@ public class ActivityUtils {
 		activity.npcButtonText = EditorGUILayout.TextField(activity.npcButtonText, GUILayout.Width(500));
 		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Atlas Path");
+		EditorGUILayout.PrefixLabel("NPC Button Atlas Path");
 		activity.npcIconAtlas = EditorGUILayout.TextField(activity.npcIconAtlas, GUILayout.Width(500));
 		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.BeginHorizontal();
-		EditorGUILayout.PrefixLabel("Sprite Name");
+		EditorGUILayout.PrefixLabel("NPC Button Sprite Name");
 		activity.npcIconSprite = EditorGUILayout.TextField(activity.npcIconSprite, GUILayout.Width(500));
 		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.Separator();

@@ -143,4 +143,6 @@ MonoBehaviour:
   - NetworkAnimateToIdle
   - NetworkAnimateToRunning
   - Die
+  - NetworkBuyItemFromPlayer
+  - NetworkUpdateShopItems
   DisableAutoOpenWizard: 0

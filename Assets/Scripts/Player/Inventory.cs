@@ -308,10 +308,25 @@ public class Inventory  : BasicInventory
 				Debug.Log(Items[i].CurrentAmount);
 				if(Items[i].CurrentAmount <= 0)
 					Items.RemoveAt(i);
+				return true;
 			}
 
 		}
-		return true;
+		return false;
+	}
+
+	public bool RemoveItemByUniqueID(string uniqueItemId, int level, int amount)
+	{
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].UniqueItemId == uniqueItemId && Items[i].Level == level)
+			{
+				Items[i].CurrentAmount -= amount;
+				if(Items[i].CurrentAmount <= 0)
+					Items.RemoveAt(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public bool RemoveItem(RPGItem itemToRemove, int level)
