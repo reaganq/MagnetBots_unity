@@ -52,6 +52,10 @@ public class HoverPopupGUIController : BasicGUIController {
 	public float duration;
 	public float timer;
 	public UIPlayTween buttonTween;
+	public UIInput messageInput;
+	public UILabel talkMessageLabel;
+	public string defaultTalkMessage = "Type your message here";
+	public GameObject messageBox;
 
 	public void Start()
 	{
@@ -142,6 +146,7 @@ public class HoverPopupGUIController : BasicGUIController {
 			buttonTween.Play(false);
 		}
 		selectedCharacter = null;
+		messageBox.SetActive(false);
 		base.Disable();
 	}
 	
@@ -255,10 +260,32 @@ public class HoverPopupGUIController : BasicGUIController {
 	
 	public void Talk()
 	{
+		HidePopups();
+		buttonTween.tweenTarget = messageBox;
+		buttonTween.Play(true);
 	}
-	
+
 	public void Dance()
 	{
+		PlayerManager.Instance.avatarActionManager.Dance();
+		Disable();
+	}
+
+	public void OnCancelTalkPressed()
+	{
+		Disable();
+	}
+
+	public void OnConfirmTalkPressed()
+	{
+		PlayerManager.Instance.avatarActionManager.Talk(messageInput.value);
+		Disable();
+	}
+
+	public void HideTalkBox()
+	{
+		buttonTween.tweenTarget = messageBox;
+		buttonTween.Play(false);
 	}
 	
 	public void OpenArmory()

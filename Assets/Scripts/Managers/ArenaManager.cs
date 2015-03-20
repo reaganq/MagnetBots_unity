@@ -116,9 +116,9 @@ public class ArenaManager : Zone {
 	{
 		Debug.Log("ready");
 		yield return new WaitForSeconds(1);
-		Debug.Log("3,2,1");
-		yield return new WaitForSeconds(1);
-		Debug.Log("start!");
+		GUIManager.Instance.rewardsGUI.StartCountdown();
+		yield return new WaitForSeconds(4.5f);
+
 		arenaState = ArenaState.battle;
 		for (int i = 0; i < enemyFSMs.Count; i++) {
 			enemyFSMs[i].StartBattle();

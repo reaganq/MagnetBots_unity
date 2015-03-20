@@ -32,6 +32,12 @@ public class GUIManager : MonoBehaviour {
 	public Camera uiCamera = null;
     public Transform UICameraRoot = null;
     
+	public UILabel[] coinLabels;
+	public UILabel[] magnetLabels;
+	public UILabel[] citizenLabels;
+	public UILabel[] bankCoinsLabels;
+	public UILabel[] shopTillLabels;
+
 	public UIPlayTween screenFlashTween;
 	public UISprite screenFlash;
 	public InventoryGUIController InventoryGUI;
@@ -132,6 +138,8 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.main:
 			MainGUI.Enable();
+			if(MainGUI.isSideTrayOpen)
+				MainGUI.OnSideTrayClick();
 			chatGUI.Enable();
 			break;
 		case UIState.npc:
@@ -192,7 +200,26 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public Color GetRarityColor(RarityType rarity)
+	public void UpdateCurrency()
+	{
+		for (int i = 0; i < coinLabels.Length; i++) {
+			coinLabels[i].text = PlayerManager.Instance.Hero.Coins.ToString();
+		}
+		for (int i = 0; i < magnetLabels.Length; i++) {
+			magnetLabels[i].text = PlayerManager.Instance.Hero.Magnets.ToString();
+        }
+		for (int i = 0; i < citizenLabels.Length; i++) {
+			citizenLabels[i].text = PlayerManager.Instance.Hero.CitizenPoints.ToString();
+        }
+		for (int i = 0; i < shopTillLabels.Length; i++) {
+			shopTillLabels[i].text = PlayerManager.Instance.Hero.shopTill.ToString();
+        }
+		for (int i = 0; i < bankCoinsLabels.Length; i++) {
+			bankCoinsLabels[i].text = PlayerManager.Instance.Hero.BankCoins.ToString();
+        }
+    }
+    
+    public Color GetRarityColor(RarityType rarity)
 	{
 		for (int i = 0; i < rarityColors.Length; i++) {
 			if(rarityColors[i].rarity == rarity)
@@ -232,7 +259,7 @@ public class GUIManager : MonoBehaviour {
 		EnterGUIState(UIState.playerShop);
 	}
 
-	public void HidPlayerShop()
+	public void HidePlayerShop()
 	{
 		EnterGUIState(UIState.main);
 	}
@@ -366,7 +393,7 @@ public class GUIManager : MonoBehaviour {
 
     public void HideAllUI()
     {
-		uiState = UIState.idle;
+		EnterGUIState(UIState.idle);
         /*if(IsInventoryDisplayed)
         {
             ArmoryGUI.SetActive(false);

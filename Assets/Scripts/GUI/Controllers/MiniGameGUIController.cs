@@ -8,6 +8,15 @@ public class MiniGameGUIController : BasicGUIController {
 	public UILabel description;
 	public UISprite portrait;
 	public NPCMinigame minigame;
+	public UILabel myScoreLabel;
+	public GameObject detailsBox;
+	public GameObject instructions;
+	public GameObject highScores;
+	public bool isDetailsDisplayed;
+	public Color inactiveColor;
+	public Color activeColor;
+	public UISprite highscoreBG;
+	public UISprite instructionsBG;
 
 	public void Enable (NPCMinigame mg)
 	{
@@ -18,6 +27,7 @@ public class MiniGameGUIController : BasicGUIController {
 		portrait.spriteName = minigame.IconPath;
 		panel.SetActive(true);
 		description.text = minigame.Description;
+		OnInstructionsPressed();
 		Enable();
 	}
 
@@ -30,5 +40,26 @@ public class MiniGameGUIController : BasicGUIController {
 	public void OnPlayButtonPressed()
 	{
 		PlayerManager.Instance.PlayMiniGame(minigame);
+	}
+
+	public void OnHighScoresPressed()
+	{
+		instructions.SetActive(false);
+		highScores.SetActive(true);
+		instructionsBG.color = inactiveColor;
+		highscoreBG.color = activeColor;
+	}
+
+	public void OnInstructionsPressed()
+	{
+		instructions.SetActive(true);
+		highScores.SetActive(false);
+		instructionsBG.color = activeColor;
+		highscoreBG.color = inactiveColor;
+	}
+
+	public void OnExitButtonPressed()
+	{
+		GUIManager.Instance.NPCGUI.HideShop();
 	}
 }

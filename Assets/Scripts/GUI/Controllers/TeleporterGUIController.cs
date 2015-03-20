@@ -11,13 +11,13 @@ public class TeleporterGUIController : BasicGUIController {
 	public GameObject detailPortraitBox;
 	public UISprite detailPortraitSprite;
 	public UILabel descriptionlabel;
-	public string naSpriteName;
+	//public string naSpriteName;
 	public int selectedIndex;
-	public UIPlayTween portraitTweener;
-	public TweenPosition portraitPosTween;
-	public Transform portraitPosRef;
+	//public UIPlayTween portraitTweener;
+	//public TweenPosition portraitPosTween;
+	//public Transform portraitPosRef;
 
-	public void Start()
+	/*public void Start()
 	{
 		for (int i = 0; i < townPortraitObjects.Length; i++) {
 			if(i + 1 > GeneralData.towns.Count)
@@ -30,39 +30,60 @@ public class TeleporterGUIController : BasicGUIController {
 				LoadTownAtlasSprite(townPortraitObjects[i], i);
 			}
 		}
-	}
+	}*/
 
-	public void LoadTownAtlasSprite(UISprite sprite, int index)
+	/*public void LoadTownAtlasSprite(UISprite sprite, int index)
 	{
 		GameObject Atlas = Resources.Load(GeneralData.towns[index].AtlasName) as GameObject;
 		sprite.atlas = Atlas.GetComponent<UIAtlas>();
 		sprite.spriteName = GeneralData.towns[index].IconPath;
 		sprite.collider.enabled = true;
-	}
+	}*/
 
-	public void OnTownButtonPressed(int index)
+	/*public void OnTownButtonPressed(int index)
 	{
 		selectedIndex = index;
 		LoadTownAtlasSprite(detailPortraitSprite, selectedIndex);
 
 		//DisplayTownDetails();
 		//portraitPosTween.from = townPortraitObjects[selectedIndex].transform.position;
+	}*/
+	public override void Enable ()
+	{
+		OnBackButtonPressed();
+		base.Enable ();
 	}
 
-	public void DisplayTownDetails()
+	public void DisplayDetailsBox(int index)
 	{
+		//enemycardobjects[index]. move to the left side
 		detailsBox.SetActive(true);
-		descriptionlabel.text = GeneralData.towns[selectedIndex].Description;
+		selectedIndex = index;
+		UpdateDetailsBox();
+		scrollView.SetActive(false);
+	}
+
+	public void UpdateDetailsBox()
+	{
+		detailPortraitSprite.spriteName = townPortraitObjects[selectedIndex].spriteName;
+		//DetailsLabel.text = activeArena.Enemies[selectedCardIndex].Description;
+		/*partyListText.text = string.Empty;
+		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
+		{
+			partyListText.text += PhotonPlayer.Find(PlayerManager.Instance.partyMembers[i]).name + "\n";
+		}*/
 	}
 
 	public void OnBackButtonPressed()
 	{
-
+		selectedIndex = -1;
+		detailsBox.SetActive(false);
+		scrollView.SetActive(true);
 	}
 
 	public void OnExitButtonPressed()
 	{
-		Disable();
+		GUIManager.Instance.NPCGUI.HideShop();
 	}
 
 	public void OnTravelButtonPressed()

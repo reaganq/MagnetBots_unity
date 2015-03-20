@@ -17,8 +17,14 @@ public class RewardsGUIController : BasicGUIController {
 	public GameObject itemTilePrefab;
 	public GameObject currencyTilePrefab;
 	public UIPlayTween rewardPanelTween;
+	public UIPlayTween fadeOutTween;
 	public GameObject badgeRewardObject;
 	public UISprite badgeSprite;
+	public UIPlayTween countdownTween;
+	public GameObject three;
+	public GameObject two;
+	public GameObject one;
+	public GameObject start;
 
 	public GameObject victoryRewardObject;
 	public GameObject minigameScoreObject;
@@ -41,6 +47,31 @@ public class RewardsGUIController : BasicGUIController {
 		Enable();
 		DisplayRewards();
 		isArena = true;
+	}
+
+	public void StartCountdown()
+	{
+		StartCoroutine(StartCountdownSequence());
+	}
+
+	public IEnumerator StartCountdownSequence()
+	{
+		countdownTween.tweenTarget = three;
+		countdownTween.Play(true);
+		yield return new WaitForSeconds(1f);
+		three.SetActive(false);
+		countdownTween.tweenTarget = two;
+		countdownTween.Play(true);
+		yield return new WaitForSeconds(1f);
+		two.SetActive(false);
+		countdownTween.tweenTarget = one;
+		countdownTween.Play(true);
+		yield return new WaitForSeconds(1f);
+		one.SetActive(false);
+		countdownTween.tweenTarget = start;
+		countdownTween.Play(true);
+		yield return new WaitForSeconds(1f);
+		start.SetActive(false);
 	}
 
 	public void DisplayMinigameRewards(LootItemList loots, float newScore)
@@ -66,7 +97,10 @@ public class RewardsGUIController : BasicGUIController {
 
 	public void HideBadge()
 	{
-		badgeRewardObject.SetActive(false);
+		Debug.Log("fade out badege");
+		fadeOutTween.tweenTarget = badgeRewardObject;
+		fadeOutTween.Play(true);
+		//badgeRewardObject.SetActive(false);
 	}
 
 	public void DisplayRewards()
@@ -79,7 +113,10 @@ public class RewardsGUIController : BasicGUIController {
 
 	public void HideRewards()
 	{
-		victoryRewardObject.SetActive(false);
+		fadeOutTween.tweenTarget = victoryRewardObject;
+		fadeOutTween.Play(true);
+		Debug.Log("fade out rewards");
+		//victoryRewardObject.SetActive(false);
 	}
 
 	public void DisplayMinigameResults()
@@ -96,8 +133,11 @@ public class RewardsGUIController : BasicGUIController {
 
 	public void OnContinueBadgePressed()
 	{
+		HideBadge();
 		if(isArena)
-			EndArena();
+			Invoke("EndArena", 0.15f);
+		else if(isMinigame)
+			Invoke("EndMiniGame", 0.15f);
 	}
 
 	public void OnContinueRewardsPressed()
@@ -110,7 +150,8 @@ public class RewardsGUIController : BasicGUIController {
 		{
 			if(isArena)
 			{
-				EndArena();
+				HideRewards();
+				Invoke("EndArena", 0.15f);
 				return;
 			}
 			if(isMinigame)

@@ -14,10 +14,20 @@ public class PlayerShopGUIController : BasicGUIController {
     //public GameObject InfoPanel = null;
 	public GameObject TransactionBox = null;
     public GameObject BuyButton = null;
+	public GameObject collectButton;
 	//public GameObject PreviousPageButton;
 	//public GameObject NextPageButton;
 	public GameObject inventoryRoot;
     
+	public void Start()
+	{
+		for (int i = 0; i < 11; i++) {
+			GameObject itemTile = NGUITools.AddChild(inventoryRoot, itemTilePrefab);
+			ShopItemTileButton tileButton = itemTile.GetComponent<ShopItemTileButton>();
+			itemTiles.Add(tileButton);
+		}
+	}
+
 	public override void Enable ()
 	{
 		selectedItemList = PlayerManager.Instance.Hero.playerShopInventory.Items;
@@ -33,11 +43,12 @@ public class PlayerShopGUIController : BasicGUIController {
     public override void OnItemTilePressed(int index)
     {
 		GUIManager.Instance.InventoryGUI.Enable();
+		Debug.Log("opening inventorygui");
     }
 
 	public void CloseShop()
 	{
-		GUIManager.Instance.NPCGUI.HideShop();
+		GUIManager.Instance.HidePlayerShop();
 	}
     
 	public override void ReceiveDestroyButtonMessage(int index)
@@ -66,5 +77,11 @@ public class PlayerShopGUIController : BasicGUIController {
 			quantity = 1;
 		QuantityLabel.text = quantity.ToString();*/
 		//UpdatePriceLabel();
+	}
+
+	public void OnCollectPressed()
+	{
+		if(PlayerManager.Instance.Hero.shopTill > 0)
+			PlayerManager.Instance.Hero.CollectFromShopTill();
 	}
 }

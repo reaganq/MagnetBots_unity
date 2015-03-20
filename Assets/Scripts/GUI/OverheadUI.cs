@@ -14,11 +14,15 @@ public class OverheadUI : MonoBehaviour {
 	public UISprite statusRewardSprite;
 	public UILabel statusRewardLabel;
 	public BillboardConstraint billboard;
+	public UISprite hpBar;
+	public GameObject hpBarObject;
+	public GameObject speechBubble;
+	public UIPlayTween speechBubbleTween;
+	public Job hideSpeechBubbleJob = null;
 	// Use this for initialization
 	void Start () {
 		billboard.enabled = true;
 	}
-	
 	// Update is called once per frame
 	/*void Update () {
 		timer -= Time.deltaTime;
@@ -52,6 +56,22 @@ public class OverheadUI : MonoBehaviour {
 
 	}
 
+	public void Talk(string text)
+	{
+		if(hideSpeechBubbleJob != null && hideSpeechBubbleJob.running)
+			hideSpeechBubbleJob.kill();
+		speechBubbleTween.tweenTarget = speechBubble;
+		speechBubbleTween.Play(true);
+		hideSpeechBubbleJob = Job.make(HideSpeechBubble());
+	}
+
+	public IEnumerator HideSpeechBubble()
+	{
+		yield return new WaitForSeconds(3);
+		speechBubbleTween.tweenTarget = speechBubble;
+		speechBubbleTween.Play(false);
+	}
+
 	public void WriteHpMessage(UILabel label, float amount)
 	{
 		label.text = amount.ToString();
@@ -61,5 +81,17 @@ public class OverheadUI : MonoBehaviour {
 			label.color = Color.green;
 		tween.tweenTarget = label.gameObject;
         tween.Play(true);
+	}
+
+	public void DisplayHpBar(bool state)
+	{
+		if(hpBarObject != null)
+			hpBarObject.SetActive(state);
+	}
+
+	public void UpdateHpBar(float amount)
+	{
+		if(hpBar != null)
+			hpBar.fillAmount = amount;
 	}
 }

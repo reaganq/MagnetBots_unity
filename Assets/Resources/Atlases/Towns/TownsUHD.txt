@@ -1,0 +1,28 @@
+{"frames": {
+
+"Koto.png":
+{
+	"frame": {"x":2,"y":792,"w":580,"h":788},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":580,"h":788},
+	"sourceSize": {"w":580,"h":788}
+},
+"Magnet_Central.png":
+{
+	"frame": {"x":2,"y":2,"w":580,"h":788},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":580,"h":788},
+	"sourceSize": {"w":580,"h":788}
+}},
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "TownsUHD.png",
+	"format": "RGBA8888",
+	"size": {"w":1024,"h":2048},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a3c5c35ba44ffc691f5df38c48d83090$"
+}
+}

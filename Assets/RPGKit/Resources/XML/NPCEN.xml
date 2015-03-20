@@ -87,8 +87,8 @@
   <RPGNPC>
     <activities>
       <NPCActivityData>
-        <activityID>1</activityID>
-        <activityType>Teleporter</activityType>
+        <activityID>3</activityID>
+        <activityType>Service</activityType>
       </NPCActivityData>
     </activities>
     <overrideActivities />

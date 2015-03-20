@@ -89,6 +89,7 @@ public class ChatGUIController : BasicGUIController {
 
 	public void OnRemoveFriend()
 	{
+		Debug.Log("remove friend");
 		removeFriends = !removeFriends;
 		if(removeFriends)
 		{

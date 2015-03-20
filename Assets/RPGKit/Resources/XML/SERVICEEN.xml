@@ -22,4 +22,16 @@
     <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
     <Conditions />
   </NPCService>
+  <NPCService>
+    <ID>3</ID>
+    <Name>Electromagnetic Portal</Name>
+    <Description />
+    <SystemDescription />
+    <activityType>Service</activityType>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>travel</npcIconSprite>
+    <npcButtonText>Portal</npcButtonText>
+    <Conditions />
+  </NPCService>
 </ArrayOfNPCService>

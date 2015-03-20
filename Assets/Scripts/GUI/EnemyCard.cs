@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class EnemyCard : MonoBehaviour {
 
 	public ArenaGUIController controller;
+	public TeleporterGUIController teleporter;
 	public int cardIndex;
 	public UISprite portrait;
 	public Collider collider;
@@ -33,7 +34,10 @@ public class EnemyCard : MonoBehaviour {
 
 	public void OnChallengeButtonPressed()
 	{
-		controller.DisplayDetailsBox(cardIndex);
+		if(controller != null)
+			controller.DisplayDetailsBox(cardIndex);
+		if(teleporter != null)
+			teleporter.DisplayDetailsBox(cardIndex);
 	}
 
 	public void ScaleDown()

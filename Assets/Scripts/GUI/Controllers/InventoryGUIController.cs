@@ -17,7 +17,7 @@ public class InventoryGUIController : BasicGUIController {
 	public List<ItemTileButton> itemTiles;
 	public List<CategoryButton> categoryButtons;
 	public List<CategoryButton> subcategoryButtons;
-	public int selectedCategoryIndex = -1;
+    public int selectedCategoryIndex = -1;
 	public int selectedSubCategoryIndex = -1;
 	public ItemCategories selectedMainInventoryCategory;
 
@@ -36,6 +36,8 @@ public class InventoryGUIController : BasicGUIController {
 	public GameObject stockQuantityObject;
 	public UILabel stockQuantityLabel;
 	public int currentQuantity;
+	public GameObject increaseArrow;
+	public GameObject decreaseArrow;
 	public GameObject useButton;
 	public GameObject tickIcon;
 	public GameObject armorStatsObject;
@@ -70,6 +72,8 @@ public class InventoryGUIController : BasicGUIController {
 
 	public override void Enable ()
 	{
+		currentQuantity = 1;
+		UpdateQuantityLabel();
 		base.Enable ();
 		OnCategoryPressed(0,0);
 		loaded = true;
@@ -77,6 +81,8 @@ public class InventoryGUIController : BasicGUIController {
 
 	public override void Disable ()
 	{
+		selectedCategoryIndex = -1;
+		selectedSubCategoryIndex = -1;
 		base.Disable ();
 	}
 
@@ -250,6 +256,7 @@ public class InventoryGUIController : BasicGUIController {
 	public void RefreshInventoryIcons()
 	{
 		LoadItemTiles(selectedItemList, itemTiles, gridPanelRoot, itemTilePrefab, inventoryType);
+		gridPanel.Reposition();
 	}
 
 	public override void OnItemTilePressed(int index)
@@ -268,7 +275,7 @@ public class InventoryGUIController : BasicGUIController {
 		GameObject atlas = Resources.Load(selectedItem.rpgItem.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = selectedItem.rpgItem.IconPath;
-		currencyLabel.text = selectedItem.rpgItem.SellValue.ToString();
+		currencyLabel.text = selectedItem.rpgItem.BuyValue.ToString();
 		if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.CitizenPoints)
 			currencyIcon.spriteName = GeneralData.citizenIconPath;
 		else if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.Magnets)
@@ -362,8 +369,17 @@ public class InventoryGUIController : BasicGUIController {
 			for (int i = 0; i < allButtons.Length; i++) {
 				allButtons[i].SetActive(false);
 			}
-			stockButton.SetActive(true);
+			if(MaxStockQuantity() > 0)
+				stockButton.SetActive(true);
+			else
+				stockButton.SetActive(false);
 			stockQuantityObject.SetActive(true);
+			if(selectedItem.IsItemEquipped && selectedItem.CurrentAmount == 1)
+			{
+				currentQuantity = 0;
+
+			}
+			UpdateQuantityLabel();
 		}
 
 		if(selectedItem.IsItemEquippable)
@@ -396,9 +412,49 @@ public class InventoryGUIController : BasicGUIController {
 		UpdateQuantityLabel();
 	}
 
+	public int MinStockQuantity()
+	{
+		if(selectedItem.IsItemEquipped && selectedItem.CurrentAmount == 1)
+			return 0;
+		else
+			return 1;
+	}
+
+	public int MaxStockQuantity()
+	{
+		if(selectedItem != null)
+		{
+			if(selectedItem.IsItemEquipped)
+				return selectedItem.CurrentAmount -1;
+			else
+				return selectedItem.CurrentAmount;
+		}
+		else
+			return 0;
+	}
+
 	public void UpdateQuantityLabel()
 	{
-		quantityLabel.text = currentQuantity.ToString();
+		if(selectedItem == null)
+			return;
+
+		if(MaxStockQuantity() <= 0)
+		{
+			stockQuantityObject.SetActive(false);
+		}
+		else
+		{
+			stockQuantityObject.SetActive(true);
+			if(MaxStockQuantity() > currentQuantity)
+				increaseArrow.SetActive(true);
+			else
+				increaseArrow.SetActive(false);
+            if(currentQuantity > MinStockQuantity())
+				decreaseArrow.SetActive(true);
+			else
+				decreaseArrow.SetActive(false);
+			stockQuantityLabel.text = currentQuantity.ToString();
+		}
 	}
 
 	public void OnEquipButtonPressed()
@@ -427,6 +483,8 @@ public class InventoryGUIController : BasicGUIController {
 	{
 		PlayerManager.Instance.Hero.StockItem(selectedItem, currentQuantity);
 		UpdateItemDetails();
+		GUIManager.Instance.PlayerShopGUI.RefreshInventoryIcons();
+		OnExitButtonPressed();
 	}
 
 	public void OnBackButtonPressed()
@@ -435,6 +493,17 @@ public class InventoryGUIController : BasicGUIController {
 		itemDetailsPanel.SetActive(false);
 		inventoryPanel.SetActive(true);
 		backButton.SetActive(false);
+	}
+
+	public void OnExitButtonPressed()
+	{
+		Debug.Log("exit button pressed");
+		if(GUIManager.Instance.uiState == UIState.inventory)
+			GUIManager.Instance.HideInventory();
+		else if(GUIManager.Instance.uiState == UIState.playerShop)
+		{
+			Disable();
+		}
 	}
 }
 

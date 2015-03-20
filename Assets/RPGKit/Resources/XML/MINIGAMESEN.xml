@@ -5,7 +5,9 @@
     <AtlasName>Atlases/MiniGames/MinigamesAtlas</AtlasName>
     <ID>1</ID>
     <Name>Burger Memory</Name>
-    <Description>Follow and copy the instructions to make the most epic burger of all time!</Description>
+    <Description>Follow the chef's orders to satisfy your customers!
+
+Follow the chef's orders to satisfy your customers! Tap on the right ingredients in the correct order to pass the level.</Description>
     <SystemDescription />
     <activityType>Minigame</activityType>
     <conversationID>0</conversationID>

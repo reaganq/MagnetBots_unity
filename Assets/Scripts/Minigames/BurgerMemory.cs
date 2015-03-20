@@ -8,7 +8,7 @@ public class BurgerMemory : Minigame {
 	public List<int> mainSequence;
 	public List<int> playerSequence;
 	public bool isActive;
-	public int lives;
+	public int lives = 1;
 
 	public float maxTime;
 	public float curTime;
@@ -23,7 +23,7 @@ public class BurgerMemory : Minigame {
 		StartCoroutine(GenerateStartingSequence(4));
 		level = 1;
 		scoreText.text = "Score: " + score.ToString();
-		livesText.text = "Lives: " + lives.ToString();
+		livesText.text = "Level: " + level.ToString();
 	}
 
 	void Update()

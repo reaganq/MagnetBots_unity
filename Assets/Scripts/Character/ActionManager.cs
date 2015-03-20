@@ -184,18 +184,15 @@ public class ActionManager : MonoBehaviour {
 		}
 	}
 
+	public void Talk(string text)
+	{
+		myPhotonView.RPC("NetworkTalk", PhotonTargets.All, text);
+	}
+	
 	[RPC]
 	public void NetworkTalk(string text)
 	{
-		CancelInvoke("HideSpeechBubble");
-		//speechBubbleText.text = text;
-		//speechBubbleTween.Play(true);
-		Invoke("HideSpeechBubble", 3);
-	}
-
-	public void HideSpeechBubble()
-	{
-		//speechBubbleTween.Play(false);
+		myStatus.HUD.Talk(text);
 	}
 	
 	[RPC]

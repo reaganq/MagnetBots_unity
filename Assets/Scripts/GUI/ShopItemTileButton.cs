@@ -68,6 +68,10 @@ public class ShopItemTileButton: MonoBehaviour
 	public void LoadGeneric(InventoryItem item)
 	{
 		nonBlankObject.SetActive(true);
+		if(itemTileType == InventoryGUIType.Playershop)
+			collider.enabled = false;
+		else
+			collider.enabled = true;
 		blankCover.SetActive(false);
 		isBlank = false;
 		if(!icon.enabled)
@@ -75,7 +79,8 @@ public class ShopItemTileButton: MonoBehaviour
 		GameObject atlas = Resources.Load(item.rpgItem.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.rpgItem.IconPath;
-		amountLabel.text = "x"+item.CurrentAmount.ToString();
+		quantityTag.SetActive(true);
+		amountLabel.text = item.CurrentAmount.ToString();
 		LoadItemRarity(item.rpgItem);
 		for (int i = 0; i < gradeStars.Length; i++) {
 			gradeStars[i].SetActive(false);
@@ -116,12 +121,17 @@ public class ShopItemTileButton: MonoBehaviour
 		itemTileType = type;
 	}
 
-	public void LoadBlank()
+	public void LoadBlank(BasicGUIController newOwner, InventoryGUIType type, int i)
 	{
+		index = i;
+		owner = newOwner;
+		itemTileType = type;
 		nonBlankObject.SetActive(false);
 		blankCover.SetActive(true);
 		tile.color = blankColor;
+		quantityTag.SetActive(false);
 		isBlank = true;
+		collider.enabled = true;
 	}
 
 	public void LoadItemRarity(RPGItem item)

@@ -85,7 +85,7 @@ public class PlayerInformation  {
 		for (int i = 0; i < NakedArmorInventory.Items.Count; i++) {
 			EquipItem(NakedArmorInventory.Items[i]);
 		}
-	}
+    }
 
     public void AddCurrency(int amount, BuyCurrencyType currency)
     {
@@ -101,8 +101,6 @@ public class PlayerInformation  {
 		{
 			CitizenPoints += amount;
 		}
-        GUIManager.Instance.MainGUI.UpdateCurrencyCount();
-
 		UpdateWalletParseData();
     }
     
@@ -120,7 +118,6 @@ public class PlayerInformation  {
 		{
 			CitizenPoints -= amount;
 		}
-        GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 		UpdateWalletParseData();
     }
 
@@ -128,7 +125,6 @@ public class PlayerInformation  {
 	{
 		BankCoins -= amount;
 		Coins += amount;
-		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 		UpdateWalletParseData();
 	}
  
@@ -136,7 +132,6 @@ public class PlayerInformation  {
 	{
 		BankCoins += amount;
 		Coins -= amount;
-		GUIManager.Instance.MainGUI.UpdateCurrencyCount();
 		UpdateWalletParseData();
 	}
 
@@ -191,10 +186,19 @@ public class PlayerInformation  {
 		{
 			item.IsItemEquipped = true;
 			item.isItemViewed = true;
+			if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
+			{
+				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			}
+			else if(item.rpgItem.ItemCategory == ItemType.Armor)
+			{
+				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			}
 			return true;
 		}
 		else
 			return false;
+
 	}
 
 	public bool UnequipItem(string itemID, int level)
@@ -204,6 +208,7 @@ public class PlayerInformation  {
 			if(NakedArmorInventory.Items[i].UniqueItemId == itemID && NakedArmorInventory.Items[i].Level == level)
 			{
 				NakedArmorInventory.Items[i].IsItemEquipped = false;
+				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 				return true;
 			}
 		}
@@ -212,6 +217,7 @@ public class PlayerInformation  {
 			if(ArmoryInventory.Items[i].UniqueItemId == itemID && ArmoryInventory.Items[i].Level == level)
 			{
 				ArmoryInventory.Items[i].IsItemEquipped = false;
+				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 				return true;
 			}
 		}
@@ -220,11 +226,17 @@ public class PlayerInformation  {
 
 	#region player shop
 
+	public void CollectFromShopTill()
+	{
+		Coins += shopTill;
+		shopTill = 0;
+		UpdateWalletParseData();
+    }
+
 	public void UpdatePlayerShop()
 	{
 		PlayerManager.Instance.avatarStatus.UpdateShopItems();
-		if(NetworkManager.Instance.usingParse)
-			UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
+		UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
 	}
 
 	public void UnstockItem(InventoryItem item, int amount)
@@ -346,19 +358,6 @@ public class PlayerInformation  {
 			ArmoryInventory.AddItem(item, amount);
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
-		/*else if(item.rpgItem.ItemCategory == ItemType.Currency)
-		{
-			if(item.rpgItem.ID == 1)
-			{
-				AddCurrency(amount, BuyCurrencyType.Coins);
-			}
-			if(item.rpgItem.ID == 2)
-			{
-				AddCurrency(amount, BuyCurrencyType.Magnets);
-			}
-			if(NetworkManager.Instance.usingParse)
-				UpdateWalletParseData();
-		}*/
 		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 		{
 			bool alreadyHasItemAtSameSlot = false;
@@ -390,9 +389,11 @@ public class PlayerInformation  {
 
 	public void RemoveItem(InventoryItem item, int amount)
 	{
+		Debug.Log("removing item");
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item, amount);
+			Debug.Log("removed armor");
 			if(NetworkManager.Instance.usingParse)
 				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
@@ -406,20 +407,17 @@ public class PlayerInformation  {
 			{
 				RemoveCurrency(amount, BuyCurrencyType.Magnets);
 			}
-			if(NetworkManager.Instance.usingParse)
-				UpdateWalletParseData();
+			UpdateWalletParseData();
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.RemoveItem(item, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 
@@ -433,20 +431,17 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, level, amount);
-			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.ReplaceNakedItem(item, level, 1);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
 			MainInventory.AddItem(item, level, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
 	}
 	
@@ -460,19 +455,16 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item, level, amount);
-			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.RemoveItem(item, level, amount);
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, level, amount);
-			if(NetworkManager.Instance.usingParse)
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 		}
     }
@@ -531,7 +523,8 @@ public class PlayerInformation  {
 
 	public void UpdateWalletParseData()
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		GUIManager.Instance.UpdateCurrency();
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
 			Debug.LogWarning("no parse id");
 			return;
@@ -554,7 +547,7 @@ public class PlayerInformation  {
 
 	public void UpdateInventoryParseData(string field, byte[] inventoryList)
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
 			Debug.LogWarning("no parse id");
 			return;
@@ -578,7 +571,7 @@ public class PlayerInformation  {
 
 	public void UpdateProfile()
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
 			Debug.LogWarning("no parse id");
 			return;

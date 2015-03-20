@@ -64,7 +64,13 @@ public class NPCGUIController : BasicGUIController {
 		case NPCGUIState.arena:
 			arenaGUI.Disable();
 			break;
-		}
+		case NPCGUIState.teleporter:
+			teleporterGUI.Disable();
+			break;
+		case NPCGUIState.minigame:
+			minigameGUI.Disable();
+            break;
+        }
 	}
 
 	void Start()
@@ -176,6 +182,15 @@ public class NPCGUIController : BasicGUIController {
 			break;
 
 		case NPCActivityType.Minigame:
+			DisplayMinigame((NPCMinigame)activeActivity);
+			break;
+		case NPCActivityType.Service:
+			Debug.Log("service");
+			if(activeActivity.ID == 3)
+			{
+				Debug.Log("teleporter");
+				DisplayTeleporter();
+			}
 			break;
 		}
 		/*if(activeActivity.conversation != null)

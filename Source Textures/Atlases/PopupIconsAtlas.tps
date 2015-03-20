@@ -170,6 +170,7 @@
             <filename>../new UI/reward_glow.png</filename>
             <filename>../new UI/lock.png</filename>
             <filename>../popup icons/burger.png</filename>
+            <filename>../new UI/trophy_icon.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

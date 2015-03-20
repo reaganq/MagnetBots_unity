@@ -94,7 +94,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: burger
-    x: 2
+    x: 250
     y: 1810
     width: 200
     height: 209
@@ -345,6 +345,19 @@ MonoBehaviour:
     y: 1552
     width: 256
     height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: trophy_icon
+    x: 2
+    y: 1810
+    width: 246
+    height: 224
     borderLeft: 0
     borderRight: 0
     borderTop: 0

@@ -97,8 +97,7 @@ public class BasicGUIController : MonoBehaviour {
 					GameObject itemTile = NGUITools.AddChild(gridPanelRoot, tilePrefab);
 					ShopItemTileButton tileButton = itemTile.GetComponent<ShopItemTileButton>();
 					tiles.Add(tileButton);
-				}
-			}
+				}}
 			for (int i = 0; i < tiles.Count; i++) {
 				if(i>=itemList.Count)
 				{
@@ -116,7 +115,7 @@ public class BasicGUIController : MonoBehaviour {
 			for (int i = 0; i < tiles.Count; i++) {
 				if(i>=itemList.Count)
 				{
-					tiles[i].LoadBlank();
+					tiles[i].LoadBlank(this, inventType, i);
 				}
 				else
 				{

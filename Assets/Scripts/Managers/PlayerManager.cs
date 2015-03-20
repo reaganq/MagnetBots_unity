@@ -30,7 +30,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerInformation Hero;
     public NPC ActiveNPC;
 	public NPCActivity activeActivity;
-	//public NPCMinigame ActiveMinigame;
+	public NPCMinigame ActiveMinigame;
 	public GameObject ActiveMinigameObject;
 	public WorldManager ActiveWorld;
 	public Zone _activeZone;
@@ -316,6 +316,7 @@ public class PlayerManager : MonoBehaviour
 		avatarObject.SetActive(false);
 		ActiveZone.zoneObject.SetActive(false);
 		ActiveMinigameObject = Instantiate(Resources.Load(minigame.PrefabDirectory) as GameObject) as GameObject;
+		ActiveMinigame = (NPCMinigame)activeActivity;
 		activityState = PlayerActivityState.minigame;
 		GUIManager.Instance.HideAllUI();
 	}

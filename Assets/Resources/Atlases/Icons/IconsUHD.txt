@@ -34,7 +34,7 @@
 },
 "burger.png":
 {
-	"frame": {"x":2,"y":1810,"w":200,"h":209},
+	"frame": {"x":250,"y":1810,"w":200,"h":209},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":200,"h":209},
@@ -191,6 +191,14 @@
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
 	"sourceSize": {"w":256,"h":256}
+},
+"trophy_icon.png":
+{
+	"frame": {"x":2,"y":1810,"w":246,"h":224},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":246,"h":224},
+	"sourceSize": {"w":246,"h":224}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
@@ -199,6 +207,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6cde1c99c4ab11752ea5baf050a7248a$"
+	"smartupdate": "$TexturePacker:SmartUpdate:db45ddf30d8585775c33682adc981126$"
 }
 }

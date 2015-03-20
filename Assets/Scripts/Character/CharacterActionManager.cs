@@ -306,7 +306,16 @@ public class CharacterActionManager : ActionManager {
 
     #endregion
 
+
+
 	#region food toy functions
+	
+	public void Dance()
+	{
+		CrossfadeAnimation("dance_robot1_rot", true);
+		actionState = ActionState.specialAction;
+		Invoke("ResetActionState", myAnimation["dance_robot1_rot"].length);
+	}
 
 	public void EatFood(string prefabPath)
 	{

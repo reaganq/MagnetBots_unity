@@ -527,10 +527,10 @@ MonoBehaviour:
     y: 1760
     width: 214
     height: 93
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 40
+    borderRight: 40
+    borderTop: 40
+    borderBottom: 40
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
@@ -813,10 +813,10 @@ MonoBehaviour:
     y: 1965
     width: 342
     height: 76
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 30
+    borderRight: 30
+    borderTop: 30
+    borderBottom: 30
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
