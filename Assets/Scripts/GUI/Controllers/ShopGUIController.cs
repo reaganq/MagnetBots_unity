@@ -16,6 +16,7 @@ public class ShopGUIController : BasicGUIController {
 	//public GameObject PreviousPageButton;
 	//public GameObject NextPageButton;
 	public GameObject inventoryRoot;
+	public UIGrid inventoryGrid;
 	public UILabel ShopNameLabel = null;
 	public UIPlayTween confirmationTween;
 	public UILabel itemNameLabel;
@@ -40,12 +41,12 @@ public class ShopGUIController : BasicGUIController {
     //public UISprite ItemSkillSprite = null;
     public void EnablePlayerShop(List<ParseInventoryItem> parseItemList, string playerName, PhotonPlayer shopKeeperPlayer)
 	{
-
+		Enable();
 		ShopNameLabel.text = playerName;
 		playerShopKeeper = shopKeeperPlayer;
 		UpdatePlayerShopitemList(parseItemList);
 		isPlayerShop = true;
-		Enable();
+
 	}
 
 
@@ -141,7 +142,10 @@ public class ShopGUIController : BasicGUIController {
 
 	public void CloseShop()
 	{
-		GUIManager.Instance.NPCGUI.HideShop();
+		if(isPlayerShop)
+			Disable();
+		else
+			GUIManager.Instance.NPCGUI.HideShop();
 	}
 
 	public void ResetQuantity()
@@ -175,12 +179,14 @@ public class ShopGUIController : BasicGUIController {
 		}
 		else
 		{
-			if (!PlayerManager.Instance.Hero.CanYouAfford(selectedItemList[CurrentSelectedItemIndex].rpgItem.BuyValue, selectedItemList[CurrentSelectedItemIndex].rpgItem.BuyCurrency))
+			if (!PlayerManager.Instance.Hero.CanYouAfford(selectedItemList[CurrentSelectedItemIndex].rpgItem.BuyValue, BuyCurrencyType.Coins))
 			{
 				notEnoughMoney.SetActive(true);
 				standardMessageObject.SetActive(false);
 				return;
 			}
+			PlayerManager.Instance.Hero.AddItem(selectedItemList[CurrentSelectedItemIndex], quantity);
+			PlayerManager.Instance.Hero.RemoveCurrency(selectedItemList[CurrentSelectedItemIndex].rpgItem.BuyValue*quantity, BuyCurrencyType.Coins);
 			//activeShop.SellItem(selectedItemList[CurrentSelectedItemIndex].rpgItem, selectedItemList[CurrentSelectedItemIndex].Level, quantity);
 			PlayerManager.Instance.ActiveWorld.BuyItemFromPlayer(selectedItemList[CurrentSelectedItemIndex].rpgItem.UniqueId,
 			                                                     selectedItemList[CurrentSelectedItemIndex].Level,
@@ -224,6 +230,7 @@ public class ShopGUIController : BasicGUIController {
     public void RefreshInventoryIcons()
     {
 		LoadShopItemTiles(selectedItemList, itemTiles, inventoryRoot, itemTilePrefab, inventoryType);
+		inventoryGrid.Reposition();
     }
 
 	public void ResetSelection()

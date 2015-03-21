@@ -78,9 +78,10 @@ public class ItemTileButton: UIDragDropItem
 			if(surface != null)
 			{
 				ExampleDragDropSurface dds = surface.GetComponent<ExampleDragDropSurface>();
-				
+				Debug.Log("uh oh");
 				if (dds != null)
 				{
+					Debug.Log("uh oh");
 					owner.OnDragDrop(index);
 					// Destroy this icon as it's no longer needed
 					NGUITools.Destroy(gameObject);
@@ -188,10 +189,14 @@ public class ItemTileButton: UIDragDropItem
 			canDisplayQuantity = true;
 			break;
 		case InventoryGUIType.quickInventory:
+			if(item.rpgItem.ItemCategory == ItemType.Armor || item.rpgItem.ItemCategory == ItemType.NakedArmor)
+				canDisplayQuantity = false;
+			else
+				canDisplayQuantity = true;
 			draggable = true;
 			canDisplayNew = false;
 			canDisplayTick = true;
-			canDisplayQuantity = false;
+
 			break;
 		case InventoryGUIType.Shop:
 			draggable = false;

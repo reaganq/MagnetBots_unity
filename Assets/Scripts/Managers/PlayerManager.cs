@@ -138,10 +138,20 @@ public class PlayerManager : MonoBehaviour
         //gameObject.AddComponent<GUIScale>();
     }
 
+	//only used when starting a fresh account or in offline direct scene load
     public void StartNewGame()
     {
-		Debug.Log("start new game");
-        Hero.StartNewGame();
+		if(!GameManager.Instance.GameHasStarted)
+		{
+			Debug.Log("start new game");
+			if(!GameManager.Instance.newGame)
+			{
+        		Hero.StartNewGame();
+			}
+
+			//prevents reloading data every time we switch worlds.
+			GameManager.Instance.GameHasStarted = true;
+		}
 		//GameManager.Instance.GameHasStarted = true;
 		//LoadAvatar();
     }
@@ -149,6 +159,7 @@ public class PlayerManager : MonoBehaviour
 	public void LoadGame()
 	{
 		StartCoroutine(Hero.RetrieveParseData());
+		GameManager.Instance.GameHasStarted = true;
 	}
 	
     public void LoadAvatar()
@@ -170,7 +181,7 @@ public class PlayerManager : MonoBehaviour
 		//UICamera.fallThrough = avatarObject;
 		avatar = avatarObject.GetComponent<Avatar>();
 		avatarPhotonView = avatarObject.GetComponent<PhotonView>();
-		RefreshAvatar();
+		Invoke("RefreshAvatar", 0.1f);
 		//PlayerCamera.Instance.targetTransform = avatarObject.transform;
 		//LoadCharacterParts();
     }
@@ -206,6 +217,7 @@ public class PlayerManager : MonoBehaviour
 		Hero.EquipItem(Hero.ArmoryInventory.Items[15]);
 		Hero.EquipItem(Hero.ArmoryInventory.Items[16]);
 		Hero.EquipItem(Hero.ArmoryInventory.Items[17]);
+		Hero.UpdatePlayerShop();
 	}
 
 	public void ChangeWorld()
@@ -215,7 +227,7 @@ public class PlayerManager : MonoBehaviour
 		SpawnPoint = ActiveWorld.DefaultZone.spawnPoint;
 		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
 		GameManager.Instance.GameIsPaused = false;
-		if(GameManager.Instance.newGame)
+		if(GameManager.Instance.newGame && Application.loadedLevel == 1)
 		{
 			GameObject cutscene = Instantiate(Resources.Load("Cutscenes/IntroCinematic") as GameObject) as GameObject;
 			Debug.Log("load cutscene");
@@ -224,7 +236,9 @@ public class PlayerManager : MonoBehaviour
 		{
 			RefreshAvatar();
 			ActiveZone = ActiveWorld.DefaultZone;
-		} 
+		}
+		Debug.Log(Time.realtimeSinceStartup);
+		GUIManager.Instance.loadingGUI.HideLoadScreen();
 	}
 
 	/*public void ChangeZone(Zone newZone)
@@ -254,7 +268,7 @@ public class PlayerManager : MonoBehaviour
 	public IEnumerator GotoZoneSequence(Zone newZone)
 	{
 		Debug.Log("go to new arena");
-		GUIManager.Instance.loadingGUI.Enable();
+		GUIManager.Instance.loadingGUI.Enable(true);
 		yield return new WaitForSeconds(1.5f);
 		ActiveZone = newZone;
 

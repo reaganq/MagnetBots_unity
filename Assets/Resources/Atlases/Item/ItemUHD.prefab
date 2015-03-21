@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -40,8 +41,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 92215223dbb304f748c35d59509572ed, type: 2}
   mSprites:
-  - name: food_cereal
+  - name: bolt
     x: 2
+    y: 174
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: food_cereal
+    x: 174
     y: 2
     width: 170
     height: 170
@@ -55,7 +69,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: GoldOpal
     x: 174
-    y: 174
+    y: 346
     width: 170
     height: 170
     borderLeft: 0
@@ -67,7 +81,20 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: NormalOpal
-    x: 174
+    x: 2
+    y: 346
+    width: 170
+    height: 170
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: panel
+    x: 2
     y: 2
     width: 170
     height: 170
@@ -80,7 +107,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: UpgradeOpal
-    x: 2
+    x: 174
     y: 174
     width: 170
     height: 170

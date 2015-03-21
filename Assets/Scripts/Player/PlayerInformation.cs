@@ -59,10 +59,14 @@ public class PlayerInformation  {
 
 		//PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 1, 1 , 5);
-		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1 , 1);
+		//PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1 , 1);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 6, 1 , 10);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 7, 1 , 3);
         AddCurrency(957,BuyCurrencyType.Coins);
         AddCurrency(100,BuyCurrencyType.Magnets);
 		AddCurrency(152, BuyCurrencyType.CitizenPoints);
+		StockItem (ArmoryInventory.Items[2], 1);
+		StockItem(ArmoryInventory.Items[4], 1);
 		EquipBaseNakedArmor();
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);
@@ -231,32 +235,39 @@ public class PlayerInformation  {
 		Coins += shopTill;
 		shopTill = 0;
 		UpdateWalletParseData();
+
     }
 
 	public void UpdatePlayerShop()
 	{
-		PlayerManager.Instance.avatarStatus.UpdateShopItems();
+		if(PlayerManager.Instance.avatarStatus != null)
+			PlayerManager.Instance.avatarStatus.UpdateShopItems();
 		UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
+		if(GUIManager.Instance.PlayerShopGUI.isDisplayed)
+			GUIManager.Instance.PlayerShopGUI.RefreshInventoryIcons();
 	}
 
 	public void UnstockItem(InventoryItem item, int amount)
 	{
 		playerShopInventory.RemoveItem(item, amount);
 		AddItem(item, amount);
+		Debug.Log("here");
 		UpdatePlayerShop();
 	}
 
 	public void StockItem(InventoryItem item, int amount)
 	{
 		RemoveItem(item, amount);
+		Debug.Log(amount);
 		playerShopInventory.AddItem(item, amount);
+		Debug.Log(playerShopInventory.Items.Count + " " + playerShopInventory.Items[0].CurrentAmount);
 		UpdatePlayerShop();
-
 	}
 
 	public void SoldItem(string uniqueItemId, int level, int amount)
 	{
-		playerShopInventory.RemoveItemByUniqueID(uniqueItemId, level, amount);
+		shopTill = shopTill + playerShopInventory.RemoveItemByUniqueID(uniqueItemId, level, amount);
+		UpdateWalletParseData();
 		UpdatePlayerShop();
 	}
 

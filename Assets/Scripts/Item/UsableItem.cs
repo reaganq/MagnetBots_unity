@@ -71,6 +71,7 @@ public enum ItemType
 	NakedArmor = 9,
 	Badge = 10,
 	DanceMove = 11,
+	Construction = 12
 }
 
 public enum UsageSkillType

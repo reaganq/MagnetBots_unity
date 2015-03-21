@@ -463,6 +463,7 @@
      <Compile Include="Assets\Scripts\Enemies\Skills\RangedAISkill.cs" />
      <Compile Include="Assets\Scripts\GUI\CategoryButton.cs" />
      <Compile Include="Assets\Scripts\GUI\ChatBox.cs" />
+     <Compile Include="Assets\Scripts\GUI\ConstructionTile.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\AnvilGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ArenaGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\BankGUIController.cs" />
@@ -533,6 +534,7 @@
      <Compile Include="Assets\Scripts\Misc\SetRenderQueue.cs" />
      <Compile Include="Assets\Scripts\Misc\TrailerCameraControl.cs" />
      <Compile Include="Assets\Scripts\NPC\Anvil.cs" />
+     <Compile Include="Assets\Scripts\NPC\Construction.cs" />
      <Compile Include="Assets\Scripts\NPC\NPC.cs" />
      <Compile Include="Assets\Scripts\NPC\NPCActivity.cs" />
      <Compile Include="Assets\Scripts\NPC\NPCArena.cs" />
@@ -829,6 +831,7 @@
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Basic_OneLight.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VignettingShader.shader" />
      <None Include="Assets\Lightmapping Extended\license.txt" />
+     <None Include="Assets\RPGKit\Resources\XML\CONSTRUCTIONEN.xml" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Tonemapper.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
      <None Include="Assets\JMO Assets\Toony Colors Pro\Shaders\TGP_Include.cginc" />

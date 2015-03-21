@@ -109,4 +109,46 @@
     <Rarity>Rare</Rarity>
     <maxLevel>0</maxLevel>
   </RPGItem>
+  <RPGItem>
+    <IconPath>bolt</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
+    <ID>6</ID>
+    <Name>Bolt</Name>
+    <Description>basic bolt</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>Construction</ItemCategory>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>true</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>1000</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>0</maxLevel>
+  </RPGItem>
+  <RPGItem>
+    <IconPath>panel</IconPath>
+    <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
+    <ID>7</ID>
+    <Name>Sheet Metal</Name>
+    <Description>basic sheet metal</Description>
+    <SystemDescription />
+    <IsUsable>false</IsUsable>
+    <IsEquippable>false</IsEquippable>
+    <IsUpgradeable>false</IsUpgradeable>
+    <ItemCategory>Construction</ItemCategory>
+    <EquipmentSlotIndex>None</EquipmentSlotIndex>
+    <isLimitedUse>true</isLimitedUse>
+    <FBXName />
+    <BuyCurrency>Magnets</BuyCurrency>
+    <Stackable>true</Stackable>
+    <BuyValue>120</BuyValue>
+    <SellValue>0</SellValue>
+    <Rarity>Legendary</Rarity>
+    <maxLevel>0</maxLevel>
+  </RPGItem>
 </ArrayOfRPGItem>

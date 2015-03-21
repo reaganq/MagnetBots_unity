@@ -19,15 +19,18 @@ public class TeamMemberUI : MonoBehaviour {
 			Debug.Log("found the son of a bitch");
 			targetCS = pc;
 			portraitIcon.spriteName = targetCS.headPortraitString;
+			targetCS.DisplayTeamSign(true);
 			nameLabel.text = targetCS.characterName;
 			Debug.Log(nameLabel.text);
+			isDisplayed = true;
+			gameObject.SetActive(true);
 		}
-		isDisplayed = true;
-		gameObject.SetActive(true);
 	}
 
 	public void Deactivate()
 	{
+		if(targetCS!=null)
+			targetCS.DisplayTeamSign(false);
 		targetCS = null;
 		isDisplayed = true;
 		gameObject.SetActive(false);

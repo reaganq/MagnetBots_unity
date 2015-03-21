@@ -28,11 +28,13 @@ public class PlayerCharacter : CharacterStatus {
 		{
 			this.tag = "OtherPlayer";
 			avatar.RequestInitInfo();
+			RequestShopItems();
 		}
 	}
 
 	public void UpdateShopItems()
 	{
+		//Debug.Log(PlayerManager.Instance.Hero.playerShopInventory.Items[0].CurrentAmount);
 		myPhotonView.RPC("NetworkUpdateShopItems", PhotonTargets.All, PlayerManager.Instance.Hero.ParseInventoryList(PlayerManager.Instance.Hero.playerShopInventory));
 	}
 
@@ -43,8 +45,19 @@ public class PlayerCharacter : CharacterStatus {
 		BinaryFormatter bb = new BinaryFormatter();
 		MemoryStream mm = new MemoryStream(shopItemdsData);
 		shopItems = (List<ParseInventoryItem>)bb.Deserialize(mm);
-		if(myPhotonView.isMine && GUIManager.Instance.ShopGUI.playerShopKeeper == myPhotonView.owner)
+		if(!myPhotonView.isMine && GUIManager.Instance.ShopGUI.playerShopKeeper == myPhotonView.owner)
 			GUIManager.Instance.ShopGUI.UpdatePlayerShopitemList(shopItems);
+	}
+
+	public void RequestShopItems()
+	{
+		myPhotonView.RPC("NetworkRequestShopItems", myPhotonView.owner);
+	}
+
+	[RPC]
+	public void NetworkRequestShopItems(PhotonMessageInfo info)
+	{
+		UpdateShopItems();
 	}
 
 	public void UpdatePortrait(string path)
@@ -77,12 +90,14 @@ public class PlayerCharacter : CharacterStatus {
 
 	public void DisplayInfoByZone()
 	{
+		Debug.Log("local display HUD by zone");
 		myPhotonView.RPC("NetworkDisplayInfoByZone", PhotonTargets.All, PlayerManager.Instance.ActiveZone.myPhotonView.viewID);
 	}
 
 	[RPC]
 	public void NetworkDisplayInfoByZone(int zoneID)
 	{
+		Debug.Log("display HUD by zone" + zoneID);
 		zoneViewID = zoneID;
 		PhotonView zoneView = PhotonView.Find(zoneViewID);
 		Zone newZone = zoneView.GetComponent<Zone>();
@@ -101,6 +116,11 @@ public class PlayerCharacter : CharacterStatus {
 			else
 				DisplayHpBar(false);
 		}
+	}
+
+	public void DisplayTeamSign(bool state)
+	{
+		HUD.teamIcon.SetActive(state);
 	}
 
 	/*public override void ChangeMovementSpeed(float change)

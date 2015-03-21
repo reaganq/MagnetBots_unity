@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!82 &8200000
 AudioSource:
   m_ObjectHideFlags: 1
@@ -100,21 +101,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActiveNPC: {fileID: 0}
+  activeActivity:
+    IconPath: 
+    AtlasName: 
+    activityType: 0
+    conversationID: 0
+    npcIconAtlas: Atlases/Icons/IconsAtlas
+    npcIconSprite: 
+    npcButtonText: 
   ActiveMinigame:
+    IconPath: 
+    AtlasName: Atlases/MiniGames/
     activityType: 0
     conversationID: 0
     npcIconAtlas: 
     npcIconSprite: 
     npcButtonText: 
-    AtlasName: Atlases/MiniGames/
-    PortraitIcon: 
     PrefabDirectory: MiniGames/
   ActiveMinigameObject: {fileID: 0}
   ActiveWorld: {fileID: 0}
-  ActiveZone: {fileID: 0}
+  _activeZone: {fileID: 0}
+  cachedTownPosition: {x: 0, y: 0, z: 0}
   ActiveArena: {fileID: 0}
   activityState: 0
   data: {fileID: 11400004}
+  activeCutscene: {fileID: 0}
   SpawnPoint: {fileID: 0}
   avatarPrefab: {fileID: 100278, guid: 889bd97a9638648b9805ff1318591f2e, type: 2}
   avatarObject: {fileID: 0}
@@ -124,7 +135,9 @@ MonoBehaviour:
   avatarStatus: {fileID: 0}
   avatarNetworkMovement: {fileID: 0}
   avatarPhotonView: {fileID: 0}
-  isPartyLeader: 0
+  _partyMembers: []
+  partyChallengeReplies: 
+  startedPartyChallenge: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,45 +173,36 @@ MonoBehaviour:
     subcategories:
     - name: All
       iconName: 
-      subcategories: []
     - name: Head
       iconName: 
-      subcategories: []
     - name: Body
       iconName: 
-      subcategories: []
     - name: ArmL
       iconName: 
-      subcategories: []
     - name: ArmR
       iconName: 
-      subcategories: []
     - name: Legs
       iconName: 
-      subcategories: []
   - name: Food
     iconName: 
     subcategories:
     - name: All
       iconName: 
-      subcategories: []
   - name: Toys
     iconName: 
     subcategories:
     - name: All
       iconName: 
-      subcategories: []
-  - name: Upgrade Materials
+  - name: Construction
     iconName: 
     subcategories:
     - name: All
       iconName: 
-      subcategories: []
-  defaultHeadObj: 
-  defaultChestObj: 
-  defaultArmLObj: 
-  defaultArmRObj: 
-  defaultLegsObj: 
+  defaultHeadObj: 1
+  defaultChestObj: 2
+  defaultArmLObj: 3
+  defaultArmRObj: 4
+  defaultLegsObj: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

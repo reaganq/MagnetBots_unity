@@ -145,4 +145,5 @@ MonoBehaviour:
   - Die
   - NetworkBuyItemFromPlayer
   - NetworkUpdateShopItems
+  - NetworkRequestShopItems
   DisableAutoOpenWizard: 0

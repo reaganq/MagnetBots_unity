@@ -51,7 +51,7 @@ public class IntroGUIController : MonoBehaviour {
 		{
 			quickStartClicked = true;
 			NetworkManager.Instance.usingParse = false;
-			PlayerManager.Instance.StartNewGame();
+
 			StartGame();
 		}
 	}
@@ -59,9 +59,9 @@ public class IntroGUIController : MonoBehaviour {
 	//int world id
     public void StartGame()
     {
+		PlayerManager.Instance.StartNewGame();
 		loadingLabel.text = "loading";
-		load();
-		GameManager.Instance.GameHasStarted = true;
+		GameManager.Instance.loadNewLevel(1);
     }
 
     public string levelName;
@@ -86,26 +86,7 @@ public class IntroGUIController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         ActivateScene();
     }
-
-	public void load()
-	{
-		//startButton.SetActive(false);
-		//loadingLabel.SetActive(true);
-		//NetworkManager.Instance.Connect();
-		Hashtable worldID = new Hashtable() {{"world", GameManager.Instance.targetLevel.ToString()}};
-		PhotonNetwork.JoinRandomRoom(worldID, 0);
-		//yield return null;
-		/*while(!NetworkManager.Instance.isConnectedToServer)
-		{
-			yield return null;
-		}
-		yield return new WaitForSeconds(1);
-		GameManager.Instance.GameHasStarted = true;
-		GameManager.Instance.GameIsPaused = false;
-		GUIManager.Instance.StartGame();
-		PhotonNetwork.LoadLevel(1);*/
-	}
-    
+	
     public void ActivateScene() {
         async.allowSceneActivation = true;
         GameManager.Instance.GameIsPaused = false;

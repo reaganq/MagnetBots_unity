@@ -162,8 +162,6 @@ public class NPCGUIController : BasicGUIController {
 
 	public void OnActivityButtonPressed(int index)
 	{
-		Debug.Log("activity pressed" + index);
-		Debug.Log(activities[index].activityType.ToString() + activities[index].Name);
 		activeActivity = activities[index];
 		PlayerManager.Instance.activeActivity = activeActivity;
 		switch(activeActivity.activityType)
@@ -185,10 +183,8 @@ public class NPCGUIController : BasicGUIController {
 			DisplayMinigame((NPCMinigame)activeActivity);
 			break;
 		case NPCActivityType.Service:
-			Debug.Log("service");
 			if(activeActivity.ID == 3)
 			{
-				Debug.Log("teleporter");
 				DisplayTeleporter();
 			}
 			break;

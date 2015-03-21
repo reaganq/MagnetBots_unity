@@ -56,6 +56,7 @@ public class GUIManager : MonoBehaviour {
 	public ProfileGUIController profileGUI;
 	public ConversationGUIController conversationGUI;
 	public OpeningCinematicGUIController nakedArmorGUI;
+	public ConstructionGUIController constructionGUI;
 	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;
@@ -282,7 +283,12 @@ public class GUIManager : MonoBehaviour {
     
     public void HideQuickInventory ()
     {
-		EnterGUIState(UIState.main);
+		if(uiState == UIState.construction)
+		{
+			QuickInventoryGUI.Disable();
+		}
+		else
+			EnterGUIState(UIState.main);
     }
 
 	public void DisplayNPC()
@@ -304,6 +310,12 @@ public class GUIManager : MonoBehaviour {
         }*/
     }
 
+	public void DisplayConstruction(Construction construction)
+	{
+		constructionGUI.Enable(construction);
+		EnterGUIState(UIState.construction);
+	}
+
 	public void DisplayProfile(PhotonPlayer player)
 	{
 		EnterGUIState(UIState.profile);
@@ -313,6 +325,11 @@ public class GUIManager : MonoBehaviour {
 	public void HideProfile()
 	{
 		EnterGUIState(UIState.main);
+	}
+
+	public void DisplayOtherPlayerShop(PlayerCharacter targetCharacter, PhotonPlayer player)
+	{
+		ShopGUI.EnablePlayerShop(targetCharacter.shopItems, targetCharacter.characterName, player);
 	}
     
     public void HideNPC()
@@ -348,7 +365,7 @@ public class GUIManager : MonoBehaviour {
 		NotificationGUI.HideHoverBox();
 	}*/
 
-	public void DisplayHoverPopup(CharacterStatus cs)
+	public void DisplayHoverPopup(PlayerCharacter cs)
 	{
 		if(IsUIBusy())
 			return;
@@ -456,6 +473,7 @@ public enum UIState
 	cinematic,
 	battle,
 	reward,
+	construction,
 }
 
 [System.Serializable]

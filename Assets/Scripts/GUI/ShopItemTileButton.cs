@@ -80,6 +80,7 @@ public class ShopItemTileButton: MonoBehaviour
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.rpgItem.IconPath;
 		quantityTag.SetActive(true);
+		Debug.Log("item has: " + item.CurrentAmount);
 		amountLabel.text = item.CurrentAmount.ToString();
 		LoadItemRarity(item.rpgItem);
 		for (int i = 0; i < gradeStars.Length; i++) {
@@ -92,12 +93,17 @@ public class ShopItemTileButton: MonoBehaviour
 				gradeStars[i].SetActive(true);
 			}
 		}
-		if(item.rpgItem.BuyCurrency == BuyCurrencyType.Coins)
+		if(itemTileType == InventoryGUIType.Shop)
+		{
+			if(item.rpgItem.BuyCurrency == BuyCurrencyType.Coins)
+				currencyIcon.spriteName = "currency_coin";
+			else if( item.rpgItem.BuyCurrency == BuyCurrencyType.Magnets)
+				currencyIcon.spriteName = "currency_magnet";
+			else if(item.rpgItem.BuyCurrency == BuyCurrencyType.CitizenPoints)
+				currencyIcon.spriteName = "currency_citizen";
+		}
+		else
 			currencyIcon.spriteName = "currency_coin";
-		else if( item.rpgItem.BuyCurrency == BuyCurrencyType.Magnets)
-			currencyIcon.spriteName = "currency_magnet";
-		else if(item.rpgItem.BuyCurrency == BuyCurrencyType.CitizenPoints)
-			currencyIcon.spriteName = "currency_citizen";
 
 		priceLabel.text = item.rpgItem.BuyValue.ToString();
 

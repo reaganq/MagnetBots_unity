@@ -161,7 +161,10 @@ public class Inventory  : BasicInventory
 		List<InventoryItem> result = new List<InventoryItem>();
 		for (int i = 0; i < Items.Count; i++) {
 			if(Items[i].rpgItem.ItemCategory == category)
+			{
 				result.Add(Items[i]);
+				Debug.Log("added an item to full list");
+			}
 		}
 		return result;
 	}
@@ -228,8 +231,13 @@ public class Inventory  : BasicInventory
 					return;
 				}
 			}
-			item.isItemViewed = false;
-			Items.Add(item);
+			InventoryItem newItem = new InventoryItem();
+			newItem.rpgItem = item.rpgItem;
+			newItem.Level = item.Level;
+			newItem.UniqueItemId = item.rpgItem.UniqueId;
+			newItem.CurrentAmount = amount;
+			newItem.isItemViewed = false;
+			Items.Add(newItem);
 			Debug.LogWarning("ADDING ITEM: " + amount + item.UniqueItemId + item.rpgItem.UniqueId);
 		}
 		else
@@ -240,9 +248,9 @@ public class Inventory  : BasicInventory
 				newItem.rpgItem = item.rpgItem;
 				newItem.Level = item.Level;
 				newItem.UniqueItemId = item.rpgItem.UniqueId;
-				newItem.CurrentAmount = 1;
+				newItem.CurrentAmount = amount;
 				newItem.isItemViewed = false;
-				Items.Add(item);
+				Items.Add(newItem);
 			}
 		}
 	}
@@ -315,18 +323,20 @@ public class Inventory  : BasicInventory
 		return false;
 	}
 
-	public bool RemoveItemByUniqueID(string uniqueItemId, int level, int amount)
+	public int RemoveItemByUniqueID(string uniqueItemId, int level, int amount)
 	{
+		int value = 0;
 		for (int i = 0; i < Items.Count; i++) {
 			if(Items[i].UniqueItemId == uniqueItemId && Items[i].Level == level)
 			{
 				Items[i].CurrentAmount -= amount;
+				value += Items[i].rpgItem.BuyValue*amount;
 				if(Items[i].CurrentAmount <= 0)
 					Items.RemoveAt(i);
-				return true;
+				return value;
 			}
 		}
-		return false;
+		return value;
 	}
 	
 	public bool RemoveItem(RPGItem itemToRemove, int level)

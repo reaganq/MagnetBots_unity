@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Reflection;
 using System;
+using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public class GameManager : MonoBehaviour {
  
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour {
 	public bool teststate;
 	public bool newGame;
 	public int targetLevel = 1;
+	private bool isLoadingNewLevel = false;
 
     void Awake()
     {
@@ -98,13 +100,52 @@ public class GameManager : MonoBehaviour {
 		}
     }
 
+	public void loadNewLevel(int level)
+	{
+		Debug.Log("LOADING NEW LEVEL");
+		StartCoroutine(LoadNewLevelSequence(level));
+	}
+
+	public IEnumerator LoadNewLevelSequence(int level)
+	{
+		GUIManager.Instance.loadingGUI.Enable(false);
+		targetLevel = level;
+		//yield return new WaitForSeconds(0.5f);
+		if(PhotonNetwork.room != null)
+		{
+
+			PhotonNetwork.LeaveRoom();
+			isLoadingNewLevel = true;
+			if(NetworkManager.Instance.offlineMode)
+				OnJoinedLobby();
+			else
+				PhotonNetwork.JoinLobby();
+			yield break;
+		}
+		Hashtable worldID = new Hashtable() {{"world", targetLevel.ToString()}};
+		Debug.Log("trying to join room");
+		PhotonNetwork.JoinRandomRoom(worldID, 0);
+		isLoadingNewLevel = false;
+		yield return null;
+	}
+
+	public void OnJoinedLobby()
+	{
+		if(isLoadingNewLevel)
+		{
+			Hashtable worldID = new Hashtable() {{"world", targetLevel.ToString()}};
+			Debug.Log("trying to join room");
+			PhotonNetwork.JoinRandomRoom(worldID, 0);
+			isLoadingNewLevel = false;
+		}
+	}
+
     public void OnLevelWasLoaded(int level)
     {
         if(level == 0)
         {
 			//StartCoroutine("LoadStandard");
             GUIManager.Instance.EnterGUIState(UIState.login);
-            GameHasStarted = false;
             GameIsPaused = true;
 
             //login
@@ -115,7 +156,7 @@ public class GameManager : MonoBehaviour {
         else
         {
 			//Debug.Log("onlevelwasloaded");
-			Debug.Log("load standard");
+			Debug.Log("load standard" + Time.realtimeSinceStartup);
 			StartCoroutine("LoadStandard");
 
         }
@@ -141,16 +182,6 @@ public class GameManager : MonoBehaviour {
 		yield return null;
 		PlayerCamera.Instance.Reset();
 	}
-
-    public void LoadWorld(string name)
-    {
-        if(inputType == InputType.TouchInput)
-        {
-            joystick.enable = false;
-        }
-        //PlayerManager.Instance.DisableAvatarInput();
-        Application.LoadLevel(name);
-    }
 }
 
 public enum InputType

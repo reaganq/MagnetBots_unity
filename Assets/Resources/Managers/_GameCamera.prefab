@@ -180,6 +180,7 @@ MonoBehaviour:
   childCamera: {fileID: 2000000}
   defaultPos: {fileID: 400004}
   quickArmoryPos: {fileID: 400006}
+  defaultFOV: 60
   quickInventoryCameraRectOffset: 0
   quickSingleInventoryCameraRectOffset: 0
 --- !u!114 &11400002

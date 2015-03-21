@@ -150,6 +150,8 @@
             <filename>GoldOpal.png</filename>
             <filename>NormalOpal.png</filename>
             <filename>food_cereal.png</filename>
+            <filename>bolt.png</filename>
+            <filename>panel.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

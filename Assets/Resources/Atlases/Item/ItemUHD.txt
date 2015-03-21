@@ -2,7 +2,7 @@
 
 "GoldOpal.png":
 {
-	"frame": {"x":174,"y":174,"w":170,"h":170},
+	"frame": {"x":174,"y":346,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -10,13 +10,21 @@
 },
 "NormalOpal.png":
 {
-	"frame": {"x":174,"y":2,"w":170,"h":170},
+	"frame": {"x":2,"y":346,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
 	"sourceSize": {"w":170,"h":170}
 },
 "UpgradeOpal.png":
+{
+	"frame": {"x":174,"y":174,"w":170,"h":170},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
+	"sourceSize": {"w":170,"h":170}
+},
+"bolt.png":
 {
 	"frame": {"x":2,"y":174,"w":170,"h":170},
 	"rotated": false,
@@ -25,6 +33,14 @@
 	"sourceSize": {"w":170,"h":170}
 },
 "food_cereal.png":
+{
+	"frame": {"x":174,"y":2,"w":170,"h":170},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
+	"sourceSize": {"w":170,"h":170}
+},
+"panel.png":
 {
 	"frame": {"x":2,"y":2,"w":170,"h":170},
 	"rotated": false,
@@ -37,8 +53,8 @@
 	"version": "1.0",
 	"image": "ItemUHD.png",
 	"format": "RGBA8888",
-	"size": {"w":512,"h":512},
+	"size": {"w":512,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8f212973a149d1f394e83fc7a799fb1b$"
+	"smartupdate": "$TexturePacker:SmartUpdate:5152c65ef9e88c67f291bcae07c8201d$"
 }
 }

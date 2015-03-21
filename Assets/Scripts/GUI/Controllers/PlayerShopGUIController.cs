@@ -18,6 +18,7 @@ public class PlayerShopGUIController : BasicGUIController {
 	//public GameObject PreviousPageButton;
 	//public GameObject NextPageButton;
 	public GameObject inventoryRoot;
+	public UIGrid inventoryGrid;
     
 	public void Start()
 	{
@@ -30,7 +31,6 @@ public class PlayerShopGUIController : BasicGUIController {
 
 	public override void Enable ()
 	{
-		selectedItemList = PlayerManager.Instance.Hero.playerShopInventory.Items;
 		RefreshInventoryIcons();
 		base.Enable ();
 	}
@@ -53,12 +53,16 @@ public class PlayerShopGUIController : BasicGUIController {
     
 	public override void ReceiveDestroyButtonMessage(int index)
 	{
+		PlayerManager.Instance.Hero.UnstockItem(selectedItemList[index], selectedItemList[index].CurrentAmount);
+		RefreshInventoryIcons();
 		//unstock item;
 	}
 	
     public void RefreshInventoryIcons()
     {
+		selectedItemList = PlayerManager.Instance.Hero.playerShopInventory.Items;
 		LoadShopItemTiles(selectedItemList, itemTiles, inventoryRoot, itemTilePrefab, inventoryType);
+		inventoryGrid.Reposition();
     }
     
     public void IncreaseCount()

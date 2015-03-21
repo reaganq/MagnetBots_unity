@@ -13,6 +13,8 @@ public class TeleporterGUIController : BasicGUIController {
 	public UILabel descriptionlabel;
 	//public string naSpriteName;
 	public int selectedIndex;
+	public GameObject visitbutton;
+	public bool isVisitPressed;
 	//public UIPlayTween portraitTweener;
 	//public TweenPosition portraitPosTween;
 	//public Transform portraitPosRef;
@@ -50,6 +52,7 @@ public class TeleporterGUIController : BasicGUIController {
 	}*/
 	public override void Enable ()
 	{
+		isVisitPressed = false;
 		OnBackButtonPressed();
 		base.Enable ();
 	}
@@ -66,6 +69,12 @@ public class TeleporterGUIController : BasicGUIController {
 	public void UpdateDetailsBox()
 	{
 		detailPortraitSprite.spriteName = townPortraitObjects[selectedIndex].spriteName;
+		if((selectedIndex +1) == GameManager.Instance.targetLevel)
+		{
+			visitbutton.SetActive(false);
+		}
+		else
+			visitbutton.SetActive(true);
 		//DetailsLabel.text = activeArena.Enemies[selectedCardIndex].Description;
 		/*partyListText.text = string.Empty;
 		for (int i = 0; i < PlayerManager.Instance.partyMembers.Count; i++) 
@@ -88,6 +97,12 @@ public class TeleporterGUIController : BasicGUIController {
 
 	public void OnTravelButtonPressed()
 	{
+		if(!isVisitPressed)
+		{
+			isVisitPressed = true;
+			GameManager.Instance.loadNewLevel(selectedIndex +1);
+		}
+
 		//travel to generaldata.towns[selectedIndex].sceneID;
 	}
 

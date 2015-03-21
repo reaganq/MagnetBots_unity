@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ArrayOfRPGConstruction xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <RPGConstruction>
+    <ID>1</ID>
+    <Name>Arcade</Name>
+    <Description />
+    <SystemDescription />
+    <activityType>Minigame</activityType>
+    <conversationID>0</conversationID>
+    <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <Conditions />
+    <requiredItems>
+      <Task TT="BringItem" ATR="5" PT="ITEM" TASKTARGET="6" TL="1" CA="0" QLD="" />
+      <Task TT="BringItem" ATR="1" PT="ITEM" TASKTARGET="7" TL="1" CA="0" QLD="" />
+    </requiredItems>
+  </RPGConstruction>
+</ArrayOfRPGConstruction>

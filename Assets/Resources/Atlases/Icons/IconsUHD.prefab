@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: 1
     x: 518
-    y: 1315
+    y: 1057
     width: 177
     height: 621
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bank
-    x: 1444
-    y: 1228
+    x: 1213
+    y: 1176
     width: 256
     height: 256
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: chat
-    x: 1186
-    y: 1176
+    x: 1742
+    y: 712
     width: 256
     height: 256
     borderLeft: 0
@@ -120,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: construction
-    x: 928
-    y: 1176
+    x: 1226
+    y: 918
     width: 256
     height: 256
     borderLeft: 0
@@ -133,8 +133,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: gym
-    x: 1742
-    y: 970
+    x: 1484
+    y: 712
     width: 256
     height: 256
     borderLeft: 0
@@ -172,8 +172,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quest
-    x: 1484
-    y: 970
+    x: 1120
+    y: 1573
     width: 256
     height: 256
     borderLeft: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: quickInventory_addFriend
     x: 1226
-    y: 918
+    y: 660
     width: 256
     height: 256
     borderLeft: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: quickInventory_armor
     x: 968
-    y: 918
+    y: 712
     width: 256
     height: 256
     borderLeft: 0
@@ -211,8 +211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_dance
-    x: 1742
-    y: 712
+    x: 955
+    y: 1315
     width: 256
     height: 256
     borderLeft: 0
@@ -224,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_food
-    x: 1484
-    y: 712
+    x: 955
+    y: 1057
     width: 256
     height: 256
     borderLeft: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_profile
-    x: 1226
-    y: 660
+    x: 862
+    y: 1573
     width: 256
     height: 256
     borderLeft: 0
@@ -250,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_teamInvite
-    x: 968
-    y: 660
+    x: 697
+    y: 1315
     width: 256
     height: 256
     borderLeft: 0
@@ -263,7 +263,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: quickInventory_toys
-    x: 670
+    x: 697
     y: 1057
     width: 256
     height: 256
@@ -302,8 +302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: shop
-    x: 412
-    y: 1057
+    x: 604
+    y: 1680
     width: 256
     height: 256
     borderLeft: 0
@@ -319,6 +319,19 @@ MonoBehaviour:
     y: 2
     width: 989
     height: 427
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: team_icon
+    x: 452
+    y: 1810
+    width: 150
+    height: 150
     borderLeft: 0
     borderRight: 0
     borderTop: 0

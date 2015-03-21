@@ -312,6 +312,6 @@ public class UITable : UIWidgetContainer
 		if (onReposition != null)
 			onReposition();
 
-		Debug.Log("reposition table");
+		//Debug.Log("reposition table");
 	}
 }

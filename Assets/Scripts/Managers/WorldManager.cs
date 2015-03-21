@@ -66,7 +66,7 @@ public class WorldManager : Photon.MonoBehaviour {
 
 	public void BuyItemFromPlayer(string uniqueItemId, int level, int amount, PhotonPlayer targetPlayer)
 	{
-		myPhotonView.RPC("NetworkBuItemFromPlayer", targetPlayer, uniqueItemId, level, amount);
+		myPhotonView.RPC("NetworkBuyItemFromPlayer", targetPlayer, uniqueItemId, level, amount);
 	}
 
 	[RPC]

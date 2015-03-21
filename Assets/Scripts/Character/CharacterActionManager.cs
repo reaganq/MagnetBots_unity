@@ -458,7 +458,8 @@ public class CharacterActionManager : ActionManager {
 	public void OnDestroy()
 	{
 		Debug.Log("being destoyred");
-		PoolManager.Pools.Destroy(effectsPool.poolName);
+		//if(PoolManager.Pools.ContainsKey(effectsPool.poolName))
+			PoolManager.Pools.Destroy(effectsPool.poolName);
 	}
 }
 

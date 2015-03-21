@@ -7,12 +7,14 @@ public class LoadScreenController : BasicGUIController {
 	public float rotationSpeed;
 	public Transform centralGear;
 	public GameObject tipBox;
+	public bool isLoading;
 
-	public override void Enable ()
+	public void Enable(bool auto)
 	{
+		Debug.Log("Starting load screen" + Time.realtimeSinceStartup);
 		base.Enable ();
 		rotationSpeed = 0;
-		StartCoroutine(Intro());
+		StartCoroutine(Intro(auto));
 	}
 
 	public void Update()
@@ -23,16 +25,17 @@ public class LoadScreenController : BasicGUIController {
 		}
 	}
 
-	public IEnumerator Intro()
+	public IEnumerator Intro(bool auto)
 	{
 		loadScreenAnimation.Play("LoadingScreen");
-		yield return new WaitForSeconds(loadScreenAnimation["LoadingScreen"].length);
-		Disable();
-	}
+		isLoading = true;
+		if(auto)
+		{
+			yield return new WaitForSeconds(1f);
+			StartCoroutine(Outro());
+		}
 
-	public void DisplayLoadScreen()
-	{
-		StartCoroutine(Intro());
+		yield return null;
 	}
 
 	public void HideLoadScreen()
@@ -42,9 +45,15 @@ public class LoadScreenController : BasicGUIController {
 
 	public IEnumerator Outro()
 	{
-		loadScreenAnimation.Play("loadingScreen_ontro");
-		yield return new WaitForSeconds(loadScreenAnimation["loadingScreen_ontro"].length);
+		Debug.Log(Time.realtimeSinceStartup);
+		if(isLoading)
+		{
+		loadScreenAnimation.Play("LoadingScreen_Outro");
+		yield return new WaitForSeconds(loadScreenAnimation["LoadingScreen_Outro"].length);
 		Disable();
+		}
+		else
+			yield return null;
 	}
 
 	public override void Disable ()

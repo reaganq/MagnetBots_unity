@@ -16,6 +16,7 @@ public class QuickInventoryGUIController : BasicGUIController {
     public int currentSelectedSubcategory = 0;
     public int currentSelectedItemIndex = -1;
 	public UIScrollBar mainScrollBar;
+	public Collider dragDropCollider;
    // public ItemTileButton[] ItemTiles = new ItemTileButton[10];
     //public ItemTileButton[] CategoryButtons;
     //public UISprite[] ItemSprites = new UISprite[10];
@@ -36,6 +37,7 @@ public class QuickInventoryGUIController : BasicGUIController {
     {
 		Enable();
 		selectedMainInventoryCategory = category;
+		dragDropCollider.enabled = true;
 		//setup categories
 		if(selectedMainInventoryCategory == ItemCategories.Armors)
 		{
@@ -55,6 +57,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Construction)
 		{
+			subCategories = PlayerManager.Instance.data.GetSubcategories("Construction");
 		}
 		SetupSubCategories();
 		OnCategoryPressed(0, 1);
@@ -108,6 +111,11 @@ public class QuickInventoryGUIController : BasicGUIController {
 			if(PlayerManager.Instance.avatarActionManager.isBusy())
 				return;
 			PlayerManager.Instance.UseItem(displayedItemList[index]);
+		}
+		else if(selectedMainInventoryCategory == ItemCategories.Construction)
+		{
+			GUIManager.Instance.constructionGUI.thisConstruction.DonateConstructionItem(displayedItemList[index]);
+			Debug.Log("dragdropped construction material");
 		}
 		RefreshInventoryIcons();
 	}

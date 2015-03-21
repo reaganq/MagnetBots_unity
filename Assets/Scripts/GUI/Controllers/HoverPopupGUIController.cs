@@ -46,7 +46,7 @@ public class HoverPopupGUIController : BasicGUIController {
 	public TweenPosition shopButtonTween;
 	public TweenPosition addFriendButtonTween;
 	public List<GameObject> buttons;
-	public CharacterStatus selectedCharacter;
+	public PlayerCharacter selectedCharacter;
 	public bool isPlayerPopupDisplayed = false;
 	public bool isOtherPopupDisplayed = false;
 	public float duration;
@@ -92,7 +92,7 @@ public class HoverPopupGUIController : BasicGUIController {
 		i++;
 	}
 	
-	public void SelectPlayer(CharacterStatus target)
+	public void SelectPlayer(PlayerCharacter target)
 	{
 		if(selectedCharacter == target)
 		{
@@ -256,6 +256,8 @@ public class HoverPopupGUIController : BasicGUIController {
 	
 	public void OpenShop()
 	{
+		GUIManager.Instance.DisplayOtherPlayerShop(selectedCharacter, selectedCharacter.myPhotonView.owner);
+		Disable();
 	}
 	
 	public void Talk()

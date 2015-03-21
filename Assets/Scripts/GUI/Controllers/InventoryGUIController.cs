@@ -127,6 +127,7 @@ public class InventoryGUIController : BasicGUIController {
 			subcategoryButtons[selectedSubCategoryIndex].DeselectCategory();
 		selectedSubCategoryIndex = 0;
 		subcategoryButtons[selectedSubCategoryIndex].SelectCategory();
+		Debug.Log(fullItemList.Count);
 		selectedItemList = fullItemList[selectedSubCategoryIndex];
 		RefreshInventoryIcons();
 		mainScrollBar.value = 0;
@@ -201,8 +202,13 @@ public class InventoryGUIController : BasicGUIController {
 		}
 		else if(category == ItemCategories.UpgradeMaterials)
 		{
+			Debug.Log("LOADING UPGRADEMATERIALS");
 			fullItems.Add(PlayerManager.Instance.Hero.MainInventory.FilteredItemByCategory(ItemType.UpgradeMaterials));
 			return fullItems;
+		}
+		else if(category == ItemCategories.Construction)
+		{
+			fullItems.Add(PlayerManager.Instance.Hero.MainInventory.FilteredItemByCategory(ItemType.Construction));
 		}
 		return fullItems;
 	}
@@ -249,6 +255,10 @@ public class InventoryGUIController : BasicGUIController {
 		else if(category == ItemCategories.UpgradeMaterials)
 		{
 			listItem = PlayerManager.Instance.Hero.MainInventory.FilteredItemByCategory(ItemType.UpgradeMaterials);
+		}
+		else if(category == ItemCategories.Construction)
+		{
+			listItem = PlayerManager.Instance.Hero.MainInventory.FilteredItemByCategory(ItemType.Construction);
 		}
 		return listItem;
 	}
@@ -482,8 +492,9 @@ public class InventoryGUIController : BasicGUIController {
 	public void OnStockButtonPressed()
 	{
 		PlayerManager.Instance.Hero.StockItem(selectedItem, currentQuantity);
+		Debug.Log(currentQuantity);
 		UpdateItemDetails();
-		GUIManager.Instance.PlayerShopGUI.RefreshInventoryIcons();
+		//GUIManager.Instance.PlayerShopGUI.RefreshInventoryIcons();
 		OnExitButtonPressed();
 	}
 
@@ -524,6 +535,7 @@ public enum ItemCategories
 	Toys,
 	Construction,
 	UpgradeMaterials,
+
 	None
 }
 

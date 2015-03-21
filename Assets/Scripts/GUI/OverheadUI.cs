@@ -17,6 +17,7 @@ public class OverheadUI : MonoBehaviour {
 	public UISprite hpBar;
 	public GameObject hpBarObject;
 	public GameObject speechBubble;
+	public GameObject teamIcon;
 	public UIPlayTween speechBubbleTween;
 	public Job hideSpeechBubbleJob = null;
 	// Use this for initialization

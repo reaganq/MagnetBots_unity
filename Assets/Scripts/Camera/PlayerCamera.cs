@@ -31,7 +31,7 @@ public class PlayerCamera: MonoBehaviour {
 	public Transform defaultPos;
 	public Transform quickArmoryPos;
 	private Job movementJob;
-
+	public float defaultFOV = 60;
 	private Transform newTransform;
 
 	public float quickInventoryCameraRectOffset;
@@ -88,17 +88,17 @@ public class PlayerCamera: MonoBehaviour {
 
 	public void TransitionToQuickArmory()
 	{
-		TransitionTo(quickArmoryPos, 60, 0.3f, quickInventoryCameraRectOffset);
+		TransitionTo(quickArmoryPos, defaultFOV, 0.3f, quickInventoryCameraRectOffset);
 	}
 
 	public void TransitionToQuickInventory()
 	{
-		TransitionTo(defaultPos, 60, 0.3f, quickInventoryCameraRectOffset);
+		TransitionTo(defaultPos, defaultFOV, 0.3f, quickInventoryCameraRectOffset);
 	}
 	
 	public void TransitionToDefault()
 	{
-		TransitionTo(defaultPos, 60, 0.2f, 0);
+		TransitionTo(defaultPos, defaultFOV, 0.2f, 0);
 		//StartCoroutine(MoveTo(defaultPos, 60, 1));
 	}
 
@@ -113,6 +113,7 @@ public class PlayerCamera: MonoBehaviour {
 
 	public IEnumerator MoveTo(Transform newTrans, float fov, float duration, float offset)
 	{
+		Debug.Log("move camera");
 		float startTime = Time.time;
 		float timer = 0;
 		Vector3 origPos = childTransform.position;

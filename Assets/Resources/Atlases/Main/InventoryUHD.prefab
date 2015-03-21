@@ -514,10 +514,10 @@ MonoBehaviour:
     y: 885
     width: 283
     height: 282
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
+    borderLeft: 40
+    borderRight: 40
+    borderTop: 40
+    borderBottom: 40
     paddingLeft: 0
     paddingRight: 0
     paddingTop: 0
