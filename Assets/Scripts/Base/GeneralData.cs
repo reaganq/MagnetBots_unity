@@ -32,6 +32,7 @@ public class GeneralData: MonoBehaviour{
 		LoadQuests();
 	}
 
+	//generate gather tasks
 	public void LoadQuests()
 	{
 		for (int i = 0; i < quests.Count; i++) {
@@ -39,7 +40,10 @@ public class GeneralData: MonoBehaviour{
 			{
 				for (int j = 0; j < quests[i].questSteps.Count; j++) {
 					if(quests[i].questSteps[j].isMainStep)
+					{
+						Debug.Log("Loading quest: " + i + " step: " + j);
 						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,4),1);
+					}
 				}
 			}
 		}
@@ -61,6 +65,23 @@ public class GeneralData: MonoBehaviour{
 				return quests[i];
 		}
 		return null;
+	}
+
+	public static void ReRollQuest(int ID)
+	{
+
+		for (int i = 0; i < quests.Count; i++) {
+			if(quests[i].ID == ID && quests[i].questType == QuestType.collection)
+			{
+				for (int j = 0; j < quests[i].questSteps.Count; j++) {
+					if(quests[i].questSteps[j].isMainStep)
+					{
+						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,4),1);
+						Debug.Log("rerolled quest");
+					}
+				}
+			}
+		}
 	}
 
 	public RPGTown GetTownByID(int ID)

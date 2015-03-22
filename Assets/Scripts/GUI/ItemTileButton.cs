@@ -162,11 +162,10 @@ public class ItemTileButton: UIDragDropItem
 	{
 		LoadGeneric(item);
 		newItemGlow.enabled = false;
-		Debug.Log(isNewQuest);
 		if(!isNewQuest)
 		{
 			amountLabel.text = PlayerManager.Instance.Hero.GetItemAmount(item, false)+"/"+item.CurrentAmount;
-			if(PlayerManager.Instance.Hero.DoYouHaveThisItem(item, false))
+			if(PlayerManager.Instance.Hero.GetItemAmount(item, false) >= item.CurrentAmount)
 				tickIcon.enabled = true;
 			else
 				tickIcon.enabled = false;
@@ -203,6 +202,12 @@ public class ItemTileButton: UIDragDropItem
 			canDisplayNew = false;
 			canDisplayTick = false;
 			canDisplayQuantity = true;
+			break;
+		case InventoryGUIType.Reward:
+			draggable = false;
+			canDisplayNew = false;
+			canDisplayTick = false;
+			canDisplayQuantity = false;
 			break;
 		case InventoryGUIType.Other:
 			draggable = true;

@@ -524,6 +524,7 @@ public enum InventoryGUIType
 	Inventory,
 	Shop,
 	Other,
+	Quest,
 	Playershop,
 	Reward,
 }

@@ -54,7 +54,8 @@ public class MainUIManager : BasicGUIController {
 		{
 			GameManager.Instance.joystick.enable = false;
 		}
-		PlayerManager.Instance.avatarActionManager.DisableMovement();
+		if(PlayerManager.Instance.avatarActionManager != null)
+			PlayerManager.Instance.avatarActionManager.DisableMovement();
 
 		base.Disable();
 		for (int i = 0; i < actionButtonScripts.Length; i++) {

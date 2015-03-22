@@ -283,12 +283,13 @@ public class GUIManager : MonoBehaviour {
     
     public void HideQuickInventory ()
     {
-		if(uiState == UIState.construction)
+		if(cachedState == UIState.construction)
 		{
-			QuickInventoryGUI.Disable();
+			Debug.Log("here");
+			//QuickInventoryGUI.Disable();
+			constructionGUI.thisConstruction.HideConstructionItems();
 		}
-		else
-			EnterGUIState(UIState.main);
+		EnterGUIState(UIState.main);
     }
 
 	public void DisplayNPC()
@@ -453,6 +454,20 @@ public class GUIManager : MonoBehaviour {
 	public void HideItemDetails()
 	{
 		itemInfoGUI.Disable();
+	}
+
+	public void FlashScreen(float duration, Color targetColor)
+	{
+		screenFlash.color = targetColor;
+		StartCoroutine(FlashScreenSequence(duration));
+	}
+
+	public IEnumerator FlashScreenSequence(float duration)
+	{
+		screenFlashTween.Play(true);
+		yield return new WaitForSeconds(0.7f);
+		yield return new WaitForSeconds(duration);
+		screenFlashTween.Play(false);
 	}
 }
 

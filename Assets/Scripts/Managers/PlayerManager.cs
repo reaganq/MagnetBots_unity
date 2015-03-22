@@ -148,7 +148,8 @@ public class PlayerManager : MonoBehaviour
 			{
         		Hero.StartNewGame();
 			}
-
+			else
+				Hero.StartBlankGame();
 			//prevents reloading data every time we switch worlds.
 			GameManager.Instance.GameHasStarted = true;
 		}
@@ -209,7 +210,8 @@ public class PlayerManager : MonoBehaviour
 
 		//TODO hacky party list refresh
 		_partyMembers.Clear();
-		Invoke("EquipStartupItems", 0.1f);
+		if(!GameManager.Instance.newGame)
+			Invoke("EquipStartupItems", 0.1f);
     }
 
 	public void EquipStartupItems()
@@ -419,7 +421,7 @@ public class PlayerManager : MonoBehaviour
 			if(maxNumberOfLoots > 0 && num >= maxNumberOfLoots)
 				break;
 		}
-		GUIManager.Instance.DisplayArenaRewards(lootItemList);
+
 		for (int i = 0; i < lootItemList.items.Count; i++) {
 			Hero.AddItem(lootItemList.items[i]);
 		}

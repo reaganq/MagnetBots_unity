@@ -70,21 +70,23 @@ public class QuestEditor : BaseEditorWindow
 		EditorGUILayout.PrefixLabel("quest type:");
 		s.questType = (QuestType)EditorGUILayout.EnumPopup(s.questType, GUILayout.Width(300));
 		EditorGUILayout.EndHorizontal();
-		if (GUILayout.Button("Add task", GUILayout.Width(400))) 
+		if(s.questType == QuestType.collection)
 		{
-			s.allTasks.Add(new Task());
-		}
-		
-		foreach(Task task in s.allTasks)
-		{
-			DisplayTask(task);
-			if (GUILayout.Button("Remove Task", GUILayout.Width(200)))
+			if (GUILayout.Button("Add task", GUILayout.Width(400))) 
 			{
-				s.allTasks.Remove(task);
-				break;
+				s.allTasks.Add(new Task());
 			}
+			
+			foreach(Task task in s.allTasks)
+			{
+				DisplayTask(task);
+				if (GUILayout.Button("Remove Task", GUILayout.Width(200)))
+				{
+					s.allTasks.Remove(task);
+					break;
+				}
 		}
-
+		}
 		ConditionsUtils.Conditions(s.Conditions, Data);
 		
 		/*if (GUILayout.Button("Add reward", GUILayout.Width(400)))
@@ -107,6 +109,12 @@ public class QuestEditor : BaseEditorWindow
 			EditorGUILayout.LabelField("quest step:" + questStep.StepNumber.ToString());
 
 			questStep.isMainStep = EditorUtils.Toggle(questStep.isMainStep, "is main step");
+			questStep.overrideNPC = EditorUtils.Toggle(questStep.overrideNPC, "has override NPC");
+			if(questStep.overrideNPC)
+			{
+				questStep.overrideNPCID = EditorUtils.IntPopup(questStep.overrideNPCID, Data.npcEditor.items, FieldTypeEnum.Middle);
+				questStep.overrideNPCConversationID = EditorUtils.IntPopup(questStep.overrideNPCConversationID, Data.conversationEditor.items, FieldTypeEnum.Middle);
+			}
 
 			questStep.QuestLogNote = EditorUtils.TextField(questStep.QuestLogNote, "Quest log note");
 			
@@ -232,6 +240,13 @@ public class QuestEditor : BaseEditorWindow
 			task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
 			task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.enemyEditor.items, "Enemy", 100, FieldTypeEnum.Middle);
 			
+			break;
+		case TaskTypeEnum.ReachPartOfConversation:
+			task.PreffixTarget = (PreffixType)EditorGUILayout.EnumPopup(task.PreffixTarget, GUILayout.Width(200));
+			task.TaskTarget = EditorUtils.IntPopup(task.TaskTarget, Data.conversationEditor.items, "Conversation Target", 100, FieldTypeEnum.Middle);
+			EditorGUILayout.PrefixLabel("paragraph id: ");
+			task.AmountToReach = EditorGUILayout.IntField(task.AmountToReach, GUILayout.Width(100));
+			task.CurrentAmount = 0;
 			break;
 		}
 		

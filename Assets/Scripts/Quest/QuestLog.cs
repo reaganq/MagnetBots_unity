@@ -54,6 +54,16 @@ public class QuestLog
 		return false;
 	}
 
+	public bool CanFinishQuest(int questID)
+	{
+		foreach(RPGQuest q in CurrentQuests)
+		{
+			if(q.ID == questID && q.CanFinish)
+				return true;
+		}
+		return false;
+	}
+
 	// Returns true is quest is finished but not get reward from it (wasn't ended)
 	public bool IsQuestFinished(int questId)
 	{
@@ -130,12 +140,14 @@ public class QuestLog
 				break;
 			}
 		}
+		Debug.Log("finished quest: " + result);
 		if (!result)
 			return false;
-		quest.GiveReward();
+		//quest.GiveReward();
 		if(!quest.repeatable)
 			FinishedQuests.Add(quest);
-		
+		else
+			GeneralData.ReRollQuest(questId);
 		/*if (!quest.Repeatable)
 		{
 			CompletedQuest cq = new CompletedQuest();
@@ -196,12 +208,28 @@ public class QuestLog
 		}
 		return result;
 	}
+
+	public RPGQuest CheckNPCConversation(int npcID)
+	{
+		Debug.Log("checking for npc conversation " + CurrentQuests.Count + " npcid: "+npcID);
+		for (int i = 0; i < CurrentQuests.Count; i++) {
+			Debug.Log(CurrentQuests[i].CurrentStep.overrideNPCConversationID);
+			if(CurrentQuests[i].CurrentStep.overrideNPC && CurrentQuests[i].CurrentStep.overrideNPCID == npcID)
+			{
+				Debug.Log("found an override quest!");
+				return CurrentQuests[i];
+			}
+				}
+
+		 return null;
+	}
 	
 	// Check paragraph if it is task of current quest
-	public void CheckParagraph(int paragraphId)
+	public void CheckParagraph(RPGConversation conversation, int paragraphId)
 	{
+		Debug.LogWarning("checking paragrap");
 		foreach(RPGQuest q in CurrentQuests)
-			q.CheckParagraph(paragraphId);
+			q.CheckParagraph(conversation.ID, paragraphId);
 		
 		UpdateQuests();
 	}
@@ -238,6 +266,16 @@ public class QuestLog
 			q.CheckInventory();
 		
 		UpdateQuests();
+	}
+
+	public void TakeItemsFromPlayer(int questID)
+	{
+		for (int i = 0; i < CurrentQuests.Count; i++) {
+			if(CurrentQuests[i].ID == questID)
+			{
+				CurrentQuests[i].CurrentStep.TakeItemsFromPlayer();
+			}
+		}
 	}
 
 

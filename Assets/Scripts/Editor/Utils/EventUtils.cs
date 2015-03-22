@@ -15,9 +15,6 @@ public class EventUtils
 			//end conversation
 		case ActionEventType.EndConversation : 
 			break;
-			
-			//give item
-		case ActionEventType.GiveItem:
 			//take item
 		case ActionEventType.TakeItem:
 			action.PreffixItem = (PreffixType)EditorGUILayout.EnumPopup(action.PreffixItem, GUILayout.Width(200));
@@ -54,10 +51,10 @@ public class EventUtils
 			}
 			action.Amount = EditorUtils.IntField(action.Amount, "Amount: ", 90, FieldTypeEnum.Middle);
 			break;
+		case ActionEventType.TakeQuestStepItemsTask:
+
 			//quest start
 		case ActionEventType.QuestStart:
-			
-			//quest failed
 		case ActionEventType.QuestFailed:
 		case ActionEventType.DisplayQuestDetails:
 		case ActionEventType.DisplayQuestInfo:

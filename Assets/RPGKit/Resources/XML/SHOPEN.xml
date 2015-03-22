@@ -6,7 +6,7 @@
     <Description />
     <SystemDescription />
     <activityType>Shop</activityType>
-    <conversationID>0</conversationID>
+    <conversationID>2</conversationID>
     <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
     <npcIconSprite>shop</npcIconSprite>
     <npcButtonText>General Store</npcButtonText>

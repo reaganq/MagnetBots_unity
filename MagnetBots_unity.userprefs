@@ -2,16 +2,29 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPC/Construction.cs">
     <Files>
-      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="114" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ConstructionGUIController.cs" Line="20" Column="13" />
-      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="60" Column="81" />
-      <File FileName="Assets/Scripts/GUI/ConstructionTile.cs" Line="7" Column="31" />
-      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="81" Column="1" />
-      <File FileName="Assets/Scripts/NPC/RPGConstruction.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/RPGItem.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Item/UsableItem.cs" Line="49" Column="3" />
-      <File FileName="Assets/Scripts/GUI/Controllers/BasicGUIController.cs" Line="86" Column="1" />
-      <File FileName="Assets/Scripts/NPC/Construction.cs" Line="116" Column="38" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="273" Column="40" />
+      <File FileName="Assets/Scripts/Quest/QuestLog.cs" Line="61" Column="37" />
+      <File FileName="Assets/Scripts/Quest/RPGQuest.cs" Line="148" Column="37" />
+      <File FileName="Assets/Scripts/Item/LootItem.cs" Line="29" Column="19" />
+      <File FileName="Assets/Scripts/GUI/Controllers/GUIManager.cs" Line="289" Column="6" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ConversationGUIController.cs" Line="418" Column="37" />
+      <File FileName="Assets/Scripts/Quest/QuestStep.cs" Line="36" Column="30" />
+      <File FileName="Assets/Scripts/Quest/Task.cs" Line="64" Column="1" />
+      <File FileName="Assets/Scripts/Base/GeneralData.cs" Line="45" Column="84" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="308" Column="58" />
+      <File FileName="Assets/Scripts/Player/Inventory.cs" Line="443" Column="16" />
+      <File FileName="Assets/Scripts/Base/Condition.cs" Line="72" Column="1" />
+      <File FileName="Assets/Scripts/Editor/Utils/ConditionUtils.cs" Line="99" Column="31" />
+      <File FileName="Assets/Scripts/Base/ActionEvent.cs" Line="70" Column="47" />
+      <File FileName="Assets/Scripts/Editor/Utils/EventUtils.cs" Line="55" Column="4" />
+      <File FileName="Assets/Scripts/GUI/ItemTileButton.cs" Line="167" Column="64" />
+      <File FileName="Assets/Scripts/GUI/Controllers/NPCGUIController.cs" Line="304" Column="1" />
+      <File FileName="Assets/Scripts/Conversation/RPGParagraph.cs" Line="18" Column="22" />
+      <File FileName="Assets/Scripts/Conversation/LineText.cs" Line="115" Column="15" />
+      <File FileName="Assets/Scripts/NPC/Construction.cs" Line="151" Column="113" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ConstructionGUIController.cs" Line="6" Column="30" />
+      <File FileName="Assets/Scripts/Camera/PlayerCamera.cs" Line="98" Column="2" />
+      <File FileName="Assets/Scripts/GUI/Controllers/QuickInventoryGUIController.cs" Line="94" Column="47" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,14 +33,25 @@
             <Node name="Scripts" expanded="True">
               <Node name="Base" expanded="True" />
               <Node name="Camera" expanded="True" />
+              <Node name="Cinematic" expanded="True" />
+              <Node name="Conversation" expanded="True" />
               <Node name="GUI" expanded="True">
                 <Node name="Controllers" expanded="True" />
               </Node>
               <Node name="Item" expanded="True" />
+              <Node name="Managers" expanded="True" />
               <Node name="NPC" expanded="True">
                 <Node name="Construction.cs" selected="True" />
               </Node>
               <Node name="Player" expanded="True" />
+              <Node name="Quest" expanded="True" />
+            </Node>
+          </Node>
+          <Node name="Assembly-CSharp-Editor" expanded="True">
+            <Node name="Scripts" expanded="True">
+              <Node name="Editor" expanded="True">
+                <Node name="Utils" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

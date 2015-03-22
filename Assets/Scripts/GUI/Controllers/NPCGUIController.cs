@@ -82,11 +82,21 @@ public class NPCGUIController : BasicGUIController {
 	// Update is called once per frame
 	public override void Enable()
     {
+		base.Enable();
+		//check for check override
+		Debug.Log("active npc id: " + PlayerManager.Instance.ActiveNPC.ID);
+		if(DisplayQuest(PlayerManager.Instance.Hero.questLog.CheckNPCConversation(PlayerManager.Instance.ActiveNPC.ID)))
+			return;
+
 		activities = PlayerManager.Instance.ActiveNPC.availableActivities;
 		if(PlayerManager.Instance.ActiveNPC.character.defaultConversationID <= 0)
 			state = NPCGUIState.activityButtons;
-		base.Enable();
+
     }
+
+	public void CheckForQuestConversationOverrides()
+	{
+	}
 
 	public override void Disable()
 	{
@@ -272,10 +282,28 @@ public class NPCGUIController : BasicGUIController {
 
 	public void DisplayQuest(NPCQuest newQuest)
 	{
-		state = NPCGUIState.quest;
-		PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest.quest;
-		conversationGUI.DisplayConversation(newQuest.conversation);
+		if(newQuest != null)
+		{
+			state = NPCGUIState.quest;
+			PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest.quest;
+			conversationGUI.DisplayConversation(newQuest.conversation);
+		}
 	}
+
+	public bool DisplayQuest(RPGQuest newQuest)
+	{
+		if(newQuest != null)
+		{
+			Debug.Log("displayed quest!");
+			state = NPCGUIState.quest;
+			PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest;
+			RPGConversation convo = Storage.LoadById<RPGConversation>(newQuest.CurrentStep.overrideNPCConversationID, new RPGConversation());
+			conversationGUI.DisplayConversation(convo);
+			return true;
+        }
+		Debug.Log("displayed no quest");
+		return false;
+    }
 
 	public void DisplayMinigame(NPCMinigame newMinigame)
 	{

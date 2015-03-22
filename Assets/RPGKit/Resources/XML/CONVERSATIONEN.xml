@@ -2,18 +2,126 @@
 <ArrayOfRPGConversation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <RPGConversation>
     <ID>1</ID>
-    <Name>Opening Speech</Name>
+    <Name>Tesla (QUEST)Starting Quest</Name>
     <Description>tesla opening remark</Description>
     <SystemDescription />
-    <conversationParagraphs />
-    <conditions />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>It's pretty safe to go alone but you should take these items anyway.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>1</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts>
+          <LineText>
+            <Text>Thanks!</Text>
+            <Events>
+              <ActionEvent PI="QUEST" ITEM="3" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+              <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
+            </Events>
+            <Conditions />
+            <lineTextType>negative</lineTextType>
+            <ID>0</ID>
+          </LineText>
+        </LineTexts>
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="3" ITEMLvl="0" AT="GiveQuestRewards" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>1</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>WaitForPlayerReply</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>2</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Why don't you head over to the town and see if you can help out our citizens?</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>1</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>3</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>They have many rewards and tips waiting for you!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>1</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>4</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="EndConversation" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+    </conversationParagraphs>
+    <conditions>
+      <Condition ITH="3" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+    </conditions>
   </RPGConversation>
   <RPGConversation>
     <ID>2</ID>
     <Name>LYNNE (shop) greeting</Name>
     <Description />
     <SystemDescription />
-    <conversationParagraphs />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>It looks like you can use everything here. You should buy it all!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="EndConversation" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+    </conversationParagraphs>
     <conditions />
   </RPGConversation>
   <RPGConversation>
@@ -29,7 +137,7 @@
         </Conditions>
         <LineTexts>
           <LineText>
-            <Text>Sure thing!</Text>
+            <Text>Sure!</Text>
             <Events>
               <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
               <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
@@ -39,7 +147,7 @@
             <ID>0</ID>
           </LineText>
           <LineText>
-            <Text>Sorry not right now...</Text>
+            <Text>No Way</Text>
             <Events>
               <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
             </Events>
@@ -92,18 +200,18 @@
         </Conditions>
         <LineTexts>
           <LineText>
-            <Text>Yes, all done!</Text>
+            <Text>Yes!</Text>
             <Events>
               <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
             </Events>
             <Conditions>
-              <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestFinished" SI="0" />
+              <Condition ITH="1" ITHLvl="0" ATR="0" CT="QuestCanFinish" SI="0" />
             </Conditions>
             <lineTextType>affirmative</lineTextType>
             <ID>0</ID>
           </LineText>
           <LineText>
-            <Text>No, not yet...</Text>
+            <Text>Not yet</Text>
             <Events>
               <ActionEvent PI="QUEST" ITEM="5" ITEMLvl="0" AT="GoToParagraph" AM="0" TX="" />
             </Events>
@@ -131,6 +239,7 @@
             <Text>Done</Text>
             <Events>
               <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+              <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="EndConversation" AM="0" TX="" />
             </Events>
             <Conditions />
             <lineTextType>negative</lineTextType>
@@ -139,7 +248,7 @@
         </LineTexts>
         <Actions>
           <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="GiveQuestRewards" AM="0" TX="" />
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="1" ITEMLvl="0" AT="TakeQuestStepItemsTask" AM="0" TX="" />
         </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>5</ownerNPCID>

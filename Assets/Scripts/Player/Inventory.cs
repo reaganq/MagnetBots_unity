@@ -432,6 +432,20 @@ public class Inventory  : BasicInventory
 		return false;
 	}
 
+	public int GetItemAmount(int id, int level)
+	{
+		int amount = 0;
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].rpgItem.ID == id && Items[i].Level == level)
+			{
+				amount += Items[i].CurrentAmount;
+				if(Items[i].IsItemEquipped)
+					amount --;
+			}
+		}
+		return amount;
+	}
+
 	public int GetItemAmount(InventoryItem itemToHave, bool ignoreLevel)
 	{
 		int amount = 0;
@@ -439,13 +453,19 @@ public class Inventory  : BasicInventory
 			if(ignoreLevel)
 			{
 				if(Items[i].UniqueItemId == itemToHave.UniqueItemId)
+				{
 					amount += Items[i].CurrentAmount;
+					if(Items[i].IsItemEquipped)
+						amount --;
+				}
 			}
 			else
 			{
 				if(Items[i].UniqueItemId == itemToHave.UniqueItemId && Items[i].Level == itemToHave.Level)
 				{
 					amount += Items[i].CurrentAmount;
+					if(Items[i].IsItemEquipped)
+						amount --;
 					return amount;
 				}
 			}

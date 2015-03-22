@@ -68,6 +68,10 @@ public class Condition
 		case ConditionTypeEnum.QuestInProgress: 
 			return PlayerManager.Instance.Hero.questLog.IsQuestInProgress(Convert.ToInt32(ItemToHave));
 			//quest finished = you can end it now
+		case ConditionTypeEnum.QuestCanFinish:
+			Debug.Log(PlayerManager.Instance.Hero.questLog.CanFinishQuest(Convert.ToInt32(ItemToHave)));
+			return PlayerManager.Instance.Hero.questLog.CanFinishQuest(Convert.ToInt32(ItemToHave));
+			break;
 		case ConditionTypeEnum.QuestFinished: 
 			return PlayerManager.Instance.Hero.questLog.IsQuestFinished(Convert.ToInt32(ItemToHave));
 			//quest completed = in quest log "quest completed"
@@ -258,30 +262,14 @@ public class Condition
 
 public enum ConditionTypeEnum
 {
-	SomeItemMustBeInInventory = 0,
-	QuestNotStarted = 1,
-	QuestInProgress = 2,
-	QuestFinished = 3,
-	QuestCompleted = 4,
-	KillTarget = 5,
-	TargetObject = 6,
-	LevelMinimum = 7,
-	LevelMaximum = 8,
-	AttributePoint = 9,
-	SkillPoint = 10,
-	BaseAttribute = 11,
-	BaseSkill = 12,
-	TotalAttribute = 13,
-	TotalSkill = 14,
-	CompletedQuestsCount = 15,
-	RaceRequired = 16,
-	RaceNotAllowed = 17,
-	ClassRequired = 18,
-	ClassNotAllowed = 19,
-	IsGuildMember = 20,
-	IsNotGuildMember = 21,
-	QuestStepInProgress = 22,
-	AlternatedQuestCompleted = 23,
-	QuestFailed = 24,
-	ReputationValue = 25
+	SomeItemMustBeInInventory,
+	QuestNotStarted,
+	QuestInProgress,
+	QuestCanFinish,
+	QuestFinished,
+	QuestCompleted,
+	KillTarget,
+	CompletedQuestsCount,
+	QuestStepInProgress,
+	QuestFailed,
 }

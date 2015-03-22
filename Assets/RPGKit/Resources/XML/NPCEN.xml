@@ -4,7 +4,7 @@
     <activities />
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
-    <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
+    <speakerPrefabPath>NPCs/Speakers/Tesla_Portrait</speakerPrefabPath>
     <ID>1</ID>
     <Name>Lab</Name>
     <Description>Magnet Central</Description>
@@ -96,6 +96,16 @@
     <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
     <ID>7</ID>
     <Name>Magnet Central Teleporter</Name>
+    <Description />
+    <SystemDescription />
+  </RPGNPC>
+  <RPGNPC>
+    <activities />
+    <overrideActivities />
+    <defaultConversationID>0</defaultConversationID>
+    <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
+    <ID>8</ID>
+    <Name>Arcade</Name>
     <Description />
     <SystemDescription />
   </RPGNPC>

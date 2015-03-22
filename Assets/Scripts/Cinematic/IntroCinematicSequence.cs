@@ -43,6 +43,7 @@ public class IntroCinematicSequence : Cutscene {
 	//get from world tour to building magnetbot
 	public IEnumerator EnterPhaseOne()
 	{
+		GUIManager.Instance.EnterGUIState(UIState.cinematic);
 		stepCounter = 1;
 		//townTrackingCameraAnimation.Play();
 		StartCoroutine(PhaseOneSubtitles());
@@ -64,15 +65,21 @@ public class IntroCinematicSequence : Cutscene {
 
 	public IEnumerator PhaseOneSubtitles()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(2f);
 		GUIManager.Instance.nakedArmorGUI.DisplaySubtitle("Woah, you're finally here!");
 		yield return new WaitForSeconds(2);
 		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("I've been expecting you!");
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(2.5f);
 		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("Welcome to the world of Magnetbots.");
-		yield return new WaitForSeconds(2);
+		yield return new WaitForSeconds(3);
 		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("We have so much to do, right this way!");
+		yield return new WaitForSeconds(2.5f);
+		GUIManager.Instance.nakedArmorGUI.HideSubtitle();
 		yield return new WaitForSeconds(1.5f);
+		GUIManager.Instance.nakedArmorGUI.DisplaySubtitle("Now you'll be needing a companion");
+		yield return new WaitForSeconds(1.5f);
+		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("Let us create your first Magnetbot together.");
+		yield return new WaitForSeconds(1.9f);
 		GUIManager.Instance.nakedArmorGUI.HideSubtitle();
 	}
 
@@ -110,21 +117,19 @@ public class IntroCinematicSequence : Cutscene {
 		TeslaAnimation.CrossFade("happyBuild");
 		yield return new WaitForSeconds(TeslaAnimation["happyBuild"].length);
 		stepCounter ++;
-		GUIManager.Instance.nakedArmorGUI.EnableSetNameUI();
+
 		TeslaAnimation.CrossFade("waitingLoop2");
+		yield return new WaitForSeconds(0.1f);
+		GUIManager.Instance.nakedArmorGUI.EnableSetNameUI();
 	}
 
 	public IEnumerator PhaseTwoSubtitles()
 	{
-		yield return new WaitForSeconds(1);
-		GUIManager.Instance.nakedArmorGUI.DisplaySubtitle("Woah, you're finally here!");
-		yield return new WaitForSeconds(2);
-		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("I've been expecting you!");
-		yield return new WaitForSeconds(2);
-		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("Welcome to the world of Magnetbots.");
-		yield return new WaitForSeconds(2);
-		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("We have so much to do, right this way!");
-		yield return new WaitForSeconds(1.5f);
+		yield return new WaitForSeconds(0.7f);
+		GUIManager.Instance.nakedArmorGUI.DisplaySubtitle("Nicely done!");
+		yield return new WaitForSeconds(1.2f);
+		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("Now how about a name?");
+		yield return new WaitForSeconds(1.8f);
 		GUIManager.Instance.nakedArmorGUI.HideSubtitle();
 	}
 
@@ -133,16 +138,27 @@ public class IntroCinematicSequence : Cutscene {
 		TeslaAnimation.Play("outro");
 		PlayerManager.Instance.RefreshAvatar();
 		StartCoroutine(PhaseThreeSubtitles());
-		yield return new WaitForSeconds(TeslaAnimation["outro"].length);
+		yield return new WaitForSeconds(TeslaAnimation["outro"].length - 0.3f);
+
+		GUIManager.Instance.FlashScreen(0.2f, Color.white);
+		yield return new WaitForSeconds(0.8f);
 		PlayerManager.Instance.ActiveZone = PlayerManager.Instance.ActiveWorld.DefaultZone;
 		Debug.Log("destroy shit");
+		PlayerManager.Instance.StartNewGame();
+		//start blank game
+		//talk to npc to get starting items
 		Destroy(gameObject);
 		//fade
 	}
 
 	public IEnumerator PhaseThreeSubtitles()
 	{
-		yield return null;
+		yield return new WaitForSeconds(0.5f);
+		GUIManager.Instance.nakedArmorGUI.DisplaySubtitle("Excellent choice!");
+		yield return new WaitForSeconds(1.2f);
+		GUIManager.Instance.nakedArmorGUI.UpdateSubtitle("You are now ready to explore Magnet Central.");
+		yield return new WaitForSeconds(1.8f);
+		GUIManager.Instance.nakedArmorGUI.HideSubtitle();
 	}
 
 }

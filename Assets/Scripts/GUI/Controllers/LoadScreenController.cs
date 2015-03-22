@@ -31,7 +31,7 @@ public class LoadScreenController : BasicGUIController {
 		isLoading = true;
 		if(auto)
 		{
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds(1.6f);
 			StartCoroutine(Outro());
 		}
 

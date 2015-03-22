@@ -55,13 +55,29 @@ public class Task {
 		}
 		return false;
 	}
+
+	public bool CanTaskBeFinished()
+	{
+		switch(TaskType)
+		{
+		case TaskTypeEnum.BringItem:
+			Debug.Log("got to here: " + PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) + " : " + AmountToReach);
+			if(PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) < AmountToReach)
+			{
+				Debug.Log(PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) + " : " + AmountToReach);
+				return false;
+			}
+			break;
+		}
+		return true;
+	}
 }
 
 public enum TaskTypeEnum
 {
 	BringItem = 0,
 	KillEnemy = 1,
-	ReachPartOfConversation = 2,
+ReachPartOfConversation = 2,
 	VisitArea = 3,
 	WaitForAccept = 4
 }

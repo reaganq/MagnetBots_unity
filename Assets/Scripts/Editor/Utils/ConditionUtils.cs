@@ -73,16 +73,14 @@ public class ConditionsUtils
 			condition.ItemToHave = IntPopup(condition, D.enemyEditor.items, "Enemy", 150, reloadList);
 			break;
 			
-		case ConditionTypeEnum.LevelMaximum:
-			break;
-			
-		case ConditionTypeEnum.LevelMinimum:
-			break;
-			
 		case ConditionTypeEnum.CompletedQuestsCount:
 			break;
 			
 		case ConditionTypeEnum.QuestCompleted:
+			condition.ItemToHave = IntPopup(condition, D.questEditor.items, "Quest", 150, reloadList);
+			break;
+
+		case ConditionTypeEnum.QuestCanFinish:
 			condition.ItemToHave = IntPopup(condition, D.questEditor.items, "Quest", 150, reloadList);
 			break;
 			
@@ -114,10 +112,7 @@ public class ConditionsUtils
 			EditorGUILayout.PrefixLabel(" Unique ID: ");
 			condition.ItemToHave = EditorGUILayout.TextField(condition.ItemToHave, GUILayout.Width(100));
 			break;
-			
-		case ConditionTypeEnum.TargetObject:
-			break;
-			
+
 		/*case ConditionTypeEnum.TotalAttribute:
 			condition.ItemToHave = IntPopup(condition, D.attributeEditor.items, "Attribute", 150, reloadList);
 			break;

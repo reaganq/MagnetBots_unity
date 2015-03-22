@@ -14,8 +14,12 @@ public class QuestStep {
 	public string BioNote;
 	[XmlAttribute (AttributeName = "SN")]
 	public int StepNumber;
+	//used by colliection quests
 	public bool isMainStep;
 	public bool IsLastStep;
+	public bool overrideNPC;
+	public int overrideNPCID;
+	public int overrideNPCConversationID;
 	public List<Task> Tasks;
 	
 	public QuestStep()
@@ -23,6 +27,16 @@ public class QuestStep {
 		Tasks = new List<Task>();
 		QuestLogNote = string.Empty;
 		BioNote = string.Empty;
+	}
+
+	public bool canFinishQuestStep()
+	{
+		foreach(Task task in Tasks)
+		{
+			if(!task.CanTaskBeFinished())
+				return false;
+		}
+		return true;
 	}
 	
 	public bool IsQuestStepFinished()
@@ -51,8 +65,32 @@ public class QuestStep {
 		}
 	}
 
+	public void TakeItemsFromPlayer()
+	{
+		foreach(Task task in Tasks)
+		{
+			if(task.TaskType == TaskTypeEnum.BringItem && task.CanTaskBeFinished())
+			{
+				InventoryItem item = new InventoryItem();
+				if(task.PreffixTarget == PreffixType.ARMOR)
+				{
+					item.GenerateNewInventoryItem(Storage.LoadById<RPGArmor>(task.TaskTarget, new RPGArmor()), task.Tasklevel, task.AmountToReach - task.CurrentAmount);
+					PlayerManager.Instance.Hero.RemoveItem(item);
+					task.CurrentAmount += (task.AmountToReach - task.CurrentAmount);
+				}
+				else if(task.PreffixTarget == PreffixType.ITEM)
+				{
+					item.GenerateNewInventoryItem(Storage.LoadById<RPGItem>(task.TaskTarget, new RPGItem()), task.Tasklevel, task.AmountToReach - task.CurrentAmount);
+					task.CurrentAmount += (task.AmountToReach - task.CurrentAmount);
+				}
+			}
+		}
+		Debug.Log("took items from player");
+	}
+
 	public void GenerateRandomTasks(List<Task> possibleTasks, int numberofTasks, int maxAmount)
 	{
+		Debug.Log("generating task: " + numberofTasks);
 		Tasks.Clear();
 		List<int> taskIDs = new List<int>();
 		for (int i = 0; i < numberofTasks; i++) {
@@ -60,12 +98,12 @@ public class QuestStep {
 			do
 			{
 				id = UnityEngine.Random.Range(0, possibleTasks.Count);
+				Debug.Log(id);
 			}while(taskIDs.Contains(id));
-			if(id < possibleTasks.Count)
-			{
-				Tasks.Add(possibleTasks[id]);
-				Tasks[i].AmountToReach = UnityEngine.Random.Range(1, maxAmount);
-			}
+			taskIDs.Add(id);
+			Debug.Log("generated task: " + id);
+			Tasks.Add(possibleTasks[id]);
+			Tasks[i].AmountToReach = UnityEngine.Random.Range(1, maxAmount);
 		}
 	}
 }

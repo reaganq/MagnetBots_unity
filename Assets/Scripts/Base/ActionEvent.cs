@@ -67,6 +67,9 @@ public class ActionEvent
 				PlayerManager.Instance.Hero.ArmoryInventory.RemoveItem(rpgItem,ItemLevel, Amount);
 			}
 			break;
+		case ActionEventType.TakeQuestStepItemsTask:
+			PlayerManager.Instance.Hero.questLog.TakeItemsFromPlayer(Item);
+			break;
 			//end conversation
 		case ActionEventType.EndConversation:
 			GUIManager.Instance.conversationGUI.EndConversation();
@@ -113,5 +116,5 @@ public enum ActionEventType
 	DisplayQuestInfo = 15,
 	DisplayQuestStatus = 16,
 	DisplayQuestConfirmation = 17,
-	DisplayQuestRewards = 18,
+	TakeQuestStepItemsTask
 }

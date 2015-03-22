@@ -74,9 +74,10 @@ public class RPGQuest : BasicItem
 		}
 	}
 
-	public void GiveQuestReward()
+	public LootItemList GiveQuestReward()
 	{
-		PlayerManager.Instance.GiveRewards(allLoots, maxNumberOfLoots);
+		Rewarded = true;
+		return PlayerManager.Instance.GiveRewards(allLoots, maxNumberOfLoots);
 	}
 
 	/*public void GenerateLoot()
@@ -139,6 +140,18 @@ public class RPGQuest : BasicItem
 		}
 	}
 
+	public bool CanFinish
+	{
+		get{
+			bool result = true;
+			foreach (QuestStep questStep in questSteps) {
+				if(!questStep.canFinishQuestStep())
+					result = false;
+			}
+			return result;
+		}
+	}
+
 	public bool HasFailed()
 	{
 		if(timed && ((Time.realtimeSinceStartup - startTime) > timeLimit))
@@ -146,7 +159,7 @@ public class RPGQuest : BasicItem
 		return false;
 	}
 	//paragraph task
-	public void CheckParagraph(int paragraphID)
+	public void CheckParagraph(int conversationID, int paragraphID)
 	{
 		QuestStep questStep = CurrentStep;
 		
@@ -155,7 +168,7 @@ public class RPGQuest : BasicItem
 		foreach(Task task in questStep.Tasks)
 		{
 			if (task.PreffixTarget == PreffixType.PARAGRAPH && task.TaskType == TaskTypeEnum.ReachPartOfConversation 
-			    && task.TaskTarget == paragraphID)
+			    && task.TaskTarget == conversationID && task.AmountToReach == paragraphID)
 				task.CurrentAmount = 1;
 		}
 	}
@@ -227,14 +240,6 @@ public class RPGQuest : BasicItem
 				task.CurrentAmount = 1; 
 			}
 		}
-	}
-	
-	public void GiveReward()
-	{
-		/*foreach(Reward r in Rewards)
-		{
-			PreffixSolver.GiveItem(r.Preffix, r.ItemId, r.Amount);
-		}*/
 	}
 }
 

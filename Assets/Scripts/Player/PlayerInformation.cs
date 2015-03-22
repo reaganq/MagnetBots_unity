@@ -77,6 +77,16 @@ public class PlayerInformation  {
 		SaveParseData();
     }
 
+	public void StartBlankGame()
+	{
+		//name already set
+		questLog.StartQuest(3);
+		GameObject tesla = GameObject.FindGameObjectWithTag("Tesla");
+		NPC npc = tesla.GetComponent<NPC>();
+		if(npc != null)
+			GUIManager.Instance.DisplayNPC(npc);
+	}
+
 	public void SetPlayerName(string newName)
 	{
 		PlayerName = newName;
@@ -296,6 +306,22 @@ public class PlayerInformation  {
 		else
 		{
 			return MainInventory.GetItemAmount(item, ignoreLevel);
+		}
+	}
+
+	public int GetItemAmount(int id, int level, PreffixType type)
+	{
+		if(type == PreffixType.ARMOR)
+		{
+			return ArmoryInventory.GetItemAmount(id, level);
+		}
+		else if(type == PreffixType.NAKEDARMOR)
+		{
+			return NakedArmorInventory.GetItemAmount(id, level);
+		}
+		else
+		{
+			return MainInventory.GetItemAmount(id, level);
 		}
 	}
 

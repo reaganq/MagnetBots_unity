@@ -9,34 +9,63 @@
       <QuestStep QLN="Can you help me find the following items?" BN="" SN="1">
         <isMainStep>true</isMainStep>
         <IsLastStep>false</IsLastStep>
+        <overrideNPC>false</overrideNPC>
+        <overrideNPCID>0</overrideNPCID>
+        <overrideNPCConversationID>0</overrideNPCConversationID>
         <Tasks />
       </QuestStep>
     </questSteps>
     <repeatable>true</repeatable>
     <timed>true</timed>
     <timeLimit>3600</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
     <initialQuestLog>Lynne needs some new stock for her shop! She will commission you to find them.</initialQuestLog>
     <finalQuestLog />
-    <randomLoot>false</randomLoot>
     <allLoots>
       <LootItem>
         <itemType>Currency</itemType>
-        <itemID />
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>100</minQuantity>
+        <maxQuantity>150</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Food</itemType>
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>3</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>15</int>
+        </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>0.5</dropRate>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>
     </allLoots>
     <questType>collection</questType>
     <allTasks>
       <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="10" TL="1" CA="0" QLD="Please help Lynne find these items:" />
-      <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="6" TL="1" CA="0" QLD="" />
+      <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="23" TL="1" CA="0" QLD="" />
+      <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="24" TL="1" CA="0" QLD="" />
     </allTasks>
     <Conditions />
-    <Rewarded>false</Rewarded>
-    <endTime>0</endTime>
   </RPGQuest>
   <RPGQuest>
     <ID>2</ID>
@@ -47,13 +76,136 @@
     <repeatable>false</repeatable>
     <timed>false</timed>
     <timeLimit>0</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
     <finalQuestLog />
-    <randomLoot>false</randomLoot>
     <allLoots />
     <questType>story</questType>
     <allTasks />
     <Conditions />
-    <Rewarded>false</Rewarded>
-    <endTime>0</endTime>
+  </RPGQuest>
+  <RPGQuest>
+    <ID>3</ID>
+    <Name>Starting Items</Name>
+    <Description>Tesla gives you starting items</Description>
+    <SystemDescription />
+    <questSteps>
+      <QuestStep QLN="" BN="" SN="1">
+        <isMainStep>true</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>1</overrideNPCID>
+        <overrideNPCConversationID>1</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="1" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </questSteps>
+    <repeatable>false</repeatable>
+    <timed>false</timed>
+    <timeLimit>0</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
+    <initialQuestLog>It's pretty safe out there but take these items anyway!</initialQuestLog>
+    <finalQuestLog>You're ready for adventure now!</finalQuestLog>
+    <allLoots>
+      <LootItem>
+        <itemType>Construction</itemType>
+        <itemID>
+          <int>6</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>5</minQuantity>
+        <maxQuantity>5</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Construction</itemType>
+        <itemID>
+          <int>7</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>2</minQuantity>
+        <maxQuantity>2</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>7</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>12</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Food</itemType>
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>5</minQuantity>
+        <maxQuantity>5</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Toys</itemType>
+        <itemID>
+          <int>4</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Currency</itemType>
+        <itemID>
+          <int>1</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1000</minQuantity>
+        <maxQuantity>1000</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Currency</itemType>
+        <itemID>
+          <int>2</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>100</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+    </allLoots>
+    <questType>story</questType>
+    <allTasks />
+    <Conditions />
   </RPGQuest>
 </ArrayOfRPGQuest>
