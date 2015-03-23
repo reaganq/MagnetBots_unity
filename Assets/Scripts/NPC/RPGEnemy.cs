@@ -9,6 +9,7 @@ using System;
 
 [XmlInclude(typeof(LootItem))]
 [XmlInclude(typeof(ActionEvent))]
+[XmlInclude(typeof(Condition))]
 public class RPGEnemy : IItem
 {
 	#region implementing interface IItem
@@ -89,6 +90,7 @@ public class RPGEnemy : IItem
 	public List<string> PrefabPaths;
 	public List<ActionEvent> preFightActions;
 	public List<ActionEvent> postFightActions;
+	public List<Condition> conditions;
 	
 	public RPGEnemy()
 	{
@@ -101,6 +103,7 @@ public class RPGEnemy : IItem
 		PortraitAtlas = "Atlases/Enemy/EnemiesAtlas";
 		preFightActions = new List<ActionEvent>();
 		postFightActions = new List<ActionEvent>();
+		conditions = new List<Condition>();
 	}
 }
 

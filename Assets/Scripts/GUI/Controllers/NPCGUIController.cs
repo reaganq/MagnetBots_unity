@@ -85,10 +85,11 @@ public class NPCGUIController : BasicGUIController {
 		base.Enable();
 		//check for check override
 		Debug.Log("active npc id: " + PlayerManager.Instance.ActiveNPC.ID);
+		activities = PlayerManager.Instance.ActiveNPC.availableActivities;
 		if(DisplayQuest(PlayerManager.Instance.Hero.questLog.CheckNPCConversation(PlayerManager.Instance.ActiveNPC.ID)))
 			return;
 
-		activities = PlayerManager.Instance.ActiveNPC.availableActivities;
+
 		if(PlayerManager.Instance.ActiveNPC.character.defaultConversationID <= 0)
 			state = NPCGUIState.activityButtons;
 
@@ -244,6 +245,7 @@ public class NPCGUIController : BasicGUIController {
 
 	public void DisplayArena(NPCArena newArena)
 	{
+		Debug.Log("huh?");
 		state = NPCGUIState.arena;
 		arenaGUI.Enable(newArena);
 	}
@@ -298,8 +300,7 @@ public class NPCGUIController : BasicGUIController {
 			state = NPCGUIState.quest;
 			PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest;
 			RPGConversation convo = Storage.LoadById<RPGConversation>(newQuest.CurrentStep.overrideNPCConversationID, new RPGConversation());
-			conversationGUI.DisplayConversation(convo);
-			return true;
+			return conversationGUI.DisplayConversation(convo);
         }
 		Debug.Log("displayed no quest");
 		return false;
@@ -319,7 +320,10 @@ public class NPCGUIController : BasicGUIController {
 
 	public void HideShop()
 	{
-		state = cachedState;
+		if(cachedState == NPCGUIState.activityButtons)
+			state = cachedState;
+		else
+			GUIManager.Instance.HideNPC();
 	}
 	
 }

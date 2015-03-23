@@ -237,8 +237,7 @@ public class Inventory  : BasicInventory
 			newItem.UniqueItemId = item.rpgItem.UniqueId;
 			newItem.CurrentAmount = amount;
 			newItem.isItemViewed = false;
-			Items.Add(newItem);
-			Debug.LogWarning("ADDING ITEM: " + amount + item.UniqueItemId + item.rpgItem.UniqueId);
+			AddItemIntoList(item);
 		}
 		else
 		{
@@ -250,7 +249,7 @@ public class Inventory  : BasicInventory
 				newItem.UniqueItemId = item.rpgItem.UniqueId;
 				newItem.CurrentAmount = amount;
 				newItem.isItemViewed = false;
-				Items.Add(newItem);
+				AddItemIntoList(item);
 			}
 		}
 	}
@@ -287,7 +286,7 @@ public class Inventory  : BasicInventory
 			item.UniqueItemId = itemToAdd.UniqueId;
 			item.CurrentAmount = amount;
 			item.isItemViewed = viewedState;
-			Items.Add(item);
+			AddItemIntoList(item);
 		}
 		else
 		{
@@ -299,21 +298,51 @@ public class Inventory  : BasicInventory
 				item.UniqueItemId = itemToAdd.UniqueId;
 				item.CurrentAmount = 1;
 				item.isItemViewed = viewedState;
-				Items.Add(item);
+				AddItemIntoList(item);
 			}
 		}
 	}
 
+	public void AddItemIntoList(InventoryItem item)
+	{
+		Debug.Log("adding item directly into list");
+		bool foundItemGroup = false;
+		for (int i = 0; i < Items.Count; i++) {
+			//Debug.Log(item.rpgItem.UniqueId + " : " +Items[i].rpgItem.UniqueId);
+			if(item.rpgItem.UniqueId == Items[i].rpgItem.UniqueId)
+			{
+				Debug.Log("found right item group");
+				if(item.Level < Items[i].Level)
+				{
+					Items.Insert(i,item);
+					Debug.Log("this item is lower level");
+					return;
+				}
+				if(item.Level > Items[i].Level)
+				{
+					foundItemGroup = true;
+				}
+			}
+			else
+			{
+				if(foundItemGroup)
+				{
+					Items.Insert(i, item);
+					Debug.Log("this item is higher level than anything I currently have");
+					return;
+				}
+			}
+		}
+		Items.Add(item);
+	}
+
 	public bool RemoveItem(InventoryItem item, int amount)
 	{
-		Debug.Log(item.UniqueItemId + amount);
 		for (int i = 0; i < Items.Count; i++) 
 		{
 			if(Items[i].UniqueItemId == item.UniqueItemId && Items[i].Level == item.Level)
 			{
-				Debug.Log(Items[i].CurrentAmount);
 				Items[i].CurrentAmount -= amount;
-				Debug.Log(Items[i].CurrentAmount);
 				if(Items[i].CurrentAmount <= 0)
 					Items.RemoveAt(i);
 				return true;

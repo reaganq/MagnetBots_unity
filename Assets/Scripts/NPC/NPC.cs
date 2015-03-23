@@ -98,6 +98,8 @@ public class NPC: MonoBehaviour
 			activities[i].LoadConversation();
 				}
 
+		GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>().AddNPC(this);
+		Debug.Log("here");
 		/*if(character.ArenaID > 0)
 		{
 			arena = Storage.LoadById<NPCArena>(character.ArenaID, new NPCArena());

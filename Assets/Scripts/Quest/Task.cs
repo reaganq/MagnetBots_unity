@@ -52,6 +52,10 @@ public class Task {
 			if (CurrentAmount == 1)
 				return true;
 			break;
+		case TaskTypeEnum.BringItem:
+			if(CurrentAmount >= AmountToReach)
+				return true;
+			break;
 		}
 		return false;
 	}

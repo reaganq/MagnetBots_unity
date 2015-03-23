@@ -18,6 +18,7 @@ public class OverheadUI : MonoBehaviour {
 	public GameObject hpBarObject;
 	public GameObject speechBubble;
 	public GameObject teamIcon;
+	public UILabel speechBubbleLabel;
 	public UIPlayTween speechBubbleTween;
 	public Job hideSpeechBubbleJob = null;
 	// Use this for initialization
@@ -63,7 +64,9 @@ public class OverheadUI : MonoBehaviour {
 			hideSpeechBubbleJob.kill();
 		speechBubbleTween.tweenTarget = speechBubble;
 		speechBubbleTween.Play(true);
+		speechBubbleLabel.text = text;
 		hideSpeechBubbleJob = Job.make(HideSpeechBubble());
+
 	}
 
 	public IEnumerator HideSpeechBubble()

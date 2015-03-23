@@ -90,7 +90,6 @@ public class QuestStep {
 
 	public void GenerateRandomTasks(List<Task> possibleTasks, int numberofTasks, int maxAmount)
 	{
-		Debug.Log("generating task: " + numberofTasks);
 		Tasks.Clear();
 		List<int> taskIDs = new List<int>();
 		for (int i = 0; i < numberofTasks; i++) {
@@ -98,10 +97,8 @@ public class QuestStep {
 			do
 			{
 				id = UnityEngine.Random.Range(0, possibleTasks.Count);
-				Debug.Log(id);
 			}while(taskIDs.Contains(id));
 			taskIDs.Add(id);
-			Debug.Log("generated task: " + id);
 			Tasks.Add(possibleTasks[id]);
 			Tasks[i].AmountToReach = UnityEngine.Random.Range(1, maxAmount);
 		}

@@ -42,8 +42,10 @@ public class SocialManager : MonoBehaviour {
 
 	public void SubmitChatMessage(string playerName, string chatText, float timeStamp, int messageType)
 	{
+		//AddChatMessage(playerName, chatText, timeStamp, messageType);
+		PlayerManager.Instance.ActiveWorld.talk(chatText, playerName, timeStamp);
 		//rpc addchatmessage
-		myPhotonView.RPC("AddChatMessage", PhotonTargets.All, playerName, chatText, timeStamp, messageType); 
+		//myPhotonView.RPC("AddChatMessage", PhotonTargets.All, playerName, chatText, timeStamp, messageType); 
 	}
 
 	[RPC]

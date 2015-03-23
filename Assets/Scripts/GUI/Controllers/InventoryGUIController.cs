@@ -53,6 +53,8 @@ public class InventoryGUIController : BasicGUIController {
 	public UISprite descriptionBG;
 	public UISprite icon;
 	public UILabel rarityLabel;
+	public GameObject[] itemDetailsStars;
+	public GameObject leftDetails;
 	public GameObject rightDetails;
 	public GameObject rightUpgradeDetails;
 
@@ -61,8 +63,13 @@ public class InventoryGUIController : BasicGUIController {
 	public GameObject upgradeDoorCog;
 	public GameObject successPage;
 	public GameObject failurePage;
-
-
+	public GameObject magnetsTick;
+	public float successChance;
+	public float bonusSuccessChance;
+	public int bonusMagnetsCount;
+	public InventoryItem upgradedItem;
+	public bool usingBonus;
+	
 	private int newItemCount;
 
 	void Start()
@@ -85,6 +92,8 @@ public class InventoryGUIController : BasicGUIController {
 		selectedSubCategoryIndex = -1;
 		base.Disable ();
 	}
+
+	#region normal grid display functions
 
 	public override void OnCategoryPressed (int index, int level)
 	{
@@ -275,10 +284,18 @@ public class InventoryGUIController : BasicGUIController {
 		DisplayItemDetails(index);
 	}
 
+	#endregion
+
+	#region item details view
+
 	public void DisplayItemDetails(int index)
 	{
 		backButton.SetActive(true);
 		itemDetailsPanel.SetActive(true);
+		HidePageComponents();
+		leftDetails.SetActive(true);
+		rightDetails.SetActive(true);
+
 		selectedItem = selectedItemList[index];
 		nameLabel.text = selectedItem.rpgItem.Name;
 		descriptionLabel.text = selectedItem.rpgItem.Description;
@@ -295,6 +312,16 @@ public class InventoryGUIController : BasicGUIController {
 		rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
 		rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
 		quantityLabel.text = selectedItem.CurrentAmount.ToString();
+		for (int i = 0; i < itemDetailsStars.Length; i++) {
+			itemDetailsStars[i].SetActive(false);
+		}
+		if(selectedItem.rpgItem.IsUpgradeable)
+		{
+			for (int i = 0; i < selectedItem.Level; i++) {
+				itemDetailsStars[i].SetActive(true);
+            }
+        }
+
 		UpdateItemDetails();
 		if(selectedItem.rpgItem.ItemCategory == ItemType.NakedArmor || selectedItem.rpgItem.ItemCategory == ItemType.Armor)
 		{
@@ -405,6 +432,10 @@ public class InventoryGUIController : BasicGUIController {
 		}
 	}
 
+	#endregion
+
+	#region player shop stocking functions
+
 	public void IncreaseQuantity()
 	{
 		int maxNumber = selectedItem.CurrentAmount;
@@ -467,6 +498,10 @@ public class InventoryGUIController : BasicGUIController {
 		}
 	}
 
+	#endregion
+
+	#region button functions
+
 	public void OnEquipButtonPressed()
 	{
 		PlayerManager.Instance.Hero.EquipItem(selectedItem);
@@ -480,9 +515,7 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void OnUpgradeButtonPressed()
 	{
-		rightDetails.SetActive(false);
-		rightUpgradeDetails.SetActive(true);
-
+		EnterUpgradeView();
 	}
 
 	public void OnUnequipButtonPressed()
@@ -515,6 +548,71 @@ public class InventoryGUIController : BasicGUIController {
 		{
 			Disable();
 		}
+	}
+
+	#endregion
+
+	#region item upgrade
+
+	public void OnMagnetsLuckIncreasePressed()
+	{
+		usingBonus = !usingBonus;
+		magnetsTick.SetActive(usingBonus);
+	}
+
+	public void OnConfirmUpgradePressed()
+	{
+		StartCoroutine(UpgradeItem ());
+	}
+
+	public void OnCancelUpgradePressed()
+	{
+	}
+
+	public void EnterUpgradeView()
+	{
+		HidePageComponents();
+		leftDetails.SetActive(true);
+		rightUpgradeDetails.SetActive(true);
+		usingBonus = false;
+		magnetsTick.SetActive(usingBonus);
+	}
+
+	public IEnumerator UpgradeItem()
+	{
+		yield return null;
+		//play door animations
+	}
+
+	public void DisplayFailurePage()
+	{
+		HidePageComponents();
+		failurePage.SetActive(true);
+	}
+
+	public void DisplaySuccessPage()
+	{
+		HidePageComponents();
+		successPage.SetActive(true);
+	}
+
+	public void OnViewNewItemPressed()
+	{
+	}
+
+	public void OnUpgradeAnotherPressed()
+	{
+	}
+
+	#endregion
+
+	public void HidePageComponents()
+	{
+		leftDetails.SetActive(false);
+		rightUpgradeDetails.SetActive(false);
+		successPage.SetActive(false);
+		failurePage.SetActive(false);
+		rightDetails.SetActive(false);
 	}
 }
 

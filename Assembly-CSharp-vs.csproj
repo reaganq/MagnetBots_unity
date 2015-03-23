@@ -648,6 +648,7 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfFieldScatter.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX Releases Notes.txt" />
+     <None Include="Assets\Scenes\BurgerMemory\BeastSettings.xml" />
      <None Include="Assets\T4M\Shaders\ShaderModel2\Bump\T4M 3 TexturesBumped.shader" />
      <None Include="Assets\Lightmapping Extended\Shaders\Alpha-VertexLit.shader" />
      <None Include="Assets\JMO Assets\Cartoon FX\CartoonFX2 Releases Notes.txt" />

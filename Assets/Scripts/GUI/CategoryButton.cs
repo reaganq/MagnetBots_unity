@@ -41,7 +41,7 @@ public class CategoryButton : MonoBehaviour {
 			if(newItemCount > 0)
 			{
 				newItemCounter.text = newItemCount.ToString();
-				newItemCountFlag.SetActive(true);
+				newItemCountFlag.SetActive(false);
 			}
 			else
 				newItemCountFlag.SetActive(false);

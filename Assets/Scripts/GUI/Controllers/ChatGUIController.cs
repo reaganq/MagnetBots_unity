@@ -18,9 +18,9 @@ public class ChatGUIController : BasicGUIController {
 	public GameObject friendListControls;
 
 	//uitables
-	public UITable chatboxesTable;
-	public UITable friendsTable;
-	public UITable friendChatTable;
+	public UIGrid chatboxesTable;
+	public UIGrid friendsTable;
+	public UIGrid friendChatTable;
 
 	public UIInput chatInput;
 	public int maxNumMessages = 50;
@@ -130,6 +130,7 @@ public class ChatGUIController : BasicGUIController {
 		mainChatScrollBar.SetActive(true);
 		friendsListScrollBar.SetActive(true);
 		friendsListScrollBar.SetActive(false);
+		chatboxesTable.Reposition();
 	}
 
 	public void UpdateNormalChat()
@@ -146,6 +147,7 @@ public class ChatGUIController : BasicGUIController {
 		mainChatScrollBar.SetActive(false);
 		//load up correct number of friendboxes
 		UpdateFriendsList();
+
 	}
 
 	public void UpdateFriendsList()
@@ -176,11 +178,12 @@ public class ChatGUIController : BasicGUIController {
 			}
 		}
 		
-		friendsTable.repositionNow = true;
+		friendsTable.Reposition();
 	}
 
 	public void ShowFriendChat(FriendBox friendBox)
 	{
+		return;
 		//move friends over to top
 		int index = friendBoxes.IndexOf(friendBox);
 		Vector3 offset = Vector3.zero;
@@ -222,15 +225,17 @@ public class ChatGUIController : BasicGUIController {
 		Debug.Log("cache pos: "+cachedFriendListPos);
 		//scale dummy object
 		//display friend chat
+		friendChatTable.Reposition();
 	}
 
 	public void AddChatBox(ChatMessage cm)
 	{
-		GameObject chatBox = Instantiate(chatboxMessageObject) as GameObject;
+		//GameObject itemTile = NGUITools.AddChild(gridPanelRoot, tilePrefab);
+		GameObject chatBox = NGUITools.AddChild(chatboxesTable.gameObject, chatboxMessageObject);
 		ChatBox cb = chatBox.GetComponent<ChatBox>();
-		chatBox.transform.parent = chatboxesTable.transform;
-		chatBox.transform.localPosition = Vector3.zero;
-		chatBox.transform.localScale = Vector3.one;
+		//chatBox.transform.parent = chatboxesTable.transform;
+		//chatBox.transform.localPosition = Vector3.zero;
+		//chatBox.transform.localScale = Vector3.one;
 		cb.LoadChatBox(cm);
 		chatBoxes.Add(cb);
 		chatboxesTable.repositionNow = true;

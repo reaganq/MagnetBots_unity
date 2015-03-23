@@ -146,4 +146,6 @@ MonoBehaviour:
   - NetworkBuyItemFromPlayer
   - NetworkUpdateShopItems
   - NetworkRequestShopItems
+  - NetworkAcceptFriendRequest
+  - NetworkAddFriend
   DisableAutoOpenWizard: 0

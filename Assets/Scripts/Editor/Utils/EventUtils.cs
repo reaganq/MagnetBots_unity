@@ -15,6 +15,11 @@ public class EventUtils
 			//end conversation
 		case ActionEventType.EndConversation : 
 			break;
+		case ActionEventType.HideSpeaker:
+			break;
+		case ActionEventType.TriggerNPCActivity:
+			action.Item = EditorUtils.IntField(action.Item, "activity id", 90, FieldTypeEnum.Middle);
+			break;
 			//take item
 		case ActionEventType.TakeItem:
 			action.PreffixItem = (PreffixType)EditorGUILayout.EnumPopup(action.PreffixItem, GUILayout.Width(200));

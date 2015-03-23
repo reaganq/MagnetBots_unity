@@ -34,7 +34,7 @@
     </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
-    <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
+    <speakerPrefabPath>NPCs/Speakers/Jim_Portrait</speakerPrefabPath>
     <ID>3</ID>
     <Name>Jim</Name>
     <Description>Magnet Central</Description>
@@ -95,8 +95,8 @@
     <defaultConversationID>0</defaultConversationID>
     <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
     <ID>7</ID>
-    <Name>Magnet Central Teleporter</Name>
-    <Description />
+    <Name>Electromagnetic Portal</Name>
+    <Description>Where will it take you?</Description>
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>

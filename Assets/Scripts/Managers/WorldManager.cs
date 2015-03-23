@@ -30,6 +30,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	public List<ArenaManager> ArenaManagers;
 	public AudioClip soundtrack;
 	public List<int> allAvatars;
+	public List<NPC> allNPCs = new List<NPC>();
 
 	void Awake()
 	{
@@ -62,6 +63,68 @@ public class WorldManager : Photon.MonoBehaviour {
 		//ArenaManagers.Clear();
 	}
 
+	public void AddNPC(NPC npc)
+	{
+		if(!allNPCs.Contains(npc))
+		{
+			Debug.Log("added npc");
+			allNPCs.Add(npc);
+		}
+	}
+
+	public NPC GetNPCByID(int id)
+	{
+		for (int i = 0; i < allNPCs.Count; i++) {
+			if(allNPCs[i].ID == id)
+				return allNPCs[i];
+				}
+		return null;
+	}
+
+	#region social
+
+	public void talk(string text, string playerName, float timeStamp)
+	{
+		myPhotonView.RPC("NetworkTalk", PhotonTargets.All, text, playerName, timeStamp);
+		PlayerManager.Instance.avatarActionManager.Talk(text);
+
+	}
+
+	[RPC]
+	public void NetworkTalk(string text, string playerName, float timeStamp)
+	{
+		ChatMessage cm = new ChatMessage();
+		cm.playerName = playerName;
+		cm.message = text;
+		cm.timeStamp = timeStamp;
+		GUIManager.Instance.chatGUI.AddChatBox(cm);
+	}
+
+	public void AddFriend(PhotonPlayer targetPlayer)
+	{
+		myPhotonView.RPC("NetworkAddFriend", targetPlayer, PlayerManager.Instance.Hero.PlayerName);
+	}
+
+	[RPC]
+	public void NetworkAddFriend(string playerName, PhotonMessageInfo info)
+	{
+		GUIManager.Instance.NotificationGUI.DisplayAddFriendNotification(playerName, info.sender);
+	}
+
+	public void AcceptFriendRequest(PhotonPlayer target, string myPlayerName)
+	{
+		myPhotonView.RPC("NetworkAcceptFriendRequest", target, myPlayerName);
+	}
+
+	[RPC]
+	public void NetworkAcceptFriendRequest(string friendName)
+	{
+		SocialManager.Instance.AddFriend(friendName);
+	}
+
+
+	#endregion
+
 	#region player shop
 
 	public void BuyItemFromPlayer(string uniqueItemId, int level, int amount, PhotonPlayer targetPlayer)
@@ -77,6 +140,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		
 	#endregion
 
+	#region party challenge
 	public void SendPartyChallenge(int enemyID)
 	{
 		PlayerManager.Instance.partyChallengeReplies.Clear();
@@ -148,6 +212,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		GUIManager.Instance.NotificationGUI.CancelPartyChallenge();
 		PlayerManager.Instance.startedPartyChallenge = false;
 	}
+	#endregion
 
 	#region arena logic
 
@@ -560,15 +625,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	}
 
 	#endregion
-
-	#region challenge party logic
-
-	public void IssueArenaChallenge()
-	{
-	}
-
-	#endregion
-
+	
 	public void OnPhotonPlayerDisconnected(PhotonPlayer player)
 	{
 		Debug.LogError(player);

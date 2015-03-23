@@ -16,7 +16,7 @@ public class ArenaGUIController : BasicGUIController {
 	public GameObject backButton;
 	public List<RPGEnemy> enemies;
 	public NPCArena activeArena;
-	
+	public bool isBusy = false;
 	public int selectedCardIndex;
 
 	public void Start()
@@ -31,6 +31,7 @@ public class ArenaGUIController : BasicGUIController {
 	public void Enable(NPCArena newArena)
 	{
 		Enable();
+		isBusy = false;
 		activeArena = newArena;
 		backButton.SetActive(true);
 		DetailsBox.SetActive(false);
@@ -56,6 +57,7 @@ public class ArenaGUIController : BasicGUIController {
 
 	public override void Disable()
 	{
+		isBusy = false;
 		base.Disable();
 	}
 
@@ -83,6 +85,10 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void Challenge()
 	{
+		if(isBusy)
+			return;
+
+		isBusy = true;
 		Debug.Log("solo challenge");
 		if(!PlayerManager.Instance.isInParty())
 			LaunchArena(true);
@@ -98,6 +104,8 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void OnBackButtonPressed()
 	{
+		if(isBusy)
+			return;
 		selectedCardIndex = -1;
 		DetailsBox.SetActive(false);
 		ScrollView.SetActive(true);
@@ -105,6 +113,8 @@ public class ArenaGUIController : BasicGUIController {
 
 	public void OnExitButtonPressed()
 	{
+		if(isBusy)
+			return;
 		//Disable();
 		GUIManager.Instance.NPCGUI.HideShop();
 	}

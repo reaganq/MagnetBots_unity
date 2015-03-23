@@ -68,6 +68,9 @@ public class ConditionsUtils
 		case ConditionTypeEnum.ClassRequired:
 			condition.ItemToHave = IntPopup(condition, D.enemyEditor.items, "Enemy", 150, reloadList);
 			break;*/
+		case ConditionTypeEnum.CanBattle:
+			condition.ItemToHave = "1";
+			break;
 			
 		case ConditionTypeEnum.KillTarget:
 			condition.ItemToHave = IntPopup(condition, D.enemyEditor.items, "Enemy", 150, reloadList);
@@ -113,6 +116,10 @@ public class ConditionsUtils
 			condition.ItemToHave = EditorGUILayout.TextField(condition.ItemToHave, GUILayout.Width(100));
 			break;
 
+		case ConditionTypeEnum.QuestStepInProgress:
+			condition.AmountToReach = EditorUtils.IntField(condition.AmountToReach, "Step number", 40, FieldTypeEnum.Middle);
+			condition.ItemToHave = IntPopup(condition, D.questEditor.items, "Quest", 150, reloadList);
+			break;
 		/*case ConditionTypeEnum.TotalAttribute:
 			condition.ItemToHave = IntPopup(condition, D.attributeEditor.items, "Attribute", 150, reloadList);
 			break;

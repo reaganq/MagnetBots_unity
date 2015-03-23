@@ -51,6 +51,9 @@ public class Condition
 			return true;
 		switch(ConditionType)
 		{
+		case ConditionTypeEnum.CanBattle:
+			//Debug.Log("canbattle: " + PlayerManager.Instance.avatarActionManager.CanBattle());
+			return PlayerManager.Instance.avatarActionManager.CanBattle();
 			//items must be in inventory
 		case ConditionTypeEnum.SomeItemMustBeInInventory :
 			bool state = false;
@@ -191,7 +194,9 @@ public class Condition
 			break;*/
 			//quest step in progress
 		case ConditionTypeEnum.QuestStepInProgress:
-			if (PlayerManager.Instance.Hero.questLog.IsQuestStepInProgress(Convert.ToInt32(ItemToHave), SecondaryID))
+			//itemtohave = quest id;
+			//amount to reach = quest step
+			if (PlayerManager.Instance.Hero.questLog.IsQuestStepInProgress(Convert.ToInt32(ItemToHave), AmountToReach))
 				return true;
 			break;
 			
@@ -272,4 +277,6 @@ public enum ConditionTypeEnum
 	CompletedQuestsCount,
 	QuestStepInProgress,
 	QuestFailed,
+	ReachMinigameHighScoreRank,
+	CanBattle,
 }

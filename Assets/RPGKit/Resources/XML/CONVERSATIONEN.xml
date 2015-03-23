@@ -62,7 +62,9 @@
         <PT>They have many rewards and tips waiting for you!</PT>
         <Conditions />
         <LineTexts />
-        <Actions />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+        </Actions>
         <displayTimer>5</displayTimer>
         <ownerNPCID>1</ownerNPCID>
         <isBaseParagraph>false</isBaseParagraph>
@@ -292,7 +294,229 @@
     <Name>Jim (Quest) Tutorial</Name>
     <Description />
     <SystemDescription />
-    <conversationParagraphs />
-    <conditions />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>Wow you are way too scrawny. I'm so embarassed for you...</PT>
+        <Conditions>
+          <Condition ITH="2" ITHLvl="0" ATR="1" CT="QuestStepInProgress" SI="0" />
+        </Conditions>
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Tell you what, I'm going to help you get some gains for free!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>2</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT> First let's get you battle ready. Swap out one of your arms for that toy sword in your inventory.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>3</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Just tap on your own character and then select the inventory button!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>10</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>4</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Simple stuff. Talk to me again when you're ready.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>5</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="EndConversation" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Good, let's get started. </PT>
+        <Conditions>
+          <Condition ITH="1" ITHLvl="0" ATR="0" CT="CanBattle" SI="0" />
+          <Condition ITH="2" ITHLvl="0" ATR="2" CT="QuestStepInProgress" SI="0" />
+        </Conditions>
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>7</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>For your first sparring partner, I suggest Punchbag Bob. You don't really have a choice anyway.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="TriggerNPCActivity" AM="0" TX="" />
+        </Actions>
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>8</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="HideSpeaker" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>You're not ready for battle yet. </PT>
+        <Conditions>
+          <Condition ITH="2" ITHLvl="0" ATR="2" CT="QuestStepInProgress" SI="0" />
+        </Conditions>
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>10</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Tap on your character or the menu button to access your inventory.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>11</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>It's not that hard!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>5</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>5</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>I can see that you're getting the hang of this. Enjoy your rewards!</PT>
+        <Conditions>
+          <Condition ITH="2" ITHLvl="0" ATR="3" CT="QuestStepInProgress" SI="0" />
+        </Conditions>
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>13</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Don't get complacent, there are plenty of stronger foes for you to face in the future!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>6</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>14</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>You can upgrade the items in your inventory or train with others to get stronger.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>15</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Not everything is a battle though, why don't you see if you can help out others in Magnet Central?</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>3</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>5</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+    </conversationParagraphs>
+    <conditions>
+      <Condition ITH="2" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+    </conditions>
   </RPGConversation>
 </ArrayOfRPGConversation>

@@ -17,6 +17,7 @@ public class NotificationGUIController : BasicGUIController {
 	public UILabel partyChallengeMessage;
 	public UILabel enemyLabel;
 	public PhotonPlayer challenger;
+	public string challengerName;
 
 	public GameObject partyChallengeWait;
 
@@ -32,7 +33,7 @@ public class NotificationGUIController : BasicGUIController {
 	// Use this for initialization
 	public void UpdateMessage (string name) 
 	{
-		notificationMessage.text = name + "would like to form a party with you!";
+		notificationMessage.text = name;
 	}
 
 	public void DisplayMessageBox(string message)
@@ -66,6 +67,10 @@ public class NotificationGUIController : BasicGUIController {
 			prospectivePartyLeader = null;
 			HideNotificationBox();
 		}
+		else if(state == NotificationUIState.addfriend)
+		{
+			SocialManager.Instance.AddFriend(challengerName);
+		}
 		else if(state == NotificationUIState.teamChallenge)
 		{
 			PlayerManager.Instance.ActiveWorld.PartyChallengeReply(challenger, true);
@@ -85,6 +90,11 @@ public class NotificationGUIController : BasicGUIController {
 			prospectivePartyLeader = null;
 			HideNotificationBox();
 		}
+		else if(state == NotificationUIState.addfriend)
+		{
+			HideNotificationBox();
+		}
+
 		else if(state == NotificationUIState.teamChallenge || state == NotificationUIState.teamChallengeWait)
 		{
 			PlayerManager.Instance.ActiveWorld.PartyChallengeReply(challenger, false);
@@ -102,11 +112,22 @@ public class NotificationGUIController : BasicGUIController {
 			HidePartyChallenge();
 	}
 
+	public void DisplayAddFriendNotification(string name, PhotonPlayer player)
+	{
+		challenger = player;
+		challengerName = name;
+		state = NotificationUIState.addfriend;
+		UpdateMessage(name + "would like to add you as a friend");
+		notificationTween.tweenTarget = notificationBox;
+		notificationTween.Play(true);
+
+	}
+
 	public void DisplayNotificationBox(PhotonPlayer player, int partyLeaderID)
 	{
 		notificationTween.tweenTarget = notificationBox;
 		state = NotificationUIState.teamInvite;
-		UpdateMessage(player.ToString());
+		UpdateMessage(player.ToString()+ "would like to form a party with you!");
 		notificationTween.Play(true);
 		prospectivePartyLeader = PhotonPlayer.Find(partyLeaderID);
 	}
@@ -229,5 +250,6 @@ public enum NotificationUIState
 	cancelTeamChallenge,
 	challengerWait,
 	teamChallengeLoading,
-	message
+	message,
+	addfriend
 }

@@ -38,6 +38,10 @@ public class ActionEvent
 	{
 		switch(ActionType)
 		{
+		case ActionEventType.TriggerNPCActivity:
+			Debug.Log("triggering npc activity: " + Item);
+			GUIManager.Instance.NPCGUI.OnActivityButtonPressed(Item);
+			break;
 			//quest start
 		case ActionEventType.QuestStart:
 			Debug.Log("start quest action");
@@ -74,6 +78,9 @@ public class ActionEvent
 		case ActionEventType.EndConversation:
 			GUIManager.Instance.conversationGUI.EndConversation();
 			//BasicGUI.isConversationDisplayed = false;
+			break;
+		case ActionEventType.HideSpeaker:
+			GUIManager.Instance.conversationGUI.HideSpeech();
 			break;
 		case ActionEventType.GoToParagraph:
 			GUIManager.Instance.conversationGUI.DisplayParagraphByID(Item);
@@ -116,5 +123,7 @@ public enum ActionEventType
 	DisplayQuestInfo = 15,
 	DisplayQuestStatus = 16,
 	DisplayQuestConfirmation = 17,
-	TakeQuestStepItemsTask
+	TakeQuestStepItemsTask,
+	TriggerNPCActivity,
+	HideSpeaker,
 }

@@ -57,6 +57,7 @@ public class ConversationGUIController : BasicGUIController {
 	public UIPlayTween speechBubbleIntroTween;
 	public UIPlayTween speechBubbleOutroTween;
 	public UIPlayTween speakerCameraTween;
+	public Camera speechBubbleCamera;
 	public GameObject speakerObject;
 	public Transform speakerRoot;
 	public UIPlayTween panelTween;
@@ -71,14 +72,12 @@ public class ConversationGUIController : BasicGUIController {
 	{
 		base.Enable();
 		speakerCamera.gameObject.SetActive(true);
+		speechBubbleCamera.enabled = true;
 	}
 
-	public void DisplayConversation(RPGConversation newConversation)
+	public bool DisplayConversation(RPGConversation newConversation)
 	{
 		//find the base paragraph
-		if(!isDisplayed)
-			Enable();
-
 		activeConversation = newConversation;
 		for (int i = 0; i < activeConversation.conversationParagraphs.Count; i++) {
 			if(activeConversation.conversationParagraphs[i].isBaseParagraph)
@@ -86,10 +85,14 @@ public class ConversationGUIController : BasicGUIController {
 				if(activeConversation.conversationParagraphs[i].Validate())
 				{
 					DisplayParagraph(activeConversation.conversationParagraphs[i]);
-					return;
+					if(!isDisplayed)
+						Enable();
+					Debug.Log("can display this conversation");
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	public void DisplayParagraphByID(int index)
@@ -458,21 +461,34 @@ public class ConversationGUIController : BasicGUIController {
 		StartCoroutine(EndTalk());
 	}
 
+	public void HideSpeech()
+	{
+		StartCoroutine(HideSpeechSequence());
+	}
+
+	public IEnumerator HideSpeechSequence()
+	{
+		yield return StartCoroutine(HideSpeaker());
+		Disable();
+	}
+
 	public IEnumerator EndTalk()
 	{
 		HideQuestInfo();
 		yield return StartCoroutine(HideSpeaker());
+		GUIManager.Instance.HideNPC();
 		Disable();
 	}
 
 	public override void Disable ()
 	{
 		speakerCamera.gameObject.SetActive(false);
+		speechBubbleCamera.enabled = false;
 		if(displayParagraphTimerJob != null && displayParagraphTimerJob.running)
 			displayParagraphTimerJob.kill();
 		//if(displaySpeakerJob != null && displaySpeakerJob.running)
 		//	displaySpeakerJob.kill();
 		base.Disable ();
-		GUIManager.Instance.HideNPC();
+
 	}
 }

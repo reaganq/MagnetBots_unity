@@ -52,12 +52,13 @@ public class PlayerInformation  {
             PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
             //Debug.Log(i);
         }
+		Debug.LogWarning("adding upgraded itmes");
 
 		for (int i = 6; i < 11; i++) {
 			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 1);
 				}
 
-		//PreffixSolver.GiveItem(PreffixType.ITEM, 2, 1, 20);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1, 20);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 1, 1 , 5);
 		//PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1 , 1);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 6, 1 , 10);
@@ -67,6 +68,7 @@ public class PlayerInformation  {
 		AddCurrency(152, BuyCurrencyType.CitizenPoints);
 		StockItem (ArmoryInventory.Items[2], 1);
 		StockItem(ArmoryInventory.Items[4], 1);
+
 		EquipBaseNakedArmor();
 		for (int i = 0; i < 20; i++) {
 			SocialManager.Instance.AddFriend("friend" + i);
@@ -261,16 +263,13 @@ public class PlayerInformation  {
 	{
 		playerShopInventory.RemoveItem(item, amount);
 		AddItem(item, amount);
-		Debug.Log("here");
 		UpdatePlayerShop();
 	}
 
 	public void StockItem(InventoryItem item, int amount)
 	{
 		RemoveItem(item, amount);
-		Debug.Log(amount);
 		playerShopInventory.AddItem(item, amount);
-		Debug.Log(playerShopInventory.Items.Count + " " + playerShopInventory.Items[0].CurrentAmount);
 		UpdatePlayerShop();
 	}
 
@@ -563,7 +562,7 @@ public class PlayerInformation  {
 		GUIManager.Instance.UpdateCurrency();
 		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
-			Debug.LogWarning("no parse id");
+			//Debug.LogWarning("no parse id");
 			return;
 		}
 
@@ -586,7 +585,7 @@ public class PlayerInformation  {
 	{
 		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
-			Debug.LogWarning("no parse id");
+			//Debug.LogWarning("no parse id");
 			return;
 		}
 

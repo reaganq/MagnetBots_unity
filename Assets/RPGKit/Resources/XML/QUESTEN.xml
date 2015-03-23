@@ -72,7 +72,38 @@
     <Name>Training Tutorial</Name>
     <Description />
     <SystemDescription />
-    <questSteps />
+    <questSteps>
+      <QuestStep QLN="" BN="" SN="1">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>3</overrideNPCID>
+        <overrideNPCConversationID>4</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="4" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+      <QuestStep QLN="" BN="" SN="2">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>3</overrideNPCID>
+        <overrideNPCConversationID>4</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="KillEnemy" ATR="1" PT="ENEMY" TASKTARGET="1" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+      <QuestStep QLN="" BN="" SN="3">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>3</overrideNPCID>
+        <overrideNPCConversationID>4</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="9" PT="PARAGRAPH" TASKTARGET="4" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </questSteps>
     <repeatable>false</repeatable>
     <timed>false</timed>
     <timeLimit>0</timeLimit>

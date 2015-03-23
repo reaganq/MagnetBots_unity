@@ -39,6 +39,16 @@ public class CharacterActionManager : ActionManager {
         else
             return false;
     }
+
+	public bool CanBattle()
+	{
+		Debug.Log(armorSkills.Count);
+		for (int i = 0; i < armorSkills.Count; i++) {
+			if(armorSkills[i].skillType == SkillType.Melee || armorSkills[i].skillType == SkillType.Ranged || armorSkills[i].skillType == SkillType.JumpingMelee)
+				return true;
+				}
+		return false;
+	}
    
     public override void Start () 
     {

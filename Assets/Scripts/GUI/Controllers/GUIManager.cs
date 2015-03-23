@@ -394,9 +394,10 @@ public class GUIManager : MonoBehaviour {
 		rewardsGUI.DisplayArenaFailure();
 	}
 
-	public void DisplayMinigameRewards(LootItemList items, float score)
+	public void DisplayMinigameRewards(LootItemList items, int score)
 	{
 		EnterGUIState(UIState.reward);
+		Debug.Log(score);
 		rewardsGUI.DisplayMinigameRewards(items, score);
 	}
 

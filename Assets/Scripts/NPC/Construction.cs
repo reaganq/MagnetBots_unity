@@ -7,6 +7,7 @@ public class Construction : MonoBehaviour {
 	public RPGConstruction construction;
 	public RPGNPC constructedNPC;
 	public List<InventoryItem> requiredItems = new List<InventoryItem>();
+	public List<int> requiredItemsQuantity = new List<int>();
 	public int ID;
 	public int NPCID;
 	public UIPlayTween itemTween;
@@ -36,6 +37,7 @@ public class Construction : MonoBehaviour {
 				InventoryItem newInventoryItem = new InventoryItem();
 				newInventoryItem.GenerateNewInventoryItem(Storage.LoadById<RPGItem>(construction.requiredItems[i].TaskTarget, new RPGItem()), construction.requiredItems[i].Tasklevel, construction.requiredItems[i].AmountToReach);
 				requiredItems.Add(newInventoryItem);
+				requiredItemsQuantity.Add(construction.requiredItems[i].AmountToReach);
             }
         }
 		if(trigger)
@@ -130,6 +132,7 @@ public class Construction : MonoBehaviour {
             else
                 itemHexagons[i].gameObject.SetActive(false);
         }
+		GUIManager.Instance.constructionGUI.UpdateMaterialsCounters();
 		CheckConstructionItems();
 	}
 
@@ -179,7 +182,7 @@ public class Construction : MonoBehaviour {
 			{
 				PlayerManager.Instance.Hero.RemoveItem(item, 1);
 				requiredItems[i].CurrentAmount --;
-				if(requiredItems[i].CurrentAmount <= 0)
+				if(requiredItems[i].CurrentAmount <= 0 )
 					requiredItems.RemoveAt(i);
 				RefreshConstructionItems();
 				return;

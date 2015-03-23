@@ -252,6 +252,7 @@ public class HoverPopupGUIController : BasicGUIController {
 	
 	public void AddFriend()
 	{
+		PlayerManager.Instance.ActiveWorld.AddFriend(selectedCharacter.myPhotonView.owner);
 	}
 	
 	public void OpenShop()
@@ -280,8 +281,13 @@ public class HoverPopupGUIController : BasicGUIController {
 
 	public void OnConfirmTalkPressed()
 	{
-		PlayerManager.Instance.avatarActionManager.Talk(messageInput.value);
-		Disable();
+		string text = NGUIText.StripSymbols(messageInput.value);
+		Debug.Log(text);
+		if(!string.IsNullOrEmpty(text))
+		{
+			PlayerManager.Instance.ActiveWorld.talk(messageInput.value, PlayerManager.Instance.Hero.PlayerName, Time.realtimeSinceStartup);
+			Disable();
+		}
 	}
 
 	public void HideTalkBox()

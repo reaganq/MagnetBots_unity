@@ -7,37 +7,56 @@ public class BurgerMemory : Minigame {
 	public List<GameObject> burgerParts;
 	public List<int> mainSequence;
 	public List<int> playerSequence;
-	public bool isActive;
+	public bool isPlaying;
 	public int lives = 1;
-
+	public int startingDifficulty = 4;
 	public float maxTime;
 	public float curTime;
 	public UILabel scoreText;
-	public UILabel livesText;
+	public UILabel levelText;
+	public UILabel instructionsLabel;
+	public UISprite progressBar;
 
 	public int level;
 
 	// Use this for initialization
 	void Start () {
-		isActive = false;
-		StartCoroutine(GenerateStartingSequence(4));
+		isPlaying = false;
+		instructionsLabel.text = "";
 		level = 1;
 		scoreText.text = "Score: " + score.ToString();
-		livesText.text = "Level: " + level.ToString();
+		levelText.text = "Level: " + level.ToString();
+		StartCoroutine(StartGame());
 	}
 
 	void Update()
 	{
-		if(isActive)
+		if(minigameState == MinigameState.active)
 		{
-			curTime -= Time.deltaTime;
-			if(curTime <= 0)
-				IncorrectSelection();
+			if(isPlaying)
+			{
+				curTime -= Time.deltaTime;
+				if(curTime <= 0)
+					IncorrectSelection();
+				progressBar.fillAmount = Mathf.Clamp(curTime/maxTime, 0.0f, 1.0f);
+			}
+			else
+				progressBar.fillAmount = 1;
 		}
+	}
+
+	public IEnumerator StartGame()
+	{
+		yield return new WaitForSeconds(1);
+		GUIManager.Instance.rewardsGUI.StartCountdown();
+		yield return new WaitForSeconds(4.5f);
+		minigameState = MinigameState.active;
+		StartCoroutine(GenerateStartingSequence(startingDifficulty));
 	}
 
 	public IEnumerator GenerateStartingSequence(int index)
 	{
+		isPlaying = false;
 		for (int i = 0; i <index; i++)
 		{
 			mainSequence.Add(Random.Range(0, burgerParts.Count));
@@ -49,20 +68,26 @@ public class BurgerMemory : Minigame {
 
 	public IEnumerator ShowSequence()
 	{
+		instructionsLabel.text = "Watch!";
 		yield return new WaitForSeconds(1);
 		for (int i = 0; i < mainSequence.Count; i++) {
 			StartCoroutine(Enlarge(burgerParts[mainSequence[i]]));
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.5f);
 		}
-		isActive = true;
+		isPlaying = true;
+		instructionsLabel.text = "Play!";
+		curTime = maxTime;
 	}
 	
 	void OnFingerUp( FingerUpEvent e )
 	{
+		if(minigameState != MinigameState.active && isPlaying)
+			return;
+
 		if(e.Selection != null)
 		{
 			Debug.Log("fingerup");
-			if(isActive)
+			if(isPlaying)
 			{
 				int index = burgerParts.IndexOf(e.Selection);
 				Debug.Log(index);
@@ -88,12 +113,15 @@ public class BurgerMemory : Minigame {
 		curTime = maxTime;
 		if(playerSequence.Count == mainSequence.Count)
 		{
-			isActive = false;
+			//levle up essentially
+			isPlaying = false;
 			playerSequence.Clear();
 			mainSequence.Add (Random.Range(0, burgerParts.Count));
 			level ++;
+			levelText.text = "Level: " + level.ToString();
 			score += 100;
 			scoreText.text = "Score: " + score.ToString();
+			maxTime = maxTime * 0.9f;
 			//score += 100;
 			//scoreText.text = "Score: " + score.ToString();
 			StartCoroutine(ShowSequence());
@@ -102,16 +130,8 @@ public class BurgerMemory : Minigame {
 
 	void IncorrectSelection()
 	{
-		lives --;
-		livesText.text = "Lives: " + lives.ToString();
-		playerSequence.Clear();
-		if(lives <= 0)
-		{
-			isActive = false;
-			EndGame();
-			return;
-		}
-		curTime = maxTime;
+		isPlaying = false;
+		EndGame();
 	}
 
 	public IEnumerator Enlarge(GameObject go)
@@ -121,3 +141,5 @@ public class BurgerMemory : Minigame {
 		TweenScale.Begin(go, 0.1f, new Vector3(1,1,1));
 	}
 }
+
+

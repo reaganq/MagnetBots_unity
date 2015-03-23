@@ -1016,7 +1016,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100056}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -.339458823, y: -6.72073028e-08, z: 9.37564693e-09, w: .940620959}
   m_LocalPosition: {x: 0, y: 2.11631775, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1045,7 +1045,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100060}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: -.339458764, y: -6.72072957e-08, z: 9.37564604e-09, w: .940620959}
   m_LocalPosition: {x: 0, y: 1.82039583, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1595,6 +1595,7 @@ MonoBehaviour:
   hpBarObject: {fileID: 100054}
   speechBubble: {fileID: 174658}
   teamIcon: {fileID: 166020}
+  speechBubbleLabel: {fileID: 11400040}
   speechBubbleTween: {fileID: 11474660}
 --- !u!114 &11400022
 MonoBehaviour:
@@ -1986,18 +1987,18 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 0, g: 0, b: 0, a: 1}
   mPivot: 4
-  mWidth: 378
-  mHeight: 100
+  mWidth: 596
+  mHeight: 253
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.79999995
+  aspectRatio: 2.35573125
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 0}
   mFont: {fileID: 11400000, guid: a73b9fc7617324f55850fc3583cbb6d8, type: 2}
   mText: asdfasdfasdfa
-  mFontSize: 100
+  mFontSize: 90
   mFontStyle: 0
   mAlignment: 0
   mEncoding: 1
@@ -2006,7 +2007,7 @@ MonoBehaviour:
   mEffectColor: {r: 1, g: 1, b: 1, a: 1}
   mSymbols: 1
   mEffectDistance: {x: 3, y: 3}
-  mOverflow: 2
+  mOverflow: 1
   mMaterial: {fileID: 0}
   mApplyGradient: 0
   mGradientTop: {r: 0, g: .433113366, b: .860294104, a: 1}

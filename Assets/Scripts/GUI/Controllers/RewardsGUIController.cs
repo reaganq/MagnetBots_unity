@@ -47,6 +47,9 @@ public class RewardsGUIController : BasicGUIController {
 		Enable();
 		DisplayRewards();
 		isArena = true;
+		//display rewards
+		//display badge
+		//end
 	}
 
 	public void StartCountdown()
@@ -74,13 +77,19 @@ public class RewardsGUIController : BasicGUIController {
 		start.SetActive(false);
 	}
 
-	public void DisplayMinigameRewards(LootItemList loots, float newScore)
+	public void DisplayMinigameRewards(LootItemList loots, int newScore)
 	{
 		allLoots = loots;
-		Enable();
-		DisplayRewards();
-		isMinigame = true;
 		score = newScore;
+		Enable();
+		DisplayMinigameResults();
+		isMinigame = true;
+
+		Debug.Log(score);
+		//display score first
+		//display badge
+		//display reward items
+		//end
 	}
 
 	public bool DisplayBadge()
@@ -121,6 +130,7 @@ public class RewardsGUIController : BasicGUIController {
 
 	public void DisplayMinigameResults()
 	{
+		Debug.Log(score);
 		scoreLabel.text = score.ToString();
 		rewardPanelTween.tweenTarget = minigameScoreObject;
 		rewardPanelTween.Play(true);
@@ -136,35 +146,37 @@ public class RewardsGUIController : BasicGUIController {
 		HideBadge();
 		if(isArena)
 			Invoke("EndArena", 0.15f);
-		else if(isMinigame)
-			Invoke("EndMiniGame", 0.15f);
+		if(isMinigame)
+			DisplayRewards();
 	}
 
 	public void OnContinueRewardsPressed()
 	{
-		if(DisplayBadge())
+		HideRewards();
+		if(isArena)
 		{
-			HideRewards();
-		}
-		else
-		{
-			if(isArena)
-			{
-				HideRewards();
-				Invoke("EndArena", 0.15f);
+			if(DisplayBadge())
 				return;
-			}
-			if(isMinigame)
-			{
-				DisplayMinigameResults();
-				HideRewards();
-			}
+			else
+				Invoke("EndArena", 0.15f);
+		}
+		if(isMinigame)
+		{
+			Invoke("EndMiniGame", 0.15f);
 		}
 	}
 
 	public void OnContinueMinigamePressed()
 	{
-		EndMiniGame();
+		if(DisplayBadge())
+		{
+			HideMinigameResults();
+		}
+		else
+		{
+			DisplayRewards();
+			HideMinigameResults();
+		}
 	}
 
 	public void EndArena()
