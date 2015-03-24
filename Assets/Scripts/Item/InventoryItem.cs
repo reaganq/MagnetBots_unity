@@ -20,7 +20,7 @@ public class InventoryItem : ItemInWorld {
 	{
 		get
 		{
-			if(rpgItem.IsUpgradeable && !(CurrentAmount == 1 && IsItemEquipped) && Level < rpgItem.maxLevel)
+			if(rpgItem.IsUpgradeable && !(CurrentAmount == 1 && IsItemEquipped) && Level < rpgItem.maxLevel && CurrentAmount > 0)
 			   return true;
 			else
 			   return false;

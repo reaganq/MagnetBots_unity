@@ -4,91 +4,153 @@ using System.Collections.Generic;
 
 public class BankGUIController : BasicGUIController {
 
-	public int _activeAmount;
-	public int activeAmount
+	public int _activeDepositAmount;
+	public int activeDepositAmount
 	{
 		get{
-			return _activeAmount;
+			return _activeDepositAmount;
 		}
 		set
 		{
-			_activeAmount = value;
-			amountLabel.text = _activeAmount.ToString();
+			_activeDepositAmount = value;
+			depositAmountLabel.text = _activeDepositAmount.ToString();
 		}
 	}
-	public UILabel amountLabel;
-	public UILabel bankCoinsLabel;
-	public BankMode bankMode = BankMode.none;
+	public UILabel depositAmountLabel;
+
+	public int _activeWithdrawAmount;
+	public int activeWithdrawAmount
+	{
+		get{
+			return _activeWithdrawAmount;
+		}
+		set
+		{
+			_activeWithdrawAmount = value;
+	
+			withdrawAmountLabel.text = _activeWithdrawAmount.ToString();
+		}
+	}
+	public UILabel withdrawAmountLabel;
+	public UILabel totalAmountLabel;
+	public UILabel interestInfoLabel;
+	public GameObject collectButton;
+	public GameObject timer;
 	public int interestAmount;
-	public GameObject quantityBox;
+	public int _time;
+	public int interestTime
+	{
+		get
+		{
+			return _time;
+		}
+        set
+        {
+            _time = value;
+			if(_time < 0)
+				_time = 0;
+			timeLabel.text = _time / 3600 + ":" + (_time % 3600) / 60 + ":" + (_time % 3600 ) % 60;
+        }
+	}
+	public UILabel timeLabel;
+	public float _timer = 0;
+
+	public void Update()
+	{
+		_timer += Time.deltaTime;
+		if(_timer > 1.0f)
+		{
+			interestTime --;
+			_timer = 0;
+		}
+	}
+
+	public void Start()
+	{
+		interestTime = 3600*24;
+	}
 
 	public override void Enable ()
 	{
-		interestAmount = (int)(GeneralData.interestRate * PlayerManager.Instance.Hero.BankCoins);
-		bankMode = BankMode.none;
-		quantityBox.SetActive(false);
-		bankCoinsLabel.text = PlayerManager.Instance.Hero.BankCoins.ToString();
+		UpdateInfo();
 		base.Enable ();
 	}
 
 	public void OnDepositPressed()
 	{
-		quantityBox.SetActive(true);
-	}
-
-	public void Deposit(int amount)
-	{
-		PlayerManager.Instance.Hero.Deposit(amount);
+		PlayerManager.Instance.Hero.Deposit(activeDepositAmount);
+		UpdateInfo();
 	}
 
 	public void OnWithdrawPressed()
 	{
-		quantityBox.SetActive(true);
+		PlayerManager.Instance.Hero.Withdraw(activeWithdrawAmount);
+		UpdateInfo();
 	}
-
-	public void Withdraw(int amount)
-	{
-		PlayerManager.Instance.Hero.Withdraw(amount);
-	}
-
+	
 	public void OnCollectInterestPressed()
 	{
 		CollectInterest();
+		UpdateInfo();
+		interestTime = 24*3600;
+	}
 
+	public void UpdateInfo()
+	{
+		interestAmount = (int)(GeneralData.interestRate * PlayerManager.Instance.Hero.BankCoins);
+		totalAmountLabel.text = "You have a total of " + PlayerManager.Instance.Hero.BankCoins.ToString() + " coins in your in your bank account.";
+		interestInfoLabel.text = "You will receive " + interestAmount.ToString() + " coins as interest everyday.";
+		activeDepositAmount = 0;
+		activeWithdrawAmount = 0;
+		if(interestTime <= 0)
+		{
+			timer.SetActive(false);
+			collectButton.SetActive(true);
+		}
+		else
+		{
+			timer.SetActive(true);
+			collectButton.SetActive(false);
+		}
 	}
 
 	public void CollectInterest()
 	{
-		PlayerManager.Instance.Hero.CollectInterest(interestAmount);
-		bankCoinsLabel.text = PlayerManager.Instance.Hero.BankCoins.ToString();
+		if(interestAmount > 0)
+			PlayerManager.Instance.Hero.CollectInterest(interestAmount);
 	}
 
-	public void OnUpPressed()
+	public void IncreaseWithdraw()
 	{
-		activeAmount ++;
-		if(activeAmount > PlayerManager.Instance.Hero.Coins && bankMode == BankMode.deposit)
-			activeAmount = PlayerManager.Instance.Hero.Coins;
-		if(activeAmount > PlayerManager.Instance.Hero.BankCoins && bankMode == BankMode.withdraw)
-			activeAmount = PlayerManager.Instance.Hero.BankCoins;
+		if(activeWithdrawAmount < PlayerManager.Instance.Hero.BankCoins)
+			activeWithdrawAmount ++;
 	}
 
-	public void OnDownpressed()
+	public void DecreaseWithdraw()
 	{
-		activeAmount --;
-		if(_activeAmount < 0)
-			activeAmount = 0;
+		if(activeWithdrawAmount > 0)
+			activeWithdrawAmount --;
+	}
+
+	public void IncreaseDeposit()
+	{
+		if(activeDepositAmount < PlayerManager.Instance.Hero.Coins)
+			activeDepositAmount ++;
+	}
+	
+	public void DecreaseDeposit()
+	{
+		if(activeDepositAmount > 0)
+			activeDepositAmount --;
 	}
 
 	public override void Disable()
 	{
-		bankMode = BankMode.none;
 		base.Disable();
 	}
-}
 
-public enum BankMode
-{
-	none,
-	withdraw,
-	deposit
+	public void OnExitButtonPressed()
+	{
+		GUIManager.Instance.NPCGUI.HideShop();
+	}
 }

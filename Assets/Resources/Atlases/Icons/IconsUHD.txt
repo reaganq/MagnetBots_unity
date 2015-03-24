@@ -26,7 +26,7 @@
 },
 "bank.png":
 {
-	"frame": {"x":1213,"y":1176,"w":256,"h":256},
+	"frame": {"x":1484,"y":970,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -42,13 +42,21 @@
 },
 "chat.png":
 {
-	"frame": {"x":1742,"y":712,"w":256,"h":256},
+	"frame": {"x":1213,"y":1176,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
 	"sourceSize": {"w":256,"h":256}
 },
 "construction.png":
+{
+	"frame": {"x":1742,"y":712,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+"event.png":
 {
 	"frame": {"x":1226,"y":918,"w":256,"h":256},
 	"rotated": false,
@@ -215,6 +223,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:85877dda1d80a3abf86d024ad6735f43$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0baf026d32df9f39035dd620cb16db0d$"
 }
 }

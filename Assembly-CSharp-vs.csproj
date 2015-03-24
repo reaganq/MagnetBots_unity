@@ -470,6 +470,7 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\BasicGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ButtonCustomMessage.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ChatGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\CombobulatorGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ConstructionGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ConversationGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\GUIManager.cs" />

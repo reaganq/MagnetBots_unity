@@ -19,6 +19,7 @@ public class PlayerInformation  {
 	public QuestLog questLog;
 	public Jukebox jukeBox;
 		
+
 	public Inventory playerShopInventory;
 
 	public int shopTill;
@@ -306,6 +307,14 @@ public class PlayerInformation  {
 		{
 			return MainInventory.GetItemAmount(item, ignoreLevel);
 		}
+	}
+
+	public InventoryItem FindItem(RPGItem item, int level)
+	{
+		if(item.ItemCategory == ItemType.Armor || item.ItemCategory == ItemType.NakedArmor)
+			return ArmoryInventory.FindItem(item, level);
+		else
+			return MainInventory.FindItem(item, level);
 	}
 
 	public int GetItemAmount(int id, int level, PreffixType type)

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: e84d8224fb7404befa59f2a3e3d414c5
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: //RootNode
     100002: polySurface47
@@ -17,6 +17,10 @@ ModelImporter:
     100022: transform63
     100024: polySurface3
     100026: transform1
+    100028: pCube10
+    100030: pCube11
+    100032: pPipe5
+    100034: transform2
     400000: //RootNode
     400002: polySurface47
     400004: polySurface48
@@ -31,16 +35,27 @@ ModelImporter:
     400022: transform63
     400024: polySurface3
     400026: transform1
+    400028: pCube10
+    400030: pCube11
+    400032: pPipe5
+    400034: transform2
     2300000: polySurface51
     2300002: //RootNode
     2300004: polySurface3
+    2300006: pCube11
     3300000: polySurface51
     3300002: //RootNode
     3300004: polySurface3
+    3300006: pCube11
     4300000: polySurface51
     4300002: TerrainMesh
     4300004: Terrain_01
     4300006: polySurface3
+    4300008: pCube10
+    4300010: pCube11
+    4300012: pPipe7
+    4300014: Magnetcentral_terrain:ZBrush_defualt_group
+    4300016: ZBrush_defualt_group
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -50,6 +65,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -93,4 +109,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

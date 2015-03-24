@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: magnetcentral_terrain3
+  m_Shader: {fileID: 4800000, guid: 4bdbc729bd554f14a95326d3db2d6eaa, type: 3}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: 0
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Control
+        second:
+          m_Texture: {fileID: 2800000, guid: 6046e7f475fee4511af564edf732dc27, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat0
+        second:
+          m_Texture: {fileID: 2800000, guid: 213bbe7e1424414409173c150b88c689, type: 3}
+          m_Scale: {x: 26, y: 26}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat1
+        second:
+          m_Texture: {fileID: 2800000, guid: 215c1ec7f572299418ae0880dbe45e21, type: 3}
+          m_Scale: {x: 34, y: 34}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat2
+        second:
+          m_Texture: {fileID: 2800000, guid: 71695d727e4d8ff4e8ac8ac6adc6cb29, type: 3}
+          m_Scale: {x: 25, y: 25}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat3
+        second:
+          m_Texture: {fileID: 2800000, guid: 21528213db94a42a48ff6156179b2900, type: 3}
+          m_Scale: {x: 34, y: 34}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat4
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Splat5
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Control2
+        second:
+          m_Texture: {fileID: 2800000, guid: 1c680324aa2ec4cc18f5672424615334, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats:
+      data:
+        first:
+          name: _ShininessL0
+        second: .078125
+      data:
+        first:
+          name: _ShininessL1
+        second: .078125
+    m_Colors:
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}

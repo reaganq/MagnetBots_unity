@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bank
-    x: 1213
-    y: 1176
+    x: 1484
+    y: 970
     width: 256
     height: 256
     borderLeft: 0
@@ -107,6 +107,19 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: chat
+    x: 1213
+    y: 1176
+    width: 256
+    height: 256
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: construction
     x: 1742
     y: 712
     width: 256
@@ -119,7 +132,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: construction
+  - name: event
     x: 1226
     y: 918
     width: 256

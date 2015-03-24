@@ -75,7 +75,12 @@
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
-    <activities />
+    <activities>
+      <NPCActivityData>
+        <activityID>2</activityID>
+        <activityType>Service</activityType>
+      </NPCActivityData>
+    </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
     <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>

@@ -39,28 +39,28 @@ public class InventoryGUIController : BasicGUIController {
 	public GameObject increaseArrow;
 	public GameObject decreaseArrow;
 	public GameObject useButton;
-	public GameObject tickIcon;
+	//public GameObject tickIcon;
 	public GameObject armorStatsObject;
-	public UISprite currencyIcon;
-	public UILabel currencyLabel;
-	public UILabel quantityLabel;
+	//public UISprite currencyIcon;
+	//public UILabel currencyLabel;
+	//public UILabel quantityLabel;
 	public UISprite skillIcon;
 	public UILabel healthBonus;
 	public UILabel defenseBonus;
 	public UILabel attackBonus;
-	public UILabel nameLabel;
+	//public UILabel nameLabel;
 	public UILabel descriptionLabel;
 	public UISprite descriptionBG;
-	public UISprite icon;
-	public UILabel rarityLabel;
-	public GameObject[] itemDetailsStars;
+	public ItemInfoBox leftItemDetailsBox;
+	//public UISprite icon;
+	//public UILabel rarityLabel;
+	//public GameObject[] itemDetailsStars;
 	public GameObject leftDetails;
 	public GameObject rightDetails;
 	public GameObject rightUpgradeDetails;
 
 	//Upgrade Item View
-	public GameObject upgradeDoor;
-	public GameObject upgradeDoorCog;
+	public Animation doorsAnimation;
 	public GameObject successPage;
 	public GameObject failurePage;
 	public GameObject magnetsTick;
@@ -69,6 +69,11 @@ public class InventoryGUIController : BasicGUIController {
 	public int bonusMagnetsCount;
 	public InventoryItem upgradedItem;
 	public bool usingBonus;
+	public ItemInfoBox successItem;
+	public GameObject upgradeAnotherButton;
+	public GameObject viewSuccessItemButton;
+	public GameObject returnToInventoryButton;
+	public GameObject tryAgainButton;
 	
 	private int newItemCount;
 
@@ -281,14 +286,15 @@ public class InventoryGUIController : BasicGUIController {
 	public override void OnItemTilePressed(int index)
 	{
 		inventoryPanel.SetActive(false);
-		DisplayItemDetails(index);
+		selectedItem = selectedItemList[index];
+		DisplayItemDetails();
 	}
 
 	#endregion
 
 	#region item details view
 
-	public void DisplayItemDetails(int index)
+	public void DisplayItemDetails()
 	{
 		backButton.SetActive(true);
 		itemDetailsPanel.SetActive(true);
@@ -296,31 +302,13 @@ public class InventoryGUIController : BasicGUIController {
 		leftDetails.SetActive(true);
 		rightDetails.SetActive(true);
 
-		selectedItem = selectedItemList[index];
-		nameLabel.text = selectedItem.rpgItem.Name;
+		//selectedItem = selectedItemList[index];
+		//nameLabel.text = selectedItem.rpgItem.Name;
 		descriptionLabel.text = selectedItem.rpgItem.Description;
-		GameObject atlas = Resources.Load(selectedItem.rpgItem.AtlasName) as GameObject;
-		icon.atlas = atlas.GetComponent<UIAtlas>();
-		icon.spriteName = selectedItem.rpgItem.IconPath;
-		currencyLabel.text = selectedItem.rpgItem.BuyValue.ToString();
-		if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.CitizenPoints)
-			currencyIcon.spriteName = GeneralData.citizenIconPath;
-		else if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.Magnets)
-			currencyIcon.spriteName = GeneralData.magnetIconPath;
-		else if(selectedItem.rpgItem.BuyCurrency == BuyCurrencyType.Coins)
-			currencyIcon.spriteName = GeneralData.coinIconPath;
-		rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
-		rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
-		quantityLabel.text = selectedItem.CurrentAmount.ToString();
-		for (int i = 0; i < itemDetailsStars.Length; i++) {
-			itemDetailsStars[i].SetActive(false);
-		}
-		if(selectedItem.rpgItem.IsUpgradeable)
-		{
-			for (int i = 0; i < selectedItem.Level; i++) {
-				itemDetailsStars[i].SetActive(true);
-            }
-        }
+		leftItemDetailsBox.LoadItemInfo(selectedItem);
+		//rarityLabel.color = GUIManager.Instance.GetRarityColor(selectedItem.rpgItem.Rarity);
+		//rarityLabel.text = selectedItem.rpgItem.Rarity.ToString();
+		//quantityLabel.text = selectedItem.CurrentAmount.ToString();
 
 		UpdateItemDetails();
 		if(selectedItem.rpgItem.ItemCategory == ItemType.NakedArmor || selectedItem.rpgItem.ItemCategory == ItemType.Armor)
@@ -417,18 +405,6 @@ public class InventoryGUIController : BasicGUIController {
 
 			}
 			UpdateQuantityLabel();
-		}
-
-		if(selectedItem.IsItemEquippable)
-		{
-			if(selectedItem.IsItemEquipped)
-			{
-				tickIcon.SetActive(true);
-			}
-			else
-			{
-				tickIcon.SetActive(false);
-			}
 		}
 	}
 
@@ -562,11 +538,13 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void OnConfirmUpgradePressed()
 	{
-		StartCoroutine(UpgradeItem ());
+		if(selectedItem != null)
+			StartCoroutine(UpgradeItem ());
 	}
 
 	public void OnCancelUpgradePressed()
 	{
+		DisplayItemDetails();
 	}
 
 	public void EnterUpgradeView()
@@ -575,11 +553,39 @@ public class InventoryGUIController : BasicGUIController {
 		leftDetails.SetActive(true);
 		rightUpgradeDetails.SetActive(true);
 		usingBonus = false;
+		leftItemDetailsBox.LoadItemInfo(selectedItem);
 		magnetsTick.SetActive(usingBonus);
 	}
 
 	public IEnumerator UpgradeItem()
 	{
+		doorsAnimation.Play();
+		yield return new WaitForSeconds(0.8f);
+		HidePageComponents();
+		//play doors animation
+		float luck = Random.Range(0.0f, 1.0f);
+		Debug.Log("luck " + luck);
+		float chance = usingBonus? 0.85f : 0.55f;
+		if(usingBonus)
+			PlayerManager.Instance.Hero.RemoveCurrency(bonusMagnetsCount, BuyCurrencyType.Magnets);
+		//TODO block bonus usage when there isn't enough magnets
+		
+		if(luck < chance)
+		{
+			InventoryItem FinalItem = new InventoryItem();
+			FinalItem.GenerateNewInventoryItem(selectedItem.rpgItem, selectedItem.Level +1, 1);
+		
+			PlayerManager.Instance.Hero.AddItem(FinalItem);
+			PlayerManager.Instance.Hero.RemoveItem(selectedItem, 1);
+			upgradedItem = PlayerManager.Instance.Hero.FindItem(FinalItem.rpgItem, FinalItem.Level);
+			DisplaySuccessPage();
+		}
+		else
+		{
+			upgradedItem = null;
+			PlayerManager.Instance.Hero.RemoveItem(selectedItem, 1);
+			DisplayFailurePage();
+		}
 		yield return null;
 		//play door animations
 	}
@@ -588,20 +594,40 @@ public class InventoryGUIController : BasicGUIController {
 	{
 		HidePageComponents();
 		failurePage.SetActive(true);
+		if(selectedItem.IsItemUpgradeable)
+		{
+			tryAgainButton.SetActive(true);
+			returnToInventoryButton.SetActive(false);
+		}
+		else
+		{
+			returnToInventoryButton.SetActive(true);
+			tryAgainButton.SetActive(false);
+		}
 	}
 
 	public void DisplaySuccessPage()
 	{
 		HidePageComponents();
 		successPage.SetActive(true);
+		successItem.LoadItemInfo(upgradedItem);
+		Debug.Log(selectedItem.CurrentAmount);
+		if(selectedItem.IsItemUpgradeable)
+			upgradeAnotherButton.SetActive(true);
+		else
+			upgradeAnotherButton.SetActive(false);
+		viewSuccessItemButton.SetActive(true);
 	}
 
 	public void OnViewNewItemPressed()
 	{
+		selectedItem = upgradedItem;
+		DisplayItemDetails();
 	}
 
 	public void OnUpgradeAnotherPressed()
 	{
+		EnterUpgradeView();
 	}
 
 	#endregion
@@ -613,6 +639,8 @@ public class InventoryGUIController : BasicGUIController {
 		successPage.SetActive(false);
 		failurePage.SetActive(false);
 		rightDetails.SetActive(false);
+
+
 	}
 }
 

@@ -32,6 +32,14 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":117},
 	"sourceSize": {"w":75,"h":117}
 },
+"arrowR.png":
+{
+	"frame": {"x":980,"y":1855,"w":73,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":114},
+	"sourceSize": {"w":73,"h":114}
+},
 "attackbutton.png":
 {
 	"frame": {"x":1619,"y":1860,"w":153,"h":153},
@@ -458,7 +466,7 @@
 },
 "panel_side_aqua.png":
 {
-	"frame": {"x":980,"y":1855,"w":71,"h":87},
+	"frame": {"x":1934,"y":1581,"w":71,"h":87},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":87},
@@ -591,6 +599,6 @@
 	"format": "RGBA8888",
 	"size": {"w":2048,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:871f7506c364590d27d37cb796004562$"
+	"smartupdate": "$TexturePacker:SmartUpdate:589ab7be30fa791192979e3626bcb532$"
 }
 }

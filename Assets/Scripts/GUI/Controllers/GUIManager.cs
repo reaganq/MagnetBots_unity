@@ -57,6 +57,7 @@ public class GUIManager : MonoBehaviour {
 	public ConversationGUIController conversationGUI;
 	public OpeningCinematicGUIController nakedArmorGUI;
 	public ConstructionGUIController constructionGUI;
+	public CombobulatorGUIController combobulatorGUI;
 	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;

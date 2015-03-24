@@ -172,6 +172,7 @@
             <filename>../popup icons/burger.png</filename>
             <filename>../new UI/trophy_icon.png</filename>
             <filename>../popup icons/team_icon.png</filename>
+            <filename>../popup icons/event.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

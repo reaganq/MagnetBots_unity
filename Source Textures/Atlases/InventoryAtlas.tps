@@ -219,6 +219,7 @@
             <filename>../new UI/icon_happy.png</filename>
             <filename>../new UI/page_panel.png</filename>
             <filename>../new UI/star.png</filename>
+            <filename>../UI/arrowR.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

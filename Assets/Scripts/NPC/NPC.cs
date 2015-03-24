@@ -149,6 +149,10 @@ public class NPC: MonoBehaviour
     public IEnumerator ShowNPC()
     {
         yield return new WaitForEndOfFrame();
+		if(targetCameraPos != null)
+		{
+			PlayerCamera.Instance.TransitionTo(targetCameraPos, PlayerCamera.Instance.defaultFOV, 0.3f, 0);
+		}
         Active = true;
         //PlayerManager.Instance.ActiveNPC = this;
         //Player.Instance.ActiveNPCName = character.Name;

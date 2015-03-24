@@ -418,7 +418,14 @@ public class Inventory  : BasicInventory
         return true;
     }
     
-    
+    public InventoryItem FindItem(RPGItem item, int level)
+	{
+		for (int i = 0; i < Items.Count; i++) {
+			if(Items[i].UniqueItemId == item.UniqueId && Items[i].Level == level)
+				return Items[i];
+				}
+		return null;
+	}
 
 	//used by parse
 	public bool EquipItem(string itemID, int level)

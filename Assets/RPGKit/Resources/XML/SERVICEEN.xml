@@ -14,12 +14,14 @@
   </NPCService>
   <NPCService>
     <ID>2</ID>
-    <Name>Anvil</Name>
+    <Name>Combobulator</Name>
     <Description />
     <SystemDescription />
     <activityType>Service</activityType>
     <conversationID>0</conversationID>
     <npcIconAtlas>Atlases/Icons/IconsAtlas</npcIconAtlas>
+    <npcIconSprite>event</npcIconSprite>
+    <npcButtonText>Daily Event</npcButtonText>
     <Conditions />
   </NPCService>
   <NPCService>

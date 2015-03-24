@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 4dfbf292c62d24c219cee92d98619171
 ModelImporter:
-  serializedVersion: 15
+  serializedVersion: 16
   fileIDToRecycleName:
     100000: burger_mesh
     100002: burgerShopObj:Mesh
@@ -142,6 +142,7 @@ ModelImporter:
     4300024: nail
     4300026: polySurface2
     4300028: Burgerbar_mesh
+    4300030: polySurface66
     9500000: //RootNode
   materials:
     importMaterials: 0
@@ -151,6 +152,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -194,4 +196,5 @@ ModelImporter:
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 0
+  additionalBone: 0
   userData: 

@@ -19,6 +19,7 @@ public class NPCGUIController : BasicGUIController {
 	public MiniGameGUIController minigameGUI;
 	public ShopGUIController shopGUI;
 	public ArenaGUIController arenaGUI;
+	public CombobulatorGUIController combobulatorGUI;
 	public BankGUIController bankGUI;
 	public TeleporterGUIController teleporterGUI;
 	public NPCGUIState _state;
@@ -102,6 +103,7 @@ public class NPCGUIController : BasicGUIController {
 	public override void Disable()
 	{
 		state= NPCGUIState.nothing;
+		PlayerCamera.Instance.TransitionToDefault();
 		//base.Disable();
 		//GUIManager.Instance.HideNPCConversationBubble();
 		base.Disable();
@@ -194,6 +196,14 @@ public class NPCGUIController : BasicGUIController {
 			DisplayMinigame((NPCMinigame)activeActivity);
 			break;
 		case NPCActivityType.Service:
+			if(activeActivity.ID == 1)
+			{
+				DisplayBank();
+			}
+			if(activeActivity.ID == 2)
+			{
+				DisplayCombobulator();
+			}
 			if(activeActivity.ID == 3)
 			{
 				DisplayTeleporter();
@@ -250,11 +260,6 @@ public class NPCGUIController : BasicGUIController {
 		arenaGUI.Enable(newArena);
 	}
 
-	public void HideArena()
-	{
-
-	}
-
     public void SetupArenaButton()
     {
 		//Debug.Log(PlayerManager.Instance.ActiveNPC.arena.Name);
@@ -269,6 +274,18 @@ public class NPCGUIController : BasicGUIController {
 	public void SetupActivityButton()
 	{
 		//activityLabel.text = PlayerManager.Instance.ActiveNPC.activity.Name;
+	}
+
+	public void DisplayBank()
+	{
+		bankGUI.Enable();
+		state = NPCGUIState.bank;
+	}
+
+	public void DisplayCombobulator()
+	{
+		combobulatorGUI.Enable();
+		state = NPCGUIState.combobulator;
 	}
 
 	public void DisplayTeleporter()
@@ -332,11 +349,12 @@ public enum NPCGUIState
 {
 	nothing,
 	activityButtons,
+	combobulator,
 	shop,
 	quest,
 	arena,
 	bank,
 	minigame,
 	teleporter,
-	construction
+	construction,
 }

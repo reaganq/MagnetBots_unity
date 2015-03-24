@@ -54,6 +54,19 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: arrowR
+    x: 980
+    y: 1855
+    width: 73
+    height: 114
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: attackbutton
     x: 1619
     y: 1860
@@ -770,8 +783,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: panel_side_aqua
-    x: 980
-    y: 1855
+    x: 1934
+    y: 1581
     width: 71
     height: 87
     borderLeft: 0
