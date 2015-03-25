@@ -74,16 +74,8 @@ public class NetworkManager : MonoBehaviour {
 		}
 	}
 
-	void OnJoinedLobby()
-	{
-		Debug.Log("joined lobby");
-		if(offlineMode)
-			PhotonNetwork.JoinRandomRoom();
-	}
-
 	void OnPhotonRandomJoinFailed() 
 	{
-		Debug.Log("join room failed" + Time.realtimeSinceStartup);
 		string[] roomPropsInLobby = {"world"};
 		Hashtable worldID = new Hashtable() {{"world", GameManager.Instance.targetLevel.ToString()}};
 		PhotonNetwork.CreateRoom( null, true, true, 0, worldID, roomPropsInLobby);
@@ -94,17 +86,14 @@ public class NetworkManager : MonoBehaviour {
 		//PhotonNetwork.load
 		//retrieve room properties to figure out which world to load
 		isConnectedToServer = true;
-		Debug.Log("OnJoinedRoom" + Time.realtimeSinceStartup);
 		//PhotonNetwork.LoadLevel(1);
 		//GUIManager.Instance.StartGame();
 		if(!offlineMode)
 		{
-			Debug.Log("load level 1");
 			PhotonNetwork.LoadLevel(GameManager.Instance.targetLevel);
 		}
 		else
 		{
-			Debug.Log("offline load");
 			PhotonNetwork.LoadLevel(GameManager.Instance.targetLevel);
 			//HACK get unity editor to run OnLevelWasLoaded on the first level
 			//GameManager.Instance.OnLevelWasLoaded(Application.loadedLevel);

@@ -12,8 +12,9 @@ public class EnemyCard : MonoBehaviour {
 	public GameObject lockIcon;
 	public TweenScale scaleDown;
 	public TweenScale scaleUp;
+	public bool isLocked;
 
-	public void LoadEnemy(string atlas, string sprite, int index, bool isAvailable)
+	public void LoadEnemy(string atlas, string sprite, int index, bool isAvailable, bool isLocked)
 	{
 		Debug.Log("load enemy card");
 		GameObject Atlas = Resources.Load(atlas) as GameObject;
@@ -22,8 +23,16 @@ public class EnemyCard : MonoBehaviour {
 		cardIndex = index;
 		if(isAvailable)
 		{
-			collider.enabled = true;
-			lockIcon.SetActive(false);
+			if(isLocked)
+			{
+				collider.enabled = false;
+				lockIcon.SetActive(true);
+			}
+			else
+			{
+				collider.enabled = true;
+				lockIcon.SetActive(false);
+			}
 		}
 		else
 		{

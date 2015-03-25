@@ -10,7 +10,6 @@ public class DynamicWidth : MonoBehaviour {
 	public void Start()
 	{
 		float offset = GameManager.Instance.nativeAspectRatio/GameManager.Instance.defaultAspectRatio;
-		Debug.Log(offset);
 		for (int i = 0; i < targetSprites.Length; i++) {
 			Transform tran = targetSprites[i].sprite.gameObject.transform;
 			float oldX = tran.localPosition.x;

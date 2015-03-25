@@ -86,6 +86,8 @@ public class RPGEnemy : IItem
 	public string PortraitIcon;
 	public string PortraitAtlas;
 	public bool isAvailable;
+	public List<int> prebattleConversations;
+	public List<int> postbattleConversations;
 	public List<LootItem> Loots;
 	public List<string> PrefabPaths;
 	public List<ActionEvent> preFightActions;
@@ -104,6 +106,17 @@ public class RPGEnemy : IItem
 		preFightActions = new List<ActionEvent>();
 		postFightActions = new List<ActionEvent>();
 		conditions = new List<Condition>();
+		prebattleConversations = new List<int>();
+		postbattleConversations = new List<int>();
+	}
+
+	public bool Validate()
+	{
+		for (int i = 0; i < conditions.Count; i++) {
+			if(!conditions[i].Validate())
+				return false;
+				}
+		return true;
 	}
 }
 

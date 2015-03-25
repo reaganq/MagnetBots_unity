@@ -71,6 +71,9 @@ public class NPCGUIController : BasicGUIController {
 		case NPCGUIState.minigame:
 			minigameGUI.Disable();
             break;
+		case NPCGUIState.bank:
+			bankGUI.Disable();
+			break;
         }
 	}
 

@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Bank_Diffuse_1024
-  m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
+  m_Shader: {fileID: 4800000, guid: 8fe65b6119ab54a1db775c4a0ec0cea4, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: 1
   m_SavedProperties:

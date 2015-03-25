@@ -43,7 +43,7 @@ public class ArenaGUIController : BasicGUIController {
 			if(i < activeArena.Enemies.Count)
 			{
 				EnemyCardObjects[i].SetActive(true);
-				EnemyCards[i].LoadEnemy(activeArena.Enemies[i].PortraitAtlas, activeArena.Enemies[i].PortraitIcon, i, activeArena.Enemies[i].isAvailable);
+				EnemyCards[i].LoadEnemy(activeArena.Enemies[i].PortraitAtlas, activeArena.Enemies[i].PortraitIcon, i, activeArena.Enemies[i].isAvailable, !activeArena.Enemies[i].Validate());
 			}
 			else
 			{

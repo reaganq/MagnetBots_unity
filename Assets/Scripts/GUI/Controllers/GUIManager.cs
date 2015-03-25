@@ -58,6 +58,7 @@ public class GUIManager : MonoBehaviour {
 	public OpeningCinematicGUIController nakedArmorGUI;
 	public ConstructionGUIController constructionGUI;
 	public CombobulatorGUIController combobulatorGUI;
+	public PremiumShopGUIController premiumShopGUI;
 	public Transform dragDropRoot;
 
 	public Transform minigameUIRoot;
@@ -264,6 +265,11 @@ public class GUIManager : MonoBehaviour {
 	public void HidePlayerShop()
 	{
 		EnterGUIState(UIState.main);
+	}
+
+	public void DisplayPremiumShop()
+	{
+		premiumShopGUI.Enable();
 	}
 
 	public void DisplayQuest()
@@ -491,6 +497,7 @@ public enum UIState
 	battle,
 	reward,
 	construction,
+	premiumShop,
 }
 
 [System.Serializable]

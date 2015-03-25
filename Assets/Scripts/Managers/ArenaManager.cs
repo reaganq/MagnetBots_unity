@@ -228,6 +228,14 @@ public class ArenaManager : Zone {
 		GUIManager.Instance.DisplayArenaRewards(PlayerManager.Instance.GiveRewards(rpgEnemy.Loots, 0));
 	}
 
+	public override void LeaveZone()
+	{
+		for (int i = 0; i < rpgEnemy.postFightActions.Count; i++) {
+			rpgEnemy.postFightActions[i].DoAction();
+				}
+		base.LeaveZone();
+	}
+
 	[RPC]
 	public override void NetworkRemovePlayer(int csViewID, PhotonMessageInfo info)
 	{

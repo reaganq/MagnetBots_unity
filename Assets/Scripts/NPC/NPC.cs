@@ -9,9 +9,6 @@ public class NPC: MonoBehaviour
     public int ID;
     public bool Active = false;
     public Shop thisShop = null;
-	//public NPCArena arena = null;
-	//public NPCActivity activity = null;
-	//public NPCMinigame miniGame = null;
 	public List<NPCActivity> activities;
 	public List<NPCActivity> _availableActivities;
 	public List<NPCActivity> availableActivities
@@ -77,8 +74,6 @@ public class NPC: MonoBehaviour
 				arena.LoadArena();
 				arena.activityType = NPCActivityType.Arena;
 				activities.Add(arena);
-				Debug.Log(arena.activityType + " " + arena.Enemies.Count);
-				Debug.LogWarning("adding arena" + arena.Name);
 			}
 			else if(ad.activityType == NPCActivityType.Teleporter)
 			{
@@ -99,26 +94,6 @@ public class NPC: MonoBehaviour
 				}
 
 		GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>().AddNPC(this);
-		Debug.Log("here");
-		/*if(character.ArenaID > 0)
-		{
-			arena = Storage.LoadById<NPCArena>(character.ArenaID, new NPCArena());
-
-				for (int j = 0; j < arena.EnemyIDs.Count; j++) 
-				{
-					arena.Enemies.Add(Storage.LoadById<RPGEnemy>(arena.EnemyIDs[j], new RPGEnemy()));
-				}
-		}
-		if(character.MinigameID > 0)
-		{
-			miniGame = Storage.LoadById<NPCMinigame>(character.MinigameID, new NPCMinigame());
-
-		}
-
-		if(character.ActivityID > 0)
-		{
-			activity = Storage.LoadById<NPCActivity>(character.ActivityID, new NPCActivity());
-		}*/
     }
     
     public void OnTriggerEnter ( Collider other )
@@ -154,21 +129,12 @@ public class NPC: MonoBehaviour
 			PlayerCamera.Instance.TransitionTo(targetCameraPos, PlayerCamera.Instance.defaultFOV, 0.3f, 0);
 		}
         Active = true;
-        //PlayerManager.Instance.ActiveNPC = this;
-        //Player.Instance.ActiveNPCName = character.Name;
 		GUIManager.Instance.DisplayNPC(this);
     }
     
     public IEnumerator HideNPC()
     {
         yield return new WaitForEndOfFrame();
-        //PlayerManager.Instance.ActiveNPC = null;
-        /*if(PlayerManager.Instance.ActiveShop != null && character.ShopID == PlayerManager.Instance.ActiveShop.ID)
-        {
-            PlayerManager.Instance.ActiveShop = null;
-            
-        }*/
-        
         GUIManager.Instance.HideNPC();
         
         Active = false;

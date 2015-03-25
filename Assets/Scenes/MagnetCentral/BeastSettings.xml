@@ -33,7 +33,7 @@
     <vertexMergeThreshold>0.001</vertexMergeThreshold>
   </RenderSettings>
   <EnvironmentSettings>
-    <giEnvironment>None</giEnvironment>
+    <giEnvironment>SkyLight</giEnvironment>
     <skyLightColor>
       <r>0.86</r>
       <g>0.93</g>
@@ -94,7 +94,7 @@
     <secondarySaturation>1</secondarySaturation>
     <specularScale>1</specularScale>
     <fgAOContrast>1</fgAOContrast>
-    <fgAOInfluence>0</fgAOInfluence>
+    <fgAOInfluence>0.1</fgAOInfluence>
     <fgAOMaxDistance>0.3</fgAOMaxDistance>
     <fgAOScale>2</fgAOScale>
     <fgAOVisualize>false</fgAOVisualize>
@@ -105,7 +105,7 @@
     <fgCheckVisibilityDepth>1</fgCheckVisibilityDepth>
     <fgClampRadiance>false</fgClampRadiance>
     <fgContrastThreshold>0.05</fgContrastThreshold>
-    <fgDepth>1</fgDepth>
+    <fgDepth>2</fgDepth>
     <fgEstimatePoints>15</fgEstimatePoints>
     <fgExploitFrameCoherence>false</fgExploitFrameCoherence>
     <fgFalloffExponent>0</fgFalloffExponent>

@@ -36,14 +36,14 @@ public class FriendBox : MonoBehaviour {
 
 	public void ShowNormal()
 	{
-		removeButton.SetActive(false);
+		//removeButton.SetActive(false);
 		chatButton.SetActive(true);
 		profileButton.SetActive(true);
 	}
 
 	public void ShowRemove()
 	{
-		removeButton.SetActive(true);
+		//removeButton.SetActive(true);
 		chatButton.SetActive(false);
 		profileButton.SetActive(false);
 	}

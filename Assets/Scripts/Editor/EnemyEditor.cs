@@ -114,7 +114,49 @@ public class EnemyEditor : BaseEditorWindow
 		//}
 		EditorGUILayout.Separator();
 		
-
+		ConditionsUtils.Conditions(s.conditions, Data);
+		EditorGUILayout.Separator();
+		foreach(ActionEvent action in s.preFightActions)
+		{
+			EventUtils.DisplayEvent(action, Data);
+			
+			if (GUILayout.Button("Remove", GUILayout.Width(150)))
+			{
+				s.preFightActions.Remove(action);
+				break;
+			}
+			
+			EditorGUILayout.EndHorizontal();
+		}
+		
+		
+		EditorGUILayout.BeginHorizontal();
+		if (GUILayout.Button("Add Pre Action", GUILayout.Width(90)))
+		{
+			s.preFightActions.Add(new ActionEvent());
+		}
+		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.Separator();
+		foreach(ActionEvent action in s.postFightActions)
+		{
+			EventUtils.DisplayEvent(action, Data);
+			
+			if (GUILayout.Button("Remove", GUILayout.Width(150)))
+			{
+				s.postFightActions.Remove(action);
+				break;
+			}
+			
+			EditorGUILayout.EndHorizontal();
+		}
+		
+		
+		EditorGUILayout.BeginHorizontal();
+		if (GUILayout.Button("Add Post Action", GUILayout.Width(90)))
+		{
+			s.postFightActions.Add(new ActionEvent());
+		}
+		EditorGUILayout.EndHorizontal();
 		
 		//s.LevelName = EditorUtils.TextField(s.LevelName, "level name");
 		

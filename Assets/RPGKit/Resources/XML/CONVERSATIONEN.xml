@@ -428,7 +428,7 @@
         <Actions />
         <displayTimer>5</displayTimer>
         <ownerNPCID>3</ownerNPCID>
-        <isBaseParagraph>false</isBaseParagraph>
+        <isBaseParagraph>true</isBaseParagraph>
         <nextParagraphCondition>NextClick</nextParagraphCondition>
         <nextParagraphIDs>
           <int>10</int>

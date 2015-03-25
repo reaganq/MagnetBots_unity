@@ -67,9 +67,9 @@ public class QuestLog
 	// Returns true is quest is finished but not get reward from it (wasn't ended)
 	public bool IsQuestFinished(int questId)
 	{
-		foreach(RPGQuest q in CurrentQuests)
+		foreach(RPGQuest q in FinishedQuests)
 		{
-			if (q.ID == questId && q.IsFinished)
+			if (q.ID == questId)
 				return true;
 		}
 		return false;
@@ -105,7 +105,7 @@ public class QuestLog
 	// Start new quest
 	public bool StartQuest(int questId)
 	{
-		Debug.Log("start quest");
+		Debug.Log("start quest" + questId);
 		if (IsQuestStarted(questId))
 			return false;
 

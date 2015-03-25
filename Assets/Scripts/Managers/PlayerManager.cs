@@ -81,7 +81,6 @@ public class PlayerManager : MonoBehaviour
 		set {
 			_partyMembers = value;
 			GUIManager.Instance.MainGUI.UpdatePartyMembers();
-			Debug.Log("updated partymembers");
 		}
 	}
 	public bool haveAllTeamReplies()
@@ -125,17 +124,9 @@ public class PlayerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //Instance = this;
-        //avatarObject = GameObject.FindGameObjectWithTag("Player");
-        //avatar = avatarObject.GetComponent<Avatar>();
         DontDestroyOnLoad(this);
         Hero = new PlayerInformation();
         SaveLoad.content = new SavedContent();
-        //Debug.Log("wtf");
-
-        //ChangeMinimap(false);
-        //gameObject.AddComponent<GUIScale>();
     }
 
 	//only used when starting a fresh account or in offline direct scene load
@@ -144,29 +135,35 @@ public class PlayerManager : MonoBehaviour
 		if(!GameManager.Instance.GameHasStarted)
 		{
 			Debug.Log("start new game");
-			if(!GameManager.Instance.newGame)
+			if(NetworkManager.Instance.offlineMode || GameManager.Instance.teststate)
 			{
-        		Hero.StartNewGame();
+				Hero.StartTestingGame();
 			}
 			else
-				Hero.StartBlankGame();
+				Hero.StartGameAfterTutorial();
+
 			//prevents reloading data every time we switch worlds.
 			GameManager.Instance.GameHasStarted = true;
+			InvokeRepeating("ParseSave", 1.0f, 1.0f);
 		}
-		//GameManager.Instance.GameHasStarted = true;
-		//LoadAvatar();
     }
 
 	public void LoadGame()
 	{
 		StartCoroutine(Hero.RetrieveParseData());
 		GameManager.Instance.GameHasStarted = true;
+		InvokeRepeating("ParseSave", 1.0f, 1.0f);
 	}
-	
+
+	public void ParseSave()
+	{
+		Hero.TryToUpdateParse();
+	}
+
     public void LoadAvatar()
     {
 		//SUPER HACK
-		if(NetworkManager.Instance.offlineMode && !GameManager.Instance.newGame)
+		if(NetworkManager.Instance.offlineMode || GameManager.Instance.teststate && !GameManager.Instance.newGame)
 			StartNewGame();
 
 		avatarObject = PhotonNetwork.Instantiate("PlayerAvatar", SpawnPoint.position , Quaternion.identity, 0) as GameObject;
@@ -210,7 +207,7 @@ public class PlayerManager : MonoBehaviour
 
 		//TODO hacky party list refresh
 		_partyMembers.Clear();
-		if(!GameManager.Instance.newGame)
+		if(!GameManager.Instance.newGame && NetworkManager.Instance.offlineMode)
 			Invoke("EquipStartupItems", 0.1f);
     }
 
@@ -230,17 +227,18 @@ public class PlayerManager : MonoBehaviour
 		SpawnPoint = ActiveWorld.DefaultZone.spawnPoint;
 		SfxManager.Instance.PlaySoundtrack(ActiveWorld.soundtrack);
 		GameManager.Instance.GameIsPaused = false;
+
+		//HACK play the tutorial
 		if(GameManager.Instance.newGame && Application.loadedLevel == 1)
 		{
+			Hero.SaveParseData();
 			GameObject cutscene = Instantiate(Resources.Load("Cutscenes/IntroCinematic") as GameObject) as GameObject;
-			Debug.Log("load cutscene");
 		}
 		else
 		{
 			RefreshAvatar();
 			ActiveZone = ActiveWorld.DefaultZone;
 		}
-		Debug.Log(Time.realtimeSinceStartup);
 		GUIManager.Instance.loadingGUI.HideLoadScreen();
 	}
 
@@ -270,7 +268,6 @@ public class PlayerManager : MonoBehaviour
 
 	public IEnumerator GotoZoneSequence(Zone newZone)
 	{
-		Debug.Log("go to new arena");
 		GUIManager.Instance.loadingGUI.Enable(true);
 		yield return new WaitForSeconds(1.5f);
 		ActiveZone = newZone;
@@ -309,7 +306,6 @@ public class PlayerManager : MonoBehaviour
 		}
 		if (item.rpgItem.isLimitedUse) 
 		{
-			Debug.Log("removing 1 of this item");
 			Hero.RemoveItem (item, 1);
 		}
 	}
@@ -432,8 +428,6 @@ public class PlayerManager : MonoBehaviour
 		for (int i = 0; i < lootItemList.badges.Count; i++) {
 			Hero.AddBadge(lootItemList.badges[i]);
 		}
-
-		Debug.Log("gave rewards");
 		return lootItemList;
 	}
 }

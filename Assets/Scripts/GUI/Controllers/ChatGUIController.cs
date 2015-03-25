@@ -126,7 +126,7 @@ public class ChatGUIController : BasicGUIController {
 	{
 		chatboxesTable.gameObject.SetActive(true);
 		friendsTable.gameObject.SetActive(false);
-		friendListControls.SetActive(false);
+		//friendListControls.SetActive(false);
 		mainChatScrollBar.SetActive(true);
 		friendsListScrollBar.SetActive(true);
 		friendsListScrollBar.SetActive(false);
@@ -142,7 +142,7 @@ public class ChatGUIController : BasicGUIController {
 		//reposition and disable the chatboxes
 		chatboxesTable.gameObject.SetActive(false);
 		friendsTable.gameObject.SetActive(true);
-		friendListControls.SetActive(true);
+		//friendListControls.SetActive(true);
 		friendsListScrollBar.SetActive(true);
 		mainChatScrollBar.SetActive(false);
 		//load up correct number of friendboxes

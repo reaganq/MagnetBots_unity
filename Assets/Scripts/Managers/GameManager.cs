@@ -55,11 +55,9 @@ public class GameManager : MonoBehaviour {
 		Environment.SetEnvironmentVariable("MONO_REFLECTION_SERIALIZER", "yes"); 
 		GameIsPaused = true;
 		GameHasStarted = false;
-		teststate = false;
 
         if(Instance != null && Instance != this)
         {
-            teststate = true;
             GameObject.DestroyImmediate(this.gameObject);
             return;
         }
@@ -102,7 +100,6 @@ public class GameManager : MonoBehaviour {
 
 	public void loadNewLevel(int level)
 	{
-		Debug.Log("LOADING NEW LEVEL");
 		StartCoroutine(LoadNewLevelSequence(level));
 	}
 
@@ -123,7 +120,6 @@ public class GameManager : MonoBehaviour {
 			yield break;
 		}
 		Hashtable worldID = new Hashtable() {{"world", targetLevel.ToString()}};
-		Debug.Log("trying to join room");
 		PhotonNetwork.JoinRandomRoom(worldID, 0);
 		isLoadingNewLevel = false;
 		yield return null;
@@ -134,7 +130,6 @@ public class GameManager : MonoBehaviour {
 		if(isLoadingNewLevel)
 		{
 			Hashtable worldID = new Hashtable() {{"world", targetLevel.ToString()}};
-			Debug.Log("trying to join room");
 			PhotonNetwork.JoinRandomRoom(worldID, 0);
 			isLoadingNewLevel = false;
 		}
@@ -155,8 +150,6 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-			//Debug.Log("onlevelwasloaded");
-			Debug.Log("load standard" + Time.realtimeSinceStartup);
 			StartCoroutine("LoadStandard");
 
         }

@@ -42,6 +42,10 @@ public class ActionEvent
 			Debug.Log("triggering npc activity: " + Item);
 			GUIManager.Instance.NPCGUI.OnActivityButtonPressed(Item);
 			break;
+		case ActionEventType.TalkToNPC:
+			Debug.Log("talking to npc: " + Item);
+			PlayerManager.Instance.ActiveWorld.TalkToNPC(Item, (float)Amount);
+			break;
 			//quest start
 		case ActionEventType.QuestStart:
 			Debug.Log("start quest action");
@@ -126,4 +130,5 @@ public enum ActionEventType
 	TakeQuestStepItemsTask,
 	TriggerNPCActivity,
 	HideSpeaker,
+	TalkToNPC,
 }

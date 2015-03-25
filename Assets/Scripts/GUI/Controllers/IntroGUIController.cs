@@ -4,13 +4,14 @@ using System;
 using Parse;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
-public class IntroGUIController : MonoBehaviour {
+public class IntroGUIController : BasicGUIController {
 
     public UILabel loadingLabel;
     public GameObject startButton;
 	public GameObject signInButton;
 	public GameObject registerButton;
-	public GameObject panel;
+	public GameObject buttonMenu;
+	public GameObject accountDetailsBox;
 
 	public UIInput usernameInput;
 	public UIInput passwordInput;
@@ -18,6 +19,9 @@ public class IntroGUIController : MonoBehaviour {
 	public bool loading;
 	public bool newAcct;
 	public bool quickStartClicked;
+	public bool registerMode;
+
+	public UIPlayTween playTween;
 
 	public void Awake()
 	{
@@ -25,23 +29,19 @@ public class IntroGUIController : MonoBehaviour {
 		newAcct = true;
 		quickStartClicked = false;
 	}
-
-	public void Enable()
+	public override void Enable()
 	{
-		panel.SetActive(true);
+		ShowButtonMenu();
+		base.Enable();
 	}
 
-	public void Disable()
+	public void ShowButtonMenu()
 	{
-		panel.SetActive(false);
+		accountDetailsBox.SetActive(false);
+		playTween.tweenTarget = buttonMenu;
+		playTween.Play(true);
 	}
-
-	public void OnJoinedLobby()
-	{
-		Debug.Log("lobby joined");
-		OnStartPressed();
-	}
-
+	
 	public void OnStartPressed()
 	{
 		if(!PhotonNetwork.insideLobby)
@@ -49,6 +49,7 @@ public class IntroGUIController : MonoBehaviour {
 
 		if(!quickStartClicked)
 		{
+			GameManager.Instance.teststate = true;
 			quickStartClicked = true;
 			NetworkManager.Instance.usingParse = false;
 
@@ -56,11 +57,33 @@ public class IntroGUIController : MonoBehaviour {
 		}
 	}
 
+	public void OnRegisterPressed()
+	{
+		buttonMenu.SetActive(false);
+		playTween.tweenTarget = accountDetailsBox;
+		playTween.Play(true);
+		registerMode = true;
+	}
+
+	public void OnLoginPressed()
+	{
+		buttonMenu.SetActive(false);
+		playTween.tweenTarget = accountDetailsBox;
+		playTween.Play(true);
+		registerMode = false;
+	}
+
+	public void OnBackButtonPressed()
+	{
+		ShowButtonMenu();
+	}
+
 	//int world id
     public void StartGame()
     {
-		PlayerManager.Instance.StartNewGame();
+		//PlayerManager.Instance.StartNewGame();
 		loadingLabel.text = "loading";
+		//TODO replace 1 with the desired level id;
 		GameManager.Instance.loadNewLevel(1);
     }
 
@@ -93,17 +116,23 @@ public class IntroGUIController : MonoBehaviour {
         //GUIManager.Instance.StartGame();
     }
 
-	public void Register()
+	public void OnConfirmpressed()
 	{
-		Debug.Log(usernameInput.value + passwordInput.value);
-		CreateNewUser(usernameInput.value, passwordInput.value);
-	}
-
-	public void Login()
-	{
-		Debug.Log(usernameInput.value + passwordInput.value);
-		authenticateUser(usernameInput.value, passwordInput.value);
-		loadingLabel.text = "signing in";
+		if(!quickStartClicked)
+		{
+			if(registerMode)
+			{
+				Debug.Log(usernameInput.value + passwordInput.value);
+				CreateNewUser(usernameInput.value, passwordInput.value);
+			}
+			else
+			{
+				Debug.Log(usernameInput.value + passwordInput.value);
+				authenticateUser(usernameInput.value, passwordInput.value);
+				loadingLabel.text = "signing in";
+			}
+			quickStartClicked = true;
+		}
 	}
 
 	void Update()
@@ -115,8 +144,10 @@ public class IntroGUIController : MonoBehaviour {
 				Debug.Log("true");
 				if(newAcct)
 				{
-					PlayerManager.Instance.StartNewGame();
+					//PlayerManager.Instance.StartNewGame();
+					//start a raw game because this is a new account
 					StartGame();
+					GameManager.Instance.newGame = true;
 					loading = true;
 				}
 				else
@@ -172,6 +203,7 @@ public class IntroGUIController : MonoBehaviour {
 
 		loadingLabel.text = "creating new account";
 		newAcct = true;
+		GameManager.Instance.newGame = true;
         //Application.LoadLevel("Demo");
     }
 }

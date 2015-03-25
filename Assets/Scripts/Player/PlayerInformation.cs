@@ -19,6 +19,7 @@ public class PlayerInformation  {
 	public QuestLog questLog;
 	public Jukebox jukeBox;
 		
+	public bool hasDoneTutorial;
 
 	public Inventory playerShopInventory;
 
@@ -30,8 +31,15 @@ public class PlayerInformation  {
 	public int Magnets;
 	public int CitizenPoints;
 	public int BankCoins;
-	public string ParseObjectId;
-	ParseObject playerData = new ParseObject("PlayerData");
+	public string parseObjectID;
+	ParseObject playerData;
+
+	public bool hasItemChange;
+	public bool hasWalletChange;
+	public bool hasArmorChange;
+	public bool hasNakedArmorChange;
+	public bool hasPlayerShopChange;
+	public bool hasProfileChange;
 
     public PlayerInformation()
     {
@@ -43,10 +51,15 @@ public class PlayerInformation  {
         Equip = new Equipment();
 		questLog = new QuestLog();
 		profile = new PlayerProfile();
+		playerData = new ParseObject("PlayerData");
+		parseObjectID = " ";
+		PlayerName = " ";
 	}
     
-    public void StartNewGame()
+    public void StartTestingGame()
     {
+		Debug.LogWarning("starting a test game");
+		NetworkManager.Instance.usingParse = false;
 		SetPlayerName(GeneralData.GenerateRandomString(6));
 
         for (int i = 1; i < 25 ; i++) {
@@ -78,16 +91,24 @@ public class PlayerInformation  {
 		//EquipItem(ArmoryInventory.Items[15]);
 		//EquipItem(ArmoryInventory.Items[17]);
 		SaveParseData();
+
     }
 
-	public void StartBlankGame()
+	//start this after you create your character
+	public void StartGameAfterTutorial()
 	{
+		hasDoneTutorial = true;
 		//name already set
+		SaveParseData();
 		questLog.StartQuest(3);
 		GameObject tesla = GameObject.FindGameObjectWithTag("Tesla");
-		NPC npc = tesla.GetComponent<NPC>();
-		if(npc != null)
-			GUIManager.Instance.DisplayNPC(npc);
+		if(tesla != null)
+		{
+			NPC npc = tesla.GetComponent<NPC>();
+			if(npc != null)
+				GUIManager.Instance.DisplayNPC(npc);
+		}
+		GUIManager.Instance.UpdateCurrency();
 	}
 
 	public void SetPlayerName(string newName)
@@ -118,7 +139,7 @@ public class PlayerInformation  {
 		{
 			CitizenPoints += amount;
 		}
-		UpdateWalletParseData();
+		hasWalletChange = true;
     }
     
     public void RemoveCurrency(int amount, BuyCurrencyType currency)
@@ -135,27 +156,27 @@ public class PlayerInformation  {
 		{
 			CitizenPoints -= amount;
 		}
-		UpdateWalletParseData();
+		hasWalletChange = true;
     }
 
 	public void Withdraw(int amount)
 	{
 		BankCoins -= amount;
 		Coins += amount;
-		UpdateWalletParseData();
+		hasWalletChange = true;
 	}
  
 	public void Deposit(int amount)
 	{
 		BankCoins += amount;
 		Coins -= amount;
-		UpdateWalletParseData();
+		hasWalletChange = true;
 	}
 
 	public void CollectInterest(int amount)
 	{
 		BankCoins += amount;
-		UpdateWalletParseData();
+		hasWalletChange = true;
 	}
 
     public bool CanYouAfford(int price, BuyCurrencyType currency)
@@ -205,11 +226,12 @@ public class PlayerInformation  {
 			item.isItemViewed = true;
 			if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 			{
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+				hasNakedArmorChange = true;
 			}
 			else if(item.rpgItem.ItemCategory == ItemType.Armor)
 			{
-				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+				hasArmorChange = true;
+
 			}
 			return true;
 		}
@@ -225,7 +247,7 @@ public class PlayerInformation  {
 			if(NakedArmorInventory.Items[i].UniqueItemId == itemID && NakedArmorInventory.Items[i].Level == level)
 			{
 				NakedArmorInventory.Items[i].IsItemEquipped = false;
-				UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+				hasNakedArmorChange = true;
 				return true;
 			}
 		}
@@ -234,7 +256,7 @@ public class PlayerInformation  {
 			if(ArmoryInventory.Items[i].UniqueItemId == itemID && ArmoryInventory.Items[i].Level == level)
 			{
 				ArmoryInventory.Items[i].IsItemEquipped = false;
-				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+				hasArmorChange = true;
 				return true;
 			}
 		}
@@ -247,15 +269,15 @@ public class PlayerInformation  {
 	{
 		Coins += shopTill;
 		shopTill = 0;
-		UpdateWalletParseData();
-
+		hasWalletChange = true;
     }
 
 	public void UpdatePlayerShop()
 	{
 		if(PlayerManager.Instance.avatarStatus != null)
 			PlayerManager.Instance.avatarStatus.UpdateShopItems();
-		UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
+		hasPlayerShopChange = true;
+
 		if(GUIManager.Instance.PlayerShopGUI.isDisplayed)
 			GUIManager.Instance.PlayerShopGUI.RefreshInventoryIcons();
 	}
@@ -277,7 +299,7 @@ public class PlayerInformation  {
 	public void SoldItem(string uniqueItemId, int level, int amount)
 	{
 		shopTill = shopTill + playerShopInventory.RemoveItemByUniqueID(uniqueItemId, level, amount);
-		UpdateWalletParseData();
+		hasWalletChange = true;
 		UpdatePlayerShop();
 	}
 
@@ -388,6 +410,7 @@ public class PlayerInformation  {
 
 	public void AddBadge(RPGBadge badge)
 	{
+		hasProfileChange = true;
 	}
 
 	public void AddItem(InventoryItem item)
@@ -401,7 +424,7 @@ public class PlayerInformation  {
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, amount);
-			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			hasArmorChange = true;
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 		{
@@ -418,12 +441,12 @@ public class PlayerInformation  {
 			}
 			if(!alreadyHasItemAtSameSlot)
 				NakedArmorInventory.AddItem(item, amount);
-			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			hasNakedArmorChange = true;
 		}
 		else
 		{
 			MainInventory.AddItem(item, amount);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			hasItemChange = true;
 		}
 	}
 
@@ -439,8 +462,7 @@ public class PlayerInformation  {
 		{
 			ArmoryInventory.RemoveItem(item, amount);
 			Debug.Log("removed armor");
-			if(NetworkManager.Instance.usingParse)
-				UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			hasArmorChange = true;
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
 		{
@@ -452,17 +474,16 @@ public class PlayerInformation  {
 			{
 				RemoveCurrency(amount, BuyCurrencyType.Magnets);
 			}
-			UpdateWalletParseData();
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.RemoveItem(item, amount);
-			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			hasNakedArmorChange = true;
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, amount);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			hasItemChange = true;
 		}
 	}
 
@@ -476,17 +497,17 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, level, amount);
-			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			hasArmorChange = true;
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.ReplaceNakedItem(item, level, 1);
-			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			hasNakedArmorChange = true;
 		}
 		else
 		{
 			MainInventory.AddItem(item, level, amount);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			hasItemChange = true;
 		}
 	}
 	
@@ -500,17 +521,17 @@ public class PlayerInformation  {
 		if(item.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item, level, amount);
-			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			hasArmorChange = true;
 		}
 		else if(item.ItemCategory == ItemType.NakedArmor)
 		{
 			NakedArmorInventory.RemoveItem(item, level, amount);
-			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			hasNakedArmorChange = true;
 		}
 		else
 		{
 			MainInventory.RemoveItem(item, level, amount);
-			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			hasItemChange = true;
 		}
     }
     
@@ -529,15 +550,10 @@ public class PlayerInformation  {
 		byte[] nakedArmoryParseList = ParseInventoryList(NakedArmorInventory);
 		byte[] mainInventoryParseList = ParseInventoryList(MainInventory);
 		byte[] armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
-		//byte[] depositBoxParseList = ParseInventoryList(DepositBox);
 		byte[] playerShopParseList = ParseInventoryList(playerShopInventory);
 		byte[] jukeBoxList = ParseJukeBoxList();
 		byte[] profile = ParsePlayerProfile();
-		//IList<object> mainInventoryParseList = ParseInventoryList(MainInventory);
-		//Debug.Log(mainInventoryParseList[0]);
-		//IList<Object> armoryInventoryParseList = ParseInventoryList(ArmoryInventory);
-		//Debug.Log(armoryInventoryParseList.Count);
-	
+
 		playerData["username"] = ParseUser.CurrentUser.Username;
 		playerData["playername"] = PlayerName;
 		playerData["profile"] = profile;
@@ -546,32 +562,69 @@ public class PlayerInformation  {
 		playerData["ArmoryList"] = armoryInventoryParseList;
 		//playerData["DepositBox"] = depositBoxParseList;
 		playerData["PlayerShopList"] = playerShopParseList;
-		playerData["JukeBoxList"] = jukeBoxList;
+		//playerData["JukeBoxList"] = jukeBoxList;
 		playerData["coins"] = Coins;
 		playerData["magnets"] = Magnets;
 		playerData["citizenpoints"] = CitizenPoints;
 		playerData["shopTill"] = shopTill;
 		playerData["bankcoins"] = BankCoins;
+		playerData["hasDoneTutorial"] = hasDoneTutorial;
+		playerData["parseObjectID"] = "";
 		playerData.SaveAsync().ContinueWith( t =>
 		                                    {
 			if(t.IsCompleted)
 			{
-				ParseObjectId = playerData.ObjectId;
-				Debug.Log(ParseObjectId);
+				parseObjectID = playerData.ObjectId;
+				Debug.Log(parseObjectID);
 			}
 			else{
 				Debug.LogError(t.Exception.Message);
 			}
 		}
 		);
+		UpdateParseObjectID();
+	}
+
+	public void UpdateParseObjectID()
+	{
+		playerData["parseObjectID"] = parseObjectID;
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+			if(t.IsCompleted)
+			{
+				Debug.Log("truly updated parse object id");
+			}
+		}
+		);
+		Debug.Log("updating parseobject id");
+	}
+
+	//string.IsNullOrEmpty(ParseObjectId) || 
+	public void UpdateTutorialState()
+	{
+		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
+		{
+			Debug.LogWarning("no parse id");
+			return;
+		}
+		playerData["hasDoneTutorial"] = hasDoneTutorial;
+		playerData.SaveAsync().ContinueWith( t =>
+		                                    {
+            if(t.IsCompleted)
+            {
+				Debug.Log("truly updated has done tutorial state");
+			}
+		}
+		);
+		Debug.Log("updating tutorial state");
 	}
 
 	public void UpdateWalletParseData()
 	{
 		GUIManager.Instance.UpdateCurrency();
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
+		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
-			//Debug.LogWarning("no parse id");
+			Debug.LogWarning("no parse id");
 			return;
 		}
 
@@ -579,6 +632,7 @@ public class PlayerInformation  {
 		playerData["magnets"] = Magnets;
 		playerData["citizenpoints"] = CitizenPoints;
 		playerData["bankcoins"] = BankCoins;
+		playerData["shopTill"] = shopTill;
 		playerData.SaveAsync().ContinueWith( t =>
 		                                    {
 			if(t.IsCompleted)
@@ -587,14 +641,14 @@ public class PlayerInformation  {
 			}
 		}
 		);
-		Debug.Log("updating wallet");
+		Debug.LogWarning("updating wallet");
 	}
 
 	public void UpdateInventoryParseData(string field, byte[] inventoryList)
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
+		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
-			//Debug.LogWarning("no parse id");
+			Debug.LogWarning("Updating: "+field);
 			return;
 		}
 
@@ -607,7 +661,7 @@ public class PlayerInformation  {
 			}
 		}
 		);
-		Debug.Log("updating " + field);
+		Debug.LogWarning("updating " + field);
 	}
 
 	public void UpdateQuestLog()
@@ -616,9 +670,9 @@ public class PlayerInformation  {
 
 	public void UpdateProfile()
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
+		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 		{
-			Debug.LogWarning("no parse id");
+			Debug.LogWarning("updating profile");
 			return;
 		}
 		playerData["profile"] = ParsePlayerProfile();
@@ -628,12 +682,12 @@ public class PlayerInformation  {
 				Debug.Log("truly updated profile");
 		}
 		);
-		Debug.Log("updating profile");
+		Debug.LogWarning("updating profile");
 	}
 
 	public void UpdateJukeBox()
 	{
-		if(string.IsNullOrEmpty(ParseObjectId) || !NetworkManager.Instance.usingParse)
+		if(!NetworkManager.Instance.usingParse)
 		{
 			Debug.LogWarning("no parse id");
 			return;
@@ -668,14 +722,26 @@ public class PlayerInformation  {
 			InterpretParseInventoryList(ArmoryInventory, player.Get<byte[]>("ArmoryList"));
 			//InterpretParseInventoryList(DepositBox, player.Get<byte[]>("DepositBox"));
 			InterpretParseInventoryList(playerShopInventory, player.Get<byte[]>("PlayerShopList"));
-			InterpretParseJukeBox(player.Get<byte[]>("JukeBoxList"));
+			//InterpretParseJukeBox(player.Get<byte[]>("JukeBoxList"));
 			Coins = player.Get<int>("coins");
 			Magnets = player.Get<int>("magnets");
 			CitizenPoints = player.Get<int>("citizenpoints");
 			shopTill = player.Get<int>("shopTill");
 			BankCoins = player.Get<int>("bankcoins");
+			hasDoneTutorial = player.Get<bool>("hasDoneTutorial");
+			parseObjectID = player.Get<string>("parseObjectID");
 		}
-		
+		if(hasDoneTutorial)
+			GameManager.Instance.newGame = false;
+		else
+			GameManager.Instance.newGame = true;
+
+		ParseQuery<ParseObject> query = ParseObject.GetQuery("PlayerData");
+		query.GetAsync(parseObjectID).ContinueWith(t =>
+		{
+			playerData = t.Result;
+		});
+
 		GUIManager.Instance.IntroGUI.StartGame();
 	}
 
@@ -778,6 +844,41 @@ public class PlayerInformation  {
 	}
 
 	#endregion
+
+	public void TryToUpdateParse()
+	{
+		if(hasItemChange)
+		{
+			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
+			hasItemChange = false;
+		}
+		if(hasNakedArmorChange)
+		{
+			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
+			hasNakedArmorChange = false;
+		}
+		if(hasArmorChange)
+		{
+			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
+			hasArmorChange = false;
+		}
+		if(hasWalletChange)
+		{
+			UpdateWalletParseData();
+			hasWalletChange = false;
+		}
+		if(hasPlayerShopChange)
+		{
+			UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
+			hasPlayerShopChange = false;
+		}
+		if(hasProfileChange)
+		{
+			UpdateProfile();
+			hasProfileChange = false;
+		}
+	}
+
 
 }
 

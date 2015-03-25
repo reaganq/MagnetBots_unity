@@ -14,15 +14,19 @@ public class OpeningCinematicGUIController : BasicGUIController {
 	//HACK
 	public UIPlayTween nakedArmorPanelTween;
 	public GameObject dummyConfirmationButton;
+	public UIGrid nakedArmorPanelGrid;
 
 	public UIPlayTween subtitleTween;
 	public UILabel subtitleLabel;
 
 	public IntroCinematicSequence introCutscene;
-
 	public GameObject setNameUIRoot;
 	public UIPlayTween setNameUITween;
 	public UIInput nameInput;
+
+	public float tipWaitTime;
+	public bool shouldDisplayTip = true;
+	public GameObject tipObject;
 
 	public float quickSingleInventoryCameraRectOffset;
 
@@ -61,6 +65,8 @@ public class OpeningCinematicGUIController : BasicGUIController {
 			//newItem.GenerateNewInventoryItem(
 		}
 		LoadItemTiles(NakedArmors, itemTiles, inventoryGridRoot, itemTilePrefab, inventoryType);
+		nakedArmorPanelGrid.Reposition();
+		Invoke("DisplayTip", tipWaitTime);
 	}
 
 	public IEnumerator MoveCamera(Camera targetCamera, float duration, float offset)
@@ -91,6 +97,26 @@ public class OpeningCinematicGUIController : BasicGUIController {
 		PlayerManager.Instance.Hero.EquipItem(NakedArmors[index]);
 		introCutscene.EquipNakedArmor(NakedArmors[index]);
 		LoadItemTiles(NakedArmors, itemTiles, inventoryGridRoot, itemTilePrefab, inventoryType);
+		HideTip();
+	}
+
+	public void DisplayTip()
+	{
+		if(shouldDisplayTip)
+		{
+			setNameUITween.tweenTarget = tipObject;
+			setNameUITween.Play(true);
+		}
+	}
+
+	public void HideTip()
+	{
+		if(shouldDisplayTip)
+		{
+			shouldDisplayTip = false;
+			setNameUITween.tweenTarget = tipObject;
+			setNameUITween.Play(false);
+		}
 	}
 
 	public void DisplayAvatarConfirmation()
@@ -106,6 +132,7 @@ public class OpeningCinematicGUIController : BasicGUIController {
 	
 	public void EnableSetNameUI()
 	{
+		setNameUITween.tweenTarget = setNameUIRoot;
 		setNameUITween.Play(true);
 	}
 

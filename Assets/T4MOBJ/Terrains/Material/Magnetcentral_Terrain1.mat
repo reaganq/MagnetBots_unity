@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Magnetcentral_Terrain1
-  m_Shader: {fileID: 4800000, guid: 5073aca1df10f344790dfcaed882fef5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 4bdbc729bd554f14a95326d3db2d6eaa, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: 0
   m_SavedProperties:

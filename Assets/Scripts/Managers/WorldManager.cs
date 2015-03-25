@@ -57,7 +57,6 @@ public class WorldManager : Photon.MonoBehaviour {
 		if(!PhotonNetwork.isMasterClient)
 		{
 			myPhotonView.RPC("RequestArenaStateDataFromMaster", PhotonTargets.MasterClient);
-			Debug.Log("sent request data to master");
 		}
 		//request arena data
 		//ArenaManagers.Clear();
@@ -67,8 +66,25 @@ public class WorldManager : Photon.MonoBehaviour {
 	{
 		if(!allNPCs.Contains(npc))
 		{
-			Debug.Log("added npc");
 			allNPCs.Add(npc);
+		}
+	}
+
+	public void TalkToNPC(int id, float waitTime)
+	{
+		StartCoroutine(TalkToNPCSequence(id, waitTime));
+	}
+
+	public IEnumerator TalkToNPCSequence(int id, float waitTime)
+	{
+		yield return new WaitForSeconds(waitTime);
+		for (int i = 0; i < allNPCs.Count; i++) 
+		{
+			if(allNPCs[i].ID == id)
+			{
+				StartCoroutine(allNPCs[i].ShowNPC());
+			}
+
 		}
 	}
 
@@ -177,7 +193,6 @@ public class WorldManager : Photon.MonoBehaviour {
 			return;
 		if(PlayerManager.Instance.shouldStartPartyChallenge())
 		{
-			Debug.Log("we should start this challenge");
 			StartPartyChallenge();
 		}
 	}
@@ -231,8 +246,7 @@ public class WorldManager : Photon.MonoBehaviour {
 		MemoryStream m = new MemoryStream();
 		b.Serialize(m, data);
 
-		myPhotonView.RPC("NetworkUpdateArenaStateData", info.sender, m.GetBuffer());
-		Debug.Log("sent reply back to new loader");
+		myPhotonView.RPC("NetworkUpdateArenaStateData", info.sender, m.GetBuffer());;
 	}
 
 	[RPC]
@@ -242,7 +256,6 @@ public class WorldManager : Photon.MonoBehaviour {
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(data);
 		arenaStateData = (ArenaStateData)b.Deserialize(m);
-		Debug.Log("receiving updates from master about arenas");
 		for (int i = 0; i < arenaStateData.arenaStates.Count; i++) {
 			Arenas.arenaStates[i] = arenaStateData.arenaStates[i];
 		}
@@ -286,7 +299,6 @@ public class WorldManager : Photon.MonoBehaviour {
 		b.Serialize(m, data);
 		
 		myPhotonView.RPC("GetAvailableArena", PhotonTargets.MasterClient, arenaName, m.GetBuffer());
-		Debug.Log ("sent through request");
 	}
 
 	//from battle challenge initiator to Master
@@ -326,25 +338,10 @@ public class WorldManager : Photon.MonoBehaviour {
 		//instantiate the first enemy wave as scene objects TODO change scene object into custom loaded object
 		if(Arenas.arenaInstances[i].admittedPlayers.Contains(PhotonNetwork.player))
 		{
-			Debug.Log("telling player to go to arena");
 			PlayerManager.Instance.GoToZone(Arenas.arenaInstances[i]);
 			//Arenas[i].arenaInstances[s].SpawnEnemyWave(0);
 			//instantiate the enemy
 		}
-	}
-
-	[RPC]
-	public void AddPlayer(int zoneid, int id)
-	{
-		/*Debug.Log(zoneid + "adding player with id: "+id);
-		PhotonView view = PhotonView.Find(id);
-		CharacterStatus playerObject = view.GetComponent<CharacterStatus>();
-		//ArenaPlayer ap = new ArenaPlayer();
-		//ap.playerCS = playerObject;
-		//ap.playerID = view.ownerId;
-		//players.Add(ap);
-		ArenaManagers[zoneid].players.Add(playerObject);
-		ArenaManagers[zoneid].playerIDs.Add(view.ownerId);*/
 	}
 	
 	public void EndSession(ArenaManager zone)
@@ -355,14 +352,11 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void DecommissionArena(int zoneid)
 	{
-		//ArenaManager am = ArenaManagers[zoneid];
 		for (int s = 0; s < Arenas.arenaInstances.Count; s++) 
 		{
 			if(Arenas.arenaInstances[s].arenaID == zoneid)
 			{
 				Arenas.arenaStates[s] = false;
-				//Arenas[i].arenaInstances[s].CleanUp();
-				//Arenas[i].arenaStates[s] = false;
 				return;
 			}
 		}
@@ -382,7 +376,6 @@ public class WorldManager : Photon.MonoBehaviour {
 		{
 			if(ArenaManagers[zoneid].playerCharacterStatuses.Count == 0)
 			{
-				Debug.Log("clear");
 				myPhotonView.RPC("DecommissionArena", PhotonTargets.AllBuffered, zoneid);
 			}
 			else
@@ -395,53 +388,12 @@ public class WorldManager : Photon.MonoBehaviour {
 			}
 		}
 	}
-	
-	//all buffered
-	/*[RPC]
-	public void RemovePlayerAt(int zoneid, int id)
-	{
-		for (int i = 0; i < ArenaManagers[zoneid].playerIDs.Count; i++) 
-		{
-			if(ArenaManagers[zoneid].playerIDs[i] == id)
-			{
-				ArenaManagers[zoneid].playerIDs.RemoveAt(i);
-				ArenaManagers[zoneid].players.RemoveAt(i);
-				Debug.Log("disconnected player" + id);
-			}
-		}
-		if(PhotonNetwork.isMasterClient)
-		{
-			if(ArenaManagers[zoneid].players.Count == 0)
-			{
-				Debug.Log("clear");
-				//if(enemyView.owner != null)
-					//myPhotonView.RPC("ClearEnemies", enemyView.owner);
-				//else
-					//myPhotonView.RPC("ClearEnemies", PhotonTargets.MasterClient);
-				myPhotonView.RPC("DecommissionArena", PhotonTargets.AllBuffered, zoneid);
-			}
-			else
-			{
-				if(ArenaManagers[zoneid].ownerID == id)
-				{
-					Debug.Log("here alloc");
-					//PhotonNetwork.UnAllocateViewID(enemyView.viewID);
-					myPhotonView.RPC("ChangeEnemyOwner", PhotonPlayer.Find(ArenaManagers[zoneid].playerIDs[0]), zoneid);
-				}
-			}
-		}
-	}*/
 
+	//not used
 	//target player
 	[RPC]
 	public void ChangeEnemyOwner(int zoneid)
 	{
-		/*if(PlayerManager.Instance.ActiveArena == this && enemyFSMs.Count > 0)
-		{
-			enemyFSMs[0].myPhotonView.RPC("ChangeOwner", PhotonTargets.AllBuffered, PhotonNetwork.AllocateViewID());
-			Debug.Log("change owner");
-		}*/
-
 		int newid = PhotonNetwork.AllocateViewID();
 		myPhotonView.RPC("ChangeZoneOwner", PhotonTargets.AllBuffered, zoneid, newid, PhotonNetwork.player.ID);
 
@@ -501,7 +453,6 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void UpdatePartyList(byte[] partyList)
 	{
-		Debug.Log("received updated party list");
 		PlayerManager.Instance._partyMembers.Clear();
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(partyList);
@@ -519,7 +470,6 @@ public class WorldManager : Photon.MonoBehaviour {
 		else
 		{
 			GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
-			Debug.Log("received party invite");
 		}
 	}
 	

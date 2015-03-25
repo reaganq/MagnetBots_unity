@@ -1268,7 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a002f3d002464b29ab4f12f1a40828e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  queue: 10000
+  queue: 1
   queues: 
 --- !u!114 &11400002
 MonoBehaviour:

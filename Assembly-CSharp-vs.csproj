@@ -485,6 +485,7 @@
      <Compile Include="Assets\Scripts\GUI\Controllers\NotificationGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\OpeningCinematicGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\PlayerShopGUIController.cs" />
+     <Compile Include="Assets\Scripts\GUI\Controllers\PremiumShopGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\ProfileGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\QuestGUIController.cs" />
      <Compile Include="Assets\Scripts\GUI\Controllers\QuickInventoryGUIController.cs" />
@@ -573,6 +574,7 @@
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
      <Compile Include="Assets\Scripts\Storage\XMLStorage.cs" />
      <Compile Include="Assets\Scripts\Utility\ConstantRotation.cs" />
+     <Compile Include="Assets\Scripts\Utility\CustomPosition.cs" />
      <Compile Include="Assets\Scripts\Utility\DynamicWidth.cs" />
      <Compile Include="Assets\Sliding\Demo\DemoSlide.cs" />
      <Compile Include="Assets\Sliding\Demo\DemoSlidingPuzzle.cs" />

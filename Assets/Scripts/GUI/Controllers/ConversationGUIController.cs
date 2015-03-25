@@ -11,6 +11,7 @@ public class ConversationGUIController : BasicGUIController {
 	public Camera speakerCamera;
 	//public List<string> clampedParagraphTexts;
 	public GameObject nextArrow;
+	public Collider nextCollider;
 	//quest box
 	public RPGQuest _activeQuest;
 	public RPGQuest activeQuest
@@ -218,11 +219,13 @@ public class ConversationGUIController : BasicGUIController {
 		if(activeParagraph.nextParagraphCondition == NextParagraphInteraction.NextClick)
 		{
 			nextArrow.SetActive(true);
+			nextCollider.enabled = true;
 			waitForNextClick = true;
 		}
 		else
 		{
 			nextArrow.SetActive(false);
+			nextCollider.enabled = false;
 			waitForNextClick = false;
 		}
 		if(!isSpeakerDisplayed && newParagraph.ownerNPCID > 0)
