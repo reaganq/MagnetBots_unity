@@ -149,12 +149,6 @@ public class Shop : NPCActivity
 	
 	public void PopulateItems()
 	{
-		//load categories
-		//foreach(ShopCategory category in Categories)
-            //category.GetItems(ShopItems, player);
-		//load items
-        Debug.Log(Items.Count);
-        
         if(LastRestockTime == 0 || Time.realtimeSinceStartup - LastRestockTime > RestockTime)
         {
             ShopItems.Clear();
@@ -163,58 +157,8 @@ public class Shop : NPCActivity
     			shopItem.AddOneItem(ShopItems);
             }
             LastRestockTime = Time.realtimeSinceStartup;
-            Debug.Log("shop items" + ShopItems.Count);
         }
-
-        //BuyedItems(ShopItems, NPCId, player);
-        //removes the items that were previously bought, it loads the full list of items every time you access shop. Shop doesnt update shop items list
-		
-		//return ShopItems;
 	}
-	
-	/*private void BuyedItems(List<ItemInWorld> items, int NPCId, Player player)
-	{
-		//check if some item was sold in this period
-		DateTime date = Weather.CurrentDateTime;
-		
-		DateTime startPeriodDate = date;
-		//determine datum
-		switch(RespawnTimer)
-		{
-			case ShopRespawnTimer.Never : return;
-			case ShopRespawnTimer.Monday: 
-				int diff = date.DayOfWeek - DayOfWeek.Monday;
-				if (diff < 0)
-					diff += 7;
-				startPeriodDate = date.AddDays(-1 * diff).Date;
-				break;
-			case ShopRespawnTimer.NewMonth:
-				startPeriodDate = date.AddDays(-1 * date.Day).Date; 
-				break;
-		}
-		//search through log and remove buyed items in current period for current NPC
-		foreach(LogEvent logEvent in player.Hero.Log.Events)
-		{
-			//log must be same as NPC id and buying item
-			if (logEvent.EventType != LogEventType.BuyItem || NPCId != logEvent.NPCId)
-				continue;
-			if (startPeriodDate > logEvent.Date)
-				continue;
-			foreach(ItemInWorld item in items)
-			{
-				if (item.rpgItem.UniqueId == logEvent.UniqueId)
-				{
-					item.CurrentAmount -= logEvent.Amount;
-					//if amount is ZERO remove from collection
-					if (item.CurrentAmount == 0)
-					{
-						items.Remove(item);
-						break;
-					}
-				}
-			}
-		}
-	}*/
 }
 
 public enum ShopRespawnTimer

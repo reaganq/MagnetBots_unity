@@ -79,7 +79,7 @@
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
     <FBXName>
-      <string>Toys/Discoball</string>
+      <string>Toys/Discoball_Toy</string>
     </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>

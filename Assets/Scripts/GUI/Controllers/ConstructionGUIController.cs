@@ -24,6 +24,9 @@ public class ConstructionGUIController : BasicGUIController {
 
 	public void UpdateMaterialsCounters()
 	{
+		if(!isDisplayed)
+			return;
+
 		int numberLeft = 0;
 		for (int i = 0; i < thisConstruction.requiredItems.Count; i++) {
 			if(i < materialObjects.Length)
@@ -46,7 +49,7 @@ public class ConstructionGUIController : BasicGUIController {
 			totalNum += thisConstruction.requiredItemsQuantity[i];
 		}
 		Debug.Log("left: " + numberLeft + " total: " + totalNum);
-		Debug.Log((float)numberLeft/(float)totalNum);
+		//Debug.Log((float)numberLeft/(float)totalNum);
 		progressBar.value = 1.0f - ((float)numberLeft/(float)totalNum);
 		percentageLabel.text = (progressBar.value*100).ToString("F0") + "%";
 	}

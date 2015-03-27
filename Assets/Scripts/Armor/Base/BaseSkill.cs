@@ -206,7 +206,6 @@ public class BaseSkill : MonoBehaviour {
 						newEffect.statusEffect = effect;
 						newEffect.ownerSkill = this;
 						ownerStatus.AddStatusEffect(newEffect);
-						Debug.Log("adding status effect to myself");
 					}
 				}
 				//currently this bit never gets used since we are passing through outgoing targeted status effects directly to targetCS;

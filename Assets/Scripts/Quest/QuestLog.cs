@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
+using Parse;
+using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Reflection;
 
 public class QuestLog 
 {
@@ -78,6 +84,10 @@ public class QuestLog
 	// Is quest is completed (rewarded)
 	public bool IsQuestCompleted(int questId)
 	{
+		for (int i = 0; i < FinishedQuests.Count; i++) {
+			if(FinishedQuests[i].ID == questId)
+				return true;
+				}
 		return false;
 	}
 	
@@ -121,6 +131,7 @@ public class QuestLog
 				result = true;
 			}
 		}
+		UpdateQuests();
 		return result;
 	}
 	
@@ -148,6 +159,7 @@ public class QuestLog
 			FinishedQuests.Add(quest);
 		else
 			GeneralData.ReRollQuest(questId);
+		UpdateQuests();
 		/*if (!quest.Repeatable)
 		{
 			CompletedQuest cq = new CompletedQuest();
@@ -211,12 +223,12 @@ public class QuestLog
 
 	public RPGQuest CheckNPCConversation(int npcID)
 	{
-		Debug.Log("checking for npc conversation " + CurrentQuests.Count + " npcid: "+npcID);
+		//Debug.Log("checking for npc conversation " + CurrentQuests.Count + " npcid: "+npcID);
 		for (int i = 0; i < CurrentQuests.Count; i++) {
-			Debug.Log(CurrentQuests[i].CurrentStep.overrideNPCConversationID);
+			//Debug.Log(CurrentQuests[i].CurrentStep.overrideNPCConversationID);
 			if(CurrentQuests[i].CurrentStep.overrideNPC && CurrentQuests[i].CurrentStep.overrideNPCID == npcID)
 			{
-				Debug.Log("found an override quest!");
+				//Debug.Log("found an override quest!");
 				return CurrentQuests[i];
 			}
 				}
@@ -227,11 +239,15 @@ public class QuestLog
 	// Check paragraph if it is task of current quest
 	public void CheckParagraph(RPGConversation conversation, int paragraphId)
 	{
-		Debug.LogWarning("checking paragrap");
+		bool validChange = false;
 		foreach(RPGQuest q in CurrentQuests)
-			q.CheckParagraph(conversation.ID, paragraphId);
-		
-		UpdateQuests();
+		{
+			if(q.CheckParagraph(conversation.ID, paragraphId))
+				validChange = true;
+		}
+
+		if(validChange)
+			UpdateQuests();
 	}
 	
 	// Check line text if it is task of current quest
@@ -276,19 +292,121 @@ public class QuestLog
 				CurrentQuests[i].CurrentStep.TakeItemsFromPlayer();
 			}
 		}
+		UpdateQuests();
 	}
 
 
 	public void UpdateQuests()
 	{
-		
+		PlayerManager.Instance.Hero.hasQuestChange = true;
+	}
+
+	public ParseQuestLogData ParseThisQuestLog()
+	{
+		Debug.LogWarning("saving questlog to parse");
+		ParseQuestLogData questData = new ParseQuestLogData();
+		for (int i = 0; i < CurrentQuests.Count; i++) {
+			//dont save repeatable quests
+			if(CurrentQuests[i].repeatable)
+			{
+				Debug.Log("ignoring a repeatable quest");
+				continue;
+			}
+			ParseQuestData newQuest = new ParseQuestData();
+			newQuest.questID = CurrentQuests[i].ID;
+			Debug.Log("adding a new quest: " + CurrentQuests[i].ID);
+			for (int j = 0; j < CurrentQuests[i].questSteps.Count; j++) {
+				ParseQuestStepData newStep = new ParseQuestStepData();
+				Debug.Log("adding a new queststep :" + j + CurrentQuests[i].questSteps[j].QuestLogNote);
+				for (int k = 0; k < CurrentQuests[i].questSteps[j].Tasks.Count; k++) {
+					newStep.taskCurrentAmounts.Add(CurrentQuests[i].questSteps[j].Tasks[k].CurrentAmount);
+					Debug.Log(CurrentQuests[i].questSteps[j].Tasks[i].TaskType.ToString() + " current amount: " + newStep.taskCurrentAmounts[k]);
+				}
+				newQuest.questSteps.Add(newStep);
+			}
+			questData.currentQuests.Add(newQuest);
+		}
+		for (int i = 0; i < FinishedQuests.Count; i++) {
+			ParseQuestData newQuest = new ParseQuestData();
+			newQuest.questID = FinishedQuests[i].ID;
+			Debug.Log("adding a finished quest: " +FinishedQuests[i].ID);
+			for (int j = 0; j < FinishedQuests[i].questSteps.Count; j++) {
+				ParseQuestStepData newStep = new ParseQuestStepData();
+				Debug.Log("adding a new queststep :" + j + FinishedQuests[i].questSteps[j].QuestLogNote);
+				for (int k = 0; k < FinishedQuests[i].questSteps[j].Tasks.Count; k++) {
+					newStep.taskCurrentAmounts.Add(FinishedQuests[i].questSteps[j].Tasks[k].CurrentAmount);
+					Debug.Log(FinishedQuests[i].questSteps[j].Tasks[k].TaskType.ToString() + " current amount: " + newStep.taskCurrentAmounts[k]);
+				}
+				newQuest.questSteps.Add(newStep);
+			}
+			questData.finishedQuests.Add(newQuest);
+		}
+		Debug.LogWarning("finished converting questlog to parse");
+		return questData;
+	}
+
+	public void InterpretParseQuestLog(ParseQuestLogData questLogData)
+	{
+		Debug.LogWarning("unpacking parse quest log data");
+		for (int i = 0; i < questLogData.currentQuests.Count; i++) {
+			RPGQuest newQuest = Storage.LoadById<RPGQuest>(questLogData.currentQuests[i].questID, new RPGQuest());
+			Debug.Log("added new current quest: " + newQuest.ID);
+			for (int j = 0; j < newQuest.questSteps.Count; j++) {
+				for (int k = 0; k < newQuest.questSteps[j].Tasks.Count; k++) {
+					newQuest.questSteps[j].Tasks[k].CurrentAmount = questLogData.currentQuests[i].questSteps[j].taskCurrentAmounts[k];
+					Debug.Log("updating quest step: " + j + " task: " + k + "current amount: " + questLogData.currentQuests[i].questSteps[j].taskCurrentAmounts[k]);
+				}
+			}
+			CurrentQuests.Add(newQuest);
+		}
+		for (int i = 0; i < questLogData.finishedQuests.Count; i++) {
+			RPGQuest newQuest = Storage.LoadById<RPGQuest>(questLogData.finishedQuests[i].questID, new RPGQuest());
+			Debug.Log("added new finished quest: " + newQuest.ID);
+			for (int j = 0; j < newQuest.questSteps.Count; j++) {
+				for (int k = 0; k < newQuest.questSteps[j].Tasks.Count; k++) {
+					newQuest.questSteps[j].Tasks[k].CurrentAmount = questLogData.finishedQuests[i].questSteps[j].taskCurrentAmounts[k];
+					Debug.Log("updating quest step: " + j + " task: " + k + "current amount: " + questLogData.finishedQuests[i].questSteps[j].taskCurrentAmounts[k]);
+				}
+			}
+			Debug.LogWarning("ufinished npacking parse quest log data");
+			FinishedQuests.Add(newQuest);
+		}
 	}
 }
 
+[Serializable]
 public class ParseQuestLogData
 {
-	public List<int> finishedQuestIDs;
-	public List<int> currentQuestIDs;
+	public List<ParseQuestData> finishedQuests;
+	public List<ParseQuestData> currentQuests;
+
+	public ParseQuestLogData()
+	{
+		finishedQuests = new List<ParseQuestData>();
+		currentQuests = new List<ParseQuestData>();
+	}
+}
+
+[Serializable]
+public class ParseQuestData
+{
+	public int questID;
+	public List<ParseQuestStepData> questSteps;
+
+	public ParseQuestData()
+	{
+		questSteps = new List<ParseQuestStepData>();
+	}
+}
+
+[Serializable]
+public class ParseQuestStepData
+{
+	public List<int> taskCurrentAmounts;
+	public ParseQuestStepData()
+	{
+		taskCurrentAmounts = new List<int>();
+	}
 }
 
 

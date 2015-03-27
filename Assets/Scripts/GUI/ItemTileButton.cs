@@ -54,7 +54,6 @@ public class ItemTileButton: UIDragDropItem
 			{
 				if(owner != null)
 					owner.OnItemTilePressed(index);
-				Debug.Log("PRESSED");
 			}
 		}
 	}
@@ -78,14 +77,10 @@ public class ItemTileButton: UIDragDropItem
 			if(surface != null)
 			{
 				ExampleDragDropSurface dds = surface.GetComponent<ExampleDragDropSurface>();
-				Debug.Log("uh oh");
 				if (dds != null)
 				{
-					Debug.Log("uh oh");
 					owner.OnDragDrop(index);
-					// Destroy this icon as it's no longer needed
 					NGUITools.Destroy(gameObject);
-					Debug.Log("DESTROYING DRAGGED ITEM TILE");
 					return;
 				}
 			}

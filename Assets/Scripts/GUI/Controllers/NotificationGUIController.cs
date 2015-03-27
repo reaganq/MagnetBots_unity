@@ -70,6 +70,8 @@ public class NotificationGUIController : BasicGUIController {
 		else if(state == NotificationUIState.addfriend)
 		{
 			SocialManager.Instance.AddFriend(challengerName);
+			PlayerManager.Instance.ActiveWorld.AcceptFriendRequest(challenger, PlayerManager.Instance.Hero.PlayerName);
+			HideNotificationBox();
 		}
 		else if(state == NotificationUIState.teamChallenge)
 		{
@@ -157,6 +159,8 @@ public class NotificationGUIController : BasicGUIController {
 		notificationTween.tweenTarget = partyChallenge;
 		notificationTween.Play(false);
 		state = NotificationUIState.none;
+		//HACK reactivate the arena GUI after team matchmaking is cancelled
+		GUIManager.Instance.NPCGUI.arenaGUI.isBusy = false;
 	}
 
 	public void DisplayPartyWaiting()

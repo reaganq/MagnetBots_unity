@@ -70,6 +70,7 @@ public class RPGQuest : BasicItem
 				if (questStep.IsQuestStepFinished() == false)
 					return questStep;
 			}
+			Debug.Log("no valid quest step" + questSteps.Count);
 			return null;
 		}
 	}
@@ -159,18 +160,22 @@ public class RPGQuest : BasicItem
 		return false;
 	}
 	//paragraph task
-	public void CheckParagraph(int conversationID, int paragraphID)
+	public bool CheckParagraph(int conversationID, int paragraphID)
 	{
 		QuestStep questStep = CurrentStep;
 		
 		if(questStep == null)
-			return;
+			return false;
 		foreach(Task task in questStep.Tasks)
 		{
 			if (task.PreffixTarget == PreffixType.PARAGRAPH && task.TaskType == TaskTypeEnum.ReachPartOfConversation 
 			    && task.TaskTarget == conversationID && task.AmountToReach == paragraphID)
+			{
 				task.CurrentAmount = 1;
+				return true;
+			}
 		}
+		return false;
 	}
 	
 	//line text task

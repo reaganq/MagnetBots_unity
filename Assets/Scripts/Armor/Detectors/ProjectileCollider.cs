@@ -22,6 +22,7 @@ public class ProjectileCollider : Detector {
 			return;
 		
 		HitBox hb = other.collider.gameObject.GetComponent<HitBox>();
+		Debug.LogWarning(other.collider.gameObject.name);
 		ContactPoint contact = other.contacts[0];
 		if(hb != null)
 		{

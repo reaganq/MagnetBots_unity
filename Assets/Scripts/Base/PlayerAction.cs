@@ -9,6 +9,7 @@ public class PlayerAction : MonoBehaviour {
 	public float rewardAmount;
 	public float rewardWaitTime;
 	public GameObject externalObject;
+	public bool disableCharacterMovement;
 
 	public void Enable(CharacterActionManager actionManager)
 	{
@@ -67,15 +68,22 @@ public class PlayerAction : MonoBehaviour {
 			GameObject obj = GameObject.Instantiate(externalObject, cam._myTransform.position, cam._myTransform.rotation) as GameObject;
 
 		}
+		if(disableCharacterMovement)
+		{
+			Debug.Log("disable movement");
+			cam.DisableMovement();
+		}
 		if(actionAnimation.clip != null)
 		{
 			Debug.Log("playing action animation");
 			cam.PlayAnimation(actionAnimation.clip.name, false);
 		}
 		yield return new WaitForSeconds(rewardWaitTime);
-		RPGCurrency currency = Storage.LoadById<RPGCurrency>(rewardCurrencyID, new RPGCurrency());
-		cam.EarnStatusRewards(currency, rewardAmount);
-
+		if(rewardCurrencyID > 0)
+		{
+			RPGCurrency currency = Storage.LoadById<RPGCurrency>(rewardCurrencyID, new RPGCurrency());
+			cam.EarnStatusRewards(currency, rewardAmount);
+		}
 		if(actionAnimation.clip != null)
 		{
 			while(cam.myAnimation.IsPlaying(actionAnimation.clip.name))
@@ -85,6 +93,10 @@ public class PlayerAction : MonoBehaviour {
 			cam.myAnimation.RemoveClip(actionAnimation.clip.name);
 		}
 		cam.ResetActionState();
+		if(disableCharacterMovement)
+		{
+			cam.EnableMovement();
+		}
 		Destroy(gameObject);
 	}
 }

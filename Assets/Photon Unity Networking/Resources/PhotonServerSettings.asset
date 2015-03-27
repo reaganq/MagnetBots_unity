@@ -148,4 +148,11 @@ MonoBehaviour:
   - NetworkRequestShopItems
   - NetworkAcceptFriendRequest
   - NetworkAddFriend
+  - NetworkUnequipHead
+  - NetworkAddNewHighScore
+  - NetworkUpdateHighScores
+  - NetworkRequestMinigameScores
+  - NetworkAddDonation
+  - NetworkRequestConstructionUpdate
+  - NetworkUpdateConstructionStatus
   DisableAutoOpenWizard: 0

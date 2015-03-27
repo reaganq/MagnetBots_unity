@@ -52,6 +52,7 @@ public class CombobulatorGUIController : BasicGUIController {
 		lootWindow.SetActive(false);
 		uiWindow.SetActive(true);
 		UpdateInfo();
+		anvil = GameObject.FindGameObjectWithTag("Anvil").GetComponent<Anvil>();
 		base.Enable ();
 	}
 

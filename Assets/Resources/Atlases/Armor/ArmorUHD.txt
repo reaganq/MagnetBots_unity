@@ -2,7 +2,7 @@
 
 "basic_armL.png":
 {
-	"frame": {"x":174,"y":862,"w":170,"h":170},
+	"frame": {"x":174,"y":1034,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -10,7 +10,7 @@
 },
 "basic_armR.png":
 {
-	"frame": {"x":2,"y":862,"w":170,"h":170},
+	"frame": {"x":690,"y":862,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -18,7 +18,7 @@
 },
 "basic_body.png":
 {
-	"frame": {"x":690,"y":862,"w":170,"h":170},
+	"frame": {"x":518,"y":862,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -26,7 +26,7 @@
 },
 "basic_head.png":
 {
-	"frame": {"x":518,"y":776,"w":170,"h":170},
+	"frame": {"x":346,"y":862,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -34,7 +34,7 @@
 },
 "basic_legs.png":
 {
-	"frame": {"x":346,"y":690,"w":170,"h":170},
+	"frame": {"x":2,"y":948,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -42,7 +42,7 @@
 },
 "boxer_armL.png":
 {
-	"frame": {"x":174,"y":690,"w":170,"h":170},
+	"frame": {"x":174,"y":862,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -50,7 +50,7 @@
 },
 "boxer_armR.png":
 {
-	"frame": {"x":2,"y":690,"w":170,"h":170},
+	"frame": {"x":776,"y":690,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -58,7 +58,7 @@
 },
 "boxer_head.png":
 {
-	"frame": {"x":690,"y":690,"w":170,"h":170},
+	"frame": {"x":604,"y":690,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -66,7 +66,7 @@
 },
 "chef_armL.png":
 {
-	"frame": {"x":518,"y":604,"w":170,"h":170},
+	"frame": {"x":432,"y":690,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -74,7 +74,7 @@
 },
 "chef_armR.png":
 {
-	"frame": {"x":346,"y":518,"w":170,"h":170},
+	"frame": {"x":2,"y":776,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -82,7 +82,7 @@
 },
 "chef_body.png":
 {
-	"frame": {"x":174,"y":518,"w":170,"h":170},
+	"frame": {"x":260,"y":690,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -90,7 +90,7 @@
 },
 "chef_head.png":
 {
-	"frame": {"x":2,"y":518,"w":170,"h":170},
+	"frame": {"x":776,"y":518,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -98,15 +98,23 @@
 },
 "chef_legs.png":
 {
-	"frame": {"x":690,"y":518,"w":170,"h":170},
+	"frame": {"x":604,"y":518,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
 	"sourceSize": {"w":170,"h":170}
 },
+"gumball_armR.png":
+{
+	"frame": {"x":2,"y":518,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
 "knight_armL.png":
 {
-	"frame": {"x":518,"y":432,"w":170,"h":170},
+	"frame": {"x":432,"y":518,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -114,7 +122,7 @@
 },
 "knight_armR.png":
 {
-	"frame": {"x":690,"y":346,"w":170,"h":170},
+	"frame": {"x":260,"y":518,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -122,7 +130,7 @@
 },
 "knight_body.png":
 {
-	"frame": {"x":518,"y":260,"w":170,"h":170},
+	"frame": {"x":776,"y":346,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -146,7 +154,7 @@
 },
 "samurai_armL.png":
 {
-	"frame": {"x":260,"y":260,"w":256,"h":256},
+	"frame": {"x":518,"y":260,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -154,7 +162,7 @@
 },
 "samurai_armR.png":
 {
-	"frame": {"x":2,"y":260,"w":256,"h":256},
+	"frame": {"x":260,"y":260,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -162,7 +170,7 @@
 },
 "samurai_body.png":
 {
-	"frame": {"x":518,"y":2,"w":256,"h":256},
+	"frame": {"x":2,"y":260,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
@@ -170,13 +178,21 @@
 },
 "samurai_head.png":
 {
-	"frame": {"x":260,"y":2,"w":256,"h":256},
+	"frame": {"x":518,"y":2,"w":256,"h":256},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
 	"sourceSize": {"w":256,"h":256}
 },
 "samurai_legs.png":
+{
+	"frame": {"x":260,"y":2,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
+},
+"toy_duck.png":
 {
 	"frame": {"x":2,"y":2,"w":256,"h":256},
 	"rotated": false,
@@ -191,6 +207,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1024,"h":2048},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:9482cebc9d527f438f45c14b6fd2d6ff$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f484a9130c9b9d12cdeb183fb4e55813$"
 }
 }

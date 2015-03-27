@@ -115,12 +115,9 @@ public class CharacterStatus : CharacterAttributes {
 			return;
 		//process damage
 		//ReceiveDamage(damage);
-		Debug.Log(perpetratorViewID +" " + perpetratorSkillID);
-		Debug.Log("receiving hit " + incomingStatusEffects.Count);
 		for (int i = 0; i < incomingStatusEffects.Count; i++) {
 			if(incomingStatusEffects[i].effect == 0)
 			{
-				Debug.Log("got a damage effect");
 				ReceiveDamage(incomingStatusEffects[i].primaryEffectValue);
 			}
 		}
@@ -134,7 +131,6 @@ public class CharacterStatus : CharacterAttributes {
 		if(curHealth >0)
 		{
 			curHealth -= damage;
-			Debug.LogWarning("currentHP: "+curHealth);
 			myPhotonView.RPC("NetworkSyncHealth", PhotonTargets.All, curHealth, damage, true);
 		}
 		if(curHealth <= 0)
@@ -167,7 +163,6 @@ public class CharacterStatus : CharacterAttributes {
 	[RPC]
 	public virtual void NetworkDie()
 	{
-		Debug.Log("died");
 		actionManager.Die();
 		//play death animation;
 	}

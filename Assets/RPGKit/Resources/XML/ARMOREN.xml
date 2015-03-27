@@ -586,7 +586,7 @@
     </armorStatsSets>
   </RPGArmor>
   <RPGArmor>
-    <IconPath>knight_armR</IconPath>
+    <IconPath>gumball_armR</IconPath>
     <AtlasName>Atlases/Armor/ArmorAtlas</AtlasName>
     <ID>14</ID>
     <Name>Gumball Gun</Name>

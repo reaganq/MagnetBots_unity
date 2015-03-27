@@ -116,6 +116,8 @@ public class EnemyEditor : BaseEditorWindow
 		
 		ConditionsUtils.Conditions(s.conditions, Data);
 		EditorGUILayout.Separator();
+		ConditionsUtils.Conditions(s.postActionConditions, Data);
+		EditorGUILayout.Separator();
 		foreach(ActionEvent action in s.preFightActions)
 		{
 			EventUtils.DisplayEvent(action, Data);

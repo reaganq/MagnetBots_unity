@@ -45,7 +45,6 @@ public class LoadScreenController : BasicGUIController {
 
 	public IEnumerator Outro()
 	{
-		Debug.Log(Time.realtimeSinceStartup);
 		if(isLoading)
 		{
 		loadScreenAnimation.Play("LoadingScreen_Outro");

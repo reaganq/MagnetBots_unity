@@ -17,18 +17,38 @@ public class MiniGameGUIController : BasicGUIController {
 	public Color activeColor;
 	public UISprite highscoreBG;
 	public UISprite instructionsBG;
+	public UILabel[] highScoreLabels;
 
 	public void Enable (NPCMinigame mg)
 	{
 		minigame = mg;
+
+		panel.SetActive(true);
+		UpdateInfo();
+		OnInstructionsPressed();
+		Enable();
+	}
+
+	public void UpdateInfo()
+	{
+		description.text = minigame.Description;
 		miniGameName.text = minigame.Name;
 		GameObject Atlas = Resources.Load(minigame.AtlasName) as GameObject;
 		portrait.atlas = Atlas.GetComponent<UIAtlas>();
 		portrait.spriteName = minigame.IconPath;
-		panel.SetActive(true);
-		description.text = minigame.Description;
-		OnInstructionsPressed();
-		Enable();
+		myScoreLabel.text = minigame.myScore.ToString();
+
+		for (int i = 0; i < highScoreLabels.Length; i++) {
+			if(i < minigame.highScores.Count)
+			{
+				highScoreLabels[i].gameObject.SetActive(true);
+				highScoreLabels[i].text = minigame.highScores[i].playerName + ": " + minigame.highScores[i].score;
+			}
+			else
+			{
+				highScoreLabels[i].gameObject.SetActive(false);
+			}
+		}
 	}
 
 	public override void Disable (bool resetState)

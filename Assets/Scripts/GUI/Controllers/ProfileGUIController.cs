@@ -57,8 +57,15 @@ public class ProfileGUIController : BasicGUIController {
 		healthLabel.text = profile.baseHealth.ToString() + " + " +profile.bonusHealth.ToString();
 		attackLabel.text = profile.baseStrength.ToString() + " + " +profile.bonusStrength.ToString();
 		defenceLabel.text = profile.baseDefense.ToString() + " + " +profile.bonusDefense.ToString();
-		for (int i = 0; i < profile.badgeIDs.Count; i++) {
-			
+		for (int i = 0; i < badgeSprites.Length; i++) {
+			if(i < profile.badgeIDs.Count)
+			{
+				badgeSprites[i].gameObject.SetActive(true);
+				RPGBadge badge = Storage.LoadById<RPGBadge>(profile.badgeIDs[i], new RPGBadge());
+				badgeSprites[i].spriteName = badge.IconPath;
+			}
+			else
+				badgeSprites[i].gameObject.SetActive(false);
 		}
 	}
 

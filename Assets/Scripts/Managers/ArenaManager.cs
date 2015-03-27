@@ -230,9 +230,12 @@ public class ArenaManager : Zone {
 
 	public override void LeaveZone()
 	{
-		for (int i = 0; i < rpgEnemy.postFightActions.Count; i++) {
-			rpgEnemy.postFightActions[i].DoAction();
-				}
+		if(rpgEnemy.ValidatePostAction())
+		{
+			for (int i = 0; i < rpgEnemy.postFightActions.Count; i++) {
+				rpgEnemy.postFightActions[i].DoAction();
+					}
+		}
 		base.LeaveZone();
 	}
 

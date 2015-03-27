@@ -11,7 +11,6 @@ public class NPCPOITrigger : MonoBehaviour {
 		if(npc)
 		{
 			npc.StartCoroutine(npc.ShowNPC());
-			Debug.Log("hit");
 			return;
 		}
 		if(construction)

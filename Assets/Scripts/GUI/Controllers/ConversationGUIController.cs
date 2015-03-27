@@ -36,7 +36,9 @@ public class ConversationGUIController : BasicGUIController {
 	public GameObject questItemsGrid;
 	public UIGrid questItemsPanelGrid;
 	public GameObject itemTilePrefab;
+	public GameObject currencyTilePrefab;
 	public List<ItemTileButton> itemTiles;
+	public List<CurrencyTilebutton> currencyTiles = new List<CurrencyTilebutton>();
 	public List<InventoryItem> questItems = new List<InventoryItem>();
 	public GameObject affirmativeButton;
 	public GameObject negativeButton;
@@ -98,7 +100,7 @@ public class ConversationGUIController : BasicGUIController {
 
 	public void DisplayParagraphByID(int index)
 	{
-		Debug.Log("display paragraph: " + index);
+		//Debug.Log("display paragraph: " + index);
 		DisplayParagraph(activeConversation.conversationParagraphs[index]);
 	}
 
@@ -118,7 +120,7 @@ public class ConversationGUIController : BasicGUIController {
 
 	public void DisplayParagraph(RPGParagraph newParagraph)
 	{
-		Debug.Log("display paragraph ");
+		//Debug.Log("display paragraph ");
 		PlayerManager.Instance.Hero.questLog.CheckParagraph(activeConversation, activeConversation.conversationParagraphs.IndexOf(newParagraph));
 		activeParagraph = newParagraph;
 		affirmativeLinetext = null;
@@ -270,6 +272,7 @@ public class ConversationGUIController : BasicGUIController {
 	public void DisplayQuestOutline(int questID)
 	{
 		activeQuest = GeneralData.GetQuestByID(questID);
+		Debug.Log("active quest: " + activeQuest.ID);
 		activeQuestStep = activeQuest.CurrentStep;
 		DisplayQuestInfo(true);
 	}
@@ -331,44 +334,54 @@ public class ConversationGUIController : BasicGUIController {
 
 	public void LoadQuestItemTiles(bool isNewQuest)
 	{
-			questItems.Clear();
-			for (int i = 0; i < activeQuestStep.Tasks.Count; i++) {
-				if(activeQuestStep.Tasks[i].TaskType == TaskTypeEnum.BringItem)
-				{
-					InventoryItem item = new InventoryItem();
-					if(activeQuestStep.Tasks[i].PreffixTarget == PreffixType.ARMOR)
-					{
-						item.GenerateNewInventoryItem(Storage.LoadById<RPGArmor>(activeQuestStep.Tasks[i].TaskTarget, new RPGArmor()), activeQuestStep.Tasks[i].Tasklevel, activeQuestStep.Tasks[i].AmountToReach);
-					}
-					else if(activeQuestStep.Tasks[i].PreffixTarget == PreffixType.ITEM)
-					{
-						item.GenerateNewInventoryItem(Storage.LoadById<RPGItem>(activeQuestStep.Tasks[i].TaskTarget, new RPGItem()), activeQuestStep.Tasks[i].Tasklevel, activeQuestStep.Tasks[i].AmountToReach);
-					}
-					questItems.Add(item);
-				}
-			}
-			int num = questItems.Count - itemTiles.Count;
-			if(num>0)
+		questItems.Clear();
+		for (int i = 0; i < activeQuestStep.Tasks.Count; i++) {
+			if(activeQuestStep.Tasks[i].TaskType == TaskTypeEnum.BringItem)
 			{
-				for (int i = 0; i < num; i++) {
-					GameObject itemTile = NGUITools.AddChild(questItemsGrid, itemTilePrefab);
-					ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
-					itemTiles.Add(tileButton);
-					tileButton.index = itemTiles.Count-1;
-				}
-			}
-			for (int i = 0; i < itemTiles.Count; i++) {
-				if(i>=questItems.Count)
+				InventoryItem item = new InventoryItem();
+				if(activeQuestStep.Tasks[i].PreffixTarget == PreffixType.ARMOR)
 				{
-					itemTiles[i].gameObject.SetActive(false);
+					item.GenerateNewInventoryItem(Storage.LoadById<RPGArmor>(activeQuestStep.Tasks[i].TaskTarget, new RPGArmor()), activeQuestStep.Tasks[i].Tasklevel, activeQuestStep.Tasks[i].AmountToReach);
 				}
-				else
+				else if(activeQuestStep.Tasks[i].PreffixTarget == PreffixType.ITEM)
 				{
-					itemTiles[i].gameObject.SetActive(true);
-					itemTiles[i].LoadQuestDisplayTile(questItems[i], isNewQuest);
-					//itemTiles[i].LoadItemTile(questItems[i], this, inventoryType, i);
+					item.GenerateNewInventoryItem(Storage.LoadById<RPGItem>(activeQuestStep.Tasks[i].TaskTarget, new RPGItem()), activeQuestStep.Tasks[i].Tasklevel, activeQuestStep.Tasks[i].AmountToReach);
 				}
+				questItems.Add(item);
 			}
+		}
+		int num = questItems.Count - itemTiles.Count;
+		if(num>0)
+		{
+			for (int i = 0; i < num; i++) {
+				GameObject itemTile = NGUITools.AddChild(questItemsGrid, itemTilePrefab);
+				ItemTileButton tileButton = itemTile.GetComponent<ItemTileButton>();
+				itemTiles.Add(tileButton);
+				tileButton.index = itemTiles.Count-1;
+			}
+		}
+		for (int i = 0; i < itemTiles.Count; i++) {
+			if(i>=questItems.Count)
+			{
+				itemTiles[i].gameObject.SetActive(false);
+			}
+			else
+			{
+				itemTiles[i].gameObject.SetActive(true);
+				itemTiles[i].LoadQuestDisplayTile(questItems[i], isNewQuest);
+			}
+			questItemsPanelGrid.Reposition();
+		}
+
+		for (int i = 0; i < currencyTiles.Count; i++) {
+			currencyTiles[i].gameObject.SetActive(false);
+				}
+
+		questItemsPanelGrid.Reposition();
+	}
+
+	public void RepositionGrid()
+	{
 		questItemsPanelGrid.Reposition();
 	}
 
@@ -380,7 +393,7 @@ public class ConversationGUIController : BasicGUIController {
 			questItems.Add(loots.items[i]);
 		}
 
-		int num = questItems.Count - itemTiles.Count;
+		int num = loots.items.Count - itemTiles.Count;
 		if(num>0)
 		{
 			for (int i = 0; i < num; i++) {
@@ -395,14 +408,42 @@ public class ConversationGUIController : BasicGUIController {
 			{
 
 				itemTiles[i].gameObject.SetActive(false);
+				//questItemsPanelGrid.Reposition();
 			}
 			else
 			{
 				itemTiles[i].gameObject.SetActive(true);
 				itemTiles[i].LoadItemTile(questItems[i], this, InventoryGUIType.Quest, i);
+				//questItemsPanelGrid.Reposition();
 				//itemTiles[i].LoadItemTile(questItems[i], this, inventoryType, i);
 			}
 		}
+
+		int n = loots.currencies.Count - currencyTiles.Count;
+		if(n > 0)
+		{
+			for (int i = 0; i < n; i++) {
+				GameObject itemTile = NGUITools.AddChild(questItemsGrid, currencyTilePrefab);
+				CurrencyTilebutton tileButton = itemTile.GetComponent<CurrencyTilebutton>();
+				currencyTiles.Add(tileButton);
+			}
+		}
+		for (int i = 0; i < currencyTiles.Count; i++) {
+			if(i>=loots.currencies.Count)
+			{
+				
+				currencyTiles[i].gameObject.SetActive(false);
+				//questItemsPanelGrid.Reposition();
+			}
+			else
+			{
+				currencyTiles[i].gameObject.SetActive(true);
+				currencyTiles[i].Load(loots.currencies[i]);
+				//questItemsPanelGrid.Reposition();
+				//itemTiles[i].LoadItemTile(questItems[i], this, inventoryType, i);
+			}
+		}
+
 		questItemsPanelGrid.Reposition();
 	}
 

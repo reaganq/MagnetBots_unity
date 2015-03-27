@@ -145,7 +145,7 @@ public class CharacterActionManager : ActionManager {
 	//HACK the problem is that skill IDs are different because of different item spawn order for clients. Reverted to hacky slot index usage. 
 	public void UseSkill(InputTrigger trigger, int slot)
 	{
-		if(isLocked() || !myStatus.isAlive())
+		if(isLocked() || (!myStatus.isAlive() && trigger == InputTrigger.OnPressDown))
 			return;
 		//int skillIndex = -1;
 		//skillIndex = GetSkillByIDAndSlot(index, slot);
@@ -294,6 +294,7 @@ public class CharacterActionManager : ActionManager {
 
 	public override void EnableMovement()
 	{
+		if(actionState !=  ActionState.specialAction)
 		base.EnableMovement();
 	}
 	
@@ -362,7 +363,8 @@ public class CharacterActionManager : ActionManager {
 			toy.transform.position = _myTransform.position;
 			toy.transform.rotation = _myTransform.rotation;
 			PlayerAction pa = toy.GetComponent<PlayerAction>();
-			pa.Enable(this);
+			if(pa != null)
+				pa.Enable(this);
 		}
 	}
 

@@ -18,12 +18,12 @@ TagManager:
   - UI3DCamera
   - Tesla
   - FxTemporaire
+  - Anvil
   - 
-  - explosion
-  - ground
-  - missile
-  - shield
-  - breath
+  - 
+  - 
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

@@ -88,7 +88,7 @@ public class NPCGUIController : BasicGUIController {
     {
 		base.Enable();
 		//check for check override
-		Debug.Log("active npc id: " + PlayerManager.Instance.ActiveNPC.ID);
+		//Debug.Log("active npc id: " + PlayerManager.Instance.ActiveNPC.ID);
 		activities = PlayerManager.Instance.ActiveNPC.availableActivities;
 		if(DisplayQuest(PlayerManager.Instance.Hero.questLog.CheckNPCConversation(PlayerManager.Instance.ActiveNPC.ID)))
 			return;
@@ -196,7 +196,7 @@ public class NPCGUIController : BasicGUIController {
 			break;
 
 		case NPCActivityType.Minigame:
-			DisplayMinigame((NPCMinigame)activeActivity);
+			DisplayMinigame(PlayerManager.Instance.ActiveWorld.MinigameByID(activeActivity.ID));
 			break;
 		case NPCActivityType.Service:
 			if(activeActivity.ID == 1)
@@ -258,7 +258,6 @@ public class NPCGUIController : BasicGUIController {
 
 	public void DisplayArena(NPCArena newArena)
 	{
-		Debug.Log("huh?");
 		state = NPCGUIState.arena;
 		arenaGUI.Enable(newArena);
 	}
@@ -316,13 +315,11 @@ public class NPCGUIController : BasicGUIController {
 	{
 		if(newQuest != null)
 		{
-			Debug.Log("displayed quest!");
 			state = NPCGUIState.quest;
 			PlayerManager.Instance.Hero.questLog.selectedQuest = newQuest;
 			RPGConversation convo = Storage.LoadById<RPGConversation>(newQuest.CurrentStep.overrideNPCConversationID, new RPGConversation());
 			return conversationGUI.DisplayConversation(convo);
         }
-		Debug.Log("displayed no quest");
 		return false;
     }
 

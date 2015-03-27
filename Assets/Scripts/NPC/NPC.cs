@@ -35,6 +35,8 @@ public class NPC: MonoBehaviour
 	public Vector3 endScale = Vector3.one;
 	public Vector3 startScale = new Vector3(0.5f, 0.5f, 0.5f);
 
+	//public PhotonView myPhotonView;
+
     void Start()
     {
 		if(trigger)
@@ -51,6 +53,8 @@ public class NPC: MonoBehaviour
 				NPCMinigame minigame = Storage.LoadById<NPCMinigame>(ad.activityID, new NPCMinigame());
 				Debug.Log(minigame.activityType.ToString());
 				activities.Add(minigame);
+				GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>().AddMinigame(minigame);
+				Debug.Log("added minigame");
 			}
 			else if(ad.activityType == NPCActivityType.Quest)
 			{
@@ -145,5 +149,7 @@ public class NPC: MonoBehaviour
 		TweenScale.Begin(trigger, 0.2f, startScale);
 		triggerCollider.enabled = false;
 	}
+
+
 
 }

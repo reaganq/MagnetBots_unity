@@ -28,7 +28,7 @@ public class GlobalInputManager : MonoBehaviour {
 			//send message: clicked outside of UI
 				if(!GUIManager.Instance.IsUIBusy())
 				{
-					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 5f)
+					if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < 20f)
 					{
 						Ray ray = Camera.main.ScreenPointToRay(new Vector3(UICamera.lastTouchPosition.x, UICamera.lastTouchPosition.y, 0 ));
 						RaycastHit hit;

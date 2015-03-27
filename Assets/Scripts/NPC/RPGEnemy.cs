@@ -93,7 +93,9 @@ public class RPGEnemy : IItem
 	public List<ActionEvent> preFightActions;
 	public List<ActionEvent> postFightActions;
 	public List<Condition> conditions;
-	
+	//HACK 
+	public List<Condition> postActionConditions;
+
 	public RPGEnemy()
 	{
 		PortraitIcon = string.Empty;
@@ -106,6 +108,7 @@ public class RPGEnemy : IItem
 		preFightActions = new List<ActionEvent>();
 		postFightActions = new List<ActionEvent>();
 		conditions = new List<Condition>();
+		postActionConditions = new List<Condition>();
 		prebattleConversations = new List<int>();
 		postbattleConversations = new List<int>();
 	}
@@ -114,8 +117,23 @@ public class RPGEnemy : IItem
 	{
 		for (int i = 0; i < conditions.Count; i++) {
 			if(!conditions[i].Validate())
+			{
+				Debug.Log(conditions[i].ConditionType.ToString());
 				return false;
-				}
+			}
+		}
+		return true;
+	}
+
+	public bool ValidatePostAction()
+	{
+		for (int i = 0; i < postActionConditions.Count; i++) {
+			if(!postActionConditions[i].Validate())
+			{
+				Debug.Log(postActionConditions[i].ConditionType.ToString());
+				return false;
+			}
+		}
 		return true;
 	}
 }

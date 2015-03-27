@@ -28,7 +28,6 @@ public class GeneralData: MonoBehaviour{
 		quests = Storage.Load<RPGQuest>(new RPGQuest());
 		NPCs = Storage.Load<RPGNPC>(new RPGNPC());
 		towns = Storage.Load<RPGTown>(new RPGTown());
-		Debug.Log(quests.Count + "quests");
 		LoadQuests();
 	}
 
@@ -41,7 +40,6 @@ public class GeneralData: MonoBehaviour{
 				for (int j = 0; j < quests[i].questSteps.Count; j++) {
 					if(quests[i].questSteps[j].isMainStep)
 					{
-						Debug.Log("Loading quest: " + i + " step: " + j);
 						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,4),1);
 					}
 				}
@@ -76,8 +74,7 @@ public class GeneralData: MonoBehaviour{
 				for (int j = 0; j < quests[i].questSteps.Count; j++) {
 					if(quests[i].questSteps[j].isMainStep)
 					{
-						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,4),1);
-						Debug.Log("rerolled quest");
+						quests[i].questSteps[i].GenerateRandomTasks(quests[i].allTasks,Random.Range(1,1),1);
 					}
 				}
 			}

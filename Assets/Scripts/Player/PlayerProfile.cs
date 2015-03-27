@@ -98,6 +98,19 @@ public class PlayerProfile{
 	public void UpdateEquippedItems()
 	{
 	}
+
+	public bool AddBadge(RPGBadge badgeToAdd)
+	{
+		for (int i = 0; i < badges.Count; i++) {
+			if(badges[i].ID == badgeToAdd.ID)
+			{
+				Debug.Log("found duplicate badge");
+				return false;
+			}
+				}
+		badges.Add(badgeToAdd);
+		return true;
+	}
 	//public List<Achievement> achievements;
 }
 

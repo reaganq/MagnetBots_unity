@@ -83,7 +83,6 @@ public class BasicGUIController : MonoBehaviour {
 				tiles[i].LoadItemTile(itemList[i], this, inventType, i);
 			}
 		}
-		Debug.Log("refresh item tiles");
 	}
 
 	public virtual void LoadShopItemTiles(List<InventoryItem> itemList, List<ShopItemTileButton> tiles, GameObject gridPanelRoot, GameObject tilePrefab, InventoryGUIType inventType)

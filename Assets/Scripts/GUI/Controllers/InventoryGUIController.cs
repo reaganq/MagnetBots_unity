@@ -496,6 +496,8 @@ public class InventoryGUIController : BasicGUIController {
 
 	public void OnUnequipButtonPressed()
 	{
+		PlayerManager.Instance.Hero.UnequipItem(selectedItem);
+		UpdateItemDetails();
 	}
 
 	public void OnStockButtonPressed()

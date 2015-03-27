@@ -82,6 +82,7 @@ MonoBehaviour:
   rewardAmount: 10
   rewardWaitTime: 3.79999995
   externalObject: {fileID: 0}
+  disableCharacterMovement: 1
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

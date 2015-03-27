@@ -90,31 +90,32 @@ public class PlayerCharacter : CharacterStatus {
 
 	public void DisplayInfoByZone()
 	{
-		Debug.Log("local display HUD by zone");
 		myPhotonView.RPC("NetworkDisplayInfoByZone", PhotonTargets.All, PlayerManager.Instance.ActiveZone.myPhotonView.viewID);
 	}
 
 	[RPC]
 	public void NetworkDisplayInfoByZone(int zoneID)
 	{
-		Debug.Log("display HUD by zone" + zoneID);
 		zoneViewID = zoneID;
 		PhotonView zoneView = PhotonView.Find(zoneViewID);
-		Zone newZone = zoneView.GetComponent<Zone>();
-		if(newZone != null)
-			parentZone = newZone;
-		if(!myPhotonView.isMine)
-			DisplayName(true);
-		else
-			DisplayName(false);
-		if(parentZone != null)
+		if(zoneView != null)
 		{
-			if(parentZone.zoneType == ZoneType.arena)
-			{
-				DisplayHpBar(true);
-			}
+			Zone newZone = zoneView.GetComponent<Zone>();
+			if(newZone != null)
+				parentZone = newZone;
+			if(!myPhotonView.isMine)
+				DisplayName(true);
 			else
-				DisplayHpBar(false);
+				DisplayName(false);
+			if(parentZone != null)
+			{
+				if(parentZone.zoneType == ZoneType.arena)
+				{
+					DisplayHpBar(true);
+				}
+				else
+					DisplayHpBar(false);
+			}
 		}
 	}
 

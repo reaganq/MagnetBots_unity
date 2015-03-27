@@ -52,7 +52,7 @@ public class IntroGUIController : BasicGUIController {
 			GameManager.Instance.teststate = true;
 			quickStartClicked = true;
 			NetworkManager.Instance.usingParse = false;
-
+			GameManager.Instance.newGame = false;
 			StartGame();
 		}
 	}
@@ -75,6 +75,7 @@ public class IntroGUIController : BasicGUIController {
 
 	public void OnBackButtonPressed()
 	{
+		Debug.Log("back button pressed");
 		ShowButtonMenu();
 	}
 
@@ -91,7 +92,7 @@ public class IntroGUIController : BasicGUIController {
     AsyncOperation async;
     
     IEnumerator offlineload() {
-        startButton.SetActive(false);
+        //startButton.SetActive(false);
 		NGUITools.SetActive(startButton, false);
         //loadingLabel.SetActive(true);
 		

@@ -16,7 +16,6 @@ public class EnemyCard : MonoBehaviour {
 
 	public void LoadEnemy(string atlas, string sprite, int index, bool isAvailable, bool isLocked)
 	{
-		Debug.Log("load enemy card");
 		GameObject Atlas = Resources.Load(atlas) as GameObject;
 		portrait.atlas = Atlas.GetComponent<UIAtlas>();
 		portrait.spriteName = sprite;

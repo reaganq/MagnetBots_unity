@@ -58,13 +58,11 @@ public class CategoryButton : MonoBehaviour {
 
 	public void SelectCategory()
 	{
-		Debug.Log("selected" + index);
 		backgroundSprite.spriteName = selectedSpriteName;
 	}
 
 	public void DeselectCategory()
 	{
-		Debug.Log("deselected" + index);
 		backgroundSprite.spriteName = unselectedSpriteName;
 	}
 }

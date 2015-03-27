@@ -37,7 +37,7 @@ Follow the chef's orders to satisfy your customers! Tap on the right ingredients
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>4</maxQuantity>
-        <dropRate>0.5</dropRate>
+        <dropRate>1</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>
@@ -49,7 +49,19 @@ Follow the chef's orders to satisfy your customers! Tap on the right ingredients
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>0.2</dropRate>
+        <dropRate>1</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Armor</itemType>
+        <itemID>
+          <int>7</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>1</minQuantity>
+        <maxQuantity>1</maxQuantity>
+        <dropRate>1</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>

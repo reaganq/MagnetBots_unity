@@ -65,10 +65,8 @@ public class Task {
 		switch(TaskType)
 		{
 		case TaskTypeEnum.BringItem:
-			Debug.Log("got to here: " + PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) + " : " + AmountToReach);
 			if(PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) < AmountToReach)
 			{
-				Debug.Log(PlayerManager.Instance.Hero.GetItemAmount(TaskTarget, Tasklevel, PreffixTarget) + " : " + AmountToReach);
 				return false;
 			}
 			break;

@@ -329,7 +329,7 @@ public class PlayerManager : MonoBehaviour
 		avatarObject.SetActive(false);
 		ActiveZone.zoneObject.SetActive(false);
 		ActiveMinigameObject = Instantiate(Resources.Load(minigame.PrefabDirectory) as GameObject) as GameObject;
-		ActiveMinigame = (NPCMinigame)activeActivity;
+		ActiveMinigame = minigame;
 		activityState = PlayerActivityState.minigame;
 		GUIManager.Instance.HideAllUI();
 	}

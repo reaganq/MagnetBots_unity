@@ -25,7 +25,7 @@ public class PlayerMotor : Motor {
 
         if(!GameManager.Instance.GameIsPaused)
         {
-			if( myActionManager.myStatus.isAlive() && myActionManager.actionState != ActionState.specialAction)
+			if( myActionManager.myStatus.isAlive())
 			{
 				if(!disableMovement)
 				{
@@ -33,7 +33,7 @@ public class PlayerMotor : Motor {
 		            AnimationUpdate();
 				}
 			}
-			if(characterVelocity == Vector3.zero && rotationTarget != Vector3.zero)
+			if(disableMovement && rotationTarget != Vector3.zero)
 				ManualRotate();
         }
 	}
@@ -55,15 +55,9 @@ public class PlayerMotor : Motor {
         set
         {
             direction = value;
-            if(direction.magnitude > 0.1f)  
-            {
-                Quaternion newRotation = Quaternion.LookRotation(direction);
-				if(!disableMovement)
-                	_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
-            }
-                direction *= 0.2f * (Vector3.Dot(_myTransform.forward,direction) + 1);
 
             dir = direction;
+			dir *= 0.2f * (Vector3.Dot(_myTransform.forward,direction) + 1);
         }
     }
     
@@ -79,6 +73,13 @@ public class PlayerMotor : Motor {
         Vector3 currentMovementOffset = velocity * Time.deltaTime;
         
         controller.Move(currentMovementOffset);
+
+		if(direction.magnitude > 0.05f)  
+		{
+			Quaternion newRotation = Quaternion.LookRotation(direction);
+			_myTransform.rotation  = Quaternion.Slerp(_myTransform.rotation,newRotation,Time.deltaTime * myStatus.rotationSpeed);
+		}
+
         
         var oldHVelocity    = new Vector3(velocity.x, 0, velocity.z);
         characterVelocity = (_myTransform.position - lastPosition) / Time.deltaTime;

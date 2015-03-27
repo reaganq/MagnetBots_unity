@@ -113,7 +113,6 @@ public class PlayerCamera: MonoBehaviour {
 
 	public IEnumerator MoveTo(Transform newTrans, float fov, float duration, float offset)
 	{
-		Debug.Log("move camera");
 		float startTime = Time.time;
 		float timer = 0;
 		Vector3 origPos = childTransform.position;

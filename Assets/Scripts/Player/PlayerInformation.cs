@@ -40,6 +40,7 @@ public class PlayerInformation  {
 	public bool hasNakedArmorChange;
 	public bool hasPlayerShopChange;
 	public bool hasProfileChange;
+	public bool hasQuestChange;
 
     public PlayerInformation()
     {
@@ -58,19 +59,15 @@ public class PlayerInformation  {
     
     public void StartTestingGame()
     {
-		Debug.LogWarning("starting a test game");
 		NetworkManager.Instance.usingParse = false;
 		SetPlayerName(GeneralData.GenerateRandomString(6));
 
         for (int i = 1; i < 25 ; i++) {
-            PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 1);
-            //Debug.Log(i);
+            PreffixSolver.GiveItem(PreffixType.ARMOR, i,1, 10);
         }
-		Debug.LogWarning("adding upgraded itmes");
-
 		for (int i = 6; i < 11; i++) {
-			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 1);
-				}
+			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 10);
+		}
 
 		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1, 20);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 1, 1 , 5);
@@ -238,6 +235,34 @@ public class PlayerInformation  {
 		else
 			return false;
 
+	}
+
+	public bool UnequipItem(InventoryItem item)
+	{
+		if (!item.IsItemEquipped)
+			return false;
+
+		if(item.rpgItem.ItemCategory == ItemType.Armor)
+		{
+			if(item.rpgItem.EquipmentSlotIndex == EquipmentSlots.Head)
+			{
+				Equip.UnequipHead();
+				return true;
+			}
+			else
+			{
+				for (int i = 0; i < NakedArmorInventory.Items.Count; i++) {
+					if(NakedArmorInventory.Items[i].rpgItem.EquipmentSlotIndex == item.rpgItem.EquipmentSlotIndex)
+					{
+						EquipItem(NakedArmorInventory.Items[i]);
+						return true;
+					}
+				}
+				return false;
+			}
+		}
+		else
+			return false;
 	}
 
 	public bool UnequipItem(string itemID, int level)
@@ -410,7 +435,8 @@ public class PlayerInformation  {
 
 	public void AddBadge(RPGBadge badge)
 	{
-		hasProfileChange = true;
+		if(profile.AddBadge(badge))
+			hasProfileChange = true;
 	}
 
 	public void AddItem(InventoryItem item)
@@ -420,7 +446,6 @@ public class PlayerInformation  {
 
 	public void AddItem(InventoryItem item, int amount)
 	{
-		Debug.Log(item.rpgItem.UniqueId + item.Level + item.rpgItem.Stackable);
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.AddItem(item, amount);
@@ -457,11 +482,9 @@ public class PlayerInformation  {
 
 	public void RemoveItem(InventoryItem item, int amount)
 	{
-		Debug.Log("removing item");
 		if(item.rpgItem.ItemCategory == ItemType.Armor)
 		{
 			ArmoryInventory.RemoveItem(item, amount);
-			Debug.Log("removed armor");
 			hasArmorChange = true;
 		}
 		else if(item.rpgItem.ItemCategory == ItemType.Currency)
@@ -553,6 +576,7 @@ public class PlayerInformation  {
 		byte[] playerShopParseList = ParseInventoryList(playerShopInventory);
 		byte[] jukeBoxList = ParseJukeBoxList();
 		byte[] profile = ParsePlayerProfile();
+		byte[] questLogData = ParseQuestLog();
 
 		playerData["username"] = ParseUser.CurrentUser.Username;
 		playerData["playername"] = PlayerName;
@@ -570,6 +594,7 @@ public class PlayerInformation  {
 		playerData["bankcoins"] = BankCoins;
 		playerData["hasDoneTutorial"] = hasDoneTutorial;
 		playerData["parseObjectID"] = "";
+		playerData["questLog"] = questLogData;
 		playerData.SaveAsync().ContinueWith( t =>
 		                                    {
 			if(t.IsCompleted)
@@ -621,68 +646,28 @@ public class PlayerInformation  {
 
 	public void UpdateWalletParseData()
 	{
-		GUIManager.Instance.UpdateCurrency();
-		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
-		{
-			Debug.LogWarning("no parse id");
-			return;
-		}
 
 		playerData["coins"] = Coins;
 		playerData["magnets"] = Magnets;
 		playerData["citizenpoints"] = CitizenPoints;
 		playerData["bankcoins"] = BankCoins;
 		playerData["shopTill"] = shopTill;
-		playerData.SaveAsync().ContinueWith( t =>
-		                                    {
-			if(t.IsCompleted)
-			{
-				Debug.Log("truly updated wallet");
-			}
-		}
-		);
-		Debug.LogWarning("updating wallet");
 	}
 
 	public void UpdateInventoryParseData(string field, byte[] inventoryList)
 	{
-		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
-		{
-			Debug.LogWarning("Updating: "+field);
-			return;
-		}
-
 		playerData[field] = inventoryList;
-		playerData.SaveAsync().ContinueWith( t =>
-		                                    {
-			if(t.IsCompleted)
-			{
-				Debug.Log("truly updated " + field);
-			}
-		}
-		);
-		Debug.LogWarning("updating " + field);
+
 	}
 
 	public void UpdateQuestLog()
 	{
+		playerData["questLog"] = ParseQuestLog();
 	}
 
 	public void UpdateProfile()
 	{
-		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
-		{
-			Debug.LogWarning("updating profile");
-			return;
-		}
 		playerData["profile"] = ParsePlayerProfile();
-		playerData.SaveAsync().ContinueWith( t =>
-		                                    {
-			if(t.IsCompleted)
-				Debug.Log("truly updated profile");
-		}
-		);
-		Debug.LogWarning("updating profile");
 	}
 
 	public void UpdateJukeBox()
@@ -722,7 +707,9 @@ public class PlayerInformation  {
 			InterpretParseInventoryList(ArmoryInventory, player.Get<byte[]>("ArmoryList"));
 			//InterpretParseInventoryList(DepositBox, player.Get<byte[]>("DepositBox"));
 			InterpretParseInventoryList(playerShopInventory, player.Get<byte[]>("PlayerShopList"));
+			InterpretParseQuestLog(player.Get<byte[]>("questLog"));
 			//InterpretParseJukeBox(player.Get<byte[]>("JukeBoxList"));
+			PlayerName = player.Get<string>("playername");
 			Coins = player.Get<int>("coins");
 			Magnets = player.Get<int>("magnets");
 			CitizenPoints = player.Get<int>("citizenpoints");
@@ -730,6 +717,7 @@ public class PlayerInformation  {
 			BankCoins = player.Get<int>("bankcoins");
 			hasDoneTutorial = player.Get<bool>("hasDoneTutorial");
 			parseObjectID = player.Get<string>("parseObjectID");
+
 		}
 		if(hasDoneTutorial)
 			GameManager.Instance.newGame = false;
@@ -779,7 +767,7 @@ public class PlayerInformation  {
 	{
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream();
-		b.Serialize(m, questLog);
+		b.Serialize(m, questLog.ParseThisQuestLog());
 		return m.GetBuffer();
 	}
 
@@ -827,8 +815,13 @@ public class PlayerInformation  {
 		profile.UpdateProfileFromParse(p);
 	}
 
-	public void InterpretParseQuestLog()
+	public void InterpretParseQuestLog(byte[] data)
 	{
+		ParseQuestLogData newQuestLog = new ParseQuestLogData();
+		BinaryFormatter bb = new BinaryFormatter();
+		MemoryStream mm = new MemoryStream(data);
+		newQuestLog = (ParseQuestLogData)bb.Deserialize(mm);
+		questLog.InterpretParseQuestLog(newQuestLog);
 	}
 
 	public void InterpretParseJukeBox(byte[] data)
@@ -847,36 +840,70 @@ public class PlayerInformation  {
 
 	public void TryToUpdateParse()
 	{
+		if(hasWalletChange)
+		{
+			GUIManager.Instance.UpdateCurrency();
+		}
+
+		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
+					return;
+	
+		bool shouldSave = false;
 		if(hasItemChange)
 		{
 			UpdateInventoryParseData("InventoryList", ParseInventoryList(MainInventory));
 			hasItemChange = false;
+			shouldSave = true;
 		}
 		if(hasNakedArmorChange)
 		{
 			UpdateInventoryParseData("NakedArmoryList", ParseInventoryList(NakedArmorInventory));
 			hasNakedArmorChange = false;
+			shouldSave = true;
 		}
 		if(hasArmorChange)
 		{
 			UpdateInventoryParseData("ArmoryList", ParseInventoryList(ArmoryInventory));
 			hasArmorChange = false;
+			shouldSave = true;
 		}
 		if(hasWalletChange)
 		{
 			UpdateWalletParseData();
 			hasWalletChange = false;
+			shouldSave = true;
 		}
 		if(hasPlayerShopChange)
 		{
 			UpdateInventoryParseData("PlayerShopList", ParseInventoryList(playerShopInventory));
 			hasPlayerShopChange = false;
+			shouldSave = true;
 		}
 		if(hasProfileChange)
 		{
 			UpdateProfile();
 			hasProfileChange = false;
+			shouldSave = true;
 		}
+		if(hasQuestChange)
+		{
+			UpdateQuestLog();
+			hasQuestChange = false;
+			shouldSave = true;
+		}
+		if(shouldSave)
+		{
+			playerData.SaveAsync().ContinueWith( t =>
+			                                    {
+				if(t.IsCompleted)
+				{
+					Debug.Log("truly saved player data");
+				}
+			}
+			);
+			Debug.LogWarning("saving player data");
+		}
+
 	}
 
 

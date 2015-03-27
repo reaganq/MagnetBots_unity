@@ -292,7 +292,6 @@ public class GUIManager : MonoBehaviour {
     {
 		if(cachedState == UIState.construction)
 		{
-			Debug.Log("here");
 			//QuickInventoryGUI.Disable();
 			constructionGUI.thisConstruction.HideConstructionItems();
 		}
@@ -378,7 +377,6 @@ public class GUIManager : MonoBehaviour {
 		if(IsUIBusy())
 			return;
 		hoverPopupGUI.SelectPlayer(cs);
-		Debug.Log("display hover");
 	}
 
 	public void HideHoverPopup()
@@ -404,7 +402,6 @@ public class GUIManager : MonoBehaviour {
 	public void DisplayMinigameRewards(LootItemList items, int score)
 	{
 		EnterGUIState(UIState.reward);
-		Debug.Log(score);
 		rewardsGUI.DisplayMinigameRewards(items, score);
 	}
 
@@ -420,30 +417,6 @@ public class GUIManager : MonoBehaviour {
     public void HideAllUI()
     {
 		EnterGUIState(UIState.idle);
-        /*if(IsInventoryDisplayed)
-        {
-            ArmoryGUI.SetActive(false);
-            //mainCamera.enabled = true;
-            //Inventory3DCamera.gameObject.SetActive(false);
-            //Inventory3DCamera.enabled = false;
-            IsInventoryDisplayed = false;
-        }
-        if(IsShopDisplayed)
-        {
-            //mainCamera.enabled = true;
-            ShopGUI.SetActive(false);
-            IsShopDisplayed = false;
-        }
-        if(IsNPCGUIDisplayed)
-        {
-            NPCGUI.SetActive(false);
-            IsNPCGUIDisplayed = false;
-        }
-		if(IsEnemiesListDisplayed)
-		{
-			ArenaGUI.Disable();
-			IsEnemiesListDisplayed = false;
-		}*/
     }
     
     public bool IsUIBusy()

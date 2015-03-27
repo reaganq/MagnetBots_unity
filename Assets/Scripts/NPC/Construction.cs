@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class Construction : MonoBehaviour {
 
@@ -26,11 +29,16 @@ public class Construction : MonoBehaviour {
 	public GameObject finishedModel;
 	public GameObject decal;
 	public bool isConstructed;
+	public List<DonorsObject> donors;
 	// Use this for initialization
 	void Start () {
 		myPhotonView = GetComponent<PhotonView>();
 		construction = Storage.LoadById<RPGConstruction>(ID, new RPGConstruction());
 		constructedNPC = Storage.LoadById<RPGNPC>(NPCID, new RPGNPC());
+		if(construction != null)
+		{
+			GameObject.FindGameObjectWithTag("WorldManager").GetComponent<WorldManager>().AddConstruction(construction);
+		}
 		for (int i = 0; i < construction.requiredItems.Count; i++) {
 			if(construction.requiredItems[i].PreffixTarget == PreffixType.ITEM)
 			{
@@ -43,10 +51,95 @@ public class Construction : MonoBehaviour {
 		if(trigger)
 		{
 			triggerCollider = trigger.GetComponent<Collider>();
-			//triggerCollider.enabled = false;
 			trigger.transform.localScale = startScale;
 		}
 		dragDropCollider.enabled = false;
+		if(!PhotonNetwork.isMasterClient)
+			RequestConstructionUpdate();
+	}
+	
+	public void DonateConstructionItem(InventoryItem item, string playerName)
+	{
+		if(!PhotonNetwork.isMasterClient)
+		{
+			for (int i = 0; i < requiredItems.Count; i++) {
+				if(requiredItems[i].UniqueItemId == item.UniqueItemId)
+					requiredItems[i].CurrentAmount --;
+					}
+			RefreshConstructionItems(true);
+		}
+		myPhotonView.RPC("NetworkAddDonation", PhotonTargets.MasterClient, item.rpgItem.ID, playerName);
+	}
+
+	[RPC]
+	public void NetworkAddDonation(int itemID, string playerName)
+	{
+		for (int i = 0; i < requiredItems.Count; i++) {
+			if(requiredItems[i].rpgItem.ID == itemID && requiredItems[i].CurrentAmount > 0)
+			{
+				PlayerManager.Instance.Hero.RemoveItem(requiredItems[i], 1);
+				requiredItems[i].CurrentAmount --;
+				break;
+			}
+		}
+		bool isNewDonor = true;
+		for (int i = 0; i < donors.Count; i++) {
+			if(donors[i].playerName == playerName)
+				donors[i].donationsQuantity ++;
+		}
+		if(isNewDonor)
+			donors.Add(new DonorsObject(playerName));
+		UpdateConstructionStatus();
+	}
+	
+	public void UpdateConstructionStatus()
+	{
+		ConstructionDonationInfo data = new ConstructionDonationInfo();
+		for (int i = 0; i < requiredItems.Count; i++) {
+			data.itemQuantities.Add(requiredItems[i].CurrentAmount);
+		}
+		data.donors = donors;
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+		myPhotonView.RPC("NetworkUpdateConstructionStatus", PhotonTargets.Others, m.GetBuffer());
+		RefreshConstructionItems(false);
+	}
+
+	[RPC]
+	public void NetworkUpdateConstructionStatus(byte[] data)
+	{
+		ConstructionDonationInfo newConstructionInfo = new ConstructionDonationInfo();
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream(data);
+		newConstructionInfo = (ConstructionDonationInfo)b.Deserialize(m);
+		for (int i = 0; i < newConstructionInfo.itemQuantities.Count; i++) {
+			requiredItems[i].CurrentAmount = newConstructionInfo.itemQuantities[i];
+		}
+		donors.Clear();
+		for (int i = 0; i < newConstructionInfo.donors.Count; i++) {
+			donors.Add(new DonorsObject(newConstructionInfo.donors[i].playerName, newConstructionInfo.donors[i].hasAlerted, newConstructionInfo.donors[i].donationsQuantity));
+		}
+		RefreshConstructionItems(false);
+	}
+	
+	public void RequestConstructionUpdate()
+	{
+		myPhotonView.RPC("NetworkRequestConstructionUpdate", PhotonTargets.MasterClient);
+	}
+	
+	[RPC]
+	public void NetworkRequestConstructionUpdate(PhotonMessageInfo info)
+	{
+		ConstructionDonationInfo data = new ConstructionDonationInfo();
+		for (int i = 0; i < requiredItems.Count; i++) {
+			data.itemQuantities.Add(requiredItems[i].CurrentAmount);
+		}
+		data.donors = donors;
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+		myPhotonView.RPC("NetworkUpdateConstructionStatus", info.sender, m.GetBuffer());
 	}
 
 	public void OnTriggerEnter ( Collider other )
@@ -58,7 +151,6 @@ public class Construction : MonoBehaviour {
 				if(!isInRange)
 					ShowTrigger();
 				isInRange = true;
-				//StartCoroutine("ShowNPC");
 			}
 		}
 	}
@@ -114,36 +206,48 @@ public class Construction : MonoBehaviour {
 	{
 		//dragDropCollider.enabled = true;
 		ResetTrigger();
-		RefreshConstructionItems();
+		RefreshConstructionItems(true);
 	}
 
-	public void RefreshConstructionItems()
+	public void RefreshConstructionItems(bool uiUpdateOnly)
 	{
 		for (int i = 0; i < itemHexagons.Length; i++) {
 			if(i < requiredItems.Count)
 			{
-				itemHexagons[i].LoadConstructionItem(requiredItems[i]);
-				if(!itemHexagons[i].gameObject.activeSelf)
+				if(requiredItems[i].CurrentAmount > 0)
 				{
-					itemTween.tweenTarget = itemHexagons[i].gameObject;
-					itemTween.Play(true);
+					itemHexagons[i].LoadConstructionItem(requiredItems[i]);
+					if(!itemHexagons[i].gameObject.activeSelf)
+					{
+						itemTween.tweenTarget = itemHexagons[i].gameObject;
+						itemTween.Play(true);
 				}
+				}
+				else
+					itemHexagons[i].gameObject.SetActive(false);
 			}
             else
                 itemHexagons[i].gameObject.SetActive(false);
         }
 		GUIManager.Instance.constructionGUI.UpdateMaterialsCounters();
-		CheckConstructionItems();
+		if(!uiUpdateOnly)
+			CheckConstructionItems();
 	}
 
 	public void CheckConstructionItems()
 	{
-		if(requiredItems.Count <= 0)
+		bool _isConstructed = true;
+		for (int i = 0; i < requiredItems.Count; i++) {
+			if(requiredItems[i].CurrentAmount > 0)
+				_isConstructed = false;
+		}
+		if(_isConstructed)
 		{
 			isConstructed = true;
 			Debug.LogWarning("we finished building this Arcade!");
 			StartCoroutine(ConstructSequence());
 		}
+
 	}
 
 	public IEnumerator ConstructSequence()
@@ -165,29 +269,48 @@ public class Construction : MonoBehaviour {
 	{
 		dragDropCollider.enabled = false;
 		for (int i = 0; i < itemHexagons.Length; i++) {
-			if(itemHexagons[i].gameObject.activeSelf)
-			{
-				itemTween.tweenTarget = itemHexagons[i].gameObject;
-				itemTween.Play(false);
-			}
+			itemHexagons[i].gameObject.SetActive(false);
 		}
 		if(isInRange)
 			ShowTrigger();
 	}
 
-	public void DonateConstructionItem(InventoryItem item)
+
+
+}
+
+[Serializable]
+public class DonorsObject
+{
+	public string playerName;
+	public bool hasAlerted = false;
+	//all donations are treated equal, in the future donations will be weighted by value of pieces
+	public int donationsQuantity;
+
+	public DonorsObject(string name)
 	{
-		for (int i = 0; i < requiredItems.Count; i++) {
-			if(requiredItems[i].UniqueItemId == item.UniqueItemId)
-			{
-				PlayerManager.Instance.Hero.RemoveItem(item, 1);
-				requiredItems[i].CurrentAmount --;
-				if(requiredItems[i].CurrentAmount <= 0 )
-					requiredItems.RemoveAt(i);
-				RefreshConstructionItems();
-				return;
-			}
-		}
+		playerName = name;
+		hasAlerted = false;
+		donationsQuantity = 1;
 	}
 
+	public DonorsObject(string name, bool alerted, int quantity)
+	{
+		playerName = name;
+		hasAlerted = true;
+		donationsQuantity = quantity;
+	}
+}
+
+[Serializable]
+public class ConstructionDonationInfo
+{
+	public List<int> itemQuantities;
+	public List<DonorsObject> donors;
+
+	public ConstructionDonationInfo()
+	{
+		itemQuantities = new List<int>();
+		donors = new List<DonorsObject>();
+	}
 }

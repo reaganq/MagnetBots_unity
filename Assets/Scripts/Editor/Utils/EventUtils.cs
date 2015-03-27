@@ -22,7 +22,7 @@ public class EventUtils
 			break;
 		case ActionEventType.TalkToNPC:
 			action.Item = EditorUtils.IntField(action.Item, "npc id", 90, FieldTypeEnum.Middle);
-			action.Amount = EditorUtils.IntField(action.Item, "delay in secs", 90, FieldTypeEnum.Middle);
+			action.Amount = EditorUtils.IntField(action.Amount, "delay in secs", 90, FieldTypeEnum.Middle);
 			break;
 			//take item
 		case ActionEventType.TakeItem:

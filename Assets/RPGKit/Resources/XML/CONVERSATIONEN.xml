@@ -489,7 +489,7 @@
         </nextParagraphIDs>
       </RPGParagraph>
       <RPGParagraph>
-        <PT>You can upgrade the items in your inventory or train with others to get stronger.</PT>
+        <PT>You can upgrade your items or link with other players to get stronger!</PT>
         <Conditions />
         <LineTexts />
         <Actions />
@@ -505,7 +505,9 @@
         <PT>Not everything is a battle though, why don't you see if you can help out others in Magnet Central?</PT>
         <Conditions />
         <LineTexts />
-        <Actions />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+        </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>3</ownerNPCID>
         <isBaseParagraph>false</isBaseParagraph>

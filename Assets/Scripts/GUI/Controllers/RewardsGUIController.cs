@@ -5,7 +5,9 @@ using System.Collections.Generic;
 public class RewardsGUIController : BasicGUIController {
 	
 	public GameObject rewardsItemsRoot;
+	public UIGrid rewardsItemsGrid;
 	public GameObject rewardsCurrenciesRoot;
+	public UIGrid rewardsCurrencyGrid;
 	public float offset;
 	public List<ItemTileButton> victoryItemTiles;
 	public List<CurrencyTilebutton> currencyTiles;
@@ -115,7 +117,9 @@ public class RewardsGUIController : BasicGUIController {
 	public void DisplayRewards()
 	{
 		LoadItemTiles(allLoots.items, victoryItemTiles, rewardsItemsRoot, itemTilePrefab, InventoryGUIType.Reward);
+		rewardsItemsGrid.Reposition();
 		LoadCurrencyTiles(allLoots.currencies, currencyTiles, rewardsCurrenciesRoot, currencyTilePrefab);
+		rewardsCurrencyGrid.Reposition();
 		rewardPanelTween.tweenTarget = victoryRewardObject;
 		rewardPanelTween.Play(true);
 	}

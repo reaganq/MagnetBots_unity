@@ -317,6 +317,18 @@ public class Equipment
 		}
 	}
 
+	//HACK
+	public void UnequipHead()
+	{
+		if(EquippedHead != null)
+		{
+			UnequipItem(EquippedHead);
+			EquippedHead = null;
+			PlayerManager.Instance.avatarStatus.UpdatePortrait(EquippedFace.rpgArmor.headPortraitPath);
+			PlayerManager.Instance.avatar.UnequipHead();
+		}
+	}
+
  // Loading all items after loading game
     public void LoadItems()
     {

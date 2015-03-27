@@ -85,7 +85,6 @@ public class QuestStep {
 				}
 			}
 		}
-		Debug.Log("took items from player");
 	}
 
 	public void GenerateRandomTasks(List<Task> possibleTasks, int numberofTasks, int maxAmount)
@@ -101,6 +100,7 @@ public class QuestStep {
 			taskIDs.Add(id);
 			Tasks.Add(possibleTasks[id]);
 			Tasks[i].AmountToReach = UnityEngine.Random.Range(1, maxAmount);
+			Tasks[i].CurrentAmount = 0;
 		}
 	}
 }

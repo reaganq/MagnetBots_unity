@@ -114,7 +114,7 @@ public class QuickInventoryGUIController : BasicGUIController {
 		}
 		else if(selectedMainInventoryCategory == ItemCategories.Construction)
 		{
-			GUIManager.Instance.constructionGUI.thisConstruction.DonateConstructionItem(displayedItemList[index]);
+			GUIManager.Instance.constructionGUI.thisConstruction.DonateConstructionItem(displayedItemList[index], PlayerManager.Instance.Hero.PlayerName);
 			Debug.Log("dragdropped construction material");
 		}
 		RefreshInventoryIcons();

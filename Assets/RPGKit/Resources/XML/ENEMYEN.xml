@@ -4,6 +4,8 @@
     <PortraitIcon>MagnetCentral_Gym_Punchbagbob</PortraitIcon>
     <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
     <isAvailable>true</isAvailable>
+    <prebattleConversations />
+    <postbattleConversations />
     <Loots>
       <LootItem>
         <itemType>Badge</itemType>
@@ -50,7 +52,7 @@
     </PrefabPaths>
     <preFightActions />
     <postFightActions>
-      <ActionEvent PI="QUEST" ITEM="3" ITEMLvl="0" AT="TalkToNPC" AM="3" TX="" />
+      <ActionEvent PI="QUEST" ITEM="3" ITEMLvl="0" AT="TalkToNPC" AM="0" TX="" />
     </postFightActions>
     <conditions />
     <ID>1</ID>
@@ -62,6 +64,8 @@
     <PortraitIcon>MagnetCentral_Gym_Jim</PortraitIcon>
     <PortraitAtlas>Atlases/Enemy/EnemiesAtlas</PortraitAtlas>
     <isAvailable>true</isAvailable>
+    <prebattleConversations />
+    <postbattleConversations />
     <Loots>
       <LootItem>
         <itemType>Currency</itemType>

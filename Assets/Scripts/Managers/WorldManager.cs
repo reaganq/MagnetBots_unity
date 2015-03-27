@@ -31,6 +31,8 @@ public class WorldManager : Photon.MonoBehaviour {
 	public AudioClip soundtrack;
 	public List<int> allAvatars;
 	public List<NPC> allNPCs = new List<NPC>();
+	public List<NPCMinigame> allMinigames = new List<NPCMinigame>();
+	public List<RPGConstruction> allConstructions = new List<RPGConstruction>();
 
 	void Awake()
 	{
@@ -96,6 +98,106 @@ public class WorldManager : Photon.MonoBehaviour {
 				}
 		return null;
 	}
+
+	#region minigame
+
+	public void AddMinigame(NPCMinigame game)
+	{
+		allMinigames.Add(game);
+		if(!PhotonNetwork.isMasterClient)
+		{
+			RequestMinigameScores(game.ID);
+		}
+	}
+	
+	public void AddNewHighScore(int score)
+	{
+		Debug.Log("add new highscore");
+		if(PlayerManager.Instance.ActiveMinigame.isPersonalHighscore(score))
+			MinigameByID(PlayerManager.Instance.ActiveMinigame.ID).myScore = score;
+		Debug.Log("score rank: " + PlayerManager.Instance.ActiveMinigame.HighScoreRank(score).ToString());
+		if(PlayerManager.Instance.ActiveMinigame.HighScoreRank(score) > 0)
+		{
+			Debug.Log("adding new highscore");
+			myPhotonView.RPC("NetworkAddNewHighScore", PhotonTargets.MasterClient, PlayerManager.Instance.ActiveMinigame.ID, PlayerManager.Instance.Hero.PlayerName, score);
+		}
+	}
+	
+	[RPC]
+	public void NetworkAddNewHighScore(int gameID, string playerName, int score)
+	{
+		Debug.Log("im not master?");
+		MinigameByID(gameID).AddHighScore(playerName, score);
+		UpdateHighScores(gameID);
+		//save to parse
+	}
+
+	public void UpdateHighScores(int gameID)
+	{
+		List<ScoreObject> data = new List<ScoreObject>();
+		data = MinigameByID(gameID).highScores;
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+		Debug.Log("Update highscores for game: " + gameID);
+		myPhotonView.RPC("NetworkUpdateHighScores", PhotonTargets.Others, gameID, m.GetBuffer());
+	}
+	
+	[RPC]
+	public void NetworkUpdateHighScores(int gameId, byte[] data)
+	{
+		Debug.Log("non master clients updating highscores");
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream(data);
+		MinigameByID(gameId).highScores = (List<ScoreObject>)b.Deserialize(m);
+	}
+
+	public void RequestMinigameScores(int id)
+	{
+		myPhotonView.RPC("NetworkRequestMinigameScores", PhotonTargets.MasterClient, id);
+		Debug.Log(" I'm requesting updated minigame scores for game :" + id);
+	}
+
+	[RPC]
+	public void NetworkRequestMinigameScores(int id, PhotonMessageInfo info)
+	{
+		List<ScoreObject> data = new List<ScoreObject>();
+		data = MinigameByID(id).highScores;
+		BinaryFormatter b = new BinaryFormatter();
+		MemoryStream m = new MemoryStream();
+		b.Serialize(m, data);
+		myPhotonView.RPC("NetworkUpdateHighScores", info.sender, id, m.GetBuffer());
+		Debug.Log("sent back highscroe data back to new loader");
+	}                         
+
+	public NPCMinigame MinigameByID(int id)
+	{
+		for (int i = 0; i < allMinigames.Count; i++) {
+			if(allMinigames[i].ID == id)
+				return allMinigames[i];
+				}
+		return null;
+	}
+
+	#endregion
+
+	#region constructions
+
+	public void AddConstruction(RPGConstruction construction)
+	{
+		allConstructions.Add(construction);
+	}
+
+	public RPGConstruction ConstructionByID(int id)
+	{
+		for (int i = 0; i < allConstructions.Count; i++) {
+			if(allConstructions[i].ID == id)
+				return allConstructions[i];
+				}
+		return null;
+	}
+
+	#endregion
 
 	#region social
 
@@ -236,11 +338,9 @@ public class WorldManager : Photon.MonoBehaviour {
 	public void RequestArenaStateDataFromMaster(PhotonMessageInfo info)
 	{
 		ArenaStateData data = new ArenaStateData();
-		{
-			data.arenaName = Arenas.arenaName;
-			for (int i = 0; i < Arenas.arenaInstances.Count; i++) {
-				data.arenaStates.Add(Arenas.arenaInstances[i]);
-			}
+		data.arenaName = Arenas.arenaName;
+		for (int i = 0; i < Arenas.arenaInstances.Count; i++) {
+			data.arenaStates.Add(Arenas.arenaInstances[i]);
 		}
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream();
@@ -305,6 +405,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void GetAvailableArena(string arenaname, byte[] data, PhotonMessageInfo info)
 	{
+		Debug.Log("preloading arena");
 		for (int i = 0; i < Arenas.arenaStates.Count; i++) 
 		{
 			if(Arenas.arenaStates[i] == false)
@@ -320,6 +421,7 @@ public class WorldManager : Photon.MonoBehaviour {
 	[RPC]
 	public void SetupArena(int i, byte[] data)
 	{
+		Debug.Log("setup arena");
 		EnterArenaData arenaData = new EnterArenaData();
 		BinaryFormatter b = new BinaryFormatter();
 		MemoryStream m = new MemoryStream(data);

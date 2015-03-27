@@ -169,6 +169,8 @@
             <filename>samurai_body.png</filename>
             <filename>samurai_head.png</filename>
             <filename>samurai_legs.png</filename>
+            <filename>../Item Icons/toy_duck.png</filename>
+            <filename>gumball_armR.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

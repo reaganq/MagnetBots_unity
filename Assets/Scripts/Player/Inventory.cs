@@ -9,7 +9,6 @@ public class Inventory  : BasicInventory
 	{
 		get
 		{
-			Debug.Log("getting head items");
 			_headItems.Clear();
 			for (int i = 0; i < Items.Count; i++) {
 				if(Items[i].rpgItem.ItemCategory == ItemType.Armor && Items[i].rpgItem.EquipmentSlotIndex == EquipmentSlots.Head)
@@ -163,7 +162,6 @@ public class Inventory  : BasicInventory
 			if(Items[i].rpgItem.ItemCategory == category)
 			{
 				result.Add(Items[i]);
-				Debug.Log("added an item to full list");
 			}
 		}
 		return result;
@@ -305,17 +303,14 @@ public class Inventory  : BasicInventory
 
 	public void AddItemIntoList(InventoryItem item)
 	{
-		Debug.Log("adding item directly into list");
 		bool foundItemGroup = false;
 		for (int i = 0; i < Items.Count; i++) {
 			//Debug.Log(item.rpgItem.UniqueId + " : " +Items[i].rpgItem.UniqueId);
 			if(item.rpgItem.UniqueId == Items[i].rpgItem.UniqueId)
 			{
-				Debug.Log("found right item group");
 				if(item.Level < Items[i].Level)
 				{
 					Items.Insert(i,item);
-					Debug.Log("this item is lower level");
 					return;
 				}
 				if(item.Level > Items[i].Level)
@@ -328,7 +323,6 @@ public class Inventory  : BasicInventory
 				if(foundItemGroup)
 				{
 					Items.Insert(i, item);
-					Debug.Log("this item is higher level than anything I currently have");
 					return;
 				}
 			}

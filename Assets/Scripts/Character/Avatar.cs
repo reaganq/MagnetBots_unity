@@ -186,7 +186,7 @@ public class Avatar : MonoBehaviour {
                 break;
         }
     }
-
+	
 	[RPC]
     public void SpawnFace(string objectpath)
     {
@@ -212,7 +212,25 @@ public class Avatar : MonoBehaviour {
         
         Destroy(temp);
     }
+
+	public void UnequipHead()
+	{
+		myPhotonView.RPC("NetworkUnequipHead", PhotonTargets.All);
+	}
 	
+	[RPC]
+	public void NetworkUnequipHead()
+	{
+		if(HeadObjects.Count > 0)
+		{
+			
+			for (int i = 0; i < HeadObjects.Count; i++) {
+				Destroy(HeadObjects[i]); 
+			}
+			HeadObjects.Clear();
+		}
+	}
+
     public IEnumerator SpawnHead(string objectpath)
     {
 		NetworkSpawnHead(objectpath);

@@ -111,7 +111,7 @@ public class OpeningCinematicGUIController : BasicGUIController {
 
 	public void HideTip()
 	{
-		if(shouldDisplayTip)
+		if(shouldDisplayTip || tipObject.activeSelf)
 		{
 			shouldDisplayTip = false;
 			setNameUITween.tweenTarget = tipObject;

@@ -74,9 +74,12 @@ public class BurgerMemory : Minigame {
 			StartCoroutine(Enlarge(burgerParts[mainSequence[i]]));
 			yield return new WaitForSeconds(0.5f);
 		}
-		isPlaying = true;
-		instructionsLabel.text = "Play!";
-		curTime = maxTime;
+		if(minigameState == MinigameState.active)
+		{
+			isPlaying = true;
+			instructionsLabel.text = "Play!";
+			curTime = maxTime;
+		}
 	}
 	
 	void OnFingerUp( FingerUpEvent e )
@@ -139,6 +142,17 @@ public class BurgerMemory : Minigame {
 		TweenScale.Begin(go, 0.1f, new Vector3(1.5f, 1.5f, 1.5f));
 		yield return new WaitForSeconds(0.1f);
 		TweenScale.Begin(go, 0.1f, new Vector3(1,1,1));
+	}
+
+	public override void EndGame ()
+	{
+		if(minigameState != MinigameState.active)
+			return;
+		Debug.Log("1");
+		base.EndGame ();
+		isPlaying = false;
+		instructionsLabel.text = "";
+		Debug.Log("0");
 	}
 }
 
