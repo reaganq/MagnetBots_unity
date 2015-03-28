@@ -33,7 +33,7 @@ public class PlayerMotor : Motor {
 		            AnimationUpdate();
 				}
 			}
-			if(disableMovement && rotationTarget != Vector3.zero)
+			if(rotationTarget != Vector3.zero)
 				ManualRotate();
         }
 	}

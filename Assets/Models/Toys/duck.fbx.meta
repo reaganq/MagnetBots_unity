@@ -8,34 +8,99 @@ ModelImporter:
     100004: duck:joint1
     100006: duck:joint2
     100008: duck:joint3
+    100010: duck
+    100012: joint1
+    100014: joint2
+    100016: joint3
+    100018: polySurface11
+    100020: polySurface3
+    100022: polySurface7
     400000: //RootNode
     400002: duck:duck
     400004: duck:joint1
     400006: duck:joint2
     400008: duck:joint3
+    400010: duck
+    400012: joint1
+    400014: joint2
+    400016: joint3
+    400018: polySurface11
+    400020: polySurface3
+    400022: polySurface7
+    2300000: duck:duck
+    2300002: polySurface11
+    2300004: polySurface3
+    2300006: polySurface7
+    3300000: duck:duck
+    3300002: polySurface11
+    3300004: polySurface3
+    3300006: polySurface7
     4300000: duck:duck
+    4300002: duck
+    4300004: polySurface11
+    4300006: polySurface3
+    4300008: polySurface7
     7400000: Take 001
     9500000: //RootNode
+    11100000: //RootNode
     13700000: duck:duck
+    13700002: duck
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 212
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: duck:duck
+        weight: 1
+      - path: duck:joint1
+        weight: 1
+      - path: duck:joint1/duck:joint2
+        weight: 1
+      - path: duck:joint1/duck:joint3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -67,6 +132,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 1
   additionalBone: 0
   userData: 

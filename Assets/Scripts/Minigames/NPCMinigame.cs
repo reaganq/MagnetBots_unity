@@ -11,6 +11,9 @@ using System.IO;
 public class NPCMinigame: NPCActivity {
 	
 	public string PrefabDirectory;
+	public int badgeOne;
+	public int badgeTwo;
+	public int badgeThree;
 	public List<LootItem> Loots;
 	[XmlIgnore]
 	public List<ScoreObject> highScores;
@@ -64,6 +67,8 @@ public class NPCMinigame: NPCActivity {
 
 	public int HighScoreRank(int score)
 	{
+		if(score == 0)
+			return 0;
 		if(highScores.Count == 0)
 		{
 			return 1;

@@ -69,6 +69,7 @@ public class PlayerInformation  {
 			PreffixSolver.GiveItem(PreffixType.ARMOR, i,3, 10);
 		}
 
+		PreffixSolver.GiveItem(PreffixType.ITEM, 5, 1, 20);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1, 20);
 		PreffixSolver.GiveItem(PreffixType.ITEM, 1, 1 , 5);
 		//PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1 , 1);

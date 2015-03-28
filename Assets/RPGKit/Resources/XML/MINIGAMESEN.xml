@@ -16,6 +16,9 @@ Follow the chef's orders to satisfy your customers! Tap on the right ingredients
     <npcButtonText>Burger Madness</npcButtonText>
     <Conditions />
     <PrefabDirectory>MiniGames/BurgerMemory</PrefabDirectory>
+    <badgeOne>2</badgeOne>
+    <badgeTwo>3</badgeTwo>
+    <badgeThree>4</badgeThree>
     <Loots>
       <LootItem>
         <itemType>Currency</itemType>

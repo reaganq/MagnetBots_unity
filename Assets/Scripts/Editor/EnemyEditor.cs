@@ -116,8 +116,7 @@ public class EnemyEditor : BaseEditorWindow
 		
 		ConditionsUtils.Conditions(s.conditions, Data);
 		EditorGUILayout.Separator();
-		ConditionsUtils.Conditions(s.postActionConditions, Data);
-		EditorGUILayout.Separator();
+
 		foreach(ActionEvent action in s.preFightActions)
 		{
 			EventUtils.DisplayEvent(action, Data);
@@ -159,6 +158,10 @@ public class EnemyEditor : BaseEditorWindow
 			s.postFightActions.Add(new ActionEvent());
 		}
 		EditorGUILayout.EndHorizontal();
+
+		EditorGUILayout.Separator();
+		ConditionsUtils.Conditions(s.postActionConditions, Data);
+
 		
 		//s.LevelName = EditorUtils.TextField(s.LevelName, "level name");
 		

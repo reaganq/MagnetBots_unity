@@ -152,6 +152,7 @@
             <filename>food_cereal.png</filename>
             <filename>bolt.png</filename>
             <filename>panel.png</filename>
+            <filename>toy_duck.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

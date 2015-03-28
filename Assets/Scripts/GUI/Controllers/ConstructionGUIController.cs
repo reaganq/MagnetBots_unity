@@ -11,6 +11,7 @@ public class ConstructionGUIController : BasicGUIController {
 	public GameObject[] materialObjects;
 	public UISprite[] materialSprites;
 	public UILabel[] materialCounters;
+	public UILabel topDonorLabel;
 
 	public void Enable(Construction construct)
 	{
@@ -19,7 +20,18 @@ public class ConstructionGUIController : BasicGUIController {
 		panelNameLabel.text = thisConstruction.construction.Name.ToString();
 
 		UpdateMaterialsCounters();
+		UpdateTopDonor();
+	}
 
+	public void UpdateTopDonor()
+	{
+		if(thisConstruction.donors.Count > 0)
+		{
+			DonorsObject topDonor = thisConstruction.TopDonor();
+			topDonorLabel.text = "Top donor: " + topDonor.playerName + " - " + topDonor.donationsQuantity;
+		}
+		else
+			topDonorLabel.text = "Top donor: ";
 	}
 
 	public void UpdateMaterialsCounters()

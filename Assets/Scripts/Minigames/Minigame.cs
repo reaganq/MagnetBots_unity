@@ -34,7 +34,28 @@ public class Minigame : MonoBehaviour {
 		Debug.Log(score);
 		//post score
 
-		GUIManager.Instance.DisplayMinigameRewards(PlayerManager.Instance.GiveRewards(PlayerManager.Instance.ActiveMinigame.Loots, 0), score);
+		LootItemList loots = PlayerManager.Instance.GiveRewards(PlayerManager.Instance.ActiveMinigame.Loots, 0);
+		int rank = PlayerManager.Instance.ActiveMinigame.HighScoreRank(score);
+		if(rank == 1)
+		{
+			RPGBadge newBadge = Storage.LoadById<RPGBadge>(PlayerManager.Instance.ActiveMinigame.badgeOne, new RPGBadge());
+			loots.badges.Add(newBadge);
+			PlayerManager.Instance.Hero.AddBadge(newBadge);
+		}
+		else if(rank == 2)
+		{
+			RPGBadge newBadge = Storage.LoadById<RPGBadge>(PlayerManager.Instance.ActiveMinigame.badgeTwo, new RPGBadge());
+			loots.badges.Add(newBadge);
+			PlayerManager.Instance.Hero.AddBadge(newBadge);
+		}
+		else if(rank == 3)
+		{
+			RPGBadge newBadge = Storage.LoadById<RPGBadge>(PlayerManager.Instance.ActiveMinigame.badgeThree, new RPGBadge());
+			loots.badges.Add(newBadge);
+			PlayerManager.Instance.Hero.AddBadge(newBadge);
+		}
+
+		GUIManager.Instance.DisplayMinigameRewards(loots, score);
 		if(score > 0)
 		{
 			Debug.Log("score was greater than 0");

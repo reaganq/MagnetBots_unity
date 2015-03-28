@@ -2,7 +2,7 @@
 
 "GoldOpal.png":
 {
-	"frame": {"x":174,"y":346,"w":170,"h":170},
+	"frame": {"x":174,"y":518,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -10,7 +10,7 @@
 },
 "NormalOpal.png":
 {
-	"frame": {"x":2,"y":346,"w":170,"h":170},
+	"frame": {"x":2,"y":432,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -18,7 +18,7 @@
 },
 "UpgradeOpal.png":
 {
-	"frame": {"x":174,"y":174,"w":170,"h":170},
+	"frame": {"x":174,"y":346,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -26,7 +26,7 @@
 },
 "bolt.png":
 {
-	"frame": {"x":2,"y":174,"w":170,"h":170},
+	"frame": {"x":2,"y":260,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -34,7 +34,7 @@
 },
 "food_cereal.png":
 {
-	"frame": {"x":174,"y":2,"w":170,"h":170},
+	"frame": {"x":260,"y":174,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
@@ -42,11 +42,19 @@
 },
 "panel.png":
 {
-	"frame": {"x":2,"y":2,"w":170,"h":170},
+	"frame": {"x":260,"y":2,"w":170,"h":170},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":170,"h":170},
 	"sourceSize": {"w":170,"h":170}
+},
+"toy_duck.png":
+{
+	"frame": {"x":2,"y":2,"w":256,"h":256},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":256,"h":256},
+	"sourceSize": {"w":256,"h":256}
 }},
 "meta": {
 	"app": "http://www.texturepacker.com",
@@ -55,6 +63,6 @@
 	"format": "RGBA8888",
 	"size": {"w":512,"h":1024},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5152c65ef9e88c67f291bcae07c8201d$"
+	"smartupdate": "$TexturePacker:SmartUpdate:0c6dd5da4e0a7b40a785b649eab74da0$"
 }
 }

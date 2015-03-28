@@ -89,7 +89,7 @@
     <maxLevel>0</maxLevel>
   </RPGItem>
   <RPGItem>
-    <IconPath>GoldOpal</IconPath>
+    <IconPath>toy_duck</IconPath>
     <AtlasName>Atlases/Item/ItemAtlas</AtlasName>
     <ID>5</ID>
     <Name>Ducky</Name>
@@ -101,7 +101,9 @@
     <ItemCategory>Toys</ItemCategory>
     <EquipmentSlotIndex>None</EquipmentSlotIndex>
     <isLimitedUse>false</isLimitedUse>
-    <FBXName />
+    <FBXName>
+      <string>Toys/Duck_Toy</string>
+    </FBXName>
     <BuyCurrency>Coins</BuyCurrency>
     <Stackable>true</Stackable>
     <BuyValue>2000</BuyValue>

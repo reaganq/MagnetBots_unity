@@ -202,7 +202,7 @@ public class ArenaManager : Zone {
 	{
 		PlayerManager.Instance.Hero.questLog.KillEnemy(rpgEnemy.ID);
 		Debug.LogError("WIN ARENA");
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(2);
 		GiveRewards();
 	}
 
@@ -218,7 +218,7 @@ public class ArenaManager : Zone {
 	public IEnumerator LoseSequence()
 	{
 		Debug.LogError("LOSE ARENA");
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(2);
 		GUIManager.Instance.DisplayArenaFailure();
 	}
 

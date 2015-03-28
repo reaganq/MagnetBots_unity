@@ -326,6 +326,8 @@ public class CharacterActionManager : ActionManager {
 		CrossfadeAnimation("dance_robot1_rot", true);
 		actionState = ActionState.specialAction;
 		Invoke("ResetActionState", myAnimation["dance_robot1_rot"].length);
+		DisableMovement();
+		Invoke("EnableMovement", myAnimation["dance_robot1_rot"].length);
 	}
 
 	public void EatFood(string prefabPath)

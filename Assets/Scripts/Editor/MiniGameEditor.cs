@@ -52,6 +52,9 @@ public class MiniGameEditor : BaseEditorWindow
 		NPCMinigame s = (NPCMinigame)currentItem;
 		
 		s.PrefabDirectory = EditorUtils.TextField(s.PrefabDirectory, "Prefab Location");
+		s.badgeOne = EditorUtils.IntField(s.badgeOne, "Rank 1 badge");
+		s.badgeTwo = EditorUtils.IntField(s.badgeTwo, "Rank 2 badge");
+		s.badgeThree = EditorUtils.IntField(s.badgeThree, "Rank 3 badge");
 		s.AtlasName = EditorUtils.TextField(s.AtlasName, "Atlas");
 		s.IconPath = EditorUtils.TextField(s.IconPath, "portrait");
 		ActivityUtils.DisplayActivityComponents(s, Data);

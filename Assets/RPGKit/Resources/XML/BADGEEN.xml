@@ -8,4 +8,28 @@
     <Description>You've defeated Punchbag Bob!</Description>
     <SystemDescription />
   </RPGBadge>
+  <RPGBadge>
+    <IconPath>burger_gold</IconPath>
+    <AtlasName>Atlases/Badges/BadgesAtlas</AtlasName>
+    <ID>2</ID>
+    <Name>Burger Madness Rank 1</Name>
+    <Description />
+    <SystemDescription />
+  </RPGBadge>
+  <RPGBadge>
+    <IconPath>burger_silver</IconPath>
+    <AtlasName>Atlases/Badges/BadgesAtlas</AtlasName>
+    <ID>3</ID>
+    <Name>Burger Madness Rank 2</Name>
+    <Description />
+    <SystemDescription />
+  </RPGBadge>
+  <RPGBadge>
+    <IconPath>burger_bronze</IconPath>
+    <AtlasName>Atlases/Badges/BadgesAtlas</AtlasName>
+    <ID>4</ID>
+    <Name>Burger Madness Rank 3</Name>
+    <Description />
+    <SystemDescription />
+  </RPGBadge>
 </ArrayOfRPGBadge>

@@ -247,6 +247,15 @@ public class ItemTileButton: UIDragDropItem
 		GameObject atlas = Resources.Load(item.AtlasName) as GameObject;
 		icon.atlas = atlas.GetComponent<UIAtlas>();
 		icon.spriteName = item.IconPath;
+		for (int i = 0; i < gradeStars.Length; i++) {
+			gradeStars[i].SetActive(false);
+		}
+		if(item.IsUpgradeable)
+		{
+			for (int i = 0; i < level; i++) {
+				gradeStars[i].SetActive(true);
+			}
+		}
 		tickIcon.enabled = false;
 		quantityTag.SetActive(false);
 		LoadItemRarity(item);

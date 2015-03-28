@@ -55,6 +55,9 @@
       <ActionEvent PI="QUEST" ITEM="3" ITEMLvl="0" AT="TalkToNPC" AM="0" TX="" />
     </postFightActions>
     <conditions />
+    <postActionConditions>
+      <Condition ITH="2" ITHLvl="0" ATR="3" CT="QuestStepInProgress" SI="0" />
+    </postActionConditions>
     <ID>1</ID>
     <Name>Punchbag Bob</Name>
     <Description>A true pacifist</Description>
@@ -115,6 +118,7 @@
     <conditions>
       <Condition ITH="2" ITHLvl="0" ATR="0" CT="QuestCompleted" SI="0" />
     </conditions>
+    <postActionConditions />
     <ID>2</ID>
     <Name>Jim</Name>
     <Description>Scariest gym teacher in the entire universe.</Description>

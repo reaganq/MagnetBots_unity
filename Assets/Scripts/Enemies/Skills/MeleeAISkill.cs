@@ -55,6 +55,6 @@ public class MeleeAISkill : AISkill {
 	{
 		ActivateSkill(true);
 		skillState = SkillState.onUse;
-		ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);
+		ownerFSM.CrossfadeAnimation(baseSkillAnimation.castAnimation.clip.name, false);
 	}
 }

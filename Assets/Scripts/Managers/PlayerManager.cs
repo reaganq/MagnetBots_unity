@@ -218,6 +218,7 @@ public class PlayerManager : MonoBehaviour
 		Hero.EquipItem(Hero.ArmoryInventory.Items[17]);
 		Hero.UpdatePlayerShop();
 		Hero.questLog.StartQuest(2);
+		Hero.questLog.EndQuest(2);
 	}
 
 	public void ChangeWorld()

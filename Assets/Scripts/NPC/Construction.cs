@@ -57,6 +57,26 @@ public class Construction : MonoBehaviour {
 		if(!PhotonNetwork.isMasterClient)
 			RequestConstructionUpdate();
 	}
+
+	public DonorsObject TopDonor()
+	{
+		if(donors.Count > 0)
+		{
+			int index = 0;
+			int value = 0;
+			for (int i = 0; i < donors.Count; i++) {
+				if(donors[i].donationsQuantity > value)
+				{
+					index = i;
+					value = donors[i].donationsQuantity;
+				}
+			}
+			return donors[index];
+		}
+		else
+			return null;
+		
+	}
 	
 	public void DonateConstructionItem(InventoryItem item, string playerName)
 	{
