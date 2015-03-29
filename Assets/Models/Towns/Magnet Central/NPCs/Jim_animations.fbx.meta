@@ -1010,6 +1010,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
@@ -1518,8 +1519,8 @@ ModelImporter:
     - serializedVersion: 16
       name: Jim_Gun_Duration
       takeName: Take 001
-      firstFrame: 110
-      lastFrame: 111
+      firstFrame: 86
+      lastFrame: 87
       wrapMode: 2
       orientationOffsetY: 0
       level: 0

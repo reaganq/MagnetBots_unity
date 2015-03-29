@@ -2107,9 +2107,9 @@ MonoBehaviour:
   fireObject: {fileID: 0}
   aimAtTarget: 0
   moveToTargetRange: 0
+  trackTarget: 0
   targetDistance: 0
   targetAngle: 0
-  trackTargetObject: 0
   targetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   canMove: 1
@@ -2207,7 +2207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   curHealth: 0
-  maxMovementSpeed: 4
+  maxMovementSpeed: 3
   rotationSpeed: 3
   characterType: 1
   nameLabel: {fileID: 0}
@@ -2365,6 +2365,7 @@ MonoBehaviour:
   ownerFSM: {fileID: 0}
   requiresTargetLock: 0
   requiresLineOfSight: 0
+  trackTarget: 0
   angleTolerance: 15
   hitDecal: {fileID: 0}
 --- !u!114 &11465440

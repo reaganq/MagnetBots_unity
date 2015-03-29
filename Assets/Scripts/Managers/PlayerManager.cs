@@ -230,7 +230,7 @@ public class PlayerManager : MonoBehaviour
 		GameManager.Instance.GameIsPaused = false;
 
 		//HACK play the tutorial
-		if(GameManager.Instance.newGame && Application.loadedLevel == 1)
+		if(GameManager.Instance.newGame && Application.loadedLevel == 1 && !Hero.hasDoneTutorial)
 		{
 			Hero.SaveParseData();
 			GameObject cutscene = Instantiate(Resources.Load("Cutscenes/IntroCinematic") as GameObject) as GameObject;

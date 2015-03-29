@@ -42,7 +42,7 @@ public class SimpleFSM : ActionManager {
 			if(fireObject != null)
 			{
 				forward = fireObject.forward;
-				targetDir = targetObject.position - fireObject.position;
+				targetDir = targetPosition - fireObject.position;
 			}
 			else
 			{
@@ -51,6 +51,7 @@ public class SimpleFSM : ActionManager {
 			}
 			forward.y = 0;
 			targetDir.y = 0;
+			Debug.Log(Vector3.Angle(targetDir, forward));
 			return Vector3.Angle(targetDir, forward);
 		}
 	}
@@ -61,13 +62,12 @@ public class SimpleFSM : ActionManager {
 	//should we aim at the target?
 	public bool aimAtTarget = false;
 	public bool moveToTargetRange = false;
+	public bool trackTarget = false;
 	//how close should we get to the target?
 
 	public float targetDistance;
 	//how accurate should the aim be?
 	public float targetAngle;
-
-	public bool trackTargetObject;
 	public Vector3 targetPosition;
 
 	public bool isMoving = false;
@@ -125,12 +125,18 @@ public class SimpleFSM : ActionManager {
 				Invoke("ReadyUp", CheckTaunts(state));
 				break;
 			case AIState.selectingSkill:
+				EnableRotation();
+				EnableMovement();
+				moveToTargetRange = false;
+				trackTarget = false;
+				aimAtTarget = false;
 				Invoke("SelectSkill", CheckTaunts(state));
 				break;
 			case AIState.executingSkill:
 				Invoke("UseActiveAISkill", CheckTaunts(state));
 				break;
 			case AIState.rest:
+
 				Invoke("Rest", CheckTaunts(state));
 				break;
 			case AIState.victory:
@@ -240,7 +246,7 @@ public class SimpleFSM : ActionManager {
 		moveVector = Vector3.zero;
 		if(state == AIState.executingSkill)
 			{
-			if(moveToTargetRange && targetObject != null)
+			if(trackTarget)
 			{
 				targetPosition = targetObject.position;
 			}
@@ -277,12 +283,14 @@ public class SimpleFSM : ActionManager {
 
 	public void EnableRotation()
 	{
-		canRotate = false;
+		canRotate = true;
+		Debug.Log("enabling rotation");
 	}
 
 	public void DisableRotation()
 	{
 		canRotate = false;
+		Debug.Log("disabling rotation");
 	}
 
 	public void AimAtTarget()
@@ -291,12 +299,13 @@ public class SimpleFSM : ActionManager {
 		{
 			if(fireObject != null)
 			{
-				Vector3 targetPos = targetObject.position;
-				if(targetCharacterController != null)
+				//Vector3 targetPos = targetObject.position;
+				Vector3 targetPos = targetPosition;
+				/*if(targetCharacterController != null)
 				{
 					float scaledVal = Mathf.Clamp(distanceToTargetObject/15.0f, 0.0f, 1.0f);
 					targetPos += targetCharacterController.velocity*scaledVal ;
-				}
+				}*/
 				
 				Vector3 fireObjectPos = fireObject.position;
 				targetPos.y = fireObjectPos.y = 0;
@@ -476,7 +485,7 @@ public class SimpleFSM : ActionManager {
 		activeSkill = ChooseSkill();
 		if(activeSkill != null)
 		{
-			Debug.Log("we have found a skill to use!");
+			Debug.Log("we have found a skill to use!" + activeSkill.skillID);
 			myPhotonView.RPC("NetworkSelectSkill", PhotonTargets.Others, activeSkill.skillID);
 			if(activeSkill.targetLimit >0)
 			{
@@ -552,23 +561,38 @@ public class SimpleFSM : ActionManager {
 	{
 		moveToTargetRange = true;
 		targetDistance = distance;
+		canMove = true;
+		aimAtTarget = false;
 	}
 
 	public void SetTargetAngle(float angle)
 	{
+		Debug.Log("setting target angle");
 		aimAtTarget = true;
 		targetAngle = angle;
+		canMove = false;
+		moveToTargetRange = false;
+		canRotate = true;
 	}
 
 	public void SetTargetPosition(Vector3 targetPos)
 	{
 		targetPosition = targetPos;
+		Debug.Log("setting target position" + targetPos);
+	}
+
+	public void SetTargetTracking(bool state)
+	{
+		trackTarget = state;
 	}
 
 	public virtual bool hasFulfilledSkillConditions()
 	{
-		if(aimAtTarget && targetAngleDifference < targetAngle)
+		if(aimAtTarget && (targetAngleDifference > targetAngle))
+		{
+			Debug.Log("false");
 			return false;
+		}
 		if(moveToTargetRange && (Vector3.Distance(_myTransform.position, targetPosition) > targetDistance))
 			return false;
 		return true;

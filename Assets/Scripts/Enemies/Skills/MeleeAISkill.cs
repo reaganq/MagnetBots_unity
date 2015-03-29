@@ -19,6 +19,7 @@ public class MeleeAISkill : AISkill {
     {
 		if(!isOwner)
 			yield break;
+
 		if(fulfillConditionsBeforeUse)
 		{
 			StartFulfillSkillConditions();
@@ -37,7 +38,7 @@ public class MeleeAISkill : AISkill {
 			ownerFSM.CrossfadeAnimation(baseSkillAnimation.precastAnimation.clip.name);
 			yield return new WaitForSeconds(baseSkillAnimation.precastAnimation.clip.length);
 		}
-
+		ownerFSM.DisableRotation();
 
 		//skillState = SkillState.onUse;
 		//ownerFSM.PlayAnimation(baseSkillAnimation.castAnimation.clip.name, false);

@@ -396,7 +396,10 @@ public class Avatar : MonoBehaviour {
 			myActionManager.AddSkill(armLcontroller);
 		}
 		else
-			GUIManager.Instance.MainGUI.DisableActionButton(0);
+		{
+			if(myPhotonView.isMine)
+				GUIManager.Instance.MainGUI.DisableActionButton(0);
+		}
 		
 		PassiveArmorAnimationController armLAnimController = temp.GetComponent<PassiveArmorAnimationController>();
 		if(armLAnimController != null)
@@ -459,7 +462,10 @@ public class Avatar : MonoBehaviour {
 			//Debug.Log("transfer animation");
 		}
 		else
-			GUIManager.Instance.MainGUI.DisableActionButton(1);
+		{
+			if(myPhotonView.isMine)
+				GUIManager.Instance.MainGUI.DisableActionButton(1);
+		}
 		
 		PassiveArmorAnimationController armRAnimController = temp.GetComponent<PassiveArmorAnimationController>();
 		if(armRAnimController != null)

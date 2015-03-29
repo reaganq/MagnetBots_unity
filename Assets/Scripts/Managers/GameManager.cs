@@ -105,8 +105,11 @@ public class GameManager : MonoBehaviour {
 
 	public IEnumerator LoadNewLevelSequence(int level)
 	{
+		if(PlayerManager.Instance.isInParty())
+			PlayerManager.Instance.ActiveWorld.DisbandParty();
 		GUIManager.Instance.loadingGUI.Enable(false);
 		targetLevel = level;
+		yield return new WaitForEndOfFrame();
 		//yield return new WaitForSeconds(0.5f);
 		if(PhotonNetwork.room != null)
 		{

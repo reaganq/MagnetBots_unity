@@ -35,6 +35,7 @@ public class AISkill : BaseSkill {
 	public SimpleFSM ownerFSM;
 	public bool requiresTargetLock;
 	public bool requiresLineOfSight;
+	public bool trackTarget;
 	public float angleTolerance = 15f;
 
 	public Job useSkillJob;
@@ -120,6 +121,7 @@ public class AISkill : BaseSkill {
 	public virtual void StartFulfillSkillConditions()
 	{
 		Debug.Log("start fulfilling conditions");
+		ownerFSM.SetTargetTracking(trackTarget);
 		for (int i = 0; i < UseConditions.Count; i++) {
 			if(UseConditions[i].conditionType == AISkillUseConditionType.rangeOfTarget)
 			{
@@ -145,6 +147,8 @@ public class AISkill : BaseSkill {
 				ResetSkill();
 			if(!wasKilled)
 				ownerFSM.EndSkill();
+			else
+				CancelSkill();
 		};
 	}
 
@@ -155,6 +159,7 @@ public class AISkill : BaseSkill {
 
 	public void CancelSkill()
 	{
+		StartCoroutine(CancelSkillSequence());
 	}
 
     public virtual IEnumerator CancelSkillSequence()

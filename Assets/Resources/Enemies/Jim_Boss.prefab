@@ -214,7 +214,6 @@ GameObject:
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400022}
-  - 114: {fileID: 11400026}
   m_Layer: 9
   m_Name: Jim_Boss
   m_TagString: Untagged
@@ -1779,7 +1778,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100122}
-  m_LocalRotation: {x: -.339458823, y: -8.12236394e-08, z: 4.31731717e-09, w: .940620959}
+  m_LocalRotation: {x: -.339458823, y: -6.72073028e-08, z: 9.37564693e-09, w: .940620959}
   m_LocalPosition: {x: 0, y: 2.97385597, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2014,7 +2013,7 @@ MonoBehaviour:
   maxHealth: 30
   curHealth: 0
   maxMovementSpeed: 10
-  rotationSpeed: 3
+  rotationSpeed: 7
   characterType: 1
   nameLabel: {fileID: 0}
   hpBar: {fileID: 11442594}
@@ -2147,7 +2146,7 @@ MonoBehaviour:
   disableMovement: 0
   disableRotation: 0
   restrictedMovement: 0
-  limitDamageInstance: 1
+  limitDamageInstance: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 0}
@@ -2158,24 +2157,24 @@ MonoBehaviour:
       useArmRBones: 0
       useVerticalBones: 0
     castAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400002, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
+      animationLayer: 2
       speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     followThroughAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400008, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
+      animationLayer: 2
       speed: 1
       useWholeBody: 0
       useArmLBones: 0
       useArmRBones: 0
       useVerticalBones: 0
     loopAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
+      clip: {fileID: 7400006, guid: f74bf5a7af9484dd7810fa47b0969f36, type: 3}
+      animationLayer: 2
       speed: 1
       useWholeBody: 0
       useArmLBones: 0
@@ -2186,7 +2185,21 @@ MonoBehaviour:
   targetLimit: Infinity
   lowerRNGLimit: 0
   upperRNGLimit: 0
-  skillStatusEffects: []
+  skillStatusEffects:
+  - ID: 0
+    effect: 0
+    primaryEffectValue: 11
+    secondaryEffectValue: 0
+    tertiaryEffectValue: 0
+    effectDuration: 0
+    numberOfProcs: 0
+    procChance: 0
+    effectFormat: 2
+    triggerCondition: 4
+    affectAlly: 0
+    affectEnemy: 1
+    affectSelf: 0
+    isLocal: 0
   outgoingEnemyStatusEffects: []
   outgoingAllyStatusEffects: []
   skillDetectors: []
@@ -2194,20 +2207,24 @@ MonoBehaviour:
   _skillState: 0
   isOwner: 0
   skillUsageLimit: Infinity
-  resetAfterUse: 0
-  weighting: 0
-  UseConditions: []
-  fulfillConditionsBeforeUse: 0
+  resetAfterUse: 1
+  weighting: 1
+  UseConditions:
+  - conditionType: 1
+    targetValue1: 2
+    targetValue2: 0
+  fulfillConditionsBeforeUse: 1
   UseRequirements: []
-  patienceTimer: 0
+  patienceTimer: 1
   targetRequirement: 1
   skillRangeMax: 200
-  skillRangeMin: 0
+  skillRangeMin: 2
   ownerFSM: {fileID: 0}
   requiresTargetLock: 1
   requiresLineOfSight: 0
+  trackTarget: 0
   angleTolerance: 20
-  fireObject: {fileID: 0}
+  fireObject: {fileID: 400096}
   cooldown: 0
   fireSpeed: 1
   damage: 0
@@ -2232,8 +2249,7 @@ MonoBehaviour:
   projectileCollisionDecal: {fileID: 400002, guid: 824962af333ae4376a9b7535c7c69230,
     type: 2}
   bulletSpeed: 100
-  maxShotsPerSession: 5
-  minShotsPerSession: 3
+  shotsPerSession: 3
   targetShotsPerSession: 0
   isReloading: 0
   cooldownTimer: 0
@@ -2342,6 +2358,7 @@ MonoBehaviour:
   ownerFSM: {fileID: 0}
   requiresTargetLock: 0
   requiresLineOfSight: 0
+  trackTarget: 1
   angleTolerance: 5
   hitDecal: {fileID: 400000, guid: 9c4f0954744674d109754c8d266f53c3, type: 2}
 --- !u!114 &11400018
@@ -2371,7 +2388,6 @@ MonoBehaviour:
   skills:
   - {fileID: 11400016}
   - {fileID: 11400014}
-  - {fileID: 11400026}
   activeSkill: {fileID: 0}
   availableSkills: []
   taunts: []
@@ -2381,9 +2397,9 @@ MonoBehaviour:
   fireObject: {fileID: 0}
   aimAtTarget: 0
   moveToTargetRange: 0
+  trackTarget: 0
   targetDistance: 0
   targetAngle: 0
-  trackTargetObject: 0
   targetPosition: {x: 0, y: 0, z: 0}
   isMoving: 0
   canMove: 1
@@ -2435,91 +2451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
---- !u!114 &11400026
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad20ba615fb9a4dbda8ede1f4c38a955, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillID: 0
-  ownerStatus: {fileID: 0}
-  ownerAnimation: {fileID: 0}
-  ownerTransform: {fileID: 0}
-  ownerManager: {fileID: 0}
-  HitTargets: []
-  isBusy: 0
-  isActive: 0
-  skillName: HammerShock
-  skillType: 0
-  disableMovement: 0
-  disableRotation: 0
-  restrictedMovement: 0
-  limitDamageInstance: 1
-  baseSkillAnimation:
-    precastAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      speed: 1
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      speed: 1
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    followThroughAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      speed: 1
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    loopAnimation:
-      clip: {fileID: 0}
-      animationLayer: 0
-      speed: 1
-      useWholeBody: 0
-      useArmLBones: 0
-      useArmRBones: 0
-      useVerticalBones: 0
-    castTime: 0
-    followThroughTime: 0
-  targetLimit: Infinity
-  lowerRNGLimit: 0
-  upperRNGLimit: 0
-  skillStatusEffects: []
-  outgoingEnemyStatusEffects: []
-  outgoingAllyStatusEffects: []
-  skillDetectors: []
-  skillVFXs: []
-  _skillState: 0
-  isOwner: 0
-  skillUsageLimit: Infinity
-  resetAfterUse: 0
-  weighting: 0
-  UseConditions: []
-  fulfillConditionsBeforeUse: 0
-  UseRequirements: []
-  patienceTimer: 0
-  targetRequirement: 1
-  skillRangeMax: 200
-  skillRangeMin: 0
-  ownerFSM: {fileID: 0}
-  requiresTargetLock: 0
-  requiresLineOfSight: 0
-  angleTolerance: 5
-  hitDecal: {fileID: 0}
 --- !u!114 &11400028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2585,6 +2516,8 @@ MonoBehaviour:
   hpBar: {fileID: 11442594}
   hpBarObject: {fileID: 142594}
   speechBubble: {fileID: 0}
+  teamIcon: {fileID: 0}
+  speechBubbleLabel: {fileID: 0}
   speechBubbleTween: {fileID: 0}
 --- !u!114 &11400036
 MonoBehaviour:
