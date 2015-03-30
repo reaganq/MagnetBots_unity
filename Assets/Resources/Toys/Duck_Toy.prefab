@@ -314,7 +314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionAnimation:
     clip: {fileID: 7400000, guid: 3bbe35c9e7f614b9481284a8b80657d0, type: 2}
-    animationLayer: 0
+    animationLayer: 6
     speed: 1
     useWholeBody: 1
     useArmLBones: 0

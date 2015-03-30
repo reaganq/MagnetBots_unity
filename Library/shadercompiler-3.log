@@ -1,22 +1,23 @@
 Base path: /Applications/Unity/Unity.app/Contents
-Pipe name: \\.\pipe\UnityShaderCompiler-3--1333018624
+Pipe name: \\.\pipe\UnityShaderCompiler-3--1332482048
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=0 type=0 insize=5050 outsize=1446 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+  api=14 type=0 insize=4440 outsize=2713 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=4478 outsize=1693 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=14 type=0 insize=4440 outsize=3842 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=4404 outsize=1693 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=9 type=0 insize=4440 outsize=4184 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=5536 outsize=814 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
+  api=9 type=0 insize=1583 outsize=652 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=5536 outsize=1308 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+  api=14 type=1 insize=1583 outsize=506 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=5536 outsize=757 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+  api=9 type=1 insize=1581 outsize=7 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=4404 outsize=465 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
+  api=9 type=1 insize=1650 outsize=7 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=4508 outsize=304 kw=DIRECTIONAL LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
-End of pipe
-
-Quitting shader compiler process
+  api=14 type=0 insize=1679 outsize=1396 kw= ok=1
+Cmd: compileSnippet
+  api=14 type=1 insize=1679 outsize=506 kw= ok=1
+Cmd: compileSnippet
+  api=14 type=1 insize=4440 outsize=1632 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1

@@ -305,7 +305,7 @@ MonoBehaviour:
   disableMovement: 0
   disableRotation: 0
   restrictedMovement: 0
-  limitDamageInstance: 1
+  limitDamageInstance: 0
   baseSkillAnimation:
     precastAnimation:
       clip: {fileID: 7400000, guid: 94c5f470c85684fe4956608012312860, type: 2}

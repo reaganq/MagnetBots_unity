@@ -57,6 +57,14 @@ public class NetworkManager : MonoBehaviour {
 		}
 		else
 			Connect();
+
+		if (usingParse) {
+			if(ParseUser.CurrentUser != null )
+			{
+			Debug.Log("there is already a parse user in use");
+			ParseUser.LogOut ();
+			}
+		}
 	}
 
 	public void Connect () 

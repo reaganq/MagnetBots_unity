@@ -152,6 +152,7 @@ public class Avatar : MonoBehaviour {
 		LoadBones();
 		myStatus.UpdateNameTag(characterName);
 		animationTarget.Play("Default_Idle");
+		Debug.LogWarning (portraitIconPath);
 		myStatus.NetworkDisplayInfoByZone(newZoneID);
 		myStatus.headPortraitString = portraitIconPath;
 		//zone view id

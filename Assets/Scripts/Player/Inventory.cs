@@ -235,7 +235,8 @@ public class Inventory  : BasicInventory
 			newItem.UniqueItemId = item.rpgItem.UniqueId;
 			newItem.CurrentAmount = amount;
 			newItem.isItemViewed = false;
-			AddItemIntoList(item);
+			AddItemIntoList(newItem);
+			Debug.Log(amount + " " + newItem.CurrentAmount);
 		}
 		else
 		{
@@ -247,7 +248,7 @@ public class Inventory  : BasicInventory
 				newItem.UniqueItemId = item.rpgItem.UniqueId;
 				newItem.CurrentAmount = amount;
 				newItem.isItemViewed = false;
-				AddItemIntoList(item);
+				AddItemIntoList(newItem);
 			}
 		}
 	}

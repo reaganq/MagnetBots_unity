@@ -118,6 +118,12 @@ MonoBehaviour:
     npcIconSprite: 
     npcButtonText: 
     PrefabDirectory: MiniGames/
+    badgeOne: 0
+    badgeTwo: 0
+    badgeThree: 0
+    highScores: []
+    parseObjectID: 
+    myScore: 0
   ActiveMinigameObject: {fileID: 0}
   ActiveWorld: {fileID: 0}
   _activeZone: {fileID: 0}

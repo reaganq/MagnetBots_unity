@@ -9,8 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 420420}
   - 114: {fileID: 11420420}
-  - 65: {fileID: 6599976}
-  - 114: {fileID: 11432916}
+  - 114: {fileID: 11487086}
+  - 65: {fileID: 6587084}
+  - 114: {fileID: 11487084}
   m_Layer: 8
   m_Name: UnStock
   m_TagString: Untagged
@@ -77,6 +78,7 @@ GameObject:
   - 65: {fileID: 6591398}
   - 114: {fileID: 11491372}
   - 114: {fileID: 11499978}
+  - 114: {fileID: 11466528}
   m_Layer: 8
   m_Name: ShopItemTileButton
   m_TagString: Untagged
@@ -582,6 +584,18 @@ Transform:
   - {fileID: 499084}
   m_Father: {fileID: 491388}
   m_RootOrder: 4
+--- !u!65 &6587084
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 245.300003, y: 415.899994, z: 0}
+  m_Center: {x: -82.5999985, y: 110.620003, z: -.75}
 --- !u!65 &6591398
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -592,20 +606,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 216, y: 384.200012, z: 0}
-  m_Center: {x: 0, y: 37.9900017, z: -.75}
---- !u!65 &6599976
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 215.710007, y: 202.899994, z: 0}
-  m_Center: {x: -39.7999992, y: 40.0200005, z: 0}
+  m_Size: {x: 245.300003, y: 415.899994, z: 0}
+  m_Center: {x: 0, y: 19, z: -.75}
 --- !u!114 &11420420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -756,27 +758,23 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 448dd6e8a2d75418a8671a170048930b, type: 2}
   mSpriteName: team_member_gloss
   mFillCenter: 1
---- !u!114 &11432916
+--- !u!114 &11466528
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120420}
+  m_GameObject: {fileID: 191370}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementThreshold: 5
+  movementThreshold: 25
   lastPressDownPos: {x: 0, y: 0}
   onHoverOver: []
   onHoverOut: []
   onPress: []
-  onRelease:
-  - mTarget: {fileID: 11499978}
-    mMethodName: UnStock
-    mParameters: []
-    oneShot: 0
+  onRelease: []
   onSelect: []
   onDeselect: []
   onClick: []
@@ -786,7 +784,11 @@ MonoBehaviour:
   onDragOver: []
   onDragOut: []
   onDrag: []
-  onCustomRelease: []
+  onCustomRelease:
+  - mTarget: {fileID: 11499978}
+    mMethodName: PressedItem
+    mParameters: []
+    oneShot: 0
 --- !u!114 &11472534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -852,6 +854,50 @@ MonoBehaviour:
   mMaxLineHeight: 0
   mLineWidth: 0
   mMultiline: 1
+--- !u!114 &11487084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementThreshold: 25
+  lastPressDownPos: {x: 0, y: 0}
+  onHoverOver: []
+  onHoverOut: []
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
+  onCustomRelease:
+  - mTarget: {fileID: 11499978}
+    mMethodName: UnStock
+    mParameters: []
+    oneShot: 0
+--- !u!114 &11487086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 120420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f02842fa4878db54f9587ff4de7d9f2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollView: {fileID: 0}
+  draggablePanel: {fileID: 0}
 --- !u!114 &11491372
 MonoBehaviour:
   m_ObjectHideFlags: 1

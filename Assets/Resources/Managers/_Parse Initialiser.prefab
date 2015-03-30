@@ -27,6 +27,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -38,8 +39,8 @@ MonoBehaviour:
   m_Script: {fileID: 762677091, guid: 533658fd205592f49bd0a7a5ad4b6cea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  applicationID: MudcxEbR32wluoODmseP667ADPKjx5Xw0k5pFtIy
-  dotnetKey: Aa3K7mX8m6JrIV7atHzL414gDlNgqtD36Ckzgaso
+  applicationID: uOv4LacYpC2JQL9I3B8mti8hy3krmqs5DVFzJawO
+  dotnetKey: Vwbf36vsRw3RidBCl8gxsMOF5YeOgsmpYZgoWOlk
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

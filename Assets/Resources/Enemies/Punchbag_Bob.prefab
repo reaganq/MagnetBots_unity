@@ -2365,7 +2365,7 @@ MonoBehaviour:
   ownerFSM: {fileID: 0}
   requiresTargetLock: 0
   requiresLineOfSight: 0
-  trackTarget: 0
+  trackTarget: 1
   angleTolerance: 15
   hitDecal: {fileID: 0}
 --- !u!114 &11465440

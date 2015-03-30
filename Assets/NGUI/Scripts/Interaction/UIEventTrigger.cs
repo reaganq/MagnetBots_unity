@@ -13,7 +13,7 @@ using System.Collections.Generic;
 [AddComponentMenu("NGUI/Interaction/Event Trigger")]
 public class UIEventTrigger : MonoBehaviour
 {
-	public float movementThreshold = 5;
+	public float movementThreshold = 25;
 	public Vector2 lastPressDownPos;
 	static public UIEventTrigger current;
 

@@ -1,62 +1,29 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Managers/NetworkManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/GUI/Controllers/TeleporterGUIController.cs" Line="103" Column="37" />
-      <File FileName="Assets/Scripts/GUI/TeamMemberUI.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="465" Column="4" />
+      <File FileName="Assets/Scripts/GUI/Controllers/IntroGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerInformation.cs" Line="898" Column="41" />
+      <File FileName="Assets/Scripts/Managers/NetworkManager.cs" Line="74" Column="1" />
+      <File FileName="Assets/NGUI/Scripts/Interaction/UIEventTrigger.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/ConversationGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/OverheadUI.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/PlayerShopGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/ShopItemTileButton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/MiniGameGUIController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Minigames/Minigame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Minigames/NPCMinigame.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/PlayerCharacter.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GUI/Controllers/InventoryGUIController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="241" Column="41" />
-      <File FileName="Assets/Scripts/GUI/Controllers/MainUIManager.cs" Line="134" Column="28" />
-      <File FileName="Assets/Scripts/Managers/WorldManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Character/CharacterActionManager.cs" Line="72" Column="2" />
-      <File FileName="Assets/Scripts/GUI/Controllers/ConstructionGUIController.cs" Line="34" Column="39" />
-      <File FileName="Assets/Scripts/Armor/Range/BasePlayerRangedSkill.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Skills/RangedAISkill.cs" Line="96" Column="34" />
-      <File FileName="Assets/Scripts/Enemies/JimFSM.cs" Line="5" Column="32" />
-      <File FileName="Assets/Scripts/Enemies/SimpleFSM.cs" Line="110" Column="1" />
-      <File FileName="Assets/Scripts/Enemies/Skills/MeleeAISkill.cs" Line="41" Column="30" />
-      <File FileName="Assets/Scripts/Enemies/Skills/AISkill.cs" Line="121" Column="2" />
-      <File FileName="Assets/Scripts/Character/ActionManager.cs" Line="75" Column="27" />
-      <File FileName="Assets/Scripts/Armor/Base/BaseSkill.cs" Line="133" Column="2" />
-      <File FileName="Assets/Plugins/PathologicalGames/PoolManager/PoolManager.cs" Line="361" Column="1" />
-      <File FileName="Assets/Scripts/Armor/Detectors/Detector.cs" Line="24" Column="2" />
+      <File FileName="Assets/Scripts/NPC/NPC.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Character/Avatar.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Parse/CreateAccount.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Managers/PlayerManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True">
-          <Node name="Assembly-CSharp" expanded="True">
-            <Node name="Photon Unity Networking" expanded="True">
-              <Node name="Plugins" expanded="True">
-                <Node name="PhotonNetwork" expanded="True" />
-              </Node>
-            </Node>
-            <Node name="Scripts" expanded="True">
-              <Node name="Armor" expanded="True">
-                <Node name="Base" expanded="True" />
-                <Node name="Detectors" expanded="True" />
-                <Node name="Range" expanded="True" />
-              </Node>
-              <Node name="Character" expanded="True" />
-              <Node name="Enemies" expanded="True">
-                <Node name="Skills" expanded="True">
-                  <Node name="MeleeAISkill.cs" selected="True" />
-                </Node>
-              </Node>
-              <Node name="GUI" expanded="True">
-                <Node name="Controllers" expanded="True" />
-              </Node>
-              <Node name="Managers" expanded="True" />
-            </Node>
-          </Node>
-          <Node name="Assembly-CSharp-firstpass" expanded="True">
-            <Node name="Plugins" expanded="True">
-              <Node name="PathologicalGames" expanded="True">
-                <Node name="PoolManager" expanded="True" />
-              </Node>
-            </Node>
-          </Node>
-        </State>
+        <State expanded="True" selected="True" />
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />
@@ -64,7 +31,9 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Volumes/Macintosh HD/Users/reaganqiu/Projects/Magnetbots/MagnetBots_unity/Assets/Scripts/Managers/PlayerManager.cs" line="358" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

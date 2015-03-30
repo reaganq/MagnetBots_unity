@@ -124,6 +124,12 @@ public class RewardsGUIController : BasicGUIController {
 		rewardPanelTween.Play(true);
 	}
 
+	public void RepositionGrid()
+	{
+		rewardsItemsGrid.Reposition ();
+		rewardsCurrencyGrid.Reposition ();
+	}
+
 	public void HideRewards()
 	{
 		fadeOutTween.tweenTarget = victoryRewardObject;

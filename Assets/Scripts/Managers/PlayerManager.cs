@@ -126,6 +126,7 @@ public class PlayerManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
         Hero = new PlayerInformation();
+		Debug.Log("new hero");
         SaveLoad.content = new SavedContent();
     }
 
@@ -352,6 +353,8 @@ public class PlayerManager : MonoBehaviour
 
     void LoadCharacterParts()
     {
+		Debug.Log (Hero.PlayerName);
+		Debug.Log (avatar.gameObject.name);
 		avatar.LoadAllBodyParts(Hero.PlayerName,
 		                        Hero.Equip.EquippedFace.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedFace.Level, Hero.Equip.EquippedFace.rpgArmor.FBXName.Count) - 1], 
 		                        Hero.Equip.EquippedHead == null? null : Hero.Equip.EquippedHead.rpgArmor.FBXName[Mathf.Min(Hero.Equip.EquippedHead.Level, Hero.Equip.EquippedHead.rpgArmor.FBXName.Count) - 1], 
@@ -419,17 +422,23 @@ public class PlayerManager : MonoBehaviour
 			if(maxNumberOfLoots > 0 && num >= maxNumberOfLoots)
 				break;
 		}
-
-		for (int i = 0; i < lootItemList.items.Count; i++) {
-			Hero.AddItem(lootItemList.items[i]);
-		}
-		for (int i = 0; i < lootItemList.currencies.Count; i++) {
-			Hero.AddRPGCurrency(lootItemList.currencies[i]);
-		}
-		for (int i = 0; i < lootItemList.badges.Count; i++) {
-			Hero.AddBadge(lootItemList.badges[i]);
-		}
+		StartCoroutine (AddRewardItems (lootItemList));
 		return lootItemList;
+
+	}
+
+	public IEnumerator AddRewardItems(LootItemList loots)
+	{
+		yield return new WaitForSeconds (0.5f);
+		for (int i = 0; i < loots.items.Count; i++) {
+			Hero.AddItem(loots.items[i]);
+		}
+		for (int i = 0; i < loots.currencies.Count; i++) {
+			Hero.AddRPGCurrency(loots.currencies[i]);
+		}
+		for (int i = 0; i < loots.badges.Count; i++) {
+			Hero.AddBadge(loots.badges[i]);
+		}
 	}
 }
 

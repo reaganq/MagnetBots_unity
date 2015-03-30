@@ -37,25 +37,12 @@ public class ShopItemTileButton: MonoBehaviour
 	public bool isBlank;
 	//bool mStarted = false;
 	//bool mHighlighted = false;
-
-	void OnPress (bool isPressed)
+		
+	public void PressedItem()
 	{
-		if (isPressed)
-		{
-			lastPressDownPos = UICamera.lastTouchPosition;
-		}
-		else 
-		{
-			if(Vector2.Distance(UICamera.lastTouchPosition, lastPressDownPos) < movementThreshold)
-			{
-				if(owner != null)
-				{
-					owner.OnItemTilePressed(index);
-				}
-				Debug.Log("PRESSED");
-			}
-		}
+		owner.OnItemTilePressed (index);
 	}
+
     
     public void UnStock()
 	{

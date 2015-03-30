@@ -1,22 +1,21 @@
 Base path: /Applications/Unity/Unity.app/Contents
-Pipe name: \\.\pipe\UnityShaderCompiler-4--1333551104
+Pipe name: \\.\pipe\UnityShaderCompiler-4--1331417088
 Cmd: getPlatforms
 Cmd: compileSnippet
-  api=0 type=0 insize=5050 outsize=2059 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=5 type=0 insize=4440 outsize=4315 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=4478 outsize=1566 kw=DIRECTIONAL SHADOWS_OFF LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=5 type=0 insize=4440 outsize=4209 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=4404 outsize=1034 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+  api=14 type=0 insize=4440 outsize=3947 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=4508 outsize=1566 kw=DIRECTIONAL LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=14 type=0 insize=1583 outsize=789 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=0 insize=5536 outsize=1967 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF VERTEXLIGHT_ON ok=1
+  api=9 type=0 insize=1581 outsize=858 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=5536 outsize=798 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_ON DIRLIGHTMAP_OFF ok=1
+  api=9 type=0 insize=1650 outsize=1029 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=4404 outsize=578 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+  api=9 type=0 insize=1679 outsize=1251 kw= ok=1
 Cmd: compileSnippet
-  api=0 type=1 insize=1164 outsize=273 kw=SOFTPARTICLES_ON ok=1
-End of pipe
-
-Quitting shader compiler process
+  api=5 type=1 insize=4440 outsize=6 kw=DIRECTIONAL SHADOWS_SCREEN LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1
+Cmd: compileSnippet
+  api=14 type=1 insize=4440 outsize=2321 kw=DIRECTIONAL SHADOWS_SCREEN SHADOWS_NATIVE LIGHTMAP_OFF DIRLIGHTMAP_OFF ok=1

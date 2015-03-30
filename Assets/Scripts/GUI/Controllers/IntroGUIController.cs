@@ -44,8 +44,11 @@ public class IntroGUIController : BasicGUIController {
 	
 	public void OnStartPressed()
 	{
-		if(!PhotonNetwork.insideLobby)
+		if (!PhotonNetwork.insideLobby) 
+		{
+			loadingLabel.text = "Not connected to lobby yet";
 			return;
+		}
 
 		if(!quickStartClicked)
 		{
@@ -59,6 +62,12 @@ public class IntroGUIController : BasicGUIController {
 
 	public void OnRegisterPressed()
 	{
+		if (!PhotonNetwork.insideLobby) 
+		{
+			loadingLabel.text = "Not connected to lobby yet";
+			return;
+		}
+
 		buttonMenu.SetActive(false);
 		playTween.tweenTarget = accountDetailsBox;
 		playTween.Play(true);
@@ -67,6 +76,12 @@ public class IntroGUIController : BasicGUIController {
 
 	public void OnLoginPressed()
 	{
+		if (!PhotonNetwork.insideLobby) 
+		{
+			loadingLabel.text = "Not connected to lobby yet";
+			return;
+		}
+
 		buttonMenu.SetActive(false);
 		playTween.tweenTarget = accountDetailsBox;
 		playTween.Play(true);
@@ -77,6 +92,8 @@ public class IntroGUIController : BasicGUIController {
 	{
 		Debug.Log("back button pressed");
 		ShowButtonMenu();
+		loadingLabel.text = "";
+		quickStartClicked = false;
 	}
 
 	//int world id
@@ -138,7 +155,7 @@ public class IntroGUIController : BasicGUIController {
 
 	void Update()
 	{
-		if(NetworkManager.Instance.usingParse && !loading)
+		if(NetworkManager.Instance.usingParse && !loading && PhotonNetwork.insideLobby)
 		{
 			if(ParseUser.CurrentUser != null)
 			{
@@ -163,7 +180,7 @@ public class IntroGUIController : BasicGUIController {
 
 	public void authenticateUser(string username, string password)
 	{
-		
+		Debug.Log ("logging in");
 		ParseUser.LogInAsync(username, password).ContinueWith(t =>
 		                                                      {
 			if (t.IsFaulted || t.IsCanceled)
@@ -171,6 +188,7 @@ public class IntroGUIController : BasicGUIController {
 				// The login failed. Check t.Exception to see why.
 				//isAuthenticated = false;
 				loadingLabel.text = "username does not exist";
+				quickStartClicked = false;
 			}
 			else
 			{
@@ -185,19 +203,21 @@ public class IntroGUIController : BasicGUIController {
 	
 	public void CreateNewUser(string userName, string password)
 	{
-		var user = new ParseUser()
+		var user = new ParseUser ()
 		{
 			Username = userName,
 			Password = password,
-			//Email = "reaganqiu@gmail.com"
 		};
+			//Email = "reaganqiu@gmail.com"
+
 		
         user.SignUpAsync().ContinueWith(t => 
                                         {
             if(t.IsFaulted || t.IsCanceled)
             {
                 //Debug.Log(t.Exception);
-				loadingLabel.text = "account already exists";
+				loadingLabel.text = "WTF";
+				quickStartClicked = false;
             }
 
         });
