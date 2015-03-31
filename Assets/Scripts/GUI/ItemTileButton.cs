@@ -42,7 +42,7 @@ public class ItemTileButton: UIDragDropItem
 	//bool mStarted = false;
 	//bool mHighlighted = false;
 
-	void OnPress (bool isPressed)
+	/*void OnPress (bool isPressed)
 	{
 		if (isPressed)
 		{
@@ -56,6 +56,12 @@ public class ItemTileButton: UIDragDropItem
 					owner.OnItemTilePressed(index);
 			}
 		}
+	}*/
+
+	public void Pressed()
+	{
+		if(owner != null)
+			owner.OnItemTilePressed(index);
 	}
 	
 	protected override void StartDragging ()

@@ -96,6 +96,12 @@ public class PlayerInformation  {
 	public void StartGameAfterTutorial()
 	{
 		hasDoneTutorial = true;
+		AddCurrency(1000, BuyCurrencyType.Coins);
+		AddCurrency(100, BuyCurrencyType.Magnets);
+		AddCurrency(50, BuyCurrencyType.CitizenPoints);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 4, 1, 1);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 6, 1, 5);
+		PreffixSolver.GiveItem(PreffixType.ITEM, 7, 1, 5);
 		//name already set
 		SaveParseData();
 		questLog.StartQuest(3);
@@ -155,6 +161,7 @@ public class PlayerInformation  {
 			CitizenPoints -= amount;
 		}
 		hasWalletChange = true;
+		GUIManager.Instance.UpdateCurrency();
     }
 
 	public void Withdraw(int amount)
@@ -162,6 +169,7 @@ public class PlayerInformation  {
 		BankCoins -= amount;
 		Coins += amount;
 		hasWalletChange = true;
+		GUIManager.Instance.UpdateCurrency();
 	}
  
 	public void Deposit(int amount)
@@ -169,12 +177,14 @@ public class PlayerInformation  {
 		BankCoins += amount;
 		Coins -= amount;
 		hasWalletChange = true;
+		GUIManager.Instance.UpdateCurrency();
 	}
 
 	public void CollectInterest(int amount)
 	{
 		BankCoins += amount;
 		hasWalletChange = true;
+		GUIManager.Instance.UpdateCurrency();
 	}
 
     public bool CanYouAfford(int price, BuyCurrencyType currency)
@@ -296,6 +306,7 @@ public class PlayerInformation  {
 		Coins += shopTill;
 		shopTill = 0;
 		hasWalletChange = true;
+		GUIManager.Instance.UpdateCurrency();
     }
 
 	public void UpdatePlayerShop()
@@ -432,6 +443,15 @@ public class PlayerInformation  {
 		case 5:
 			break;
 		}
+	}
+
+	public bool HasBadge(RPGBadge badge)
+	{
+		for (int i = 0; i < profile.badges.Count; i++) {
+			if(profile.badges[i].ID == badge.ID)
+				return true;
+				}
+		return false;
 	}
 
 	public void AddBadge(RPGBadge badge)
@@ -843,8 +863,7 @@ public class PlayerInformation  {
 	{
 		if(hasWalletChange)
 		{
-			GUIManager.Instance.UpdateCurrency();
-		}
+			GUIManager.Instance.UpdateCurrency();}
 
 		if(!NetworkManager.Instance.usingParse || !GameManager.Instance.GameHasStarted)
 					return;

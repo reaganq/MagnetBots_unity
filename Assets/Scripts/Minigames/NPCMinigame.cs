@@ -69,14 +69,19 @@ public class NPCMinigame: NPCActivity {
 	{
 		if(score == 0)
 			return 0;
-		if(highScores.Count == 0)
-		{
-			return 1;
-		}
+
 		for (int i = 0; i < highScores.Count; i++) {
 			if(score > highScores[i].score)
 				return i+1;
 				}
+		if(highScores.Count == 0)
+		{
+			return 1;
+		}
+		else if(highScores.Count == 1)
+			return 2;
+		else if(highScores.Count == 2)
+			return 3;
 		return 0;
 	}
 

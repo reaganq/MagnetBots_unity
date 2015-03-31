@@ -27,6 +27,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+	public GlobalInputManager inputManager;
     public PlayerInformation Hero;
     public NPC ActiveNPC;
 	public NPCActivity activeActivity;
@@ -396,7 +397,8 @@ public class PlayerManager : MonoBehaviour
 				else if(allLoots[i].itemType == ItemType.Badge)
 				{
 					RPGBadge badge = Storage.LoadById<RPGBadge>(allLoots[i].itemID[index], new RPGBadge());
-					lootItemList.badges.Add(badge);
+					if(!Hero.HasBadge(badge))
+						lootItemList.badges.Add(badge);
 				}
 				else 
 				{

@@ -24,11 +24,38 @@ public class NotificationGUIController : BasicGUIController {
 	public GameObject messageBox;
 	public UILabel messageBoxLabel;
 
+	public UIPlayTween statusLogTween;
+	public GameObject statusLog;
+	public UILabel statusLogLabel;
+	public bool isStatusLogDisplayed;
+	public float statusLogTimer;
+
 	/*public GameObject selectedCharacter;
 	public GameObject hoverBox;
 	public GameObject addToFriendButton;
 	public GameObject inviteButton;*/
 	public UIPlayTween notificationTween;
+
+	public void DisplayStatusLog(string message)
+	{
+		statusLogTween.tweenTarget = statusLog;
+		statusLogLabel.text = message;
+		statusLogTween.Play(true);
+		isStatusLogDisplayed = true;
+		statusLogTimer = 3;
+	}
+
+	public void Update()
+	{
+		if(statusLogTimer > 0)
+			statusLogTimer -= Time.deltaTime;
+		if(statusLogTimer <= 0 && isStatusLogDisplayed)
+		{
+			isStatusLogDisplayed = false;
+			statusLogTween.tweenTarget = statusLog;
+			statusLogTween.Play(false);
+		}
+	}
 
 	// Use this for initialization
 	public void UpdateMessage (string name) 
@@ -125,11 +152,11 @@ public class NotificationGUIController : BasicGUIController {
 
 	}
 
-	public void DisplayNotificationBox(PhotonPlayer player, int partyLeaderID)
+	public void DisplayNotificationBox(string name, PhotonPlayer player, int partyLeaderID)
 	{
 		notificationTween.tweenTarget = notificationBox;
 		state = NotificationUIState.teamInvite;
-		UpdateMessage(player.ToString()+ "would like to form a party with you!");
+		UpdateMessage(name + "would like to form a party with you!");
 		notificationTween.Play(true);
 		prospectivePartyLeader = PhotonPlayer.Find(partyLeaderID);
 	}

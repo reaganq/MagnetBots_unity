@@ -1778,7 +1778,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100122}
-  m_LocalRotation: {x: -.339458823, y: -6.72073028e-08, z: 9.37564693e-09, w: .940620959}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 2.97385597, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2514,11 +2514,13 @@ MonoBehaviour:
   statusRewardLabel: {fileID: 0}
   billboard: {fileID: 11400036}
   hpBar: {fileID: 11442594}
+  nameLabel: {fileID: 0}
   hpBarObject: {fileID: 142594}
   speechBubble: {fileID: 0}
   teamIcon: {fileID: 0}
   speechBubbleLabel: {fileID: 0}
   speechBubbleTween: {fileID: 0}
+  ownerCS: {fileID: 11400000}
 --- !u!114 &11400036
 MonoBehaviour:
   m_ObjectHideFlags: 1

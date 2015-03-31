@@ -25,9 +25,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 400002}
   - 65: {fileID: 6500000}
-  - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400016}
+  - 114: {fileID: 11495390}
   m_Layer: 8
   m_Name: ItemTileButton
   m_TagString: Untagged
@@ -627,21 +627,6 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 448dd6e8a2d75418a8671a170048930b, type: 2}
   mSpriteName: itemTile_BG
   mFillCenter: 1
---- !u!114 &11400006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
-  trigger: 0
-  volume: 1
-  pitch: 1
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,6 +1252,37 @@ MonoBehaviour:
   mAtlas: {fileID: 11400000, guid: 448dd6e8a2d75418a8671a170048930b, type: 2}
   mSpriteName: team_member_gloss
   mFillCenter: 1
+--- !u!114 &11495390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e862f287df53bb64db191162f851a296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementThreshold: 25
+  lastPressDownPos: {x: 0, y: 0}
+  onHoverOver: []
+  onHoverOut: []
+  onPress: []
+  onRelease: []
+  onSelect: []
+  onDeselect: []
+  onClick: []
+  onDoubleClick: []
+  onDragStart: []
+  onDragEnd: []
+  onDragOver: []
+  onDragOut: []
+  onDrag: []
+  onCustomRelease:
+  - mTarget: {fileID: 11400008}
+    mMethodName: Pressed
+    mParameters: []
+    oneShot: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

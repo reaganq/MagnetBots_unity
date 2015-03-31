@@ -42,6 +42,7 @@ public class GUIManager : MonoBehaviour {
 	public UISprite screenFlash;
 	public InventoryGUIController InventoryGUI;
     public QuickInventoryGUIController QuickInventoryGUI;
+	public QuestGUIController questGUI;
     public MainUIManager MainGUI;
 	public NotificationGUIController NotificationGUI;
     public PlayerShopGUIController PlayerShopGUI;
@@ -141,8 +142,6 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.main:
 			MainGUI.Enable();
-			if(MainGUI.isSideTrayOpen)
-				MainGUI.OnSideTrayClick();
 			chatGUI.Enable();
 			break;
 		case UIState.npc:
@@ -157,6 +156,9 @@ public class GUIManager : MonoBehaviour {
 			InventoryGUI.Enable();
 			break;
 		case UIState.quickInventory:
+			break;
+		case UIState.quest:
+			questGUI.Enable();
 			break;
 		case UIState.profile:
 			profileGUI.Enable();
@@ -193,6 +195,9 @@ public class GUIManager : MonoBehaviour {
 			break;
 		case UIState.inventory:
 			InventoryGUI.Disable();
+			break;
+		case UIState.quest:
+			questGUI.Disable();
 			break;
 		case UIState.quickInventory:
 			QuickInventoryGUI.Disable();
@@ -291,10 +296,7 @@ public class GUIManager : MonoBehaviour {
     public void HideQuickInventory ()
     {
 		if(cachedState == UIState.construction)
-		{
-			//QuickInventoryGUI.Disable();
 			constructionGUI.thisConstruction.HideConstructionItems();
-		}
 		EnterGUIState(UIState.main);
     }
 
@@ -307,14 +309,6 @@ public class GUIManager : MonoBehaviour {
     {
 		PlayerManager.Instance.ActiveNPC = npc;
 		EnterGUIState(UIState.npc);
-        /*if(!IsNPCGUIDisplayed)
-        {
-            HideMainGUI();
-            TurnOffAllOtherUI();
-            //NPCGUI.SetActive(true);
-
-            IsNPCGUIDisplayed = true;
-        }*/
     }
 
 	public void DisplayConstruction(Construction construction)
@@ -343,34 +337,17 @@ public class GUIManager : MonoBehaviour {
     {
 		PlayerManager.Instance.ActiveNPC = null;
 		EnterGUIState(UIState.main);
-        /*if(IsNPCGUIDisplayed)
-        {
-            NPCGUI.SetActive(false);
-            IsNPCGUIDisplayed = false;
-			Debug.Log(" hide npc ui");
-            //DisplayMainGUI();
-        }*/
     }
 
-	public void DisplayPartyNotification(PhotonPlayer player, int partyleaderID)
+	public void DisplayPartyNotification(string playerName, PhotonPlayer player, int partyleaderID)
 	{
-		NotificationGUI.DisplayNotificationBox(player, partyleaderID);
+		NotificationGUI.DisplayNotificationBox(playerName, player, partyleaderID);
 	}
 
 	public void HidePartyNotification()
 	{
 		NotificationGUI.HideNotificationBox();
 	}
-
-	/*public void DisplayCharacterPopUp(GameObject character)
-	{
-		NotificationGUI.DisplayHoverBox(character);
-	}
-
-	public void HideCharacterPopUp()
-	{
-		NotificationGUI.HideHoverBox();
-	}*/
 
 	public void DisplayHoverPopup(PlayerCharacter cs)
 	{
@@ -389,8 +366,6 @@ public class GUIManager : MonoBehaviour {
 	{
 		EnterGUIState(UIState.reward);
 		rewardsGUI.DisplayArenaRewards(items);
-		//rewardsGUI.items = items;
-		//uiState = UIState.rewards;
 	}
 
 	public void DisplayArenaFailure()

@@ -9,6 +9,8 @@ public class GlobalInputManager : MonoBehaviour {
 	public int poiMask = 1<<15;
 	public int characterLayerMask = 1<<9;
 	private Vector2 lastPressDownPos;
+	public GameObject indicatorObjectPrefab;
+	public float indicatorTimer;
 
 	void Start () {
 		inputType = GameManager.Instance.inputType;
@@ -39,7 +41,11 @@ public class GlobalInputManager : MonoBehaviour {
 							if(layermsk == terrainMask)
 							{
 								if(PlayerManager.Instance.avatarInput != null)
+								{
 									PlayerManager.Instance.avatarInput.SetWayPoint(hit.point);
+									GameObject indicator = GameObject.Instantiate(indicatorObjectPrefab, hit.point, Quaternion.identity) as GameObject;
+								}
+
 							}
 							else if(layermsk == poiMask)
 							{

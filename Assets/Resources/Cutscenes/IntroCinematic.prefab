@@ -2491,6 +2491,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &189218
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 489218}
+  m_Layer: 0
+  m_Name: Start spawn point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &195552
 GameObject:
   m_ObjectHideFlags: 1
@@ -2792,6 +2807,7 @@ Transform:
   - {fileID: 481766}
   - {fileID: 424044}
   - {fileID: 424046}
+  - {fileID: 489218}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &400038
@@ -4661,6 +4677,18 @@ Transform:
   - {fileID: 481846}
   m_Father: {fileID: 481762}
   m_RootOrder: 1
+--- !u!4 &489218
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 189218}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.1299992, y: -32.0794907, z: -.879999995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400036}
+  m_RootOrder: 7
 --- !u!4 &495552
 Transform:
   m_ObjectHideFlags: 1
@@ -5322,6 +5350,7 @@ MonoBehaviour:
   interiorCameraAnimation: {fileID: 11100002}
   townTrackingCamera: {fileID: 0}
   townTrackingCameraAnimation: {fileID: 0}
+  startPoint: {fileID: 489218}
   dummy: {fileID: 11481722}
   face: 0
   body: 0

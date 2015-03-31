@@ -22,22 +22,24 @@
       <LootItem>
         <itemType>Armor</itemType>
         <itemID>
-          <int>1</int>
-          <int>4</int>
-          <int>5</int>
-          <int>2</int>
+          <int>11</int>
+          <int>13</int>
+          <int>6</int>
+          <int>7</int>
+          <int>8</int>
+          <int>10</int>
         </itemID>
-        <itemLevel>2</itemLevel>
+        <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>1</dropRate>
+        <dropRate>0.6</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>
       <LootItem>
-        <itemType>UpgradeMaterials</itemType>
+        <itemType>Construction</itemType>
         <itemID>
-          <int>2</int>
+          <int>5</int>
         </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
@@ -85,27 +87,29 @@
       <LootItem>
         <itemType>Armor</itemType>
         <itemID>
-          <int>1</int>
-          <int>4</int>
-          <int>5</int>
-          <int>2</int>
+          <int>20</int>
+          <int>21</int>
+          <int>22</int>
+          <int>23</int>
+          <int>24</int>
         </itemID>
         <itemLevel>2</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>1</dropRate>
+        <dropRate>0.6</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>
       <LootItem>
         <itemType>UpgradeMaterials</itemType>
         <itemID>
-          <int>2</int>
+          <int>7</int>
+          <int>6</int>
         </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
-        <dropRate>1</dropRate>
+        <dropRate>0.5</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>

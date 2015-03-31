@@ -503,6 +503,8 @@
      <Compile Include="Assets\Scripts\GUI\ItemTileButton.cs" />
      <Compile Include="Assets\Scripts\GUI\NPCActivityButton.cs" />
      <Compile Include="Assets\Scripts\GUI\OverheadUI.cs" />
+     <Compile Include="Assets\Scripts\GUI\QuestBook.cs" />
+     <Compile Include="Assets\Scripts\GUI\QuestPage.cs" />
      <Compile Include="Assets\Scripts\GUI\ShopItemTileButton.cs" />
      <Compile Include="Assets\Scripts\GUI\TeamMemberUI.cs" />
      <Compile Include="Assets\Scripts\GUI\UiButtonBase.cs" />
@@ -573,6 +575,7 @@
      <Compile Include="Assets\Scripts\Storage\IStorage.cs" />
      <Compile Include="Assets\Scripts\Storage\Language.cs" />
      <Compile Include="Assets\Scripts\Storage\XMLStorage.cs" />
+     <Compile Include="Assets\Scripts\Utility\AutoDestroy.cs" />
      <Compile Include="Assets\Scripts\Utility\ConstantRotation.cs" />
      <Compile Include="Assets\Scripts\Utility\CustomPosition.cs" />
      <Compile Include="Assets\Scripts\Utility\DynamicWidth.cs" />

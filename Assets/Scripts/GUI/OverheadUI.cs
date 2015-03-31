@@ -15,12 +15,14 @@ public class OverheadUI : MonoBehaviour {
 	public UILabel statusRewardLabel;
 	public BillboardConstraint billboard;
 	public UISprite hpBar;
+	public UILabel nameLabel;
 	public GameObject hpBarObject;
 	public GameObject speechBubble;
 	public GameObject teamIcon;
 	public UILabel speechBubbleLabel;
 	public UIPlayTween speechBubbleTween;
 	public Job hideSpeechBubbleJob = null;
+	public CharacterStatus ownerCS;
 	// Use this for initialization
 	void Start () {
 		billboard.enabled = true;
@@ -78,6 +80,7 @@ public class OverheadUI : MonoBehaviour {
 
 	public void WriteHpMessage(UILabel label, float amount)
 	{
+		billboard.enabled = true;
 		label.text = amount.ToString();
 		if(amount < 0)
 			label.color = Color.red;
@@ -85,6 +88,25 @@ public class OverheadUI : MonoBehaviour {
 			label.color = Color.green;
 		tween.tweenTarget = label.gameObject;
         tween.Play(true);
+	}
+
+	public void DisplayName(bool state)
+	{
+		billboard.enabled = true;
+		if(nameLabel != null)
+			nameLabel.gameObject.SetActive(state);
+	}
+
+	public void UpdateNameTag(string nameString)
+	{
+		if(nameLabel != null)
+			nameLabel.text = nameString;
+	}
+	
+	public void Update()
+	{
+		if(hpBar != null)
+			hpBar.fillAmount = ownerCS.curHealth/ownerCS.maxHealth;
 	}
 
 	public void DisplayHpBar(bool state)
@@ -97,5 +119,11 @@ public class OverheadUI : MonoBehaviour {
 	{
 		if(hpBar != null)
 			hpBar.fillAmount = amount;
+	}
+
+	public void HideInfo()
+	{
+		DisplayName(false);
+		DisplayHpBar(false);
 	}
 }

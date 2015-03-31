@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: CFXM_RayRounded
-  m_Shader: {fileID: 4800000, guid: bccaaca1f83315c4aad8d95e28fd9149, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6c3621cca3989ab47b005ce83dffc644, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -33,4 +33,4 @@ Material:
       data:
         first:
           name: _TintColor
-        second: {r: .5, g: .5, b: .5, a: .5}
+        second: {r: .154411793, g: .510141969, b: 1, a: .501960814}

@@ -53,35 +53,8 @@ public class CharacterStatus : CharacterAttributes {
 	public void UpdateNameTag(string nameString)
 	{
 		characterName = nameString;
-		if(nameLabel != null)
-			nameLabel.text = characterName;
+		HUD.UpdateNameTag(characterName);
 	}
-
-	public void Update()
-	{
-		if(hpBar != null)
-			hpBar.fillAmount = curHealth/maxHealth;
-	}
-
-	public void DisplayName(bool state)
-	{
-		if(nameLabel != null)
-			nameLabel.gameObject.SetActive(state);
-	}
-
-	public void DisplayHpBar(bool state)
-	{
-		if(hpBar != null)
-			hpBar.gameObject.SetActive(state);
-	}
-
-	public void HideInfo()
-	{
-		DisplayName(false);
-		DisplayHpBar(false);
-	}
-
-
 
 	public void UpdateHitBoxes()
 	{

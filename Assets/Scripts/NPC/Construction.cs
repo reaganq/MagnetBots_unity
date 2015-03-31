@@ -16,7 +16,8 @@ public class Construction : MonoBehaviour {
 	public UIPlayTween itemTween;
 	public ConstructionTile[] itemHexagons;
 	public GameObject trigger;
-	public GameObject constructedTrigger;
+	public GameObject nonConstructedIcon;
+	public GameObject constructedIcon;
 	public Collider triggerCollider;
 	public Collider dragDropCollider;
 	public Transform targetCameraPos;
@@ -199,27 +200,14 @@ public class Construction : MonoBehaviour {
 
 	public void ShowTrigger()
 	{
-		if(!isConstructed)
-		{
+		Debug.Log("show trigger");
 		TweenScale.Begin(trigger, 0.2f, endScale);
-		//triggerCollider.enabled = true;
-		}
-		else
-		{
-			TweenScale.Begin(constructedTrigger, 0.2f, endScale);
-			//triggerCollider.enabled = true;
-		}
 	}
 
 	public void ResetTrigger()
 	{
-		if(!isConstructed)
-		{
 			TweenScale.Begin(trigger, 0.2f, startScale);
 			//triggerCollider.enabled = false;
-		}
-		else
-			TweenScale.Begin(constructedTrigger, 0.2f, startScale);
 	}
 
 	public void ShowConstructionItems()
@@ -278,6 +266,8 @@ public class Construction : MonoBehaviour {
 		GameObject particle = GameObject.Instantiate(decal, finishedModel.transform.position, decal.transform.rotation) as GameObject;
 		yield return new WaitForSeconds(1f);
 		DisplayCongratulationsMessage();
+		nonConstructedIcon.SetActive(false);
+		constructedIcon.SetActive(true);
 	}
 
 	public void DisplayCongratulationsMessage()
@@ -294,9 +284,6 @@ public class Construction : MonoBehaviour {
 		if(isInRange)
 			ShowTrigger();
 	}
-
-
-
 }
 
 [Serializable]

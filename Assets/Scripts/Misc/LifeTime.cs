@@ -12,6 +12,6 @@ public class LifeTime : MonoBehaviour {
 
 	public void Destroy()
 	{
-		GameObject.Destroy(this);
+		Destroy(this.gameObject);
 	}
 }

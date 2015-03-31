@@ -244,15 +244,18 @@ public class HoverPopupGUIController : BasicGUIController {
 
 		Debug.Log("invite to party");
 		if(PlayerManager.Instance.partyMembers.Count > 0)
-			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.partyMembers[0].playerID);
+			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.Hero.PlayerName, PlayerManager.Instance.partyMembers[0].playerID);
 		else if(PlayerManager.Instance.partyMembers.Count == 0)
-			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PhotonNetwork.player.ID);
+			PlayerManager.Instance.ActiveWorld.myPhotonView.RPC("SendPartyInvite", selectedCharacter.GetComponent<PhotonView>().owner, PlayerManager.Instance.Hero.PlayerName, PhotonNetwork.player.ID);
+		GUIManager.Instance.NotificationGUI.DisplayStatusLog("Team invitation sent to " + selectedCharacter.characterName);
 		Disable();
 	}
 	
 	public void AddFriend()
 	{
 		PlayerManager.Instance.ActiveWorld.AddFriend(selectedCharacter.myPhotonView.owner);
+		GUIManager.Instance.NotificationGUI.DisplayStatusLog("Friend request sent to " + selectedCharacter.characterName);
+		Disable();
 	}
 	
 	public void OpenShop()
@@ -271,6 +274,7 @@ public class HoverPopupGUIController : BasicGUIController {
 	public void Dance()
 	{
 		PlayerManager.Instance.avatarActionManager.Dance();
+		GUIManager.Instance.NotificationGUI.DisplayStatusLog("It's time to do the robot");
 		Disable();
 	}
 

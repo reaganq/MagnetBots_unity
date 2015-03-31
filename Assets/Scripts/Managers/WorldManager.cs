@@ -565,13 +565,13 @@ public class WorldManager : Photon.MonoBehaviour {
 	
 	//party leader send to prospective party members
 	[RPC]
-	public void SendPartyInvite(int partyLeaderID,PhotonMessageInfo info)
+	public void SendPartyInvite(string playerName, int partyLeaderID,PhotonMessageInfo info)
 	{
 		if(PlayerManager.Instance.isInParty())
 			myPhotonView.RPC("NetworkRejectPartyInvite", info.sender, PlayerManager.Instance.Hero.PlayerName + " is already in a party");
 		else
 		{
-			GUIManager.Instance.DisplayPartyNotification(info.sender, partyLeaderID);
+			GUIManager.Instance.DisplayPartyNotification(playerName, info.sender, partyLeaderID);
 		}
 	}
 	

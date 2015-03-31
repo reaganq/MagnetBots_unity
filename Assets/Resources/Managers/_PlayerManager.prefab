@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee33f46343104813a89ba6d5b6af11a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputManager: {fileID: 11400002}
   ActiveNPC: {fileID: 0}
   activeActivity:
     IconPath: 
@@ -162,6 +163,10 @@ MonoBehaviour:
   terrainMask: 65536
   poiMask: 32768
   characterLayerMask: 512
+  indicatorObject: {fileID: 0}
+  indicatorObjectPrefab: {fileID: 161826, guid: d64dae624aa5545c8880dbd3bd9c6361,
+    type: 2}
+  indicatorTimer: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

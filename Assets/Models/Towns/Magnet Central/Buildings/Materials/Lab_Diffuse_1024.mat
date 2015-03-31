@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Lab_Diffuse_1024
-  m_Shader: {fileID: 4800000, guid: f350d1dc5603b224084af095b085076a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: 1
   m_SavedProperties:

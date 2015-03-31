@@ -104,17 +104,17 @@ public class PlayerCharacter : CharacterStatus {
 			if(newZone != null)
 				parentZone = newZone;
 			if(!myPhotonView.isMine)
-				DisplayName(true);
+				HUD.DisplayName(true);
 			else
-				DisplayName(false);
+				HUD.DisplayName(false);
 			if(parentZone != null)
 			{
 				if(parentZone.zoneType == ZoneType.arena)
 				{
-					DisplayHpBar(true);
+					HUD.DisplayHpBar(true);
 				}
 				else
-					DisplayHpBar(false);
+					HUD.DisplayHpBar(false);
 			}
 		}
 	}

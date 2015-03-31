@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ConstructionGUIController : BasicGUIController {
 
+	public GameObject constructionPage;
+	public GameObject infoPage;
 	public UIProgressBar progressBar;
 	public UILabel percentageLabel;
 	public Transform buildingTransform;
@@ -17,8 +19,9 @@ public class ConstructionGUIController : BasicGUIController {
 	{
 		Enable();
 		thisConstruction = construct;
+		infoPage.SetActive(thisConstruction.isConstructed);
+		constructionPage.SetActive(!thisConstruction.isConstructed);
 		panelNameLabel.text = thisConstruction.construction.Name.ToString();
-
 		UpdateMaterialsCounters();
 		UpdateTopDonor();
 	}

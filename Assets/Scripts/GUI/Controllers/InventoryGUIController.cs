@@ -109,9 +109,11 @@ public class InventoryGUIController : BasicGUIController {
 		{
 			if(selectedCategoryIndex != index )
 			{
-				if(selectedCategoryIndex >= 0)
-					categoryButtons[selectedCategoryIndex].DeselectCategory();
 				selectedCategoryIndex = index;
+				for (int i = 0; i < categoryButtons.Count; i++) {
+					if(i != selectedCategoryIndex)
+						categoryButtons[i].DeselectCategory();
+				}
 				selectedMainInventoryCategory = (ItemCategories)selectedCategoryIndex;
 				fullItemList = loadAllItemsFromCategory(selectedMainInventoryCategory);
 				RefreshSubcategories();

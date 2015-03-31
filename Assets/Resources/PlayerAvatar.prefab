@@ -1592,11 +1592,13 @@ MonoBehaviour:
   statusRewardLabel: {fileID: 11400022}
   billboard: {fileID: 11400028}
   hpBar: {fileID: 11400024}
+  nameLabel: {fileID: 11474652}
   hpBarObject: {fileID: 100054}
   speechBubble: {fileID: 174658}
   teamIcon: {fileID: 166020}
   speechBubbleLabel: {fileID: 11400040}
   speechBubbleTween: {fileID: 11474660}
+  ownerCS: {fileID: 11400026}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1

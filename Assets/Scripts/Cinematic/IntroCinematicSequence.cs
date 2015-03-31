@@ -12,6 +12,7 @@ public class IntroCinematicSequence : Cutscene {
 	public Animation interiorCameraAnimation;
 	public Camera townTrackingCamera;
 	public Animation townTrackingCameraAnimation;
+	public Transform startPoint;
 
 	public DummyAvatar dummy;
 
@@ -136,6 +137,7 @@ public class IntroCinematicSequence : Cutscene {
 	public IEnumerator EnterPhaseThree()
 	{
 		TeslaAnimation.Play("outro");
+		PlayerManager.Instance.SpawnPoint = startPoint;
 		PlayerManager.Instance.RefreshAvatar();
 		StartCoroutine(PhaseThreeSubtitles());
 		yield return new WaitForSeconds(TeslaAnimation["outro"].length - 0.3f);

@@ -73,7 +73,7 @@
     <Description />
     <SystemDescription />
     <questSteps>
-      <QuestStep QLN="" BN="" SN="1">
+      <QuestStep QLN="Talk to the best personal trainer in the world, located in the middle of Magnet Central" BN="" SN="1">
         <isMainStep>false</isMainStep>
         <IsLastStep>false</IsLastStep>
         <overrideNPC>true</overrideNPC>
@@ -83,7 +83,7 @@
           <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="4" TL="0" CA="0" QLD="" />
         </Tasks>
       </QuestStep>
-      <QuestStep QLN="" BN="" SN="2">
+      <QuestStep QLN="Defeat your first opponent: Punchbag Bob!" BN="" SN="2">
         <isMainStep>false</isMainStep>
         <IsLastStep>false</IsLastStep>
         <overrideNPC>true</overrideNPC>
@@ -93,7 +93,7 @@
           <Task TT="KillEnemy" ATR="1" PT="ENEMY" TASKTARGET="1" TL="0" CA="0" QLD="" />
         </Tasks>
       </QuestStep>
-      <QuestStep QLN="" BN="" SN="3">
+      <QuestStep QLN="Congratulations on your victory! Now link up with friends, upgrade your items to challenge stronger opponents!" BN="" SN="3">
         <isMainStep>false</isMainStep>
         <IsLastStep>false</IsLastStep>
         <overrideNPC>true</overrideNPC>
@@ -139,33 +139,9 @@
     <finalQuestLog>You're ready for adventure now!</finalQuestLog>
     <allLoots>
       <LootItem>
-        <itemType>Construction</itemType>
-        <itemID>
-          <int>6</int>
-        </itemID>
-        <itemLevel>1</itemLevel>
-        <minQuantity>5</minQuantity>
-        <maxQuantity>5</maxQuantity>
-        <dropRate>1</dropRate>
-        <definiteDrop>false</definiteDrop>
-        <Conditions />
-      </LootItem>
-      <LootItem>
-        <itemType>Construction</itemType>
-        <itemID>
-          <int>7</int>
-        </itemID>
-        <itemLevel>1</itemLevel>
-        <minQuantity>2</minQuantity>
-        <maxQuantity>2</maxQuantity>
-        <dropRate>1</dropRate>
-        <definiteDrop>false</definiteDrop>
-        <Conditions />
-      </LootItem>
-      <LootItem>
         <itemType>Armor</itemType>
         <itemID>
-          <int>7</int>
+          <int>14</int>
         </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
@@ -211,24 +187,12 @@
         <Conditions />
       </LootItem>
       <LootItem>
-        <itemType>Currency</itemType>
+        <itemType>Armor</itemType>
         <itemID>
-          <int>1</int>
+          <int>9</int>
         </itemID>
         <itemLevel>1</itemLevel>
-        <minQuantity>1000</minQuantity>
-        <maxQuantity>1000</maxQuantity>
-        <dropRate>1</dropRate>
-        <definiteDrop>false</definiteDrop>
-        <Conditions />
-      </LootItem>
-      <LootItem>
-        <itemType>Currency</itemType>
-        <itemID>
-          <int>2</int>
-        </itemID>
-        <itemLevel>1</itemLevel>
-        <minQuantity>100</minQuantity>
+        <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
         <dropRate>1</dropRate>
         <definiteDrop>false</definiteDrop>

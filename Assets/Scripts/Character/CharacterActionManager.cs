@@ -217,8 +217,8 @@ public class CharacterActionManager : ActionManager {
 		DisableMovement();
 		RotateTo(PlayerCamera.Instance.quickArmoryPos);
 		DisableNetworking();
-		myStatus.DisplayName(false);
-		myStatus.DisplayHpBar(false);
+		myStatus.HUD.DisplayName(false);
+		myStatus.HUD.DisplayHpBar(false);
 	}
 
 	public void TransitionToDefault()

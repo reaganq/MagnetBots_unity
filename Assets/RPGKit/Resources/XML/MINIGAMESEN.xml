@@ -36,34 +36,39 @@ Follow the chef's orders to satisfy your customers! Tap on the right ingredients
         <itemType>Construction</itemType>
         <itemID>
           <int>6</int>
-        </itemID>
-        <itemLevel>1</itemLevel>
-        <minQuantity>1</minQuantity>
-        <maxQuantity>4</maxQuantity>
-        <dropRate>1</dropRate>
-        <definiteDrop>false</definiteDrop>
-        <Conditions />
-      </LootItem>
-      <LootItem>
-        <itemType>Construction</itemType>
-        <itemID>
           <int>7</int>
         </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
-        <maxQuantity>1</maxQuantity>
-        <dropRate>1</dropRate>
+        <maxQuantity>4</maxQuantity>
+        <dropRate>0.5</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />
       </LootItem>
       <LootItem>
         <itemType>Armor</itemType>
         <itemID>
-          <int>7</int>
+          <int>15</int>
+          <int>16</int>
+          <int>17</int>
+          <int>18</int>
+          <int>19</int>
         </itemID>
         <itemLevel>1</itemLevel>
         <minQuantity>1</minQuantity>
         <maxQuantity>1</maxQuantity>
+        <dropRate>0.6</dropRate>
+        <definiteDrop>false</definiteDrop>
+        <Conditions />
+      </LootItem>
+      <LootItem>
+        <itemType>Currency</itemType>
+        <itemID>
+          <int>3</int>
+        </itemID>
+        <itemLevel>1</itemLevel>
+        <minQuantity>10</minQuantity>
+        <maxQuantity>40</maxQuantity>
         <dropRate>1</dropRate>
         <definiteDrop>false</definiteDrop>
         <Conditions />

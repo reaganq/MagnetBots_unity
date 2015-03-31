@@ -79,6 +79,8 @@ public class MainUIManager : BasicGUIController {
 
 	public void EnterBattleMode(bool state)
 	{
+		if(isSideTrayOpen)
+			OnSideTrayClick();
 		mainButton.SetActive(!state);
 		currenciesRoot.SetActive(!state);
 	}
@@ -133,6 +135,7 @@ public class MainUIManager : BasicGUIController {
 
 	public void OnQuestClick()
 	{
+		GUIManager.Instance.DisplayQuest();
 	}
 
 	public void OnShopWizardClick()
