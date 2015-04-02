@@ -66,6 +66,7 @@
       <Task TT="BringItem" ATR="1" PT="ARMOR" TASKTARGET="24" TL="1" CA="0" QLD="" />
     </allTasks>
     <Conditions />
+    <isLogged>true</isLogged>
   </RPGQuest>
   <RPGQuest>
     <ID>2</ID>
@@ -113,10 +114,11 @@
     <questType>story</questType>
     <allTasks />
     <Conditions />
+    <isLogged>true</isLogged>
   </RPGQuest>
   <RPGQuest>
     <ID>3</ID>
-    <Name>Starting Items</Name>
+    <Name>Newbie Pack</Name>
     <Description>Tesla gives you starting items</Description>
     <SystemDescription />
     <questSteps>
@@ -202,5 +204,90 @@
     <questType>story</questType>
     <allTasks />
     <Conditions />
+    <isLogged>false</isLogged>
+  </RPGQuest>
+  <RPGQuest>
+    <ID>4</ID>
+    <Name>Banker Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <questSteps>
+      <QuestStep QLN="" BN="" SN="1">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>2</overrideNPCID>
+        <overrideNPCConversationID>5</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="5" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </questSteps>
+    <repeatable>false</repeatable>
+    <timed>false</timed>
+    <timeLimit>0</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
+    <finalQuestLog />
+    <allLoots />
+    <questType>story</questType>
+    <allTasks />
+    <Conditions />
+    <isLogged>false</isLogged>
+  </RPGQuest>
+  <RPGQuest>
+    <ID>5</ID>
+    <Name>Ramsay's Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <questSteps>
+      <QuestStep QLN="Talk to Ramsay" BN="" SN="1">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>4</overrideNPCID>
+        <overrideNPCConversationID>6</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="6" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </questSteps>
+    <repeatable>false</repeatable>
+    <timed>false</timed>
+    <timeLimit>0</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
+    <finalQuestLog />
+    <allLoots />
+    <questType>story</questType>
+    <allTasks />
+    <Conditions />
+    <isLogged>false</isLogged>
+  </RPGQuest>
+  <RPGQuest>
+    <ID>6</ID>
+    <Name>Lynne's Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <questSteps>
+      <QuestStep QLN="" BN="" SN="1">
+        <isMainStep>false</isMainStep>
+        <IsLastStep>false</IsLastStep>
+        <overrideNPC>true</overrideNPC>
+        <overrideNPCID>5</overrideNPCID>
+        <overrideNPCConversationID>7</overrideNPCConversationID>
+        <Tasks>
+          <Task TT="ReachPartOfConversation" ATR="1" PT="PARAGRAPH" TASKTARGET="7" TL="0" CA="0" QLD="" />
+        </Tasks>
+      </QuestStep>
+    </questSteps>
+    <repeatable>false</repeatable>
+    <timed>false</timed>
+    <timeLimit>0</timeLimit>
+    <maxNumberOfLoots>0</maxNumberOfLoots>
+    <finalQuestLog />
+    <allLoots />
+    <questType>story</questType>
+    <allTasks />
+    <Conditions />
+    <isLogged>false</isLogged>
   </RPGQuest>
 </ArrayOfRPGQuest>

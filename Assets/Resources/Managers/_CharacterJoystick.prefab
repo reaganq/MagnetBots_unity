@@ -112,11 +112,11 @@ MonoBehaviour:
   visible: 1
   isActivated: 1
   showDebugRadius: 0
-  selected: 0
+  selected: 1
   useFixedUpdate: 0
   isUseGuiLayout: 1
   dynamicJoystick: 1
-  area: 7
+  area: 0
   joyAnchor: 7
   joystickPositionOffset: {x: 0, y: 0}
   zoneRadius: 100

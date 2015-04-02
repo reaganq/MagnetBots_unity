@@ -56,7 +56,7 @@ public class QuestEditor : BaseEditorWindow
 	{
 		RPGQuest s = (RPGQuest)currentItem;
 
-		
+		s.isLogged = EditorUtils.Toggle (s.isLogged, "logged");
 		s.repeatable = EditorUtils.Toggle(s.repeatable, "Repeatable");
 		s.timed = EditorUtils.Toggle(s.timed, "timed");
 		if(s.timed)

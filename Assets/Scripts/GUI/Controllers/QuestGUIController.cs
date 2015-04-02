@@ -30,7 +30,7 @@ public class QuestGUIController : BasicGUIController {
 
 	public void SelectCurrentQuests()
 	{
-		selectedQuests = PlayerManager.Instance.Hero.questLog.CurrentQuests;
+		selectedQuests = PlayerManager.Instance.Hero.questLog.loggedCurrentQuests();
 		currentQuestButtonSprite.spriteName = selectedCategoryButtonSprite;
 		finishedQuestButtonSprite.spriteName = unselectedCategoryButtonSprite;
 		RefreshQuests();
@@ -38,7 +38,7 @@ public class QuestGUIController : BasicGUIController {
 
 	public void SelectFinishedQuests()
 	{
-		selectedQuests = PlayerManager.Instance.Hero.questLog.FinishedQuests;
+		selectedQuests = PlayerManager.Instance.Hero.questLog.loggedFinishedQuests();
 		currentQuestButtonSprite.spriteName = unselectedCategoryButtonSprite;
 		finishedQuestButtonSprite.spriteName = selectedCategoryButtonSprite;
 		RefreshQuests();

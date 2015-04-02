@@ -1194,7 +1194,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400208}
-  m_Layer: 0
+  - 65: {fileID: 6523710}
+  m_Layer: 10
   m_Name: bones:L_Elbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1550,6 +1551,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400278}
+  - 65: {fileID: 6523712}
   m_Layer: 0
   m_Name: bones:R_Elbow
   m_TagString: Untagged
@@ -6210,6 +6212,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &123710
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 423710}
+  - 64: {fileID: 6423710}
+  m_Layer: 10
+  m_Name: magnetcentral_teleporter_collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &133312
 GameObject:
   m_ObjectHideFlags: 1
@@ -7267,7 +7285,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100126}
   m_LocalRotation: {x: -2.98023188e-08, y: 6.42884768e-09, z: 2.5717326e-09, w: 1}
-  m_LocalPosition: {x: .910000026, y: -1.96000004, z: -.0900000036}
+  m_LocalPosition: {x: 1.69000006, y: -2.07999992, z: 1.15999997}
   m_LocalScale: {x: .899999976, y: .899999976, z: .900000036}
   m_Children:
   - {fileID: 400582}
@@ -9742,7 +9760,7 @@ Transform:
   m_GameObject: {fileID: 100618}
   m_LocalRotation: {x: -2.98023224e-07, y: 6.4288459e-09, z: 2.60828426e-08, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .899999976, y: .899999976, z: .899999976}
+  m_LocalScale: {x: .600000024, y: .600000024, z: .600000024}
   m_Children:
   - {fileID: 400896}
   m_Father: {fileID: 400126}
@@ -10162,9 +10180,10 @@ Transform:
   - {fileID: 400052}
   - {fileID: 400638}
   - {fileID: 400640}
-  - {fileID: 463052}
   - {fileID: 463048}
   - {fileID: 463050}
+  - {fileID: 423710}
+  - {fileID: 463052}
   m_Father: {fileID: 400032}
   m_RootOrder: 2
 --- !u!4 &400650
@@ -11750,7 +11769,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100894}
   m_LocalRotation: {x: -.334906548, y: .153530583, z: .0554073527, w: .92800653}
-  m_LocalPosition: {x: .0259547848, y: 3.21339846, z: -.0567593351}
+  m_LocalPosition: {x: .0700000003, y: 3.1500001, z: .0599999987}
   m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 400770}
@@ -11813,7 +11832,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105586}
   m_LocalRotation: {x: -.339458883, y: -4.75078688e-09, z: -1.31641542e-08, w: .940620959}
-  m_LocalPosition: {x: 0, y: 8.59356022, z: 0}
+  m_LocalPosition: {x: 0, y: 11.5299997, z: 3.99000001}
   m_LocalScale: {x: 1.81642568, y: 1.81642556, z: 1.81642556}
   m_Children:
   - {fileID: 405588}
@@ -11882,6 +11901,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 409300}
   m_RootOrder: 0
+--- !u!4 &423710
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123710}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8.26000023, y: 1.06671298, z: 25.3199978}
+  m_LocalScale: {x: .277586967, y: .277586967, z: .277586967}
+  m_Children: []
+  m_Father: {fileID: 400648}
+  m_RootOrder: 7
 --- !u!4 &433312
 Transform:
   m_ObjectHideFlags: 1
@@ -11964,7 +11995,7 @@ Transform:
   m_GameObject: {fileID: 161560}
   m_LocalRotation: {x: -2.68220873e-07, y: 4.97787944e-09, z: 4.22401314e-08, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .899999976, y: .899999976, z: .899999976}
+  m_LocalScale: {x: .699999988, y: .699999988, z: .699999988}
   m_Children:
   - {fileID: 461562}
   m_Father: {fileID: 400126}
@@ -11992,7 +12023,7 @@ Transform:
   m_LocalScale: {x: .870000005, y: .870000005, z: .870000005}
   m_Children: []
   m_Father: {fileID: 400648}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!4 &463050
 Transform:
   m_ObjectHideFlags: 1
@@ -12004,7 +12035,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400648}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!4 &463052
 Transform:
   m_ObjectHideFlags: 1
@@ -12016,7 +12047,7 @@ Transform:
   m_LocalScale: {x: .870000005, y: .870000005, z: .870000005}
   m_Children: []
   m_Father: {fileID: 400648}
-  m_RootOrder: 5
+  m_RootOrder: 8
 --- !u!4 &466848
 Transform:
   m_ObjectHideFlags: 1
@@ -13804,6 +13835,19 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 4300000, guid: 63cbf3a8e31a048089aef9075a4bd597, type: 3}
+--- !u!64 &6423710
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123710}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 4300000, guid: f9655dd44d8a742bc85f3b7f26257865, type: 3}
 --- !u!64 &6463048
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -13900,7 +13944,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.29999995, y: 1.29999995, z: .100000001}
+  m_Size: {x: 1.60000002, y: 1.60000002, z: .100000001}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6505592
 BoxCollider:
@@ -13913,6 +13957,30 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.29999995, y: 1.29999995, z: .100000001}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6523710
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.04999995, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6523712
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100278}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2.56999993, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6533312
 BoxCollider:

@@ -25,7 +25,9 @@ public class OverheadUI : MonoBehaviour {
 	public CharacterStatus ownerCS;
 	// Use this for initialization
 	void Start () {
+		billboard.enabled = false;
 		billboard.enabled = true;
+		billboard.target = PlayerCamera.Instance.childCamera.transform;
 	}
 	// Update is called once per frame
 	/*void Update () {
@@ -62,13 +64,14 @@ public class OverheadUI : MonoBehaviour {
 
 	public void Talk(string text)
 	{
+		billboard.enabled = false;
+		billboard.enabled = true;
 		if(hideSpeechBubbleJob != null && hideSpeechBubbleJob.running)
 			hideSpeechBubbleJob.kill();
 		speechBubbleTween.tweenTarget = speechBubble;
 		speechBubbleTween.Play(true);
 		speechBubbleLabel.text = text;
 		hideSpeechBubbleJob = Job.make(HideSpeechBubble());
-
 	}
 
 	public IEnumerator HideSpeechBubble()

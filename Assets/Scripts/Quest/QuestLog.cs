@@ -25,6 +25,26 @@ public class QuestLog
 		FinishedQuests = new List<RPGQuest>();
 	}
 
+	public List<RPGQuest> loggedFinishedQuests()
+	{
+		List<RPGQuest> loggedQuests = new List<RPGQuest> ();
+		for (int i = 0; i < FinishedQuests.Count; i++) {
+			if(FinishedQuests[i].isLogged)
+				loggedQuests.Add(FinishedQuests[i]);
+				}
+		return loggedQuests;
+	}
+
+	public List<RPGQuest> loggedCurrentQuests()
+	{
+		List<RPGQuest> loggedQuests = new List<RPGQuest> ();
+		for (int i = 0; i < CurrentQuests.Count; i++) {
+			if(CurrentQuests[i].isLogged)
+				loggedQuests.Add(CurrentQuests[i]);
+		}
+		return loggedQuests;
+	}
+
 	public void AddQuestPoints(int amount)
 	{
 		questPoints += amount;

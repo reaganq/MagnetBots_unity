@@ -55,6 +55,24 @@ public class IntroGUIController : BasicGUIController {
 			GameManager.Instance.teststate = true;
 			quickStartClicked = true;
 			NetworkManager.Instance.usingParse = false;
+			GameManager.Instance.newGame = true;
+			StartGame();
+		}
+	}
+
+	public void OnQuickLoadPressed()
+	{
+		if (!PhotonNetwork.insideLobby) 
+		{
+			loadingLabel.text = "Not connected to lobby yet";
+			return;
+		}
+		
+		if(!quickStartClicked)
+		{
+			GameManager.Instance.teststate = true;
+			quickStartClicked = true;
+			NetworkManager.Instance.usingParse = false;
 			GameManager.Instance.newGame = false;
 			StartGame();
 		}

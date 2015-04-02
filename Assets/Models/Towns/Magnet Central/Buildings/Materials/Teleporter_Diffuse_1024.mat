@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Teleporter
+  m_Name: Teleporter_Diffuse_1024
   m_Shader: {fileID: 4800000, guid: 6b888bee5436f4557835f7986500e734, type: 3}
   m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -22,19 +22,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _BumpMap
-        second:
-          m_Texture: {fileID: 2800000, guid: 003b50390d0477945b9a1503d812f99b, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 2800000, guid: a54a836f027df3f4a8d894236589b700, type: 3}
+          m_Texture: {fileID: 2800000, guid: a2daa9b606711a643808bebed4c59a0c, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Alpha
+        second: 1
     m_Colors:
       data:
         first:
@@ -43,7 +40,7 @@ Material:
       data:
         first:
           name: _SColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .595588207, g: .595588207, b: .595588207, a: 1}
       data:
         first:
           name: _TintColor

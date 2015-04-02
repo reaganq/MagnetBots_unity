@@ -27,6 +27,7 @@ public class RPGQuest : BasicItem
 	public QuestType questType;
 	public List<Task> allTasks;
 	public List<Condition> Conditions;
+	public bool isLogged;
 	//recorded in questlog
 	[XmlIgnore]
 	public bool Rewarded;

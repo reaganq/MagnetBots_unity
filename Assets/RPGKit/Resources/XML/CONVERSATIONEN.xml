@@ -64,6 +64,9 @@
         <LineTexts />
         <Actions>
           <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="5" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="6" ITEMLvl="0" AT="QuestStart" AM="0" TX="" />
         </Actions>
         <displayTimer>5</displayTimer>
         <ownerNPCID>1</ownerNPCID>
@@ -395,9 +398,7 @@
         <PT>For your first sparring partner, I suggest Punchbag Bob. You don't really have a choice anyway.</PT>
         <Conditions />
         <LineTexts />
-        <Actions>
-          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="TriggerNPCActivity" AM="0" TX="" />
-        </Actions>
+        <Actions />
         <displayTimer>6</displayTimer>
         <ownerNPCID>3</ownerNPCID>
         <isBaseParagraph>false</isBaseParagraph>
@@ -412,6 +413,7 @@
         <LineTexts />
         <Actions>
           <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="HideSpeaker" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="TriggerNPCActivity" AM="0" TX="" />
         </Actions>
         <displayTimer>0</displayTimer>
         <ownerNPCID>0</ownerNPCID>
@@ -519,6 +521,191 @@
     </conversationParagraphs>
     <conditions>
       <Condition ITH="2" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+    </conditions>
+  </RPGConversation>
+  <RPGConversation>
+    <ID>5</ID>
+    <Name>Banker's Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>Show me the money!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>2</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>If you have any spare coins lying around, you can deposit them with me!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>2</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>2</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>You'll be able to collect a nice interest from the bank everyday!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>2</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>3</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="HideSpeaker" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="2" ITEMLvl="0" AT="TalkToNPC" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+    </conversationParagraphs>
+    <conditions>
+      <Condition ITH="4" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+    </conditions>
+  </RPGConversation>
+  <RPGConversation>
+    <ID>6</ID>
+    <Name>Ramsay's Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>Have you got what it takes to survive in my kitchen?</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>4</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>Be my assistant in Burger Madness and I'll reward you with Citizen Points for the work you do.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="5" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>4</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>2</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="HideSpeaker" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="4" ITEMLvl="0" AT="TalkToNPC" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+    </conversationParagraphs>
+    <conditions>
+      <Condition ITH="5" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
+    </conditions>
+  </RPGConversation>
+  <RPGConversation>
+    <ID>7</ID>
+    <Name>Lynne's Greeting</Name>
+    <Description />
+    <SystemDescription />
+    <conversationParagraphs>
+      <RPGParagraph>
+        <PT>Welcome to Magnet Central's general store!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>true</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>1</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>You can find everything you need here for a fair price.</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions />
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>2</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT>I will also occasionally find small jobs for you to do!</PT>
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="6" ITEMLvl="0" AT="QuestEnd" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>5</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>NextClick</nextParagraphCondition>
+        <nextParagraphIDs>
+          <int>3</int>
+        </nextParagraphIDs>
+      </RPGParagraph>
+      <RPGParagraph>
+        <PT />
+        <Conditions />
+        <LineTexts />
+        <Actions>
+          <ActionEvent PI="QUEST" ITEM="0" ITEMLvl="0" AT="HideSpeaker" AM="0" TX="" />
+          <ActionEvent PI="QUEST" ITEM="5" ITEMLvl="0" AT="TalkToNPC" AM="0" TX="" />
+        </Actions>
+        <displayTimer>0</displayTimer>
+        <ownerNPCID>0</ownerNPCID>
+        <isBaseParagraph>false</isBaseParagraph>
+        <nextParagraphCondition>Nothing</nextParagraphCondition>
+        <nextParagraphIDs />
+      </RPGParagraph>
+    </conversationParagraphs>
+    <conditions>
+      <Condition ITH="6" ITHLvl="0" ATR="0" CT="QuestInProgress" SI="0" />
     </conditions>
   </RPGConversation>
 </ArrayOfRPGConversation>

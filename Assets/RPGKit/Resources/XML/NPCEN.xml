@@ -6,7 +6,7 @@
     <defaultConversationID>0</defaultConversationID>
     <speakerPrefabPath>NPCs/Speakers/Tesla_Portrait</speakerPrefabPath>
     <ID>1</ID>
-    <Name>Lab</Name>
+    <Name>Tesla The Magnificent</Name>
     <Description>Magnet Central</Description>
     <SystemDescription />
   </RPGNPC>
@@ -19,9 +19,9 @@
     </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
-    <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
+    <speakerPrefabPath>NPCs/Speakers/Oswald_Portrait</speakerPrefabPath>
     <ID>2</ID>
-    <Name>Oswald</Name>
+    <Name>Oswald The Banker</Name>
     <Description>Magnet Central</Description>
     <SystemDescription />
   </RPGNPC>
@@ -49,10 +49,10 @@
     </activities>
     <overrideActivities />
     <defaultConversationID>0</defaultConversationID>
-    <speakerPrefabPath>NPCs/Speakers/</speakerPrefabPath>
+    <speakerPrefabPath>NPCs/Speakers/Ramsay_Portrait</speakerPrefabPath>
     <ID>4</ID>
-    <Name>Burger Joint</Name>
-    <Description>Magnet Central</Description>
+    <Name>Ramsay's Burger Bar</Name>
+    <Description>Burger Bar Owner</Description>
     <SystemDescription />
   </RPGNPC>
   <RPGNPC>
@@ -70,7 +70,7 @@
     <defaultConversationID>0</defaultConversationID>
     <speakerPrefabPath>NPCs/Speakers/Lynne_Portrait</speakerPrefabPath>
     <ID>5</ID>
-    <Name>Lynne</Name>
+    <Name>Lynne's General Store</Name>
     <Description>Magnet Central - GeneralStore</Description>
     <SystemDescription />
   </RPGNPC>

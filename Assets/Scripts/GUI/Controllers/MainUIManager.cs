@@ -24,6 +24,7 @@ public class MainUIManager : BasicGUIController {
 	public bool isSideTrayOpen = false;
 	public bool isPartyUIDisplayed = false;
 	public UISprite soundButton;
+	public UISprite menuButton;
 
 	public void UpdateCurrencyCount()
 	{
@@ -122,6 +123,10 @@ public class MainUIManager : BasicGUIController {
 		isSideTrayOpen = !isSideTrayOpen;
 		tween.Play(isSideTrayOpen);
 		DisplayActionButtons(!isSideTrayOpen);
+		if(isSideTrayOpen)
+			menuButton.spriteName = "MenuButton_active";
+		else
+			menuButton.spriteName = "MenuButton";
 	}
 
 	public void OnInventoryClick()

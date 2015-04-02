@@ -137,12 +137,16 @@ public class PlayerManager : MonoBehaviour
 		if(!GameManager.Instance.GameHasStarted)
 		{
 			Debug.Log("start new game");
-			if(NetworkManager.Instance.offlineMode || GameManager.Instance.teststate)
+			if(NetworkManager.Instance.offlineMode || (GameManager.Instance.teststate && !GameManager.Instance.newGame))
 			{
+				Debug.Log("starting test game");
 				Hero.StartTestingGame();
 			}
 			else
+			{
+				Debug.Log("starting fresh game");
 				Hero.StartGameAfterTutorial();
+			}
 
 			//prevents reloading data every time we switch worlds.
 			GameManager.Instance.GameHasStarted = true;
@@ -220,7 +224,10 @@ public class PlayerManager : MonoBehaviour
 		Hero.EquipItem(Hero.ArmoryInventory.Items[17]);
 		Hero.UpdatePlayerShop();
 		Hero.questLog.StartQuest(2);
-		Hero.questLog.EndQuest(2);
+		Hero.questLog.StartQuest(4);
+		Hero.questLog.StartQuest(5);
+		Hero.questLog.StartQuest(6);
+		//Hero.questLog.EndQuest(2);
 	}
 
 	public void ChangeWorld()
